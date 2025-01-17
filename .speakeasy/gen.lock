@@ -5,8 +5,10 @@ management:
   docVersion: "1.0"
   speakeasyVersion: 1.469.0
   generationVersion: 2.493.21
-  releaseVersion: 0.0.3
-  configChecksum: 8ec8bfa35e562eadca97dd84a1afadc9
+  releaseVersion: 0.0.4
+  configChecksum: 7ce5ac4a94c7b9681c6c297f225951a0
+  repoURL: https://github.com/novuhq/novu-go.git
+  installationURL: https://github.com/novuhq/novu-go
 features:
   go:
     acceptHeaders: 2.81.2
