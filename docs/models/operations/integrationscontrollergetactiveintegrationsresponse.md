@@ -1,0 +1,10 @@
+# IntegrationsControllerGetActiveIntegrationsResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `IntegrationResponseDtos`                                                                     | [][components.IntegrationResponseDto](../../models/components/integrationresponsedto.md)      | :heavy_minus_sign:                                                                            | The list of active integrations belonging to the organization that are successfully returned. |
+| `Headers`                                                                                     | map[string][]*string*                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |

@@ -1,0 +1,9 @@
+# IntegrationsControllerUpdateIntegrationByIDRequest
+
+
+## Fields
+
+| Field                                                                                            | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `IntegrationID`                                                                                  | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `UpdateIntegrationRequestDto`                                                                    | [components.UpdateIntegrationRequestDto](../../models/components/updateintegrationrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |

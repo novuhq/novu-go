@@ -1,0 +1,10 @@
+# SubscribersControllerCreateSubscriberResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                    | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `SubscriberResponseDto`                                                               | [*components.SubscriberResponseDto](../../models/components/subscriberresponsedto.md) | :heavy_minus_sign:                                                                    | Created                                                                               |
+| `Headers`                                                                             | map[string][]*string*                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |

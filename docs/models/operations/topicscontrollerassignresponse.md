@@ -1,0 +1,10 @@
+# TopicsControllerAssignResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `AssignSubscriberToTopicDto`                                                                    | [*components.AssignSubscriberToTopicDto](../../models/components/assignsubscribertotopicdto.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `Headers`                                                                                       | map[string][]*string*                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |

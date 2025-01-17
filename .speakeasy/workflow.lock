@@ -1,0 +1,37 @@
+speakeasyVersion: 1.469.0
+sources:
+    novu-OAS:
+        sourceNamespace: novu-oas
+        sourceRevisionDigest: sha256:95eb3839314a2ae245eecfd819c35a68ba608275bff283d34501018ab4c2b40e
+        sourceBlobDigest: sha256:b329e46ca248bd5e89d4054e10302003ab757bcfb90d11ec2aaf51744e79e363
+        tags:
+            - latest
+targets:
+    novu:
+        source: novu-OAS
+        sourceNamespace: novu-oas
+        sourceRevisionDigest: sha256:95eb3839314a2ae245eecfd819c35a68ba608275bff283d34501018ab4c2b40e
+        sourceBlobDigest: sha256:b329e46ca248bd5e89d4054e10302003ab757bcfb90d11ec2aaf51744e79e363
+        codeSamplesNamespace: novu-oas-go-code-samples
+        codeSamplesRevisionDigest: sha256:6292df871f52c154a6962a1a2512ae668e3995f886be7d73dc644d991fdb3891
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        novu-OAS:
+            inputs:
+                - location: registry.speakeasyapi.dev/novu/novu/novu-oas:main
+            overlays:
+                - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/novu/novu/novu-oas
+    targets:
+        novu:
+            target: go
+            source: novu-OAS
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/novu/novu/novu-oas-go-code-samples
+                labelOverride:
+                    fixedValue: Go (SDK)
+                blocking: false

@@ -1,0 +1,14 @@
+# DigestTimedConfigDto
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `AtTime`                                                                    | **string*                                                                   | :heavy_minus_sign:                                                          | Time at which the digest is triggered                                       |
+| `WeekDays`                                                                  | [][components.WeekDays](../../models/components/weekdays.md)                | :heavy_minus_sign:                                                          | Days of the week for the digest                                             |
+| `MonthDays`                                                                 | []*float64*                                                                 | :heavy_minus_sign:                                                          | Specific days of the month for the digest                                   |
+| `Ordinal`                                                                   | [*components.OrdinalEnum](../../models/components/ordinalenum.md)           | :heavy_minus_sign:                                                          | Ordinal position for the digest                                             |
+| `OrdinalValue`                                                              | [*components.OrdinalValueEnum](../../models/components/ordinalvalueenum.md) | :heavy_minus_sign:                                                          | Value of the ordinal                                                        |
+| `MonthlyType`                                                               | [*components.MonthlyTypeEnum](../../models/components/monthlytypeenum.md)   | :heavy_minus_sign:                                                          | Type of monthly schedule                                                    |
+| `CronExpression`                                                            | **string*                                                                   | :heavy_minus_sign:                                                          | Cron expression for scheduling                                              |

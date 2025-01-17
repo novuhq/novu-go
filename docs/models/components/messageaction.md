@@ -1,0 +1,10 @@
+# MessageAction
+
+
+## Fields
+
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Status`                                                                                  | [*components.MessageActionStatusEnum](../../models/components/messageactionstatusenum.md) | :heavy_minus_sign:                                                                        | Status of the message action                                                              |
+| `Buttons`                                                                                 | [][components.MessageButton](../../models/components/messagebutton.md)                    | :heavy_minus_sign:                                                                        | List of buttons associated with the message action                                        |
+| `Result`                                                                                  | [*components.MessageActionResult](../../models/components/messageactionresult.md)         | :heavy_minus_sign:                                                                        | Result of the message action                                                              |

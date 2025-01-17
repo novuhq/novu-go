@@ -1,0 +1,1143 @@
+lockVersion: 2.0.0
+id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
+management:
+  docChecksum: dc140a35a497f4d13f89c53973c7b07e
+  docVersion: "1.0"
+  speakeasyVersion: 1.469.0
+  generationVersion: 2.493.21
+  releaseVersion: 0.0.3
+  configChecksum: 8ec8bfa35e562eadca97dd84a1afadc9
+features:
+  go:
+    acceptHeaders: 2.81.2
+    additionalDependencies: 0.1.0
+    constsAndDefaults: 0.1.6
+    core: 3.6.6
+    defaultEnabledRetries: 0.2.0
+    deprecations: 2.81.2
+    devContainers: 2.90.0
+    envVarSecurityUsage: 0.3.2
+    examples: 2.81.4
+    flattening: 2.81.1
+    globalSecurity: 2.82.10
+    globalSecurityCallbacks: 0.1.0
+    globalSecurityFlattening: 0.1.0
+    globalServerURLs: 2.82.2
+    groups: 2.81.2
+    intellisenseMarkdownSupport: 0.1.0
+    nameOverrides: 2.81.2
+    nullables: 0.1.0
+    pagination: 2.82.2
+    responseFormat: 0.1.2
+    retries: 2.83.2
+    sdkHooks: 0.1.0
+    unions: 2.85.10
+generatedFiles:
+  - .devcontainer/README.md
+  - .devcontainer/devcontainer.json
+  - .devcontainer/setup.sh
+  - .gitattributes
+  - /models/apierrors/errordto.go
+  - /models/apierrors/validationerrordto.go
+  - /models/components/activitiesresponsedto.go
+  - /models/components/activitygraphstatesresponse.go
+  - /models/components/activitynotificationexecutiondetailresponsedto.go
+  - /models/components/activitynotificationjobresponsedto.go
+  - /models/components/activitynotificationresponsedto.go
+  - /models/components/activitynotificationstepresponsedto.go
+  - /models/components/activitynotificationsubscriberresponsedto.go
+  - /models/components/activitynotificationtemplateresponsedto.go
+  - /models/components/activitystatsresponsedto.go
+  - /models/components/actorfeeditemdto.go
+  - /models/components/actortypeenum.go
+  - /models/components/addsubscribersrequestdto.go
+  - /models/components/assignsubscribertotopicdto.go
+  - /models/components/builderfieldtypeenum.go
+  - /models/components/bulkcreatesubscriberresponsedto.go
+  - /models/components/bulksubscribercreatedto.go
+  - /models/components/bulktriggereventdto.go
+  - /models/components/buttontypeenum.go
+  - /models/components/channelcredentials.go
+  - /models/components/channelcredentialsdto.go
+  - /models/components/channelctatypeenum.go
+  - /models/components/channelpreference.go
+  - /models/components/channelsettings.go
+  - /models/components/channeltypeenum.go
+  - /models/components/createdsubscriberdto.go
+  - /models/components/createintegrationrequestdto.go
+  - /models/components/createsubscriberrequestdto.go
+  - /models/components/createsupportthreaddto.go
+  - /models/components/createtopicrequestdto.go
+  - /models/components/createtopicresponsedto.go
+  - /models/components/credentialsdto.go
+  - /models/components/databooleandto.go
+  - /models/components/delayregularmetadata.go
+  - /models/components/delayscheduledmetadata.go
+  - /models/components/deletemessageresponsedto.go
+  - /models/components/deletesubscriberresponsedto.go
+  - /models/components/digestmetadatadto.go
+  - /models/components/digestregularmetadata.go
+  - /models/components/digesttimedconfigdto.go
+  - /models/components/digesttimedmetadata.go
+  - /models/components/digesttypeenum.go
+  - /models/components/digestunitenum.go
+  - /models/components/emailblock.go
+  - /models/components/emailblockstyles.go
+  - /models/components/emailblocktypeenum.go
+  - /models/components/executiondetailssourceenum.go
+  - /models/components/executiondetailsstatusenum.go
+  - /models/components/failedassignmentsdto.go
+  - /models/components/failedoperationdto.go
+  - /models/components/feedresponsedto.go
+  - /models/components/fieldfilterpartdto.go
+  - /models/components/filtertopicsresponsedto.go
+  - /models/components/getsubscriberpreferencesresponsedto.go
+  - /models/components/gettopicresponsedto.go
+  - /models/components/httpmetadata.go
+  - /models/components/integrationresponsedto.go
+  - /models/components/markallmessageasrequestdto.go
+  - /models/components/markmessageactionasseendto.go
+  - /models/components/messageaction.go
+  - /models/components/messageactionresult.go
+  - /models/components/messageactionstatusenum.go
+  - /models/components/messagebutton.go
+  - /models/components/messagecta.go
+  - /models/components/messagectadata.go
+  - /models/components/messagemarkasrequestdto.go
+  - /models/components/messageresponsedto.go
+  - /models/components/messagestatusenum.go
+  - /models/components/messagetemplate.go
+  - /models/components/messagetemplatedto.go
+  - /models/components/monthlytypeenum.go
+  - /models/components/notificationfeeditemdto.go
+  - /models/components/notificationgroup.go
+  - /models/components/notificationstepdata.go
+  - /models/components/notificationstepdto.go
+  - /models/components/notificationtrigger.go
+  - /models/components/notificationtriggerdto.go
+  - /models/components/notificationtriggerresponse.go
+  - /models/components/notificationtriggervariable.go
+  - /models/components/notificationtriggervariableresponse.go
+  - /models/components/ordinalenum.go
+  - /models/components/ordinalvalueenum.go
+  - /models/components/plaincardrequestdto.go
+  - /models/components/preference.go
+  - /models/components/preferencechannels.go
+  - /models/components/providersidenum.go
+  - /models/components/removesubscribersrequestdto.go
+  - /models/components/renametopicrequestdto.go
+  - /models/components/renametopicresponsedto.go
+  - /models/components/replycallback.go
+  - /models/components/security.go
+  - /models/components/stepfilterdto.go
+  - /models/components/steptypeenum.go
+  - /models/components/subscriberchanneldto.go
+  - /models/components/subscriberfeedresponsedto.go
+  - /models/components/subscriberpayloaddto.go
+  - /models/components/subscriberresponsedto.go
+  - /models/components/templateresponse.go
+  - /models/components/tenantpayloaddto.go
+  - /models/components/textalignenum.go
+  - /models/components/timedconfig.go
+  - /models/components/topicdto.go
+  - /models/components/topicpayloaddto.go
+  - /models/components/topicsubscriberdto.go
+  - /models/components/triggereventrequestdto.go
+  - /models/components/triggereventresponsedto.go
+  - /models/components/triggereventtoallrequestdto.go
+  - /models/components/triggerrecipientstypeenum.go
+  - /models/components/triggerreservedvariableresponse.go
+  - /models/components/triggertypeenum.go
+  - /models/components/unseencountresponse.go
+  - /models/components/updatedsubscriberdto.go
+  - /models/components/updateintegrationrequestdto.go
+  - /models/components/updatesubscriberchannelrequestdto.go
+  - /models/components/updatesubscriberglobalpreferencesrequestdto.go
+  - /models/components/updatesubscriberonlineflagrequestdto.go
+  - /models/components/updatesubscriberpreferenceglobalresponsedto.go
+  - /models/components/updatesubscriberpreferencerequestdto.go
+  - /models/components/updatesubscriberpreferenceresponsedto.go
+  - /models/components/updatesubscriberrequestdto.go
+  - /models/components/workflowresponse.go
+  - /models/components/workflowtostepcontrolvaluesdto.go
+  - /models/operations/eventscontrollerbroadcasteventtoall.go
+  - /models/operations/eventscontrollercancel.go
+  - /models/operations/eventscontrollertrigger.go
+  - /models/operations/eventscontrollertriggerbulk.go
+  - /models/operations/integrationscontrollercreateintegration.go
+  - /models/operations/integrationscontrollergetactiveintegrations.go
+  - /models/operations/integrationscontrollergetwebhooksupportstatus.go
+  - /models/operations/integrationscontrollerlistintegrations.go
+  - /models/operations/integrationscontrollerremoveintegration.go
+  - /models/operations/integrationscontrollersetintegrationasprimary.go
+  - /models/operations/integrationscontrollerupdateintegrationbyid.go
+  - /models/operations/messagescontrollerdeletemessage.go
+  - /models/operations/messagescontrollerdeletemessagesbytransactionid.go
+  - /models/operations/messagescontrollergetmessages.go
+  - /models/operations/notificationscontrollergetactivitygraphstats.go
+  - /models/operations/notificationscontrollergetactivitystats.go
+  - /models/operations/notificationscontrollergetnotification.go
+  - /models/operations/notificationscontrollerlistnotifications.go
+  - /models/operations/subscriberscontrollerbulkcreatesubscribers.go
+  - /models/operations/subscriberscontrollerchataccessoauth.go
+  - /models/operations/subscriberscontrollerchatoauthcallback.go
+  - /models/operations/subscriberscontrollercreatesubscriber.go
+  - /models/operations/subscriberscontrollerdeletesubscribercredentials.go
+  - /models/operations/subscriberscontrollergetnotificationsfeed.go
+  - /models/operations/subscriberscontrollergetsubscriber.go
+  - /models/operations/subscriberscontrollergetsubscriberpreferencebylevel.go
+  - /models/operations/subscriberscontrollergetunseencount.go
+  - /models/operations/subscriberscontrollerlistsubscriberpreferences.go
+  - /models/operations/subscriberscontrollerlistsubscribers.go
+  - /models/operations/subscriberscontrollermarkactionasseen.go
+  - /models/operations/subscriberscontrollermarkallunreadasread.go
+  - /models/operations/subscriberscontrollermarkmessagesas.go
+  - /models/operations/subscriberscontrollermodifysubscriberchannel.go
+  - /models/operations/subscriberscontrollerremovesubscriber.go
+  - /models/operations/subscriberscontrollerupdatesubscriber.go
+  - /models/operations/subscriberscontrollerupdatesubscriberchannel.go
+  - /models/operations/subscriberscontrollerupdatesubscriberglobalpreferences.go
+  - /models/operations/subscriberscontrollerupdatesubscriberonlineflag.go
+  - /models/operations/subscriberscontrollerupdatesubscriberpreference.go
+  - /models/operations/supportcontrollercreatethread.go
+  - /models/operations/supportcontrollerfetchuserorganizations.go
+  - /models/operations/topicscontrollerassign.go
+  - /models/operations/topicscontrollercreatetopic.go
+  - /models/operations/topicscontrollerdeletetopic.go
+  - /models/operations/topicscontrollergettopic.go
+  - /models/operations/topicscontrollergettopicsubscriber.go
+  - /models/operations/topicscontrollerlisttopics.go
+  - /models/operations/topicscontrollerremovesubscribers.go
+  - /models/operations/topicscontrollerrenametopic.go
+  - USAGE.md
+  - authentication.go
+  - credentials.go
+  - docs/models/apierrors/errordto.md
+  - docs/models/apierrors/errors.md
+  - docs/models/apierrors/validationerrordto.md
+  - docs/models/apierrors/value.md
+  - docs/models/components/activitiesresponsedto.md
+  - docs/models/components/activitygraphstatesresponse.md
+  - docs/models/components/activitynotificationexecutiondetailresponsedto.md
+  - docs/models/components/activitynotificationjobresponsedto.md
+  - docs/models/components/activitynotificationjobresponsedtotype.md
+  - docs/models/components/activitynotificationresponsedto.md
+  - docs/models/components/activitynotificationresponsedtopayload.md
+  - docs/models/components/activitynotificationresponsedtoto.md
+  - docs/models/components/activitynotificationstepresponsedto.md
+  - docs/models/components/activitynotificationstepresponsedtoreplycallback.md
+  - docs/models/components/activitynotificationsubscriberresponsedto.md
+  - docs/models/components/activitynotificationtemplateresponsedto.md
+  - docs/models/components/activitystatsresponsedto.md
+  - docs/models/components/actor.md
+  - docs/models/components/actorfeeditemdto.md
+  - docs/models/components/actortypeenum.md
+  - docs/models/components/addsubscribersrequestdto.md
+  - docs/models/components/assignsubscribertotopicdto.md
+  - docs/models/components/backoffunit.md
+  - docs/models/components/builderfieldtypeenum.md
+  - docs/models/components/bulkcreatesubscriberresponsedto.md
+  - docs/models/components/bulksubscribercreatedto.md
+  - docs/models/components/bulktriggereventdto.md
+  - docs/models/components/buttontypeenum.md
+  - docs/models/components/channel.md
+  - docs/models/components/channelcredentials.md
+  - docs/models/components/channelcredentialsdto.md
+  - docs/models/components/channelctatypeenum.md
+  - docs/models/components/channelpreference.md
+  - docs/models/components/channels.md
+  - docs/models/components/channelsettings.md
+  - docs/models/components/channelsettingsproviderid.md
+  - docs/models/components/channeltypeenum.md
+  - docs/models/components/content.md
+  - docs/models/components/controls.md
+  - docs/models/components/controlvariables.md
+  - docs/models/components/createdsubscriberdto.md
+  - docs/models/components/createintegrationrequestdto.md
+  - docs/models/components/createintegrationrequestdtochannel.md
+  - docs/models/components/createsubscriberrequestdto.md
+  - docs/models/components/createsubscriberrequestdtodata.md
+  - docs/models/components/createsupportthreaddto.md
+  - docs/models/components/createtopicrequestdto.md
+  - docs/models/components/createtopicresponsedto.md
+  - docs/models/components/credentialsdto.md
+  - docs/models/components/customer.md
+  - docs/models/components/data.md
+  - docs/models/components/databooleandto.md
+  - docs/models/components/delayregularmetadata.md
+  - docs/models/components/delayregularmetadatatype.md
+  - docs/models/components/delayregularmetadataunit.md
+  - docs/models/components/delayscheduledmetadata.md
+  - docs/models/components/delayscheduledmetadatatype.md
+  - docs/models/components/deletemessageresponsedto.md
+  - docs/models/components/deletemessageresponsedtostatus.md
+  - docs/models/components/deletesubscriberresponsedto.md
+  - docs/models/components/deletesubscriberresponsedtostatus.md
+  - docs/models/components/digestmetadatadto.md
+  - docs/models/components/digestregularmetadata.md
+  - docs/models/components/digestregularmetadatatype.md
+  - docs/models/components/digestregularmetadataunit.md
+  - docs/models/components/digesttimedconfigdto.md
+  - docs/models/components/digesttimedmetadata.md
+  - docs/models/components/digesttimedmetadatatype.md
+  - docs/models/components/digesttimedmetadataunit.md
+  - docs/models/components/digesttypeenum.md
+  - docs/models/components/digestunitenum.md
+  - docs/models/components/emailblock.md
+  - docs/models/components/emailblockstyles.md
+  - docs/models/components/emailblocktypeenum.md
+  - docs/models/components/executiondetailssourceenum.md
+  - docs/models/components/executiondetailsstatusenum.md
+  - docs/models/components/failedassignmentsdto.md
+  - docs/models/components/failedoperationdto.md
+  - docs/models/components/feedidentifier.md
+  - docs/models/components/feedresponsedto.md
+  - docs/models/components/fieldfilterpartdto.md
+  - docs/models/components/filtertopicsresponsedto.md
+  - docs/models/components/getsubscriberpreferencesresponsedto.md
+  - docs/models/components/gettopicresponsedto.md
+  - docs/models/components/httpmetadata.md
+  - docs/models/components/integrationresponsedto.md
+  - docs/models/components/issues.md
+  - docs/models/components/markallmessageasrequestdto.md
+  - docs/models/components/markallmessageasrequestdtomarkas.md
+  - docs/models/components/markas.md
+  - docs/models/components/markmessageactionasseendto.md
+  - docs/models/components/markmessageactionasseendtopayload.md
+  - docs/models/components/markmessageactionasseendtostatus.md
+  - docs/models/components/messageaction.md
+  - docs/models/components/messageactionresult.md
+  - docs/models/components/messageactionresultpayload.md
+  - docs/models/components/messageactionstatusenum.md
+  - docs/models/components/messagebutton.md
+  - docs/models/components/messagecta.md
+  - docs/models/components/messagectadata.md
+  - docs/models/components/messageid.md
+  - docs/models/components/messagemarkasrequestdto.md
+  - docs/models/components/messageresponsedto.md
+  - docs/models/components/messageresponsedtooverrides.md
+  - docs/models/components/messageresponsedtopayload.md
+  - docs/models/components/messagestatusenum.md
+  - docs/models/components/messagetemplate.md
+  - docs/models/components/messagetemplatedto.md
+  - docs/models/components/metadata.md
+  - docs/models/components/monthlytype.md
+  - docs/models/components/monthlytypeenum.md
+  - docs/models/components/notificationfeeditemdto.md
+  - docs/models/components/notificationfeeditemdtostatus.md
+  - docs/models/components/notificationgroup.md
+  - docs/models/components/notificationstepdata.md
+  - docs/models/components/notificationstepdatametadata.md
+  - docs/models/components/notificationstepdto.md
+  - docs/models/components/notificationstepdtometadata.md
+  - docs/models/components/notificationtrigger.md
+  - docs/models/components/notificationtriggerdto.md
+  - docs/models/components/notificationtriggerresponse.md
+  - docs/models/components/notificationtriggertype.md
+  - docs/models/components/notificationtriggervariable.md
+  - docs/models/components/notificationtriggervariableresponse.md
+  - docs/models/components/notificationtriggervariableresponsetype.md
+  - docs/models/components/notificationtriggervariableresponsevalue.md
+  - docs/models/components/on.md
+  - docs/models/components/one.md
+  - docs/models/components/operator.md
+  - docs/models/components/ordinal.md
+  - docs/models/components/ordinalenum.md
+  - docs/models/components/ordinalvalue.md
+  - docs/models/components/ordinalvalueenum.md
+  - docs/models/components/overrides.md
+  - docs/models/components/payload.md
+  - docs/models/components/plaincardrequestdto.md
+  - docs/models/components/plaincardrequestdtotenant.md
+  - docs/models/components/preference.md
+  - docs/models/components/preferencechannels.md
+  - docs/models/components/providerid.md
+  - docs/models/components/providersidenum.md
+  - docs/models/components/removesubscribersrequestdto.md
+  - docs/models/components/renametopicrequestdto.md
+  - docs/models/components/renametopicresponsedto.md
+  - docs/models/components/replycallback.md
+  - docs/models/components/security.md
+  - docs/models/components/status.md
+  - docs/models/components/stepfilterdto.md
+  - docs/models/components/steptypeenum.md
+  - docs/models/components/subscriberchanneldto.md
+  - docs/models/components/subscriberfeedresponsedto.md
+  - docs/models/components/subscriberpayloaddto.md
+  - docs/models/components/subscriberresponsedto.md
+  - docs/models/components/templateresponse.md
+  - docs/models/components/tenant.md
+  - docs/models/components/tenantpayloaddto.md
+  - docs/models/components/tenantpayloaddtodata.md
+  - docs/models/components/textalignenum.md
+  - docs/models/components/thread.md
+  - docs/models/components/timedconfig.md
+  - docs/models/components/timedconfigweekdays.md
+  - docs/models/components/tlsoptions.md
+  - docs/models/components/to.md
+  - docs/models/components/topicdto.md
+  - docs/models/components/topicpayloaddto.md
+  - docs/models/components/topicsubscriberdto.md
+  - docs/models/components/triggereventrequestdto.md
+  - docs/models/components/triggereventresponsedto.md
+  - docs/models/components/triggereventtoallrequestdto.md
+  - docs/models/components/triggereventtoallrequestdtoactor.md
+  - docs/models/components/triggereventtoallrequestdtotenant.md
+  - docs/models/components/triggerrecipientstypeenum.md
+  - docs/models/components/triggerreservedvariableresponse.md
+  - docs/models/components/triggerreservedvariableresponsetype.md
+  - docs/models/components/triggertypeenum.md
+  - docs/models/components/type.md
+  - docs/models/components/unit.md
+  - docs/models/components/unseencountresponse.md
+  - docs/models/components/updatedsubscriberdto.md
+  - docs/models/components/updateintegrationrequestdto.md
+  - docs/models/components/updatesubscriberchannelrequestdto.md
+  - docs/models/components/updatesubscriberchannelrequestdtoproviderid.md
+  - docs/models/components/updatesubscriberglobalpreferencesrequestdto.md
+  - docs/models/components/updatesubscriberonlineflagrequestdto.md
+  - docs/models/components/updatesubscriberpreferenceglobalresponsedto.md
+  - docs/models/components/updatesubscriberpreferencerequestdto.md
+  - docs/models/components/updatesubscriberpreferenceresponsedto.md
+  - docs/models/components/updatesubscriberrequestdto.md
+  - docs/models/components/value.md
+  - docs/models/components/weekdays.md
+  - docs/models/components/workflowintegrationstatus.md
+  - docs/models/components/workflowresponse.md
+  - docs/models/components/workflowresponsedata.md
+  - docs/models/components/workflowtostepcontrolvaluesdto.md
+  - docs/models/operations/channel.md
+  - docs/models/operations/eventscontrollerbroadcasteventtoallresponse.md
+  - docs/models/operations/eventscontrollercancelrequest.md
+  - docs/models/operations/eventscontrollercancelresponse.md
+  - docs/models/operations/eventscontrollertriggerbulkresponse.md
+  - docs/models/operations/eventscontrollertriggerresponse.md
+  - docs/models/operations/integrationscontrollercreateintegrationresponse.md
+  - docs/models/operations/integrationscontrollergetactiveintegrationsresponse.md
+  - docs/models/operations/integrationscontrollergetwebhooksupportstatusrequest.md
+  - docs/models/operations/integrationscontrollergetwebhooksupportstatusresponse.md
+  - docs/models/operations/integrationscontrollerlistintegrationsresponse.md
+  - docs/models/operations/integrationscontrollerremoveintegrationrequest.md
+  - docs/models/operations/integrationscontrollerremoveintegrationresponse.md
+  - docs/models/operations/integrationscontrollersetintegrationasprimaryrequest.md
+  - docs/models/operations/integrationscontrollersetintegrationasprimaryresponse.md
+  - docs/models/operations/integrationscontrollerupdateintegrationbyidrequest.md
+  - docs/models/operations/integrationscontrollerupdateintegrationbyidresponse.md
+  - docs/models/operations/messagescontrollerdeletemessagerequest.md
+  - docs/models/operations/messagescontrollerdeletemessageresponse.md
+  - docs/models/operations/messagescontrollerdeletemessagesbytransactionidrequest.md
+  - docs/models/operations/messagescontrollerdeletemessagesbytransactionidresponse.md
+  - docs/models/operations/messagescontrollergetmessagesrequest.md
+  - docs/models/operations/messagescontrollergetmessagesresponse.md
+  - docs/models/operations/notificationscontrollergetactivitygraphstatsrequest.md
+  - docs/models/operations/notificationscontrollergetactivitygraphstatsresponse.md
+  - docs/models/operations/notificationscontrollergetactivitystatsresponse.md
+  - docs/models/operations/notificationscontrollergetnotificationrequest.md
+  - docs/models/operations/notificationscontrollergetnotificationresponse.md
+  - docs/models/operations/notificationscontrollerlistnotificationsrequest.md
+  - docs/models/operations/notificationscontrollerlistnotificationsresponse.md
+  - docs/models/operations/option.md
+  - docs/models/operations/parameter.md
+  - docs/models/operations/subscriberscontrollerbulkcreatesubscribersresponse.md
+  - docs/models/operations/subscriberscontrollerchataccessoauthrequest.md
+  - docs/models/operations/subscriberscontrollerchataccessoauthresponse.md
+  - docs/models/operations/subscriberscontrollerchatoauthcallbackrequest.md
+  - docs/models/operations/subscriberscontrollerchatoauthcallbackresponse.md
+  - docs/models/operations/subscriberscontrollercreatesubscriberresponse.md
+  - docs/models/operations/subscriberscontrollerdeletesubscribercredentialsrequest.md
+  - docs/models/operations/subscriberscontrollerdeletesubscribercredentialsresponse.md
+  - docs/models/operations/subscriberscontrollergetnotificationsfeedrequest.md
+  - docs/models/operations/subscriberscontrollergetnotificationsfeedresponse.md
+  - docs/models/operations/subscriberscontrollergetsubscriberpreferencebylevelrequest.md
+  - docs/models/operations/subscriberscontrollergetsubscriberpreferencebylevelresponse.md
+  - docs/models/operations/subscriberscontrollergetsubscriberrequest.md
+  - docs/models/operations/subscriberscontrollergetsubscriberresponse.md
+  - docs/models/operations/subscriberscontrollergetunseencountrequest.md
+  - docs/models/operations/subscriberscontrollergetunseencountresponse.md
+  - docs/models/operations/subscriberscontrollerlistsubscriberpreferencesrequest.md
+  - docs/models/operations/subscriberscontrollerlistsubscriberpreferencesresponse.md
+  - docs/models/operations/subscriberscontrollerlistsubscribersrequest.md
+  - docs/models/operations/subscriberscontrollerlistsubscribersresponse.md
+  - docs/models/operations/subscriberscontrollerlistsubscribersresponsebody.md
+  - docs/models/operations/subscriberscontrollermarkactionasseenrequest.md
+  - docs/models/operations/subscriberscontrollermarkactionasseenresponse.md
+  - docs/models/operations/subscriberscontrollermarkallunreadasreadrequest.md
+  - docs/models/operations/subscriberscontrollermarkallunreadasreadresponse.md
+  - docs/models/operations/subscriberscontrollermarkmessagesasrequest.md
+  - docs/models/operations/subscriberscontrollermarkmessagesasresponse.md
+  - docs/models/operations/subscriberscontrollermodifysubscriberchannelrequest.md
+  - docs/models/operations/subscriberscontrollermodifysubscriberchannelresponse.md
+  - docs/models/operations/subscriberscontrollerremovesubscriberrequest.md
+  - docs/models/operations/subscriberscontrollerremovesubscriberresponse.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberchannelrequest.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberchannelresponse.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberglobalpreferencesrequest.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberglobalpreferencesresponse.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberonlineflagrequest.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberonlineflagresponse.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberpreferencerequest.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberpreferenceresponse.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberrequest.md
+  - docs/models/operations/subscriberscontrollerupdatesubscriberresponse.md
+  - docs/models/operations/supportcontrollercreatethreadresponse.md
+  - docs/models/operations/supportcontrollerfetchuserorganizationsresponse.md
+  - docs/models/operations/supportcontrollerfetchuserorganizationsresponsebody.md
+  - docs/models/operations/topicscontrollerassignrequest.md
+  - docs/models/operations/topicscontrollerassignresponse.md
+  - docs/models/operations/topicscontrollercreatetopicresponse.md
+  - docs/models/operations/topicscontrollerdeletetopicrequest.md
+  - docs/models/operations/topicscontrollerdeletetopicresponse.md
+  - docs/models/operations/topicscontrollergettopicrequest.md
+  - docs/models/operations/topicscontrollergettopicresponse.md
+  - docs/models/operations/topicscontrollergettopicsubscriberrequest.md
+  - docs/models/operations/topicscontrollergettopicsubscriberresponse.md
+  - docs/models/operations/topicscontrollerlisttopicsrequest.md
+  - docs/models/operations/topicscontrollerlisttopicsresponse.md
+  - docs/models/operations/topicscontrollerremovesubscribersrequest.md
+  - docs/models/operations/topicscontrollerremovesubscribersresponse.md
+  - docs/models/operations/topicscontrollerrenametopicrequest.md
+  - docs/models/operations/topicscontrollerrenametopicresponse.md
+  - docs/sdks/authentication/README.md
+  - docs/sdks/credentials/README.md
+  - docs/sdks/integrations/README.md
+  - docs/sdks/messages/README.md
+  - docs/sdks/notifications/README.md
+  - docs/sdks/novu/README.md
+  - docs/sdks/novumessages/README.md
+  - docs/sdks/novusubscribersnotifications/README.md
+  - docs/sdks/novutopicssubscribers/README.md
+  - docs/sdks/preferences/README.md
+  - docs/sdks/stats/README.md
+  - docs/sdks/subscribers/README.md
+  - docs/sdks/subscriberspreferences/README.md
+  - docs/sdks/support/README.md
+  - docs/sdks/topics/README.md
+  - docs/sdks/topicssubscribers/README.md
+  - docs/sdks/webhooks/README.md
+  - go.mod
+  - integrations.go
+  - internal/hooks/hooks.go
+  - internal/utils/contenttype.go
+  - internal/utils/env.go
+  - internal/utils/form.go
+  - internal/utils/headers.go
+  - internal/utils/json.go
+  - internal/utils/pathparams.go
+  - internal/utils/queryparams.go
+  - internal/utils/requestbody.go
+  - internal/utils/retries.go
+  - internal/utils/security.go
+  - internal/utils/utils.go
+  - messages.go
+  - models/apierrors/apierror.go
+  - models/operations/options.go
+  - notifications.go
+  - novu.go
+  - novumessages.go
+  - novusubscribersnotifications.go
+  - novutopicssubscribers.go
+  - preferences.go
+  - retry/config.go
+  - stats.go
+  - subscribers.go
+  - subscriberspreferences.go
+  - support.go
+  - topics.go
+  - topicssubscribers.go
+  - types/bigint.go
+  - types/date.go
+  - types/datetime.go
+  - types/decimal.go
+  - types/pointers.go
+  - webhooks.go
+examples:
+  EventsController_trigger:
+    speakeasy-default-events-controller-trigger:
+      requestBody:
+        application/json: {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}
+      responses:
+        "201":
+          application/json: {"acknowledged": false, "status": "processed"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  EventsController_triggerBulk:
+    speakeasy-default-events-controller-trigger-bulk:
+      requestBody:
+        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": [{"topicKey": "<value>", "type": "Subscriber"}]}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "bridgeUrl": "https://example.com/bridge", "overrides": {"fcm": {"data": {"key": "value"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
+      responses:
+        "201":
+          application/json: [{"acknowledged": true, "status": "error"}, {"acknowledged": true, "status": "no_workflow_active_steps_defined"}, {"acknowledged": true, "status": "trigger_not_active"}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  EventsController_broadcastEventToAll:
+    speakeasy-default-events-controller-broadcast-event-to-all:
+      requestBody:
+        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}}
+      responses:
+        "200":
+          application/json: {"acknowledged": true, "status": "trigger_not_active"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  EventsController_cancel:
+    speakeasy-default-events-controller-cancel:
+      parameters:
+        path:
+          transactionId: "<id>"
+      responses:
+        "200":
+          application/json: {"data": true}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SupportController_fetchUserOrganizations:
+    speakeasy-default-support-controller-fetch-user-organizations:
+      requestBody:
+        application/json: {"timestamp": "<value>"}
+      responses:
+        "201":
+          application/json: {}
+  SupportController_createThread:
+    speakeasy-default-support-controller-create-thread:
+      requestBody:
+        application/json: {"text": "<value>"}
+  NotificationsController_listNotifications:
+    speakeasy-default-notifications-controller-list-notifications:
+      responses:
+        "200":
+          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 6783.17, "page": 1777.06}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  NotificationsController_getNotification:
+    speakeasy-default-notifications-controller-get-notification:
+      parameters:
+        path:
+          notificationId: "<id>"
+      responses:
+        "200":
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  NotificationsController_getActivityStats:
+    speakeasy-default-notifications-controller-get-activity-stats:
+      responses:
+        "200":
+          application/json: {"weeklySent": 3704.56, "monthlySent": 9198.31}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  NotificationsController_getActivityGraphStats:
+    speakeasy-default-notifications-controller-get-activity-graph-stats:
+      responses:
+        "200":
+          application/json: [{"_id": "<id>", "count": 4718.99, "templates": ["<value>", "<value>", "<value>"], "channels": []}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_listIntegrations:
+    speakeasy-default-integrations-controller-list-integrations:
+      responses:
+        "200":
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "active": false, "deleted": false, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": false}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_createIntegration:
+    speakeasy-default-integrations-controller-create-integration:
+      requestBody:
+        application/json: {"providerId": "<id>", "channel": "sms"}
+      responses:
+        "201":
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": true}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_getActiveIntegrations:
+    speakeasy-default-integrations-controller-get-active-integrations:
+      responses:
+        "200":
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": true, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_updateIntegrationById:
+    speakeasy-default-integrations-controller-update-integration-by-id:
+      parameters:
+        path:
+          integrationId: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": true, "primary": false}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_removeIntegration:
+    speakeasy-default-integrations-controller-remove-integration:
+      parameters:
+        path:
+          integrationId: "<id>"
+      responses:
+        "200":
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_setIntegrationAsPrimary:
+    speakeasy-default-integrations-controller-set-integration-as-primary:
+      parameters:
+        path:
+          integrationId: "<id>"
+      responses:
+        "200":
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": false, "deleted": false, "primary": true}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  IntegrationsController_getWebhookSupportStatus:
+    speakeasy-default-integrations-controller-get-webhook-support-status:
+      parameters:
+        path:
+          providerOrIntegrationId: "<id>"
+      responses:
+        "200":
+          application/json: true
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_listSubscribers:
+    speakeasy-default-subscribers-controller-list-subscribers:
+      responses:
+        "200":
+          application/json: {"page": 7685.78, "hasMore": false, "pageSize": 6783.17, "data": []}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_createSubscriber:
+    speakeasy-default-subscribers-controller-create-subscriber:
+      requestBody:
+        application/json: {"subscriberId": "<id>"}
+      responses:
+        "201":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1709824276522", "updatedAt": "1737042502546"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_getSubscriber:
+    speakeasy-default-subscribers-controller-get-subscriber:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1715785758022", "updatedAt": "1737044393819"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_updateSubscriber:
+    speakeasy-default-subscribers-controller-update-subscriber:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"email": "john.doe@example.com", "firstName": "John", "lastName": "Doe", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "data": {"preferences": {"notifications": true, "theme": "dark"}, "tags": ["premium", "newsletter"]}}
+      responses:
+        "200":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1721003385247", "updatedAt": "1737121556053"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_removeSubscriber:
+    speakeasy-default-subscribers-controller-remove-subscriber:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      responses:
+        "200":
+          application/json: {"acknowledged": false, "status": "deleted"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_bulkCreateSubscribers:
+    speakeasy-default-subscribers-controller-bulk-create-subscribers:
+      requestBody:
+        application/json: {"subscribers": [{"subscriberId": "<id>"}]}
+      responses:
+        "201":
+          application/json: {"updated": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "created": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "failed": [{}, {}]}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_updateSubscriberChannel:
+    speakeasy-default-subscribers-controller-update-subscriber-channel:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+      responses:
+        "200":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1721003385277", "updatedAt": "1737121556083"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_modifySubscriberChannel:
+    speakeasy-default-subscribers-controller-modify-subscriber-channel:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+      responses:
+        "200":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "apns", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1737034392564", "updatedAt": "1737084342945"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_deleteSubscriberCredentials:
+    speakeasy-default-subscribers-controller-delete-subscriber-credentials:
+      parameters:
+        path:
+          subscriberId: "<id>"
+          providerId: "<id>"
+      responses:
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_updateSubscriberOnlineFlag:
+    speakeasy-default-subscribers-controller-update-subscriber-online-flag:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"isOnline": false}
+      responses:
+        "200":
+          application/json: {"subscriberId": "<id>", "channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1726655907694", "updatedAt": "1737109058245"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_listSubscriberPreferences:
+    speakeasy-default-subscribers-controller-list-subscriber-preferences:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: [{"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}]}, "preference": {"enabled": true, "channels": {}}}, {"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": true, "channels": {}}}, {"template": {"_id": "<id>", "name": "<value>", "critical": true, "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": true, "channels": {}}}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_updateSubscriberGlobalPreferences:
+    speakeasy-default-subscribers-controller-update-subscriber-global-preferences:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"preference": {"enabled": true, "channels": {}}}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_getSubscriberPreferenceByLevel:
+    speakeasy-default-subscribers-controller-get-subscriber-preference-by-level:
+      parameters:
+        path:
+          parameter: "template"
+          subscriberId: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: [{"preference": {"enabled": true, "channels": {}}}]
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_updateSubscriberPreference:
+    speakeasy-default-subscribers-controller-update-subscriber-preference:
+      parameters:
+        path:
+          subscriberId: "<id>"
+          parameter: "<id>"
+      requestBody:
+        application/json: {}
+      responses:
+        "200":
+          application/json: {"template": {"_id": "<id>", "name": "<value>", "critical": false, "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}, {"name": "<value>"}]}]}, "preference": {"enabled": false, "channels": {}}}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_getNotificationsFeed:
+    "":
+      parameters:
+        path:
+          subscriberId: "<id>"
+        query:
+          payload: "btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="
+      responses:
+        "200":
+          application/json: {"totalCount": 5, "hasMore": true, "data": [{"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "in_app", "read": false, "seen": true, "deleted": false, "deviceTokens": ["token1", "token2"], "cta": {"data": {}}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}], "pageSize": 2, "page": 1}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {"key": "value"}}}}
+  SubscribersController_getUnseenCount:
+    speakeasy-default-subscribers-controller-get-unseen-count:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        query: {}
+      responses:
+        "200":
+          application/json: {"count": 2166.35}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_markMessagesAs:
+    speakeasy-default-subscribers-controller-mark-messages-as:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"messageId": "<id>", "markAs": "unread"}
+      responses:
+        "201":
+          application/json: []
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_markAllUnreadAsRead:
+    speakeasy-default-subscribers-controller-mark-all-unread-as-read:
+      parameters:
+        path:
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"markAs": "seen"}
+      responses:
+        "201":
+          application/json: 4603.37
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_markActionAsSeen:
+    speakeasy-default-subscribers-controller-mark-action-as-seen:
+      parameters:
+        path:
+          messageId: "<id>"
+          type: "<value>"
+          subscriberId: "<id>"
+      requestBody:
+        application/json: {"status": "done"}
+      responses:
+        "201":
+          application/json: {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"subscriberId": "<id>", "channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1718601447016", "updatedAt": "1737120025559"}, "createdAt": "1710453533428", "content": {"type": "button", "content": "<value>"}, "transactionId": "<id>", "channel": "chat", "read": true, "seen": true, "cta": {"data": {}}, "status": "error"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_chatOauthCallback:
+    speakeasy-default-subscribers-controller-chat-oauth-callback:
+      parameters:
+        path:
+          subscriberId: "<id>"
+          providerId: "<id>"
+        query:
+          hmacHash: "<value>"
+          environmentId: "<id>"
+          code: "<value>"
+      responses:
+        "200":
+          text/html: "<value>"
+        "302":
+          application/json: "<value>"
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  SubscribersController_chatAccessOauth:
+    speakeasy-default-subscribers-controller-chat-access-oauth:
+      parameters:
+        path:
+          subscriberId: "<id>"
+          providerId: "<id>"
+        query:
+          hmacHash: "<value>"
+          environmentId: "<id>"
+      responses:
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  MessagesController_getMessages:
+    speakeasy-default-messages-controller-get-messages:
+      responses:
+        "200":
+          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 3129.93, "page": 3234.02}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  MessagesController_deleteMessage:
+    speakeasy-default-messages-controller-delete-message:
+      parameters:
+        path:
+          messageId: "<id>"
+      responses:
+        "200":
+          application/json: {"acknowledged": false, "status": "deleted"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  MessagesController_deleteMessagesByTransactionId:
+    speakeasy-default-messages-controller-delete-messages-by-transaction-id:
+      parameters:
+        path:
+          transactionId: "<id>"
+        query: {}
+      responses:
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_createTopic:
+    speakeasy-default-topics-controller-create-topic:
+      requestBody:
+        application/json: {"key": "<key>", "name": "<value>"}
+      responses:
+        "201":
+          application/json: {"key": "<key>"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_listTopics:
+    "":
+      parameters:
+        query:
+          page: 0
+          pageSize: 10
+          key: "exampleKey"
+      responses:
+        "200":
+          application/json: {"data": [], "page": 1, "pageSize": 10, "totalCount": 10}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {"key": "value"}}}}
+  TopicsController_deleteTopic:
+    speakeasy-default-topics-controller-delete-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+      responses:
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_getTopic:
+    speakeasy-default-topics-controller-get-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+      responses:
+        "200":
+          application/json: {"_organizationId": "<id>", "_environmentId": "<id>", "key": "<key>", "name": "<value>", "subscribers": ["<value>"]}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_renameTopic:
+    speakeasy-default-topics-controller-rename-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+      requestBody:
+        application/json: {"name": "<value>"}
+      responses:
+        "200":
+          application/json: {"_organizationId": "<id>", "_environmentId": "<id>", "key": "<key>", "name": "<value>", "subscribers": ["<value>", "<value>", "<value>"]}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_assign:
+    speakeasy-default-topics-controller-assign:
+      parameters:
+        path:
+          topicKey: "<value>"
+      requestBody:
+        application/json: {"subscribers": ["<value>", "<value>", "<value>"]}
+      responses:
+        "200":
+          application/json: {"succeeded": []}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_getTopicSubscriber:
+    speakeasy-default-topics-controller-get-topic-subscriber:
+      parameters:
+        path:
+          externalSubscriberId: "<id>"
+          topicKey: "<value>"
+      responses:
+        "200":
+          application/json: {"_organizationId": "org_123456789", "_environmentId": "env_123456789", "_subscriberId": "sub_123456789", "_topicId": "topic_123456789", "topicKey": "my_topic_key", "externalSubscriberId": "external_subscriber_123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+  TopicsController_removeSubscribers:
+    speakeasy-default-topics-controller-remove-subscribers:
+      parameters:
+        path:
+          topicKey: "<value>"
+      requestBody:
+        application/json: {"subscribers": ["<value>", "<value>"]}
+      responses:
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+generatedTests: {}

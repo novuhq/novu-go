@@ -1,0 +1,9 @@
+# CreateTopicResponseDto
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                                      | **string*                                                                                                 | :heavy_minus_sign:                                                                                        | The unique identifier for the Topic created.                                                              |
+| `Key`                                                                                                     | *string*                                                                                                  | :heavy_check_mark:                                                                                        | User defined custom key and provided by the user that will be an unique identifier for the Topic created. |

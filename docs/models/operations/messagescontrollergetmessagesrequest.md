@@ -1,0 +1,12 @@
+# MessagesControllerGetMessagesRequest
+
+
+## Fields
+
+| Field                                                                     | Type                                                                      | Required                                                                  | Description                                                               |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `Channel`                                                                 | [*components.ChannelTypeEnum](../../models/components/channeltypeenum.md) | :heavy_minus_sign:                                                        | Channel type through which the message is sent                            |
+| `SubscriberID`                                                            | **string*                                                                 | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `TransactionID`                                                           | []*string*                                                                | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `Page`                                                                    | **float64*                                                                | :heavy_minus_sign:                                                        | N/A                                                                       |
+| `Limit`                                                                   | **float64*                                                                | :heavy_minus_sign:                                                        | N/A                                                                       |

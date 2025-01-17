@@ -1,0 +1,9 @@
+# DeleteMessageResponseDto
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Acknowledged`                                                                                         | *bool*                                                                                                 | :heavy_check_mark:                                                                                     | A boolean stating the success of the action                                                            |
+| `Status`                                                                                               | [components.DeleteMessageResponseDtoStatus](../../models/components/deletemessageresponsedtostatus.md) | :heavy_check_mark:                                                                                     | The status enum for the performed action                                                               |

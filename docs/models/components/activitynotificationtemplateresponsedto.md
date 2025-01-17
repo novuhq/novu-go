@@ -1,0 +1,10 @@
+# ActivityNotificationTemplateResponseDto
+
+
+## Fields
+
+| Field                                                                                    | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ID`                                                                                     | **string*                                                                                | :heavy_minus_sign:                                                                       | Unique identifier of the template                                                        |
+| `Name`                                                                                   | *string*                                                                                 | :heavy_check_mark:                                                                       | Name of the template                                                                     |
+| `Triggers`                                                                               | [][components.NotificationTriggerDto](../../models/components/notificationtriggerdto.md) | :heavy_check_mark:                                                                       | Triggers of the template                                                                 |

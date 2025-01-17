@@ -1,0 +1,9 @@
+# CreateTopicRequestDto
+
+
+## Fields
+
+| Field                                                                                                     | Type                                                                                                      | Required                                                                                                  | Description                                                                                               |
+| --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| `Key`                                                                                                     | *string*                                                                                                  | :heavy_check_mark:                                                                                        | User defined custom key and provided by the user that will be an unique identifier for the Topic created. |
+| `Name`                                                                                                    | *string*                                                                                                  | :heavy_check_mark:                                                                                        | User defined custom name and provided by the user that will name the Topic created.                       |

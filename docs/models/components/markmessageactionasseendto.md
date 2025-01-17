@@ -1,0 +1,9 @@
+# MarkMessageActionAsSeenDto
+
+
+## Fields
+
+| Field                                                                                                         | Type                                                                                                          | Required                                                                                                      | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `Status`                                                                                                      | [components.MarkMessageActionAsSeenDtoStatus](../../models/components/markmessageactionasseendtostatus.md)    | :heavy_check_mark:                                                                                            | Message action status                                                                                         |
+| `Payload`                                                                                                     | [*components.MarkMessageActionAsSeenDtoPayload](../../models/components/markmessageactionasseendtopayload.md) | :heavy_minus_sign:                                                                                            | Message action payload                                                                                        |

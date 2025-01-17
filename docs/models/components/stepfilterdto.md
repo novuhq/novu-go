@@ -1,0 +1,11 @@
+# StepFilterDto
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `IsNegated`                                                                        | *bool*                                                                             | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Type`                                                                             | [components.BuilderFieldTypeEnum](../../models/components/builderfieldtypeenum.md) | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Value`                                                                            | [components.Value](../../models/components/value.md)                               | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Children`                                                                         | [][components.FieldFilterPartDto](../../models/components/fieldfilterpartdto.md)   | :heavy_check_mark:                                                                 | N/A                                                                                |
