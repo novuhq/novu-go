@@ -32,7 +32,9 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
     )
 
-    res, err := s.Notifications.List(ctx, operations.NotificationsControllerListNotificationsRequest{})
+    res, err := s.Notifications.List(ctx, operations.NotificationsControllerListNotificationsRequest{
+        Page: novugo.Float64(0),
+    })
     if err != nil {
         log.Fatal(err)
     }

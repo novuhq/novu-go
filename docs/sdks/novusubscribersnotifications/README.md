@@ -34,6 +34,7 @@ func main() {
 
     res, err := s.Subscribers.Notifications.GetFeed(ctx, operations.SubscribersControllerGetNotificationsFeedRequest{
         SubscriberID: "<id>",
+        Limit: novugo.Float64(10),
         Payload: novugo.String("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
     })
     if err != nil {
@@ -88,7 +89,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", nil, nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", novugo.Bool(false), novugo.Float64(100))
     if err != nil {
         log.Fatal(err)
     }

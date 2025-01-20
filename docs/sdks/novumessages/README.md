@@ -151,7 +151,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Messages.UpdateAction(ctx, "<id>", "<value>", "<id>", components.MarkMessageActionAsSeenDto{
-        Status: components.MarkMessageActionAsSeenDtoStatusDone,
+        Status: components.MarkMessageActionAsSeenDtoStatusPending,
     })
     if err != nil {
         log.Fatal(err)
