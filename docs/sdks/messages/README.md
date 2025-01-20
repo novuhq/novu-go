@@ -36,7 +36,10 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
     )
 
-    res, err := s.Messages.List(ctx, operations.MessagesControllerGetMessagesRequest{})
+    res, err := s.Messages.List(ctx, operations.MessagesControllerGetMessagesRequest{
+        Page: novugo.Float64(0),
+        Limit: novugo.Float64(10),
+    })
     if err != nil {
         log.Fatal(err)
     }

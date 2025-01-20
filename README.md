@@ -482,7 +482,7 @@ func main() {
 		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
 	)
 
-	res, err := s.Subscribers.List(ctx, nil, nil)
+	res, err := s.Subscribers.List(ctx, nil, novugo.Float64(10))
 	if err != nil {
 		log.Fatal(err)
 	}
