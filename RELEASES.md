@@ -29,3 +29,13 @@ Based on:
 - [go v0.0.6] .
 ### Releases
 - [Go v0.0.6] https://github.com/novuhq/novu-go/releases/tag/v0.0.6 - .
+
+## 2025-01-28 00:13:07
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.476.2 (2.495.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v0.0.7] .
+### Releases
+- [Go v0.0.7] https://github.com/novuhq/novu-go/releases/tag/v0.0.7 - .
