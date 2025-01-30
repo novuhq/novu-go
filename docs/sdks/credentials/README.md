@@ -87,6 +87,8 @@ Subscriber credentials associated to the delivery methods such as slack and push
 
 
 
+
+
     This endpoint appends provided credentials and deviceTokens to the existing ones.
 
 ### Example Usage
