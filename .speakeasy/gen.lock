@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: dc140a35a497f4d13f89c53973c7b07e
+  docChecksum: 11b7e948445214c3d50ad397d0f0bc1a
   docVersion: "1.0"
-  speakeasyVersion: 1.476.3
-  generationVersion: 2.496.0
-  releaseVersion: 0.0.12
-  configChecksum: f635c802f8168ebef48ca39fcc863c00
+  speakeasyVersion: 1.477.2
+  generationVersion: 2.497.8
+  releaseVersion: 0.0.13
+  configChecksum: 1310e72674490f36ef1224555be147e8
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -14,7 +14,7 @@ features:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.6
-    core: 3.6.9
+    core: 3.6.10
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.2
     devContainers: 2.90.0
