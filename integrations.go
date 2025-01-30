@@ -1093,15 +1093,6 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 404:
-		fallthrough
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 422:
 		res.Headers = httpRes.Header
 
@@ -1125,6 +1116,15 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 404:
+		fallthrough
+	case httpRes.StatusCode == 429:
+		res.Headers = httpRes.Header
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1651,15 +1651,6 @@ func (s *Integrations) SetPrimary(ctx context.Context, integrationID string, opt
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
-	case httpRes.StatusCode == 404:
-		fallthrough
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 422:
 		res.Headers = httpRes.Header
 
@@ -1683,6 +1674,15 @@ func (s *Integrations) SetPrimary(ctx context.Context, integrationID string, opt
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 404:
+		fallthrough
+	case httpRes.StatusCode == 429:
+		res.Headers = httpRes.Header
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)
