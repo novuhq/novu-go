@@ -1,9 +1,9 @@
-speakeasyVersion: 1.480.0
+speakeasyVersion: 1.480.1
 sources:
     novu-OAS:
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:52a45e22b8dd9f64238ce1dfc27926468eacd5d98fa8b3cdae7cd1c83313ea19
-        sourceBlobDigest: sha256:8e485423c27acd50e1542cea2262096f65d76c0d3ca6c5c9566e757cdd4114f9
+        sourceRevisionDigest: sha256:ed42d9267b761bf867bae1dc4b1b6fc2df95879395ce5d2a0f75cb934ecf3345
+        sourceBlobDigest: sha256:83ec01668439cb896744e13be2ac73d891d9130b87deb3444cc32a5c949ba042
         tags:
             - latest
             - "1.0"
@@ -11,17 +11,17 @@ targets:
     novu:
         source: novu-OAS
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:52a45e22b8dd9f64238ce1dfc27926468eacd5d98fa8b3cdae7cd1c83313ea19
-        sourceBlobDigest: sha256:8e485423c27acd50e1542cea2262096f65d76c0d3ca6c5c9566e757cdd4114f9
+        sourceRevisionDigest: sha256:ed42d9267b761bf867bae1dc4b1b6fc2df95879395ce5d2a0f75cb934ecf3345
+        sourceBlobDigest: sha256:83ec01668439cb896744e13be2ac73d891d9130b87deb3444cc32a5c949ba042
         codeSamplesNamespace: novu-oas-go-code-samples
-        codeSamplesRevisionDigest: sha256:f53e80733bed3420fed546e495f3287b21dcb1edb87267277d6c6a02a2671642
+        codeSamplesRevisionDigest: sha256:e61336168007515e877c8e5d60b594e4422d5c29d5951c50508bfba2432dfb87
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
     sources:
         novu-OAS:
             inputs:
-                - location: http://127.0.0.1:3000/openapi.sdk.yaml
+                - location: registry.speakeasyapi.dev/novu/novu/novu-oas:main
             overlays:
                 - location: .speakeasy/speakeasy-modifications-overlay.yaml
             registry:
