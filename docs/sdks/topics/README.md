@@ -97,7 +97,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Topics.List(ctx, novugo.Int64(0), novugo.Int64(10), novugo.String("exampleKey"), nil)
+    res, err := s.Topics.List(ctx, nil, nil, novugo.String("exampleKey"), nil)
     if err != nil {
         log.Fatal(err)
     }

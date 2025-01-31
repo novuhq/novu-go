@@ -40,7 +40,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Subscribers.List(ctx, nil, novugo.Float64(10), nil)
+    res, err := s.Subscribers.List(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
