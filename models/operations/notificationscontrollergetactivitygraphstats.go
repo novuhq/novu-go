@@ -8,6 +8,8 @@ import (
 
 type NotificationsControllerGetActivityGraphStatsRequest struct {
 	Days *float64 `queryParam:"style=form,explode=true,name=days"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *NotificationsControllerGetActivityGraphStatsRequest) GetDays() *float64 {
@@ -15,6 +17,13 @@ func (o *NotificationsControllerGetActivityGraphStatsRequest) GetDays() *float64
 		return nil
 	}
 	return o.Days
+}
+
+func (o *NotificationsControllerGetActivityGraphStatsRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type NotificationsControllerGetActivityGraphStatsResponse struct {

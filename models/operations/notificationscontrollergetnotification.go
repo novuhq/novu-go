@@ -8,6 +8,8 @@ import (
 
 type NotificationsControllerGetNotificationRequest struct {
 	NotificationID string `pathParam:"style=simple,explode=false,name=notificationId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *NotificationsControllerGetNotificationRequest) GetNotificationID() string {
@@ -15,6 +17,13 @@ func (o *NotificationsControllerGetNotificationRequest) GetNotificationID() stri
 		return ""
 	}
 	return o.NotificationID
+}
+
+func (o *NotificationsControllerGetNotificationRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type NotificationsControllerGetNotificationResponse struct {

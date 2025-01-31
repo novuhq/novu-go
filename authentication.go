@@ -26,10 +26,10 @@ func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
 }
 
 // OauthCallback - Handle providers oauth redirect
-func (s *Authentication) OauthCallback(ctx context.Context, request operations.SubscribersControllerChatOauthCallbackRequest, opts ...operations.Option) (*operations.SubscribersControllerChatOauthCallbackResponse, error) {
+func (s *Authentication) OauthCallback(ctx context.Context, request operations.SubscribersV1ControllerChatOauthCallbackRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatOauthCallbackResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "SubscribersController_chatOauthCallback",
+		OperationID:    "SubscribersV1Controller_chatOauthCallback",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
@@ -81,6 +81,8 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -101,7 +103,7 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -176,7 +178,7 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -191,7 +193,7 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 		}
 	}
 
-	res := &operations.SubscribersControllerChatOauthCallbackResponse{
+	res := &operations.SubscribersV1ControllerChatOauthCallbackResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -241,11 +243,42 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -298,6 +331,29 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -330,10 +386,10 @@ func (s *Authentication) OauthCallback(ctx context.Context, request operations.S
 }
 
 // ChatAccessOauth - Handle chat oauth
-func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations.SubscribersControllerChatAccessOauthRequest, opts ...operations.Option) (*operations.SubscribersControllerChatAccessOauthResponse, error) {
+func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations.SubscribersV1ControllerChatAccessOauthRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatAccessOauthResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "SubscribersController_chatAccessOauth",
+		OperationID:    "SubscribersV1Controller_chatAccessOauth",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
@@ -379,6 +435,8 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
@@ -399,7 +457,7 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -474,7 +532,7 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -489,7 +547,7 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 		}
 	}
 
-	res := &operations.SubscribersControllerChatAccessOauthResponse{
+	res := &operations.SubscribersV1ControllerChatAccessOauthResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -498,11 +556,42 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 
 	switch {
 	case httpRes.StatusCode == 200:
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -555,6 +644,29 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)

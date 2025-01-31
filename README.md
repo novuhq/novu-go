@@ -70,18 +70,17 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -94,7 +93,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -122,20 +121,19 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
 		Events: []components.TriggerEventRequestDto{
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -150,14 +148,13 @@ func main() {
 				),
 			},
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -177,14 +174,13 @@ func main() {
 				),
 			},
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -204,7 +200,7 @@ func main() {
 				),
 			},
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -232,7 +228,7 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
@@ -243,7 +239,7 @@ func main() {
 				"text": "string",
 			},
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -270,10 +266,10 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
-	res, err := s.Cancel(ctx, "<id>")
+	res, err := s.Cancel(ctx, "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -292,9 +288,9 @@ func main() {
 
 This SDK supports the following security scheme globally:
 
-| Name     | Type   | Scheme  | Environment Variable |
-| -------- | ------ | ------- | -------------------- |
-| `APIKey` | apiKey | API key | `NOVU_API_KEY`       |
+| Name        | Type   | Scheme  | Environment Variable |
+| ----------- | ------ | ------- | -------------------- |
+| `SecretKey` | apiKey | API key | `NOVU_SECRET_KEY`    |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -312,18 +308,17 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -336,7 +331,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -396,8 +391,12 @@ func main() {
 * [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
 * [Get](docs/sdks/subscribers/README.md#get) - Get subscriber
 * [Update](docs/sdks/subscribers/README.md#update) - Update subscriber
-* [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
+* [~~DeleteLegacy~~](docs/sdks/subscribers/README.md#deletelegacy) - Delete subscriber :warning: **Deprecated**
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
+* [Search](docs/sdks/subscribers/README.md#search) - Search for subscribers
+* [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
+* [Patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
+* [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
 * [UpdateOnlineStatus](docs/sdks/subscribers/README.md#updateonlinestatus) - Update subscriber online status
 
 #### [Subscribers.Authentication](docs/sdks/authentication/README.md)
@@ -431,11 +430,6 @@ func main() {
 
 * [UpdateGlobal](docs/sdks/subscriberspreferences/README.md#updateglobal) - Update subscriber global preferences
 * [Update](docs/sdks/subscriberspreferences/README.md#update) - Update subscriber preference
-
-### [Support](docs/sdks/support/README.md)
-
-* [FetchUserOrganizations](docs/sdks/support/README.md#fetchuserorganizations)
-* [CreateThread](docs/sdks/support/README.md#createthread)
 
 ### [Topics](docs/sdks/topics/README.md)
 
@@ -479,10 +473,10 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
-	res, err := s.Subscribers.List(ctx, nil, novugo.Float64(10))
+	res, err := s.Subscribers.List(ctx, nil, novugo.Float64(10), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -529,18 +523,17 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -553,7 +546,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	}, operations.WithRetries(
+	}, nil, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -602,18 +595,17 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -626,7 +618,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -647,11 +639,13 @@ By Default, an API error will return `apierrors.APIError`. When custom error res
 
 For example, the `Trigger` function may return the following errors:
 
-| Error Type                   | Status Code   | Content Type     |
-| ---------------------------- | ------------- | ---------------- |
-| apierrors.ErrorDto           | 400, 404, 409 | application/json |
-| apierrors.ValidationErrorDto | 422           | application/json |
-| apierrors.APIError           | 4XX, 5XX      | \*/\*            |
+| Error Type                   | Status Code                            | Content Type     |
+| ---------------------------- | -------------------------------------- | ---------------- |
+| apierrors.ErrorDto           | 414                                    | application/json |
+| apierrors.ErrorDto           | 400, 401, 403, 404, 405, 409, 413, 415 | application/json |
+| apierrors.ValidationErrorDto | 422                                    | application/json |
+| apierrors.ErrorDto           | 500                                    | application/json |
+| apierrors.APIError           | 4XX, 5XX                               | \*/\*            |
 
 ### Example
 
@@ -672,18 +666,17 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -696,7 +689,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 
 		var e *apierrors.ErrorDto
@@ -705,7 +698,19 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
+		var e *apierrors.ErrorDto
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
 		var e *apierrors.ValidationErrorDto
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.ErrorDto
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -752,18 +757,17 @@ func main() {
 
 	s := novugo.New(
 		novugo.WithServerIndex(1),
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -776,7 +780,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -806,18 +810,17 @@ func main() {
 
 	s := novugo.New(
 		novugo.WithServerURL("https://api.novu.co"),
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -830,7 +833,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

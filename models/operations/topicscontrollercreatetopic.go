@@ -6,6 +6,26 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type TopicsControllerCreateTopicRequest struct {
+	// A header for idempotency purposes
+	IdempotencyKey        *string                          `header:"style=simple,explode=false,name=idempotency-key"`
+	CreateTopicRequestDto components.CreateTopicRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *TopicsControllerCreateTopicRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
+func (o *TopicsControllerCreateTopicRequest) GetCreateTopicRequestDto() components.CreateTopicRequestDto {
+	if o == nil {
+		return components.CreateTopicRequestDto{}
+	}
+	return o.CreateTopicRequestDto
+}
+
 type TopicsControllerCreateTopicResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created

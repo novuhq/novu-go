@@ -16,18 +16,17 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		Name: "workflow_identifier",
+		WorkflowID: "workflow_identifier",
 		Payload: map[string]any{
 			"comment_id": "string",
 			"post": map[string]any{
 				"text": "string",
 			},
 		},
-		BridgeURL: novugo.String("https://example.com/bridge"),
 		Overrides: map[string]map[string]any{
 			"fcm": map[string]any{
 				"data": map[string]any{
@@ -40,7 +39,7 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		),
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -68,20 +67,19 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
 		Events: []components.TriggerEventRequestDto{
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -96,14 +94,13 @@ func main() {
 				),
 			},
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -123,14 +120,13 @@ func main() {
 				),
 			},
 			components.TriggerEventRequestDto{
-				Name: "workflow_identifier",
+				WorkflowID: "workflow_identifier",
 				Payload: map[string]any{
 					"comment_id": "string",
 					"post": map[string]any{
 						"text": "string",
 					},
 				},
-				BridgeURL: novugo.String("https://example.com/bridge"),
 				Overrides: map[string]map[string]any{
 					"fcm": map[string]any{
 						"data": map[string]any{
@@ -150,7 +146,7 @@ func main() {
 				),
 			},
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -178,7 +174,7 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
 	res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
@@ -189,7 +185,7 @@ func main() {
 				"text": "string",
 			},
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -216,10 +212,10 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
-	res, err := s.Cancel(ctx, "<id>")
+	res, err := s.Cancel(ctx, "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}

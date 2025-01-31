@@ -8,7 +8,9 @@ import (
 
 type TopicsControllerAssignRequest struct {
 	// The topic key
-	TopicKey                 string                              `pathParam:"style=simple,explode=false,name=topicKey"`
+	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
+	// A header for idempotency purposes
+	IdempotencyKey           *string                             `header:"style=simple,explode=false,name=idempotency-key"`
 	AddSubscribersRequestDto components.AddSubscribersRequestDto `request:"mediaType=application/json"`
 }
 
@@ -17,6 +19,13 @@ func (o *TopicsControllerAssignRequest) GetTopicKey() string {
 		return ""
 	}
 	return o.TopicKey
+}
+
+func (o *TopicsControllerAssignRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 func (o *TopicsControllerAssignRequest) GetAddSubscribersRequestDto() components.AddSubscribersRequestDto {

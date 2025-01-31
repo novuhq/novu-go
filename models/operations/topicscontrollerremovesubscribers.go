@@ -8,7 +8,9 @@ import (
 
 type TopicsControllerRemoveSubscribersRequest struct {
 	// The topic key
-	TopicKey                    string                                 `pathParam:"style=simple,explode=false,name=topicKey"`
+	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
+	// A header for idempotency purposes
+	IdempotencyKey              *string                                `header:"style=simple,explode=false,name=idempotency-key"`
 	RemoveSubscribersRequestDto components.RemoveSubscribersRequestDto `request:"mediaType=application/json"`
 }
 
@@ -17,6 +19,13 @@ func (o *TopicsControllerRemoveSubscribersRequest) GetTopicKey() string {
 		return ""
 	}
 	return o.TopicKey
+}
+
+func (o *TopicsControllerRemoveSubscribersRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 func (o *TopicsControllerRemoveSubscribersRequest) GetRemoveSubscribersRequestDto() components.RemoveSubscribersRequestDto {

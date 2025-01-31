@@ -6,6 +6,18 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type IntegrationsControllerGetActiveIntegrationsRequest struct {
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
+}
+
+func (o *IntegrationsControllerGetActiveIntegrationsRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
 type IntegrationsControllerGetActiveIntegrationsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// The list of active integrations belonging to the organization that are successfully returned.

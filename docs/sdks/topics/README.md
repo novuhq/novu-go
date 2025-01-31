@@ -35,13 +35,13 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.Topics.Create(ctx, components.CreateTopicRequestDto{
         Key: "<key>",
         Name: "<value>",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -56,7 +56,8 @@ func main() {
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `request`                                                                            | [components.CreateTopicRequestDto](../../models/components/createtopicrequestdto.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
+| `createTopicRequestDto`                                                              | [components.CreateTopicRequestDto](../../models/components/createtopicrequestdto.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `idempotencyKey`                                                                     | **string*                                                                            | :heavy_minus_sign:                                                                   | A header for idempotency purposes                                                    |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -65,11 +66,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## List
 
@@ -91,10 +94,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Topics.List(ctx, novugo.Int64(0), novugo.Int64(10), novugo.String("exampleKey"))
+    res, err := s.Topics.List(ctx, novugo.Int64(0), novugo.Int64(10), novugo.String("exampleKey"), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -112,6 +115,7 @@ func main() {
 | `page`                                                   | **int64*                                                 | :heavy_minus_sign:                                       | The page number to retrieve (starts from 0)              | 0                                                        |
 | `pageSize`                                               | **int64*                                                 | :heavy_minus_sign:                                       | The number of items to return per page (default: 10)     | 10                                                       |
 | `key`                                                    | **string*                                                | :heavy_minus_sign:                                       | A filter key to apply to the results                     | exampleKey                                               |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -120,11 +124,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Delete
 
@@ -146,10 +152,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Topics.Delete(ctx, "<value>")
+    res, err := s.Topics.Delete(ctx, "<value>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -165,6 +171,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `topicKey`                                               | *string*                                                 | :heavy_check_mark:                                       | The topic key                                            |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -173,11 +180,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Get
 
@@ -199,10 +208,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Topics.Get(ctx, "<value>")
+    res, err := s.Topics.Get(ctx, "<value>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -218,6 +227,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `topicKey`                                               | *string*                                                 | :heavy_check_mark:                                       | The topic key                                            |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -226,11 +236,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Rename
 
@@ -253,12 +265,12 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.Topics.Rename(ctx, "<value>", components.RenameTopicRequestDto{
         Name: "<value>",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -275,6 +287,7 @@ func main() {
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
 | `topicKey`                                                                           | *string*                                                                             | :heavy_check_mark:                                                                   | The topic key                                                                        |
 | `renameTopicRequestDto`                                                              | [components.RenameTopicRequestDto](../../models/components/renametopicrequestdto.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
+| `idempotencyKey`                                                                     | **string*                                                                            | :heavy_minus_sign:                                                                   | A header for idempotency purposes                                                    |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -283,8 +296,10 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

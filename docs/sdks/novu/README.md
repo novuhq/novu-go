@@ -39,18 +39,17 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-        Name: "workflow_identifier",
+        WorkflowID: "workflow_identifier",
         Payload: map[string]any{
             "comment_id": "string",
             "post": map[string]any{
                 "text": "string",
             },
         },
-        BridgeURL: novugo.String("https://example.com/bridge"),
         Overrides: map[string]map[string]any{
             "fcm": map[string]any{
                 "data": map[string]any{
@@ -63,7 +62,7 @@ func main() {
                 SubscriberID: "<id>",
             },
         ),
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -78,7 +77,8 @@ func main() {
 | Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
-| `request`                                                                              | [components.TriggerEventRequestDto](../../models/components/triggereventrequestdto.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
+| `triggerEventRequestDto`                                                               | [components.TriggerEventRequestDto](../../models/components/triggereventrequestdto.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `idempotencyKey`                                                                       | **string*                                                                              | :heavy_minus_sign:                                                                     | A header for idempotency purposes                                                      |
 | `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 
 ### Response
@@ -87,11 +87,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## TriggerBulk
 
@@ -117,20 +119,19 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
         Events: []components.TriggerEventRequestDto{
             components.TriggerEventRequestDto{
-                Name: "workflow_identifier",
+                WorkflowID: "workflow_identifier",
                 Payload: map[string]any{
                     "comment_id": "string",
                     "post": map[string]any{
                         "text": "string",
                     },
                 },
-                BridgeURL: novugo.String("https://example.com/bridge"),
                 Overrides: map[string]map[string]any{
                     "fcm": map[string]any{
                         "data": map[string]any{
@@ -145,14 +146,13 @@ func main() {
                 ),
             },
             components.TriggerEventRequestDto{
-                Name: "workflow_identifier",
+                WorkflowID: "workflow_identifier",
                 Payload: map[string]any{
                     "comment_id": "string",
                     "post": map[string]any{
                         "text": "string",
                     },
                 },
-                BridgeURL: novugo.String("https://example.com/bridge"),
                 Overrides: map[string]map[string]any{
                     "fcm": map[string]any{
                         "data": map[string]any{
@@ -172,14 +172,13 @@ func main() {
                 ),
             },
             components.TriggerEventRequestDto{
-                Name: "workflow_identifier",
+                WorkflowID: "workflow_identifier",
                 Payload: map[string]any{
                     "comment_id": "string",
                     "post": map[string]any{
                         "text": "string",
                     },
                 },
-                BridgeURL: novugo.String("https://example.com/bridge"),
                 Overrides: map[string]map[string]any{
                     "fcm": map[string]any{
                         "data": map[string]any{
@@ -199,7 +198,7 @@ func main() {
                 ),
             },
         },
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -214,7 +213,8 @@ func main() {
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
-| `request`                                                                        | [components.BulkTriggerEventDto](../../models/components/bulktriggereventdto.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `bulkTriggerEventDto`                                                            | [components.BulkTriggerEventDto](../../models/components/bulktriggereventdto.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `idempotencyKey`                                                                 | **string*                                                                        | :heavy_minus_sign:                                                               | A header for idempotency purposes                                                |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
@@ -223,20 +223,17 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Broadcast
 
 Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.
-
-
-
-
-
 
       In the future could be used to trigger events to a subset of subscribers based on defined filters.
 
@@ -257,7 +254,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
@@ -268,7 +265,7 @@ func main() {
                 "text": "string",
             },
         },
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -283,7 +280,8 @@ func main() {
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `request`                                                                                        | [components.TriggerEventToAllRequestDto](../../models/components/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                               | The request object to use for the request.                                                       |
+| `triggerEventToAllRequestDto`                                                                    | [components.TriggerEventToAllRequestDto](../../models/components/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `idempotencyKey`                                                                                 | **string*                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
 | `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
 ### Response
@@ -292,11 +290,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Cancel
 
@@ -321,10 +321,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Cancel(ctx, "<id>")
+    res, err := s.Cancel(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -340,6 +340,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -348,8 +349,10 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

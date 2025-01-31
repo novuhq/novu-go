@@ -26,16 +26,17 @@ func newSubscribersPreferences(sdkConfig sdkConfiguration) *SubscribersPreferenc
 }
 
 // UpdateGlobal - Update subscriber global preferences
-func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID string, updateSubscriberGlobalPreferencesRequestDto components.UpdateSubscriberGlobalPreferencesRequestDto, opts ...operations.Option) (*operations.SubscribersControllerUpdateSubscriberGlobalPreferencesResponse, error) {
+func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID string, updateSubscriberGlobalPreferencesRequestDto components.UpdateSubscriberGlobalPreferencesRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "SubscribersController_updateSubscriberGlobalPreferences",
+		OperationID:    "SubscribersV1Controller_updateSubscriberGlobalPreferences",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.SubscribersControllerUpdateSubscriberGlobalPreferencesRequest{
-		SubscriberID: subscriberID,
+	request := operations.SubscribersV1ControllerUpdateSubscriberGlobalPreferencesRequest{
+		SubscriberID:   subscriberID,
+		IdempotencyKey: idempotencyKey,
 		UpdateSubscriberGlobalPreferencesRequestDto: updateSubscriberGlobalPreferencesRequestDto,
 	}
 
@@ -88,6 +89,8 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -104,7 +107,7 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -179,7 +182,7 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -194,7 +197,7 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 		}
 	}
 
-	res := &operations.SubscribersControllerUpdateSubscriberGlobalPreferencesResponse{
+	res := &operations.SubscribersV1ControllerUpdateSubscriberGlobalPreferencesResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -225,11 +228,42 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -282,6 +316,29 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -314,17 +371,18 @@ func (s *SubscribersPreferences) UpdateGlobal(ctx context.Context, subscriberID 
 }
 
 // Update subscriber preference
-func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string, workflowID string, updateSubscriberPreferenceRequestDto components.UpdateSubscriberPreferenceRequestDto, opts ...operations.Option) (*operations.SubscribersControllerUpdateSubscriberPreferenceResponse, error) {
+func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string, workflowID string, updateSubscriberPreferenceRequestDto components.UpdateSubscriberPreferenceRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberPreferenceResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
-		OperationID:    "SubscribersController_updateSubscriberPreference",
+		OperationID:    "SubscribersV1Controller_updateSubscriberPreference",
 		OAuth2Scopes:   []string{},
 		SecuritySource: s.sdkConfiguration.Security,
 	}
 
-	request := operations.SubscribersControllerUpdateSubscriberPreferenceRequest{
+	request := operations.SubscribersV1ControllerUpdateSubscriberPreferenceRequest{
 		SubscriberID:                         subscriberID,
 		WorkflowID:                           workflowID,
+		IdempotencyKey:                       idempotencyKey,
 		UpdateSubscriberPreferenceRequestDto: updateSubscriberPreferenceRequestDto,
 	}
 
@@ -377,6 +435,8 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -393,7 +453,7 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -468,7 +528,7 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -483,7 +543,7 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 		}
 	}
 
-	res := &operations.SubscribersControllerUpdateSubscriberPreferenceResponse{
+	res := &operations.SubscribersV1ControllerUpdateSubscriberPreferenceResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -514,11 +574,42 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -571,6 +662,29 @@ func (s *SubscribersPreferences) Update(ctx context.Context, subscriberID string
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)

@@ -33,7 +33,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
     res, err := s.Messages.List(ctx, operations.MessagesControllerGetMessagesRequest{
@@ -63,11 +63,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Delete
 
@@ -89,10 +91,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Messages.Delete(ctx, "<id>")
+    res, err := s.Messages.Delete(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -108,6 +110,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `messageID`                                              | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -116,11 +119,13 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## DeleteByTransactionID
 
@@ -142,10 +147,10 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_API_KEY")),
+        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Messages.DeleteByTransactionID(ctx, "<id>", nil)
+    res, err := s.Messages.DeleteByTransactionID(ctx, "<id>", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -162,6 +167,7 @@ func main() {
 | `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |
 | `transactionID`                                           | *string*                                                  | :heavy_check_mark:                                        | N/A                                                       |
 | `channel`                                                 | [*operations.Channel](../../models/operations/channel.md) | :heavy_minus_sign:                                        | The channel of the message to be deleted                  |
+| `idempotencyKey`                                          | **string*                                                 | :heavy_minus_sign:                                        | A header for idempotency purposes                         |
 | `opts`                                                    | [][operations.Option](../../models/operations/option.md)  | :heavy_minus_sign:                                        | The options for this request.                             |
 
 ### Response
@@ -170,8 +176,10 @@ func main() {
 
 ### Errors
 
-| Error Type                   | Status Code                  | Content Type                 |
-| ---------------------------- | ---------------------------- | ---------------------------- |
-| apierrors.ErrorDto           | 400, 404, 409                | application/json             |
-| apierrors.ValidationErrorDto | 422                          | application/json             |
-| apierrors.APIError           | 4XX, 5XX                     | \*/\*                        |
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |

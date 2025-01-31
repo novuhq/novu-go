@@ -48,6 +48,8 @@ type MessagesControllerDeleteMessagesByTransactionIDRequest struct {
 	// The channel of the message to be deleted
 	Channel       *Channel `queryParam:"style=form,explode=true,name=channel"`
 	TransactionID string   `pathParam:"style=simple,explode=false,name=transactionId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetChannel() *Channel {
@@ -62,6 +64,13 @@ func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetTransactionI
 		return ""
 	}
 	return o.TransactionID
+}
+
+func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type MessagesControllerDeleteMessagesByTransactionIDResponse struct {

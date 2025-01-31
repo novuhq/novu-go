@@ -6,6 +6,26 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type EventsControllerTriggerRequest struct {
+	// A header for idempotency purposes
+	IdempotencyKey         *string                           `header:"style=simple,explode=false,name=idempotency-key"`
+	TriggerEventRequestDto components.TriggerEventRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *EventsControllerTriggerRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
+func (o *EventsControllerTriggerRequest) GetTriggerEventRequestDto() components.TriggerEventRequestDto {
+	if o == nil {
+		return components.TriggerEventRequestDto{}
+	}
+	return o.TriggerEventRequestDto
+}
+
 type EventsControllerTriggerResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created

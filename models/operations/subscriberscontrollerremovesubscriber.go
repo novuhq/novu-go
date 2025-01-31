@@ -8,6 +8,8 @@ import (
 
 type SubscribersControllerRemoveSubscriberRequest struct {
 	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *SubscribersControllerRemoveSubscriberRequest) GetSubscriberID() string {
@@ -17,10 +19,17 @@ func (o *SubscribersControllerRemoveSubscriberRequest) GetSubscriberID() string 
 	return o.SubscriberID
 }
 
+func (o *SubscribersControllerRemoveSubscriberRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
 type SubscribersControllerRemoveSubscriberResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	DeleteSubscriberResponseDto *components.DeleteSubscriberResponseDto
+	RemoveSubscriberResponseDto *components.RemoveSubscriberResponseDto
 	Headers                     map[string][]string
 }
 
@@ -31,11 +40,11 @@ func (o *SubscribersControllerRemoveSubscriberResponse) GetHTTPMeta() components
 	return o.HTTPMeta
 }
 
-func (o *SubscribersControllerRemoveSubscriberResponse) GetDeleteSubscriberResponseDto() *components.DeleteSubscriberResponseDto {
+func (o *SubscribersControllerRemoveSubscriberResponse) GetRemoveSubscriberResponseDto() *components.RemoveSubscriberResponseDto {
 	if o == nil {
 		return nil
 	}
-	return o.DeleteSubscriberResponseDto
+	return o.RemoveSubscriberResponseDto
 }
 
 func (o *SubscribersControllerRemoveSubscriberResponse) GetHeaders() map[string][]string {

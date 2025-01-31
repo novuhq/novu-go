@@ -27,7 +27,7 @@ func newNovuTopicsSubscribers(sdkConfig sdkConfiguration) *NovuTopicsSubscribers
 
 // Check topic subscriber
 // Check if a subscriber belongs to a certain topic
-func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID string, topicKey string, opts ...operations.Option) (*operations.TopicsControllerGetTopicSubscriberResponse, error) {
+func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID string, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicSubscriberResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "TopicsController_getTopicSubscriber",
@@ -38,6 +38,7 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 	request := operations.TopicsControllerGetTopicSubscriberRequest{
 		ExternalSubscriberID: externalSubscriberID,
 		TopicKey:             topicKey,
+		IdempotencyKey:       idempotencyKey,
 	}
 
 	o := operations.Options{}
@@ -81,6 +82,8 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -97,7 +100,7 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -172,7 +175,7 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -218,11 +221,42 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -275,6 +309,29 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -308,7 +365,7 @@ func (s *NovuTopicsSubscribers) Check(ctx context.Context, externalSubscriberID 
 
 // Remove - Subscribers removal
 // Remove subscribers from a topic
-func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, removeSubscribersRequestDto components.RemoveSubscribersRequestDto, opts ...operations.Option) (*operations.TopicsControllerRemoveSubscribersResponse, error) {
+func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, removeSubscribersRequestDto components.RemoveSubscribersRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerRemoveSubscribersResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "TopicsController_removeSubscribers",
@@ -318,6 +375,7 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 
 	request := operations.TopicsControllerRemoveSubscribersRequest{
 		TopicKey:                    topicKey,
+		IdempotencyKey:              idempotencyKey,
 		RemoveSubscribersRequestDto: removeSubscribersRequestDto,
 	}
 
@@ -370,6 +428,8 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
+	utils.PopulateHeaders(ctx, req, request, nil)
+
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
 	}
@@ -386,7 +446,7 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 		} else {
 			retryConfig = &retry.Config{
 				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 500,
+					InitialInterval: 1000,
 					MaxInterval:     30000,
 					Exponent:        1.5,
 					MaxElapsedTime:  3600000,
@@ -461,7 +521,7 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 
 			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "404", "409", "422", "429", "4XX", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -487,11 +547,42 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 	case httpRes.StatusCode == 204:
 		res.Headers = httpRes.Header
 
+	case httpRes.StatusCode == 414:
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 400:
+		fallthrough
+	case httpRes.StatusCode == 401:
+		fallthrough
+	case httpRes.StatusCode == 403:
 		fallthrough
 	case httpRes.StatusCode == 404:
 		fallthrough
+	case httpRes.StatusCode == 405:
+		fallthrough
 	case httpRes.StatusCode == 409:
+		fallthrough
+	case httpRes.StatusCode == 413:
+		fallthrough
+	case httpRes.StatusCode == 415:
 		res.Headers = httpRes.Header
 
 		switch {
@@ -544,6 +635,29 @@ func (s *NovuTopicsSubscribers) Remove(ctx context.Context, topicKey string, rem
 			return nil, err
 		}
 		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+	case httpRes.StatusCode == 500:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.ErrorDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 503:
 		res.Headers = httpRes.Header
 		rawBody, err := utils.ConsumeRawBody(httpRes)

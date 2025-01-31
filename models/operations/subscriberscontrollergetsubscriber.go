@@ -8,8 +8,8 @@ import (
 
 type SubscribersControllerGetSubscriberRequest struct {
 	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
-	// Includes the topics associated with the subscriber
-	IncludeTopics *bool `queryParam:"style=form,explode=true,name=includeTopics"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *SubscribersControllerGetSubscriberRequest) GetSubscriberID() string {
@@ -19,11 +19,11 @@ func (o *SubscribersControllerGetSubscriberRequest) GetSubscriberID() string {
 	return o.SubscriberID
 }
 
-func (o *SubscribersControllerGetSubscriberRequest) GetIncludeTopics() *bool {
+func (o *SubscribersControllerGetSubscriberRequest) GetIdempotencyKey() *string {
 	if o == nil {
 		return nil
 	}
-	return o.IncludeTopics
+	return o.IdempotencyKey
 }
 
 type SubscribersControllerGetSubscriberResponse struct {

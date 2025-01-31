@@ -7,7 +7,9 @@ import (
 )
 
 type IntegrationsControllerUpdateIntegrationByIDRequest struct {
-	IntegrationID               string                                 `pathParam:"style=simple,explode=false,name=integrationId"`
+	IntegrationID string `pathParam:"style=simple,explode=false,name=integrationId"`
+	// A header for idempotency purposes
+	IdempotencyKey              *string                                `header:"style=simple,explode=false,name=idempotency-key"`
 	UpdateIntegrationRequestDto components.UpdateIntegrationRequestDto `request:"mediaType=application/json"`
 }
 
@@ -16,6 +18,13 @@ func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetIntegrationID() 
 		return ""
 	}
 	return o.IntegrationID
+}
+
+func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetUpdateIntegrationRequestDto() components.UpdateIntegrationRequestDto {

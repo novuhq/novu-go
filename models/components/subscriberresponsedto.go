@@ -20,8 +20,10 @@ type SubscriberResponseDto struct {
 	// The identifier used to create this subscriber, which typically corresponds to the user ID in your system.
 	SubscriberID string `json:"subscriberId"`
 	// An array of channel settings associated with the subscriber.
-	Channels []ChannelSettings `json:"channels,omitempty"`
+	Channels []ChannelSettingsDto `json:"channels,omitempty"`
 	// An array of topics that the subscriber is subscribed to.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Topics []string `json:"topics,omitempty"`
 	// Indicates whether the subscriber is currently online.
 	IsOnline *bool `json:"isOnline,omitempty"`
@@ -39,6 +41,8 @@ type SubscriberResponseDto struct {
 	UpdatedAt string `json:"updatedAt"`
 	// The version of the subscriber document.
 	V *float64 `json:"__v,omitempty"`
+	// Additional custom data for the subscriber
+	Data map[string]any `json:"data,omitempty"`
 }
 
 func (o *SubscriberResponseDto) GetID() *string {
@@ -97,7 +101,7 @@ func (o *SubscriberResponseDto) GetSubscriberID() string {
 	return o.SubscriberID
 }
 
-func (o *SubscriberResponseDto) GetChannels() []ChannelSettings {
+func (o *SubscriberResponseDto) GetChannels() []ChannelSettingsDto {
 	if o == nil {
 		return nil
 	}
@@ -165,4 +169,11 @@ func (o *SubscriberResponseDto) GetV() *float64 {
 		return nil
 	}
 	return o.V
+}
+
+func (o *SubscriberResponseDto) GetData() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Data
 }

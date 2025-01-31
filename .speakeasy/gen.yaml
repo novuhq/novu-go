@@ -16,9 +16,9 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 go:
-  version: 0.0.14
+  version: 0.0.16
   additionalDependencies:
-    "github.com/google/uuid": v1.6.0
+    github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError

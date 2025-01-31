@@ -8,6 +8,8 @@ import (
 
 type IntegrationsControllerRemoveIntegrationRequest struct {
 	IntegrationID string `pathParam:"style=simple,explode=false,name=integrationId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *IntegrationsControllerRemoveIntegrationRequest) GetIntegrationID() string {
@@ -15,6 +17,13 @@ func (o *IntegrationsControllerRemoveIntegrationRequest) GetIntegrationID() stri
 		return ""
 	}
 	return o.IntegrationID
+}
+
+func (o *IntegrationsControllerRemoveIntegrationRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type IntegrationsControllerRemoveIntegrationResponse struct {

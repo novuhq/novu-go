@@ -14,6 +14,8 @@ type MessagesControllerGetMessagesRequest struct {
 	TransactionID []string                    `queryParam:"style=form,explode=true,name=transactionId"`
 	Page          *float64                    `default:"0" queryParam:"style=form,explode=true,name=page"`
 	Limit         *float64                    `default:"10" queryParam:"style=form,explode=true,name=limit"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (m MessagesControllerGetMessagesRequest) MarshalJSON() ([]byte, error) {
@@ -60,6 +62,13 @@ func (o *MessagesControllerGetMessagesRequest) GetLimit() *float64 {
 		return nil
 	}
 	return o.Limit
+}
+
+func (o *MessagesControllerGetMessagesRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type MessagesControllerGetMessagesResponse struct {

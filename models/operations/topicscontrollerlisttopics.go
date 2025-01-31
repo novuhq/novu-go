@@ -14,6 +14,8 @@ type TopicsControllerListTopicsRequest struct {
 	PageSize *int64 `default:"10" queryParam:"style=form,explode=true,name=pageSize"`
 	// A filter key to apply to the results
 	Key *string `queryParam:"style=form,explode=true,name=key"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (t TopicsControllerListTopicsRequest) MarshalJSON() ([]byte, error) {
@@ -46,6 +48,13 @@ func (o *TopicsControllerListTopicsRequest) GetKey() *string {
 		return nil
 	}
 	return o.Key
+}
+
+func (o *TopicsControllerListTopicsRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type TopicsControllerListTopicsResponse struct {

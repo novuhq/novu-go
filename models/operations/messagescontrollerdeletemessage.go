@@ -8,6 +8,8 @@ import (
 
 type MessagesControllerDeleteMessageRequest struct {
 	MessageID string `pathParam:"style=simple,explode=false,name=messageId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *MessagesControllerDeleteMessageRequest) GetMessageID() string {
@@ -15,6 +17,13 @@ func (o *MessagesControllerDeleteMessageRequest) GetMessageID() string {
 		return ""
 	}
 	return o.MessageID
+}
+
+func (o *MessagesControllerDeleteMessageRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type MessagesControllerDeleteMessageResponse struct {

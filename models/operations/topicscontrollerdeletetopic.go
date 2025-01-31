@@ -9,6 +9,8 @@ import (
 type TopicsControllerDeleteTopicRequest struct {
 	// The topic key
 	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *TopicsControllerDeleteTopicRequest) GetTopicKey() string {
@@ -16,6 +18,13 @@ func (o *TopicsControllerDeleteTopicRequest) GetTopicKey() string {
 		return ""
 	}
 	return o.TopicKey
+}
+
+func (o *TopicsControllerDeleteTopicRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type TopicsControllerDeleteTopicResponse struct {

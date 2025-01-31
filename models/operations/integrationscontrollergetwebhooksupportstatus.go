@@ -8,6 +8,8 @@ import (
 
 type IntegrationsControllerGetWebhookSupportStatusRequest struct {
 	ProviderOrIntegrationID string `pathParam:"style=simple,explode=false,name=providerOrIntegrationId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *IntegrationsControllerGetWebhookSupportStatusRequest) GetProviderOrIntegrationID() string {
@@ -15,6 +17,13 @@ func (o *IntegrationsControllerGetWebhookSupportStatusRequest) GetProviderOrInte
 		return ""
 	}
 	return o.ProviderOrIntegrationID
+}
+
+func (o *IntegrationsControllerGetWebhookSupportStatusRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type IntegrationsControllerGetWebhookSupportStatusResponse struct {

@@ -110,7 +110,7 @@ actions:
       created_at: 1737123019702
   - target: $["paths"]["/v1/subscribers/{subscriberId}"]["delete"]
     update:
-      x-speakeasy-name-override: delete
+      x-speakeasy-name-override: deleteLegacy
     x-speakeasy-metadata:
       type: method-name
       before: sdk.Subscribers.SubscribersController_removeSubscriber()

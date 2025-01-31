@@ -6,6 +6,18 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type NotificationsControllerGetActivityStatsRequest struct {
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
+}
+
+func (o *NotificationsControllerGetActivityStatsRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
 type NotificationsControllerGetActivityStatsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK

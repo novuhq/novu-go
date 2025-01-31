@@ -28,6 +28,8 @@ type NotificationsControllerListNotificationsRequest struct {
 	After *string `queryParam:"style=form,explode=true,name=after"`
 	// Date filter for records before this timestamp
 	Before *string `queryParam:"style=form,explode=true,name=before"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (n NotificationsControllerListNotificationsRequest) MarshalJSON() ([]byte, error) {
@@ -102,6 +104,13 @@ func (o *NotificationsControllerListNotificationsRequest) GetBefore() *string {
 		return nil
 	}
 	return o.Before
+}
+
+func (o *NotificationsControllerListNotificationsRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type NotificationsControllerListNotificationsResponse struct {

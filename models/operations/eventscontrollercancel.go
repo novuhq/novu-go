@@ -8,6 +8,8 @@ import (
 
 type EventsControllerCancelRequest struct {
 	TransactionID string `pathParam:"style=simple,explode=false,name=transactionId"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *EventsControllerCancelRequest) GetTransactionID() string {
@@ -15,6 +17,13 @@ func (o *EventsControllerCancelRequest) GetTransactionID() string {
 		return ""
 	}
 	return o.TransactionID
+}
+
+func (o *EventsControllerCancelRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type EventsControllerCancelResponse struct {

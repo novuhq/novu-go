@@ -335,13 +335,11 @@ func (u Tenant) MarshalJSON() ([]byte, error) {
 
 type TriggerEventRequestDto struct {
 	// The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page.
-	Name string `json:"name"`
+	WorkflowID string `json:"name"`
 	// The payload object is used to pass additional custom information that could be
 	//     used to render the workflow, or perform routing rules based on it.
 	//       This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
 	Payload map[string]any `json:"payload,omitempty"`
-	// A URL to bridge for additional processing.
-	BridgeURL *string `json:"bridgeUrl,omitempty"`
 	// This could be used to override provider specific configurations
 	Overrides map[string]map[string]any `json:"overrides,omitempty"`
 	// The recipients list of people who will receive the notification.
@@ -350,25 +348,18 @@ type TriggerEventRequestDto struct {
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
 	//
-	//
-	//
-	//
-	//
-	//
 	//     If a new actor object is provided, we will create a new subscriber in our system
 	Actor *Actor `json:"actor,omitempty"`
 	// It is used to specify a tenant context during trigger event.
 	//     Existing tenants will be updated with the provided details.
 	Tenant *Tenant `json:"tenant,omitempty"`
-	// Additional control configurations.
-	Controls *WorkflowToStepControlValuesDto `json:"controls,omitempty"`
 }
 
-func (o *TriggerEventRequestDto) GetName() string {
+func (o *TriggerEventRequestDto) GetWorkflowID() string {
 	if o == nil {
 		return ""
 	}
-	return o.Name
+	return o.WorkflowID
 }
 
 func (o *TriggerEventRequestDto) GetPayload() map[string]any {
@@ -376,13 +367,6 @@ func (o *TriggerEventRequestDto) GetPayload() map[string]any {
 		return nil
 	}
 	return o.Payload
-}
-
-func (o *TriggerEventRequestDto) GetBridgeURL() *string {
-	if o == nil {
-		return nil
-	}
-	return o.BridgeURL
 }
 
 func (o *TriggerEventRequestDto) GetOverrides() map[string]map[string]any {
@@ -418,11 +402,4 @@ func (o *TriggerEventRequestDto) GetTenant() *Tenant {
 		return nil
 	}
 	return o.Tenant
-}
-
-func (o *TriggerEventRequestDto) GetControls() *WorkflowToStepControlValuesDto {
-	if o == nil {
-		return nil
-	}
-	return o.Controls
 }

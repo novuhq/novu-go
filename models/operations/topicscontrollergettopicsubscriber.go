@@ -11,6 +11,8 @@ type TopicsControllerGetTopicSubscriberRequest struct {
 	ExternalSubscriberID string `pathParam:"style=simple,explode=false,name=externalSubscriberId"`
 	// The topic key
 	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
+	// A header for idempotency purposes
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (o *TopicsControllerGetTopicSubscriberRequest) GetExternalSubscriberID() string {
@@ -25,6 +27,13 @@ func (o *TopicsControllerGetTopicSubscriberRequest) GetTopicKey() string {
 		return ""
 	}
 	return o.TopicKey
+}
+
+func (o *TopicsControllerGetTopicSubscriberRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
 }
 
 type TopicsControllerGetTopicSubscriberResponse struct {

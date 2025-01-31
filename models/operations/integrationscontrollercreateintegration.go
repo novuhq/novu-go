@@ -6,6 +6,26 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type IntegrationsControllerCreateIntegrationRequest struct {
+	// A header for idempotency purposes
+	IdempotencyKey              *string                                `header:"style=simple,explode=false,name=idempotency-key"`
+	CreateIntegrationRequestDto components.CreateIntegrationRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *IntegrationsControllerCreateIntegrationRequest) GetIdempotencyKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IdempotencyKey
+}
+
+func (o *IntegrationsControllerCreateIntegrationRequest) GetCreateIntegrationRequestDto() components.CreateIntegrationRequestDto {
+	if o == nil {
+		return components.CreateIntegrationRequestDto{}
+	}
+	return o.CreateIntegrationRequestDto
+}
+
 type IntegrationsControllerCreateIntegrationResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
