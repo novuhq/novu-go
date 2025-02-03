@@ -1,0 +1,10 @@
+# SubscribersControllerUpdateSubscriberPreferencesResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `GetSubscriberPreferencesDto`                                                                     | [*components.GetSubscriberPreferencesDto](../../models/components/getsubscriberpreferencesdto.md) | :heavy_minus_sign:                                                                                | OK                                                                                                |
+| `Headers`                                                                                         | map[string][]*string*                                                                             | :heavy_check_mark:                                                                                | N/A                                                                                               |

@@ -23,6 +23,7 @@ type Subscribers struct {
 	Notifications  *NovuSubscribersNotifications
 	Messages       *NovuMessages
 	Authentication *Authentication
+	Preferences    *NovuPreferences
 
 	sdkConfiguration sdkConfiguration
 }
@@ -35,6 +36,7 @@ func newSubscribers(sdkConfig sdkConfiguration) *Subscribers {
 		Notifications:    newNovuSubscribersNotifications(sdkConfig),
 		Messages:         newNovuMessages(sdkConfig),
 		Authentication:   newAuthentication(sdkConfig),
+		Preferences:      newNovuPreferences(sdkConfig),
 	}
 }
 

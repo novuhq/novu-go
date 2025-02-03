@@ -44,7 +44,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/novuhq/novu-go@v(xxx.xxx.xxx-current version)
+go get github.com/novuhq/novu-go
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -423,6 +423,11 @@ func main() {
 
 * [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
 * [RetrieveByLevel](docs/sdks/preferences/README.md#retrievebylevel) - Get subscriber preferences by level
+
+#### [Subscribers.Preferences](docs/sdks/novupreferences/README.md)
+
+* [Retrieve](docs/sdks/novupreferences/README.md#retrieve) - Get subscriber preferences
+* [Update](docs/sdks/novupreferences/README.md#update) - Update subscriber global or workflow specific preferences
 
 ### [SubscribersPreferences](docs/sdks/subscriberspreferences/README.md)
 

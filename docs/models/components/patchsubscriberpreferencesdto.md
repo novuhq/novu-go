@@ -1,0 +1,9 @@
+# PatchSubscriberPreferencesDto
+
+
+## Fields
+
+| Field                                                                                          | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `Channels`                                                                                     | [components.PatchPreferenceChannelsDto](../../models/components/patchpreferencechannelsdto.md) | :heavy_check_mark:                                                                             | Channel-specific preference settings                                                           |
+| `WorkflowID`                                                                                   | **string*                                                                                      | :heavy_minus_sign:                                                                             | If provided, update workflow specific preferences, otherwise update global preferences         |

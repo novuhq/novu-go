@@ -8,8 +8,8 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// Overrides - This could be used to override provider specific configurations
-type Overrides struct {
+// TriggerEventToAllRequestDtoOverrides - This could be used to override provider specific configurations
+type TriggerEventToAllRequestDtoOverrides struct {
 }
 
 type TriggerEventToAllRequestDtoActorType string
@@ -152,7 +152,7 @@ type TriggerEventToAllRequestDto struct {
 	//       For In-App channel, payload data are also available in <Inbox />
 	Payload map[string]any `json:"payload"`
 	// This could be used to override provider specific configurations
-	Overrides *Overrides `json:"overrides,omitempty"`
+	Overrides *TriggerEventToAllRequestDtoOverrides `json:"overrides,omitempty"`
 	// A unique identifier for this transaction, we will generated a UUID if not provided.
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
@@ -179,7 +179,7 @@ func (o *TriggerEventToAllRequestDto) GetPayload() map[string]any {
 	return o.Payload
 }
 
-func (o *TriggerEventToAllRequestDto) GetOverrides() *Overrides {
+func (o *TriggerEventToAllRequestDto) GetOverrides() *TriggerEventToAllRequestDtoOverrides {
 	if o == nil {
 		return nil
 	}
