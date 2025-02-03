@@ -395,6 +395,8 @@ func main() {
 * [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
 * [Patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
 * [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
+* [RetrievePreferences](docs/sdks/subscribers/README.md#retrievepreferences) - Get subscriber preferences
+* [UpdatePreferences](docs/sdks/subscribers/README.md#updatepreferences) - Update subscriber global or workflow specific preferences
 * [UpdateOnlineStatus](docs/sdks/subscribers/README.md#updateonlinestatus) - Update subscriber online status
 
 #### [Subscribers.Authentication](docs/sdks/authentication/README.md)
@@ -423,11 +425,6 @@ func main() {
 
 * [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
 * [RetrieveByLevel](docs/sdks/preferences/README.md#retrievebylevel) - Get subscriber preferences by level
-
-#### [Subscribers.Preferences](docs/sdks/novupreferences/README.md)
-
-* [Retrieve](docs/sdks/novupreferences/README.md#retrieve) - Get subscriber preferences
-* [Update](docs/sdks/novupreferences/README.md#update) - Update subscriber global or workflow specific preferences
 
 ### [SubscribersPreferences](docs/sdks/subscriberspreferences/README.md)
 

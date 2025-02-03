@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: f597bae88cf78d22d24fcd53c3ee4d92
+  docChecksum: 9492c4a7be33ab586c16506f474e2051
   docVersion: "1.0"
   speakeasyVersion: 1.481.1
   generationVersion: 2.500.5
-  releaseVersion: 0.1.7
-  configChecksum: c5b14789758c786b345a4cac18e208cf
+  releaseVersion: 0.1.8
+  configChecksum: c14eb9225dc5482faf5d8e1ebeef4cd4
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -544,7 +544,6 @@ generatedFiles:
   - docs/sdks/notifications/README.md
   - docs/sdks/novu/README.md
   - docs/sdks/novumessages/README.md
-  - docs/sdks/novupreferences/README.md
   - docs/sdks/novusubscribersnotifications/README.md
   - docs/sdks/novutopicssubscribers/README.md
   - docs/sdks/preferences/README.md
@@ -574,7 +573,6 @@ generatedFiles:
   - notifications.go
   - novu.go
   - novumessages.go
-  - novupreferences.go
   - novusubscribersnotifications.go
   - novutopicssubscribers.go
   - preferences.go

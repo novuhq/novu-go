@@ -170,9 +170,9 @@ func New(opts ...SDKOption) *Novu {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.1.7",
+			SDKVersion:        "0.1.8",
 			GenVersion:        "2.500.5",
-			UserAgent:         "speakeasy-sdk/go 0.1.7 2.500.5 1.0 github.com/novuhq/novu-go",
+			UserAgent:         "speakeasy-sdk/go 0.1.8 2.500.5 1.0 github.com/novuhq/novu-go",
 			Hooks:             hooks.New(),
 		},
 	}

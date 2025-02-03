@@ -87,8 +87,6 @@ func main() {
 
 Subscriber credentials associated to the delivery methods such as slack and push tokens.
 
-
-
     This endpoint appends provided credentials and deviceTokens to the existing ones.
 
 ### Example Usage
