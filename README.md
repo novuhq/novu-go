@@ -11,8 +11,6 @@ Developer-friendly & type-safe Go SDK specifically catered to leverage *github.c
 
 
 <br /><br />
-> [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/novu/novu). Delete this section before > publishing to a package manager.
 
 <!-- Start Summary [summary] -->
 ## Summary
@@ -46,7 +44,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/novuhq/novu-go
+go get github.com/novuhq/novu-go@v(xxx.xxx.xxx-current version)
 ```
 <!-- End SDK Installation [installation] -->
 
