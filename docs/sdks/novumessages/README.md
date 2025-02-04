@@ -5,11 +5,11 @@
 
 ### Available Operations
 
-* [MarkAs](#markas) - Mark a subscriber messages as seen, read, unseen or unread
+* [MarkAllAs](#markallas) - Mark a subscriber messages as seen, read, unseen or unread
 * [MarkAll](#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
-* [UpdateAction](#updateaction) - Mark message action as seen
+* [UpdateAsSeen](#updateasseen) - Mark message action as seen
 
-## MarkAs
+## MarkAllAs
 
 Mark a subscriber messages as seen, read, unseen or unread
 
@@ -33,7 +33,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Subscribers.Messages.MarkAs(ctx, "<id>", components.MessageMarkAsRequestDto{
+    res, err := s.Subscribers.Messages.MarkAllAs(ctx, "<id>", components.MessageMarkAsRequestDto{
         MessageID: components.CreateMessageIDStr(
             "<id>",
         ),
@@ -132,7 +132,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## UpdateAction
+## UpdateAsSeen
 
 Mark message action as seen
 
@@ -157,7 +157,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Subscribers.Messages.UpdateAction(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{
+    res, err := s.Subscribers.Messages.UpdateAsSeen(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{
         MessageID: "<id>",
         Type: "<value>",
         SubscriberID: "<id>",

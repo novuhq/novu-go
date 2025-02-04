@@ -5,9 +5,9 @@
 
 ### Available Operations
 
-* [GetProviderStatus](#getproviderstatus) - Get webhook support status for provider
+* [Retrieve](#retrieve) - Get webhook support status for provider
 
-## GetProviderStatus
+## Retrieve
 
 Return the status of the webhook for this provider, if it is supported or if it is not based on a boolean value
 
@@ -30,7 +30,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Integrations.Webhooks.GetProviderStatus(ctx, "<id>", nil)
+    res, err := s.Integrations.Webhooks.Retrieve(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }

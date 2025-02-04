@@ -25,8 +25,8 @@ func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
 	}
 }
 
-// OauthCallback - Handle providers oauth redirect
-func (s *Authentication) OauthCallback(ctx context.Context, request operations.SubscribersV1ControllerChatOauthCallbackRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatOauthCallbackResponse, error) {
+// ChatAccessOauthCallBack - Handle providers oauth redirect
+func (s *Authentication) ChatAccessOauthCallBack(ctx context.Context, request operations.SubscribersV1ControllerChatOauthCallbackRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatOauthCallbackResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "SubscribersV1Controller_chatOauthCallback",

@@ -11,7 +11,7 @@ Topics are a way to group subscribers together so that they can be notified of e
 * [Create](#create) - Topic creation
 * [List](#list) - Get topic list filtered 
 * [Delete](#delete) - Delete topic
-* [Get](#get) - Get topic
+* [Retrieve](#retrieve) - Get topic
 * [Rename](#rename) - Rename a topic
 
 ## Create
@@ -188,7 +188,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Get
+## Retrieve
 
 Get a topic by its topic key
 
@@ -211,7 +211,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Topics.Get(ctx, "<value>", nil)
+    res, err := s.Topics.Retrieve(ctx, "<value>", nil)
     if err != nil {
         log.Fatal(err)
     }

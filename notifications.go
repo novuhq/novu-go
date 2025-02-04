@@ -364,8 +364,8 @@ func (s *Notifications) List(ctx context.Context, request operations.Notificatio
 
 }
 
-// Get notification
-func (s *Notifications) Get(ctx context.Context, notificationID string, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetNotificationResponse, error) {
+// Retrieve - Get notification
+func (s *Notifications) Retrieve(ctx context.Context, notificationID string, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetNotificationResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "NotificationsController_getNotification",

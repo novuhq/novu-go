@@ -25,9 +25,9 @@ func newWebhooks(sdkConfig sdkConfiguration) *Webhooks {
 	}
 }
 
-// GetProviderStatus - Get webhook support status for provider
+// Retrieve - Get webhook support status for provider
 // Return the status of the webhook for this provider, if it is supported or if it is not based on a boolean value
-func (s *Webhooks) GetProviderStatus(ctx context.Context, providerOrIntegrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetWebhookSupportStatusResponse, error) {
+func (s *Webhooks) Retrieve(ctx context.Context, providerOrIntegrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetWebhookSupportStatusResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "IntegrationsController_getWebhookSupportStatus",

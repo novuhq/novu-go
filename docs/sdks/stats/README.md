@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [Get](#get) - Get notification statistics
-* [GetGraph](#getgraph) - Get notification graph statistics
+* [Retrieve](#retrieve) - Get notification statistics
+* [Graph](#graph) - Get notification graph statistics
 
-## Get
+## Retrieve
 
 Get notification statistics
 
@@ -31,7 +31,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Notifications.Stats.Get(ctx, nil)
+    res, err := s.Notifications.Stats.Retrieve(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -63,7 +63,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## GetGraph
+## Graph
 
 Get notification graph statistics
 
@@ -86,7 +86,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Notifications.Stats.GetGraph(ctx, nil, nil)
+    res, err := s.Notifications.Stats.Graph(ctx, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

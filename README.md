@@ -229,7 +229,7 @@ func main() {
 		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
-	res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
+	res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
 		Name: "<value>",
 		Payload: map[string]any{
 			"comment_id": "string",
@@ -354,40 +354,40 @@ func main() {
 * [ListActive](docs/sdks/integrations/README.md#listactive) - Get active integrations
 * [Update](docs/sdks/integrations/README.md#update) - Update integration
 * [Delete](docs/sdks/integrations/README.md#delete) - Delete integration
-* [SetPrimary](docs/sdks/integrations/README.md#setprimary) - Set integration as primary
+* [SetAsPrimary](docs/sdks/integrations/README.md#setasprimary) - Set integration as primary
 
 #### [Integrations.Webhooks](docs/sdks/webhooks/README.md)
 
-* [GetProviderStatus](docs/sdks/webhooks/README.md#getproviderstatus) - Get webhook support status for provider
+* [Retrieve](docs/sdks/webhooks/README.md#retrieve) - Get webhook support status for provider
 
 ### [Messages](docs/sdks/messages/README.md)
 
-* [List](docs/sdks/messages/README.md#list) - Get messages
+* [Retrieve](docs/sdks/messages/README.md#retrieve) - Get messages
 * [Delete](docs/sdks/messages/README.md#delete) - Delete message
 * [DeleteByTransactionID](docs/sdks/messages/README.md#deletebytransactionid) - Delete messages by transactionId
 
 ### [Notifications](docs/sdks/notifications/README.md)
 
 * [List](docs/sdks/notifications/README.md#list) - Get notifications
-* [Get](docs/sdks/notifications/README.md#get) - Get notification
+* [Retrieve](docs/sdks/notifications/README.md#retrieve) - Get notification
 
 #### [Notifications.Stats](docs/sdks/stats/README.md)
 
-* [Get](docs/sdks/stats/README.md#get) - Get notification statistics
-* [GetGraph](docs/sdks/stats/README.md#getgraph) - Get notification graph statistics
+* [Retrieve](docs/sdks/stats/README.md#retrieve) - Get notification statistics
+* [Graph](docs/sdks/stats/README.md#graph) - Get notification graph statistics
 
 ### [Novu SDK](docs/sdks/novu/README.md)
 
 * [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
 * [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
-* [Broadcast](docs/sdks/novu/README.md#broadcast) - Broadcast event to all
+* [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
 * [List](docs/sdks/subscribers/README.md#list) - Get subscribers
 * [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
-* [Get](docs/sdks/subscribers/README.md#get) - Get subscriber
+* [RetrieveLegacy](docs/sdks/subscribers/README.md#retrievelegacy) - Get subscriber
 * [Update](docs/sdks/subscribers/README.md#update) - Update subscriber
 * [~~DeleteLegacy~~](docs/sdks/subscribers/README.md#deletelegacy) - Delete subscriber :warning: **Deprecated**
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
@@ -395,13 +395,10 @@ func main() {
 * [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
 * [Patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
 * [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
-* [RetrievePreferences](docs/sdks/subscribers/README.md#retrievepreferences) - Get subscriber preferences
-* [UpdatePreferences](docs/sdks/subscribers/README.md#updatepreferences) - Update subscriber global or workflow specific preferences
-* [UpdateOnlineStatus](docs/sdks/subscribers/README.md#updateonlinestatus) - Update subscriber online status
 
 #### [Subscribers.Authentication](docs/sdks/authentication/README.md)
 
-* [OauthCallback](docs/sdks/authentication/README.md#oauthcallback) - Handle providers oauth redirect
+* [ChatAccessOauthCallBack](docs/sdks/authentication/README.md#chataccessoauthcallback) - Handle providers oauth redirect
 * [ChatAccessOauth](docs/sdks/authentication/README.md#chataccessoauth) - Handle chat oauth
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
@@ -412,41 +409,41 @@ func main() {
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
 
-* [MarkAs](docs/sdks/novumessages/README.md#markas) - Mark a subscriber messages as seen, read, unseen or unread
+* [MarkAllAs](docs/sdks/novumessages/README.md#markallas) - Mark a subscriber messages as seen, read, unseen or unread
 * [MarkAll](docs/sdks/novumessages/README.md#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
-* [UpdateAction](docs/sdks/novumessages/README.md#updateaction) - Mark message action as seen
+* [UpdateAsSeen](docs/sdks/novumessages/README.md#updateasseen) - Mark message action as seen
 
-#### [Subscribers.Notifications](docs/sdks/novusubscribersnotifications/README.md)
+#### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
-* [GetFeed](docs/sdks/novusubscribersnotifications/README.md#getfeed) - Get in-app notification feed for a particular subscriber
-* [UnseenCount](docs/sdks/novusubscribersnotifications/README.md#unseencount) - Get the unseen in-app notifications count for subscribers feed
+* [Feed](docs/sdks/novunotifications/README.md#feed) - Get in-app notification feed for a particular subscriber
+* [UnseenCount](docs/sdks/novunotifications/README.md#unseencount) - Get the unseen in-app notifications count for subscribers feed
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
 * [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
+* [UpdateGlobal](docs/sdks/preferences/README.md#updateglobal) - Update subscriber global preferences
 * [RetrieveByLevel](docs/sdks/preferences/README.md#retrievebylevel) - Get subscriber preferences by level
+* [UpdateLegacy](docs/sdks/preferences/README.md#updatelegacy) - Update subscriber preference
+* [Retrieve](docs/sdks/preferences/README.md#retrieve) - Get subscriber preferences
+* [Update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
 
-### [SubscribersPreferences](docs/sdks/subscriberspreferences/README.md)
+#### [Subscribers.Properties](docs/sdks/properties/README.md)
 
-* [UpdateGlobal](docs/sdks/subscriberspreferences/README.md#updateglobal) - Update subscriber global preferences
-* [Update](docs/sdks/subscriberspreferences/README.md#update) - Update subscriber preference
+* [UpdateOnlineFlag](docs/sdks/properties/README.md#updateonlineflag) - Update subscriber online status
 
 ### [Topics](docs/sdks/topics/README.md)
 
 * [Create](docs/sdks/topics/README.md#create) - Topic creation
 * [List](docs/sdks/topics/README.md#list) - Get topic list filtered 
 * [Delete](docs/sdks/topics/README.md#delete) - Delete topic
-* [Get](docs/sdks/topics/README.md#get) - Get topic
+* [Retrieve](docs/sdks/topics/README.md#retrieve) - Get topic
 * [Rename](docs/sdks/topics/README.md#rename) - Rename a topic
 
-#### [Topics.Subscribers](docs/sdks/novutopicssubscribers/README.md)
+#### [Topics.Subscribers](docs/sdks/novusubscribers/README.md)
 
-* [Check](docs/sdks/novutopicssubscribers/README.md#check) - Check topic subscriber
-* [Remove](docs/sdks/novutopicssubscribers/README.md#remove) - Subscribers removal
-
-### [TopicsSubscribers](docs/sdks/topicssubscribers/README.md)
-
-* [Add](docs/sdks/topicssubscribers/README.md#add) - Subscribers addition
+* [Assign](docs/sdks/novusubscribers/README.md#assign) - Subscribers addition
+* [Retrieve](docs/sdks/novusubscribers/README.md#retrieve) - Check topic subscriber
+* [Remove](docs/sdks/novusubscribers/README.md#remove) - Subscribers removal
 
 </details>
 <!-- End Available Resources and Operations [operations] -->

@@ -29,9 +29,9 @@ func newMessages(sdkConfig sdkConfiguration) *Messages {
 	}
 }
 
-// List - Get messages
+// Retrieve - Get messages
 // Returns a list of messages, could paginate using the `page` query parameter
-func (s *Messages) List(ctx context.Context, request operations.MessagesControllerGetMessagesRequest, opts ...operations.Option) (*operations.MessagesControllerGetMessagesResponse, error) {
+func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesControllerGetMessagesRequest, opts ...operations.Option) (*operations.MessagesControllerGetMessagesResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "MessagesController_getMessages",

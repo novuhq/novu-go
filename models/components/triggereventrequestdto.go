@@ -347,7 +347,6 @@ type TriggerEventRequestDto struct {
 	// A unique identifier for this transaction, we will generate a UUID if not provided.
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
-	//
 	//     If a new actor object is provided, we will create a new subscriber in our system
 	Actor *Actor `json:"actor,omitempty"`
 	// It is used to specify a tenant context during trigger event.

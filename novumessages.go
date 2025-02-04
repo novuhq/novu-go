@@ -25,8 +25,8 @@ func newNovuMessages(sdkConfig sdkConfiguration) *NovuMessages {
 	}
 }
 
-// MarkAs - Mark a subscriber messages as seen, read, unseen or unread
-func (s *NovuMessages) MarkAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
+// MarkAllAs - Mark a subscriber messages as seen, read, unseen or unread
+func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "SubscribersV1Controller_markMessagesAs",
@@ -715,8 +715,8 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 
 }
 
-// UpdateAction - Mark message action as seen
-func (s *NovuMessages) UpdateAction(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
+// UpdateAsSeen - Mark message action as seen
+func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "SubscribersV1Controller_markActionAsSeen",

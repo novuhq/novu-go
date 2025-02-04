@@ -80,9 +80,11 @@ type Novu struct {
 	// With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
 	//
 	// https://docs.novu.co/channels-and-providers/integration-store
-	Integrations           *Integrations
-	Subscribers            *Subscribers
-	SubscribersPreferences *SubscribersPreferences
+	Integrations *Integrations
+	// A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
+	//
+	// https://docs.novu.co/subscribers/subscribers
+	Subscribers *Subscribers
 	// A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
 	//
 	// https://docs.novu.co/workflows/messages
@@ -90,8 +92,7 @@ type Novu struct {
 	// Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
 	//
 	// https://docs.novu.co/subscribers/topics
-	Topics            *Topics
-	TopicsSubscribers *TopicsSubscribers
+	Topics *Topics
 
 	sdkConfiguration sdkConfiguration
 }
@@ -170,9 +171,9 @@ func New(opts ...SDKOption) *Novu {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.1.8",
-			GenVersion:        "2.500.5",
-			UserAgent:         "speakeasy-sdk/go 0.1.8 2.500.5 1.0 github.com/novuhq/novu-go",
+			SDKVersion:        "0.1.15",
+			GenVersion:        "2.502.0",
+			UserAgent:         "speakeasy-sdk/go 0.1.15 2.502.0 1.0 github.com/novuhq/novu-go",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -205,13 +206,9 @@ func New(opts ...SDKOption) *Novu {
 
 	sdk.Subscribers = newSubscribers(sdk.sdkConfiguration)
 
-	sdk.SubscribersPreferences = newSubscribersPreferences(sdk.sdkConfiguration)
-
 	sdk.Messages = newMessages(sdk.sdkConfiguration)
 
 	sdk.Topics = newTopics(sdk.sdkConfiguration)
-
-	sdk.TopicsSubscribers = newTopicsSubscribers(sdk.sdkConfiguration)
 
 	return sdk
 }
@@ -911,11 +908,11 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 }
 
-// Broadcast event to all
+// TriggerBroadcast - Broadcast event to all
 // Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.
 //
 //	In the future could be used to trigger events to a subset of subscribers based on defined filters.
-func (s *Novu) Broadcast(ctx context.Context, triggerEventToAllRequestDto components.TriggerEventToAllRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerBroadcastEventToAllResponse, error) {
+func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto components.TriggerEventToAllRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerBroadcastEventToAllResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "EventsController_broadcastEventToAll",

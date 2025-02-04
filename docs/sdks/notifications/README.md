@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [List](#list) - Get notifications
-* [Get](#get) - Get notification
+* [Retrieve](#retrieve) - Get notification
 
 ## List
 
@@ -64,7 +64,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Get
+## Retrieve
 
 Get notification
 
@@ -87,7 +87,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Notifications.Get(ctx, "<id>", nil)
+    res, err := s.Notifications.Retrieve(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }

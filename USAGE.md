@@ -177,7 +177,7 @@ func main() {
 		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
 	)
 
-	res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
+	res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
 		Name: "<value>",
 		Payload: map[string]any{
 			"comment_id": "string",

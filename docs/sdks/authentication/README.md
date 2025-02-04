@@ -5,10 +5,10 @@
 
 ### Available Operations
 
-* [OauthCallback](#oauthcallback) - Handle providers oauth redirect
+* [ChatAccessOauthCallBack](#chataccessoauthcallback) - Handle providers oauth redirect
 * [ChatAccessOauth](#chataccessoauth) - Handle chat oauth
 
-## OauthCallback
+## ChatAccessOauthCallBack
 
 Handle providers oauth redirect
 
@@ -32,7 +32,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Subscribers.Authentication.OauthCallback(ctx, operations.SubscribersV1ControllerChatOauthCallbackRequest{
+    res, err := s.Subscribers.Authentication.ChatAccessOauthCallBack(ctx, operations.SubscribersV1ControllerChatOauthCallbackRequest{
         SubscriberID: "<id>",
         ProviderID: "<id>",
         HmacHash: "<value>",

@@ -20,7 +20,7 @@ import (
 //
 // https://docs.novu.co/subscribers/topics
 type Topics struct {
-	Subscribers *NovuTopicsSubscribers
+	Subscribers *NovuSubscribers
 
 	sdkConfiguration sdkConfiguration
 }
@@ -28,7 +28,7 @@ type Topics struct {
 func newTopics(sdkConfig sdkConfiguration) *Topics {
 	return &Topics{
 		sdkConfiguration: sdkConfig,
-		Subscribers:      newNovuTopicsSubscribers(sdkConfig),
+		Subscribers:      newNovuSubscribers(sdkConfig),
 	}
 }
 
@@ -1037,9 +1037,9 @@ func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *st
 
 }
 
-// Get topic
+// Retrieve - Get topic
 // Get a topic by its topic key
-func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicResponse, error) {
+func (s *Topics) Retrieve(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "TopicsController_getTopic",

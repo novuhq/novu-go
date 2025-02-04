@@ -1730,8 +1730,8 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 
 }
 
-// SetPrimary - Set integration as primary
-func (s *Integrations) SetPrimary(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerSetIntegrationAsPrimaryResponse, error) {
+// SetAsPrimary - Set integration as primary
+func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerSetIntegrationAsPrimaryResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "IntegrationsController_setIntegrationAsPrimary",

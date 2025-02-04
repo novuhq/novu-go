@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 9492c4a7be33ab586c16506f474e2051
+  docChecksum: 314933743cdc7df0fece4d1200534ba4
   docVersion: "1.0"
-  speakeasyVersion: 1.481.1
-  generationVersion: 2.500.5
-  releaseVersion: 0.1.8
-  configChecksum: c14eb9225dc5482faf5d8e1ebeef4cd4
+  speakeasyVersion: 1.483.0
+  generationVersion: 2.502.0
+  releaseVersion: 0.1.15
+  configChecksum: d7316db187f8178eae9465f1f7f7511b
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -544,14 +544,13 @@ generatedFiles:
   - docs/sdks/notifications/README.md
   - docs/sdks/novu/README.md
   - docs/sdks/novumessages/README.md
-  - docs/sdks/novusubscribersnotifications/README.md
-  - docs/sdks/novutopicssubscribers/README.md
+  - docs/sdks/novunotifications/README.md
+  - docs/sdks/novusubscribers/README.md
   - docs/sdks/preferences/README.md
+  - docs/sdks/properties/README.md
   - docs/sdks/stats/README.md
   - docs/sdks/subscribers/README.md
-  - docs/sdks/subscriberspreferences/README.md
   - docs/sdks/topics/README.md
-  - docs/sdks/topicssubscribers/README.md
   - docs/sdks/webhooks/README.md
   - go.mod
   - integrations.go
@@ -573,15 +572,14 @@ generatedFiles:
   - notifications.go
   - novu.go
   - novumessages.go
-  - novusubscribersnotifications.go
-  - novutopicssubscribers.go
+  - novunotifications.go
+  - novusubscribers.go
   - preferences.go
+  - properties.go
   - retry/config.go
   - stats.go
   - subscribers.go
-  - subscriberspreferences.go
   - topics.go
-  - topicssubscribers.go
   - types/bigint.go
   - types/date.go
   - types/datetime.go

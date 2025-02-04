@@ -8,11 +8,11 @@ A message in Novu represents a notification delivered to a recipient on a partic
 
 ### Available Operations
 
-* [List](#list) - Get messages
+* [Retrieve](#retrieve) - Get messages
 * [Delete](#delete) - Delete message
 * [DeleteByTransactionID](#deletebytransactionid) - Delete messages by transactionId
 
-## List
+## Retrieve
 
 Returns a list of messages, could paginate using the `page` query parameter
 
@@ -36,7 +36,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Messages.List(ctx, operations.MessagesControllerGetMessagesRequest{})
+    res, err := s.Messages.Retrieve(ctx, operations.MessagesControllerGetMessagesRequest{})
     if err != nil {
         log.Fatal(err)
     }

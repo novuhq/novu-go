@@ -3,9 +3,7 @@ speakeasyVersion: latest
 sources:
     novu-OAS:
         inputs:
-            - location: http://127.0.0.1:3000/openapi.sdk.yaml
-        overlays:
-            - location: .speakeasy/speakeasy-modifications-overlay.yaml
+            - location: https://api.novu.co/openapi.sdk.yaml
         registry:
             location: registry.speakeasyapi.dev/novu/novu/novu-oas
 targets:

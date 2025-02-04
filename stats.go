@@ -26,8 +26,8 @@ func newStats(sdkConfig sdkConfiguration) *Stats {
 	}
 }
 
-// Get notification statistics
-func (s *Stats) Get(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityStatsResponse, error) {
+// Retrieve - Get notification statistics
+func (s *Stats) Retrieve(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityStatsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "NotificationsController_getActivityStats",
@@ -361,8 +361,8 @@ func (s *Stats) Get(ctx context.Context, idempotencyKey *string, opts ...operati
 
 }
 
-// GetGraph - Get notification graph statistics
-func (s *Stats) GetGraph(ctx context.Context, days *float64, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityGraphStatsResponse, error) {
+// Graph - Get notification graph statistics
+func (s *Stats) Graph(ctx context.Context, days *float64, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityGraphStatsResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "NotificationsController_getActivityGraphStats",

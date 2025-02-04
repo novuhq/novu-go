@@ -11,7 +11,7 @@ Novu Documentation
 
 * [Trigger](#trigger) - Trigger event
 * [TriggerBulk](#triggerbulk) - Bulk trigger event
-* [Broadcast](#broadcast) - Broadcast event to all
+* [TriggerBroadcast](#triggerbroadcast) - Broadcast event to all
 * [Cancel](#cancel) - Cancel triggered event
 
 ## Trigger
@@ -231,10 +231,9 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Broadcast
+## TriggerBroadcast
 
 Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.
-
       In the future could be used to trigger events to a subset of subscribers based on defined filters.
 
 ### Example Usage
@@ -257,7 +256,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Broadcast(ctx, components.TriggerEventToAllRequestDto{
+    res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
         Name: "<value>",
         Payload: map[string]any{
             "comment_id": "string",

@@ -13,7 +13,7 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [ListActive](#listactive) - Get active integrations
 * [Update](#update) - Update integration
 * [Delete](#delete) - Delete integration
-* [SetPrimary](#setprimary) - Set integration as primary
+* [SetAsPrimary](#setasprimary) - Set integration as primary
 
 ## List
 
@@ -299,7 +299,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## SetPrimary
+## SetAsPrimary
 
 Set integration as primary
 
@@ -322,7 +322,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Integrations.SetPrimary(ctx, "<id>", nil)
+    res, err := s.Integrations.SetAsPrimary(ctx, "<id>", nil)
     if err != nil {
         log.Fatal(err)
     }
