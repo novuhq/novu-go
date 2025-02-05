@@ -14,5 +14,5 @@ targets:
             registry:
                 location: registry.speakeasyapi.dev/novu/novu/novu-oas-go-code-samples
             labelOverride:
-                fixedValue: Go (SDK)
+                fixedValue: Go
             blocking: false
