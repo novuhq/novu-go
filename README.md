@@ -388,7 +388,7 @@ func main() {
 * [List](docs/sdks/subscribers/README.md#list) - Get subscribers
 * [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
 * [RetrieveLegacy](docs/sdks/subscribers/README.md#retrievelegacy) - Get subscriber
-* [Update](docs/sdks/subscribers/README.md#update) - Update subscriber
+* [UpdateLegacy](docs/sdks/subscribers/README.md#updatelegacy) - Update subscriber
 * [~~DeleteLegacy~~](docs/sdks/subscribers/README.md#deletelegacy) - Delete subscriber :warning: **Deprecated**
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
 * [Search](docs/sdks/subscribers/README.md#search) - Search for subscribers
@@ -420,12 +420,15 @@ func main() {
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
-* [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
-* [UpdateGlobal](docs/sdks/preferences/README.md#updateglobal) - Update subscriber global preferences
-* [RetrieveByLevel](docs/sdks/preferences/README.md#retrievebylevel) - Get subscriber preferences by level
+* [~~ListLegacy~~](docs/sdks/preferences/README.md#listlegacy) - Get subscriber preferences :warning: **Deprecated**
+* [~~RetrieveByLevelLegacy~~](docs/sdks/preferences/README.md#retrievebylevellegacy) - Get subscriber preferences by level :warning: **Deprecated**
 * [UpdateLegacy](docs/sdks/preferences/README.md#updatelegacy) - Update subscriber preference
 * [Retrieve](docs/sdks/preferences/README.md#retrieve) - Get subscriber preferences
 * [Update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
+
+#### [Subscribers.Preferences.Legacy](docs/sdks/legacy/README.md)
+
+* [UpdateGlobal](docs/sdks/legacy/README.md#updateglobal) - Update subscriber global preferences
 
 #### [Subscribers.Properties](docs/sdks/properties/README.md)
 

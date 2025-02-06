@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 314933743cdc7df0fece4d1200534ba4
+  docChecksum: dd3f2cfbe8fe0d218524247e07b527e1
   docVersion: "1.0"
-  speakeasyVersion: 1.483.0
-  generationVersion: 2.502.0
-  releaseVersion: 0.1.16
-  configChecksum: b6439fd84ac2eebaae9223470937aff3
+  speakeasyVersion: 1.484.1
+  generationVersion: 2.503.2
+  releaseVersion: 0.1.17
+  configChecksum: fa8159268cb04ff199d7f763a9ad7919
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -540,6 +540,7 @@ generatedFiles:
   - docs/sdks/authentication/README.md
   - docs/sdks/credentials/README.md
   - docs/sdks/integrations/README.md
+  - docs/sdks/legacy/README.md
   - docs/sdks/messages/README.md
   - docs/sdks/notifications/README.md
   - docs/sdks/novu/README.md
@@ -566,6 +567,7 @@ generatedFiles:
   - internal/utils/retries.go
   - internal/utils/security.go
   - internal/utils/utils.go
+  - legacy.go
   - messages.go
   - models/apierrors/apierror.go
   - models/operations/options.go

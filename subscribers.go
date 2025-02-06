@@ -1118,9 +1118,9 @@ func (s *Subscribers) RetrieveLegacy(ctx context.Context, subscriberID string, i
 
 }
 
-// Update subscriber
+// UpdateLegacy - Update subscriber
 // Used to update the subscriber entity with new information
-func (s *Subscribers) Update(ctx context.Context, subscriberID string, updateSubscriberRequestDto components.UpdateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberResponse, error) {
+func (s *Subscribers) UpdateLegacy(ctx context.Context, subscriberID string, updateSubscriberRequestDto components.UpdateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberResponse, error) {
 	hookCtx := hooks.HookContext{
 		Context:        ctx,
 		OperationID:    "SubscribersV1Controller_updateSubscriber",

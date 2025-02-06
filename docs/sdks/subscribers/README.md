@@ -11,7 +11,7 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 * [List](#list) - Get subscribers
 * [Create](#create) - Create subscriber
 * [RetrieveLegacy](#retrievelegacy) - Get subscriber
-* [Update](#update) - Update subscriber
+* [UpdateLegacy](#updatelegacy) - Update subscriber
 * [~~DeleteLegacy~~](#deletelegacy) - Delete subscriber :warning: **Deprecated**
 * [CreateBulk](#createbulk) - Bulk create subscribers
 * [Search](#search) - Search for subscribers
@@ -204,7 +204,7 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Update
+## UpdateLegacy
 
 Used to update the subscriber entity with new information
 
@@ -228,7 +228,7 @@ func main() {
         novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
     )
 
-    res, err := s.Subscribers.Update(ctx, "<id>", components.UpdateSubscriberRequestDto{
+    res, err := s.Subscribers.UpdateLegacy(ctx, "<id>", components.UpdateSubscriberRequestDto{
         Email: novugo.String("john.doe@example.com"),
         FirstName: novugo.String("John"),
         LastName: novugo.String("Doe"),
