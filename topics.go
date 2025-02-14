@@ -35,13 +35,6 @@ func newTopics(sdkConfig sdkConfiguration) *Topics {
 // Create - Topic creation
 // Create a topic
 func (s *Topics) Create(ctx context.Context, createTopicRequestDto components.CreateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerCreateTopicResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_createTopic",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerCreateTopicRequest{
 		IdempotencyKey:        idempotencyKey,
 		CreateTopicRequestDto: createTopicRequestDto,
@@ -70,6 +63,13 @@ func (s *Topics) Create(ctx context.Context, createTopicRequestDto components.Cr
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_createTopic",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateTopicRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -380,13 +380,6 @@ func (s *Topics) Create(ctx context.Context, createTopicRequestDto components.Cr
 // List - Get topic list filtered
 // Returns a list of topics that can be paginated using the `page` query parameter and filtered by the topic key with the `key` query parameter
 func (s *Topics) List(ctx context.Context, page *int64, pageSize *int64, key *string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerListTopicsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_listTopics",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerListTopicsRequest{
 		Page:           page,
 		PageSize:       pageSize,
@@ -415,6 +408,14 @@ func (s *Topics) List(ctx context.Context, page *int64, pageSize *int64, key *st
 	opURL, err := url.JoinPath(baseURL, "/v1/topics")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_listTopics",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -723,13 +724,6 @@ func (s *Topics) List(ctx context.Context, page *int64, pageSize *int64, key *st
 // Delete topic
 // Delete a topic by its topic key if it has no subscribers
 func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerDeleteTopicResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_deleteTopic",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerDeleteTopicRequest{
 		TopicKey:       topicKey,
 		IdempotencyKey: idempotencyKey,
@@ -756,6 +750,14 @@ func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *st
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/topics/{topicKey}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_deleteTopic",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1040,13 +1042,6 @@ func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *st
 // Retrieve - Get topic
 // Get a topic by its topic key
 func (s *Topics) Retrieve(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_getTopic",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerGetTopicRequest{
 		TopicKey:       topicKey,
 		IdempotencyKey: idempotencyKey,
@@ -1073,6 +1068,14 @@ func (s *Topics) Retrieve(ctx context.Context, topicKey string, idempotencyKey *
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/topics/{topicKey}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_getTopic",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1377,13 +1380,6 @@ func (s *Topics) Retrieve(ctx context.Context, topicKey string, idempotencyKey *
 // Rename a topic
 // Rename a topic by providing a new name
 func (s *Topics) Rename(ctx context.Context, topicKey string, renameTopicRequestDto components.RenameTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerRenameTopicResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_renameTopic",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerRenameTopicRequest{
 		TopicKey:              topicKey,
 		IdempotencyKey:        idempotencyKey,
@@ -1413,6 +1409,13 @@ func (s *Topics) Rename(ctx context.Context, topicKey string, renameTopicRequest
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_renameTopic",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RenameTopicRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

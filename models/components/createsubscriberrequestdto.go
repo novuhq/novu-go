@@ -134,6 +134,8 @@ type CreateSubscriberRequestDto struct {
 	Data map[string]CreateSubscriberRequestDtoData `json:"data,omitempty"`
 	// An optional array of subscriber channels.
 	Channels []SubscriberChannelDto `json:"channels,omitempty"`
+	// The timezone of the subscriber.
+	Timezone *string `json:"timezone,omitempty"`
 }
 
 func (o *CreateSubscriberRequestDto) GetSubscriberID() string {
@@ -197,4 +199,11 @@ func (o *CreateSubscriberRequestDto) GetChannels() []SubscriberChannelDto {
 		return nil
 	}
 	return o.Channels
+}
+
+func (o *CreateSubscriberRequestDto) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
 }

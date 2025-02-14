@@ -32,13 +32,6 @@ func newMessages(sdkConfig sdkConfiguration) *Messages {
 // Retrieve - Get messages
 // Returns a list of messages, could paginate using the `page` query parameter
 func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesControllerGetMessagesRequest, opts ...operations.Option) (*operations.MessagesControllerGetMessagesResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "MessagesController_getMessages",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -60,6 +53,14 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 	opURL, err := url.JoinPath(baseURL, "/v1/messages")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "MessagesController_getMessages",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -368,13 +369,6 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 // Delete message
 // Deletes a message entity from the Novu platform
 func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey *string, opts ...operations.Option) (*operations.MessagesControllerDeleteMessageResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "MessagesController_deleteMessage",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.MessagesControllerDeleteMessageRequest{
 		MessageID:      messageID,
 		IdempotencyKey: idempotencyKey,
@@ -401,6 +395,14 @@ func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey 
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/messages/{messageId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "MessagesController_deleteMessage",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -705,13 +707,6 @@ func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey 
 // DeleteByTransactionID - Delete messages by transactionId
 // Deletes messages entity from the Novu platform using TransactionId of message
 func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID string, channel *operations.Channel, idempotencyKey *string, opts ...operations.Option) (*operations.MessagesControllerDeleteMessagesByTransactionIDResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "MessagesController_deleteMessagesByTransactionId",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.MessagesControllerDeleteMessagesByTransactionIDRequest{
 		Channel:        channel,
 		TransactionID:  transactionID,
@@ -739,6 +734,14 @@ func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID stri
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/messages/transaction/{transactionId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "MessagesController_deleteMessagesByTransactionId",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

@@ -34,7 +34,6 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
 * [Development](#development)
-  * [Maturity](#maturity)
   * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->
@@ -61,14 +60,13 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -112,14 +110,13 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
@@ -219,14 +216,13 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
@@ -257,14 +253,13 @@ import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Cancel(ctx, "<id>", nil)
@@ -299,14 +294,13 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -386,12 +380,9 @@ func main() {
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
 * [List](docs/sdks/subscribers/README.md#list) - Get subscribers
-* [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
-* [RetrieveLegacy](docs/sdks/subscribers/README.md#retrievelegacy) - Get subscriber
-* [UpdateLegacy](docs/sdks/subscribers/README.md#updatelegacy) - Update subscriber
-* [~~DeleteLegacy~~](docs/sdks/subscribers/README.md#deletelegacy) - Delete subscriber :warning: **Deprecated**
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
 * [Search](docs/sdks/subscribers/README.md#search) - Search for subscribers
+* [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
 * [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
 * [Patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
 * [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
@@ -420,15 +411,8 @@ func main() {
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
-* [~~ListLegacy~~](docs/sdks/preferences/README.md#listlegacy) - Get subscriber preferences :warning: **Deprecated**
-* [~~RetrieveByLevelLegacy~~](docs/sdks/preferences/README.md#retrievebylevellegacy) - Get subscriber preferences by level :warning: **Deprecated**
-* [UpdateLegacy](docs/sdks/preferences/README.md#updatelegacy) - Update subscriber preference
-* [Retrieve](docs/sdks/preferences/README.md#retrieve) - Get subscriber preferences
+* [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
 * [Update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
-
-#### [Subscribers.Preferences.Legacy](docs/sdks/legacy/README.md)
-
-* [UpdateGlobal](docs/sdks/legacy/README.md#updateglobal) - Update subscriber global preferences
 
 #### [Subscribers.Properties](docs/sdks/properties/README.md)
 
@@ -466,14 +450,13 @@ import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Subscribers.List(ctx, nil, nil, nil)
@@ -516,14 +499,13 @@ import (
 	"github.com/novuhq/novu-go/retry"
 	"log"
 	"models/operations"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -577,7 +559,6 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 	"github.com/novuhq/novu-go/retry"
 	"log"
-	"os"
 )
 
 func main() {
@@ -595,7 +576,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -659,14 +640,13 @@ import (
 	"github.com/novuhq/novu-go/models/apierrors"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -749,7 +729,6 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
@@ -757,7 +736,7 @@ func main() {
 
 	s := novugo.New(
 		novugo.WithServerIndex(1),
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -802,7 +781,6 @@ import (
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
-	"os"
 )
 
 func main() {
@@ -810,7 +788,7 @@ func main() {
 
 	s := novugo.New(
 		novugo.WithServerURL("https://api.novu.co"),
-		novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{

@@ -27,13 +27,6 @@ func newNovuMessages(sdkConfig sdkConfiguration) *NovuMessages {
 
 // MarkAllAs - Mark a subscriber messages as seen, read, unseen or unread
 func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markMessagesAs",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerMarkMessagesAsRequest{
 		SubscriberID:            subscriberID,
 		IdempotencyKey:          idempotencyKey,
@@ -63,6 +56,13 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markMessagesAs",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MessageMarkAsRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -372,13 +372,6 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 
 // MarkAll - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
 func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAllMessageAsRequestDto components.MarkAllMessageAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkAllUnreadAsReadResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markAllUnreadAsRead",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerMarkAllUnreadAsReadRequest{
 		SubscriberID:               subscriberID,
 		IdempotencyKey:             idempotencyKey,
@@ -408,6 +401,13 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markAllUnreadAsRead",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkAllMessageAsRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -717,13 +717,6 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 
 // UpdateAsSeen - Mark message action as seen
 func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markActionAsSeen",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -747,6 +740,13 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markActionAsSeen",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkMessageActionAsSeenDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
