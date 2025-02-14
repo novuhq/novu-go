@@ -19,7 +19,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/operations"
 	"log"
@@ -29,7 +28,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Notifications.List(ctx, operations.NotificationsControllerListNotificationsRequest{})
@@ -75,7 +74,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -84,7 +82,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Notifications.Retrieve(ctx, "<id>", nil)

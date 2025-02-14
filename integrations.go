@@ -35,13 +35,6 @@ func newIntegrations(sdkConfig sdkConfiguration) *Integrations {
 // List - Get integrations
 // Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerListIntegrationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_listIntegrations",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerListIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,
 	}
@@ -67,6 +60,14 @@ func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ..
 	opURL, err := url.JoinPath(baseURL, "/v1/integrations")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_listIntegrations",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -371,13 +372,6 @@ func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ..
 // Create integration
 // Create an integration for the current environment the user is based on the API key provided
 func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto components.CreateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerCreateIntegrationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_createIntegration",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerCreateIntegrationRequest{
 		IdempotencyKey:              idempotencyKey,
 		CreateIntegrationRequestDto: createIntegrationRequestDto,
@@ -406,6 +400,13 @@ func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto c
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_createIntegration",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateIntegrationRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -716,13 +717,6 @@ func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto c
 // ListActive - Get active integrations
 // Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
 func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetActiveIntegrationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_getActiveIntegrations",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerGetActiveIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,
 	}
@@ -748,6 +742,14 @@ func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, o
 	opURL, err := url.JoinPath(baseURL, "/v1/integrations/active")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_getActiveIntegrations",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1051,13 +1053,6 @@ func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, o
 
 // Update integration
 func (s *Integrations) Update(ctx context.Context, integrationID string, updateIntegrationRequestDto components.UpdateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerUpdateIntegrationByIDResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_updateIntegrationById",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerUpdateIntegrationByIDRequest{
 		IntegrationID:               integrationID,
 		IdempotencyKey:              idempotencyKey,
@@ -1087,6 +1082,13 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_updateIntegrationById",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateIntegrationRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1396,13 +1398,6 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 
 // Delete integration
 func (s *Integrations) Delete(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerRemoveIntegrationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_removeIntegration",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerRemoveIntegrationRequest{
 		IntegrationID:  integrationID,
 		IdempotencyKey: idempotencyKey,
@@ -1429,6 +1424,14 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/integrations/{integrationId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_removeIntegration",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -1732,13 +1735,6 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 
 // SetAsPrimary - Set integration as primary
 func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerSetIntegrationAsPrimaryResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_setIntegrationAsPrimary",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerSetIntegrationAsPrimaryRequest{
 		IntegrationID:  integrationID,
 		IdempotencyKey: idempotencyKey,
@@ -1765,6 +1761,14 @@ func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, i
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/integrations/{integrationId}/set-primary", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_setIntegrationAsPrimary",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

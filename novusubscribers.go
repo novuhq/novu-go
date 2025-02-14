@@ -28,13 +28,6 @@ func newNovuSubscribers(sdkConfig sdkConfiguration) *NovuSubscribers {
 // Assign - Subscribers addition
 // Add subscribers to a topic by key
 func (s *NovuSubscribers) Assign(ctx context.Context, topicKey string, addSubscribersRequestDto components.AddSubscribersRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerAssignResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_assign",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerAssignRequest{
 		TopicKey:                 topicKey,
 		IdempotencyKey:           idempotencyKey,
@@ -64,6 +57,13 @@ func (s *NovuSubscribers) Assign(ctx context.Context, topicKey string, addSubscr
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_assign",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "AddSubscribersRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -374,13 +374,6 @@ func (s *NovuSubscribers) Assign(ctx context.Context, topicKey string, addSubscr
 // Retrieve - Check topic subscriber
 // Check if a subscriber belongs to a certain topic
 func (s *NovuSubscribers) Retrieve(ctx context.Context, externalSubscriberID string, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicSubscriberResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_getTopicSubscriber",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerGetTopicSubscriberRequest{
 		ExternalSubscriberID: externalSubscriberID,
 		TopicKey:             topicKey,
@@ -408,6 +401,14 @@ func (s *NovuSubscribers) Retrieve(ctx context.Context, externalSubscriberID str
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/topics/{topicKey}/subscribers/{externalSubscriberId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_getTopicSubscriber",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -712,13 +713,6 @@ func (s *NovuSubscribers) Retrieve(ctx context.Context, externalSubscriberID str
 // Remove - Subscribers removal
 // Remove subscribers from a topic
 func (s *NovuSubscribers) Remove(ctx context.Context, topicKey string, removeSubscribersRequestDto components.RemoveSubscribersRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerRemoveSubscribersResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "TopicsController_removeSubscribers",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.TopicsControllerRemoveSubscribersRequest{
 		TopicKey:                    topicKey,
 		IdempotencyKey:              idempotencyKey,
@@ -748,6 +742,13 @@ func (s *NovuSubscribers) Remove(ctx context.Context, topicKey string, removeSub
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "TopicsController_removeSubscribers",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RemoveSubscribersRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

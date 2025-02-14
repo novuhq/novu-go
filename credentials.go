@@ -28,13 +28,6 @@ func newCredentials(sdkConfig sdkConfiguration) *Credentials {
 // Update subscriber credentials
 // Subscriber credentials associated to the delivery methods such as slack and push tokens.
 func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberChannelResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_updateSubscriberChannel",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerUpdateSubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
 		IdempotencyKey:                    idempotencyKey,
@@ -64,6 +57,13 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_updateSubscriberChannel",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberChannelRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -376,13 +376,6 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 //
 //	This endpoint appends provided credentials and deviceTokens to the existing ones.
 func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerModifySubscriberChannelResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_modifySubscriberChannel",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerModifySubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
 		IdempotencyKey:                    idempotencyKey,
@@ -412,6 +405,13 @@ func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSub
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_modifySubscriberChannel",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberChannelRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -722,13 +722,6 @@ func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSub
 // Delete subscriber credentials by providerId
 // Delete subscriber credentials such as slack and expo tokens.
 func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerID string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerDeleteSubscriberCredentialsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_deleteSubscriberCredentials",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerDeleteSubscriberCredentialsRequest{
 		SubscriberID:   subscriberID,
 		ProviderID:     providerID,
@@ -756,6 +749,14 @@ func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerI
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/credentials/{providerId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_deleteSubscriberCredentials",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

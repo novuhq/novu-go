@@ -28,13 +28,6 @@ func newWebhooks(sdkConfig sdkConfiguration) *Webhooks {
 // Retrieve - Get webhook support status for provider
 // Return the status of the webhook for this provider, if it is supported or if it is not based on a boolean value
 func (s *Webhooks) Retrieve(ctx context.Context, providerOrIntegrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetWebhookSupportStatusResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "IntegrationsController_getWebhookSupportStatus",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.IntegrationsControllerGetWebhookSupportStatusRequest{
 		ProviderOrIntegrationID: providerOrIntegrationID,
 		IdempotencyKey:          idempotencyKey,
@@ -61,6 +54,14 @@ func (s *Webhooks) Retrieve(ctx context.Context, providerOrIntegrationID string,
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/integrations/webhook/provider/{providerOrIntegrationId}/status", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "IntegrationsController_getWebhookSupportStatus",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

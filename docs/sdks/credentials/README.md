@@ -20,7 +20,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -30,7 +29,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Update(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
@@ -95,7 +94,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -105,7 +103,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Append(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
@@ -169,7 +167,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -178,7 +175,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Delete(ctx, "<id>", "<id>", nil)

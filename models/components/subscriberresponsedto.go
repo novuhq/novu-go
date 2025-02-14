@@ -43,6 +43,8 @@ type SubscriberResponseDto struct {
 	V *float64 `json:"__v,omitempty"`
 	// Additional custom data for the subscriber
 	Data map[string]any `json:"data,omitempty"`
+	// Timezone of the subscriber
+	Timezone *string `json:"timezone,omitempty"`
 }
 
 func (o *SubscriberResponseDto) GetID() *string {
@@ -176,4 +178,11 @@ func (o *SubscriberResponseDto) GetData() map[string]any {
 		return nil
 	}
 	return o.Data
+}
+
+func (o *SubscriberResponseDto) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
 }
