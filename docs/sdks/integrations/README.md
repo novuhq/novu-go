@@ -26,7 +26,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -35,7 +34,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.List(ctx, nil)
@@ -81,7 +80,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -91,7 +89,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.Create(ctx, components.CreateIntegrationRequestDto{
@@ -141,7 +139,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -150,7 +147,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.ListActive(ctx, nil)
@@ -196,7 +193,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -206,7 +202,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.Update(ctx, "<id>", components.UpdateIntegrationRequestDto{}, nil)
@@ -254,7 +250,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -263,7 +258,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.Delete(ctx, "<id>", nil)
@@ -310,7 +305,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -319,7 +313,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.SetAsPrimary(ctx, "<id>", nil)

@@ -6,48 +6,48 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
-type SubscribersV1ControllerCreateSubscriberRequest struct {
+type SubscribersControllerCreateSubscriberRequest struct {
 	// A header for idempotency purposes
 	IdempotencyKey             *string                               `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateSubscriberRequestDto components.CreateSubscriberRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerCreateSubscriberRequest) GetIdempotencyKey() *string {
+func (o *SubscribersControllerCreateSubscriberRequest) GetIdempotencyKey() *string {
 	if o == nil {
 		return nil
 	}
 	return o.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerCreateSubscriberRequest) GetCreateSubscriberRequestDto() components.CreateSubscriberRequestDto {
+func (o *SubscribersControllerCreateSubscriberRequest) GetCreateSubscriberRequestDto() components.CreateSubscriberRequestDto {
 	if o == nil {
 		return components.CreateSubscriberRequestDto{}
 	}
 	return o.CreateSubscriberRequestDto
 }
 
-type SubscribersV1ControllerCreateSubscriberResponse struct {
+type SubscribersControllerCreateSubscriberResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
 	SubscriberResponseDto *components.SubscriberResponseDto
 	Headers               map[string][]string
 }
 
-func (o *SubscribersV1ControllerCreateSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *SubscribersControllerCreateSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
 	if o == nil {
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerCreateSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+func (o *SubscribersControllerCreateSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
 	if o == nil {
 		return nil
 	}
 	return o.SubscriberResponseDto
 }
 
-func (o *SubscribersV1ControllerCreateSubscriberResponse) GetHeaders() map[string][]string {
+func (o *SubscribersControllerCreateSubscriberResponse) GetHeaders() map[string][]string {
 	if o == nil {
 		return map[string][]string{}
 	}

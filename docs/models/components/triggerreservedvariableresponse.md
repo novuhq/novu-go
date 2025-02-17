@@ -1,9 +1,0 @@
-# TriggerReservedVariableResponse
-
-
-## Fields
-
-| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
-| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `Type`                                                                                                           | [components.TriggerReservedVariableResponseType](../../models/components/triggerreservedvariableresponsetype.md) | :heavy_check_mark:                                                                                               | The type of the reserved variable                                                                                |
-| `Variables`                                                                                                      | []*string*                                                                                                       | :heavy_check_mark:                                                                                               | The reserved variables of the trigger                                                                            |

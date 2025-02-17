@@ -27,13 +27,6 @@ func newAuthentication(sdkConfig sdkConfiguration) *Authentication {
 
 // ChatAccessOauthCallBack - Handle providers oauth redirect
 func (s *Authentication) ChatAccessOauthCallBack(ctx context.Context, request operations.SubscribersV1ControllerChatOauthCallbackRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatOauthCallbackResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_chatOauthCallback",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -56,6 +49,14 @@ func (s *Authentication) ChatAccessOauthCallBack(ctx context.Context, request op
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/credentials/{providerId}/oauth/callback", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_chatOauthCallback",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -387,13 +388,6 @@ func (s *Authentication) ChatAccessOauthCallBack(ctx context.Context, request op
 
 // ChatAccessOauth - Handle chat oauth
 func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations.SubscribersV1ControllerChatAccessOauthRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerChatAccessOauthResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_chatAccessOauth",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -415,6 +409,14 @@ func (s *Authentication) ChatAccessOauth(ctx context.Context, request operations
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/credentials/{providerId}/oauth", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_chatAccessOauth",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

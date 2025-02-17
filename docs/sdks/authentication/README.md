@@ -19,7 +19,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/operations"
 	"log"
@@ -29,7 +28,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Authentication.ChatAccessOauthCallBack(ctx, operations.SubscribersV1ControllerChatOauthCallbackRequest{
@@ -81,7 +80,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/operations"
 	"log"
@@ -91,7 +89,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Authentication.ChatAccessOauth(ctx, operations.SubscribersV1ControllerChatAccessOauthRequest{

@@ -171,9 +171,9 @@ func New(opts ...SDKOption) *Novu {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0",
-			SDKVersion:        "0.1.17",
-			GenVersion:        "2.503.2",
-			UserAgent:         "speakeasy-sdk/go 0.1.17 2.503.2 1.0 github.com/novuhq/novu-go",
+			SDKVersion:        "0.2.0",
+			GenVersion:        "2.512.4",
+			UserAgent:         "speakeasy-sdk/go 0.2.0 2.512.4 1.0 github.com/novuhq/novu-go",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -219,13 +219,6 @@ func New(opts ...SDKOption) *Novu {
 //	The trigger identifier is used to match the particular workflow associated with it.
 //	Additional information can be passed according the body interface below.
 func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.TriggerEventRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerTriggerResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "EventsController_trigger",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.EventsControllerTriggerRequest{
 		IdempotencyKey:         idempotencyKey,
 		TriggerEventRequestDto: triggerEventRequestDto,
@@ -254,6 +247,13 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "EventsController_trigger",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TriggerEventRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -566,13 +566,6 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 //	Using this endpoint you can trigger multiple events at once, to avoid multiple calls to the API.
 //	The bulk API is limited to 100 events per request.
 func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.BulkTriggerEventDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerTriggerBulkResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "EventsController_triggerBulk",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.EventsControllerTriggerBulkRequest{
 		IdempotencyKey:      idempotencyKey,
 		BulkTriggerEventDto: bulkTriggerEventDto,
@@ -601,6 +594,13 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "EventsController_triggerBulk",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "BulkTriggerEventDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -913,13 +913,6 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 //
 //	In the future could be used to trigger events to a subset of subscribers based on defined filters.
 func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto components.TriggerEventToAllRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerBroadcastEventToAllResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "EventsController_broadcastEventToAll",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.EventsControllerBroadcastEventToAllRequest{
 		IdempotencyKey:              idempotencyKey,
 		TriggerEventToAllRequestDto: triggerEventToAllRequestDto,
@@ -948,6 +941,13 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "EventsController_broadcastEventToAll",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TriggerEventToAllRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -1262,13 +1262,6 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 //	Using a previously generated transactionId during the event trigger,
 //	 will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
 func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerCancelResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "EventsController_cancel",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.EventsControllerCancelRequest{
 		TransactionID:  transactionID,
 		IdempotencyKey: idempotencyKey,
@@ -1295,6 +1288,14 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/events/trigger/{transactionId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "EventsController_cancel",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
