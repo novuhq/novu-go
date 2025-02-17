@@ -28,13 +28,6 @@ func newStats(sdkConfig sdkConfiguration) *Stats {
 
 // Retrieve - Get notification statistics
 func (s *Stats) Retrieve(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityStatsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "NotificationsController_getActivityStats",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.NotificationsControllerGetActivityStatsRequest{
 		IdempotencyKey: idempotencyKey,
 	}
@@ -60,6 +53,14 @@ func (s *Stats) Retrieve(ctx context.Context, idempotencyKey *string, opts ...op
 	opURL, err := url.JoinPath(baseURL, "/v1/notifications/stats")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "NotificationsController_getActivityStats",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -363,13 +364,6 @@ func (s *Stats) Retrieve(ctx context.Context, idempotencyKey *string, opts ...op
 
 // Graph - Get notification graph statistics
 func (s *Stats) Graph(ctx context.Context, days *float64, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetActivityGraphStatsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "NotificationsController_getActivityGraphStats",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.NotificationsControllerGetActivityGraphStatsRequest{
 		Days:           days,
 		IdempotencyKey: idempotencyKey,
@@ -396,6 +390,14 @@ func (s *Stats) Graph(ctx context.Context, days *float64, idempotencyKey *string
 	opURL, err := url.JoinPath(baseURL, "/v1/notifications/graph/stats")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "NotificationsController_getActivityGraphStats",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

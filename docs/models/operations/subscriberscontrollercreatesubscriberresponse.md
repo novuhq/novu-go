@@ -1,4 +1,4 @@
-# SubscribersV1ControllerCreateSubscriberResponse
+# SubscribersControllerCreateSubscriberResponse
 
 
 ## Fields

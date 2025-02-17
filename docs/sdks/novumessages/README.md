@@ -20,7 +20,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -30,7 +29,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Messages.MarkAllAs(ctx, "<id>", components.MessageMarkAsRequestDto{
@@ -83,7 +82,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -93,7 +91,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Messages.MarkAll(ctx, "<id>", components.MarkAllMessageAsRequestDto{
@@ -143,7 +141,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"github.com/novuhq/novu-go/models/operations"
@@ -154,7 +151,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Messages.UpdateAsSeen(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{

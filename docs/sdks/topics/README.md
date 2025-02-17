@@ -25,7 +25,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -35,7 +34,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Create(ctx, components.CreateTopicRequestDto{
@@ -85,7 +84,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -94,7 +92,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.List(ctx, nil, nil, novugo.String("exampleKey"), nil)
@@ -143,7 +141,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -152,7 +149,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Delete(ctx, "<value>", nil)
@@ -199,7 +196,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
@@ -208,7 +204,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Retrieve(ctx, "<value>", nil)
@@ -255,7 +251,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -265,7 +260,7 @@ func main() {
     ctx := context.Background()
     
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Rename(ctx, "<value>", components.RenameTopicRequestDto{

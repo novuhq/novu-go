@@ -22,6 +22,8 @@ type NotificationsControllerListNotificationsRequest struct {
 	SubscriberIds []string `queryParam:"style=form,explode=true,name=subscriberIds"`
 	// Page number for pagination
 	Page *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
+	// Limit for pagination
+	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
 	// Transaction ID for filtering
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Date filter for records after this timestamp
@@ -83,6 +85,13 @@ func (o *NotificationsControllerListNotificationsRequest) GetPage() *float64 {
 		return nil
 	}
 	return o.Page
+}
+
+func (o *NotificationsControllerListNotificationsRequest) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
 }
 
 func (o *NotificationsControllerListNotificationsRequest) GetTransactionID() *string {
