@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// OverridesChannel - The channel type which is overridden
-type OverridesChannel string
+// Channel - The channel type which is overridden
+type Channel string
 
 const (
-	OverridesChannelInApp OverridesChannel = "in_app"
-	OverridesChannelEmail OverridesChannel = "email"
-	OverridesChannelSms   OverridesChannel = "sms"
-	OverridesChannelChat  OverridesChannel = "chat"
-	OverridesChannelPush  OverridesChannel = "push"
+	ChannelInApp Channel = "in_app"
+	ChannelEmail Channel = "email"
+	ChannelSms   Channel = "sms"
+	ChannelChat  Channel = "chat"
+	ChannelPush  Channel = "push"
 )
 
-func (e OverridesChannel) ToPointer() *OverridesChannel {
+func (e Channel) ToPointer() *Channel {
 	return &e
 }
-func (e *OverridesChannel) UnmarshalJSON(data []byte) error {
+func (e *Channel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -36,10 +36,10 @@ func (e *OverridesChannel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
-		*e = OverridesChannel(v)
+		*e = Channel(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OverridesChannel: %v", v)
+		return fmt.Errorf("invalid value for Channel: %v", v)
 	}
 }
 
@@ -75,14 +75,14 @@ func (e *Source) UnmarshalJSON(data []byte) error {
 
 type Overrides struct {
 	// The channel type which is overridden
-	Channel OverridesChannel `json:"channel"`
+	Channel Channel `json:"channel"`
 	// The source of overrides
 	Source Source `json:"source"`
 }
 
-func (o *Overrides) GetChannel() OverridesChannel {
+func (o *Overrides) GetChannel() Channel {
 	if o == nil {
-		return OverridesChannel("")
+		return Channel("")
 	}
 	return o.Channel
 }

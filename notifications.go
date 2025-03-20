@@ -31,13 +31,6 @@ func newNotifications(sdkConfig sdkConfiguration) *Notifications {
 
 // List - Get notifications
 func (s *Notifications) List(ctx context.Context, request operations.NotificationsControllerListNotificationsRequest, opts ...operations.Option) (*operations.NotificationsControllerListNotificationsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "NotificationsController_listNotifications",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -59,6 +52,14 @@ func (s *Notifications) List(ctx context.Context, request operations.Notificatio
 	opURL, err := url.JoinPath(baseURL, "/v1/notifications")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "NotificationsController_listNotifications",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -366,13 +367,6 @@ func (s *Notifications) List(ctx context.Context, request operations.Notificatio
 
 // Retrieve - Get notification
 func (s *Notifications) Retrieve(ctx context.Context, notificationID string, idempotencyKey *string, opts ...operations.Option) (*operations.NotificationsControllerGetNotificationResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "NotificationsController_getNotification",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.NotificationsControllerGetNotificationRequest{
 		NotificationID: notificationID,
 		IdempotencyKey: idempotencyKey,
@@ -399,6 +393,14 @@ func (s *Notifications) Retrieve(ctx context.Context, notificationID string, ide
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/notifications/{notificationId}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "NotificationsController_getNotification",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

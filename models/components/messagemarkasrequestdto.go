@@ -72,19 +72,19 @@ func (u MessageID) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type MessageID: all fields are null")
 }
 
-type MarkAs string
+type MessageMarkAsRequestDtoMarkAs string
 
 const (
-	MarkAsRead   MarkAs = "read"
-	MarkAsSeen   MarkAs = "seen"
-	MarkAsUnread MarkAs = "unread"
-	MarkAsUnseen MarkAs = "unseen"
+	MessageMarkAsRequestDtoMarkAsRead   MessageMarkAsRequestDtoMarkAs = "read"
+	MessageMarkAsRequestDtoMarkAsSeen   MessageMarkAsRequestDtoMarkAs = "seen"
+	MessageMarkAsRequestDtoMarkAsUnread MessageMarkAsRequestDtoMarkAs = "unread"
+	MessageMarkAsRequestDtoMarkAsUnseen MessageMarkAsRequestDtoMarkAs = "unseen"
 )
 
-func (e MarkAs) ToPointer() *MarkAs {
+func (e MessageMarkAsRequestDtoMarkAs) ToPointer() *MessageMarkAsRequestDtoMarkAs {
 	return &e
 }
-func (e *MarkAs) UnmarshalJSON(data []byte) error {
+func (e *MessageMarkAsRequestDtoMarkAs) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -97,16 +97,16 @@ func (e *MarkAs) UnmarshalJSON(data []byte) error {
 	case "unread":
 		fallthrough
 	case "unseen":
-		*e = MarkAs(v)
+		*e = MessageMarkAsRequestDtoMarkAs(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for MarkAs: %v", v)
+		return fmt.Errorf("invalid value for MessageMarkAsRequestDtoMarkAs: %v", v)
 	}
 }
 
 type MessageMarkAsRequestDto struct {
-	MessageID MessageID `json:"messageId"`
-	MarkAs    MarkAs    `json:"markAs"`
+	MessageID MessageID                     `json:"messageId"`
+	MarkAs    MessageMarkAsRequestDtoMarkAs `json:"markAs"`
 }
 
 func (o *MessageMarkAsRequestDto) GetMessageID() MessageID {
@@ -116,9 +116,9 @@ func (o *MessageMarkAsRequestDto) GetMessageID() MessageID {
 	return o.MessageID
 }
 
-func (o *MessageMarkAsRequestDto) GetMarkAs() MarkAs {
+func (o *MessageMarkAsRequestDto) GetMarkAs() MessageMarkAsRequestDtoMarkAs {
 	if o == nil {
-		return MarkAs("")
+		return MessageMarkAsRequestDtoMarkAs("")
 	}
 	return o.MarkAs
 }

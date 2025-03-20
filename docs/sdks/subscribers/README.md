@@ -8,16 +8,293 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 
 ### Available Operations
 
-* [List](#list) - Get subscribers
-* [Create](#create) - Create subscriber
-* [RetrieveLegacy](#retrievelegacy) - Get subscriber
-* [UpdateLegacy](#updatelegacy) - Update subscriber
-* [~~DeleteLegacy~~](#deletelegacy) - Delete subscriber :warning: **Deprecated**
-* [CreateBulk](#createbulk) - Bulk create subscribers
 * [Search](#search) - Search for subscribers
+* [Create](#create) - Create subscriber
 * [Retrieve](#retrieve) - Get subscriber
 * [Patch](#patch) - Patch subscriber
 * [Delete](#delete) - Delete subscriber
+* [List](#list) - Get subscribers
+* [CreateBulk](#createbulk) - Bulk create subscribers
+
+## Search
+
+Search for subscribers
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Search(ctx, operations.SubscribersControllerSearchSubscribersRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ListSubscribersResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
+| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                | :heavy_check_mark:                                                                                                                   | The context to use for the request.                                                                                                  |
+| `request`                                                                                                                            | [operations.SubscribersControllerSearchSubscribersRequest](../../models/operations/subscriberscontrollersearchsubscribersrequest.md) | :heavy_check_mark:                                                                                                                   | The request object to use for the request.                                                                                           |
+| `opts`                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                             | :heavy_minus_sign:                                                                                                                   | The options for this request.                                                                                                        |
+
+### Response
+
+**[*operations.SubscribersControllerSearchSubscribersResponse](../../models/operations/subscriberscontrollersearchsubscribersresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Create
+
+Create subscriber with the given data
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Create(ctx, components.CreateSubscriberRequestDto{
+        SubscriberID: "<id>",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SubscriberResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `createSubscriberRequestDto`                                                                   | [components.CreateSubscriberRequestDto](../../models/components/createsubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.SubscribersControllerCreateSubscriberResponse](../../models/operations/subscriberscontrollercreatesubscriberresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Retrieve
+
+Get subscriber by your internal id used to identify the subscriber
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Retrieve(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SubscriberResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.SubscribersControllerGetSubscriberResponse](../../models/operations/subscriberscontrollergetsubscriberresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Patch
+
+Patch subscriber by your internal id used to identify the subscriber
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{}, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SubscriberResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `subscriberID`                                                                               | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `patchSubscriberRequestDto`                                                                  | [components.PatchSubscriberRequestDto](../../models/components/patchsubscriberrequestdto.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `idempotencyKey`                                                                             | **string*                                                                                    | :heavy_minus_sign:                                                                           | A header for idempotency purposes                                                            |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
+
+### Response
+
+**[*operations.SubscribersControllerPatchSubscriberResponse](../../models/operations/subscriberscontrollerpatchsubscriberresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Delete
+
+Deletes a subscriber entity from the Novu platform
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Delete(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.RemoveSubscriberResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.SubscribersControllerRemoveSubscriberResponse](../../models/operations/subscriberscontrollerremovesubscriberresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## List
 
@@ -30,16 +307,15 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.List(ctx, nil, nil, nil)
@@ -88,255 +364,6 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## Create
-
-Creates a subscriber entity, in the Novu platform. The subscriber will be later used to receive notifications, and access notification feeds. Communication credentials such as email, phone number, and 3 rd party credentials i.e slack tokens could be later associated to this entity.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.Create(ctx, components.CreateSubscriberRequestDto{
-        SubscriberID: "<id>",
-    }, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `createSubscriberRequestDto`                                                                   | [components.CreateSubscriberRequestDto](../../models/components/createsubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.SubscribersV1ControllerCreateSubscriberResponse](../../models/operations/subscribersv1controllercreatesubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## RetrieveLegacy
-
-Get subscriber by your internal id used to identify the subscriber
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.RetrieveLegacy(ctx, "<id>", nil, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `includeTopics`                                          | **bool*                                                  | :heavy_minus_sign:                                       | Includes the topics associated with the subscriber       |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.SubscribersV1ControllerGetSubscriberResponse](../../models/operations/subscribersv1controllergetsubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## UpdateLegacy
-
-Used to update the subscriber entity with new information
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.UpdateLegacy(ctx, "<id>", components.UpdateSubscriberRequestDto{
-        Email: novugo.String("john.doe@example.com"),
-        FirstName: novugo.String("John"),
-        LastName: novugo.String("Doe"),
-        Phone: novugo.String("+1234567890"),
-        Avatar: novugo.String("https://example.com/avatar.jpg"),
-        Locale: novugo.String("en-US"),
-        Data: map[string]any{
-            "preferences": map[string]any{
-                "notifications": true,
-                "theme": "dark",
-            },
-            "tags": []any{
-                "premium",
-                "newsletter",
-            },
-        },
-    }, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `subscriberID`                                                                                 | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `updateSubscriberRequestDto`                                                                   | [components.UpdateSubscriberRequestDto](../../models/components/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.SubscribersV1ControllerUpdateSubscriberResponse](../../models/operations/subscribersv1controllerupdatesubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## ~~DeleteLegacy~~
-
-Deletes a subscriber entity from the Novu platform
-
-> :warning: **DEPRECATED**: This will be removed in a future release, please migrate away from it as soon as possible.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.DeleteLegacy(ctx, "<id>", nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.DeleteSubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.SubscribersV1ControllerRemoveSubscriberResponse](../../models/operations/subscribersv1controllerremovesubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
 ## CreateBulk
 
 
@@ -351,7 +378,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -359,9 +385,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.CreateBulk(ctx, components.BulkSubscriberCreateDto{
@@ -392,232 +418,6 @@ func main() {
 ### Response
 
 **[*operations.SubscribersV1ControllerBulkCreateSubscribersResponse](../../models/operations/subscribersv1controllerbulkcreatesubscribersresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Search
-
-Search for subscribers
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.Search(ctx, operations.SubscribersControllerSearchSubscribersRequest{})
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.ListSubscribersResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                                                            | Type                                                                                                                                 | Required                                                                                                                             | Description                                                                                                                          |
-| ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                                                | :heavy_check_mark:                                                                                                                   | The context to use for the request.                                                                                                  |
-| `request`                                                                                                                            | [operations.SubscribersControllerSearchSubscribersRequest](../../models/operations/subscriberscontrollersearchsubscribersrequest.md) | :heavy_check_mark:                                                                                                                   | The request object to use for the request.                                                                                           |
-| `opts`                                                                                                                               | [][operations.Option](../../models/operations/option.md)                                                                             | :heavy_minus_sign:                                                                                                                   | The options for this request.                                                                                                        |
-
-### Response
-
-**[*operations.SubscribersControllerSearchSubscribersResponse](../../models/operations/subscriberscontrollersearchsubscribersresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Retrieve
-
-Get subscriber by your internal id used to identify the subscriber
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.Retrieve(ctx, "<id>", nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.SubscribersControllerGetSubscriberResponse](../../models/operations/subscriberscontrollergetsubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Patch
-
-Patch subscriber by your internal id used to identify the subscriber
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{}, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
-| `subscriberID`                                                                               | *string*                                                                                     | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `patchSubscriberRequestDto`                                                                  | [components.PatchSubscriberRequestDto](../../models/components/patchsubscriberrequestdto.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
-| `idempotencyKey`                                                                             | **string*                                                                                    | :heavy_minus_sign:                                                                           | A header for idempotency purposes                                                            |
-| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
-
-### Response
-
-**[*operations.SubscribersControllerPatchSubscriberResponse](../../models/operations/subscriberscontrollerpatchsubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Delete
-
-Deletes a subscriber entity from the Novu platform
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Subscribers.Delete(ctx, "<id>", nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.RemoveSubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.SubscribersControllerRemoveSubscriberResponse](../../models/operations/subscriberscontrollerremovesubscriberresponse.md), error**
 
 ### Errors
 

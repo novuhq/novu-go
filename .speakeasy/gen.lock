@@ -1,35 +1,35 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: dd3f2cfbe8fe0d218524247e07b527e1
+  docChecksum: a532115093aec3faad55c6df85d4b94b
   docVersion: "1.0"
-  speakeasyVersion: 1.484.1
-  generationVersion: 2.503.2
-  releaseVersion: 0.1.17
-  configChecksum: fa8159268cb04ff199d7f763a9ad7919
+  speakeasyVersion: 1.521.0
+  generationVersion: 2.558.2
+  releaseVersion: 0.2.0
+  configChecksum: 220e427839ac0c6755ad87719bc75f48
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
   go:
     acceptHeaders: 2.81.2
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.6
-    core: 3.6.12
+    constsAndDefaults: 0.1.11
+    core: 3.7.2
     defaultEnabledRetries: 0.2.0
-    deprecations: 2.81.2
+    deprecations: 2.81.3
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
     examples: 2.81.4
     flattening: 2.81.1
-    globalSecurity: 2.82.10
+    globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.2
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.1.0
-    pagination: 2.82.2
+    nullables: 0.1.1
+    pagination: 2.82.4
     responseFormat: 0.1.2
     retries: 2.83.2
     sdkHooks: 0.1.0
@@ -62,7 +62,6 @@ generatedFiles:
   - /models/components/channelcredentials.go
   - /models/components/channelcredentialsdto.go
   - /models/components/channelctatypeenum.go
-  - /models/components/channelpreference.go
   - /models/components/channelsettingsdto.go
   - /models/components/channeltypeenum.go
   - /models/components/createdsubscriberdto.go
@@ -71,11 +70,9 @@ generatedFiles:
   - /models/components/createtopicrequestdto.go
   - /models/components/createtopicresponsedto.go
   - /models/components/credentialsdto.go
-  - /models/components/databooleandto.go
   - /models/components/delayregularmetadata.go
   - /models/components/delayscheduledmetadata.go
   - /models/components/deletemessageresponsedto.go
-  - /models/components/deletesubscriberresponsedto.go
   - /models/components/digestmetadatadto.go
   - /models/components/digestregularmetadata.go
   - /models/components/digesttimedconfigdto.go
@@ -93,7 +90,6 @@ generatedFiles:
   - /models/components/fieldfilterpartdto.go
   - /models/components/filtertopicsresponsedto.go
   - /models/components/getsubscriberpreferencesdto.go
-  - /models/components/getsubscriberpreferencesresponsedto.go
   - /models/components/gettopicresponsedto.go
   - /models/components/globalpreferencedto.go
   - /models/components/httpmetadata.go
@@ -119,16 +115,13 @@ generatedFiles:
   - /models/components/notificationstepdto.go
   - /models/components/notificationtrigger.go
   - /models/components/notificationtriggerdto.go
-  - /models/components/notificationtriggerresponse.go
   - /models/components/notificationtriggervariable.go
-  - /models/components/notificationtriggervariableresponse.go
   - /models/components/ordinalenum.go
   - /models/components/ordinalvalueenum.go
   - /models/components/overrides.go
   - /models/components/patchpreferencechannelsdto.go
   - /models/components/patchsubscriberpreferencesdto.go
   - /models/components/patchsubscriberrequestdto.go
-  - /models/components/preference.go
   - /models/components/preferencechannels.go
   - /models/components/providersidenum.go
   - /models/components/removesubscriberresponsedto.go
@@ -143,7 +136,6 @@ generatedFiles:
   - /models/components/subscriberfeedresponsedto.go
   - /models/components/subscriberpayloaddto.go
   - /models/components/subscriberresponsedto.go
-  - /models/components/templateresponse.go
   - /models/components/tenantpayloaddto.go
   - /models/components/textalignenum.go
   - /models/components/timedconfig.go
@@ -154,19 +146,13 @@ generatedFiles:
   - /models/components/triggereventresponsedto.go
   - /models/components/triggereventtoallrequestdto.go
   - /models/components/triggerrecipientstypeenum.go
-  - /models/components/triggerreservedvariableresponse.go
-  - /models/components/triggertypeenum.go
   - /models/components/unseencountresponse.go
   - /models/components/updatedsubscriberdto.go
   - /models/components/updateintegrationrequestdto.go
   - /models/components/updatesubscriberchannelrequestdto.go
-  - /models/components/updatesubscriberglobalpreferencesrequestdto.go
   - /models/components/updatesubscriberonlineflagrequestdto.go
-  - /models/components/updatesubscriberpreferenceglobalresponsedto.go
-  - /models/components/updatesubscriberpreferencerequestdto.go
-  - /models/components/updatesubscriberpreferenceresponsedto.go
-  - /models/components/updatesubscriberrequestdto.go
   - /models/components/workflowinfodto.go
+  - /models/components/workfloworiginenum.go
   - /models/components/workflowpreferencedto.go
   - /models/components/workflowresponse.go
   - /models/operations/eventscontrollerbroadcasteventtoall.go
@@ -187,6 +173,7 @@ generatedFiles:
   - /models/operations/notificationscontrollergetactivitystats.go
   - /models/operations/notificationscontrollergetnotification.go
   - /models/operations/notificationscontrollerlistnotifications.go
+  - /models/operations/subscriberscontrollercreatesubscriber.go
   - /models/operations/subscriberscontrollergetsubscriber.go
   - /models/operations/subscriberscontrollergetsubscriberpreferences.go
   - /models/operations/subscriberscontrollerpatchsubscriber.go
@@ -196,24 +183,16 @@ generatedFiles:
   - /models/operations/subscribersv1controllerbulkcreatesubscribers.go
   - /models/operations/subscribersv1controllerchataccessoauth.go
   - /models/operations/subscribersv1controllerchatoauthcallback.go
-  - /models/operations/subscribersv1controllercreatesubscriber.go
   - /models/operations/subscribersv1controllerdeletesubscribercredentials.go
   - /models/operations/subscribersv1controllergetnotificationsfeed.go
-  - /models/operations/subscribersv1controllergetsubscriber.go
-  - /models/operations/subscribersv1controllergetsubscriberpreferencebylevel.go
   - /models/operations/subscribersv1controllergetunseencount.go
-  - /models/operations/subscribersv1controllerlistsubscriberpreferences.go
   - /models/operations/subscribersv1controllerlistsubscribers.go
   - /models/operations/subscribersv1controllermarkactionasseen.go
   - /models/operations/subscribersv1controllermarkallunreadasread.go
   - /models/operations/subscribersv1controllermarkmessagesas.go
   - /models/operations/subscribersv1controllermodifysubscriberchannel.go
-  - /models/operations/subscribersv1controllerremovesubscriber.go
-  - /models/operations/subscribersv1controllerupdatesubscriber.go
   - /models/operations/subscribersv1controllerupdatesubscriberchannel.go
-  - /models/operations/subscribersv1controllerupdatesubscriberglobalpreferences.go
   - /models/operations/subscribersv1controllerupdatesubscriberonlineflag.go
-  - /models/operations/subscribersv1controllerupdatesubscriberpreference.go
   - /models/operations/topicscontrollerassign.go
   - /models/operations/topicscontrollercreatetopic.go
   - /models/operations/topicscontrollerdeletetopic.go
@@ -257,10 +236,8 @@ generatedFiles:
   - docs/models/components/channelcredentials.md
   - docs/models/components/channelcredentialsdto.md
   - docs/models/components/channelctatypeenum.md
-  - docs/models/components/channelpreference.md
   - docs/models/components/channels.md
   - docs/models/components/channelsettingsdto.md
-  - docs/models/components/channelsettingsdtoproviderid.md
   - docs/models/components/channeltypeenum.md
   - docs/models/components/content.md
   - docs/models/components/controls.md
@@ -269,12 +246,10 @@ generatedFiles:
   - docs/models/components/createintegrationrequestdto.md
   - docs/models/components/createintegrationrequestdtochannel.md
   - docs/models/components/createsubscriberrequestdto.md
-  - docs/models/components/createsubscriberrequestdtodata.md
   - docs/models/components/createtopicrequestdto.md
   - docs/models/components/createtopicresponsedto.md
   - docs/models/components/credentialsdto.md
   - docs/models/components/data.md
-  - docs/models/components/databooleandto.md
   - docs/models/components/delayregularmetadata.md
   - docs/models/components/delayregularmetadatatype.md
   - docs/models/components/delayregularmetadataunit.md
@@ -282,8 +257,6 @@ generatedFiles:
   - docs/models/components/delayscheduledmetadatatype.md
   - docs/models/components/deletemessageresponsedto.md
   - docs/models/components/deletemessageresponsedtostatus.md
-  - docs/models/components/deletesubscriberresponsedto.md
-  - docs/models/components/deletesubscriberresponsedtostatus.md
   - docs/models/components/digestmetadatadto.md
   - docs/models/components/digestregularmetadata.md
   - docs/models/components/digestregularmetadatatype.md
@@ -306,15 +279,14 @@ generatedFiles:
   - docs/models/components/fieldfilterpartdto.md
   - docs/models/components/filtertopicsresponsedto.md
   - docs/models/components/getsubscriberpreferencesdto.md
-  - docs/models/components/getsubscriberpreferencesresponsedto.md
   - docs/models/components/gettopicresponsedto.md
   - docs/models/components/globalpreferencedto.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/integrationresponsedto.md
+  - docs/models/components/integrationresponsedtochannel.md
   - docs/models/components/issues.md
   - docs/models/components/listsubscribersresponsedto.md
   - docs/models/components/markallmessageasrequestdto.md
-  - docs/models/components/markallmessageasrequestdtomarkas.md
   - docs/models/components/markas.md
   - docs/models/components/markmessageactionasseendto.md
   - docs/models/components/markmessageactionasseendtopayload.md
@@ -328,6 +300,7 @@ generatedFiles:
   - docs/models/components/messagectadata.md
   - docs/models/components/messageid.md
   - docs/models/components/messagemarkasrequestdto.md
+  - docs/models/components/messagemarkasrequestdtomarkas.md
   - docs/models/components/messageresponsedto.md
   - docs/models/components/messageresponsedtooverrides.md
   - docs/models/components/messageresponsedtopayload.md
@@ -346,12 +319,8 @@ generatedFiles:
   - docs/models/components/notificationstepdtometadata.md
   - docs/models/components/notificationtrigger.md
   - docs/models/components/notificationtriggerdto.md
-  - docs/models/components/notificationtriggerresponse.md
   - docs/models/components/notificationtriggertype.md
   - docs/models/components/notificationtriggervariable.md
-  - docs/models/components/notificationtriggervariableresponse.md
-  - docs/models/components/notificationtriggervariableresponsetype.md
-  - docs/models/components/notificationtriggervariableresponsevalue.md
   - docs/models/components/on.md
   - docs/models/components/one.md
   - docs/models/components/operator.md
@@ -360,13 +329,10 @@ generatedFiles:
   - docs/models/components/ordinalvalue.md
   - docs/models/components/ordinalvalueenum.md
   - docs/models/components/overrides.md
-  - docs/models/components/overrideschannel.md
   - docs/models/components/patchpreferencechannelsdto.md
   - docs/models/components/patchsubscriberpreferencesdto.md
   - docs/models/components/patchsubscriberrequestdto.md
-  - docs/models/components/patchsubscriberrequestdtodata.md
   - docs/models/components/payload.md
-  - docs/models/components/preference.md
   - docs/models/components/preferencechannels.md
   - docs/models/components/providerid.md
   - docs/models/components/providersidenum.md
@@ -381,10 +347,11 @@ generatedFiles:
   - docs/models/components/stepfilterdto.md
   - docs/models/components/steptypeenum.md
   - docs/models/components/subscriberchanneldto.md
+  - docs/models/components/subscriberchanneldtoproviderid.md
   - docs/models/components/subscriberfeedresponsedto.md
   - docs/models/components/subscriberpayloaddto.md
+  - docs/models/components/subscriberpayloaddtodata.md
   - docs/models/components/subscriberresponsedto.md
-  - docs/models/components/templateresponse.md
   - docs/models/components/tenant.md
   - docs/models/components/tenantpayloaddto.md
   - docs/models/components/tenantpayloaddtodata.md
@@ -403,9 +370,6 @@ generatedFiles:
   - docs/models/components/triggereventtoallrequestdtooverrides.md
   - docs/models/components/triggereventtoallrequestdtotenant.md
   - docs/models/components/triggerrecipientstypeenum.md
-  - docs/models/components/triggerreservedvariableresponse.md
-  - docs/models/components/triggerreservedvariableresponsetype.md
-  - docs/models/components/triggertypeenum.md
   - docs/models/components/type.md
   - docs/models/components/unit.md
   - docs/models/components/unseencountresponse.md
@@ -413,16 +377,12 @@ generatedFiles:
   - docs/models/components/updateintegrationrequestdto.md
   - docs/models/components/updatesubscriberchannelrequestdto.md
   - docs/models/components/updatesubscriberchannelrequestdtoproviderid.md
-  - docs/models/components/updatesubscriberglobalpreferencesrequestdto.md
   - docs/models/components/updatesubscriberonlineflagrequestdto.md
-  - docs/models/components/updatesubscriberpreferenceglobalresponsedto.md
-  - docs/models/components/updatesubscriberpreferencerequestdto.md
-  - docs/models/components/updatesubscriberpreferenceresponsedto.md
-  - docs/models/components/updatesubscriberrequestdto.md
   - docs/models/components/value.md
   - docs/models/components/weekdays.md
   - docs/models/components/workflowinfodto.md
   - docs/models/components/workflowintegrationstatus.md
+  - docs/models/components/workfloworiginenum.md
   - docs/models/components/workflowpreferencedto.md
   - docs/models/components/workflowresponse.md
   - docs/models/components/workflowresponsedata.md
@@ -465,7 +425,8 @@ generatedFiles:
   - docs/models/operations/notificationscontrollerlistnotificationsresponse.md
   - docs/models/operations/option.md
   - docs/models/operations/orderdirection.md
-  - docs/models/operations/parameter.md
+  - docs/models/operations/subscriberscontrollercreatesubscriberrequest.md
+  - docs/models/operations/subscriberscontrollercreatesubscriberresponse.md
   - docs/models/operations/subscriberscontrollergetsubscriberpreferencesrequest.md
   - docs/models/operations/subscriberscontrollergetsubscriberpreferencesresponse.md
   - docs/models/operations/subscriberscontrollergetsubscriberrequest.md
@@ -484,20 +445,12 @@ generatedFiles:
   - docs/models/operations/subscribersv1controllerchataccessoauthresponse.md
   - docs/models/operations/subscribersv1controllerchatoauthcallbackrequest.md
   - docs/models/operations/subscribersv1controllerchatoauthcallbackresponse.md
-  - docs/models/operations/subscribersv1controllercreatesubscriberrequest.md
-  - docs/models/operations/subscribersv1controllercreatesubscriberresponse.md
   - docs/models/operations/subscribersv1controllerdeletesubscribercredentialsrequest.md
   - docs/models/operations/subscribersv1controllerdeletesubscribercredentialsresponse.md
   - docs/models/operations/subscribersv1controllergetnotificationsfeedrequest.md
   - docs/models/operations/subscribersv1controllergetnotificationsfeedresponse.md
-  - docs/models/operations/subscribersv1controllergetsubscriberpreferencebylevelrequest.md
-  - docs/models/operations/subscribersv1controllergetsubscriberpreferencebylevelresponse.md
-  - docs/models/operations/subscribersv1controllergetsubscriberrequest.md
-  - docs/models/operations/subscribersv1controllergetsubscriberresponse.md
   - docs/models/operations/subscribersv1controllergetunseencountrequest.md
   - docs/models/operations/subscribersv1controllergetunseencountresponse.md
-  - docs/models/operations/subscribersv1controllerlistsubscriberpreferencesrequest.md
-  - docs/models/operations/subscribersv1controllerlistsubscriberpreferencesresponse.md
   - docs/models/operations/subscribersv1controllerlistsubscribersrequest.md
   - docs/models/operations/subscribersv1controllerlistsubscribersresponse.md
   - docs/models/operations/subscribersv1controllerlistsubscribersresponsebody.md
@@ -509,18 +462,10 @@ generatedFiles:
   - docs/models/operations/subscribersv1controllermarkmessagesasresponse.md
   - docs/models/operations/subscribersv1controllermodifysubscriberchannelrequest.md
   - docs/models/operations/subscribersv1controllermodifysubscriberchannelresponse.md
-  - docs/models/operations/subscribersv1controllerremovesubscriberrequest.md
-  - docs/models/operations/subscribersv1controllerremovesubscriberresponse.md
   - docs/models/operations/subscribersv1controllerupdatesubscriberchannelrequest.md
   - docs/models/operations/subscribersv1controllerupdatesubscriberchannelresponse.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberglobalpreferencesrequest.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberglobalpreferencesresponse.md
   - docs/models/operations/subscribersv1controllerupdatesubscriberonlineflagrequest.md
   - docs/models/operations/subscribersv1controllerupdatesubscriberonlineflagresponse.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberpreferencerequest.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberpreferenceresponse.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberrequest.md
-  - docs/models/operations/subscribersv1controllerupdatesubscriberresponse.md
   - docs/models/operations/topicscontrollerassignrequest.md
   - docs/models/operations/topicscontrollerassignresponse.md
   - docs/models/operations/topicscontrollercreatetopicrequest.md
@@ -540,7 +485,6 @@ generatedFiles:
   - docs/sdks/authentication/README.md
   - docs/sdks/credentials/README.md
   - docs/sdks/integrations/README.md
-  - docs/sdks/legacy/README.md
   - docs/sdks/messages/README.md
   - docs/sdks/notifications/README.md
   - docs/sdks/novu/README.md
@@ -567,7 +511,6 @@ generatedFiles:
   - internal/utils/retries.go
   - internal/utils/security.go
   - internal/utils/utils.go
-  - legacy.go
   - messages.go
   - models/apierrors/apierror.go
   - models/operations/options.go
@@ -656,10 +599,11 @@ examples:
       parameters:
         query:
           page: 0
+          limit: 10
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 6783.17, "page": 1777.06}
+          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "push", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "bandwidth", "source": "Payload"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "nodemailer", "source": "Payload"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": true, "type": "BOOLEAN", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "payload"}]}, {"isNegated": false, "type": "GROUP", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "plivo", "status": "<value>"}, {"_id": "<id>", "type": "delay", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "TEXT", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "ALL_IN", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "maqsam", "status": "<value>"}, {"_id": "<id>", "type": "delay", "executionDetails": [{"_id": "<id>", "status": "ReadConfirmation", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "sendinblue", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "OR", "children": []}, {"isNegated": true, "type": "BOOLEAN", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "SMALLER_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "nodemailer", "status": "<value>"}, {"_id": "<id>", "type": "sms", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "sendgrid", "source": "Payload"}, {"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "getstream", "source": "Webhook"}, {"_id": "<id>", "status": "Pending", "detail": "<value>", "isRetry": false, "isTest": false, "providerId": "mailgun", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "NUMBER", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "BETWEEN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}]}, {"isNegated": false, "type": "DATE", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "ses", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "mailtrap", "source": "Webhook"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "plunk", "source": "Credentials"}, {"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "pusher-beams", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "isend-sms", "status": "<value>"}]}], "pageSize": 6783.17, "page": 1777.06}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
@@ -676,7 +620,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "azure-sms", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "apns", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
@@ -845,6 +789,10 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersController_getSubscriber:
     speakeasy-default-subscribers-controller-get-subscriber:
       parameters:
@@ -1130,7 +1078,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>"}], "pageSize": 6783.17, "page": 1777.06}
+          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "azure-sms", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "apns", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "bandwidth", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "in_app", "executionDetails": [{"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "msteams", "source": "Payload"}], "step": {"_id": "<id>", "active": true, "filters": [{"isNegated": false, "type": "STATEMENT", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}, {"isNegated": false, "type": "LIST", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "LARGER_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "LARGER_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "IN", "on": "payload"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "braze", "status": "<value>"}, {"_id": "<id>", "type": "push", "executionDetails": [], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "NOT_LIKE", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "messagebird", "status": "<value>"}]}], "pageSize": 6783.17, "page": 1777.06}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "Resource not found.", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":

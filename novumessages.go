@@ -25,21 +25,8 @@ func newNovuMessages(sdkConfig sdkConfiguration) *NovuMessages {
 	}
 }
 
-// MarkAllAs - Mark a subscriber messages as seen, read, unseen or unread
-func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markMessagesAs",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
-	request := operations.SubscribersV1ControllerMarkMessagesAsRequest{
-		SubscriberID:            subscriberID,
-		IdempotencyKey:          idempotencyKey,
-		MessageMarkAsRequestDto: messageMarkAsRequestDto,
-	}
-
+// UpdateAsSeen - Mark message action as seen
+func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -58,12 +45,19 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/messages/mark-as", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MessageMarkAsRequestDto", "json", `request:"mediaType=application/json"`)
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markActionAsSeen",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkMessageActionAsSeenDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -197,7 +191,7 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 		}
 	}
 
-	res := &operations.SubscribersV1ControllerMarkMessagesAsResponse{
+	res := &operations.SubscribersV1ControllerMarkActionAsSeenResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -215,12 +209,12 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 				return nil, err
 			}
 
-			var out []components.MessageResponseDto
+			var out components.MessageResponseDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.MessageResponseDtos = out
+			res.MessageResponseDto = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -372,13 +366,6 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 
 // MarkAll - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
 func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAllMessageAsRequestDto components.MarkAllMessageAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkAllUnreadAsReadResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markAllUnreadAsRead",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerMarkAllUnreadAsReadRequest{
 		SubscriberID:               subscriberID,
 		IdempotencyKey:             idempotencyKey,
@@ -408,6 +395,13 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markAllUnreadAsRead",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkAllMessageAsRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
@@ -715,13 +709,12 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 
 }
 
-// UpdateAsSeen - Mark message action as seen
-func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_markActionAsSeen",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
+// MarkAllAs - Mark a subscriber messages as seen, read, unseen or unread
+func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
+	request := operations.SubscribersV1ControllerMarkMessagesAsRequest{
+		SubscriberID:            subscriberID,
+		IdempotencyKey:          idempotencyKey,
+		MessageMarkAsRequestDto: messageMarkAsRequestDto,
 	}
 
 	o := operations.Options{}
@@ -742,12 +735,19 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/messages/{messageId}/actions/{type}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/messages/mark-as", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkMessageActionAsSeenDto", "json", `request:"mediaType=application/json"`)
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_markMessagesAs",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MessageMarkAsRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -881,7 +881,7 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 		}
 	}
 
-	res := &operations.SubscribersV1ControllerMarkActionAsSeenResponse{
+	res := &operations.SubscribersV1ControllerMarkMessagesAsResponse{
 		HTTPMeta: components.HTTPMetadata{
 			Request:  req,
 			Response: httpRes,
@@ -899,12 +899,12 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 				return nil, err
 			}
 
-			var out components.MessageResponseDto
+			var out []components.MessageResponseDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.MessageResponseDto = &out
+			res.MessageResponseDtos = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

@@ -2,13 +2,11 @@
 
 package components
 
-// PatchSubscriberRequestDtoData - Additional custom data for the subscriber
-type PatchSubscriberRequestDtoData struct {
+// Data - Additional custom data for the subscriber
+type Data struct {
 }
 
 type PatchSubscriberRequestDto struct {
-	// Unique identifier of the subscriber
-	SubscriberID *string `json:"subscriberId,omitempty"`
 	// First name of the subscriber
 	FirstName *string `json:"firstName,omitempty"`
 	// Last name of the subscriber
@@ -24,14 +22,7 @@ type PatchSubscriberRequestDto struct {
 	// Locale of the subscriber
 	Locale *string `json:"locale,omitempty"`
 	// Additional custom data for the subscriber
-	Data *PatchSubscriberRequestDtoData `json:"data,omitempty"`
-}
-
-func (o *PatchSubscriberRequestDto) GetSubscriberID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.SubscriberID
+	Data *Data `json:"data,omitempty"`
 }
 
 func (o *PatchSubscriberRequestDto) GetFirstName() *string {
@@ -83,7 +74,7 @@ func (o *PatchSubscriberRequestDto) GetLocale() *string {
 	return o.Locale
 }
 
-func (o *PatchSubscriberRequestDto) GetData() *PatchSubscriberRequestDtoData {
+func (o *PatchSubscriberRequestDto) GetData() *Data {
 	if o == nil {
 		return nil
 	}

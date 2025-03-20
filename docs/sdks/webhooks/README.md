@@ -18,16 +18,15 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Integrations.Webhooks.Retrieve(ctx, "<id>", nil)

@@ -27,9 +27,9 @@ func (o *EventsControllerCancelRequest) GetIdempotencyKey() *string {
 }
 
 type EventsControllerCancelResponse struct {
-	HTTPMeta       components.HTTPMetadata `json:"-"`
-	DataBooleanDto *components.DataBooleanDto
-	Headers        map[string][]string
+	HTTPMeta components.HTTPMetadata `json:"-"`
+	Boolean  *bool
+	Headers  map[string][]string
 }
 
 func (o *EventsControllerCancelResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -39,11 +39,11 @@ func (o *EventsControllerCancelResponse) GetHTTPMeta() components.HTTPMetadata {
 	return o.HTTPMeta
 }
 
-func (o *EventsControllerCancelResponse) GetDataBooleanDto() *components.DataBooleanDto {
+func (o *EventsControllerCancelResponse) GetBoolean() *bool {
 	if o == nil {
 		return nil
 	}
-	return o.DataBooleanDto
+	return o.Boolean
 }
 
 func (o *EventsControllerCancelResponse) GetHeaders() map[string][]string {

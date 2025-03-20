@@ -13,3 +13,4 @@ Status of the trigger
 | `StatusNoWorkflowStepsDefined`       | no_workflow_steps_defined            |
 | `StatusProcessed`                    | processed                            |
 | `StatusNoTenantFound`                | no_tenant_found                      |
+| `StatusInvalidRecipients`            | invalid_recipients                   |

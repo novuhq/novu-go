@@ -17,6 +17,7 @@ const (
 	StatusNoWorkflowStepsDefined       Status = "no_workflow_steps_defined"
 	StatusProcessed                    Status = "processed"
 	StatusNoTenantFound                Status = "no_tenant_found"
+	StatusInvalidRecipients            Status = "invalid_recipients"
 )
 
 func (e Status) ToPointer() *Status {
@@ -39,6 +40,8 @@ func (e *Status) UnmarshalJSON(data []byte) error {
 	case "processed":
 		fallthrough
 	case "no_tenant_found":
+		fallthrough
+	case "invalid_recipients":
 		*e = Status(v)
 		return nil
 	default:

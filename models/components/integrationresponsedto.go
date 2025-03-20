@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-// Channel - The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
-type Channel string
+// IntegrationResponseDtoChannel - The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
+type IntegrationResponseDtoChannel string
 
 const (
-	ChannelInApp Channel = "in_app"
-	ChannelEmail Channel = "email"
-	ChannelSms   Channel = "sms"
-	ChannelChat  Channel = "chat"
-	ChannelPush  Channel = "push"
+	IntegrationResponseDtoChannelInApp IntegrationResponseDtoChannel = "in_app"
+	IntegrationResponseDtoChannelEmail IntegrationResponseDtoChannel = "email"
+	IntegrationResponseDtoChannelSms   IntegrationResponseDtoChannel = "sms"
+	IntegrationResponseDtoChannelChat  IntegrationResponseDtoChannel = "chat"
+	IntegrationResponseDtoChannelPush  IntegrationResponseDtoChannel = "push"
 )
 
-func (e Channel) ToPointer() *Channel {
+func (e IntegrationResponseDtoChannel) ToPointer() *IntegrationResponseDtoChannel {
 	return &e
 }
-func (e *Channel) UnmarshalJSON(data []byte) error {
+func (e *IntegrationResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -36,10 +36,10 @@ func (e *Channel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
-		*e = Channel(v)
+		*e = IntegrationResponseDtoChannel(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Channel: %v", v)
+		return fmt.Errorf("invalid value for IntegrationResponseDtoChannel: %v", v)
 	}
 }
 
@@ -57,7 +57,7 @@ type IntegrationResponseDto struct {
 	// The identifier for the provider of the integration (e.g., "mailgun", "twilio").
 	ProviderID string `json:"providerId"`
 	// The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
-	Channel Channel `json:"channel"`
+	Channel IntegrationResponseDtoChannel `json:"channel"`
 	// The credentials required for the integration to function, including API keys and other sensitive information.
 	Credentials CredentialsDto `json:"credentials"`
 	// Indicates whether the integration is currently active. An active integration will process events and messages.
@@ -116,9 +116,9 @@ func (o *IntegrationResponseDto) GetProviderID() string {
 	return o.ProviderID
 }
 
-func (o *IntegrationResponseDto) GetChannel() Channel {
+func (o *IntegrationResponseDto) GetChannel() IntegrationResponseDtoChannel {
 	if o == nil {
-		return Channel("")
+		return IntegrationResponseDtoChannel("")
 	}
 	return o.Channel
 }

@@ -27,13 +27,6 @@ func newNovuNotifications(sdkConfig sdkConfiguration) *NovuNotifications {
 
 // Feed - Get in-app notification feed for a particular subscriber
 func (s *NovuNotifications) Feed(ctx context.Context, request operations.SubscribersV1ControllerGetNotificationsFeedRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerGetNotificationsFeedResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_getNotificationsFeed",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -55,6 +48,14 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/notifications/feed", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_getNotificationsFeed",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout
@@ -362,13 +363,6 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 
 // UnseenCount - Get the unseen in-app notifications count for subscribers feed
 func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string, seen *bool, limit *float64, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerGetUnseenCountResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_getUnseenCount",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerGetUnseenCountRequest{
 		SubscriberID:   subscriberID,
 		Seen:           seen,
@@ -397,6 +391,14 @@ func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}/notifications/unseen", request, nil)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
+	}
+
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_getUnseenCount",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
 	}
 
 	timeout := o.Timeout

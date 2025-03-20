@@ -10,13 +10,15 @@ generation:
   useClassNamesForArrayFields: true
   fixes:
     nameResolutionDec2023: true
+    nameResolutionFeb2025: false
     parameterOrderingFeb2024: true
     requestResponseComponentNamesFeb2024: true
+    securityFeb2025: false
   auth:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 go:
-  version: 0.1.17
+  version: 0.2.0
   additionalDependencies:
     github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false

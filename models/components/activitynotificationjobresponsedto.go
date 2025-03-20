@@ -70,6 +70,8 @@ type ActivityNotificationJobResponseDto struct {
 	ExecutionDetails []ActivityNotificationExecutionDetailResponseDto `json:"executionDetails"`
 	// Step details of the job
 	Step ActivityNotificationStepResponseDto `json:"step"`
+	// Optional context object for additional error details.
+	Overrides map[string]any `json:"overrides,omitempty"`
 	// Optional payload for the job
 	Payload *Payload `json:"payload,omitempty"`
 	// Provider ID of the job
@@ -113,6 +115,13 @@ func (o *ActivityNotificationJobResponseDto) GetStep() ActivityNotificationStepR
 		return ActivityNotificationStepResponseDto{}
 	}
 	return o.Step
+}
+
+func (o *ActivityNotificationJobResponseDto) GetOverrides() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Overrides
 }
 
 func (o *ActivityNotificationJobResponseDto) GetPayload() *Payload {
