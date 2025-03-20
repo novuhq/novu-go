@@ -73,20 +73,20 @@ func (u FeedIdentifier) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type FeedIdentifier: all fields are null")
 }
 
-// MarkAllMessageAsRequestDtoMarkAs - Mark all subscriber messages as read, unread, seen or unseen
-type MarkAllMessageAsRequestDtoMarkAs string
+// MarkAs - Mark all subscriber messages as read, unread, seen or unseen
+type MarkAs string
 
 const (
-	MarkAllMessageAsRequestDtoMarkAsRead   MarkAllMessageAsRequestDtoMarkAs = "read"
-	MarkAllMessageAsRequestDtoMarkAsSeen   MarkAllMessageAsRequestDtoMarkAs = "seen"
-	MarkAllMessageAsRequestDtoMarkAsUnread MarkAllMessageAsRequestDtoMarkAs = "unread"
-	MarkAllMessageAsRequestDtoMarkAsUnseen MarkAllMessageAsRequestDtoMarkAs = "unseen"
+	MarkAsRead   MarkAs = "read"
+	MarkAsSeen   MarkAs = "seen"
+	MarkAsUnread MarkAs = "unread"
+	MarkAsUnseen MarkAs = "unseen"
 )
 
-func (e MarkAllMessageAsRequestDtoMarkAs) ToPointer() *MarkAllMessageAsRequestDtoMarkAs {
+func (e MarkAs) ToPointer() *MarkAs {
 	return &e
 }
-func (e *MarkAllMessageAsRequestDtoMarkAs) UnmarshalJSON(data []byte) error {
+func (e *MarkAs) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -99,10 +99,10 @@ func (e *MarkAllMessageAsRequestDtoMarkAs) UnmarshalJSON(data []byte) error {
 	case "unread":
 		fallthrough
 	case "unseen":
-		*e = MarkAllMessageAsRequestDtoMarkAs(v)
+		*e = MarkAs(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for MarkAllMessageAsRequestDtoMarkAs: %v", v)
+		return fmt.Errorf("invalid value for MarkAs: %v", v)
 	}
 }
 
@@ -110,7 +110,7 @@ type MarkAllMessageAsRequestDto struct {
 	// Optional feed identifier or array of feed identifiers
 	FeedIdentifier *FeedIdentifier `json:"feedIdentifier,omitempty"`
 	// Mark all subscriber messages as read, unread, seen or unseen
-	MarkAs MarkAllMessageAsRequestDtoMarkAs `json:"markAs"`
+	MarkAs MarkAs `json:"markAs"`
 }
 
 func (o *MarkAllMessageAsRequestDto) GetFeedIdentifier() *FeedIdentifier {
@@ -120,9 +120,9 @@ func (o *MarkAllMessageAsRequestDto) GetFeedIdentifier() *FeedIdentifier {
 	return o.FeedIdentifier
 }
 
-func (o *MarkAllMessageAsRequestDto) GetMarkAs() MarkAllMessageAsRequestDtoMarkAs {
+func (o *MarkAllMessageAsRequestDto) GetMarkAs() MarkAs {
 	if o == nil {
-		return MarkAllMessageAsRequestDtoMarkAs("")
+		return MarkAs("")
 	}
 	return o.MarkAs
 }

@@ -28,13 +28,6 @@ func newProperties(sdkConfig sdkConfiguration) *Properties {
 // UpdateOnlineFlag - Update subscriber online status
 // Used to update the subscriber isOnline flag.
 func (s *Properties) UpdateOnlineFlag(ctx context.Context, subscriberID string, updateSubscriberOnlineFlagRequestDto components.UpdateSubscriberOnlineFlagRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse, error) {
-	hookCtx := hooks.HookContext{
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_updateSubscriberOnlineFlag",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
 	request := operations.SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest{
 		SubscriberID:                         subscriberID,
 		IdempotencyKey:                       idempotencyKey,
@@ -64,6 +57,13 @@ func (s *Properties) UpdateOnlineFlag(ctx context.Context, subscriberID string, 
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
 
+	hookCtx := hooks.HookContext{
+		BaseURL:        baseURL,
+		Context:        ctx,
+		OperationID:    "SubscribersV1Controller_updateSubscriberOnlineFlag",
+		OAuth2Scopes:   []string{},
+		SecuritySource: s.sdkConfiguration.Security,
+	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberOnlineFlagRequestDto", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err

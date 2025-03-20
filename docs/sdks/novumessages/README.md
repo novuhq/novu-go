@@ -5,13 +5,13 @@
 
 ### Available Operations
 
-* [MarkAllAs](#markallas) - Mark a subscriber messages as seen, read, unseen or unread
-* [MarkAll](#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
 * [UpdateAsSeen](#updateasseen) - Mark message action as seen
+* [MarkAll](#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+* [MarkAllAs](#markallas) - Mark a subscriber messages as seen, read, unseen or unread
 
-## MarkAllAs
+## UpdateAsSeen
 
-Mark a subscriber messages as seen, read, unseen or unread
+Mark message action as seen
 
 ### Example Usage
 
@@ -20,29 +20,31 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Messages.MarkAllAs(ctx, "<id>", components.MessageMarkAsRequestDto{
-        MessageID: components.CreateMessageIDStr(
-            "<id>",
-        ),
-        MarkAs: components.MarkAsUnread,
-    }, nil)
+    res, err := s.Subscribers.Messages.UpdateAsSeen(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{
+        MessageID: "<id>",
+        Type: "<value>",
+        SubscriberID: "<id>",
+        MarkMessageActionAsSeenDto: components.MarkMessageActionAsSeenDto{
+            Status: components.MarkMessageActionAsSeenDtoStatusPending,
+        },
+    })
     if err != nil {
         log.Fatal(err)
     }
-    if res.MessageResponseDtos != nil {
+    if res.MessageResponseDto != nil {
         // handle response
     }
 }
@@ -50,17 +52,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `subscriberID`                                                                           | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `messageMarkAsRequestDto`                                                                | [components.MessageMarkAsRequestDto](../../models/components/messagemarkasrequestdto.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `idempotencyKey`                                                                         | **string*                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
-| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
+| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                  | :heavy_check_mark:                                                                                                                     | The context to use for the request.                                                                                                    |
+| `request`                                                                                                                              | [operations.SubscribersV1ControllerMarkActionAsSeenRequest](../../models/operations/subscribersv1controllermarkactionasseenrequest.md) | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
+| `opts`                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                               | :heavy_minus_sign:                                                                                                                     | The options for this request.                                                                                                          |
 
 ### Response
 
-**[*operations.SubscribersV1ControllerMarkMessagesAsResponse](../../models/operations/subscribersv1controllermarkmessagesasresponse.md), error**
+**[*operations.SubscribersV1ControllerMarkActionAsSeenResponse](../../models/operations/subscribersv1controllermarkactionasseenresponse.md), error**
 
 ### Errors
 
@@ -83,7 +83,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -91,13 +90,13 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Messages.MarkAll(ctx, "<id>", components.MarkAllMessageAsRequestDto{
-        MarkAs: components.MarkAllMessageAsRequestDtoMarkAsSeen,
+        MarkAs: components.MarkAsSeen,
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -132,9 +131,9 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## UpdateAsSeen
+## MarkAllAs
 
-Mark message action as seen
+Mark a subscriber messages as seen, read, unseen or unread
 
 ### Example Usage
 
@@ -143,32 +142,28 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
-	"github.com/novuhq/novu-go/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Messages.UpdateAsSeen(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{
-        MessageID: "<id>",
-        Type: "<value>",
-        SubscriberID: "<id>",
-        MarkMessageActionAsSeenDto: components.MarkMessageActionAsSeenDto{
-            Status: components.MarkMessageActionAsSeenDtoStatusPending,
-        },
-    })
+    res, err := s.Subscribers.Messages.MarkAllAs(ctx, "<id>", components.MessageMarkAsRequestDto{
+        MessageID: components.CreateMessageIDStr(
+            "<id>",
+        ),
+        MarkAs: components.MessageMarkAsRequestDtoMarkAsUnread,
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.MessageResponseDto != nil {
+    if res.MessageResponseDtos != nil {
         // handle response
     }
 }
@@ -176,15 +171,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                              | Type                                                                                                                                   | Required                                                                                                                               | Description                                                                                                                            |
-| -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                  | :heavy_check_mark:                                                                                                                     | The context to use for the request.                                                                                                    |
-| `request`                                                                                                                              | [operations.SubscribersV1ControllerMarkActionAsSeenRequest](../../models/operations/subscribersv1controllermarkactionasseenrequest.md) | :heavy_check_mark:                                                                                                                     | The request object to use for the request.                                                                                             |
-| `opts`                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                               | :heavy_minus_sign:                                                                                                                     | The options for this request.                                                                                                          |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `subscriberID`                                                                           | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `messageMarkAsRequestDto`                                                                | [components.MessageMarkAsRequestDto](../../models/components/messagemarkasrequestdto.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `idempotencyKey`                                                                         | **string*                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
 
-**[*operations.SubscribersV1ControllerMarkActionAsSeenResponse](../../models/operations/subscribersv1controllermarkactionasseenresponse.md), error**
+**[*operations.SubscribersV1ControllerMarkMessagesAsResponse](../../models/operations/subscribersv1controllermarkmessagesasresponse.md), error**
 
 ### Errors
 

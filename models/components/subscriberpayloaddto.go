@@ -8,94 +8,94 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-type DataType string
+type SubscriberPayloadDtoDataType string
 
 const (
-	DataTypeStr        DataType = "str"
-	DataTypeArrayOfStr DataType = "arrayOfStr"
-	DataTypeBoolean    DataType = "boolean"
-	DataTypeNumber     DataType = "number"
+	SubscriberPayloadDtoDataTypeStr        SubscriberPayloadDtoDataType = "str"
+	SubscriberPayloadDtoDataTypeArrayOfStr SubscriberPayloadDtoDataType = "arrayOfStr"
+	SubscriberPayloadDtoDataTypeBoolean    SubscriberPayloadDtoDataType = "boolean"
+	SubscriberPayloadDtoDataTypeNumber     SubscriberPayloadDtoDataType = "number"
 )
 
-type Data struct {
+type SubscriberPayloadDtoData struct {
 	Str        *string  `queryParam:"inline"`
 	ArrayOfStr []string `queryParam:"inline"`
 	Boolean    *bool    `queryParam:"inline"`
 	Number     *float64 `queryParam:"inline"`
 
-	Type DataType
+	Type SubscriberPayloadDtoDataType
 }
 
-func CreateDataStr(str string) Data {
-	typ := DataTypeStr
+func CreateSubscriberPayloadDtoDataStr(str string) SubscriberPayloadDtoData {
+	typ := SubscriberPayloadDtoDataTypeStr
 
-	return Data{
+	return SubscriberPayloadDtoData{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateDataArrayOfStr(arrayOfStr []string) Data {
-	typ := DataTypeArrayOfStr
+func CreateSubscriberPayloadDtoDataArrayOfStr(arrayOfStr []string) SubscriberPayloadDtoData {
+	typ := SubscriberPayloadDtoDataTypeArrayOfStr
 
-	return Data{
+	return SubscriberPayloadDtoData{
 		ArrayOfStr: arrayOfStr,
 		Type:       typ,
 	}
 }
 
-func CreateDataBoolean(boolean bool) Data {
-	typ := DataTypeBoolean
+func CreateSubscriberPayloadDtoDataBoolean(boolean bool) SubscriberPayloadDtoData {
+	typ := SubscriberPayloadDtoDataTypeBoolean
 
-	return Data{
+	return SubscriberPayloadDtoData{
 		Boolean: &boolean,
 		Type:    typ,
 	}
 }
 
-func CreateDataNumber(number float64) Data {
-	typ := DataTypeNumber
+func CreateSubscriberPayloadDtoDataNumber(number float64) SubscriberPayloadDtoData {
+	typ := SubscriberPayloadDtoDataTypeNumber
 
-	return Data{
+	return SubscriberPayloadDtoData{
 		Number: &number,
 		Type:   typ,
 	}
 }
 
-func (u *Data) UnmarshalJSON(data []byte) error {
+func (u *SubscriberPayloadDtoData) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
-		u.Type = DataTypeStr
+		u.Type = SubscriberPayloadDtoDataTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
 	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
 		u.ArrayOfStr = arrayOfStr
-		u.Type = DataTypeArrayOfStr
+		u.Type = SubscriberPayloadDtoDataTypeArrayOfStr
 		return nil
 	}
 
 	var boolean bool = false
 	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
 		u.Boolean = &boolean
-		u.Type = DataTypeBoolean
+		u.Type = SubscriberPayloadDtoDataTypeBoolean
 		return nil
 	}
 
 	var number float64 = float64(0)
 	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
 		u.Number = &number
-		u.Type = DataTypeNumber
+		u.Type = SubscriberPayloadDtoDataTypeNumber
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Data", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SubscriberPayloadDtoData", string(data))
 }
 
-func (u Data) MarshalJSON() ([]byte, error) {
+func (u SubscriberPayloadDtoData) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -112,7 +112,7 @@ func (u Data) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Number, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Data: all fields are null")
+	return nil, errors.New("could not marshal union type SubscriberPayloadDtoData: all fields are null")
 }
 
 type SubscriberPayloadDto struct {
@@ -131,9 +131,11 @@ type SubscriberPayloadDto struct {
 	// The locale of the subscriber.
 	Locale *string `json:"locale,omitempty"`
 	// An optional payload object that can contain any properties.
-	Data map[string]Data `json:"data,omitempty"`
+	Data map[string]SubscriberPayloadDtoData `json:"data,omitempty"`
 	// An optional array of subscriber channels.
 	Channels []SubscriberChannelDto `json:"channels,omitempty"`
+	// The timezone of the subscriber.
+	Timezone *string `json:"timezone,omitempty"`
 }
 
 func (o *SubscriberPayloadDto) GetSubscriberID() string {
@@ -185,7 +187,7 @@ func (o *SubscriberPayloadDto) GetLocale() *string {
 	return o.Locale
 }
 
-func (o *SubscriberPayloadDto) GetData() map[string]Data {
+func (o *SubscriberPayloadDto) GetData() map[string]SubscriberPayloadDtoData {
 	if o == nil {
 		return nil
 	}
@@ -197,4 +199,11 @@ func (o *SubscriberPayloadDto) GetChannels() []SubscriberChannelDto {
 		return nil
 	}
 	return o.Channels
+}
+
+func (o *SubscriberPayloadDto) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
 }

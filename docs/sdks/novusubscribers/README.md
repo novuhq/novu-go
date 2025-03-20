@@ -20,7 +20,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -28,9 +27,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Subscribers.Assign(ctx, "<value>", components.AddSubscribersRequestDto{
@@ -83,16 +82,15 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Subscribers.Retrieve(ctx, "<id>", "<value>", nil)
@@ -140,7 +138,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -148,9 +145,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Subscribers.Remove(ctx, "<value>", components.RemoveSubscribersRequestDto{

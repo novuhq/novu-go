@@ -22,11 +22,13 @@ type NotificationsControllerListNotificationsRequest struct {
 	SubscriberIds []string `queryParam:"style=form,explode=true,name=subscriberIds"`
 	// Page number for pagination
 	Page *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
+	// Limit for pagination
+	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
 	// Transaction ID for filtering
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
-	// Date filter for records after this timestamp
+	// Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan
 	After *string `queryParam:"style=form,explode=true,name=after"`
-	// Date filter for records before this timestamp
+	// Date filter for records before this timestamp. Defaults to current time of request (now)
 	Before *string `queryParam:"style=form,explode=true,name=before"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
@@ -83,6 +85,13 @@ func (o *NotificationsControllerListNotificationsRequest) GetPage() *float64 {
 		return nil
 	}
 	return o.Page
+}
+
+func (o *NotificationsControllerListNotificationsRequest) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
 }
 
 func (o *NotificationsControllerListNotificationsRequest) GetTransactionID() *string {

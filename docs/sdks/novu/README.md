@@ -10,9 +10,9 @@ Novu Documentation
 ### Available Operations
 
 * [Trigger](#trigger) - Trigger event
-* [TriggerBulk](#triggerbulk) - Bulk trigger event
-* [TriggerBroadcast](#triggerbroadcast) - Broadcast event to all
 * [Cancel](#cancel) - Cancel triggered event
+* [TriggerBroadcast](#triggerbroadcast) - Broadcast event to all
+* [TriggerBulk](#triggerbulk) - Bulk trigger event
 
 ## Trigger
 
@@ -29,7 +29,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -37,9 +36,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -95,6 +94,129 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## Cancel
+
+
+    Using a previously generated transactionId during the event trigger,
+     will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
+    
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Cancel(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Boolean != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.EventsControllerCancelResponse](../../models/operations/eventscontrollercancelresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## TriggerBroadcast
+
+Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.
+      In the future could be used to trigger events to a subset of subscribers based on defined filters.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
+        Name: "<value>",
+        Payload: map[string]any{
+            "comment_id": "string",
+            "post": map[string]any{
+                "text": "string",
+            },
+        },
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.TriggerEventResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
+| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `triggerEventToAllRequestDto`                                                                    | [components.TriggerEventToAllRequestDto](../../models/components/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `idempotencyKey`                                                                                 | **string*                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
+| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
+
+### Response
+
+**[*operations.EventsControllerBroadcastEventToAllResponse](../../models/operations/eventscontrollerbroadcasteventtoallresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## TriggerBulk
 
 
@@ -109,7 +231,6 @@ package main
 
 import(
 	"context"
-	"os"
 	novugo "github.com/novuhq/novu-go"
 	"github.com/novuhq/novu-go/models/components"
 	"log"
@@ -117,9 +238,9 @@ import(
 
 func main() {
     ctx := context.Background()
-    
+
     s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
@@ -220,131 +341,6 @@ func main() {
 ### Response
 
 **[*operations.EventsControllerTriggerBulkResponse](../../models/operations/eventscontrollertriggerbulkresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## TriggerBroadcast
-
-Trigger a broadcast event to all existing subscribers, could be used to send announcements, etc.
-      In the future could be used to trigger events to a subset of subscribers based on defined filters.
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
-        Name: "<value>",
-        Payload: map[string]any{
-            "comment_id": "string",
-            "post": map[string]any{
-                "text": "string",
-            },
-        },
-    }, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.TriggerEventResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
-| ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
-| `triggerEventToAllRequestDto`                                                                    | [components.TriggerEventToAllRequestDto](../../models/components/triggereventtoallrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `idempotencyKey`                                                                                 | **string*                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
-| `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
-
-### Response
-
-**[*operations.EventsControllerBroadcastEventToAllResponse](../../models/operations/eventscontrollerbroadcasteventtoallresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Cancel
-
-
-    Using a previously generated transactionId during the event trigger,
-     will cancel any active or pending workflows. This is useful to cancel active digests, delays etc...
-    
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	"os"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-    
-    s := novugo.New(
-        novugo.WithSecurity(os.Getenv("NOVU_SECRET_KEY")),
-    )
-
-    res, err := s.Cancel(ctx, "<id>", nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.DataBooleanDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.EventsControllerCancelResponse](../../models/operations/eventscontrollercancelresponse.md), error**
 
 ### Errors
 

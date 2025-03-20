@@ -7,33 +7,33 @@ import (
 	"fmt"
 )
 
-// ChannelSettingsDtoProviderID - The provider identifier for the credentials
-type ChannelSettingsDtoProviderID string
+// ProviderID - The provider identifier for the credentials
+type ProviderID string
 
 const (
-	ChannelSettingsDtoProviderIDSlack            ChannelSettingsDtoProviderID = "slack"
-	ChannelSettingsDtoProviderIDDiscord          ChannelSettingsDtoProviderID = "discord"
-	ChannelSettingsDtoProviderIDMsteams          ChannelSettingsDtoProviderID = "msteams"
-	ChannelSettingsDtoProviderIDMattermost       ChannelSettingsDtoProviderID = "mattermost"
-	ChannelSettingsDtoProviderIDRyver            ChannelSettingsDtoProviderID = "ryver"
-	ChannelSettingsDtoProviderIDZulip            ChannelSettingsDtoProviderID = "zulip"
-	ChannelSettingsDtoProviderIDGrafanaOnCall    ChannelSettingsDtoProviderID = "grafana-on-call"
-	ChannelSettingsDtoProviderIDGetstream        ChannelSettingsDtoProviderID = "getstream"
-	ChannelSettingsDtoProviderIDRocketChat       ChannelSettingsDtoProviderID = "rocket-chat"
-	ChannelSettingsDtoProviderIDWhatsappBusiness ChannelSettingsDtoProviderID = "whatsapp-business"
-	ChannelSettingsDtoProviderIDFcm              ChannelSettingsDtoProviderID = "fcm"
-	ChannelSettingsDtoProviderIDApns             ChannelSettingsDtoProviderID = "apns"
-	ChannelSettingsDtoProviderIDExpo             ChannelSettingsDtoProviderID = "expo"
-	ChannelSettingsDtoProviderIDOneSignal        ChannelSettingsDtoProviderID = "one-signal"
-	ChannelSettingsDtoProviderIDPushpad          ChannelSettingsDtoProviderID = "pushpad"
-	ChannelSettingsDtoProviderIDPushWebhook      ChannelSettingsDtoProviderID = "push-webhook"
-	ChannelSettingsDtoProviderIDPusherBeams      ChannelSettingsDtoProviderID = "pusher-beams"
+	ProviderIDSlack            ProviderID = "slack"
+	ProviderIDDiscord          ProviderID = "discord"
+	ProviderIDMsteams          ProviderID = "msteams"
+	ProviderIDMattermost       ProviderID = "mattermost"
+	ProviderIDRyver            ProviderID = "ryver"
+	ProviderIDZulip            ProviderID = "zulip"
+	ProviderIDGrafanaOnCall    ProviderID = "grafana-on-call"
+	ProviderIDGetstream        ProviderID = "getstream"
+	ProviderIDRocketChat       ProviderID = "rocket-chat"
+	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
+	ProviderIDFcm              ProviderID = "fcm"
+	ProviderIDApns             ProviderID = "apns"
+	ProviderIDExpo             ProviderID = "expo"
+	ProviderIDOneSignal        ProviderID = "one-signal"
+	ProviderIDPushpad          ProviderID = "pushpad"
+	ProviderIDPushWebhook      ProviderID = "push-webhook"
+	ProviderIDPusherBeams      ProviderID = "pusher-beams"
 )
 
-func (e ChannelSettingsDtoProviderID) ToPointer() *ChannelSettingsDtoProviderID {
+func (e ProviderID) ToPointer() *ProviderID {
 	return &e
 }
-func (e *ChannelSettingsDtoProviderID) UnmarshalJSON(data []byte) error {
+func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -72,16 +72,16 @@ func (e *ChannelSettingsDtoProviderID) UnmarshalJSON(data []byte) error {
 	case "push-webhook":
 		fallthrough
 	case "pusher-beams":
-		*e = ChannelSettingsDtoProviderID(v)
+		*e = ProviderID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ChannelSettingsDtoProviderID: %v", v)
+		return fmt.Errorf("invalid value for ProviderID: %v", v)
 	}
 }
 
 type ChannelSettingsDto struct {
 	// The provider identifier for the credentials
-	ProviderID ChannelSettingsDtoProviderID `json:"providerId"`
+	ProviderID ProviderID `json:"providerId"`
 	// The integration identifier
 	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
 	// Credentials payload for the specified provider
@@ -90,9 +90,9 @@ type ChannelSettingsDto struct {
 	IntegrationID string `json:"_integrationId"`
 }
 
-func (o *ChannelSettingsDto) GetProviderID() ChannelSettingsDtoProviderID {
+func (o *ChannelSettingsDto) GetProviderID() ProviderID {
 	if o == nil {
-		return ChannelSettingsDtoProviderID("")
+		return ProviderID("")
 	}
 	return o.ProviderID
 }
