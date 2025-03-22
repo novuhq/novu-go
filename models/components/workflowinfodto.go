@@ -9,6 +9,8 @@ type WorkflowInfoDto struct {
 	Identifier string `json:"identifier"`
 	// Display name of the workflow
 	Name string `json:"name"`
+	// last updated date
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 func (o *WorkflowInfoDto) GetSlug() string {
@@ -30,4 +32,11 @@ func (o *WorkflowInfoDto) GetName() string {
 		return ""
 	}
 	return o.Name
+}
+
+func (o *WorkflowInfoDto) GetUpdatedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedAt
 }
