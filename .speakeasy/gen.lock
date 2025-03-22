@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: a532115093aec3faad55c6df85d4b94b
+  docChecksum: eec960032a6bd6a301e3fd1992f9862a
   docVersion: "1.0"
-  speakeasyVersion: 1.521.0
-  generationVersion: 2.558.2
-  releaseVersion: 0.2.0
-  configChecksum: 220e427839ac0c6755ad87719bc75f48
+  speakeasyVersion: 1.522.0
+  generationVersion: 2.559.0
+  releaseVersion: 0.2.1
+  configChecksum: 3905b25aeaa829e1aee26bfd5531bbdf
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
