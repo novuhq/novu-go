@@ -1,6 +1,4 @@
-# MessageActionResultPayload
-
-Payload of the action result
+# Four
 
 
 ## Fields

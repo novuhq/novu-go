@@ -7,116 +7,99 @@ import (
 	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/models/components"
 )
 
-type ValueType string
+type Message5Type string
 
 const (
-	ValueTypeStr             ValueType = "str"
-	ValueTypeNumber          ValueType = "number"
-	ValueTypeBoolean         ValueType = "boolean"
-	ValueTypeMapOfAny        ValueType = "mapOfAny"
-	ValueTypeArrayOfMapOfAny ValueType = "arrayOfMapOfAny"
+	Message5TypeStr      Message5Type = "str"
+	Message5TypeNumber   Message5Type = "number"
+	Message5TypeBoolean  Message5Type = "boolean"
+	Message5TypeMapOfAny Message5Type = "mapOfAny"
 )
 
-type Value struct {
-	Str             *string          `queryParam:"inline"`
-	Number          *float64         `queryParam:"inline"`
-	Boolean         *bool            `queryParam:"inline"`
-	MapOfAny        map[string]any   `queryParam:"inline"`
-	ArrayOfMapOfAny []map[string]any `queryParam:"inline"`
+type Message5 struct {
+	Str      *string        `queryParam:"inline"`
+	Number   *float64       `queryParam:"inline"`
+	Boolean  *bool          `queryParam:"inline"`
+	MapOfAny map[string]any `queryParam:"inline"`
 
-	Type ValueType
+	Type Message5Type
 }
 
-var _ error = &Value{}
+var _ error = &Message5{}
 
-func CreateValueStr(str string) Value {
-	typ := ValueTypeStr
+func CreateMessage5Str(str string) Message5 {
+	typ := Message5TypeStr
 
-	return Value{
+	return Message5{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateValueNumber(number float64) Value {
-	typ := ValueTypeNumber
+func CreateMessage5Number(number float64) Message5 {
+	typ := Message5TypeNumber
 
-	return Value{
+	return Message5{
 		Number: &number,
 		Type:   typ,
 	}
 }
 
-func CreateValueBoolean(boolean bool) Value {
-	typ := ValueTypeBoolean
+func CreateMessage5Boolean(boolean bool) Message5 {
+	typ := Message5TypeBoolean
 
-	return Value{
+	return Message5{
 		Boolean: &boolean,
 		Type:    typ,
 	}
 }
 
-func CreateValueMapOfAny(mapOfAny map[string]any) Value {
-	typ := ValueTypeMapOfAny
+func CreateMessage5MapOfAny(mapOfAny map[string]any) Message5 {
+	typ := Message5TypeMapOfAny
 
-	return Value{
+	return Message5{
 		MapOfAny: mapOfAny,
 		Type:     typ,
 	}
 }
 
-func CreateValueArrayOfMapOfAny(arrayOfMapOfAny []map[string]any) Value {
-	typ := ValueTypeArrayOfMapOfAny
-
-	return Value{
-		ArrayOfMapOfAny: arrayOfMapOfAny,
-		Type:            typ,
-	}
-}
-
-func (u *Value) UnmarshalJSON(data []byte) error {
+func (u *Message5) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
 		u.Str = &str
-		u.Type = ValueTypeStr
+		u.Type = Message5TypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
 	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
 		u.Number = &number
-		u.Type = ValueTypeNumber
+		u.Type = Message5TypeNumber
 		return nil
 	}
 
 	var boolean bool = false
 	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
 		u.Boolean = &boolean
-		u.Type = ValueTypeBoolean
+		u.Type = Message5TypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = ValueTypeMapOfAny
+		u.Type = Message5TypeMapOfAny
 		return nil
 	}
 
-	var arrayOfMapOfAny []map[string]any = []map[string]any{}
-	if err := utils.UnmarshalJSON(data, &arrayOfMapOfAny, "", true, true); err == nil {
-		u.ArrayOfMapOfAny = arrayOfMapOfAny
-		u.Type = ValueTypeArrayOfMapOfAny
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Value", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Message5", string(data))
 }
 
-func (u Value) MarshalJSON() ([]byte, error) {
+func (u Message5) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -133,52 +116,183 @@ func (u Value) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
 
-	if u.ArrayOfMapOfAny != nil {
-		return utils.MarshalJSON(u.ArrayOfMapOfAny, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type Value: all fields are null")
+	return nil, errors.New("could not marshal union type Message5: all fields are null")
 }
 
-func (u Value) Error() string {
+func (u Message5) Error() string {
 	switch u.Type {
-	case ValueTypeStr:
+	case Message5TypeStr:
 		data, _ := json.Marshal(u.Str)
 		return string(data)
-	case ValueTypeNumber:
+	case Message5TypeNumber:
 		data, _ := json.Marshal(u.Number)
 		return string(data)
-	case ValueTypeBoolean:
+	case Message5TypeBoolean:
 		data, _ := json.Marshal(u.Boolean)
 		return string(data)
-	case ValueTypeMapOfAny:
+	case Message5TypeMapOfAny:
 		data, _ := json.Marshal(u.MapOfAny)
-		return string(data)
-	case ValueTypeArrayOfMapOfAny:
-		data, _ := json.Marshal(u.ArrayOfMapOfAny)
 		return string(data)
 	default:
 		return "unknown error"
 	}
 }
 
-type Errors struct {
-	Messages []string `json:"messages"`
-	Value    *Value   `json:"value"`
+type Message4 struct {
 }
 
-func (o *Errors) GetMessages() []string {
-	if o == nil {
-		return []string{}
+type ValidationErrorDtoMessageType string
+
+const (
+	ValidationErrorDtoMessageTypeStr             ValidationErrorDtoMessageType = "str"
+	ValidationErrorDtoMessageTypeNumber          ValidationErrorDtoMessageType = "number"
+	ValidationErrorDtoMessageTypeBoolean         ValidationErrorDtoMessageType = "boolean"
+	ValidationErrorDtoMessageTypeMessage4        ValidationErrorDtoMessageType = "message_4"
+	ValidationErrorDtoMessageTypeArrayOfMessage5 ValidationErrorDtoMessageType = "arrayOfMessage5"
+)
+
+// ValidationErrorDtoMessage - Value that failed validation
+type ValidationErrorDtoMessage struct {
+	Str             *string     `queryParam:"inline"`
+	Number          *float64    `queryParam:"inline"`
+	Boolean         *bool       `queryParam:"inline"`
+	Message4        *Message4   `queryParam:"inline"`
+	ArrayOfMessage5 []*Message5 `queryParam:"inline"`
+
+	Type ValidationErrorDtoMessageType
+}
+
+var _ error = &ValidationErrorDtoMessage{}
+
+func CreateValidationErrorDtoMessageStr(str string) ValidationErrorDtoMessage {
+	typ := ValidationErrorDtoMessageTypeStr
+
+	return ValidationErrorDtoMessage{
+		Str:  &str,
+		Type: typ,
 	}
-	return o.Messages
 }
 
-func (o *Errors) GetValue() *Value {
-	if o == nil {
+func CreateValidationErrorDtoMessageNumber(number float64) ValidationErrorDtoMessage {
+	typ := ValidationErrorDtoMessageTypeNumber
+
+	return ValidationErrorDtoMessage{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateValidationErrorDtoMessageBoolean(boolean bool) ValidationErrorDtoMessage {
+	typ := ValidationErrorDtoMessageTypeBoolean
+
+	return ValidationErrorDtoMessage{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateValidationErrorDtoMessageMessage4(message4 Message4) ValidationErrorDtoMessage {
+	typ := ValidationErrorDtoMessageTypeMessage4
+
+	return ValidationErrorDtoMessage{
+		Message4: &message4,
+		Type:     typ,
+	}
+}
+
+func CreateValidationErrorDtoMessageArrayOfMessage5(arrayOfMessage5 []*Message5) ValidationErrorDtoMessage {
+	typ := ValidationErrorDtoMessageTypeArrayOfMessage5
+
+	return ValidationErrorDtoMessage{
+		ArrayOfMessage5: arrayOfMessage5,
+		Type:            typ,
+	}
+}
+
+func (u *ValidationErrorDtoMessage) UnmarshalJSON(data []byte) error {
+
+	var message4 Message4 = Message4{}
+	if err := utils.UnmarshalJSON(data, &message4, "", true, true); err == nil {
+		u.Message4 = &message4
+		u.Type = ValidationErrorDtoMessageTypeMessage4
 		return nil
 	}
-	return o.Value
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = ValidationErrorDtoMessageTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+		u.Number = &number
+		u.Type = ValidationErrorDtoMessageTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+		u.Boolean = &boolean
+		u.Type = ValidationErrorDtoMessageTypeBoolean
+		return nil
+	}
+
+	var arrayOfMessage5 []*Message5 = []*Message5{}
+	if err := utils.UnmarshalJSON(data, &arrayOfMessage5, "", true, true); err == nil {
+		u.ArrayOfMessage5 = arrayOfMessage5
+		u.Type = ValidationErrorDtoMessageTypeArrayOfMessage5
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ValidationErrorDtoMessage", string(data))
+}
+
+func (u ValidationErrorDtoMessage) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.Message4 != nil {
+		return utils.MarshalJSON(u.Message4, "", true)
+	}
+
+	if u.ArrayOfMessage5 != nil {
+		return utils.MarshalJSON(u.ArrayOfMessage5, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ValidationErrorDtoMessage: all fields are null")
+}
+
+func (u ValidationErrorDtoMessage) Error() string {
+	switch u.Type {
+	case ValidationErrorDtoMessageTypeStr:
+		data, _ := json.Marshal(u.Str)
+		return string(data)
+	case ValidationErrorDtoMessageTypeNumber:
+		data, _ := json.Marshal(u.Number)
+		return string(data)
+	case ValidationErrorDtoMessageTypeBoolean:
+		data, _ := json.Marshal(u.Boolean)
+		return string(data)
+	case ValidationErrorDtoMessageTypeMessage4:
+		data, _ := json.Marshal(u.Message4)
+		return string(data)
+	case ValidationErrorDtoMessageTypeArrayOfMessage5:
+		data, _ := json.Marshal(u.ArrayOfMessage5)
+		return string(data)
+	default:
+		return "unknown error"
+	}
 }
 
 type ValidationErrorDto struct {
@@ -188,15 +302,15 @@ type ValidationErrorDto struct {
 	Timestamp string `json:"timestamp"`
 	// The path where the error occurred.
 	Path string `json:"path"`
-	// A detailed error message.
-	Message string `json:"message"`
+	// Value that failed validation
+	Message *ValidationErrorDtoMessage `json:"message,omitempty"`
 	// Optional context object for additional error details.
 	Ctx map[string]any `json:"ctx,omitempty"`
 	// Optional unique identifier for the error, useful for tracking using Sentry and
 	//       New Relic, only available for 500.
 	ErrorID *string `json:"errorId,omitempty"`
 	// A record of validation errors keyed by field name
-	Errors map[string]Errors `json:"errors"`
+	Errors map[string]components.ConstraintValidation `json:"errors"`
 }
 
 var _ error = &ValidationErrorDto{}

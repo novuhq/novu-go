@@ -31,7 +31,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Properties.UpdateOnlineFlag(ctx, "<id>", components.UpdateSubscriberOnlineFlagRequestDto{
-        IsOnline: true,
+        IsOnline: false,
     }, nil)
     if err != nil {
         log.Fatal(err)

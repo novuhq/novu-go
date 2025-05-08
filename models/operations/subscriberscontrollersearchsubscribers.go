@@ -8,6 +8,7 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 )
 
+// OrderDirection - Direction of sorting
 type OrderDirection string
 
 const (
@@ -39,6 +40,14 @@ type SubscribersControllerSearchSubscribersRequest struct {
 	After *string `queryParam:"style=form,explode=true,name=after"`
 	// Cursor for pagination indicating the ending point before which to fetch results.
 	Before *string `queryParam:"style=form,explode=true,name=before"`
+	// Limit the number of items to return
+	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
+	// Direction of sorting
+	OrderDirection *OrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
+	// Field to order by
+	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
+	// Include cursor item in response
+	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
 	// Email address of the subscriber to filter results.
 	Email *string `queryParam:"style=form,explode=true,name=email"`
 	// Name of the subscriber to filter results.
@@ -46,10 +55,7 @@ type SubscribersControllerSearchSubscribersRequest struct {
 	// Phone number of the subscriber to filter results.
 	Phone *string `queryParam:"style=form,explode=true,name=phone"`
 	// Unique identifier of the subscriber to filter results.
-	SubscriberID   *string         `queryParam:"style=form,explode=true,name=subscriberId"`
-	Limit          *float64        `queryParam:"style=form,explode=true,name=limit"`
-	OrderDirection *OrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
-	OrderBy        any             `queryParam:"style=form,explode=true,name=orderBy"`
+	SubscriberID *string `queryParam:"style=form,explode=true,name=subscriberId"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
@@ -66,6 +72,34 @@ func (o *SubscribersControllerSearchSubscribersRequest) GetBefore() *string {
 		return nil
 	}
 	return o.Before
+}
+
+func (o *SubscribersControllerSearchSubscribersRequest) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
+}
+
+func (o *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *OrderDirection {
+	if o == nil {
+		return nil
+	}
+	return o.OrderDirection
+}
+
+func (o *SubscribersControllerSearchSubscribersRequest) GetOrderBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OrderBy
+}
+
+func (o *SubscribersControllerSearchSubscribersRequest) GetIncludeCursor() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeCursor
 }
 
 func (o *SubscribersControllerSearchSubscribersRequest) GetEmail() *string {
@@ -94,27 +128,6 @@ func (o *SubscribersControllerSearchSubscribersRequest) GetSubscriberID() *strin
 		return nil
 	}
 	return o.SubscriberID
-}
-
-func (o *SubscribersControllerSearchSubscribersRequest) GetLimit() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.Limit
-}
-
-func (o *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *OrderDirection {
-	if o == nil {
-		return nil
-	}
-	return o.OrderDirection
-}
-
-func (o *SubscribersControllerSearchSubscribersRequest) GetOrderBy() any {
-	if o == nil {
-		return nil
-	}
-	return o.OrderBy
 }
 
 func (o *SubscribersControllerSearchSubscribersRequest) GetIdempotencyKey() *string {

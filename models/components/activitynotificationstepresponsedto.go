@@ -10,8 +10,8 @@ type ActivityNotificationStepResponseDtoReplyCallback struct {
 type ControlVariables struct {
 }
 
-// Metadata for the workflow step
-type Metadata struct {
+// ActivityNotificationStepResponseDtoMetadata - Metadata for the workflow step
+type ActivityNotificationStepResponseDtoMetadata struct {
 }
 
 // Issues - Step issues
@@ -28,7 +28,7 @@ type ActivityNotificationStepResponseDto struct {
 	// Control variables
 	ControlVariables *ControlVariables `json:"controlVariables,omitempty"`
 	// Metadata for the workflow step
-	Metadata *Metadata `json:"metadata,omitempty"`
+	Metadata *ActivityNotificationStepResponseDtoMetadata `json:"metadata,omitempty"`
 	// Step issues
 	Issues *Issues `json:"issues,omitempty"`
 	// Filter criteria for the step
@@ -73,7 +73,7 @@ func (o *ActivityNotificationStepResponseDto) GetControlVariables() *ControlVari
 	return o.ControlVariables
 }
 
-func (o *ActivityNotificationStepResponseDto) GetMetadata() *Metadata {
+func (o *ActivityNotificationStepResponseDto) GetMetadata() *ActivityNotificationStepResponseDtoMetadata {
 	if o == nil {
 		return nil
 	}

@@ -211,12 +211,12 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 				return nil, err
 			}
 
-			var out components.ActivitiesResponseDto
+			var out components.MessagesResponseDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.ActivitiesResponseDto = &out
+			res.MessagesResponseDto = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

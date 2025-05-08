@@ -4,21 +4,21 @@ package components
 
 type GetSubscriberPreferencesDto struct {
 	// Global preference settings
-	Global GlobalPreferenceDto `json:"global"`
+	Global SubscriberGlobalPreferenceDto `json:"global"`
 	// Workflow-specific preference settings
-	Workflows []WorkflowPreferenceDto `json:"workflows"`
+	Workflows []SubscriberWorkflowPreferenceDto `json:"workflows"`
 }
 
-func (o *GetSubscriberPreferencesDto) GetGlobal() GlobalPreferenceDto {
+func (o *GetSubscriberPreferencesDto) GetGlobal() SubscriberGlobalPreferenceDto {
 	if o == nil {
-		return GlobalPreferenceDto{}
+		return SubscriberGlobalPreferenceDto{}
 	}
 	return o.Global
 }
 
-func (o *GetSubscriberPreferencesDto) GetWorkflows() []WorkflowPreferenceDto {
+func (o *GetSubscriberPreferencesDto) GetWorkflows() []SubscriberWorkflowPreferenceDto {
 	if o == nil {
-		return []WorkflowPreferenceDto{}
+		return []SubscriberWorkflowPreferenceDto{}
 	}
 	return o.Workflows
 }

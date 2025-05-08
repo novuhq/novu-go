@@ -38,7 +38,7 @@ func main() {
         Type: "<value>",
         SubscriberID: "<id>",
         MarkMessageActionAsSeenDto: components.MarkMessageActionAsSeenDto{
-            Status: components.MarkMessageActionAsSeenDtoStatusPending,
+            Status: components.MarkMessageActionAsSeenDtoStatusDone,
         },
     })
     if err != nil {

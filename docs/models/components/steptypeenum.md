@@ -1,6 +1,6 @@
 # StepTypeEnum
 
-Channels of the notification
+Type of the step
 
 
 ## Values

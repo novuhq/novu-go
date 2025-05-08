@@ -62,6 +62,7 @@ const (
 	ProvidersIDEnumBrevoSms         ProvidersIDEnum = "brevo-sms"
 	ProvidersIDEnumEazySms          ProvidersIDEnum = "eazy-sms"
 	ProvidersIDEnumMobishastra      ProvidersIDEnum = "mobishastra"
+	ProvidersIDEnumAfroMessage      ProvidersIDEnum = "afro-message"
 	ProvidersIDEnumFcm              ProvidersIDEnum = "fcm"
 	ProvidersIDEnumApns             ProvidersIDEnum = "apns"
 	ProvidersIDEnumExpo             ProvidersIDEnum = "expo"
@@ -192,6 +193,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "eazy-sms":
 		fallthrough
 	case "mobishastra":
+		fallthrough
+	case "afro-message":
 		fallthrough
 	case "fcm":
 		fallthrough

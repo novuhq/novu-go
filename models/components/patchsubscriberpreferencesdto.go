@@ -5,7 +5,7 @@ package components
 type PatchSubscriberPreferencesDto struct {
 	// Channel-specific preference settings
 	Channels PatchPreferenceChannelsDto `json:"channels"`
-	// If provided, update workflow specific preferences, otherwise update global preferences
+	// Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences
 	WorkflowID *string `json:"workflowId,omitempty"`
 }
 

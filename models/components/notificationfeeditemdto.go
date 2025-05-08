@@ -82,8 +82,6 @@ type NotificationFeedItemDto struct {
 	Read bool `json:"read"`
 	// Indicates whether the notification has been seen by the subscriber.
 	Seen bool `json:"seen"`
-	// Indicates whether the notification has been deleted.
-	Deleted bool `json:"deleted"`
 	// Device tokens for push notifications, if applicable.
 	DeviceTokens []string `json:"deviceTokens,omitempty"`
 	// Call-to-action information associated with the notification.
@@ -252,13 +250,6 @@ func (o *NotificationFeedItemDto) GetSeen() bool {
 		return false
 	}
 	return o.Seen
-}
-
-func (o *NotificationFeedItemDto) GetDeleted() bool {
-	if o == nil {
-		return false
-	}
-	return o.Deleted
 }
 
 func (o *NotificationFeedItemDto) GetDeviceTokens() []string {

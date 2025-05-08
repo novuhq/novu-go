@@ -8,95 +8,95 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-type NotificationStepDtoMetadataType string
+type MetadataType string
 
 const (
-	NotificationStepDtoMetadataTypeDigestRegularMetadata  NotificationStepDtoMetadataType = "DigestRegularMetadata"
-	NotificationStepDtoMetadataTypeDigestTimedMetadata    NotificationStepDtoMetadataType = "DigestTimedMetadata"
-	NotificationStepDtoMetadataTypeDelayRegularMetadata   NotificationStepDtoMetadataType = "DelayRegularMetadata"
-	NotificationStepDtoMetadataTypeDelayScheduledMetadata NotificationStepDtoMetadataType = "DelayScheduledMetadata"
+	MetadataTypeDigestRegularMetadata  MetadataType = "DigestRegularMetadata"
+	MetadataTypeDigestTimedMetadata    MetadataType = "DigestTimedMetadata"
+	MetadataTypeDelayRegularMetadata   MetadataType = "DelayRegularMetadata"
+	MetadataTypeDelayScheduledMetadata MetadataType = "DelayScheduledMetadata"
 )
 
-// NotificationStepDtoMetadata - Metadata associated with the workflow step. Can vary based on the type of step.
-type NotificationStepDtoMetadata struct {
+// Metadata associated with the workflow step. Can vary based on the type of step.
+type Metadata struct {
 	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline"`
 	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline"`
 	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline"`
 	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline"`
 
-	Type NotificationStepDtoMetadataType
+	Type MetadataType
 }
 
-func CreateNotificationStepDtoMetadataDigestRegularMetadata(digestRegularMetadata DigestRegularMetadata) NotificationStepDtoMetadata {
-	typ := NotificationStepDtoMetadataTypeDigestRegularMetadata
+func CreateMetadataDigestRegularMetadata(digestRegularMetadata DigestRegularMetadata) Metadata {
+	typ := MetadataTypeDigestRegularMetadata
 
-	return NotificationStepDtoMetadata{
+	return Metadata{
 		DigestRegularMetadata: &digestRegularMetadata,
 		Type:                  typ,
 	}
 }
 
-func CreateNotificationStepDtoMetadataDigestTimedMetadata(digestTimedMetadata DigestTimedMetadata) NotificationStepDtoMetadata {
-	typ := NotificationStepDtoMetadataTypeDigestTimedMetadata
+func CreateMetadataDigestTimedMetadata(digestTimedMetadata DigestTimedMetadata) Metadata {
+	typ := MetadataTypeDigestTimedMetadata
 
-	return NotificationStepDtoMetadata{
+	return Metadata{
 		DigestTimedMetadata: &digestTimedMetadata,
 		Type:                typ,
 	}
 }
 
-func CreateNotificationStepDtoMetadataDelayRegularMetadata(delayRegularMetadata DelayRegularMetadata) NotificationStepDtoMetadata {
-	typ := NotificationStepDtoMetadataTypeDelayRegularMetadata
+func CreateMetadataDelayRegularMetadata(delayRegularMetadata DelayRegularMetadata) Metadata {
+	typ := MetadataTypeDelayRegularMetadata
 
-	return NotificationStepDtoMetadata{
+	return Metadata{
 		DelayRegularMetadata: &delayRegularMetadata,
 		Type:                 typ,
 	}
 }
 
-func CreateNotificationStepDtoMetadataDelayScheduledMetadata(delayScheduledMetadata DelayScheduledMetadata) NotificationStepDtoMetadata {
-	typ := NotificationStepDtoMetadataTypeDelayScheduledMetadata
+func CreateMetadataDelayScheduledMetadata(delayScheduledMetadata DelayScheduledMetadata) Metadata {
+	typ := MetadataTypeDelayScheduledMetadata
 
-	return NotificationStepDtoMetadata{
+	return Metadata{
 		DelayScheduledMetadata: &delayScheduledMetadata,
 		Type:                   typ,
 	}
 }
 
-func (u *NotificationStepDtoMetadata) UnmarshalJSON(data []byte) error {
+func (u *Metadata) UnmarshalJSON(data []byte) error {
 
 	var delayScheduledMetadata DelayScheduledMetadata = DelayScheduledMetadata{}
 	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, true); err == nil {
 		u.DelayScheduledMetadata = &delayScheduledMetadata
-		u.Type = NotificationStepDtoMetadataTypeDelayScheduledMetadata
+		u.Type = MetadataTypeDelayScheduledMetadata
 		return nil
 	}
 
 	var delayRegularMetadata DelayRegularMetadata = DelayRegularMetadata{}
 	if err := utils.UnmarshalJSON(data, &delayRegularMetadata, "", true, true); err == nil {
 		u.DelayRegularMetadata = &delayRegularMetadata
-		u.Type = NotificationStepDtoMetadataTypeDelayRegularMetadata
+		u.Type = MetadataTypeDelayRegularMetadata
 		return nil
 	}
 
 	var digestTimedMetadata DigestTimedMetadata = DigestTimedMetadata{}
 	if err := utils.UnmarshalJSON(data, &digestTimedMetadata, "", true, true); err == nil {
 		u.DigestTimedMetadata = &digestTimedMetadata
-		u.Type = NotificationStepDtoMetadataTypeDigestTimedMetadata
+		u.Type = MetadataTypeDigestTimedMetadata
 		return nil
 	}
 
 	var digestRegularMetadata DigestRegularMetadata = DigestRegularMetadata{}
 	if err := utils.UnmarshalJSON(data, &digestRegularMetadata, "", true, true); err == nil {
 		u.DigestRegularMetadata = &digestRegularMetadata
-		u.Type = NotificationStepDtoMetadataTypeDigestRegularMetadata
+		u.Type = MetadataTypeDigestRegularMetadata
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for NotificationStepDtoMetadata", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Metadata", string(data))
 }
 
-func (u NotificationStepDtoMetadata) MarshalJSON() ([]byte, error) {
+func (u Metadata) MarshalJSON() ([]byte, error) {
 	if u.DigestRegularMetadata != nil {
 		return utils.MarshalJSON(u.DigestRegularMetadata, "", true)
 	}
@@ -113,7 +113,7 @@ func (u NotificationStepDtoMetadata) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DelayScheduledMetadata, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type NotificationStepDtoMetadata: all fields are null")
+	return nil, errors.New("could not marshal union type Metadata: all fields are null")
 }
 
 type NotificationStepDto struct {
@@ -136,7 +136,7 @@ type NotificationStepDto struct {
 	// ID of the parent notification step, if applicable.
 	ParentID *string `json:"_parentId,omitempty"`
 	// Metadata associated with the workflow step. Can vary based on the type of step.
-	Metadata *NotificationStepDtoMetadata `json:"metadata,omitempty"`
+	Metadata *Metadata `json:"metadata,omitempty"`
 	// Callback information for replies, including whether it is active and the callback URL.
 	ReplyCallback *ReplyCallback         `json:"replyCallback,omitempty"`
 	Variants      []NotificationStepData `json:"variants,omitempty"`
@@ -205,7 +205,7 @@ func (o *NotificationStepDto) GetParentID() *string {
 	return o.ParentID
 }
 
-func (o *NotificationStepDto) GetMetadata() *NotificationStepDtoMetadata {
+func (o *NotificationStepDto) GetMetadata() *Metadata {
 	if o == nil {
 		return nil
 	}

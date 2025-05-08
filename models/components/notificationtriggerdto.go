@@ -7,33 +7,33 @@ import (
 	"fmt"
 )
 
-// Type of the trigger
-type Type string
+// NotificationTriggerDtoType - Type of the trigger
+type NotificationTriggerDtoType string
 
 const (
-	TypeEvent Type = "event"
+	NotificationTriggerDtoTypeEvent NotificationTriggerDtoType = "event"
 )
 
-func (e Type) ToPointer() *Type {
+func (e NotificationTriggerDtoType) ToPointer() *NotificationTriggerDtoType {
 	return &e
 }
-func (e *Type) UnmarshalJSON(data []byte) error {
+func (e *NotificationTriggerDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
 	case "event":
-		*e = Type(v)
+		*e = NotificationTriggerDtoType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
+		return fmt.Errorf("invalid value for NotificationTriggerDtoType: %v", v)
 	}
 }
 
 type NotificationTriggerDto struct {
 	// Type of the trigger
-	Type Type `json:"type"`
+	Type NotificationTriggerDtoType `json:"type"`
 	// Identifier of the trigger
 	Identifier string `json:"identifier"`
 	// Variables of the trigger
@@ -42,9 +42,9 @@ type NotificationTriggerDto struct {
 	SubscriberVariables []NotificationTriggerVariable `json:"subscriberVariables,omitempty"`
 }
 
-func (o *NotificationTriggerDto) GetType() Type {
+func (o *NotificationTriggerDto) GetType() NotificationTriggerDtoType {
 	if o == nil {
-		return Type("")
+		return NotificationTriggerDtoType("")
 	}
 	return o.Type
 }

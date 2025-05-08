@@ -14,6 +14,7 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 * [Patch](#patch) - Patch subscriber
 * [Delete](#delete) - Delete subscriber
 * [List](#list) - Get subscribers
+* [Upsert](#upsert) - Upsert subscriber
 * [CreateBulk](#createbulk) - Bulk create subscribers
 
 ## Search
@@ -353,6 +354,80 @@ func main() {
 ### Response
 
 **[*operations.SubscribersV1ControllerListSubscribersResponse](../../models/operations/subscribersv1controllerlistsubscribersresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## Upsert
+
+Used to upsert the subscriber entity with new information
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Subscribers.Upsert(ctx, "<id>", components.UpdateSubscriberRequestDto{
+        Email: novugo.String("john.doe@example.com"),
+        FirstName: novugo.String("John"),
+        LastName: novugo.String("Doe"),
+        Phone: novugo.String("+1234567890"),
+        Avatar: novugo.String("https://example.com/avatar.jpg"),
+        Locale: novugo.String("en-US"),
+        Data: map[string]any{
+            "preferences": map[string]any{
+                "notifications": true,
+                "theme": "dark",
+            },
+            "tags": []any{
+                "premium",
+                "newsletter",
+            },
+        },
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.SubscriberResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `subscriberID`                                                                                 | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `updateSubscriberRequestDto`                                                                   | [components.UpdateSubscriberRequestDto](../../models/components/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*operations.SubscribersV1ControllerUpdateSubscriberResponse](../../models/operations/subscribersv1controllerupdatesubscriberresponse.md), error**
 
 ### Errors
 

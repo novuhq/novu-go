@@ -2,95 +2,18 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
-// UpdateSubscriberChannelRequestDtoProviderID - The provider identifier for the credentials
-type UpdateSubscriberChannelRequestDtoProviderID string
-
-const (
-	UpdateSubscriberChannelRequestDtoProviderIDSlack            UpdateSubscriberChannelRequestDtoProviderID = "slack"
-	UpdateSubscriberChannelRequestDtoProviderIDDiscord          UpdateSubscriberChannelRequestDtoProviderID = "discord"
-	UpdateSubscriberChannelRequestDtoProviderIDMsteams          UpdateSubscriberChannelRequestDtoProviderID = "msteams"
-	UpdateSubscriberChannelRequestDtoProviderIDMattermost       UpdateSubscriberChannelRequestDtoProviderID = "mattermost"
-	UpdateSubscriberChannelRequestDtoProviderIDRyver            UpdateSubscriberChannelRequestDtoProviderID = "ryver"
-	UpdateSubscriberChannelRequestDtoProviderIDZulip            UpdateSubscriberChannelRequestDtoProviderID = "zulip"
-	UpdateSubscriberChannelRequestDtoProviderIDGrafanaOnCall    UpdateSubscriberChannelRequestDtoProviderID = "grafana-on-call"
-	UpdateSubscriberChannelRequestDtoProviderIDGetstream        UpdateSubscriberChannelRequestDtoProviderID = "getstream"
-	UpdateSubscriberChannelRequestDtoProviderIDRocketChat       UpdateSubscriberChannelRequestDtoProviderID = "rocket-chat"
-	UpdateSubscriberChannelRequestDtoProviderIDWhatsappBusiness UpdateSubscriberChannelRequestDtoProviderID = "whatsapp-business"
-	UpdateSubscriberChannelRequestDtoProviderIDFcm              UpdateSubscriberChannelRequestDtoProviderID = "fcm"
-	UpdateSubscriberChannelRequestDtoProviderIDApns             UpdateSubscriberChannelRequestDtoProviderID = "apns"
-	UpdateSubscriberChannelRequestDtoProviderIDExpo             UpdateSubscriberChannelRequestDtoProviderID = "expo"
-	UpdateSubscriberChannelRequestDtoProviderIDOneSignal        UpdateSubscriberChannelRequestDtoProviderID = "one-signal"
-	UpdateSubscriberChannelRequestDtoProviderIDPushpad          UpdateSubscriberChannelRequestDtoProviderID = "pushpad"
-	UpdateSubscriberChannelRequestDtoProviderIDPushWebhook      UpdateSubscriberChannelRequestDtoProviderID = "push-webhook"
-	UpdateSubscriberChannelRequestDtoProviderIDPusherBeams      UpdateSubscriberChannelRequestDtoProviderID = "pusher-beams"
-)
-
-func (e UpdateSubscriberChannelRequestDtoProviderID) ToPointer() *UpdateSubscriberChannelRequestDtoProviderID {
-	return &e
-}
-func (e *UpdateSubscriberChannelRequestDtoProviderID) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "slack":
-		fallthrough
-	case "discord":
-		fallthrough
-	case "msteams":
-		fallthrough
-	case "mattermost":
-		fallthrough
-	case "ryver":
-		fallthrough
-	case "zulip":
-		fallthrough
-	case "grafana-on-call":
-		fallthrough
-	case "getstream":
-		fallthrough
-	case "rocket-chat":
-		fallthrough
-	case "whatsapp-business":
-		fallthrough
-	case "fcm":
-		fallthrough
-	case "apns":
-		fallthrough
-	case "expo":
-		fallthrough
-	case "one-signal":
-		fallthrough
-	case "pushpad":
-		fallthrough
-	case "push-webhook":
-		fallthrough
-	case "pusher-beams":
-		*e = UpdateSubscriberChannelRequestDtoProviderID(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UpdateSubscriberChannelRequestDtoProviderID: %v", v)
-	}
-}
-
 type UpdateSubscriberChannelRequestDto struct {
 	// The provider identifier for the credentials
-	ProviderID UpdateSubscriberChannelRequestDtoProviderID `json:"providerId"`
+	ProviderID ChatOrPushProviderEnum `json:"providerId"`
 	// The integration identifier
 	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
 	// Credentials payload for the specified provider
 	Credentials ChannelCredentials `json:"credentials"`
 }
 
-func (o *UpdateSubscriberChannelRequestDto) GetProviderID() UpdateSubscriberChannelRequestDtoProviderID {
+func (o *UpdateSubscriberChannelRequestDto) GetProviderID() ChatOrPushProviderEnum {
 	if o == nil {
-		return UpdateSubscriberChannelRequestDtoProviderID("")
+		return ChatOrPushProviderEnum("")
 	}
 	return o.ProviderID
 }

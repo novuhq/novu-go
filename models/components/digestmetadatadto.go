@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-// Unit of the digest
-type Unit string
+// DigestMetadataDtoUnit - Unit of the digest
+type DigestMetadataDtoUnit string
 
 const (
-	UnitSeconds Unit = "seconds"
-	UnitMinutes Unit = "minutes"
-	UnitHours   Unit = "hours"
-	UnitDays    Unit = "days"
-	UnitWeeks   Unit = "weeks"
-	UnitMonths  Unit = "months"
+	DigestMetadataDtoUnitSeconds DigestMetadataDtoUnit = "seconds"
+	DigestMetadataDtoUnitMinutes DigestMetadataDtoUnit = "minutes"
+	DigestMetadataDtoUnitHours   DigestMetadataDtoUnit = "hours"
+	DigestMetadataDtoUnitDays    DigestMetadataDtoUnit = "days"
+	DigestMetadataDtoUnitWeeks   DigestMetadataDtoUnit = "weeks"
+	DigestMetadataDtoUnitMonths  DigestMetadataDtoUnit = "months"
 )
 
-func (e Unit) ToPointer() *Unit {
+func (e DigestMetadataDtoUnit) ToPointer() *DigestMetadataDtoUnit {
 	return &e
 }
-func (e *Unit) UnmarshalJSON(data []byte) error {
+func (e *DigestMetadataDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -39,10 +39,10 @@ func (e *Unit) UnmarshalJSON(data []byte) error {
 	case "weeks":
 		fallthrough
 	case "months":
-		*e = Unit(v)
+		*e = DigestMetadataDtoUnit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Unit: %v", v)
+		return fmt.Errorf("invalid value for DigestMetadataDtoUnit: %v", v)
 	}
 }
 
@@ -52,7 +52,7 @@ type DigestMetadataDto struct {
 	// Amount for the digest
 	Amount *float64 `json:"amount,omitempty"`
 	// Unit of the digest
-	Unit *Unit `json:"unit,omitempty"`
+	Unit *DigestMetadataDtoUnit `json:"unit,omitempty"`
 	// The Digest Type
 	Type DigestTypeEnum `json:"type"`
 	// Optional array of events associated with the digest, represented as key-value pairs
@@ -83,7 +83,7 @@ func (o *DigestMetadataDto) GetAmount() *float64 {
 	return o.Amount
 }
 
-func (o *DigestMetadataDto) GetUnit() *Unit {
+func (o *DigestMetadataDto) GetUnit() *DigestMetadataDtoUnit {
 	if o == nil {
 		return nil
 	}
