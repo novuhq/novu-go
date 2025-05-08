@@ -1,7 +1,5 @@
 # Unit
 
-Unit of the digest
-
 
 ## Values
 

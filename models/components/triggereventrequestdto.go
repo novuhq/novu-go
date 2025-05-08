@@ -8,6 +8,83 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// Overrides - This could be used to override provider specific configurations
+type Overrides struct {
+	// This could be used to override provider specific configurations
+	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Overrides the provider configuration for the entire workflow and all steps
+	Providers map[string]map[string]any `json:"providers,omitempty"`
+	// Override the email provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Email map[string]any `json:"email,omitempty"`
+	// Override the push provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Push map[string]any `json:"push,omitempty"`
+	// Override the sms provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Sms map[string]any `json:"sms,omitempty"`
+	// Override the chat provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Chat map[string]any `json:"chat,omitempty"`
+	// Override the layout identifier for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	LayoutIdentifier *string `json:"layoutIdentifier,omitempty"`
+}
+
+func (o *Overrides) GetSteps() map[string]StepsOverrides {
+	if o == nil {
+		return nil
+	}
+	return o.Steps
+}
+
+func (o *Overrides) GetProviders() map[string]map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Providers
+}
+
+func (o *Overrides) GetEmail() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *Overrides) GetPush() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Push
+}
+
+func (o *Overrides) GetSms() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Sms
+}
+
+func (o *Overrides) GetChat() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Chat
+}
+
+func (o *Overrides) GetLayoutIdentifier() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutIdentifier
+}
+
 type OneType string
 
 const (
@@ -341,7 +418,7 @@ type TriggerEventRequestDto struct {
 	//       This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
 	Payload map[string]any `json:"payload,omitempty"`
 	// This could be used to override provider specific configurations
-	Overrides map[string]map[string]any `json:"overrides,omitempty"`
+	Overrides *Overrides `json:"overrides,omitempty"`
 	// The recipients list of people who will receive the notification.
 	To To `json:"to"`
 	// A unique identifier for this transaction, we will generate a UUID if not provided.
@@ -368,7 +445,7 @@ func (o *TriggerEventRequestDto) GetPayload() map[string]any {
 	return o.Payload
 }
 
-func (o *TriggerEventRequestDto) GetOverrides() map[string]map[string]any {
+func (o *TriggerEventRequestDto) GetOverrides() *Overrides {
 	if o == nil {
 		return nil
 	}

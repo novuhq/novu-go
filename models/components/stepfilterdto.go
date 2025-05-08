@@ -7,17 +7,17 @@ import (
 	"fmt"
 )
 
-type Value string
+type StepFilterDtoValue string
 
 const (
-	ValueAnd Value = "AND"
-	ValueOr  Value = "OR"
+	StepFilterDtoValueAnd StepFilterDtoValue = "AND"
+	StepFilterDtoValueOr  StepFilterDtoValue = "OR"
 )
 
-func (e Value) ToPointer() *Value {
+func (e StepFilterDtoValue) ToPointer() *StepFilterDtoValue {
 	return &e
 }
-func (e *Value) UnmarshalJSON(data []byte) error {
+func (e *StepFilterDtoValue) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -26,17 +26,17 @@ func (e *Value) UnmarshalJSON(data []byte) error {
 	case "AND":
 		fallthrough
 	case "OR":
-		*e = Value(v)
+		*e = StepFilterDtoValue(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Value: %v", v)
+		return fmt.Errorf("invalid value for StepFilterDtoValue: %v", v)
 	}
 }
 
 type StepFilterDto struct {
 	IsNegated bool                 `json:"isNegated"`
 	Type      BuilderFieldTypeEnum `json:"type"`
-	Value     Value                `json:"value"`
+	Value     StepFilterDtoValue   `json:"value"`
 	Children  []FieldFilterPartDto `json:"children"`
 }
 
@@ -54,9 +54,9 @@ func (o *StepFilterDto) GetType() BuilderFieldTypeEnum {
 	return o.Type
 }
 
-func (o *StepFilterDto) GetValue() Value {
+func (o *StepFilterDto) GetValue() StepFilterDtoValue {
 	if o == nil {
-		return Value("")
+		return StepFilterDtoValue("")
 	}
 	return o.Value
 }

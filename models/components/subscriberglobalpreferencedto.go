@@ -2,23 +2,23 @@
 
 package components
 
-type GlobalPreferenceDto struct {
+type SubscriberGlobalPreferenceDto struct {
 	// Whether notifications are enabled globally
 	Enabled bool `json:"enabled"`
 	// Channel-specific preference settings
-	Channels PreferenceChannels `json:"channels"`
+	Channels SubscriberPreferenceChannels `json:"channels"`
 }
 
-func (o *GlobalPreferenceDto) GetEnabled() bool {
+func (o *SubscriberGlobalPreferenceDto) GetEnabled() bool {
 	if o == nil {
 		return false
 	}
 	return o.Enabled
 }
 
-func (o *GlobalPreferenceDto) GetChannels() PreferenceChannels {
+func (o *SubscriberGlobalPreferenceDto) GetChannels() SubscriberPreferenceChannels {
 	if o == nil {
-		return PreferenceChannels{}
+		return SubscriberPreferenceChannels{}
 	}
 	return o.Channels
 }

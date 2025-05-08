@@ -58,6 +58,7 @@ Provider ID of the job
 | `ProvidersIDEnumBrevoSms`         | brevo-sms                         |
 | `ProvidersIDEnumEazySms`          | eazy-sms                          |
 | `ProvidersIDEnumMobishastra`      | mobishastra                       |
+| `ProvidersIDEnumAfroMessage`      | afro-message                      |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |

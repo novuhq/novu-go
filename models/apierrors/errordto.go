@@ -4,7 +4,295 @@ package apierrors
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
+
+type FiveType string
+
+const (
+	FiveTypeStr      FiveType = "str"
+	FiveTypeNumber   FiveType = "number"
+	FiveTypeBoolean  FiveType = "boolean"
+	FiveTypeMapOfAny FiveType = "mapOfAny"
+)
+
+type Five struct {
+	Str      *string        `queryParam:"inline"`
+	Number   *float64       `queryParam:"inline"`
+	Boolean  *bool          `queryParam:"inline"`
+	MapOfAny map[string]any `queryParam:"inline"`
+
+	Type FiveType
+}
+
+var _ error = &Five{}
+
+func CreateFiveStr(str string) Five {
+	typ := FiveTypeStr
+
+	return Five{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateFiveNumber(number float64) Five {
+	typ := FiveTypeNumber
+
+	return Five{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateFiveBoolean(boolean bool) Five {
+	typ := FiveTypeBoolean
+
+	return Five{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateFiveMapOfAny(mapOfAny map[string]any) Five {
+	typ := FiveTypeMapOfAny
+
+	return Five{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *Five) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = FiveTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+		u.Number = &number
+		u.Type = FiveTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+		u.Boolean = &boolean
+		u.Type = FiveTypeBoolean
+		return nil
+	}
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = FiveTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Five", string(data))
+}
+
+func (u Five) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Five: all fields are null")
+}
+
+func (u Five) Error() string {
+	switch u.Type {
+	case FiveTypeStr:
+		data, _ := json.Marshal(u.Str)
+		return string(data)
+	case FiveTypeNumber:
+		data, _ := json.Marshal(u.Number)
+		return string(data)
+	case FiveTypeBoolean:
+		data, _ := json.Marshal(u.Boolean)
+		return string(data)
+	case FiveTypeMapOfAny:
+		data, _ := json.Marshal(u.MapOfAny)
+		return string(data)
+	default:
+		return "unknown error"
+	}
+}
+
+type Four struct {
+}
+
+type MessageType string
+
+const (
+	MessageTypeStr      MessageType = "str"
+	MessageTypeNumber   MessageType = "number"
+	MessageTypeBoolean  MessageType = "boolean"
+	MessageTypeFour     MessageType = "4"
+	MessageTypeArrayOf5 MessageType = "arrayOf5"
+)
+
+// Message - Value that failed validation
+type Message struct {
+	Str      *string  `queryParam:"inline"`
+	Number   *float64 `queryParam:"inline"`
+	Boolean  *bool    `queryParam:"inline"`
+	Four     *Four    `queryParam:"inline"`
+	ArrayOf5 []*Five  `queryParam:"inline"`
+
+	Type MessageType
+}
+
+var _ error = &Message{}
+
+func CreateMessageStr(str string) Message {
+	typ := MessageTypeStr
+
+	return Message{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateMessageNumber(number float64) Message {
+	typ := MessageTypeNumber
+
+	return Message{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateMessageBoolean(boolean bool) Message {
+	typ := MessageTypeBoolean
+
+	return Message{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateMessageFour(four Four) Message {
+	typ := MessageTypeFour
+
+	return Message{
+		Four: &four,
+		Type: typ,
+	}
+}
+
+func CreateMessageArrayOf5(arrayOf5 []*Five) Message {
+	typ := MessageTypeArrayOf5
+
+	return Message{
+		ArrayOf5: arrayOf5,
+		Type:     typ,
+	}
+}
+
+func (u *Message) UnmarshalJSON(data []byte) error {
+
+	var four Four = Four{}
+	if err := utils.UnmarshalJSON(data, &four, "", true, true); err == nil {
+		u.Four = &four
+		u.Type = MessageTypeFour
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+		u.Str = &str
+		u.Type = MessageTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+		u.Number = &number
+		u.Type = MessageTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+		u.Boolean = &boolean
+		u.Type = MessageTypeBoolean
+		return nil
+	}
+
+	var arrayOf5 []*Five = []*Five{}
+	if err := utils.UnmarshalJSON(data, &arrayOf5, "", true, true); err == nil {
+		u.ArrayOf5 = arrayOf5
+		u.Type = MessageTypeArrayOf5
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Message", string(data))
+}
+
+func (u Message) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.Four != nil {
+		return utils.MarshalJSON(u.Four, "", true)
+	}
+
+	if u.ArrayOf5 != nil {
+		return utils.MarshalJSON(u.ArrayOf5, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Message: all fields are null")
+}
+
+func (u Message) Error() string {
+	switch u.Type {
+	case MessageTypeStr:
+		data, _ := json.Marshal(u.Str)
+		return string(data)
+	case MessageTypeNumber:
+		data, _ := json.Marshal(u.Number)
+		return string(data)
+	case MessageTypeBoolean:
+		data, _ := json.Marshal(u.Boolean)
+		return string(data)
+	case MessageTypeFour:
+		data, _ := json.Marshal(u.Four)
+		return string(data)
+	case MessageTypeArrayOf5:
+		data, _ := json.Marshal(u.ArrayOf5)
+		return string(data)
+	default:
+		return "unknown error"
+	}
+}
 
 type ErrorDto struct {
 	// HTTP status code of the error response.
@@ -13,8 +301,8 @@ type ErrorDto struct {
 	Timestamp string `json:"timestamp"`
 	// The path where the error occurred.
 	Path string `json:"path"`
-	// A detailed error message.
-	Message string `json:"message"`
+	// Value that failed validation
+	Message *Message `json:"message,omitempty"`
 	// Optional context object for additional error details.
 	Ctx map[string]any `json:"ctx,omitempty"`
 	// Optional unique identifier for the error, useful for tracking using Sentry and

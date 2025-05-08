@@ -49,10 +49,19 @@ func main() {
                 "text": "string",
             },
         },
-        Overrides: map[string]map[string]any{
-            "fcm": map[string]any{
-                "data": map[string]any{
-                    "key": "value",
+        Overrides: &components.Overrides{
+            Steps: map[string]components.StepsOverrides{
+                "email-step": components.StepsOverrides{
+                    Providers: map[string]map[string]any{
+                        "sendgrid": map[string]any{
+                            "templateId": "1234567890",
+                        },
+                    },
+                },
+            },
+            Providers: map[string]map[string]any{
+                "sendgrid": map[string]any{
+                    "templateId": "1234567890",
                 },
             },
         },
@@ -184,6 +193,29 @@ func main() {
                 "text": "string",
             },
         },
+        Overrides: &components.TriggerEventToAllRequestDtoOverrides{
+            Steps: map[string]components.StepsOverrides{
+                "email-step": components.StepsOverrides{
+                    Providers: map[string]map[string]any{
+                        "sendgrid": map[string]any{
+                            "templateId": "1234567890",
+                        },
+                    },
+                },
+            },
+            Providers: map[string]map[string]any{
+                "sendgrid": map[string]any{
+                    "templateId": "1234567890",
+                },
+            },
+            AdditionalProperties: map[string]map[string]any{
+                "fcm": map[string]any{
+                    "data": map[string]any{
+                        "key": "value",
+                    },
+                },
+            },
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -253,10 +285,19 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: map[string]map[string]any{
-                    "fcm": map[string]any{
-                        "data": map[string]any{
-                            "key": "value",
+                Overrides: &components.Overrides{
+                    Steps: map[string]components.StepsOverrides{
+                        "email-step": components.StepsOverrides{
+                            Providers: map[string]map[string]any{
+                                "sendgrid": map[string]any{
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        },
+                    },
+                    Providers: map[string]map[string]any{
+                        "sendgrid": map[string]any{
+                            "templateId": "1234567890",
                         },
                     },
                 },
@@ -274,10 +315,19 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: map[string]map[string]any{
-                    "fcm": map[string]any{
-                        "data": map[string]any{
-                            "key": "value",
+                Overrides: &components.Overrides{
+                    Steps: map[string]components.StepsOverrides{
+                        "email-step": components.StepsOverrides{
+                            Providers: map[string]map[string]any{
+                                "sendgrid": map[string]any{
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        },
+                    },
+                    Providers: map[string]map[string]any{
+                        "sendgrid": map[string]any{
+                            "templateId": "1234567890",
                         },
                     },
                 },
@@ -300,10 +350,19 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: map[string]map[string]any{
-                    "fcm": map[string]any{
-                        "data": map[string]any{
-                            "key": "value",
+                Overrides: &components.Overrides{
+                    Steps: map[string]components.StepsOverrides{
+                        "email-step": components.StepsOverrides{
+                            Providers: map[string]map[string]any{
+                                "sendgrid": map[string]any{
+                                    "templateId": "1234567890",
+                                },
+                            },
+                        },
+                    },
+                    Providers: map[string]map[string]any{
+                        "sendgrid": map[string]any{
+                            "templateId": "1234567890",
                         },
                     },
                 },

@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-type DigestRegularMetadataUnit string
+type Unit string
 
 const (
-	DigestRegularMetadataUnitSeconds DigestRegularMetadataUnit = "seconds"
-	DigestRegularMetadataUnitMinutes DigestRegularMetadataUnit = "minutes"
-	DigestRegularMetadataUnitHours   DigestRegularMetadataUnit = "hours"
-	DigestRegularMetadataUnitDays    DigestRegularMetadataUnit = "days"
-	DigestRegularMetadataUnitWeeks   DigestRegularMetadataUnit = "weeks"
-	DigestRegularMetadataUnitMonths  DigestRegularMetadataUnit = "months"
+	UnitSeconds Unit = "seconds"
+	UnitMinutes Unit = "minutes"
+	UnitHours   Unit = "hours"
+	UnitDays    Unit = "days"
+	UnitWeeks   Unit = "weeks"
+	UnitMonths  Unit = "months"
 )
 
-func (e DigestRegularMetadataUnit) ToPointer() *DigestRegularMetadataUnit {
+func (e Unit) ToPointer() *Unit {
 	return &e
 }
-func (e *DigestRegularMetadataUnit) UnmarshalJSON(data []byte) error {
+func (e *Unit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -38,24 +38,24 @@ func (e *DigestRegularMetadataUnit) UnmarshalJSON(data []byte) error {
 	case "weeks":
 		fallthrough
 	case "months":
-		*e = DigestRegularMetadataUnit(v)
+		*e = Unit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DigestRegularMetadataUnit: %v", v)
+		return fmt.Errorf("invalid value for Unit: %v", v)
 	}
 }
 
-type DigestRegularMetadataType string
+type Type string
 
 const (
-	DigestRegularMetadataTypeRegular DigestRegularMetadataType = "regular"
-	DigestRegularMetadataTypeBackoff DigestRegularMetadataType = "backoff"
+	TypeRegular Type = "regular"
+	TypeBackoff Type = "backoff"
 )
 
-func (e DigestRegularMetadataType) ToPointer() *DigestRegularMetadataType {
+func (e Type) ToPointer() *Type {
 	return &e
 }
-func (e *DigestRegularMetadataType) UnmarshalJSON(data []byte) error {
+func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -64,10 +64,10 @@ func (e *DigestRegularMetadataType) UnmarshalJSON(data []byte) error {
 	case "regular":
 		fallthrough
 	case "backoff":
-		*e = DigestRegularMetadataType(v)
+		*e = Type(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DigestRegularMetadataType: %v", v)
+		return fmt.Errorf("invalid value for Type: %v", v)
 	}
 }
 
@@ -110,14 +110,14 @@ func (e *BackoffUnit) UnmarshalJSON(data []byte) error {
 }
 
 type DigestRegularMetadata struct {
-	Amount        *float64                   `json:"amount,omitempty"`
-	Unit          *DigestRegularMetadataUnit `json:"unit,omitempty"`
-	DigestKey     *string                    `json:"digestKey,omitempty"`
-	Type          DigestRegularMetadataType  `json:"type"`
-	Backoff       *bool                      `json:"backoff,omitempty"`
-	BackoffAmount *float64                   `json:"backoffAmount,omitempty"`
-	BackoffUnit   *BackoffUnit               `json:"backoffUnit,omitempty"`
-	UpdateMode    *bool                      `json:"updateMode,omitempty"`
+	Amount        *float64     `json:"amount,omitempty"`
+	Unit          *Unit        `json:"unit,omitempty"`
+	DigestKey     *string      `json:"digestKey,omitempty"`
+	Type          Type         `json:"type"`
+	Backoff       *bool        `json:"backoff,omitempty"`
+	BackoffAmount *float64     `json:"backoffAmount,omitempty"`
+	BackoffUnit   *BackoffUnit `json:"backoffUnit,omitempty"`
+	UpdateMode    *bool        `json:"updateMode,omitempty"`
 }
 
 func (o *DigestRegularMetadata) GetAmount() *float64 {
@@ -127,7 +127,7 @@ func (o *DigestRegularMetadata) GetAmount() *float64 {
 	return o.Amount
 }
 
-func (o *DigestRegularMetadata) GetUnit() *DigestRegularMetadataUnit {
+func (o *DigestRegularMetadata) GetUnit() *Unit {
 	if o == nil {
 		return nil
 	}
@@ -141,9 +141,9 @@ func (o *DigestRegularMetadata) GetDigestKey() *string {
 	return o.DigestKey
 }
 
-func (o *DigestRegularMetadata) GetType() DigestRegularMetadataType {
+func (o *DigestRegularMetadata) GetType() Type {
 	if o == nil {
-		return DigestRegularMetadataType("")
+		return Type("")
 	}
 	return o.Type
 }

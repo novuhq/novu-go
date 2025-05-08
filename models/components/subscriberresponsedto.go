@@ -17,8 +17,6 @@ type SubscriberResponseDto struct {
 	Avatar *string `json:"avatar,omitempty"`
 	// The locale setting of the subscriber, indicating their preferred language or region.
 	Locale *string `json:"locale,omitempty"`
-	// The identifier used to create this subscriber, which typically corresponds to the user ID in your system.
-	SubscriberID string `json:"subscriberId"`
 	// An array of channel settings associated with the subscriber.
 	Channels []ChannelSettingsDto `json:"channels,omitempty"`
 	// An array of topics that the subscriber is subscribed to.
@@ -29,6 +27,14 @@ type SubscriberResponseDto struct {
 	IsOnline *bool `json:"isOnline,omitempty"`
 	// The timestamp indicating when the subscriber was last online, in ISO 8601 format.
 	LastOnlineAt *string `json:"lastOnlineAt,omitempty"`
+	// The version of the subscriber document.
+	V *float64 `json:"__v,omitempty"`
+	// Additional custom data for the subscriber
+	Data map[string]any `json:"data,omitempty"`
+	// Timezone of the subscriber
+	Timezone *string `json:"timezone,omitempty"`
+	// The identifier used to create this subscriber, which typically corresponds to the user ID in your system.
+	SubscriberID string `json:"subscriberId"`
 	// The unique identifier of the organization to which the subscriber belongs.
 	OrganizationID string `json:"_organizationId"`
 	// The unique identifier of the environment associated with this subscriber.
@@ -39,12 +45,6 @@ type SubscriberResponseDto struct {
 	CreatedAt string `json:"createdAt"`
 	// The timestamp indicating when the subscriber was last updated, in ISO 8601 format.
 	UpdatedAt string `json:"updatedAt"`
-	// The version of the subscriber document.
-	V *float64 `json:"__v,omitempty"`
-	// Additional custom data for the subscriber
-	Data map[string]any `json:"data,omitempty"`
-	// Timezone of the subscriber
-	Timezone *string `json:"timezone,omitempty"`
 }
 
 func (o *SubscriberResponseDto) GetID() *string {
@@ -96,13 +96,6 @@ func (o *SubscriberResponseDto) GetLocale() *string {
 	return o.Locale
 }
 
-func (o *SubscriberResponseDto) GetSubscriberID() string {
-	if o == nil {
-		return ""
-	}
-	return o.SubscriberID
-}
-
 func (o *SubscriberResponseDto) GetChannels() []ChannelSettingsDto {
 	if o == nil {
 		return nil
@@ -129,6 +122,34 @@ func (o *SubscriberResponseDto) GetLastOnlineAt() *string {
 		return nil
 	}
 	return o.LastOnlineAt
+}
+
+func (o *SubscriberResponseDto) GetV() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.V
+}
+
+func (o *SubscriberResponseDto) GetData() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
+func (o *SubscriberResponseDto) GetTimezone() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Timezone
+}
+
+func (o *SubscriberResponseDto) GetSubscriberID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SubscriberID
 }
 
 func (o *SubscriberResponseDto) GetOrganizationID() string {
@@ -164,25 +185,4 @@ func (o *SubscriberResponseDto) GetUpdatedAt() string {
 		return ""
 	}
 	return o.UpdatedAt
-}
-
-func (o *SubscriberResponseDto) GetV() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.V
-}
-
-func (o *SubscriberResponseDto) GetData() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.Data
-}
-
-func (o *SubscriberResponseDto) GetTimezone() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Timezone
 }

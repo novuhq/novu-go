@@ -1,0 +1,9 @@
+# SubscriberGlobalPreferenceDto
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Enabled`                                                                                          | *bool*                                                                                             | :heavy_check_mark:                                                                                 | Whether notifications are enabled globally                                                         |
+| `Channels`                                                                                         | [components.SubscriberPreferenceChannels](../../models/components/subscriberpreferencechannels.md) | :heavy_check_mark:                                                                                 | Channel-specific preference settings                                                               |

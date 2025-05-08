@@ -9,27 +9,27 @@ type WorkflowIntegrationStatus struct {
 }
 
 type WorkflowResponse struct {
-	ID                        *string                    `json:"_id,omitempty"`
-	Name                      string                     `json:"name"`
-	Description               string                     `json:"description"`
-	Active                    bool                       `json:"active"`
-	Draft                     bool                       `json:"draft"`
-	PreferenceSettings        PreferenceChannels         `json:"preferenceSettings"`
-	Critical                  bool                       `json:"critical"`
-	Tags                      []string                   `json:"tags"`
-	Steps                     []NotificationStepDto      `json:"steps"`
-	OrganizationID            string                     `json:"_organizationId"`
-	CreatorID                 string                     `json:"_creatorId"`
-	EnvironmentID             string                     `json:"_environmentId"`
-	Triggers                  []NotificationTrigger      `json:"triggers"`
-	NotificationGroupID       string                     `json:"_notificationGroupId"`
-	ParentID                  *string                    `json:"_parentId,omitempty"`
-	Deleted                   bool                       `json:"deleted"`
-	DeletedAt                 string                     `json:"deletedAt"`
-	DeletedBy                 string                     `json:"deletedBy"`
-	NotificationGroup         *NotificationGroup         `json:"notificationGroup,omitempty"`
-	Data                      *WorkflowResponseData      `json:"data,omitempty"`
-	WorkflowIntegrationStatus *WorkflowIntegrationStatus `json:"workflowIntegrationStatus,omitempty"`
+	ID                        *string                      `json:"_id,omitempty"`
+	Name                      string                       `json:"name"`
+	Description               string                       `json:"description"`
+	Active                    bool                         `json:"active"`
+	Draft                     bool                         `json:"draft"`
+	PreferenceSettings        SubscriberPreferenceChannels `json:"preferenceSettings"`
+	Critical                  bool                         `json:"critical"`
+	Tags                      []string                     `json:"tags"`
+	Steps                     []NotificationStepDto        `json:"steps"`
+	OrganizationID            string                       `json:"_organizationId"`
+	CreatorID                 string                       `json:"_creatorId"`
+	EnvironmentID             string                       `json:"_environmentId"`
+	Triggers                  []NotificationTrigger        `json:"triggers"`
+	NotificationGroupID       string                       `json:"_notificationGroupId"`
+	ParentID                  *string                      `json:"_parentId,omitempty"`
+	Deleted                   bool                         `json:"deleted"`
+	DeletedAt                 string                       `json:"deletedAt"`
+	DeletedBy                 string                       `json:"deletedBy"`
+	NotificationGroup         *NotificationGroup           `json:"notificationGroup,omitempty"`
+	Data                      *WorkflowResponseData        `json:"data,omitempty"`
+	WorkflowIntegrationStatus *WorkflowIntegrationStatus   `json:"workflowIntegrationStatus,omitempty"`
 }
 
 func (o *WorkflowResponse) GetID() *string {
@@ -67,9 +67,9 @@ func (o *WorkflowResponse) GetDraft() bool {
 	return o.Draft
 }
 
-func (o *WorkflowResponse) GetPreferenceSettings() PreferenceChannels {
+func (o *WorkflowResponse) GetPreferenceSettings() SubscriberPreferenceChannels {
 	if o == nil {
-		return PreferenceChannels{}
+		return SubscriberPreferenceChannels{}
 	}
 	return o.PreferenceSettings
 }

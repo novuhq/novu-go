@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-type WeekDays string
+type DigestTimedConfigDtoWeekDays string
 
 const (
-	WeekDaysMonday    WeekDays = "monday"
-	WeekDaysTuesday   WeekDays = "tuesday"
-	WeekDaysWednesday WeekDays = "wednesday"
-	WeekDaysThursday  WeekDays = "thursday"
-	WeekDaysFriday    WeekDays = "friday"
-	WeekDaysSaturday  WeekDays = "saturday"
-	WeekDaysSunday    WeekDays = "sunday"
+	DigestTimedConfigDtoWeekDaysMonday    DigestTimedConfigDtoWeekDays = "monday"
+	DigestTimedConfigDtoWeekDaysTuesday   DigestTimedConfigDtoWeekDays = "tuesday"
+	DigestTimedConfigDtoWeekDaysWednesday DigestTimedConfigDtoWeekDays = "wednesday"
+	DigestTimedConfigDtoWeekDaysThursday  DigestTimedConfigDtoWeekDays = "thursday"
+	DigestTimedConfigDtoWeekDaysFriday    DigestTimedConfigDtoWeekDays = "friday"
+	DigestTimedConfigDtoWeekDaysSaturday  DigestTimedConfigDtoWeekDays = "saturday"
+	DigestTimedConfigDtoWeekDaysSunday    DigestTimedConfigDtoWeekDays = "sunday"
 )
 
-func (e WeekDays) ToPointer() *WeekDays {
+func (e DigestTimedConfigDtoWeekDays) ToPointer() *DigestTimedConfigDtoWeekDays {
 	return &e
 }
-func (e *WeekDays) UnmarshalJSON(data []byte) error {
+func (e *DigestTimedConfigDtoWeekDays) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -41,10 +41,10 @@ func (e *WeekDays) UnmarshalJSON(data []byte) error {
 	case "saturday":
 		fallthrough
 	case "sunday":
-		*e = WeekDays(v)
+		*e = DigestTimedConfigDtoWeekDays(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for WeekDays: %v", v)
+		return fmt.Errorf("invalid value for DigestTimedConfigDtoWeekDays: %v", v)
 	}
 }
 
@@ -52,7 +52,7 @@ type DigestTimedConfigDto struct {
 	// Time at which the digest is triggered
 	AtTime *string `json:"atTime,omitempty"`
 	// Days of the week for the digest
-	WeekDays []WeekDays `json:"weekDays,omitempty"`
+	WeekDays []DigestTimedConfigDtoWeekDays `json:"weekDays,omitempty"`
 	// Specific days of the month for the digest
 	MonthDays []float64 `json:"monthDays,omitempty"`
 	// Ordinal position for the digest
@@ -72,7 +72,7 @@ func (o *DigestTimedConfigDto) GetAtTime() *string {
 	return o.AtTime
 }
 
-func (o *DigestTimedConfigDto) GetWeekDays() []WeekDays {
+func (o *DigestTimedConfigDto) GetWeekDays() []DigestTimedConfigDtoWeekDays {
 	if o == nil {
 		return nil
 	}

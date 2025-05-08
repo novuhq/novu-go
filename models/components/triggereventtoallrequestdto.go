@@ -10,6 +10,98 @@ import (
 
 // TriggerEventToAllRequestDtoOverrides - This could be used to override provider specific configurations
 type TriggerEventToAllRequestDtoOverrides struct {
+	// This could be used to override provider specific configurations
+	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Overrides the provider configuration for the entire workflow and all steps
+	Providers map[string]map[string]any `json:"providers,omitempty"`
+	// Override the email provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Email map[string]any `json:"email,omitempty"`
+	// Override the push provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Push map[string]any `json:"push,omitempty"`
+	// Override the sms provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Sms map[string]any `json:"sms,omitempty"`
+	// Override the chat provider specific configurations for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Chat map[string]any `json:"chat,omitempty"`
+	// Override the layout identifier for the entire workflow
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	LayoutIdentifier     *string                   `json:"layoutIdentifier,omitempty"`
+	AdditionalProperties map[string]map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (t TriggerEventToAllRequestDtoOverrides) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TriggerEventToAllRequestDtoOverrides) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetSteps() map[string]StepsOverrides {
+	if o == nil {
+		return nil
+	}
+	return o.Steps
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetProviders() map[string]map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Providers
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetEmail() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetPush() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Push
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetSms() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Sms
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetChat() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Chat
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetLayoutIdentifier() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutIdentifier
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetAdditionalProperties() map[string]map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.AdditionalProperties
 }
 
 type TriggerEventToAllRequestDtoActorType string

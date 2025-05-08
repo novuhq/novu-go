@@ -72,9 +72,9 @@ func (o *MessagesControllerGetMessagesRequest) GetIdempotencyKey() *string {
 }
 
 type MessagesControllerGetMessagesResponse struct {
-	HTTPMeta              components.HTTPMetadata `json:"-"`
-	ActivitiesResponseDto *components.ActivitiesResponseDto
-	Headers               map[string][]string
+	HTTPMeta            components.HTTPMetadata `json:"-"`
+	MessagesResponseDto *components.MessagesResponseDto
+	Headers             map[string][]string
 }
 
 func (o *MessagesControllerGetMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -84,11 +84,11 @@ func (o *MessagesControllerGetMessagesResponse) GetHTTPMeta() components.HTTPMet
 	return o.HTTPMeta
 }
 
-func (o *MessagesControllerGetMessagesResponse) GetActivitiesResponseDto() *components.ActivitiesResponseDto {
+func (o *MessagesControllerGetMessagesResponse) GetMessagesResponseDto() *components.MessagesResponseDto {
 	if o == nil {
 		return nil
 	}
-	return o.ActivitiesResponseDto
+	return o.MessagesResponseDto
 }
 
 func (o *MessagesControllerGetMessagesResponse) GetHeaders() map[string][]string {

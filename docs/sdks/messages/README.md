@@ -39,7 +39,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ActivitiesResponseDto != nil {
+    if res.MessagesResponseDto != nil {
         // handle response
     }
 }

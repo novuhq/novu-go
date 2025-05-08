@@ -11,24 +11,24 @@ import (
 type ContentType string
 
 const (
-	ContentTypeEmailBlock ContentType = "EmailBlock"
-	ContentTypeStr        ContentType = "str"
+	ContentTypeArrayOfEmailBlock ContentType = "arrayOfEmailBlock"
+	ContentTypeStr               ContentType = "str"
 )
 
 // Content of the message, can be an email block or a string
 type Content struct {
-	EmailBlock *EmailBlock `queryParam:"inline"`
-	Str        *string     `queryParam:"inline"`
+	ArrayOfEmailBlock []EmailBlock `queryParam:"inline"`
+	Str               *string      `queryParam:"inline"`
 
 	Type ContentType
 }
 
-func CreateContentEmailBlock(emailBlock EmailBlock) Content {
-	typ := ContentTypeEmailBlock
+func CreateContentArrayOfEmailBlock(arrayOfEmailBlock []EmailBlock) Content {
+	typ := ContentTypeArrayOfEmailBlock
 
 	return Content{
-		EmailBlock: &emailBlock,
-		Type:       typ,
+		ArrayOfEmailBlock: arrayOfEmailBlock,
+		Type:              typ,
 	}
 }
 
@@ -43,10 +43,10 @@ func CreateContentStr(str string) Content {
 
 func (u *Content) UnmarshalJSON(data []byte) error {
 
-	var emailBlock EmailBlock = EmailBlock{}
-	if err := utils.UnmarshalJSON(data, &emailBlock, "", true, true); err == nil {
-		u.EmailBlock = &emailBlock
-		u.Type = ContentTypeEmailBlock
+	var arrayOfEmailBlock []EmailBlock = []EmailBlock{}
+	if err := utils.UnmarshalJSON(data, &arrayOfEmailBlock, "", true, true); err == nil {
+		u.ArrayOfEmailBlock = arrayOfEmailBlock
+		u.Type = ContentTypeArrayOfEmailBlock
 		return nil
 	}
 
@@ -61,8 +61,8 @@ func (u *Content) UnmarshalJSON(data []byte) error {
 }
 
 func (u Content) MarshalJSON() ([]byte, error) {
-	if u.EmailBlock != nil {
-		return utils.MarshalJSON(u.EmailBlock, "", true)
+	if u.ArrayOfEmailBlock != nil {
+		return utils.MarshalJSON(u.ArrayOfEmailBlock, "", true)
 	}
 
 	if u.Str != nil {
@@ -103,6 +103,8 @@ type MessageResponseDto struct {
 	TemplateIdentifier *string `json:"templateIdentifier,omitempty"`
 	// Creation date of the message
 	CreatedAt string `json:"createdAt"`
+	// Array of delivery dates for the message, if the message has multiple delivery dates, for example after being snoozed
+	DeliveredAt []string `json:"deliveredAt,omitempty"`
 	// Last seen date of the message, if available
 	LastSeenDate *string `json:"lastSeenDate,omitempty"`
 	// Last read date of the message, if available
@@ -119,6 +121,8 @@ type MessageResponseDto struct {
 	Read bool `json:"read"`
 	// Indicates if the message has been seen
 	Seen bool `json:"seen"`
+	// Date when the message will be unsnoozed
+	SnoozedUntil *string `json:"snoozedUntil,omitempty"`
 	// Email address associated with the message, if applicable
 	Email *string `json:"email,omitempty"`
 	// Phone number associated with the message, if applicable
@@ -224,6 +228,13 @@ func (o *MessageResponseDto) GetCreatedAt() string {
 	return o.CreatedAt
 }
 
+func (o *MessageResponseDto) GetDeliveredAt() []string {
+	if o == nil {
+		return nil
+	}
+	return o.DeliveredAt
+}
+
 func (o *MessageResponseDto) GetLastSeenDate() *string {
 	if o == nil {
 		return nil
@@ -278,6 +289,13 @@ func (o *MessageResponseDto) GetSeen() bool {
 		return false
 	}
 	return o.Seen
+}
+
+func (o *MessageResponseDto) GetSnoozedUntil() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SnoozedUntil
 }
 
 func (o *MessageResponseDto) GetEmail() *string {

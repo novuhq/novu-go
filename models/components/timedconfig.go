@@ -7,22 +7,22 @@ import (
 	"fmt"
 )
 
-type TimedConfigWeekDays string
+type WeekDays string
 
 const (
-	TimedConfigWeekDaysMonday    TimedConfigWeekDays = "monday"
-	TimedConfigWeekDaysTuesday   TimedConfigWeekDays = "tuesday"
-	TimedConfigWeekDaysWednesday TimedConfigWeekDays = "wednesday"
-	TimedConfigWeekDaysThursday  TimedConfigWeekDays = "thursday"
-	TimedConfigWeekDaysFriday    TimedConfigWeekDays = "friday"
-	TimedConfigWeekDaysSaturday  TimedConfigWeekDays = "saturday"
-	TimedConfigWeekDaysSunday    TimedConfigWeekDays = "sunday"
+	WeekDaysMonday    WeekDays = "monday"
+	WeekDaysTuesday   WeekDays = "tuesday"
+	WeekDaysWednesday WeekDays = "wednesday"
+	WeekDaysThursday  WeekDays = "thursday"
+	WeekDaysFriday    WeekDays = "friday"
+	WeekDaysSaturday  WeekDays = "saturday"
+	WeekDaysSunday    WeekDays = "sunday"
 )
 
-func (e TimedConfigWeekDays) ToPointer() *TimedConfigWeekDays {
+func (e WeekDays) ToPointer() *WeekDays {
 	return &e
 }
-func (e *TimedConfigWeekDays) UnmarshalJSON(data []byte) error {
+func (e *WeekDays) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -41,10 +41,10 @@ func (e *TimedConfigWeekDays) UnmarshalJSON(data []byte) error {
 	case "saturday":
 		fallthrough
 	case "sunday":
-		*e = TimedConfigWeekDays(v)
+		*e = WeekDays(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for TimedConfigWeekDays: %v", v)
+		return fmt.Errorf("invalid value for WeekDays: %v", v)
 	}
 }
 
@@ -163,12 +163,12 @@ func (e *MonthlyType) UnmarshalJSON(data []byte) error {
 }
 
 type TimedConfig struct {
-	AtTime       *string               `json:"atTime,omitempty"`
-	WeekDays     []TimedConfigWeekDays `json:"weekDays,omitempty"`
-	MonthDays    []string              `json:"monthDays,omitempty"`
-	Ordinal      *Ordinal              `json:"ordinal,omitempty"`
-	OrdinalValue *OrdinalValue         `json:"ordinalValue,omitempty"`
-	MonthlyType  *MonthlyType          `json:"monthlyType,omitempty"`
+	AtTime       *string       `json:"atTime,omitempty"`
+	WeekDays     []WeekDays    `json:"weekDays,omitempty"`
+	MonthDays    []string      `json:"monthDays,omitempty"`
+	Ordinal      *Ordinal      `json:"ordinal,omitempty"`
+	OrdinalValue *OrdinalValue `json:"ordinalValue,omitempty"`
+	MonthlyType  *MonthlyType  `json:"monthlyType,omitempty"`
 }
 
 func (o *TimedConfig) GetAtTime() *string {
@@ -178,7 +178,7 @@ func (o *TimedConfig) GetAtTime() *string {
 	return o.AtTime
 }
 
-func (o *TimedConfig) GetWeekDays() []TimedConfigWeekDays {
+func (o *TimedConfig) GetWeekDays() []WeekDays {
 	if o == nil {
 		return nil
 	}

@@ -36,6 +36,7 @@ func main() {
         Subscribers: []string{
             "<value>",
             "<value>",
+            "<value>",
         },
     }, nil)
     if err != nil {

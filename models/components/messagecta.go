@@ -6,7 +6,7 @@ type MessageCTA struct {
 	// Type of call to action
 	Type *ChannelCTATypeEnum `json:"type,omitempty"`
 	// Data associated with the call to action
-	Data MessageCTAData `json:"data"`
+	Data *MessageCTAData `json:"data,omitempty"`
 	// Action associated with the call to action
 	Action *MessageAction `json:"action,omitempty"`
 }
@@ -18,9 +18,9 @@ func (o *MessageCTA) GetType() *ChannelCTATypeEnum {
 	return o.Type
 }
 
-func (o *MessageCTA) GetData() MessageCTAData {
+func (o *MessageCTA) GetData() *MessageCTAData {
 	if o == nil {
-		return MessageCTAData{}
+		return nil
 	}
 	return o.Data
 }
