@@ -926,7 +926,7 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithServerURL("https://api.novu.co"),
+		novugo.WithServerURL("https://eu.api.novu.co"),
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 

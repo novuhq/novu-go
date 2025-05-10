@@ -3,10 +3,10 @@ id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
   docChecksum: 30e872db553882a1638affa60c929da6
   docVersion: 2.1.13
-  speakeasyVersion: 1.542.3
-  generationVersion: 2.597.9
-  releaseVersion: 0.3.0
-  configChecksum: dfd401909226052f801cdd043088f85b
+  speakeasyVersion: 1.543.4
+  generationVersion: 2.598.22
+  releaseVersion: 0.3.1
+  configChecksum: a8f33bad7503ed69feb3c02b3fa93961
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -25,7 +25,7 @@ features:
     globalSecurity: 2.82.11
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.2
+    globalServerURLs: 2.82.3
     groups: 2.81.2
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
@@ -602,7 +602,7 @@ examples:
   EventsController_triggerBulk:
     speakeasy-default-events-controller-trigger-bulk:
       requestBody:
-        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"topicKey": "<value>", "type": "Subscriber"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
+        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": [{"topicKey": "<value>", "type": "Subscriber"}]}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
       responses:
         "201":
           application/json: [{"acknowledged": true, "status": "error"}, {"acknowledged": true, "status": "no_workflow_active_steps_defined"}, {"acknowledged": true, "status": "trigger_not_active"}]
