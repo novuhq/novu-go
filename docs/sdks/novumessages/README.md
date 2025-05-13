@@ -6,7 +6,7 @@
 ### Available Operations
 
 * [UpdateAsSeen](#updateasseen) - Mark message action as seen
-* [MarkAll](#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+* [MarkAll](#markall) - Marks all the subscriber messages as read, unread, seen or unseen.
 * [MarkAllAs](#markallas) - Mark a subscriber messages as seen, read, unseen or unread
 
 ## UpdateAsSeen
@@ -74,7 +74,7 @@ func main() {
 
 ## MarkAll
 
-Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+Marks all the subscriber messages as read, unread, seen or unseen.
 
 ### Example Usage
 

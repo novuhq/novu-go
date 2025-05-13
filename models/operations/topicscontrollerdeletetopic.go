@@ -7,7 +7,7 @@ import (
 )
 
 type TopicsControllerDeleteTopicRequest struct {
-	// The topic key
+	// The key identifier of the topic
 	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
@@ -29,7 +29,9 @@ func (o *TopicsControllerDeleteTopicRequest) GetIdempotencyKey() *string {
 
 type TopicsControllerDeleteTopicResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
-	Headers  map[string][]string
+	// Topic deleted successfully
+	DeleteTopicResponseDto *components.DeleteTopicResponseDto
+	Headers                map[string][]string
 }
 
 func (o *TopicsControllerDeleteTopicResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -37,6 +39,13 @@ func (o *TopicsControllerDeleteTopicResponse) GetHTTPMeta() components.HTTPMetad
 		return components.HTTPMetadata{}
 	}
 	return o.HTTPMeta
+}
+
+func (o *TopicsControllerDeleteTopicResponse) GetDeleteTopicResponseDto() *components.DeleteTopicResponseDto {
+	if o == nil {
+		return nil
+	}
+	return o.DeleteTopicResponseDto
 }
 
 func (o *TopicsControllerDeleteTopicResponse) GetHeaders() map[string][]string {

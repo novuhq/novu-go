@@ -80,6 +80,10 @@ type Novu struct {
 	//
 	// https://docs.novu.co/subscribers/subscribers
 	Subscribers *Subscribers
+	// Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
+	//
+	// https://docs.novu.co/subscribers/topics
+	Topics *Topics
 	// With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
 	//
 	// https://docs.novu.co/channels-and-providers/integration-store
@@ -89,10 +93,6 @@ type Novu struct {
 	// https://docs.novu.co/workflows/messages
 	Messages      *Messages
 	Notifications *Notifications
-	// Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
-	//
-	// https://docs.novu.co/subscribers/topics
-	Topics *Topics
 
 	sdkConfiguration sdkConfiguration
 }
@@ -171,9 +171,9 @@ func New(opts ...SDKOption) *Novu {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "2.1.13",
-			SDKVersion:        "0.3.0",
-			GenVersion:        "2.597.9",
-			UserAgent:         "speakeasy-sdk/go 0.3.0 2.597.9 2.1.13 github.com/novuhq/novu-go",
+			SDKVersion:        "1.0.0",
+			GenVersion:        "2.599.0",
+			UserAgent:         "speakeasy-sdk/go 1.0.0 2.599.0 2.1.13 github.com/novuhq/novu-go",
 			Hooks:             hooks.New(),
 		},
 	}
@@ -202,13 +202,13 @@ func New(opts ...SDKOption) *Novu {
 
 	sdk.Subscribers = newSubscribers(sdk.sdkConfiguration)
 
+	sdk.Topics = newTopics(sdk.sdkConfiguration)
+
 	sdk.Integrations = newIntegrations(sdk.sdkConfiguration)
 
 	sdk.Messages = newMessages(sdk.sdkConfiguration)
 
 	sdk.Notifications = newNotifications(sdk.sdkConfiguration)
-
-	sdk.Topics = newTopics(sdk.sdkConfiguration)
 
 	return sdk
 }

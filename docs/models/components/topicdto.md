@@ -3,11 +3,8 @@
 
 ## Fields
 
-| Field              | Type               | Required           | Description        |
-| ------------------ | ------------------ | ------------------ | ------------------ |
-| `ID`               | **string*          | :heavy_minus_sign: | N/A                |
-| `OrganizationID`   | *string*           | :heavy_check_mark: | N/A                |
-| `EnvironmentID`    | *string*           | :heavy_check_mark: | N/A                |
-| `Key`              | *string*           | :heavy_check_mark: | N/A                |
-| `Name`             | *string*           | :heavy_check_mark: | N/A                |
-| `Subscribers`      | []*string*         | :heavy_check_mark: | N/A                |
+| Field                                                                                                | Type                                                                                                 | Required                                                                                             | Description                                                                                          | Example                                                                                              |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ID`                                                                                                 | *string*                                                                                             | :heavy_check_mark:                                                                                   | The internal unique identifier of the topic                                                          | 64f5e95d3d7946d80d0cb677                                                                             |
+| `Key`                                                                                                | *string*                                                                                             | :heavy_check_mark:                                                                                   | The key identifier of the topic used in your application. Should be unique on the environment level. | product-updates                                                                                      |
+| `Name`                                                                                               | **string*                                                                                            | :heavy_minus_sign:                                                                                   | The name of the topic                                                                                | Product Updates                                                                                      |

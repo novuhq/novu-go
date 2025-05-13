@@ -26,6 +26,8 @@ type NotificationsControllerListNotificationsRequest struct {
 	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
 	// Transaction ID for filtering
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
+	// Topic Key for filtering notifications by topic
+	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`
 	// Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan
 	After *string `queryParam:"style=form,explode=true,name=after"`
 	// Date filter for records before this timestamp. Defaults to current time of request (now)
@@ -99,6 +101,13 @@ func (o *NotificationsControllerListNotificationsRequest) GetTransactionID() *st
 		return nil
 	}
 	return o.TransactionID
+}
+
+func (o *NotificationsControllerListNotificationsRequest) GetTopicKey() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TopicKey
 }
 
 func (o *NotificationsControllerListNotificationsRequest) GetAfter() *string {

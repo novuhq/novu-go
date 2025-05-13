@@ -504,7 +504,7 @@ func main() {
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
 
 * [UpdateAsSeen](docs/sdks/novumessages/README.md#updateasseen) - Mark message action as seen
-* [MarkAll](docs/sdks/novumessages/README.md#markall) - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+* [MarkAll](docs/sdks/novumessages/README.md#markall) - Marks all the subscriber messages as read, unread, seen or unseen.
 * [MarkAllAs](docs/sdks/novumessages/README.md#markallas) - Mark a subscriber messages as seen, read, unseen or unread
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
@@ -521,19 +521,27 @@ func main() {
 
 * [UpdateOnlineFlag](docs/sdks/properties/README.md#updateonlineflag) - Update subscriber online status
 
+#### [Subscribers.Topics](docs/sdks/novutopics/README.md)
+
+* [List](docs/sdks/novutopics/README.md#list) - List topics a subscriber is subscribed to
+
 ### [Topics](docs/sdks/topics/README.md)
 
-* [Create](docs/sdks/topics/README.md#create) - Topic creation
-* [List](docs/sdks/topics/README.md#list) - Get topic list filtered 
-* [Delete](docs/sdks/topics/README.md#delete) - Delete topic
-* [Retrieve](docs/sdks/topics/README.md#retrieve) - Get topic
-* [Rename](docs/sdks/topics/README.md#rename) - Rename a topic
+* [List](docs/sdks/topics/README.md#list) - Get topics list
+* [Create](docs/sdks/topics/README.md#create) - Create or update a topic
+* [Get](docs/sdks/topics/README.md#get) - Get topic by key
+* [Update](docs/sdks/topics/README.md#update) - Update topic by key
+* [Delete](docs/sdks/topics/README.md#delete) - Delete topic by key
 
 #### [Topics.Subscribers](docs/sdks/novusubscribers/README.md)
 
-* [Assign](docs/sdks/novusubscribers/README.md#assign) - Subscribers addition
 * [Retrieve](docs/sdks/novusubscribers/README.md#retrieve) - Check topic subscriber
-* [Remove](docs/sdks/novusubscribers/README.md#remove) - Subscribers removal
+
+#### [Topics.Subscriptions](docs/sdks/subscriptions/README.md)
+
+* [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
+* [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions, if the topic does not exist, it will be created.
+* [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -926,7 +934,7 @@ func main() {
 	ctx := context.Background()
 
 	s := novugo.New(
-		novugo.WithServerURL("https://api.novu.co"),
+		novugo.WithServerURL("https://eu.api.novu.co"),
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 

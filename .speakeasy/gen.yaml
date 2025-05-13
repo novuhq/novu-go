@@ -19,7 +19,7 @@ generation:
     oAuth2ClientCredentialsEnabled: true
     oAuth2PasswordEnabled: true
 go:
-  version: 0.3.0
+  version: 1.0.0
   additionalDependencies:
     github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false

@@ -364,7 +364,7 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 
 }
 
-// MarkAll - Marks all the subscriber messages as read, unread, seen or unseen. Optionally you can pass feed id (or array) to mark messages of a particular feed.
+// MarkAll - Marks all the subscriber messages as read, unread, seen or unseen.
 func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAllMessageAsRequestDto components.MarkAllMessageAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkAllUnreadAsReadResponse, error) {
 	request := operations.SubscribersV1ControllerMarkAllUnreadAsReadRequest{
 		SubscriberID:               subscriberID,
