@@ -22,6 +22,7 @@ import (
 // https://docs.novu.co/subscribers/subscribers
 type Subscribers struct {
 	Preferences    *Preferences
+	Topics         *NovuTopics
 	Credentials    *Credentials
 	Authentication *Authentication
 	Messages       *NovuMessages
@@ -35,6 +36,7 @@ func newSubscribers(sdkConfig sdkConfiguration) *Subscribers {
 	return &Subscribers{
 		sdkConfiguration: sdkConfig,
 		Preferences:      newPreferences(sdkConfig),
+		Topics:           newNovuTopics(sdkConfig),
 		Credentials:      newCredentials(sdkConfig),
 		Authentication:   newAuthentication(sdkConfig),
 		Messages:         newNovuMessages(sdkConfig),
@@ -380,7 +382,7 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 }
 
 // Create subscriber
-// Create subscriber with the given data
+// Create subscriber with the given data, if the subscriber already exists, it will be updated
 func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
 	request := operations.SubscribersControllerCreateSubscriberRequest{
 		IdempotencyKey:             idempotencyKey,

@@ -3,33 +3,19 @@
 package components
 
 type TopicDto struct {
-	ID             *string  `json:"_id,omitempty"`
-	OrganizationID string   `json:"_organizationId"`
-	EnvironmentID  string   `json:"_environmentId"`
-	Key            string   `json:"key"`
-	Name           string   `json:"name"`
-	Subscribers    []string `json:"subscribers"`
+	// The internal unique identifier of the topic
+	ID string `json:"_id"`
+	// The key identifier of the topic used in your application. Should be unique on the environment level.
+	Key string `json:"key"`
+	// The name of the topic
+	Name *string `json:"name,omitempty"`
 }
 
-func (o *TopicDto) GetID() *string {
+func (o *TopicDto) GetID() string {
 	if o == nil {
-		return nil
+		return ""
 	}
 	return o.ID
-}
-
-func (o *TopicDto) GetOrganizationID() string {
-	if o == nil {
-		return ""
-	}
-	return o.OrganizationID
-}
-
-func (o *TopicDto) GetEnvironmentID() string {
-	if o == nil {
-		return ""
-	}
-	return o.EnvironmentID
 }
 
 func (o *TopicDto) GetKey() string {
@@ -39,16 +25,9 @@ func (o *TopicDto) GetKey() string {
 	return o.Key
 }
 
-func (o *TopicDto) GetName() string {
+func (o *TopicDto) GetName() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Name
-}
-
-func (o *TopicDto) GetSubscribers() []string {
-	if o == nil {
-		return []string{}
-	}
-	return o.Subscribers
 }

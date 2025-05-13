@@ -48,6 +48,8 @@ type ActivityNotificationResponseDto struct {
 	Controls *Controls `json:"controls,omitempty"`
 	// To field for subscriber definition
 	To *ActivityNotificationResponseDtoTo `json:"to,omitempty"`
+	// Topics of the notification
+	Topics []ActivityTopicDto `json:"topics,omitempty"`
 }
 
 func (o *ActivityNotificationResponseDto) GetID() *string {
@@ -167,4 +169,11 @@ func (o *ActivityNotificationResponseDto) GetTo() *ActivityNotificationResponseD
 		return nil
 	}
 	return o.To
+}
+
+func (o *ActivityNotificationResponseDto) GetTopics() []ActivityTopicDto {
+	if o == nil {
+		return nil
+	}
+	return o.Topics
 }

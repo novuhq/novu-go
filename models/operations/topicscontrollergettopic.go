@@ -7,7 +7,7 @@ import (
 )
 
 type TopicsControllerGetTopicRequest struct {
-	// The topic key
+	// The key identifier of the topic
 	TopicKey string `pathParam:"style=simple,explode=false,name=topicKey"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
@@ -30,8 +30,8 @@ func (o *TopicsControllerGetTopicRequest) GetIdempotencyKey() *string {
 type TopicsControllerGetTopicResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	GetTopicResponseDto *components.GetTopicResponseDto
-	Headers             map[string][]string
+	TopicResponseDto *components.TopicResponseDto
+	Headers          map[string][]string
 }
 
 func (o *TopicsControllerGetTopicResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -41,11 +41,11 @@ func (o *TopicsControllerGetTopicResponse) GetHTTPMeta() components.HTTPMetadata
 	return o.HTTPMeta
 }
 
-func (o *TopicsControllerGetTopicResponse) GetGetTopicResponseDto() *components.GetTopicResponseDto {
+func (o *TopicsControllerGetTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
 	if o == nil {
 		return nil
 	}
-	return o.GetTopicResponseDto
+	return o.TopicResponseDto
 }
 
 func (o *TopicsControllerGetTopicResponse) GetHeaders() map[string][]string {

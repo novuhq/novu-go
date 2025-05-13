@@ -3,44 +3,99 @@
 package operations
 
 import (
-	"github.com/novuhq/novu-go/internal/utils"
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/models/components"
 )
 
+// TopicsControllerListTopicsQueryParamOrderDirection - Direction of sorting
+type TopicsControllerListTopicsQueryParamOrderDirection string
+
+const (
+	TopicsControllerListTopicsQueryParamOrderDirectionAsc  TopicsControllerListTopicsQueryParamOrderDirection = "ASC"
+	TopicsControllerListTopicsQueryParamOrderDirectionDesc TopicsControllerListTopicsQueryParamOrderDirection = "DESC"
+)
+
+func (e TopicsControllerListTopicsQueryParamOrderDirection) ToPointer() *TopicsControllerListTopicsQueryParamOrderDirection {
+	return &e
+}
+func (e *TopicsControllerListTopicsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "ASC":
+		fallthrough
+	case "DESC":
+		*e = TopicsControllerListTopicsQueryParamOrderDirection(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for TopicsControllerListTopicsQueryParamOrderDirection: %v", v)
+	}
+}
+
 type TopicsControllerListTopicsRequest struct {
-	// The page number to retrieve (starts from 0)
-	Page *int64 `default:"0" queryParam:"style=form,explode=true,name=page"`
-	// The number of items to return per page (default: 10)
-	PageSize *int64 `default:"10" queryParam:"style=form,explode=true,name=pageSize"`
-	// A filter key to apply to the results
+	// Cursor for pagination indicating the starting point after which to fetch results.
+	After *string `queryParam:"style=form,explode=true,name=after"`
+	// Cursor for pagination indicating the ending point before which to fetch results.
+	Before *string `queryParam:"style=form,explode=true,name=before"`
+	// Limit the number of items to return (max 100)
+	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
+	// Direction of sorting
+	OrderDirection *TopicsControllerListTopicsQueryParamOrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
+	// Field to order by
+	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
+	// Include cursor item in response
+	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
+	// Key of the topic to filter results.
 	Key *string `queryParam:"style=form,explode=true,name=key"`
+	// Name of the topic to filter results.
+	Name *string `queryParam:"style=form,explode=true,name=name"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (t TopicsControllerListTopicsRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *TopicsControllerListTopicsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *TopicsControllerListTopicsRequest) GetPage() *int64 {
+func (o *TopicsControllerListTopicsRequest) GetAfter() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Page
+	return o.After
 }
 
-func (o *TopicsControllerListTopicsRequest) GetPageSize() *int64 {
+func (o *TopicsControllerListTopicsRequest) GetBefore() *string {
 	if o == nil {
 		return nil
 	}
-	return o.PageSize
+	return o.Before
+}
+
+func (o *TopicsControllerListTopicsRequest) GetLimit() *float64 {
+	if o == nil {
+		return nil
+	}
+	return o.Limit
+}
+
+func (o *TopicsControllerListTopicsRequest) GetOrderDirection() *TopicsControllerListTopicsQueryParamOrderDirection {
+	if o == nil {
+		return nil
+	}
+	return o.OrderDirection
+}
+
+func (o *TopicsControllerListTopicsRequest) GetOrderBy() *string {
+	if o == nil {
+		return nil
+	}
+	return o.OrderBy
+}
+
+func (o *TopicsControllerListTopicsRequest) GetIncludeCursor() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IncludeCursor
 }
 
 func (o *TopicsControllerListTopicsRequest) GetKey() *string {
@@ -48,6 +103,13 @@ func (o *TopicsControllerListTopicsRequest) GetKey() *string {
 		return nil
 	}
 	return o.Key
+}
+
+func (o *TopicsControllerListTopicsRequest) GetName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Name
 }
 
 func (o *TopicsControllerListTopicsRequest) GetIdempotencyKey() *string {
@@ -58,9 +120,10 @@ func (o *TopicsControllerListTopicsRequest) GetIdempotencyKey() *string {
 }
 
 type TopicsControllerListTopicsResponse struct {
-	HTTPMeta                components.HTTPMetadata `json:"-"`
-	FilterTopicsResponseDto *components.FilterTopicsResponseDto
-	Headers                 map[string][]string
+	HTTPMeta components.HTTPMetadata `json:"-"`
+	// OK
+	ListTopicsResponseDto *components.ListTopicsResponseDto
+	Headers               map[string][]string
 }
 
 func (o *TopicsControllerListTopicsResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -70,11 +133,11 @@ func (o *TopicsControllerListTopicsResponse) GetHTTPMeta() components.HTTPMetada
 	return o.HTTPMeta
 }
 
-func (o *TopicsControllerListTopicsResponse) GetFilterTopicsResponseDto() *components.FilterTopicsResponseDto {
+func (o *TopicsControllerListTopicsResponse) GetListTopicsResponseDto() *components.ListTopicsResponseDto {
 	if o == nil {
 		return nil
 	}
-	return o.FilterTopicsResponseDto
+	return o.ListTopicsResponseDto
 }
 
 func (o *TopicsControllerListTopicsResponse) GetHeaders() map[string][]string {
