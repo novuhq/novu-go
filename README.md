@@ -127,9 +127,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)
@@ -308,14 +317,9 @@ func main() {
 						},
 					},
 				},
-				To: components.CreateToArrayOf1(
-					[]components.One{
-						components.CreateOneTopicPayloadDto(
-							components.TopicPayloadDto{
-								TopicKey: "<value>",
-								Type:     components.TriggerRecipientsTypeEnumSubscriber,
-							},
-						),
+				To: components.CreateToSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
 					},
 				),
 			},
@@ -343,14 +347,9 @@ func main() {
 						},
 					},
 				},
-				To: components.CreateToArrayOf1(
-					[]components.One{
-						components.CreateOneStr(
-							"SUBSCRIBER_ID",
-						),
-						components.CreateOneStr(
-							"SUBSCRIBER_ID",
-						),
+				To: components.CreateToSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
 					},
 				),
 			},
@@ -420,9 +419,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)
@@ -643,9 +651,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil, operations.WithRetries(
@@ -723,9 +740,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)
@@ -802,9 +828,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)
@@ -901,9 +936,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)
@@ -962,9 +1006,18 @@ func main() {
 				},
 			},
 		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
+		To: components.CreateToArrayOf1(
+			[]components.One{
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
+				components.CreateOneSubscriberPayloadDto(
+					components.SubscriberPayloadDto{
+						SubscriberID: "<id>",
+					},
+				),
 			},
 		),
 	}, nil)

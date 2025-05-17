@@ -94,7 +94,7 @@ func main() {
 
     res, err := s.Integrations.Create(ctx, components.CreateIntegrationRequestDto{
         ProviderID: "<id>",
-        Channel: components.CreateIntegrationRequestDtoChannelSms,
+        Channel: components.CreateIntegrationRequestDtoChannelEmail,
     }, nil)
     if err != nil {
         log.Fatal(err)

@@ -33,7 +33,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Credentials.Update(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
-        ProviderID: components.ChatOrPushProviderEnumPushpad,
+        ProviderID: components.ChatOrPushProviderEnumSlack,
         Credentials: components.ChannelCredentials{
             WebhookURL: novugo.String("https://example.com/webhook"),
             Channel: novugo.String("general"),
@@ -107,7 +107,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Credentials.Append(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
-        ProviderID: components.ChatOrPushProviderEnumZulip,
+        ProviderID: components.ChatOrPushProviderEnumOneSignal,
         Credentials: components.ChannelCredentials{
             WebhookURL: novugo.String("https://example.com/webhook"),
             Channel: novugo.String("general"),
