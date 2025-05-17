@@ -3,10 +3,10 @@ id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
   docChecksum: 12d4bac749ee57eef709b93d1e74aa99
   docVersion: 2.1.13
-  speakeasyVersion: 1.544.0
-  generationVersion: 2.599.0
-  releaseVersion: 1.0.0
-  configChecksum: 3987173f7a67d6560a4f0353ea3a154a
+  speakeasyVersion: 1.546.1
+  generationVersion: 2.604.2
+  releaseVersion: 1.0.1
+  configChecksum: 08d50eafb95c2c1fe18566f1ef648911
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -15,7 +15,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.7.4
+    core: 3.7.5
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
@@ -583,10 +583,10 @@ examples:
   EventsController_trigger:
     speakeasy-default-events-controller-trigger:
       requestBody:
-        application/json: {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}
+        application/json: {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}]}
       responses:
         "201":
-          application/json: {"acknowledged": false, "status": "no_tenant_found"}
+          application/json: {"acknowledged": true, "status": "trigger_not_active"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -603,7 +603,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: true
+          application/json: false
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -618,7 +618,7 @@ examples:
         application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}, "fcm": {"data": {"key": "value"}}}}
       responses:
         "200":
-          application/json: {"acknowledged": true, "status": "trigger_not_active"}
+          application/json: {"acknowledged": false, "status": "invalid_recipients"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -630,10 +630,10 @@ examples:
   EventsController_triggerBulk:
     speakeasy-default-events-controller-trigger-bulk:
       requestBody:
-        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": [{"topicKey": "<value>", "type": "Subscriber"}]}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": ["SUBSCRIBER_ID", "SUBSCRIBER_ID"]}]}
+        application/json: {"events": [{"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}, {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"steps": {"email-step": {"providers": {"sendgrid": {"templateId": "1234567890"}}}}, "providers": {"sendgrid": {"templateId": "1234567890"}}}, "to": {"subscriberId": "<id>"}}]}
       responses:
         "201":
-          application/json: [{"acknowledged": true, "status": "error"}, {"acknowledged": true, "status": "no_workflow_active_steps_defined"}, {"acknowledged": true, "status": "trigger_not_active"}]
+          application/json: [{"acknowledged": false, "status": "trigger_not_active"}, {"acknowledged": false, "status": "trigger_not_active"}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -646,7 +646,7 @@ examples:
     speakeasy-default-subscribers-controller-search-subscribers:
       responses:
         "200":
-          application/json: {"data": [{"channels": [{"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "discord", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1722651005775", "updatedAt": "1746626230154"}], "next": "<value>", "previous": "<value>"}
+          application/json: {"data": [{"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1735583403839", "updatedAt": "1747388132871"}, {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1735583403839", "updatedAt": "1747388132871"}, {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1735583403839", "updatedAt": "1747388132871"}], "next": "<value>", "previous": "<value>"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -661,7 +661,7 @@ examples:
         application/json: {"subscriberId": "<id>"}
       responses:
         "201":
-          application/json: {"channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1717304106110", "updatedAt": "1746645721717"}
+          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1726222106017", "updatedAt": "1747425615465"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -678,7 +678,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1717994425381", "updatedAt": "1746623172537"}
+          application/json: {"channels": [{"providerId": "slack", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1739067818215", "updatedAt": "1747376141873"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -697,7 +697,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1744384565448", "updatedAt": "1746632634983"}
+          application/json: {"channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1744241975974", "updatedAt": "1747425452628"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -731,7 +731,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"page": 7685.78, "hasMore": false, "pageSize": 6783.17, "data": []}
+          application/json: {"page": 1980.01, "hasMore": false, "pageSize": 4713.49, "data": [{"channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1734392040902", "updatedAt": "1747401890982"}, {"channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1734392040902", "updatedAt": "1747401890982"}, {"channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1734392040902", "updatedAt": "1747401890982"}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -750,7 +750,7 @@ examples:
         application/json: {"email": "john.doe@example.com", "firstName": "John", "lastName": "Doe", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "data": {"preferences": {"notifications": true, "theme": "dark"}, "tags": ["premium", "newsletter"]}}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "grafana-on-call", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1722445789681", "updatedAt": "1746643169881"}
+          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1720115690652", "updatedAt": "1747367259158"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -765,7 +765,7 @@ examples:
         application/json: {"subscribers": [{"subscriberId": "<id>"}]}
       responses:
         "201":
-          application/json: {"updated": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "created": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "failed": [{}, {}]}
+          application/json: {"updated": [{"subscriberId": "<id>"}], "created": [{"subscriberId": "<id>"}, {"subscriberId": "<id>"}, {"subscriberId": "<id>"}], "failed": [{}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -782,7 +782,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"global": {"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}}, "workflows": [{"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": true, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
+          application/json: {"global": {"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}}, "workflows": [{"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [{"channel": "sms", "source": "subscriber"}, {"channel": "sms", "source": "subscriber"}, {"channel": "sms", "source": "subscriber"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [{"channel": "sms", "source": "subscriber"}, {"channel": "sms", "source": "subscriber"}, {"channel": "sms", "source": "subscriber"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -801,7 +801,25 @@ examples:
         application/json: {"channels": {}}
       responses:
         "200":
-          application/json: {"global": {"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}}, "workflows": [{"enabled": true, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [{"channel": "chat", "source": "template"}, {"channel": "push", "source": "subscriber"}, {"channel": "push", "source": "template"}], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}, {"enabled": true, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "overrides": [], "workflow": {"slug": "<value>", "identifier": "<value>", "name": "<value>"}}]}
+          application/json: {"global": {"enabled": false, "channels": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}}, "workflows": []}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  SubscribersController_listSubscriberTopics:
+    speakeasy-default-subscribers-controller-list-subscriber-topics:
+      parameters:
+        path:
+          subscriberId: "<id>"
+        query: {}
+        header: {}
+      responses:
+        "200":
+          application/json: {"data": [{"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}, {"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}], "next": "<value>", "previous": "<value>"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -817,10 +835,10 @@ examples:
           subscriberId: "<id>"
         header: {}
       requestBody:
-        application/json: {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+        application/json: {"providerId": "slack", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1730543753853", "updatedAt": "1746661924659"}
+          application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1732202541761", "updatedAt": "1747378995395"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -836,10 +854,10 @@ examples:
           subscriberId: "<id>"
         header: {}
       requestBody:
-        application/json: {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
+        application/json: {"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "apns", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1746574761151", "updatedAt": "1746624711533"}
+          application/json: {"channels": [{"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "msteams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1745295316407", "updatedAt": "1747355299638"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -916,10 +934,10 @@ examples:
           subscriberId: "<id>"
         header: {}
       requestBody:
-        application/json: {"status": "done"}
+        application/json: {"status": "pending"}
       responses:
         "201":
-          application/json: {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "push-webhook", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "ryver", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1745600273787", "updatedAt": "1746590240488"}, "template": {"name": "<value>", "description": "after ouch meager stupendous failing", "active": false, "draft": false, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value>", "<value>", "<value>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": false, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1746196363369", "content": [{"type": "button", "content": "<value>"}], "transactionId": "<id>", "channel": "sms", "read": false, "seen": false, "cta": {}, "status": "error"}
+          application/json: {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1730085059898", "updatedAt": "1747403031048"}, "template": {"name": "<value>", "description": "loaf than of familiarize puppet transom worth", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1724118398865", "content": "<value>", "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "sent"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -935,10 +953,10 @@ examples:
           subscriberId: "<id>"
         header: {}
       requestBody:
-        application/json: {"markAs": "seen"}
+        application/json: {"markAs": "read"}
       responses:
         "201":
-          application/json: 4603.37
+          application/json: 2930.68
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -954,10 +972,10 @@ examples:
           subscriberId: "<id>"
         header: {}
       requestBody:
-        application/json: {"messageId": "<id>", "markAs": "unread"}
+        application/json: {"messageId": [], "markAs": "seen"}
       responses:
         "201":
-          application/json: [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "ryver", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1733174964023", "updatedAt": "1746645026436"}, "template": {"name": "<value>", "description": "deck instantly ultimately whenever stealthily pish ordinary microblog", "active": true, "draft": false, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": false, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1720270281992", "content": "<value>", "transactionId": "<id>", "channel": "push", "read": true, "seen": true, "cta": {}, "status": "warning"}]
+          application/json: [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1737341235442", "updatedAt": "1747366782974"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1722024923111", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1737341235442", "updatedAt": "1747366782974"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1722024923111", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1737341235442", "updatedAt": "1747366782974"}, "template": {"name": "<value>", "description": "aircraft gadzooks lawmaker shaft", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>", "<value 3>"], "steps": [{}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1722024923111", "content": [{"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "email", "read": true, "seen": true, "cta": {}, "status": "error"}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -977,13 +995,13 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"totalCount": 5, "hasMore": true, "data": [{"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "push", "read": false, "seen": true, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}, {"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "system_icon"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "in_app", "read": false, "seen": true, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}], "pageSize": 2, "page": 1}
+          application/json: {"totalCount": 5, "hasMore": true, "data": [{"_id": "615c1f2f9b0c5b001f8e4e3b", "_templateId": "template_12345", "_environmentId": "env_67890", "_messageTemplateId": "message_template_54321", "_organizationId": "org_98765", "_notificationId": "notification_123456", "_subscriberId": "subscriber_112233", "_feedId": "feed_445566", "_jobId": "job_778899", "createdAt": "2024-12-10T10:10:59.639Z", "updatedAt": "2024-12-10T10:10:59.639Z", "actor": {"data": null, "type": "none"}, "transactionId": "transaction_123456", "templateIdentifier": "template_abcdef", "providerId": "provider_xyz", "content": "This is a test notification content.", "subject": "Test Notification Subject", "channel": "sms", "read": false, "seen": true, "deviceTokens": ["token1", "token2"], "cta": {}, "status": "sent", "payload": {"key": "value"}, "overrides": {"overrideKey": "overrideValue"}}], "pageSize": 2, "page": 1}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": [{"key": "value"}]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
   SubscribersV1Controller_getUnseenCount:
@@ -997,7 +1015,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"count": 2166.35}
+          application/json: {"count": 7412.55}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1016,7 +1034,162 @@ examples:
         application/json: {"isOnline": false}
       responses:
         "200":
-          application/json: {"channels": [{"providerId": "one-signal", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1741597188615", "updatedAt": "1746593793005"}
+          application/json: {"channels": [{"providerId": "whatsapp-business", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "whatsapp-business", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1746739249775", "updatedAt": "1747432189289"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_listTopics:
+    speakeasy-default-topics-controller-list-topics:
+      responses:
+        "200":
+          application/json: {"data": [{"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}], "next": "<value>", "previous": "<value>"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_upsertTopic:
+    speakeasy-default-topics-controller-upsert-topic:
+      requestBody:
+        application/json: {"key": "task:12345", "name": "Task Title"}
+      responses:
+        "200":
+          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_getTopic:
+    speakeasy-default-topics-controller-get-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_updateTopic:
+    speakeasy-default-topics-controller-update-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"name": "Updated Topic Name"}
+      responses:
+        "200":
+          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_deleteTopic:
+    speakeasy-default-topics-controller-delete-topic:
+      parameters:
+        path:
+          topicKey: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"acknowledged": true}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_listTopicSubscriptions:
+    speakeasy-default-topics-controller-list-topic-subscriptions:
+      parameters:
+        path:
+          topicKey: "<value>"
+        query: {}
+        header: {}
+      responses:
+        "200":
+          application/json: {"data": [], "next": "<value>", "previous": "<value>"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_createTopicSubscriptions:
+    speakeasy-default-topics-controller-create-topic-subscriptions:
+      parameters:
+        path:
+          topicKey: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
+      responses:
+        "201":
+          application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_deleteTopicSubscriptions:
+    speakeasy-default-topics-controller-delete-topic-subscriptions:
+      parameters:
+        path:
+          topicKey: "<value>"
+        header: {}
+      requestBody:
+        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
+      responses:
+        "200":
+          application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsV1Controller_getTopicSubscriber:
+    speakeasy-default-topics-v1-controller-get-topic-subscriber:
+      parameters:
+        path:
+          externalSubscriberId: "<id>"
+          topicKey: "<value>"
+        header: {}
+      responses:
+        "200":
+          application/json: {"_organizationId": "org_123456789", "_environmentId": "env_123456789", "_subscriberId": "sub_123456789", "_topicId": "topic_123456789", "topicKey": "my_topic_key", "externalSubscriberId": "external_subscriber_123"}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1029,7 +1202,7 @@ examples:
     speakeasy-default-integrations-controller-list-integrations:
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "active": false, "deleted": false, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": false}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": true, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1041,10 +1214,10 @@ examples:
   IntegrationsController_createIntegration:
     speakeasy-default-integrations-controller-create-integration:
       requestBody:
-        application/json: {"providerId": "<id>", "channel": "sms"}
+        application/json: {"providerId": "<id>", "channel": "email"}
       responses:
         "201":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": true, "primary": true}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": false, "primary": true}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1063,7 +1236,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": true, "primary": false}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": true}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1080,7 +1253,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": true, "deleted": false, "primary": false}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": true, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "sms", "credentials": {}, "active": true, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1097,7 +1270,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": false, "deleted": false, "primary": true}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "in_app", "credentials": {}, "active": false, "deleted": false, "primary": false}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1110,7 +1283,7 @@ examples:
     speakeasy-default-integrations-controller-get-active-integrations:
       responses:
         "200":
-          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "email", "credentials": {}, "active": true, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "chat", "credentials": {}, "active": false, "deleted": true, "primary": true}]
+          application/json: [{"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": false}, {"_environmentId": "<id>", "_organizationId": "<id>", "name": "<value>", "identifier": "<value>", "providerId": "<id>", "channel": "push", "credentials": {}, "active": false, "deleted": false, "primary": false}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1127,7 +1300,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: true
+          application/json: false
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1145,7 +1318,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": true, "data": [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1732014359887", "updatedAt": "1746634753247"}, "template": {"name": "<value>", "description": "blissfully ouch pleasing serpentine", "active": false, "draft": false, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": false, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1724664406839", "content": [], "transactionId": "<id>", "channel": "sms", "read": true, "seen": false, "cta": {}, "status": "warning"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pusher-beams", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1743620791987", "updatedAt": "1746656487507"}, "template": {"name": "<value>", "description": "seriously till needy as cripple phooey deceivingly", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [], "_notificationGroupId": "<id>", "deleted": false, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1738532250202", "content": [{"type": "text", "content": "<value>"}, {"type": "button", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "mattermost", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1746259554356", "updatedAt": "1746607033778"}, "template": {"name": "<value>", "description": "what yahoo positively gadzooks and turbulent tremendously", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": false, "tags": ["<value>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": false, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734550946754", "content": [{"type": "button", "content": "<value>"}, {"type": "button", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "sms", "read": true, "seen": true, "cta": {}, "status": "warning"}], "pageSize": 4672.69, "page": 7638.04}
+          application/json: {"hasMore": true, "data": [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1731049605072", "updatedAt": "1747399691265"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1745951649575", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1731049605072", "updatedAt": "1747399691265"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1745951649575", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1731049605072", "updatedAt": "1747399691265"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1745951649575", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}], "pageSize": 3755.69, "page": 3670.04}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1196,7 +1369,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"hasMore": false, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "email", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [{"isNegated": false, "type": "BOOLEAN", "value": "OR", "children": []}, {"isNegated": true, "type": "LIST", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "LARGER", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "postmark", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "ReadConfirmation", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "plivo", "source": "Webhook"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "mattermost", "source": "Credentials"}], "step": {"_id": "<id>", "active": true, "filters": [{"isNegated": true, "type": "NUMBER", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "ALL_IN", "on": "subscriber"}]}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "SMALLER", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "NOT_LIKE", "on": "subscriber"}]}, {"isNegated": false, "type": "GROUP", "value": "OR", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "brevo-sms", "status": "<value>"}, {"_id": "<id>", "type": "digest", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "resend", "source": "Credentials"}, {"_id": "<id>", "status": "ReadConfirmation", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "azure-sms", "source": "Internal"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "nodemailer", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": true, "type": "DATE", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "ALL_IN", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "LIKE", "on": "payload"}]}, {"isNegated": false, "type": "STATEMENT", "value": "OR", "children": [{"field": "<value>", "value": "<value>", "operator": "LARGER", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "IN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "NOT_BETWEEN", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "mailjet", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "sms77", "source": "Internal"}, {"_id": "<id>", "status": "Success", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "whatsapp-business", "source": "Internal"}], "step": {"_id": "<id>", "active": true, "filters": [{"isNegated": true, "type": "GROUP", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "NOT_EQUAL", "on": "subscriber"}, {"field": "<value>", "value": "<value>", "operator": "LARGER_EQUAL", "on": "subscriber"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "ses", "status": "<value>"}, {"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": false, "isTest": true, "providerId": "forty-six-elks", "source": "Webhook"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "sendinblue", "source": "Payload"}, {"_id": "<id>", "status": "Pending", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "clicksend", "source": "Internal"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "STATEMENT", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "BETWEEN", "on": "subscriber"}]}, {"isNegated": false, "type": "STATEMENT", "value": "OR", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "plunk", "status": "<value>"}]}], "pageSize": 2139.89, "page": 3875.74}
+          application/json: {"hasMore": true, "data": [{"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "infobip-sms", "status": "<value>"}, {"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "infobip-sms", "status": "<value>"}]}, {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "infobip-sms", "status": "<value>"}, {"_id": "<id>", "type": "trigger", "executionDetails": [{"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}, {"_id": "<id>", "status": "Queued", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "mandrill", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}, {"isNegated": false, "type": "MULTI_LIST", "value": "AND", "children": []}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "infobip-sms", "status": "<value>"}]}], "pageSize": 2484.15, "page": 7600.09}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1213,7 +1386,7 @@ examples:
         header: {}
       responses:
         "200":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "custom", "executionDetails": [{"_id": "<id>", "status": "Warning", "detail": "<value>", "isRetry": true, "isTest": false, "providerId": "azure-sms", "source": "Credentials"}], "step": {"_id": "<id>", "active": false, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "apns", "status": "<value>"}, {"_id": "<id>", "type": "custom", "executionDetails": [], "step": {"_id": "<id>", "active": true, "filters": [], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "messagebird", "status": "<value>"}]}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_subscriberId": "<id>", "transactionId": "<id>", "jobs": [{"_id": "<id>", "type": "push", "executionDetails": [{"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "grafana-on-call", "source": "Payload"}, {"_id": "<id>", "status": "Failed", "detail": "<value>", "isRetry": true, "isTest": true, "providerId": "grafana-on-call", "source": "Payload"}], "step": {"_id": "<id>", "active": false, "filters": [{"isNegated": false, "type": "BOOLEAN", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}, {"isNegated": false, "type": "BOOLEAN", "value": "AND", "children": [{"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}, {"field": "<value>", "value": "<value>", "operator": "ANY_IN", "on": "payload"}]}], "_templateId": "<id>"}, "overrides": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "providerId": "novu-email", "status": "<value>"}]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1226,7 +1399,7 @@ examples:
     speakeasy-default-notifications-controller-get-activity-graph-stats:
       responses:
         "200":
-          application/json: [{"_id": "<id>", "count": 4718.99, "templates": ["<value>", "<value>", "<value>"], "channels": []}, {"_id": "<id>", "count": 3081.94, "templates": ["<value>", "<value>"], "channels": ["email", "email"]}]
+          application/json: [{"_id": "<id>", "count": 8662.86, "templates": ["<value 1>"], "channels": ["in_app"]}, {"_id": "<id>", "count": 8662.86, "templates": ["<value 1>"], "channels": ["in_app"]}]
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1239,7 +1412,7 @@ examples:
     speakeasy-default-notifications-controller-get-activity-stats:
       responses:
         "200":
-          application/json: {"weeklySent": 3704.56, "monthlySent": 9198.31}
+          application/json: {"weeklySent": 9579.01, "monthlySent": 6237.94}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1248,284 +1421,5 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_createTopic:
-    speakeasy-default-topics-controller-create-topic:
-      requestBody:
-        application/json: {"key": "<key>", "name": "<value>"}
-      responses:
-        "201":
-          application/json: {"key": "<key>"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_listTopics:
-    "":
-      parameters:
-        query:
-          page: 0
-          pageSize: 10
-          key: "exampleKey"
-        header: {}
-      responses:
-        "200":
-          application/json: {"data": [], "page": 1, "pageSize": 10, "totalCount": 10}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": [{"key": "value"}]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-    speakeasy-default-topics-controller-list-topics:
-      responses:
-        "200":
-          application/json: {"data": [{"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}], "next": "<value>", "previous": "<value>"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_deleteTopic:
-    speakeasy-default-topics-controller-delete-topic:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      responses:
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "200":
-          application/json: {"acknowledged": true}
-  TopicsController_getTopic:
-    speakeasy-default-topics-controller-get-topic:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_renameTopic:
-    speakeasy-default-topics-controller-rename-topic:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"name": "<value>"}
-      responses:
-        "200":
-          application/json: {"_organizationId": "<id>", "_environmentId": "<id>", "key": "<key>", "name": "<value>", "subscribers": ["<value>", "<value>", "<value>"]}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_assign:
-    speakeasy-default-topics-controller-assign:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"subscribers": ["<value>", "<value>", "<value>"]}
-      responses:
-        "200":
-          application/json: {"succeeded": []}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_getTopicSubscriber:
-    speakeasy-default-topics-controller-get-topic-subscriber:
-      parameters:
-        path:
-          externalSubscriberId: "<id>"
-          topicKey: "<value>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"_organizationId": "org_123456789", "_environmentId": "env_123456789", "_subscriberId": "sub_123456789", "_topicId": "topic_123456789", "topicKey": "my_topic_key", "externalSubscriberId": "external_subscriber_123"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_removeSubscribers:
-    speakeasy-default-topics-controller-remove-subscribers:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"subscribers": ["<value>", "<value>"]}
-      responses:
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  SubscribersController_listSubscriberTopics:
-    speakeasy-default-subscribers-controller-list-subscriber-topics:
-      parameters:
-        path:
-          subscriberId: "<id>"
-        query: {}
-        header: {}
-      responses:
-        "200":
-          application/json: {"data": [{"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}, {"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}, {"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}], "next": "<value>", "previous": "<value>"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_upsertTopic:
-    speakeasy-default-topics-controller-upsert-topic:
-      requestBody:
-        application/json: {"key": "task:12345", "name": "Task Title"}
-      responses:
-        "200":
-          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_updateTopic:
-    speakeasy-default-topics-controller-update-topic:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"name": "Updated Topic Name"}
-      responses:
-        "200":
-          application/json: {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_listTopicSubscriptions:
-    speakeasy-default-topics-controller-list-topic-subscriptions:
-      parameters:
-        path:
-          topicKey: "<value>"
-        query: {}
-        header: {}
-      responses:
-        "200":
-          application/json: {"data": [{"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}, {"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}, {"_id": "64da692e9a94fb2e6449ad08", "createdAt": "2021-01-01T00:00:00.000Z", "topic": {"_id": "64da692e9a94fb2e6449ad06", "key": "product-updates", "name": "Product Updates", "createdAt": "2023-08-15T00:00:00.000Z", "updatedAt": "2023-08-15T00:00:00.000Z"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}}], "next": "<value>", "previous": "<value>"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_createTopicSubscriptions:
-    speakeasy-default-topics-controller-create-topic-subscriptions:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
-      responses:
-        "201":
-          application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsController_deleteTopicSubscriptions:
-    speakeasy-default-topics-controller-delete-topic-subscriptions:
-      parameters:
-        path:
-          topicKey: "<value>"
-        header: {}
-      requestBody:
-        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
-      responses:
-        "200":
-          application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}, {"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-  TopicsV1Controller_getTopicSubscriber:
-    speakeasy-default-topics-v1-controller-get-topic-subscriber:
-      parameters:
-        path:
-          externalSubscriberId: "<id>"
-          topicKey: "<value>"
-        header: {}
-      responses:
-        "200":
-          application/json: {"_organizationId": "org_123456789", "_environmentId": "env_123456789", "_subscriberId": "sub_123456789", "_topicId": "topic_123456789", "topicKey": "my_topic_key", "externalSubscriberId": "external_subscriber_123"}
-        "414":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "400":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-        "422":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName2": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName3": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName4": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName5": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}, "fieldName6": {"messages": ["Field is required", "Invalid format"], "value": "xx xx xx "}}}
-        "500":
-          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
-examplesVersion: 1.0.1
+examplesVersion: 1.0.2
 generatedTests: {}

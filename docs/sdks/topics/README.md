@@ -37,9 +37,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{
-        Key: novugo.String("exampleKey"),
-    })
+    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{})
     if err != nil {
         log.Fatal(err)
     }

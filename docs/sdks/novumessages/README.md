@@ -38,7 +38,7 @@ func main() {
         Type: "<value>",
         SubscriberID: "<id>",
         MarkMessageActionAsSeenDto: components.MarkMessageActionAsSeenDto{
-            Status: components.MarkMessageActionAsSeenDtoStatusDone,
+            Status: components.MarkMessageActionAsSeenDtoStatusPending,
         },
     })
     if err != nil {
@@ -96,7 +96,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Messages.MarkAll(ctx, "<id>", components.MarkAllMessageAsRequestDto{
-        MarkAs: components.MarkAsSeen,
+        MarkAs: components.MarkAsRead,
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -155,10 +155,10 @@ func main() {
     )
 
     res, err := s.Subscribers.Messages.MarkAllAs(ctx, "<id>", components.MessageMarkAsRequestDto{
-        MessageID: components.CreateMessageIDStr(
-            "<id>",
+        MessageID: components.CreateMessageIDArrayOfStr(
+            []string{},
         ),
-        MarkAs: components.MessageMarkAsRequestDtoMarkAsUnread,
+        MarkAs: components.MessageMarkAsRequestDtoMarkAsSeen,
     }, nil)
     if err != nil {
         log.Fatal(err)
