@@ -5,12 +5,13 @@
 
 ### Available Operations
 
-* [List](#list) - Get subscriber preferences
-* [Update](#update) - Update subscriber global or workflow specific preferences
+* [List](#list) - Retrieve subscriber preferences
+* [Update](#update) - Update subscriber preferences
 
 ## List
 
-Get subscriber global and workflow specific preferences
+Retrieve subscriber channel preferences by its unique key identifier **subscriberId**. 
+    This API returns all five channels preferences for all workflows and global preferences.
 
 ### Example Usage
 
@@ -65,7 +66,9 @@ func main() {
 
 ## Update
 
-Update subscriber global or workflow specific preferences
+Update subscriber preferences by its unique key identifier **subscriberId**. 
+    **workflowId** is optional field, if provided, this API will update that workflow preference, 
+    otherwise it will update global preferences
 
 ### Example Usage
 

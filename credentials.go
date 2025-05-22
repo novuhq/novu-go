@@ -25,8 +25,10 @@ func newCredentials(sdkConfig sdkConfiguration) *Credentials {
 	}
 }
 
-// Update subscriber credentials
-// Subscriber credentials associated to the delivery methods such as slack and push tokens.
+// Update provider credentials
+// Update credentials for a provider such as slack and push tokens.
+//
+//	**providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberChannelResponse, error) {
 	request := operations.SubscribersV1ControllerUpdateSubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
@@ -371,10 +373,10 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 
 }
 
-// Append - Modify subscriber credentials
-// Subscriber credentials associated to the delivery methods such as slack and push tokens.
+// Append - Upsert provider credentials
+// Update credentials for a provider such as **slack** and **FCM**.
 //
-//	This endpoint appends provided credentials and deviceTokens to the existing ones.
+//	**providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerModifySubscriberChannelResponse, error) {
 	request := operations.SubscribersV1ControllerModifySubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
@@ -719,8 +721,10 @@ func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSub
 
 }
 
-// Delete subscriber credentials by providerId
-// Delete subscriber credentials such as slack and expo tokens.
+// Delete provider credentials
+// Delete subscriber credentials for a provider such as **slack** and **FCM** by **providerId**.
+//
+//	This action is irreversible and will remove the credentials for the provider for particular **subscriberId**.
 func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerID string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerDeleteSubscriberCredentialsResponse, error) {
 	request := operations.SubscribersV1ControllerDeleteSubscriberCredentialsRequest{
 		SubscriberID:   subscriberID,

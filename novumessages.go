@@ -25,7 +25,10 @@ func newNovuMessages(sdkConfig sdkConfiguration) *NovuMessages {
 	}
 }
 
-// UpdateAsSeen - Mark message action as seen
+// UpdateAsSeen - Update notification action status
+// Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+//
+//	**type** field can be **primary** or **secondary**
 func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -364,7 +367,8 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 
 }
 
-// MarkAll - Marks all the subscriber messages as read, unread, seen or unseen.
+// MarkAll - Update all notifications state
+// Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
 func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAllMessageAsRequestDto components.MarkAllMessageAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkAllUnreadAsReadResponse, error) {
 	request := operations.SubscribersV1ControllerMarkAllUnreadAsReadRequest{
 		SubscriberID:               subscriberID,
@@ -709,7 +713,10 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 
 }
 
-// MarkAllAs - Mark a subscriber messages as seen, read, unseen or unread
+// MarkAllAs - Update notifications state
+// Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
+//
+//	**messageId** is of type mongodbId of notifications
 func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
 	request := operations.SubscribersV1ControllerMarkMessagesAsRequest{
 		SubscriberID:            subscriberID,

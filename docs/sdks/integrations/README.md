@@ -8,16 +8,16 @@ With the help of the Integration Store, you can easily integrate your favorite d
 
 ### Available Operations
 
-* [List](#list) - Get integrations
-* [Create](#create) - Create integration
-* [Update](#update) - Update integration
-* [Delete](#delete) - Delete integration
-* [SetAsPrimary](#setasprimary) - Set integration as primary
-* [ListActive](#listactive) - Get active integrations
+* [List](#list) - List all integrations
+* [Create](#create) - Create an integration
+* [Update](#update) - Update an integration
+* [Delete](#delete) - Delete an integration
+* [SetAsPrimary](#setasprimary) - Update integration as primary
+* [ListActive](#listactive) - List active integrations
 
 ## List
 
-Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+List all the channels integrations created in the organization
 
 ### Example Usage
 
@@ -71,7 +71,8 @@ func main() {
 
 ## Create
 
-Create an integration for the current environment the user is based on the API key provided
+Create an integration for the current environment the user is based on the API key provided. 
+    Each provider supports different credentials, check the provider documentation for more details.
 
 ### Example Usage
 
@@ -94,7 +95,7 @@ func main() {
 
     res, err := s.Integrations.Create(ctx, components.CreateIntegrationRequestDto{
         ProviderID: "<id>",
-        Channel: components.CreateIntegrationRequestDtoChannelSms,
+        Channel: components.CreateIntegrationRequestDtoChannelEmail,
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -130,7 +131,8 @@ func main() {
 
 ## Update
 
-Update integration
+Update an integration by its unique key identifier **integrationId**. 
+    Each provider supports different credentials, check the provider documentation for more details.
 
 ### Example Usage
 
@@ -187,7 +189,8 @@ func main() {
 
 ## Delete
 
-Delete integration
+Delete an integration by its unique key identifier **integrationId**. 
+    This action is irreversible.
 
 ### Example Usage
 
@@ -242,7 +245,9 @@ func main() {
 
 ## SetAsPrimary
 
-Set integration as primary
+Update an integration as **primary** by its unique key identifier **integrationId**. 
+    This API will set the integration as primary for that channel in the current environment. 
+    Primary integration is used to deliver notification for sms and email channels in the workflow.
 
 ### Example Usage
 
@@ -297,7 +302,7 @@ func main() {
 
 ## ListActive
 
-Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+List all the active integrations created in the organization
 
 ### Example Usage
 

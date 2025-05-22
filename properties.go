@@ -26,7 +26,7 @@ func newProperties(sdkConfig sdkConfiguration) *Properties {
 }
 
 // UpdateOnlineFlag - Update subscriber online status
-// Used to update the subscriber isOnline flag.
+// Update the subscriber online status by its unique key identifier **subscriberId**
 func (s *Properties) UpdateOnlineFlag(ctx context.Context, subscriberID string, updateSubscriberOnlineFlagRequestDto components.UpdateSubscriberOnlineFlagRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse, error) {
 	request := operations.SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest{
 		SubscriberID:                         subscriberID,

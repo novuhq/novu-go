@@ -25,8 +25,10 @@ func newNovuTopics(sdkConfig sdkConfiguration) *NovuTopics {
 	}
 }
 
-// List topics a subscriber is subscribed to
-// List topic subscriptions for a subscriber with pagination and filtering
+// List - Retrieve subscriber subscriptions
+// Retrieve subscriber's topic subscriptions by its unique key identifier **subscriberId**.
+//
+//	Checkout all available filters in the query section.
 func (s *NovuTopics) List(ctx context.Context, request operations.SubscribersControllerListSubscriberTopicsRequest, opts ...operations.Option) (*operations.SubscribersControllerListSubscriberTopicsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{

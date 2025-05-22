@@ -62,7 +62,6 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
-  * [Pagination](#pagination)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -111,26 +110,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {
@@ -200,20 +182,6 @@ func main() {
 			},
 		},
 		Overrides: &components.TriggerEventToAllRequestDtoOverrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
 			AdditionalProperties: map[string]map[string]any{
 				"fcm": map[string]any{
 					"data": map[string]any{
@@ -262,26 +230,9 @@ func main() {
 						"text": "string",
 					},
 				},
-				Overrides: &components.Overrides{
-					Steps: map[string]components.StepsOverrides{
-						"email-step": components.StepsOverrides{
-							Providers: map[string]map[string]any{
-								"sendgrid": map[string]any{
-									"templateId": "1234567890",
-								},
-							},
-						},
-					},
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-				To: components.CreateToSubscriberPayloadDto(
-					components.SubscriberPayloadDto{
-						SubscriberID: "<id>",
-					},
+				Overrides: &components.Overrides{},
+				To: components.CreateToStr(
+					"SUBSCRIBER_ID",
 				),
 			},
 			components.TriggerEventRequestDto{
@@ -292,31 +243,9 @@ func main() {
 						"text": "string",
 					},
 				},
-				Overrides: &components.Overrides{
-					Steps: map[string]components.StepsOverrides{
-						"email-step": components.StepsOverrides{
-							Providers: map[string]map[string]any{
-								"sendgrid": map[string]any{
-									"templateId": "1234567890",
-								},
-							},
-						},
-					},
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-				To: components.CreateToArrayOf1(
-					[]components.One{
-						components.CreateOneTopicPayloadDto(
-							components.TopicPayloadDto{
-								TopicKey: "<value>",
-								Type:     components.TriggerRecipientsTypeEnumSubscriber,
-							},
-						),
-					},
+				Overrides: &components.Overrides{},
+				To: components.CreateToStr(
+					"SUBSCRIBER_ID",
 				),
 			},
 			components.TriggerEventRequestDto{
@@ -327,31 +256,9 @@ func main() {
 						"text": "string",
 					},
 				},
-				Overrides: &components.Overrides{
-					Steps: map[string]components.StepsOverrides{
-						"email-step": components.StepsOverrides{
-							Providers: map[string]map[string]any{
-								"sendgrid": map[string]any{
-									"templateId": "1234567890",
-								},
-							},
-						},
-					},
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-				To: components.CreateToArrayOf1(
-					[]components.One{
-						components.CreateOneStr(
-							"SUBSCRIBER_ID",
-						),
-						components.CreateOneStr(
-							"SUBSCRIBER_ID",
-						),
-					},
+				Overrides: &components.Overrides{},
+				To: components.CreateToStr(
+					"SUBSCRIBER_ID",
 				),
 			},
 		},
@@ -404,26 +311,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {
@@ -445,32 +335,23 @@ func main() {
 
 ### [Integrations](docs/sdks/integrations/README.md)
 
-* [List](docs/sdks/integrations/README.md#list) - Get integrations
-* [Create](docs/sdks/integrations/README.md#create) - Create integration
-* [Update](docs/sdks/integrations/README.md#update) - Update integration
-* [Delete](docs/sdks/integrations/README.md#delete) - Delete integration
-* [SetAsPrimary](docs/sdks/integrations/README.md#setasprimary) - Set integration as primary
-* [ListActive](docs/sdks/integrations/README.md#listactive) - Get active integrations
-
-#### [Integrations.Webhooks](docs/sdks/webhooks/README.md)
-
-* [Retrieve](docs/sdks/webhooks/README.md#retrieve) - Get webhook support status for provider
+* [List](docs/sdks/integrations/README.md#list) - List all integrations
+* [Create](docs/sdks/integrations/README.md#create) - Create an integration
+* [Update](docs/sdks/integrations/README.md#update) - Update an integration
+* [Delete](docs/sdks/integrations/README.md#delete) - Delete an integration
+* [SetAsPrimary](docs/sdks/integrations/README.md#setasprimary) - Update integration as primary
+* [ListActive](docs/sdks/integrations/README.md#listactive) - List active integrations
 
 ### [Messages](docs/sdks/messages/README.md)
 
-* [Retrieve](docs/sdks/messages/README.md#retrieve) - Get messages
-* [Delete](docs/sdks/messages/README.md#delete) - Delete message
+* [Retrieve](docs/sdks/messages/README.md#retrieve) - List all messages
+* [Delete](docs/sdks/messages/README.md#delete) - Delete a message
 * [DeleteByTransactionID](docs/sdks/messages/README.md#deletebytransactionid) - Delete messages by transactionId
 
 ### [Notifications](docs/sdks/notifications/README.md)
 
-* [List](docs/sdks/notifications/README.md#list) - Get notifications
-* [Retrieve](docs/sdks/notifications/README.md#retrieve) - Get notification
-
-#### [Notifications.Stats](docs/sdks/stats/README.md)
-
-* [Graph](docs/sdks/stats/README.md#graph) - Get notification graph statistics
-* [Retrieve](docs/sdks/stats/README.md#retrieve) - Get notification statistics
+* [List](docs/sdks/notifications/README.md#list) - List all events
+* [Retrieve](docs/sdks/notifications/README.md#retrieve) - Retrieve an event
 
 ### [Novu SDK](docs/sdks/novu/README.md)
 
@@ -481,41 +362,34 @@ func main() {
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
-* [Search](docs/sdks/subscribers/README.md#search) - Search for subscribers
-* [Create](docs/sdks/subscribers/README.md#create) - Create subscriber
-* [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Get subscriber
-* [Patch](docs/sdks/subscribers/README.md#patch) - Patch subscriber
+* [Search](docs/sdks/subscribers/README.md#search) - Search subscribers
+* [Create](docs/sdks/subscribers/README.md#create) - Create a subscriber
+* [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Retrieve a subscriber
+* [Patch](docs/sdks/subscribers/README.md#patch) - Update a subscriber
 * [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
-* [List](docs/sdks/subscribers/README.md#list) - Get subscribers
-* [Upsert](docs/sdks/subscribers/README.md#upsert) - Upsert subscriber
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
-
-#### [Subscribers.Authentication](docs/sdks/authentication/README.md)
-
-* [ChatAccessOauth](docs/sdks/authentication/README.md#chataccessoauth) - Handle chat oauth
-* [ChatAccessOauthCallBack](docs/sdks/authentication/README.md#chataccessoauthcallback) - Handle providers oauth redirect
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
-* [Update](docs/sdks/credentials/README.md#update) - Update subscriber credentials
-* [Append](docs/sdks/credentials/README.md#append) - Modify subscriber credentials
-* [Delete](docs/sdks/credentials/README.md#delete) - Delete subscriber credentials by providerId
+* [Update](docs/sdks/credentials/README.md#update) - Update provider credentials
+* [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
+* [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
 
-* [UpdateAsSeen](docs/sdks/novumessages/README.md#updateasseen) - Mark message action as seen
-* [MarkAll](docs/sdks/novumessages/README.md#markall) - Marks all the subscriber messages as read, unread, seen or unseen.
-* [MarkAllAs](docs/sdks/novumessages/README.md#markallas) - Mark a subscriber messages as seen, read, unseen or unread
+* [UpdateAsSeen](docs/sdks/novumessages/README.md#updateasseen) - Update notification action status
+* [MarkAll](docs/sdks/novumessages/README.md#markall) - Update all notifications state
+* [MarkAllAs](docs/sdks/novumessages/README.md#markallas) - Update notifications state
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
-* [Feed](docs/sdks/novunotifications/README.md#feed) - Get in-app notification feed for a particular subscriber
-* [UnseenCount](docs/sdks/novunotifications/README.md#unseencount) - Get the unseen in-app notifications count for subscribers feed
+* [Feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
+* [UnseenCount](docs/sdks/novunotifications/README.md#unseencount) - Retrieve unseen notifications count
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 
-* [List](docs/sdks/preferences/README.md#list) - Get subscriber preferences
-* [Update](docs/sdks/preferences/README.md#update) - Update subscriber global or workflow specific preferences
+* [List](docs/sdks/preferences/README.md#list) - Retrieve subscriber preferences
+* [Update](docs/sdks/preferences/README.md#update) - Update subscriber preferences
 
 #### [Subscribers.Properties](docs/sdks/properties/README.md)
 
@@ -523,15 +397,15 @@ func main() {
 
 #### [Subscribers.Topics](docs/sdks/novutopics/README.md)
 
-* [List](docs/sdks/novutopics/README.md#list) - List topics a subscriber is subscribed to
+* [List](docs/sdks/novutopics/README.md#list) - Retrieve subscriber subscriptions
 
 ### [Topics](docs/sdks/topics/README.md)
 
-* [List](docs/sdks/topics/README.md#list) - Get topics list
-* [Create](docs/sdks/topics/README.md#create) - Create or update a topic
-* [Get](docs/sdks/topics/README.md#get) - Get topic by key
-* [Update](docs/sdks/topics/README.md#update) - Update topic by key
-* [Delete](docs/sdks/topics/README.md#delete) - Delete topic by key
+* [List](docs/sdks/topics/README.md#list) - List all topics
+* [Create](docs/sdks/topics/README.md#create) - Create a topic
+* [Get](docs/sdks/topics/README.md#get) - Retrieve a topic
+* [Update](docs/sdks/topics/README.md#update) - Update a topic
+* [Delete](docs/sdks/topics/README.md#delete) - Delete a topic
 
 #### [Topics.Subscribers](docs/sdks/novusubscribers/README.md)
 
@@ -540,59 +414,11 @@ func main() {
 #### [Topics.Subscriptions](docs/sdks/subscriptions/README.md)
 
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
-* [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions, if the topic does not exist, it will be created.
+* [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
-
-<!-- Start Pagination [pagination] -->
-## Pagination
-
-Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
-returned response object will have a `Next` method that can be called to pull down the next group of results. If the
-return value of `Next` is `nil`, then there are no more pages to be fetched.
-
-Here's an example of one such pagination call:
-```go
-package main
-
-import (
-	"context"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-	ctx := context.Background()
-
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
-	)
-
-	res, err := s.Subscribers.List(ctx, nil, nil, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if res.Object != nil {
-		for {
-			// handle items
-
-			res, err = res.Next()
-
-			if err != nil {
-				// handle error
-			}
-
-			if res == nil {
-				break
-			}
-		}
-	}
-}
-
-```
-<!-- End Pagination [pagination] -->
 
 <!-- Start Retries [retries] -->
 ## Retries
@@ -627,26 +453,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil, operations.WithRetries(
 		retry.Config{
@@ -707,26 +516,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {
@@ -786,26 +578,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {
@@ -885,26 +660,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {
@@ -946,26 +704,9 @@ func main() {
 				"text": "string",
 			},
 		},
-		Overrides: &components.Overrides{
-			Steps: map[string]components.StepsOverrides{
-				"email-step": components.StepsOverrides{
-					Providers: map[string]map[string]any{
-						"sendgrid": map[string]any{
-							"templateId": "1234567890",
-						},
-					},
-				},
-			},
-			Providers: map[string]map[string]any{
-				"sendgrid": map[string]any{
-					"templateId": "1234567890",
-				},
-			},
-		},
-		To: components.CreateToSubscriberPayloadDto(
-			components.SubscriberPayloadDto{
-				SubscriberID: "<id>",
-			},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
 		),
 	}, nil)
 	if err != nil {

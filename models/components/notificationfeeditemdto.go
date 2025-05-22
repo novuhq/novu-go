@@ -55,7 +55,7 @@ type NotificationFeedItemDto struct {
 	// Unique identifier for the subscriber receiving the notification.
 	SubscriberID string `json:"_subscriberId"`
 	// Identifier for the feed associated with the notification.
-	FeedID string `json:"_feedId"`
+	FeedID *string `json:"_feedId,omitempty"`
 	// Identifier for the job that triggered the notification.
 	JobID string `json:"_jobId"`
 	// Timestamp indicating when the notification was created.
@@ -154,9 +154,9 @@ func (o *NotificationFeedItemDto) GetSubscriberID() string {
 	return o.SubscriberID
 }
 
-func (o *NotificationFeedItemDto) GetFeedID() string {
+func (o *NotificationFeedItemDto) GetFeedID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.FeedID
 }
