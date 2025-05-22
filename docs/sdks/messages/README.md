@@ -8,13 +8,15 @@ A message in Novu represents a notification delivered to a recipient on a partic
 
 ### Available Operations
 
-* [Retrieve](#retrieve) - Get messages
-* [Delete](#delete) - Delete message
+* [Retrieve](#retrieve) - List all messages
+* [Delete](#delete) - Delete a message
 * [DeleteByTransactionID](#deletebytransactionid) - Delete messages by transactionId
 
 ## Retrieve
 
-Returns a list of messages, could paginate using the `page` query parameter
+List all messages for the current environment. 
+    This API supports filtering by **channel**, **subscriberId**, and **transactionId**. 
+    This API returns a paginated list of messages.
 
 ### Example Usage
 
@@ -69,7 +71,8 @@ func main() {
 
 ## Delete
 
-Deletes a message entity from the Novu platform
+Delete a message entity from the Novu platform by **messageId**. 
+    This action is irreversible. **messageId** is required and of mongodbId type.
 
 ### Example Usage
 
@@ -89,7 +92,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Messages.Delete(ctx, "<id>", nil)
+    res, err := s.Messages.Delete(ctx, "507f1f77bcf86cd799439011", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -101,12 +104,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `messageID`                                              | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `messageID`                                              | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | 507f1f77bcf86cd799439011                                 |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
 
@@ -124,7 +127,8 @@ func main() {
 
 ## DeleteByTransactionID
 
-Deletes messages entity from the Novu platform using TransactionId of message
+Delete multiple messages from the Novu platform using **transactionId** of triggered event. 
+    This API supports filtering by **channel** and delete all messages associated with the **transactionId**.
 
 ### Example Usage
 
@@ -144,7 +148,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Messages.DeleteByTransactionID(ctx, "<id>", nil, nil)
+    res, err := s.Messages.DeleteByTransactionID(ctx, "507f1f77bcf86cd799439011", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -156,13 +160,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                 | Type                                                      | Required                                                  | Description                                               |
-| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
-| `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |
-| `transactionID`                                           | *string*                                                  | :heavy_check_mark:                                        | N/A                                                       |
-| `channel`                                                 | [*operations.Channel](../../models/operations/channel.md) | :heavy_minus_sign:                                        | The channel of the message to be deleted                  |
-| `idempotencyKey`                                          | **string*                                                 | :heavy_minus_sign:                                        | A header for idempotency purposes                         |
-| `opts`                                                    | [][operations.Option](../../models/operations/option.md)  | :heavy_minus_sign:                                        | The options for this request.                             |
+| Parameter                                                 | Type                                                      | Required                                                  | Description                                               | Example                                                   |
+| --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------- |
+| `ctx`                                                     | [context.Context](https://pkg.go.dev/context#Context)     | :heavy_check_mark:                                        | The context to use for the request.                       |                                                           |
+| `transactionID`                                           | *string*                                                  | :heavy_check_mark:                                        | N/A                                                       | 507f1f77bcf86cd799439011                                  |
+| `channel`                                                 | [*operations.Channel](../../models/operations/channel.md) | :heavy_minus_sign:                                        | The channel of the message to be deleted                  |                                                           |
+| `idempotencyKey`                                          | **string*                                                 | :heavy_minus_sign:                                        | A header for idempotency purposes                         |                                                           |
+| `opts`                                                    | [][operations.Option](../../models/operations/option.md)  | :heavy_minus_sign:                                        | The options for this request.                             |                                                           |
 
 ### Response
 

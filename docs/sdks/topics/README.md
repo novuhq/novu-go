@@ -8,15 +8,17 @@ Topics are a way to group subscribers together so that they can be notified of e
 
 ### Available Operations
 
-* [List](#list) - Get topics list
-* [Create](#create) - Create or update a topic
-* [Get](#get) - Get topic by key
-* [Update](#update) - Update topic by key
-* [Delete](#delete) - Delete topic by key
+* [List](#list) - List all topics
+* [Create](#create) - Create a topic
+* [Get](#get) - Retrieve a topic
+* [Update](#update) - Update a topic
+* [Delete](#delete) - Delete a topic
 
 ## List
 
-Get topics list
+This api returns a paginated list of topics.
+    Topics can be filtered by **key**, **name**, or **includeCursor** to paginate through the list. 
+    Checkout all available filters in the query section.
 
 ### Example Usage
 
@@ -37,9 +39,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{
-        Key: novugo.String("exampleKey"),
-    })
+    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -132,7 +132,7 @@ func main() {
 
 ## Get
 
-Get topic by key
+Retrieve a topic by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -187,7 +187,7 @@ func main() {
 
 ## Update
 
-Update topic by key
+Update a topic name by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -246,7 +246,8 @@ func main() {
 
 ## Delete
 
-Delete topic by key
+Delete a topic by its unique key identifier **topicKey**. 
+    This action is irreversible and will remove all subscriptions to the topic.
 
 ### Example Usage
 

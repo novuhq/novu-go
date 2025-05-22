@@ -5,11 +5,12 @@
 
 ### Available Operations
 
-* [List](#list) - List topics a subscriber is subscribed to
+* [List](#list) - Retrieve subscriber subscriptions
 
 ## List
 
-List topic subscriptions for a subscriber with pagination and filtering
+Retrieve subscriber's topic subscriptions by its unique key identifier **subscriberId**. 
+    Checkout all available filters in the query section.
 
 ### Example Usage
 

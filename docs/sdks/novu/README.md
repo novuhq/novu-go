@@ -49,26 +49,9 @@ func main() {
                 "text": "string",
             },
         },
-        Overrides: &components.Overrides{
-            Steps: map[string]components.StepsOverrides{
-                "email-step": components.StepsOverrides{
-                    Providers: map[string]map[string]any{
-                        "sendgrid": map[string]any{
-                            "templateId": "1234567890",
-                        },
-                    },
-                },
-            },
-            Providers: map[string]map[string]any{
-                "sendgrid": map[string]any{
-                    "templateId": "1234567890",
-                },
-            },
-        },
-        To: components.CreateToSubscriberPayloadDto(
-            components.SubscriberPayloadDto{
-                SubscriberID: "<id>",
-            },
+        Overrides: &components.Overrides{},
+        To: components.CreateToStr(
+            "SUBSCRIBER_ID",
         ),
     }, nil)
     if err != nil {
@@ -194,20 +177,6 @@ func main() {
             },
         },
         Overrides: &components.TriggerEventToAllRequestDtoOverrides{
-            Steps: map[string]components.StepsOverrides{
-                "email-step": components.StepsOverrides{
-                    Providers: map[string]map[string]any{
-                        "sendgrid": map[string]any{
-                            "templateId": "1234567890",
-                        },
-                    },
-                },
-            },
-            Providers: map[string]map[string]any{
-                "sendgrid": map[string]any{
-                    "templateId": "1234567890",
-                },
-            },
             AdditionalProperties: map[string]map[string]any{
                 "fcm": map[string]any{
                     "data": map[string]any{
@@ -285,26 +254,9 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: &components.Overrides{
-                    Steps: map[string]components.StepsOverrides{
-                        "email-step": components.StepsOverrides{
-                            Providers: map[string]map[string]any{
-                                "sendgrid": map[string]any{
-                                    "templateId": "1234567890",
-                                },
-                            },
-                        },
-                    },
-                    Providers: map[string]map[string]any{
-                        "sendgrid": map[string]any{
-                            "templateId": "1234567890",
-                        },
-                    },
-                },
-                To: components.CreateToSubscriberPayloadDto(
-                    components.SubscriberPayloadDto{
-                        SubscriberID: "<id>",
-                    },
+                Overrides: &components.Overrides{},
+                To: components.CreateToStr(
+                    "SUBSCRIBER_ID",
                 ),
             },
             components.TriggerEventRequestDto{
@@ -315,31 +267,9 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: &components.Overrides{
-                    Steps: map[string]components.StepsOverrides{
-                        "email-step": components.StepsOverrides{
-                            Providers: map[string]map[string]any{
-                                "sendgrid": map[string]any{
-                                    "templateId": "1234567890",
-                                },
-                            },
-                        },
-                    },
-                    Providers: map[string]map[string]any{
-                        "sendgrid": map[string]any{
-                            "templateId": "1234567890",
-                        },
-                    },
-                },
-                To: components.CreateToArrayOf1(
-                    []components.One{
-                        components.CreateOneTopicPayloadDto(
-                            components.TopicPayloadDto{
-                                TopicKey: "<value>",
-                                Type: components.TriggerRecipientsTypeEnumSubscriber,
-                            },
-                        ),
-                    },
+                Overrides: &components.Overrides{},
+                To: components.CreateToStr(
+                    "SUBSCRIBER_ID",
                 ),
             },
             components.TriggerEventRequestDto{
@@ -350,31 +280,9 @@ func main() {
                         "text": "string",
                     },
                 },
-                Overrides: &components.Overrides{
-                    Steps: map[string]components.StepsOverrides{
-                        "email-step": components.StepsOverrides{
-                            Providers: map[string]map[string]any{
-                                "sendgrid": map[string]any{
-                                    "templateId": "1234567890",
-                                },
-                            },
-                        },
-                    },
-                    Providers: map[string]map[string]any{
-                        "sendgrid": map[string]any{
-                            "templateId": "1234567890",
-                        },
-                    },
-                },
-                To: components.CreateToArrayOf1(
-                    []components.One{
-                        components.CreateOneStr(
-                            "SUBSCRIBER_ID",
-                        ),
-                        components.CreateOneStr(
-                            "SUBSCRIBER_ID",
-                        ),
-                    },
+                Overrides: &components.Overrides{},
+                To: components.CreateToStr(
+                    "SUBSCRIBER_ID",
                 ),
             },
         },

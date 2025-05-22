@@ -20,20 +20,17 @@ import (
 //
 // https://docs.novu.co/channels-and-providers/integration-store
 type Integrations struct {
-	Webhooks *Webhooks
-
 	sdkConfiguration sdkConfiguration
 }
 
 func newIntegrations(sdkConfig sdkConfiguration) *Integrations {
 	return &Integrations{
 		sdkConfiguration: sdkConfig,
-		Webhooks:         newWebhooks(sdkConfig),
 	}
 }
 
-// List - Get integrations
-// Return all the integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+// List all integrations
+// List all the channels integrations created in the organization
 func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerListIntegrationsResponse, error) {
 	request := operations.IntegrationsControllerListIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,
@@ -369,8 +366,10 @@ func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ..
 
 }
 
-// Create integration
-// Create an integration for the current environment the user is based on the API key provided
+// Create an integration
+// Create an integration for the current environment the user is based on the API key provided.
+//
+//	Each provider supports different credentials, check the provider documentation for more details.
 func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto components.CreateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerCreateIntegrationResponse, error) {
 	request := operations.IntegrationsControllerCreateIntegrationRequest{
 		IdempotencyKey:              idempotencyKey,
@@ -714,7 +713,10 @@ func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto c
 
 }
 
-// Update integration
+// Update an integration
+// Update an integration by its unique key identifier **integrationId**.
+//
+//	Each provider supports different credentials, check the provider documentation for more details.
 func (s *Integrations) Update(ctx context.Context, integrationID string, updateIntegrationRequestDto components.UpdateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerUpdateIntegrationByIDResponse, error) {
 	request := operations.IntegrationsControllerUpdateIntegrationByIDRequest{
 		IntegrationID:               integrationID,
@@ -1059,7 +1061,10 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 
 }
 
-// Delete integration
+// Delete an integration
+// Delete an integration by its unique key identifier **integrationId**.
+//
+//	This action is irreversible.
 func (s *Integrations) Delete(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerRemoveIntegrationResponse, error) {
 	request := operations.IntegrationsControllerRemoveIntegrationRequest{
 		IntegrationID:  integrationID,
@@ -1396,7 +1401,11 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 
 }
 
-// SetAsPrimary - Set integration as primary
+// SetAsPrimary - Update integration as primary
+// Update an integration as **primary** by its unique key identifier **integrationId**.
+//
+//	This API will set the integration as primary for that channel in the current environment.
+//	Primary integration is used to deliver notification for sms and email channels in the workflow.
 func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerSetIntegrationAsPrimaryResponse, error) {
 	request := operations.IntegrationsControllerSetIntegrationAsPrimaryRequest{
 		IntegrationID:  integrationID,
@@ -1733,8 +1742,8 @@ func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, i
 
 }
 
-// ListActive - Get active integrations
-// Return all the active integrations the user has created for that organization. Review v.0.17.0 changelog for a breaking change
+// ListActive - List active integrations
+// List all the active integrations created in the organization
 func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetActiveIntegrationsResponse, error) {
 	request := operations.IntegrationsControllerGetActiveIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,

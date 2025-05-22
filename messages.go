@@ -29,8 +29,11 @@ func newMessages(sdkConfig sdkConfiguration) *Messages {
 	}
 }
 
-// Retrieve - Get messages
-// Returns a list of messages, could paginate using the `page` query parameter
+// Retrieve - List all messages
+// List all messages for the current environment.
+//
+//	This API supports filtering by **channel**, **subscriberId**, and **transactionId**.
+//	This API returns a paginated list of messages.
 func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesControllerGetMessagesRequest, opts ...operations.Option) (*operations.MessagesControllerGetMessagesResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -366,8 +369,10 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 
 }
 
-// Delete message
-// Deletes a message entity from the Novu platform
+// Delete a message
+// Delete a message entity from the Novu platform by **messageId**.
+//
+//	This action is irreversible. **messageId** is required and of mongodbId type.
 func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey *string, opts ...operations.Option) (*operations.MessagesControllerDeleteMessageResponse, error) {
 	request := operations.MessagesControllerDeleteMessageRequest{
 		MessageID:      messageID,
@@ -705,7 +710,9 @@ func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey 
 }
 
 // DeleteByTransactionID - Delete messages by transactionId
-// Deletes messages entity from the Novu platform using TransactionId of message
+// Delete multiple messages from the Novu platform using **transactionId** of triggered event.
+//
+//	This API supports filtering by **channel** and delete all messages associated with the **transactionId**.
 func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID string, channel *operations.Channel, idempotencyKey *string, opts ...operations.Option) (*operations.MessagesControllerDeleteMessagesByTransactionIDResponse, error) {
 	request := operations.MessagesControllerDeleteMessagesByTransactionIDRequest{
 		Channel:        channel,

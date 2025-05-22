@@ -25,8 +25,10 @@ func newPreferences(sdkConfig sdkConfiguration) *Preferences {
 	}
 }
 
-// List - Get subscriber preferences
-// Get subscriber global and workflow specific preferences
+// List - Retrieve subscriber preferences
+// Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
+//
+//	This API returns all five channels preferences for all workflows and global preferences.
 func (s *Preferences) List(ctx context.Context, subscriberID string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerGetSubscriberPreferencesResponse, error) {
 	request := operations.SubscribersControllerGetSubscriberPreferencesRequest{
 		SubscriberID:   subscriberID,
@@ -363,8 +365,11 @@ func (s *Preferences) List(ctx context.Context, subscriberID string, idempotency
 
 }
 
-// Update subscriber global or workflow specific preferences
-// Update subscriber global or workflow specific preferences
+// Update subscriber preferences
+// Update subscriber preferences by its unique key identifier **subscriberId**.
+//
+//	**workflowId** is optional field, if provided, this API will update that workflow preference,
+//	otherwise it will update global preferences
 func (s *Preferences) Update(ctx context.Context, subscriberID string, patchSubscriberPreferencesDto components.PatchSubscriberPreferencesDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerUpdateSubscriberPreferencesResponse, error) {
 	request := operations.SubscribersControllerUpdateSubscriberPreferencesRequest{
 		SubscriberID:                  subscriberID,

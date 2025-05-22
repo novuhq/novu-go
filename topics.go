@@ -34,7 +34,11 @@ func newTopics(sdkConfig sdkConfiguration) *Topics {
 	}
 }
 
-// List - Get topics list
+// List all topics
+// This api returns a paginated list of topics.
+//
+//	Topics can be filtered by **key**, **name**, or **includeCursor** to paginate through the list.
+//	Checkout all available filters in the query section.
 func (s *Topics) List(ctx context.Context, request operations.TopicsControllerListTopicsRequest, opts ...operations.Option) (*operations.TopicsControllerListTopicsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -370,7 +374,7 @@ func (s *Topics) List(ctx context.Context, request operations.TopicsControllerLi
 
 }
 
-// Create or update a topic
+// Create a topic
 // Creates a new topic if it does not exist, or updates an existing topic if it already exists
 func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto components.CreateUpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpsertTopicResponse, error) {
 	request := operations.TopicsControllerUpsertTopicRequest{
@@ -717,7 +721,8 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 
 }
 
-// Get topic by key
+// Get - Retrieve a topic
+// Retrieve a topic by its unique key identifier **topicKey**
 func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicResponse, error) {
 	request := operations.TopicsControllerGetTopicRequest{
 		TopicKey:       topicKey,
@@ -1054,7 +1059,8 @@ func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *strin
 
 }
 
-// Update topic by key
+// Update a topic
+// Update a topic name by its unique key identifier **topicKey**
 func (s *Topics) Update(ctx context.Context, topicKey string, updateTopicRequestDto components.UpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpdateTopicResponse, error) {
 	request := operations.TopicsControllerUpdateTopicRequest{
 		TopicKey:              topicKey,
@@ -1399,7 +1405,10 @@ func (s *Topics) Update(ctx context.Context, topicKey string, updateTopicRequest
 
 }
 
-// Delete topic by key
+// Delete a topic
+// Delete a topic by its unique key identifier **topicKey**.
+//
+//	This action is irreversible and will remove all subscriptions to the topic.
 func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerDeleteTopicResponse, error) {
 	request := operations.TopicsControllerDeleteTopicRequest{
 		TopicKey:       topicKey,

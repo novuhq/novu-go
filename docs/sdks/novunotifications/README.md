@@ -5,12 +5,12 @@
 
 ### Available Operations
 
-* [Feed](#feed) - Get in-app notification feed for a particular subscriber
-* [UnseenCount](#unseencount) - Get the unseen in-app notifications count for subscribers feed
+* [Feed](#feed) - Retrieve subscriber notifications
+* [UnseenCount](#unseencount) - Retrieve unseen notifications count
 
 ## Feed
 
-Get in-app notification feed for a particular subscriber
+Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
@@ -68,7 +68,7 @@ func main() {
 
 ## UnseenCount
 
-Get the unseen in-app notifications count for subscribers feed
+Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
 
 ### Example Usage
 

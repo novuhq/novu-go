@@ -26,6 +26,9 @@ func newSubscriptions(sdkConfig sdkConfiguration) *Subscriptions {
 }
 
 // List topic subscriptions
+// List all topics that a subscriber is subscribed to.
+//
+//	Checkout all available filters in the query section.
 func (s *Subscriptions) List(ctx context.Context, request operations.TopicsControllerListTopicSubscriptionsRequest, opts ...operations.Option) (*operations.TopicsControllerListTopicSubscriptionsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -361,7 +364,10 @@ func (s *Subscriptions) List(ctx context.Context, request operations.TopicsContr
 
 }
 
-// Create topic subscriptions, if the topic does not exist, it will be created.
+// Create topic subscriptions
+// This api will create subscription for subscriberIds for a topic.
+//
+//	Its like subscribing to a common interest group. if topic does not exist, it will be created.
 func (s *Subscriptions) Create(ctx context.Context, topicKey string, createTopicSubscriptionsRequestDto components.CreateTopicSubscriptionsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerCreateTopicSubscriptionsResponse, error) {
 	request := operations.TopicsControllerCreateTopicSubscriptionsRequest{
 		TopicKey:                           topicKey,
@@ -707,6 +713,7 @@ func (s *Subscriptions) Create(ctx context.Context, topicKey string, createTopic
 }
 
 // Delete topic subscriptions
+// Delete subscriptions for subscriberIds for a topic.
 func (s *Subscriptions) Delete(ctx context.Context, topicKey string, deleteTopicSubscriptionsRequestDto components.DeleteTopicSubscriptionsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerDeleteTopicSubscriptionsResponse, error) {
 	request := operations.TopicsControllerDeleteTopicSubscriptionsRequest{
 		TopicKey:                           topicKey,

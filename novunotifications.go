@@ -25,7 +25,8 @@ func newNovuNotifications(sdkConfig sdkConfiguration) *NovuNotifications {
 	}
 }
 
-// Feed - Get in-app notification feed for a particular subscriber
+// Feed - Retrieve subscriber notifications
+// Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
 func (s *NovuNotifications) Feed(ctx context.Context, request operations.SubscribersV1ControllerGetNotificationsFeedRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerGetNotificationsFeedResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -361,7 +362,8 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 
 }
 
-// UnseenCount - Get the unseen in-app notifications count for subscribers feed
+// UnseenCount - Retrieve unseen notifications count
+// Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
 func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string, seen *bool, limit *float64, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerGetUnseenCountResponse, error) {
 	request := operations.SubscribersV1ControllerGetUnseenCountRequest{
 		SubscriberID:   subscriberID,

@@ -3,23 +3,22 @@
 
 ## Overview
 
-A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
+A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
 <https://docs.novu.co/subscribers/subscribers>
 
 ### Available Operations
 
-* [Search](#search) - Search for subscribers
-* [Create](#create) - Create subscriber
-* [Retrieve](#retrieve) - Get subscriber
-* [Patch](#patch) - Patch subscriber
+* [Search](#search) - Search subscribers
+* [Create](#create) - Create a subscriber
+* [Retrieve](#retrieve) - Retrieve a subscriber
+* [Patch](#patch) - Update a subscriber
 * [Delete](#delete) - Delete subscriber
-* [List](#list) - Get subscribers
-* [Upsert](#upsert) - Upsert subscriber
 * [CreateBulk](#createbulk) - Bulk create subscribers
 
 ## Search
 
-Search for subscribers
+Search subscribers by their **email**, **phone**, **subscriberId** and **name**. 
+    The search is case sensitive and supports pagination.Checkout all available filters in the query section.
 
 ### Example Usage
 
@@ -74,7 +73,8 @@ func main() {
 
 ## Create
 
-Create subscriber with the given data, if the subscriber already exists, it will be updated
+Create a subscriber with the subscriber attributes. 
+      **subscriberId** is a required field, rest other fields are optional, if the subscriber already exists, it will be updated
 
 ### Example Usage
 
@@ -132,7 +132,8 @@ func main() {
 
 ## Retrieve
 
-Get subscriber by your internal id used to identify the subscriber
+Retrive a subscriber by its unique key identifier **subscriberId**. 
+    **subscriberId** field is required.
 
 ### Example Usage
 
@@ -187,7 +188,8 @@ func main() {
 
 ## Patch
 
-Patch subscriber by your internal id used to identify the subscriber
+Update a subscriber by its unique key identifier **subscriberId**. 
+    **subscriberId** is a required field, rest other fields are optional
 
 ### Example Usage
 
@@ -244,7 +246,7 @@ func main() {
 
 ## Delete
 
-Deletes a subscriber entity from the Novu platform
+Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
 
 ### Example Usage
 
@@ -297,153 +299,10 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
-## List
-
-Returns a list of subscribers, could paginated using the `page` and `limit` query parameter
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	novugo "github.com/novuhq/novu-go"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
-    )
-
-    res, err := s.Subscribers.List(ctx, nil, nil, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.Object != nil {
-        for {
-            // handle items
-
-            res, err = res.Next()
-
-            if err != nil {
-                // handle error
-            }
-
-            if res == nil {
-                break
-            }
-        }
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `page`                                                   | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
-| `limit`                                                  | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
-
-### Response
-
-**[*operations.SubscribersV1ControllerListSubscribersResponse](../../models/operations/subscribersv1controllerlistsubscribersresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
-## Upsert
-
-Used to upsert the subscriber entity with new information
-
-### Example Usage
-
-```go
-package main
-
-import(
-	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
-	"log"
-)
-
-func main() {
-    ctx := context.Background()
-
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
-    )
-
-    res, err := s.Subscribers.Upsert(ctx, "<id>", components.UpdateSubscriberRequestDto{
-        Email: novugo.String("john.doe@example.com"),
-        FirstName: novugo.String("John"),
-        LastName: novugo.String("Doe"),
-        Phone: novugo.String("+1234567890"),
-        Avatar: novugo.String("https://example.com/avatar.jpg"),
-        Locale: novugo.String("en-US"),
-        Data: map[string]any{
-            "preferences": map[string]any{
-                "notifications": true,
-                "theme": "dark",
-            },
-            "tags": []any{
-                "premium",
-                "newsletter",
-            },
-        },
-    }, nil)
-    if err != nil {
-        log.Fatal(err)
-    }
-    if res.SubscriberResponseDto != nil {
-        // handle response
-    }
-}
-```
-
-### Parameters
-
-| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
-| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
-| `subscriberID`                                                                                 | *string*                                                                                       | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `updateSubscriberRequestDto`                                                                   | [components.UpdateSubscriberRequestDto](../../models/components/updatesubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
-| `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
-| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
-
-### Response
-
-**[*operations.SubscribersV1ControllerUpdateSubscriberResponse](../../models/operations/subscribersv1controllerupdatesubscriberresponse.md), error**
-
-### Errors
-
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
-
 ## CreateBulk
 
 
-      Using this endpoint you can create multiple subscribers at once, to avoid multiple calls to the API.
-      The bulk API is limited to 500 subscribers per request.
+      Using this endpoint multiple subscribers can be created at once. The bulk API is limited to 500 subscribers per request.
     
 
 ### Example Usage

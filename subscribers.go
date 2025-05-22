@@ -12,22 +12,20 @@ import (
 	"github.com/novuhq/novu-go/models/components"
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
-	"github.com/spyzhov/ajson"
 	"net/http"
 	"net/url"
 )
 
-// Subscribers - A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
+// Subscribers - A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
 //
 // https://docs.novu.co/subscribers/subscribers
 type Subscribers struct {
-	Preferences    *Preferences
-	Topics         *NovuTopics
-	Credentials    *Credentials
-	Authentication *Authentication
-	Messages       *NovuMessages
-	Notifications  *NovuNotifications
-	Properties     *Properties
+	Preferences   *Preferences
+	Topics        *NovuTopics
+	Credentials   *Credentials
+	Messages      *NovuMessages
+	Notifications *NovuNotifications
+	Properties    *Properties
 
 	sdkConfiguration sdkConfiguration
 }
@@ -38,14 +36,16 @@ func newSubscribers(sdkConfig sdkConfiguration) *Subscribers {
 		Preferences:      newPreferences(sdkConfig),
 		Topics:           newNovuTopics(sdkConfig),
 		Credentials:      newCredentials(sdkConfig),
-		Authentication:   newAuthentication(sdkConfig),
 		Messages:         newNovuMessages(sdkConfig),
 		Notifications:    newNovuNotifications(sdkConfig),
 		Properties:       newProperties(sdkConfig),
 	}
 }
 
-// Search for subscribers
+// Search subscribers
+// Search subscribers by their **email**, **phone**, **subscriberId** and **name**.
+//
+//	The search is case sensitive and supports pagination.Checkout all available filters in the query section.
 func (s *Subscribers) Search(ctx context.Context, request operations.SubscribersControllerSearchSubscribersRequest, opts ...operations.Option) (*operations.SubscribersControllerSearchSubscribersResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -381,8 +381,10 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 
 }
 
-// Create subscriber
-// Create subscriber with the given data, if the subscriber already exists, it will be updated
+// Create a subscriber
+// Create a subscriber with the subscriber attributes.
+//
+//	**subscriberId** is a required field, rest other fields are optional, if the subscriber already exists, it will be updated
 func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
 	request := operations.SubscribersControllerCreateSubscriberRequest{
 		IdempotencyKey:             idempotencyKey,
@@ -726,8 +728,10 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 
 }
 
-// Retrieve - Get subscriber
-// Get subscriber by your internal id used to identify the subscriber
+// Retrieve a subscriber
+// Retrive a subscriber by its unique key identifier **subscriberId**.
+//
+//	**subscriberId** field is required.
 func (s *Subscribers) Retrieve(ctx context.Context, subscriberID string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerGetSubscriberResponse, error) {
 	request := operations.SubscribersControllerGetSubscriberRequest{
 		SubscriberID:   subscriberID,
@@ -1064,8 +1068,10 @@ func (s *Subscribers) Retrieve(ctx context.Context, subscriberID string, idempot
 
 }
 
-// Patch subscriber
-// Patch subscriber by your internal id used to identify the subscriber
+// Patch - Update a subscriber
+// Update a subscriber by its unique key identifier **subscriberId**.
+//
+//	**subscriberId** is a required field, rest other fields are optional
 func (s *Subscribers) Patch(ctx context.Context, subscriberID string, patchSubscriberRequestDto components.PatchSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerPatchSubscriberResponse, error) {
 	request := operations.SubscribersControllerPatchSubscriberRequest{
 		SubscriberID:              subscriberID,
@@ -1411,7 +1417,7 @@ func (s *Subscribers) Patch(ctx context.Context, subscriberID string, patchSubsc
 }
 
 // Delete subscriber
-// Deletes a subscriber entity from the Novu platform
+// Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
 func (s *Subscribers) Delete(ctx context.Context, subscriberID string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerRemoveSubscriberResponse, error) {
 	request := operations.SubscribersControllerRemoveSubscriberRequest{
 		SubscriberID:   subscriberID,
@@ -1748,745 +1754,9 @@ func (s *Subscribers) Delete(ctx context.Context, subscriberID string, idempoten
 
 }
 
-// List - Get subscribers
-// Returns a list of subscribers, could paginated using the `page` and `limit` query parameter
-func (s *Subscribers) List(ctx context.Context, page *float64, limit *float64, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerListSubscribersResponse, error) {
-	request := operations.SubscribersV1ControllerListSubscribersRequest{
-		Page:           page,
-		Limit:          limit,
-		IdempotencyKey: idempotencyKey,
-	}
-
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := url.JoinPath(baseURL, "/v1/subscribers")
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		BaseURL:        baseURL,
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_listSubscribers",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "GET", opURL, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-
-	utils.PopulateHeaders(ctx, req, request, nil)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		} else {
-			retryConfig = &retry.Config{
-				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 1000,
-					MaxInterval:     30000,
-					Exponent:        1.5,
-					MaxElapsedTime:  3600000,
-				},
-				RetryConnectionErrors: true,
-			}
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"408",
-				"409",
-				"429",
-				"5XX",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil {
-				copyBody, err := req.GetBody()
-				if err != nil {
-					return nil, err
-				}
-				req.Body = copyBody
-			}
-
-			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
-			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.SubscribersV1ControllerListSubscribersResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-	res.Next = func() (*operations.SubscribersV1ControllerListSubscribersResponse, error) {
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-
-		b, err := ajson.Unmarshal(rawBody)
-		if err != nil {
-			return nil, err
-		}
-		var p float64 = 1
-		if page != nil {
-			p = *page
-		}
-		nP := float64(p + 1)
-		r, err := ajson.Eval(b, "$.data.resultArray")
-		if err != nil {
-			return nil, err
-		}
-		if !r.IsArray() {
-			return nil, nil
-		}
-		arr, err := r.GetArray()
-		if err != nil {
-			return nil, err
-		}
-		if len(arr) == 0 {
-			return nil, nil
-		}
-
-		l := 0
-		if limit != nil {
-			l = int(*limit)
-		}
-		if len(arr) < l {
-			return nil, nil
-		}
-
-		return s.List(
-			ctx,
-			&nP,
-			limit,
-			idempotencyKey,
-			opts...,
-		)
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out operations.SubscribersV1ControllerListSubscribersResponseBody
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.Object = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 414:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 400:
-		fallthrough
-	case httpRes.StatusCode == 401:
-		fallthrough
-	case httpRes.StatusCode == 403:
-		fallthrough
-	case httpRes.StatusCode == 404:
-		fallthrough
-	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
-		fallthrough
-	case httpRes.StatusCode == 413:
-		fallthrough
-	case httpRes.StatusCode == 415:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 422:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ValidationErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	default:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
-	}
-
-	return res, nil
-
-}
-
-// Upsert subscriber
-// Used to upsert the subscriber entity with new information
-func (s *Subscribers) Upsert(ctx context.Context, subscriberID string, updateSubscriberRequestDto components.UpdateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberResponse, error) {
-	request := operations.SubscribersV1ControllerUpdateSubscriberRequest{
-		SubscriberID:               subscriberID,
-		IdempotencyKey:             idempotencyKey,
-		UpdateSubscriberRequestDto: updateSubscriberRequestDto,
-	}
-
-	o := operations.Options{}
-	supportedOptions := []string{
-		operations.SupportedOptionRetries,
-		operations.SupportedOptionTimeout,
-	}
-
-	for _, opt := range opts {
-		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
-		}
-	}
-
-	var baseURL string
-	if o.ServerURL == nil {
-		baseURL = utils.ReplaceParameters(s.sdkConfiguration.GetServerDetails())
-	} else {
-		baseURL = *o.ServerURL
-	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/v1/subscribers/{subscriberId}", request, nil)
-	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
-	}
-
-	hookCtx := hooks.HookContext{
-		BaseURL:        baseURL,
-		Context:        ctx,
-		OperationID:    "SubscribersV1Controller_updateSubscriber",
-		OAuth2Scopes:   []string{},
-		SecuritySource: s.sdkConfiguration.Security,
-	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberRequestDto", "json", `request:"mediaType=application/json"`)
-	if err != nil {
-		return nil, err
-	}
-
-	timeout := o.Timeout
-	if timeout == nil {
-		timeout = s.sdkConfiguration.Timeout
-	}
-
-	if timeout != nil {
-		var cancel context.CancelFunc
-		ctx, cancel = context.WithTimeout(ctx, *timeout)
-		defer cancel()
-	}
-
-	req, err := http.NewRequestWithContext(ctx, "PUT", opURL, bodyReader)
-	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
-	}
-	req.Header.Set("Accept", "application/json")
-	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
-	if reqContentType != "" {
-		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	utils.PopulateHeaders(ctx, req, request, nil)
-
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
-	}
-
-	for k, v := range o.SetHeaders {
-		req.Header.Set(k, v)
-	}
-
-	globalRetryConfig := s.sdkConfiguration.RetryConfig
-	retryConfig := o.Retries
-	if retryConfig == nil {
-		if globalRetryConfig != nil {
-			retryConfig = globalRetryConfig
-		} else {
-			retryConfig = &retry.Config{
-				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
-					InitialInterval: 1000,
-					MaxInterval:     30000,
-					Exponent:        1.5,
-					MaxElapsedTime:  3600000,
-				},
-				RetryConnectionErrors: true,
-			}
-		}
-	}
-
-	var httpRes *http.Response
-	if retryConfig != nil {
-		httpRes, err = utils.Retry(ctx, utils.Retries{
-			Config: retryConfig,
-			StatusCodes: []string{
-				"408",
-				"409",
-				"429",
-				"5XX",
-			},
-		}, func() (*http.Response, error) {
-			if req.Body != nil {
-				copyBody, err := req.GetBody()
-				if err != nil {
-					return nil, err
-				}
-				req.Body = copyBody
-			}
-
-			req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-			if err != nil {
-				if retry.IsPermanentError(err) || retry.IsTemporaryError(err) {
-					return nil, err
-				}
-
-				return nil, retry.Permanent(err)
-			}
-
-			httpRes, err := s.sdkConfiguration.Client.Do(req)
-			if err != nil || httpRes == nil {
-				if err != nil {
-					err = fmt.Errorf("error sending request: %w", err)
-				} else {
-					err = fmt.Errorf("error sending request: no response")
-				}
-
-				_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			}
-			return httpRes, err
-		})
-
-		if err != nil {
-			return nil, err
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	} else {
-		req, err = s.sdkConfiguration.Hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
-		if err != nil {
-			return nil, err
-		}
-
-		httpRes, err = s.sdkConfiguration.Client.Do(req)
-		if err != nil || httpRes == nil {
-			if err != nil {
-				err = fmt.Errorf("error sending request: %w", err)
-			} else {
-				err = fmt.Errorf("error sending request: no response")
-			}
-
-			_, err = s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
-			_httpRes, err := s.sdkConfiguration.Hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
-			if err != nil {
-				return nil, err
-			} else if _httpRes != nil {
-				httpRes = _httpRes
-			}
-		} else {
-			httpRes, err = s.sdkConfiguration.Hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
-			if err != nil {
-				return nil, err
-			}
-		}
-	}
-
-	res := &operations.SubscribersV1ControllerUpdateSubscriberResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
-	switch {
-	case httpRes.StatusCode == 200:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out components.SubscriberResponseDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			res.SubscriberResponseDto = &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 414:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 400:
-		fallthrough
-	case httpRes.StatusCode == 401:
-		fallthrough
-	case httpRes.StatusCode == 403:
-		fallthrough
-	case httpRes.StatusCode == 404:
-		fallthrough
-	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
-		fallthrough
-	case httpRes.StatusCode == 413:
-		fallthrough
-	case httpRes.StatusCode == 415:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 422:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ValidationErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 429:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode == 500:
-		res.Headers = httpRes.Header
-
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out apierrors.ErrorDto
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return nil, &out
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
-	case httpRes.StatusCode == 503:
-		res.Headers = httpRes.Header
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
-	default:
-		rawBody, err := utils.ConsumeRawBody(httpRes)
-		if err != nil {
-			return nil, err
-		}
-		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
-	}
-
-	return res, nil
-
-}
-
 // CreateBulk - Bulk create subscribers
 //
-//	Using this endpoint you can create multiple subscribers at once, to avoid multiple calls to the API.
-//	The bulk API is limited to 500 subscribers per request.
+//	Using this endpoint multiple subscribers can be created at once. The bulk API is limited to 500 subscribers per request.
 func (s *Subscribers) CreateBulk(ctx context.Context, bulkSubscriberCreateDto components.BulkSubscriberCreateDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerBulkCreateSubscribersResponse, error) {
 	request := operations.SubscribersV1ControllerBulkCreateSubscribersRequest{
 		IdempotencyKey:          idempotencyKey,

@@ -5,13 +5,14 @@
 
 ### Available Operations
 
-* [Update](#update) - Update subscriber credentials
-* [Append](#append) - Modify subscriber credentials
-* [Delete](#delete) - Delete subscriber credentials by providerId
+* [Update](#update) - Update provider credentials
+* [Append](#append) - Upsert provider credentials
+* [Delete](#delete) - Delete provider credentials
 
 ## Update
 
-Subscriber credentials associated to the delivery methods such as slack and push tokens.
+Update credentials for a provider such as slack and push tokens. 
+      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 
 ### Example Usage
 
@@ -33,7 +34,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Credentials.Update(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
-        ProviderID: components.ChatOrPushProviderEnumPushpad,
+        ProviderID: components.ChatOrPushProviderEnumSlack,
         Credentials: components.ChannelCredentials{
             WebhookURL: novugo.String("https://example.com/webhook"),
             Channel: novugo.String("general"),
@@ -84,8 +85,8 @@ func main() {
 
 ## Append
 
-Subscriber credentials associated to the delivery methods such as slack and push tokens.
-    This endpoint appends provided credentials and deviceTokens to the existing ones.
+Update credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 
 ### Example Usage
 
@@ -107,7 +108,7 @@ func main() {
     )
 
     res, err := s.Subscribers.Credentials.Append(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
-        ProviderID: components.ChatOrPushProviderEnumZulip,
+        ProviderID: components.ChatOrPushProviderEnumOneSignal,
         Credentials: components.ChannelCredentials{
             WebhookURL: novugo.String("https://example.com/webhook"),
             Channel: novugo.String("general"),
@@ -158,7 +159,8 @@ func main() {
 
 ## Delete
 
-Delete subscriber credentials such as slack and expo tokens.
+Delete subscriber credentials for a provider such as **slack** and **FCM** by **providerId**. 
+    This action is irreversible and will remove the credentials for the provider for particular **subscriberId**.
 
 ### Example Usage
 

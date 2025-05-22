@@ -76,7 +76,7 @@ func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
 //
 // https://docs.novu.co - Novu Documentation
 type Novu struct {
-	// A subscriber in Novu represents someone who should receive a message. A subscriber’s profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
+	// A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
 	//
 	// https://docs.novu.co/subscribers/subscribers
 	Subscribers *Subscribers
@@ -170,10 +170,10 @@ func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
-			OpenAPIDocVersion: "2.1.13",
-			SDKVersion:        "1.0.0",
-			GenVersion:        "2.599.0",
-			UserAgent:         "speakeasy-sdk/go 1.0.0 2.599.0 2.1.13 github.com/novuhq/novu-go",
+			OpenAPIDocVersion: "2.2.0",
+			SDKVersion:        "1.1.0",
+			GenVersion:        "2.605.6",
+			UserAgent:         "speakeasy-sdk/go 1.1.0 2.605.6 2.2.0 github.com/novuhq/novu-go",
 			Hooks:             hooks.New(),
 		},
 	}
