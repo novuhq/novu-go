@@ -3,10 +3,10 @@ id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
   docChecksum: 6dae00a06d15f8b5086a0b1bb1b54a0b
   docVersion: 2.2.0
-  speakeasyVersion: 1.548.4
-  generationVersion: 2.605.6
-  releaseVersion: 1.1.0
-  configChecksum: 54af2ab979f09a5ac8008fa1deb573cd
+  speakeasyVersion: 1.551.0
+  generationVersion: 2.610.0
+  releaseVersion: 1.1.1
+  configChecksum: 74ed29be560c53cab6df49fe43c0330a
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
