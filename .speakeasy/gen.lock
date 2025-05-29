@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 6dae00a06d15f8b5086a0b1bb1b54a0b
+  docChecksum: f5571b2bdb845fe4d4dc505316874dee
   docVersion: 2.2.0
-  speakeasyVersion: 1.548.4
-  generationVersion: 2.605.6
-  releaseVersion: 1.1.0
-  configChecksum: 54af2ab979f09a5ac8008fa1deb573cd
+  speakeasyVersion: 1.552.0
+  generationVersion: 2.610.0
+  releaseVersion: 1.2.0
+  configChecksum: 922df8311ea253d65f0f22857bce0e14
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -362,7 +362,6 @@ generatedFiles:
   - docs/models/components/subscriberfeedresponsedto.md
   - docs/models/components/subscriberglobalpreferencedto.md
   - docs/models/components/subscriberpayloaddto.md
-  - docs/models/components/subscriberpayloaddtodata.md
   - docs/models/components/subscriberpreferencechannels.md
   - docs/models/components/subscriberpreferenceoverridedto.md
   - docs/models/components/subscriberpreferencesworkflowinfodto.md
