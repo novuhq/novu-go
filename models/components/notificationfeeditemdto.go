@@ -47,7 +47,7 @@ type NotificationFeedItemDto struct {
 	// Identifier for the environment where the notification is sent.
 	EnvironmentID string `json:"_environmentId"`
 	// Identifier for the message template used.
-	MessageTemplateID string `json:"_messageTemplateId"`
+	MessageTemplateID *string `json:"_messageTemplateId,omitempty"`
 	// Identifier for the organization sending the notification.
 	OrganizationID string `json:"_organizationId"`
 	// Unique identifier for the notification instance.
@@ -126,9 +126,9 @@ func (o *NotificationFeedItemDto) GetEnvironmentID() string {
 	return o.EnvironmentID
 }
 
-func (o *NotificationFeedItemDto) GetMessageTemplateID() string {
+func (o *NotificationFeedItemDto) GetMessageTemplateID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.MessageTemplateID
 }
