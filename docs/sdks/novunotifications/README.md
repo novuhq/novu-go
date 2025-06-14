@@ -88,7 +88,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", nil, nil, nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", novugo.Bool(false), novugo.Float64(100), nil)
     if err != nil {
         log.Fatal(err)
     }

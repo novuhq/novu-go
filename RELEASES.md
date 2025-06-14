@@ -119,3 +119,13 @@ Based on:
 - [go v1.2.0] .
 ### Releases
 - [Go v1.2.0] https://github.com/novuhq/novu-go/releases/tag/v1.2.0 - .
+
+## 2025-06-14 00:14:28
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.563.0 (2.629.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.3.0] .
+### Releases
+- [Go v1.3.0] https://github.com/novuhq/novu-go/releases/tag/v1.3.0 - .
