@@ -11,7 +11,7 @@
 
 ## List
 
-List all topics that a subscriber is subscribed to.
+List all subscriptions of subscribers for a topic.
     Checkout all available filters in the query section.
 
 ### Example Usage
