@@ -7,21 +7,21 @@ import (
 	"fmt"
 )
 
-type Unit string
+type DigestRegularMetadataUnit string
 
 const (
-	UnitSeconds Unit = "seconds"
-	UnitMinutes Unit = "minutes"
-	UnitHours   Unit = "hours"
-	UnitDays    Unit = "days"
-	UnitWeeks   Unit = "weeks"
-	UnitMonths  Unit = "months"
+	DigestRegularMetadataUnitSeconds DigestRegularMetadataUnit = "seconds"
+	DigestRegularMetadataUnitMinutes DigestRegularMetadataUnit = "minutes"
+	DigestRegularMetadataUnitHours   DigestRegularMetadataUnit = "hours"
+	DigestRegularMetadataUnitDays    DigestRegularMetadataUnit = "days"
+	DigestRegularMetadataUnitWeeks   DigestRegularMetadataUnit = "weeks"
+	DigestRegularMetadataUnitMonths  DigestRegularMetadataUnit = "months"
 )
 
-func (e Unit) ToPointer() *Unit {
+func (e DigestRegularMetadataUnit) ToPointer() *DigestRegularMetadataUnit {
 	return &e
 }
-func (e *Unit) UnmarshalJSON(data []byte) error {
+func (e *DigestRegularMetadataUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -38,24 +38,24 @@ func (e *Unit) UnmarshalJSON(data []byte) error {
 	case "weeks":
 		fallthrough
 	case "months":
-		*e = Unit(v)
+		*e = DigestRegularMetadataUnit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Unit: %v", v)
+		return fmt.Errorf("invalid value for DigestRegularMetadataUnit: %v", v)
 	}
 }
 
-type Type string
+type DigestRegularMetadataType string
 
 const (
-	TypeRegular Type = "regular"
-	TypeBackoff Type = "backoff"
+	DigestRegularMetadataTypeRegular DigestRegularMetadataType = "regular"
+	DigestRegularMetadataTypeBackoff DigestRegularMetadataType = "backoff"
 )
 
-func (e Type) ToPointer() *Type {
+func (e DigestRegularMetadataType) ToPointer() *DigestRegularMetadataType {
 	return &e
 }
-func (e *Type) UnmarshalJSON(data []byte) error {
+func (e *DigestRegularMetadataType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -64,10 +64,10 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	case "regular":
 		fallthrough
 	case "backoff":
-		*e = Type(v)
+		*e = DigestRegularMetadataType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
+		return fmt.Errorf("invalid value for DigestRegularMetadataType: %v", v)
 	}
 }
 
@@ -110,14 +110,14 @@ func (e *BackoffUnit) UnmarshalJSON(data []byte) error {
 }
 
 type DigestRegularMetadata struct {
-	Amount        *float64     `json:"amount,omitempty"`
-	Unit          *Unit        `json:"unit,omitempty"`
-	DigestKey     *string      `json:"digestKey,omitempty"`
-	Type          Type         `json:"type"`
-	Backoff       *bool        `json:"backoff,omitempty"`
-	BackoffAmount *float64     `json:"backoffAmount,omitempty"`
-	BackoffUnit   *BackoffUnit `json:"backoffUnit,omitempty"`
-	UpdateMode    *bool        `json:"updateMode,omitempty"`
+	Amount        *float64                   `json:"amount,omitempty"`
+	Unit          *DigestRegularMetadataUnit `json:"unit,omitempty"`
+	DigestKey     *string                    `json:"digestKey,omitempty"`
+	Type          DigestRegularMetadataType  `json:"type"`
+	Backoff       *bool                      `json:"backoff,omitempty"`
+	BackoffAmount *float64                   `json:"backoffAmount,omitempty"`
+	BackoffUnit   *BackoffUnit               `json:"backoffUnit,omitempty"`
+	UpdateMode    *bool                      `json:"updateMode,omitempty"`
 }
 
 func (o *DigestRegularMetadata) GetAmount() *float64 {
@@ -127,7 +127,7 @@ func (o *DigestRegularMetadata) GetAmount() *float64 {
 	return o.Amount
 }
 
-func (o *DigestRegularMetadata) GetUnit() *Unit {
+func (o *DigestRegularMetadata) GetUnit() *DigestRegularMetadataUnit {
 	if o == nil {
 		return nil
 	}
@@ -141,9 +141,9 @@ func (o *DigestRegularMetadata) GetDigestKey() *string {
 	return o.DigestKey
 }
 
-func (o *DigestRegularMetadata) GetType() Type {
+func (o *DigestRegularMetadata) GetType() DigestRegularMetadataType {
 	if o == nil {
-		return Type("")
+		return DigestRegularMetadataType("")
 	}
 	return o.Type
 }

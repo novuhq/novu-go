@@ -78,13 +78,14 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| apierrors.PayloadValidationExceptionDto | 400                                     | application/json                        |
+| apierrors.ErrorDto                      | 414                                     | application/json                        |
+| apierrors.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415       | application/json                        |
+| apierrors.ValidationErrorDto            | 422                                     | application/json                        |
+| apierrors.ErrorDto                      | 500                                     | application/json                        |
+| apierrors.APIError                      | 4XX, 5XX                                | \*/\*                                   |
 
 ## Cancel
 
@@ -210,13 +211,14 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| apierrors.PayloadValidationExceptionDto | 400                                     | application/json                        |
+| apierrors.ErrorDto                      | 414                                     | application/json                        |
+| apierrors.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415       | application/json                        |
+| apierrors.ValidationErrorDto            | 422                                     | application/json                        |
+| apierrors.ErrorDto                      | 500                                     | application/json                        |
+| apierrors.APIError                      | 4XX, 5XX                                | \*/\*                                   |
 
 ## TriggerBulk
 
@@ -311,10 +313,11 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                              | Status Code                             | Content Type                            |
+| --------------------------------------- | --------------------------------------- | --------------------------------------- |
+| apierrors.PayloadValidationExceptionDto | 400                                     | application/json                        |
+| apierrors.ErrorDto                      | 414                                     | application/json                        |
+| apierrors.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415       | application/json                        |
+| apierrors.ValidationErrorDto            | 422                                     | application/json                        |
+| apierrors.ErrorDto                      | 500                                     | application/json                        |
+| apierrors.APIError                      | 4XX, 5XX                                | \*/\*                                   |

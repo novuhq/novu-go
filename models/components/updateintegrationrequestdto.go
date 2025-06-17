@@ -9,10 +9,8 @@ type UpdateIntegrationRequestDto struct {
 	// If the integration is active the validation on the credentials field will run
 	Active      *bool           `json:"active,omitempty"`
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
-	// If true, the Novu branding will be removed from the Inbox component
-	RemoveNovuBranding *bool           `json:"removeNovuBranding,omitempty"`
-	Check              *bool           `json:"check,omitempty"`
-	Conditions         []StepFilterDto `json:"conditions,omitempty"`
+	Check       *bool           `json:"check,omitempty"`
+	Conditions  []StepFilterDto `json:"conditions,omitempty"`
 }
 
 func (o *UpdateIntegrationRequestDto) GetName() *string {
@@ -48,13 +46,6 @@ func (o *UpdateIntegrationRequestDto) GetCredentials() *CredentialsDto {
 		return nil
 	}
 	return o.Credentials
-}
-
-func (o *UpdateIntegrationRequestDto) GetRemoveNovuBranding() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.RemoveNovuBranding
 }
 
 func (o *UpdateIntegrationRequestDto) GetCheck() *bool {

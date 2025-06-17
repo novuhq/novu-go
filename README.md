@@ -333,6 +333,13 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
+### [Environments](docs/sdks/environments/README.md)
+
+* [Create](docs/sdks/environments/README.md#create) - Create an environment
+* [List](docs/sdks/environments/README.md#list) - List all environments
+* [Update](docs/sdks/environments/README.md#update) - Update an environment
+* [Delete](docs/sdks/environments/README.md#delete) - Delete an environment
+
 ### [Integrations](docs/sdks/integrations/README.md)
 
 * [List](docs/sdks/integrations/README.md#list) - List all integrations
@@ -366,7 +373,7 @@ func main() {
 * [Create](docs/sdks/subscribers/README.md#create) - Create a subscriber
 * [Retrieve](docs/sdks/subscribers/README.md#retrieve) - Retrieve a subscriber
 * [Patch](docs/sdks/subscribers/README.md#patch) - Update a subscriber
-* [Delete](docs/sdks/subscribers/README.md#delete) - Delete subscriber
+* [Delete](docs/sdks/subscribers/README.md#delete) - Delete a subscriber
 * [CreateBulk](docs/sdks/subscribers/README.md#createbulk) - Bulk create subscribers
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
@@ -416,6 +423,20 @@ func main() {
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+
+### [Workflows](docs/sdks/workflows/README.md)
+
+* [Create](docs/sdks/workflows/README.md#create) - Create a workflow
+* [List](docs/sdks/workflows/README.md#list) - List all workflows
+* [Update](docs/sdks/workflows/README.md#update) - Update a workflow
+* [Get](docs/sdks/workflows/README.md#get) - Retrieve a workflow
+* [Delete](docs/sdks/workflows/README.md#delete) - Delete a workflow
+* [Patch](docs/sdks/workflows/README.md#patch) - Update a workflow
+* [Sync](docs/sdks/workflows/README.md#sync) - Sync a workflow
+
+#### [Workflows.Steps](docs/sdks/steps/README.md)
+
+* [Retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>
 <!-- End Available Resources and Operations [operations] -->
@@ -541,13 +562,14 @@ By Default, an API error will return `apierrors.APIError`. When custom error res
 
 For example, the `Trigger` function may return the following errors:
 
-| Error Type                   | Status Code                            | Content Type     |
-| ---------------------------- | -------------------------------------- | ---------------- |
-| apierrors.ErrorDto           | 414                                    | application/json |
-| apierrors.ErrorDto           | 400, 401, 403, 404, 405, 409, 413, 415 | application/json |
-| apierrors.ValidationErrorDto | 422                                    | application/json |
-| apierrors.ErrorDto           | 500                                    | application/json |
-| apierrors.APIError           | 4XX, 5XX                               | \*/\*            |
+| Error Type                              | Status Code                       | Content Type     |
+| --------------------------------------- | --------------------------------- | ---------------- |
+| apierrors.PayloadValidationExceptionDto | 400                               | application/json |
+| apierrors.ErrorDto                      | 414                               | application/json |
+| apierrors.ErrorDto                      | 401, 403, 404, 405, 409, 413, 415 | application/json |
+| apierrors.ValidationErrorDto            | 422                               | application/json |
+| apierrors.ErrorDto                      | 500                               | application/json |
+| apierrors.APIError                      | 4XX, 5XX                          | \*/\*            |
 
 ### Example
 
@@ -584,6 +606,12 @@ func main() {
 		),
 	}, nil)
 	if err != nil {
+
+		var e *apierrors.PayloadValidationExceptionDto
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
 
 		var e *apierrors.ErrorDto
 		if errors.As(err, &e) {
