@@ -12,7 +12,7 @@ A subscriber in Novu represents someone who should receive a message. A subscrib
 * [Create](#create) - Create a subscriber
 * [Retrieve](#retrieve) - Retrieve a subscriber
 * [Patch](#patch) - Update a subscriber
-* [Delete](#delete) - Delete subscriber
+* [Delete](#delete) - Delete a subscriber
 * [CreateBulk](#createbulk) - Bulk create subscribers
 
 ## Search
@@ -132,7 +132,7 @@ func main() {
 
 ## Retrieve
 
-Retrive a subscriber by its unique key identifier **subscriberId**. 
+Retrieve a subscriber by its unique key identifier **subscriberId**. 
     **subscriberId** field is required.
 
 ### Example Usage
@@ -246,7 +246,8 @@ func main() {
 
 ## Delete
 
-Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions
+Deletes a subscriber entity from the Novu platform along with associated messages, preferences, and topic subscriptions. 
+      **subscriberId** is a required field.
 
 ### Example Usage
 

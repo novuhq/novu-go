@@ -1,0 +1,9 @@
+# StepIssuesDto
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `Controls`                                                                                      | map[string][][components.StepContentIssueDto](../../models/components/stepcontentissuedto.md)   | :heavy_minus_sign:                                                                              | Controls-related issues                                                                         |
+| `Integration`                                                                                   | map[string][][components.StepIntegrationIssue](../../models/components/stepintegrationissue.md) | :heavy_minus_sign:                                                                              | Integration-related issues                                                                      |
