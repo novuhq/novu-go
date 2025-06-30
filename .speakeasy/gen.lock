@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: bb85d847eb688acfd2a121be0e463ba5
-  docVersion: 2.2.0
-  speakeasyVersion: 1.563.4
-  generationVersion: 2.630.6
-  releaseVersion: 1.3.0
-  configChecksum: 54b6de163e4b54adbf62d7be4b2a809e
+  docChecksum: ad418033a46ea67805dd4b4ee758bfad
+  docVersion: 2.3.0
+  speakeasyVersion: 1.571.2
+  generationVersion: 2.640.2
+  releaseVersion: 1.4.0
+  configChecksum: cd4e4034bb8e721e2c5a0b624a5d5889
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -172,6 +172,7 @@ generatedFiles:
   - /models/components/redirectdto.go
   - /models/components/removesubscriberresponsedto.go
   - /models/components/replycallback.go
+  - /models/components/resourceoriginenum.go
   - /models/components/runtimeissuedto.go
   - /models/components/security.go
   - /models/components/smscontroldto.go
@@ -227,7 +228,6 @@ generatedFiles:
   - /models/components/updateworkflowdto.go
   - /models/components/workflowcreationsourceenum.go
   - /models/components/workflowlistresponsedto.go
-  - /models/components/workfloworiginenum.go
   - /models/components/workflowpreferencedto.go
   - /models/components/workflowpreferencesdto.go
   - /models/components/workflowpreferencesresponsedto.go
@@ -371,7 +371,6 @@ generatedFiles:
   - docs/models/components/customstepupsertdtocontrolvalues.md
   - docs/models/components/data.md
   - docs/models/components/delaycontroldto.md
-  - docs/models/components/delaycontroldtounit.md
   - docs/models/components/delaycontrolsmetadataresponsedto.md
   - docs/models/components/delayregularmetadata.md
   - docs/models/components/delayregularmetadatatype.md
@@ -385,8 +384,6 @@ generatedFiles:
   - docs/models/components/delaystepresponsedtounit.md
   - docs/models/components/delaystepupsertdto.md
   - docs/models/components/delaystepupsertdtocontrolvalues.md
-  - docs/models/components/delaystepupsertdtotype.md
-  - docs/models/components/delaystepupsertdtounit.md
   - docs/models/components/deletemessageresponsedto.md
   - docs/models/components/deletemessageresponsedtostatus.md
   - docs/models/components/deletetopicresponsedto.md
@@ -408,8 +405,6 @@ generatedFiles:
   - docs/models/components/digeststepresponsedtounit.md
   - docs/models/components/digeststepupsertdto.md
   - docs/models/components/digeststepupsertdtocontrolvalues.md
-  - docs/models/components/digeststepupsertdtotype.md
-  - docs/models/components/digeststepupsertdtounit.md
   - docs/models/components/digesttimedconfigdto.md
   - docs/models/components/digesttimedconfigdtoweekdays.md
   - docs/models/components/digesttimedmetadata.md
@@ -430,7 +425,6 @@ generatedFiles:
   - docs/models/components/emailstepresponsedtoslug.md
   - docs/models/components/emailstepupsertdto.md
   - docs/models/components/emailstepupsertdtocontrolvalues.md
-  - docs/models/components/emailstepupsertdtoeditortype.md
   - docs/models/components/environmentresponsedto.md
   - docs/models/components/executiondetailssourceenum.md
   - docs/models/components/executiondetailsstatusenum.md
@@ -457,6 +451,7 @@ generatedFiles:
   - docs/models/components/listtopicsubscriptionsresponsedto.md
   - docs/models/components/listworkflowresponse.md
   - docs/models/components/lookbackwindowdto.md
+  - docs/models/components/lookbackwindowdtounit.md
   - docs/models/components/markallmessageasrequestdto.md
   - docs/models/components/markas.md
   - docs/models/components/markmessageactionasseendto.md
@@ -525,6 +520,7 @@ generatedFiles:
   - docs/models/components/redirectdto.md
   - docs/models/components/removesubscriberresponsedto.md
   - docs/models/components/replycallback.md
+  - docs/models/components/resourceoriginenum.md
   - docs/models/components/runtimeissuedto.md
   - docs/models/components/security.md
   - docs/models/components/slug.md
@@ -609,7 +605,6 @@ generatedFiles:
   - docs/models/components/workflowcreationsourceenum.md
   - docs/models/components/workflowintegrationstatus.md
   - docs/models/components/workflowlistresponsedto.md
-  - docs/models/components/workfloworiginenum.md
   - docs/models/components/workflowpreferencedto.md
   - docs/models/components/workflowpreferencesdto.md
   - docs/models/components/workflowpreferencesresponsedto.md

@@ -272,7 +272,7 @@ type UpdateWorkflowDto struct {
 	// Workflow preferences
 	Preferences PreferencesRequestDto `json:"preferences"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// The payload JSON Schema for the workflow
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable payload schema validation
@@ -339,9 +339,9 @@ func (o *UpdateWorkflowDto) GetPreferences() PreferencesRequestDto {
 	return o.Preferences
 }
 
-func (o *UpdateWorkflowDto) GetOrigin() WorkflowOriginEnum {
+func (o *UpdateWorkflowDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

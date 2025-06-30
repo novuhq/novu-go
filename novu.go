@@ -2,7 +2,7 @@
 
 package novugo
 
-// Generated from OpenAPI doc version 2.2.0 and generator version 2.630.6
+// Generated from OpenAPI doc version 2.3.0 and generator version 2.640.2
 
 import (
 	"bytes"
@@ -75,7 +75,7 @@ type Novu struct {
 	Environments *Environments
 	// With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
 	//
-	// https://docs.novu.co/channels-and-providers/integration-store
+	// https://docs.novu.co/platform/integrations/overview
 	Integrations *Integrations
 	// A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
 	//
@@ -158,9 +158,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "1.3.0",
+		SDKVersion: "1.4.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.3.0 2.630.6 2.2.0 github.com/novuhq/novu-go",
+			UserAgent:  "speakeasy-sdk/go 1.4.0 2.640.2 2.3.0 github.com/novuhq/novu-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
