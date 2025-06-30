@@ -53,7 +53,7 @@ func (e EmailControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, true); err != nil {
 		return err
 	}
 	return nil

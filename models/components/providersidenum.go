@@ -81,6 +81,7 @@ const (
 	ProvidersIDEnumGetstream        ProvidersIDEnum = "getstream"
 	ProvidersIDEnumRocketChat       ProvidersIDEnum = "rocket-chat"
 	ProvidersIDEnumWhatsappBusiness ProvidersIDEnum = "whatsapp-business"
+	ProvidersIDEnumChatWebhook      ProvidersIDEnum = "chat-webhook"
 )
 
 func (e ProvidersIDEnum) ToPointer() *ProvidersIDEnum {
@@ -231,6 +232,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "rocket-chat":
 		fallthrough
 	case "whatsapp-business":
+		fallthrough
+	case "chat-webhook":
 		*e = ProvidersIDEnum(v)
 		return nil
 	default:

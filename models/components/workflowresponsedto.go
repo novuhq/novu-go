@@ -282,7 +282,7 @@ type WorkflowResponseDto struct {
 	// Steps of the workflow
 	Steps []WorkflowResponseDtoSteps `json:"steps"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Preferences for the workflow
 	Preferences WorkflowPreferencesResponseDto `json:"preferences"`
 	// Status of the workflow
@@ -380,9 +380,9 @@ func (o *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
 	return o.Steps
 }
 
-func (o *WorkflowResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *WorkflowResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }
