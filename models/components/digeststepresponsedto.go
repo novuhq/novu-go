@@ -182,7 +182,7 @@ type DigestStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -247,9 +247,9 @@ func (o *DigestStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *DigestStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *DigestStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

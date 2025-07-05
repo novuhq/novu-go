@@ -1,21 +1,21 @@
-speakeasyVersion: 1.563.4
+speakeasyVersion: 1.575.5
 sources:
     novu-OAS:
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:669c050c4b4b83a85753b2430504b660d3c476d0aa8331e73b8bd429cfcee4cd
-        sourceBlobDigest: sha256:635694f7a41785185e1122ad31ab17c1c0c4bcdec88fad0cf2096ab75a79e260
+        sourceRevisionDigest: sha256:73f6d26f4ff929e821a7aa481371933ea2b965ffc4f86f468b1cdbfed4c138e9
+        sourceBlobDigest: sha256:2275d424f9c0da6fda453b65e402ab4ed89d5470e0669fef2aa73ffd7f996076
         tags:
             - latest
-            - speakeasy-sdk-regen-1748564117
-            - 2.2.0
+            - speakeasy-sdk-regen-1750205716
+            - 2.3.0
 targets:
     novu:
         source: novu-OAS
         sourceNamespace: novu-oas
-        sourceRevisionDigest: sha256:669c050c4b4b83a85753b2430504b660d3c476d0aa8331e73b8bd429cfcee4cd
-        sourceBlobDigest: sha256:635694f7a41785185e1122ad31ab17c1c0c4bcdec88fad0cf2096ab75a79e260
+        sourceRevisionDigest: sha256:73f6d26f4ff929e821a7aa481371933ea2b965ffc4f86f468b1cdbfed4c138e9
+        sourceBlobDigest: sha256:2275d424f9c0da6fda453b65e402ab4ed89d5470e0669fef2aa73ffd7f996076
         codeSamplesNamespace: novu-oas-go-code-samples
-        codeSamplesRevisionDigest: sha256:bbe54d4efc9513fd0f0a17582097a2d4c08d0f7cb642363ea89c61dc3e89e771
+        codeSamplesRevisionDigest: sha256:e28515496b3653a3419dd148b8e1aa31be564bc8b6517255f1e0afd79bfe677c
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
