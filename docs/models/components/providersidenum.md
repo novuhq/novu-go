@@ -77,3 +77,4 @@ Provider ID of the job
 | `ProvidersIDEnumGetstream`        | getstream                         |
 | `ProvidersIDEnumRocketChat`       | rocket-chat                       |
 | `ProvidersIDEnumWhatsappBusiness` | whatsapp-business                 |
+| `ProvidersIDEnumChatWebhook`      | chat-webhook                      |

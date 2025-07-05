@@ -250,6 +250,8 @@ type UISchemaProperty struct {
 	Placeholder *Placeholder `json:"placeholder,omitempty"`
 	// Component type for the UI Schema Property
 	Component UIComponentEnum `json:"component"`
+	// Properties of the UI Schema
+	Properties map[string]UISchemaProperty `json:"properties,omitempty"`
 }
 
 func (o *UISchemaProperty) GetPlaceholder() *Placeholder {
@@ -264,4 +266,11 @@ func (o *UISchemaProperty) GetComponent() UIComponentEnum {
 		return UIComponentEnum("")
 	}
 	return o.Component
+}
+
+func (o *UISchemaProperty) GetProperties() map[string]UISchemaProperty {
+	if o == nil {
+		return nil
+	}
+	return o.Properties
 }

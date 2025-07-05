@@ -20,7 +20,7 @@ type WorkflowListResponseDto struct {
 	// Status of the workflow
 	Status WorkflowStatusEnum `json:"status"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
 	// Overview of step types in the workflow
@@ -83,9 +83,9 @@ func (o *WorkflowListResponseDto) GetStatus() WorkflowStatusEnum {
 	return o.Status
 }
 
-func (o *WorkflowListResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *WorkflowListResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

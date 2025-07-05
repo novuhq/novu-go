@@ -152,7 +152,7 @@ type DelayStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -217,9 +217,9 @@ func (o *DelayStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *DelayStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *DelayStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

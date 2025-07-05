@@ -209,7 +209,7 @@ func main() {
                 },
             },
         },
-        Origin: components.WorkflowOriginEnumExternal,
+        Origin: components.ResourceOriginEnumExternal,
     }, nil)
     if err != nil {
         log.Fatal(err)

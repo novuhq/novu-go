@@ -19,6 +19,7 @@ const (
 	UISchemaGroupEnumChat   UISchemaGroupEnum = "CHAT"
 	UISchemaGroupEnumPush   UISchemaGroupEnum = "PUSH"
 	UISchemaGroupEnumSkip   UISchemaGroupEnum = "SKIP"
+	UISchemaGroupEnumLayout UISchemaGroupEnum = "LAYOUT"
 )
 
 func (e UISchemaGroupEnum) ToPointer() *UISchemaGroupEnum {
@@ -45,6 +46,8 @@ func (e *UISchemaGroupEnum) UnmarshalJSON(data []byte) error {
 	case "PUSH":
 		fallthrough
 	case "SKIP":
+		fallthrough
+	case "LAYOUT":
 		*e = UISchemaGroupEnum(v)
 		return nil
 	default:
