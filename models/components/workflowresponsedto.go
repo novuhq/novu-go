@@ -269,6 +269,12 @@ type WorkflowResponseDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Unique identifier of the workflow
 	ID string `json:"_id"`
 	// Workflow identifier
@@ -282,7 +288,7 @@ type WorkflowResponseDto struct {
 	// Steps of the workflow
 	Steps []WorkflowResponseDtoSteps `json:"steps"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Preferences for the workflow
 	Preferences WorkflowPreferencesResponseDto `json:"preferences"`
 	// Status of the workflow
@@ -291,12 +297,8 @@ type WorkflowResponseDto struct {
 	Issues map[string]RuntimeIssueDto `json:"issues,omitempty"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Generated payload example based on the payload schema
 	PayloadExample map[string]any `json:"payloadExample,omitempty"`
-	// Whether payload schema validation is enabled
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
 }
 
 func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
@@ -336,6 +338,27 @@ func (o *WorkflowResponseDto) GetActive() *bool {
 		return nil
 	}
 	return o.Active
+}
+
+func (o *WorkflowResponseDto) GetValidatePayload() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ValidatePayload
+}
+
+func (o *WorkflowResponseDto) GetPayloadSchema() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.PayloadSchema
+}
+
+func (o *WorkflowResponseDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
 }
 
 func (o *WorkflowResponseDto) GetID() string {
@@ -380,9 +403,9 @@ func (o *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
 	return o.Steps
 }
 
-func (o *WorkflowResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *WorkflowResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }
@@ -415,23 +438,9 @@ func (o *WorkflowResponseDto) GetLastTriggeredAt() *string {
 	return o.LastTriggeredAt
 }
 
-func (o *WorkflowResponseDto) GetPayloadSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.PayloadSchema
-}
-
 func (o *WorkflowResponseDto) GetPayloadExample() map[string]any {
 	if o == nil {
 		return nil
 	}
 	return o.PayloadExample
-}
-
-func (o *WorkflowResponseDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
 }

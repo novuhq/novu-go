@@ -366,6 +366,7 @@ func main() {
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
 * [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
+* [Retrieve](docs/sdks/novu/README.md#retrieve)
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
