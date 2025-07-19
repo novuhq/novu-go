@@ -12,7 +12,7 @@
 ## Update
 
 Update credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
+      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
 
 ### Example Usage
 
@@ -86,7 +86,7 @@ func main() {
 ## Append
 
 Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
+      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
 
 ### Example Usage
 

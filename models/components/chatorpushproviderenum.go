@@ -21,6 +21,7 @@ const (
 	ChatOrPushProviderEnumGetstream        ChatOrPushProviderEnum = "getstream"
 	ChatOrPushProviderEnumRocketChat       ChatOrPushProviderEnum = "rocket-chat"
 	ChatOrPushProviderEnumWhatsappBusiness ChatOrPushProviderEnum = "whatsapp-business"
+	ChatOrPushProviderEnumChatWebhook      ChatOrPushProviderEnum = "chat-webhook"
 	ChatOrPushProviderEnumFcm              ChatOrPushProviderEnum = "fcm"
 	ChatOrPushProviderEnumApns             ChatOrPushProviderEnum = "apns"
 	ChatOrPushProviderEnumExpo             ChatOrPushProviderEnum = "expo"
@@ -58,6 +59,8 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 	case "rocket-chat":
 		fallthrough
 	case "whatsapp-business":
+		fallthrough
+	case "chat-webhook":
 		fallthrough
 	case "fcm":
 		fallthrough

@@ -8,10 +8,66 @@ Environments allow you to manage different stages of your application developmen
 
 ### Available Operations
 
+* [GetTags](#gettags) - Get environment tags
 * [Create](#create) - Create an environment
 * [List](#list) - List all environments
 * [Update](#update) - Update an environment
 * [Delete](#delete) - Delete an environment
+
+## GetTags
+
+Retrieve all unique tags used in workflows within the specified environment. These tags can be used for filtering workflows.
+
+### Example Usage
+
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Environments.GetTags(ctx, "6615943e7ace93b0540ae377", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetEnvironmentTagsDtos != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `environmentID`                                          | *string*                                                 | :heavy_check_mark:                                       | Environment internal ID (MongoDB ObjectId) or identifier | 6615943e7ace93b0540ae377                                 |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*operations.EnvironmentsControllerGetEnvironmentTagsResponse](../../models/operations/environmentscontrollergetenvironmenttagsresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
 ## Create
 
