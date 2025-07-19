@@ -2,6 +2,38 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// EnvironmentResponseDtoType - Type of the environment
+type EnvironmentResponseDtoType string
+
+const (
+	EnvironmentResponseDtoTypeDev  EnvironmentResponseDtoType = "dev"
+	EnvironmentResponseDtoTypeProd EnvironmentResponseDtoType = "prod"
+)
+
+func (e EnvironmentResponseDtoType) ToPointer() *EnvironmentResponseDtoType {
+	return &e
+}
+func (e *EnvironmentResponseDtoType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "dev":
+		fallthrough
+	case "prod":
+		*e = EnvironmentResponseDtoType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnvironmentResponseDtoType: %v", v)
+	}
+}
+
 type EnvironmentResponseDto struct {
 	// Unique identifier of the environment
 	ID string `json:"_id"`
@@ -11,6 +43,8 @@ type EnvironmentResponseDto struct {
 	OrganizationID string `json:"_organizationId"`
 	// Unique identifier for the environment
 	Identifier string `json:"identifier"`
+	// Type of the environment
+	Type *EnvironmentResponseDtoType `json:"type,omitempty"`
 	// List of API keys associated with the environment
 	APIKeys []APIKeyDto `json:"apiKeys,omitempty"`
 	// Parent environment ID
@@ -45,6 +79,13 @@ func (o *EnvironmentResponseDto) GetIdentifier() string {
 		return ""
 	}
 	return o.Identifier
+}
+
+func (o *EnvironmentResponseDto) GetType() *EnvironmentResponseDtoType {
+	if o == nil {
+		return nil
+	}
+	return o.Type
 }
 
 func (o *EnvironmentResponseDto) GetAPIKeys() []APIKeyDto {

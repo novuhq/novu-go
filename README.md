@@ -335,6 +335,7 @@ func main() {
 
 ### [Environments](docs/sdks/environments/README.md)
 
+* [GetTags](docs/sdks/environments/README.md#gettags) - Get environment tags
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -366,6 +367,7 @@ func main() {
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
 * [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
+* [Retrieve](docs/sdks/novu/README.md#retrieve)
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
