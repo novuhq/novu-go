@@ -46,8 +46,10 @@ type EmailStepResponseDtoControlValues struct {
 	// Type of editor to use for the body.
 	EditorType *EmailStepResponseDtoEditorType `default:"block" json:"editorType"`
 	// Disable sanitization of the output.
-	DisableOutputSanitization *bool          `default:"false" json:"disableOutputSanitization"`
-	AdditionalProperties      map[string]any `additionalProperties:"true" json:"-"`
+	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID             *string        `json:"layoutId,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (e EmailStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
@@ -96,6 +98,13 @@ func (o *EmailStepResponseDtoControlValues) GetDisableOutputSanitization() *bool
 	return o.DisableOutputSanitization
 }
 
+func (o *EmailStepResponseDtoControlValues) GetLayoutID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutID
+}
+
 func (o *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
 	if o == nil {
 		return nil
@@ -125,7 +134,7 @@ type EmailStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -190,9 +199,9 @@ func (o *EmailStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *EmailStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *EmailStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

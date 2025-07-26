@@ -21,6 +21,7 @@ const (
 	ProviderIDGetstream        ProviderID = "getstream"
 	ProviderIDRocketChat       ProviderID = "rocket-chat"
 	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
+	ProviderIDChatWebhook      ProviderID = "chat-webhook"
 	ProviderIDFcm              ProviderID = "fcm"
 	ProviderIDApns             ProviderID = "apns"
 	ProviderIDExpo             ProviderID = "expo"
@@ -58,6 +59,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	case "rocket-chat":
 		fallthrough
 	case "whatsapp-business":
+		fallthrough
+	case "chat-webhook":
 		fallthrough
 	case "fcm":
 		fallthrough

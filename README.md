@@ -335,6 +335,7 @@ func main() {
 
 ### [Environments](docs/sdks/environments/README.md)
 
+* [GetTags](docs/sdks/environments/README.md#gettags) - Get environment tags
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -366,6 +367,7 @@ func main() {
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
 * [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
+* [Retrieve](docs/sdks/novu/README.md#retrieve)
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
@@ -378,8 +380,8 @@ func main() {
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
-* [Update](docs/sdks/credentials/README.md#update) - Update provider credentials
-* [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
+* [Update](docs/sdks/credentials/README.md#update) - Upsert provider credentials
+* [Append](docs/sdks/credentials/README.md#append) - Create or Partially Update provider credentials
 * [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
@@ -765,12 +767,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/novuhq/novu-go"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = novugo.New(novugo.WithClient(httpClient))
 )
 ```
 
