@@ -15,6 +15,7 @@ Retrieve subscriber channel preferences by its unique key identifier **subscribe
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_getSubscriberPreferences" method="get" path="/v2/subscribers/{subscriberId}/preferences" -->
 ```go
 package main
 
@@ -72,6 +73,7 @@ Update subscriber preferences by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_updateSubscriberPreferences" method="patch" path="/v2/subscribers/{subscriberId}/preferences" -->
 ```go
 package main
 

@@ -4,16 +4,16 @@ package components
 
 type StepContentIssueDto struct {
 	// Type of step content issue
-	IssueType StepContentIssueEnum `json:"issueType"`
+	IssueType ContentIssueEnum `json:"issueType"`
 	// Name of the variable related to the issue
 	VariableName *string `json:"variableName,omitempty"`
 	// Detailed message describing the issue
 	Message string `json:"message"`
 }
 
-func (o *StepContentIssueDto) GetIssueType() StepContentIssueEnum {
+func (o *StepContentIssueDto) GetIssueType() ContentIssueEnum {
 	if o == nil {
-		return StepContentIssueEnum("")
+		return ContentIssueEnum("")
 	}
 	return o.IssueType
 }

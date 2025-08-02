@@ -59,6 +59,7 @@ Provider ID of the job
 | `ProvidersIDEnumEazySms`          | eazy-sms                          |
 | `ProvidersIDEnumMobishastra`      | mobishastra                       |
 | `ProvidersIDEnumAfroMessage`      | afro-message                      |
+| `ProvidersIDEnumImedia`           | imedia                            |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |
@@ -77,3 +78,4 @@ Provider ID of the job
 | `ProvidersIDEnumGetstream`        | getstream                         |
 | `ProvidersIDEnumRocketChat`       | rocket-chat                       |
 | `ProvidersIDEnumWhatsappBusiness` | whatsapp-business                 |
+| `ProvidersIDEnumChatWebhook`      | chat-webhook                      |

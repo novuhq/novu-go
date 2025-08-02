@@ -16,6 +16,7 @@ List all subscriptions of subscribers for a topic.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_listTopicSubscriptions" method="get" path="/v2/topics/{topicKey}/subscriptions" -->
 ```go
 package main
 
@@ -74,6 +75,7 @@ This api will create subscription for subscriberIds for a topic.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_createTopicSubscriptions" method="post" path="/v2/topics/{topicKey}/subscriptions" -->
 ```go
 package main
 
@@ -136,6 +138,7 @@ Delete subscriptions for subscriberIds for a topic.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_deleteTopicSubscriptions" method="delete" path="/v2/topics/{topicKey}/subscriptions" -->
 ```go
 package main
 

@@ -9,21 +9,78 @@ Novu Documentation
 
 ### Available Operations
 
+* [Retrieve](#retrieve)
 * [Trigger](#trigger) - Trigger event
 * [Cancel](#cancel) - Cancel triggered event
 * [TriggerBroadcast](#triggerbroadcast) - Broadcast event to all
 * [TriggerBulk](#triggerbulk) - Bulk trigger event
 
-## Trigger
-
-
-    Trigger event is the main (and only) way to send notifications to subscribers. 
-    The trigger identifier is used to match the particular workflow associated with it. 
-    Additional information can be passed according the body interface below.
-    
+## Retrieve
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="ActivityController_getLogs" method="get" path="/v1/activity/requests" -->
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/models/operations"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+        StatusCodes: []float64{
+            200,
+            404,
+            500,
+        },
+        CreatedGte: novugo.Float64(1640995200),
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.GetRequestsResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                  | Type                                                                                                       | Required                                                                                                   | Description                                                                                                |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                      | :heavy_check_mark:                                                                                         | The context to use for the request.                                                                        |
+| `request`                                                                                                  | [operations.ActivityControllerGetLogsRequest](../../models/operations/activitycontrollergetlogsrequest.md) | :heavy_check_mark:                                                                                         | The request object to use for the request.                                                                 |
+| `opts`                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                   | :heavy_minus_sign:                                                                                         | The options for this request.                                                                              |
+
+### Response
+
+**[*operations.ActivityControllerGetLogsResponse](../../models/operations/activitycontrollergetlogsresponse.md), error**
+
+### Errors
+
+| Error Type         | Status Code        | Content Type       |
+| ------------------ | ------------------ | ------------------ |
+| apierrors.APIError | 4XX, 5XX           | \*/\*              |
+
+## Trigger
+
+
+    Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+    To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="EventsController_trigger" method="post" path="/v1/events/trigger" -->
 ```go
 package main
 
@@ -96,6 +153,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="EventsController_cancel" method="delete" path="/v1/events/trigger/{transactionId}" -->
 ```go
 package main
 
@@ -152,6 +210,7 @@ Trigger a broadcast event to all existing subscribers, could be used to send ann
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="EventsController_broadcastEventToAll" method="post" path="/v1/events/trigger/broadcast" -->
 ```go
 package main
 
@@ -229,6 +288,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="EventsController_triggerBulk" method="post" path="/v1/events/trigger/bulk" -->
 ```go
 package main
 
