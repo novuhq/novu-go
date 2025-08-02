@@ -2,26 +2,74 @@
 
 package components
 
-// SmsStepUpsertDtoControlValues - Control values for the SMS step
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
+type SmsStepUpsertDtoControlValuesType string
+
+const (
+	SmsStepUpsertDtoControlValuesTypeSmsControlDto SmsStepUpsertDtoControlValuesType = "SmsControlDto"
+	SmsStepUpsertDtoControlValuesTypeMapOfAny      SmsStepUpsertDtoControlValuesType = "mapOfAny"
+)
+
+// SmsStepUpsertDtoControlValues - Control values for the SMS step.
 type SmsStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Content of the SMS message.
-	Body *string `json:"body,omitempty"`
+	SmsControlDto *SmsControlDto `queryParam:"inline"`
+	MapOfAny      map[string]any `queryParam:"inline"`
+
+	Type SmsStepUpsertDtoControlValuesType
 }
 
-func (o *SmsStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
-		return nil
+func CreateSmsStepUpsertDtoControlValuesSmsControlDto(smsControlDto SmsControlDto) SmsStepUpsertDtoControlValues {
+	typ := SmsStepUpsertDtoControlValuesTypeSmsControlDto
+
+	return SmsStepUpsertDtoControlValues{
+		SmsControlDto: &smsControlDto,
+		Type:          typ,
 	}
-	return o.Skip
 }
 
-func (o *SmsStepUpsertDtoControlValues) GetBody() *string {
-	if o == nil {
+func CreateSmsStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) SmsStepUpsertDtoControlValues {
+	typ := SmsStepUpsertDtoControlValuesTypeMapOfAny
+
+	return SmsStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *SmsStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var smsControlDto SmsControlDto = SmsControlDto{}
+	if err := utils.UnmarshalJSON(data, &smsControlDto, "", true, true); err == nil {
+		u.SmsControlDto = &smsControlDto
+		u.Type = SmsStepUpsertDtoControlValuesTypeSmsControlDto
 		return nil
 	}
-	return o.Body
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = SmsStepUpsertDtoControlValuesTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for SmsStepUpsertDtoControlValues", string(data))
+}
+
+func (u SmsStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.SmsControlDto != nil {
+		return utils.MarshalJSON(u.SmsControlDto, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type SmsStepUpsertDtoControlValues: all fields are null")
 }
 
 type SmsStepUpsertDto struct {
@@ -31,7 +79,7 @@ type SmsStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the SMS step
+	// Control values for the SMS step.
 	ControlValues *SmsStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 

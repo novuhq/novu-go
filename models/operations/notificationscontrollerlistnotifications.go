@@ -24,7 +24,7 @@ type NotificationsControllerListNotificationsRequest struct {
 	Page *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
 	// Limit for pagination
 	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
-	// Transaction ID for filtering
+	// The transaction ID to filter by
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Topic Key for filtering notifications by topic
 	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`

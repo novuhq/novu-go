@@ -5,17 +5,18 @@
 
 ### Available Operations
 
-* [Update](#update) - Update provider credentials
-* [Append](#append) - Upsert provider credentials
+* [Update](#update) - Upsert provider credentials
+* [Append](#append) - Update provider credentials
 * [Delete](#delete) - Delete provider credentials
 
 ## Update
 
-Update credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
+Upsert credentials for a provider such as slack and push tokens. 
+      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_updateSubscriberChannel" method="put" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```go
 package main
 
@@ -86,10 +87,11 @@ func main() {
 ## Append
 
 Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
+      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_modifySubscriberChannel" method="patch" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```go
 package main
 
@@ -164,6 +166,7 @@ Delete subscriber credentials for a provider such as **slack** and **FCM** by **
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_deleteSubscriberCredentials" method="delete" path="/v1/subscribers/{subscriberId}/credentials/{providerId}" -->
 ```go
 package main
 

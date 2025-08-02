@@ -17,6 +17,7 @@ List all notification events (triggered events) for the current environment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="NotificationsController_listNotifications" method="get" path="/v1/notifications" -->
 ```go
 package main
 
@@ -74,6 +75,7 @@ Retrieve an event by its unique key identifier **notificationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="NotificationsController_getNotification" method="get" path="/v1/notifications/{notificationId}" -->
 ```go
 package main
 

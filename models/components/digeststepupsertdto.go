@@ -3,141 +3,73 @@
 package components
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// DigestStepUpsertDtoType - The type of digest strategy. Determines which fields are applicable.
-type DigestStepUpsertDtoType string
+type DigestStepUpsertDtoControlValuesType string
 
 const (
-	DigestStepUpsertDtoTypeRegular DigestStepUpsertDtoType = "regular"
-	DigestStepUpsertDtoTypeTimed   DigestStepUpsertDtoType = "timed"
+	DigestStepUpsertDtoControlValuesTypeDigestControlDto DigestStepUpsertDtoControlValuesType = "DigestControlDto"
+	DigestStepUpsertDtoControlValuesTypeMapOfAny         DigestStepUpsertDtoControlValuesType = "mapOfAny"
 )
 
-func (e DigestStepUpsertDtoType) ToPointer() *DigestStepUpsertDtoType {
-	return &e
-}
-func (e *DigestStepUpsertDtoType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "regular":
-		fallthrough
-	case "timed":
-		*e = DigestStepUpsertDtoType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DigestStepUpsertDtoType: %v", v)
-	}
-}
-
-// DigestStepUpsertDtoUnit - The unit of time for the digest interval (for REGULAR type).
-type DigestStepUpsertDtoUnit string
-
-const (
-	DigestStepUpsertDtoUnitSeconds DigestStepUpsertDtoUnit = "seconds"
-	DigestStepUpsertDtoUnitMinutes DigestStepUpsertDtoUnit = "minutes"
-	DigestStepUpsertDtoUnitHours   DigestStepUpsertDtoUnit = "hours"
-	DigestStepUpsertDtoUnitDays    DigestStepUpsertDtoUnit = "days"
-	DigestStepUpsertDtoUnitWeeks   DigestStepUpsertDtoUnit = "weeks"
-	DigestStepUpsertDtoUnitMonths  DigestStepUpsertDtoUnit = "months"
-)
-
-func (e DigestStepUpsertDtoUnit) ToPointer() *DigestStepUpsertDtoUnit {
-	return &e
-}
-func (e *DigestStepUpsertDtoUnit) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "seconds":
-		fallthrough
-	case "minutes":
-		fallthrough
-	case "hours":
-		fallthrough
-	case "days":
-		fallthrough
-	case "weeks":
-		fallthrough
-	case "months":
-		*e = DigestStepUpsertDtoUnit(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DigestStepUpsertDtoUnit: %v", v)
-	}
-}
-
-// DigestStepUpsertDtoControlValues - Control values for the Digest step
+// DigestStepUpsertDtoControlValues - Control values for the Digest step.
 type DigestStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// The type of digest strategy. Determines which fields are applicable.
-	Type *DigestStepUpsertDtoType `json:"type,omitempty"`
-	// The amount of time for the digest interval (for REGULAR type). Min 1.
-	Amount *float64 `json:"amount,omitempty"`
-	// The unit of time for the digest interval (for REGULAR type).
-	Unit *DigestStepUpsertDtoUnit `json:"unit,omitempty"`
-	// Configuration for look-back window (for REGULAR type).
-	LookBackWindow *LookBackWindowDto `json:"lookBackWindow,omitempty"`
-	// Cron expression for TIMED digest. Min length 1.
-	Cron *string `json:"cron,omitempty"`
-	// Specify a custom key for digesting events instead of the default event key.
-	DigestKey *string `json:"digestKey,omitempty"`
+	DigestControlDto *DigestControlDto `queryParam:"inline"`
+	MapOfAny         map[string]any    `queryParam:"inline"`
+
+	Type DigestStepUpsertDtoControlValuesType
 }
 
-func (o *DigestStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
-		return nil
+func CreateDigestStepUpsertDtoControlValuesDigestControlDto(digestControlDto DigestControlDto) DigestStepUpsertDtoControlValues {
+	typ := DigestStepUpsertDtoControlValuesTypeDigestControlDto
+
+	return DigestStepUpsertDtoControlValues{
+		DigestControlDto: &digestControlDto,
+		Type:             typ,
 	}
-	return o.Skip
 }
 
-func (o *DigestStepUpsertDtoControlValues) GetType() *DigestStepUpsertDtoType {
-	if o == nil {
-		return nil
+func CreateDigestStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) DigestStepUpsertDtoControlValues {
+	typ := DigestStepUpsertDtoControlValuesTypeMapOfAny
+
+	return DigestStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
 	}
-	return o.Type
 }
 
-func (o *DigestStepUpsertDtoControlValues) GetAmount() *float64 {
-	if o == nil {
+func (u *DigestStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var digestControlDto DigestControlDto = DigestControlDto{}
+	if err := utils.UnmarshalJSON(data, &digestControlDto, "", true, true); err == nil {
+		u.DigestControlDto = &digestControlDto
+		u.Type = DigestStepUpsertDtoControlValuesTypeDigestControlDto
 		return nil
 	}
-	return o.Amount
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = DigestStepUpsertDtoControlValuesTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for DigestStepUpsertDtoControlValues", string(data))
 }
 
-func (o *DigestStepUpsertDtoControlValues) GetUnit() *DigestStepUpsertDtoUnit {
-	if o == nil {
-		return nil
+func (u DigestStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.DigestControlDto != nil {
+		return utils.MarshalJSON(u.DigestControlDto, "", true)
 	}
-	return o.Unit
-}
 
-func (o *DigestStepUpsertDtoControlValues) GetLookBackWindow() *LookBackWindowDto {
-	if o == nil {
-		return nil
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
-	return o.LookBackWindow
-}
 
-func (o *DigestStepUpsertDtoControlValues) GetCron() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Cron
-}
-
-func (o *DigestStepUpsertDtoControlValues) GetDigestKey() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DigestKey
+	return nil, errors.New("could not marshal union type DigestStepUpsertDtoControlValues: all fields are null")
 }
 
 type DigestStepUpsertDto struct {
@@ -147,7 +79,7 @@ type DigestStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Digest step
+	// Control values for the Digest step.
 	ControlValues *DigestStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 
