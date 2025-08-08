@@ -22,6 +22,7 @@ This api returns a paginated list of topics.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_listTopics" method="get" path="/v2/topics" -->
 ```go
 package main
 
@@ -73,10 +74,11 @@ func main() {
 
 ## Create
 
-Creates a new topic if it does not exist, or updates an existing topic if it already exists
+Creates a new topic if it does not exist, or updates an existing topic if it already exists. Use ?failIfExists=true to prevent updates.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_upsertTopic" method="post" path="/v2/topics" -->
 ```go
 package main
 
@@ -94,7 +96,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Topics.Create(ctx, components.CreateUpdateTopicRequestDto{
+    res, err := s.Topics.Create(ctx, true, components.CreateUpdateTopicRequestDto{
         Key: "task:12345",
         Name: novugo.String("Task Title"),
     }, nil)
@@ -112,6 +114,7 @@ func main() {
 | Parameter                                                                                        | Type                                                                                             | Required                                                                                         | Description                                                                                      |
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
+| `failIfExists`                                                                                   | *bool*                                                                                           | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `createUpdateTopicRequestDto`                                                                    | [components.CreateUpdateTopicRequestDto](../../models/components/createupdatetopicrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `idempotencyKey`                                                                                 | **string*                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
 | `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
@@ -122,13 +125,14 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| apierrors.TopicResponseDto        | 409                               | application/json                  |
+| apierrors.ErrorDto                | 414                               | application/json                  |
+| apierrors.ErrorDto                | 400, 401, 403, 404, 405, 413, 415 | application/json                  |
+| apierrors.ValidationErrorDto      | 422                               | application/json                  |
+| apierrors.ErrorDto                | 500                               | application/json                  |
+| apierrors.APIError                | 4XX, 5XX                          | \*/\*                             |
 
 ## Get
 
@@ -136,6 +140,7 @@ Retrieve a topic by its unique key identifier **topicKey**
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_getTopic" method="get" path="/v2/topics/{topicKey}" -->
 ```go
 package main
 
@@ -191,6 +196,7 @@ Update a topic name by its unique key identifier **topicKey**
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_updateTopic" method="patch" path="/v2/topics/{topicKey}" -->
 ```go
 package main
 
@@ -251,6 +257,7 @@ Delete a topic by its unique key identifier **topicKey**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="TopicsController_deleteTopic" method="delete" path="/v2/topics/{topicKey}" -->
 ```go
 package main
 

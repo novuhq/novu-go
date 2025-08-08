@@ -384,9 +384,10 @@ func (s *Topics) List(ctx context.Context, request operations.TopicsControllerLi
 }
 
 // Create a topic
-// Creates a new topic if it does not exist, or updates an existing topic if it already exists
-func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto components.CreateUpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpsertTopicResponse, error) {
+// Creates a new topic if it does not exist, or updates an existing topic if it already exists. Use ?failIfExists=true to prevent updates.
+func (s *Topics) Create(ctx context.Context, failIfExists bool, createUpdateTopicRequestDto components.CreateUpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpsertTopicResponse, error) {
 	request := operations.TopicsControllerUpsertTopicRequest{
+		FailIfExists:                failIfExists,
 		IdempotencyKey:              idempotencyKey,
 		CreateUpdateTopicRequestDto: createUpdateTopicRequestDto,
 	}
@@ -450,6 +451,10 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -592,6 +597,29 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 409:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.TopicResponseDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -622,8 +650,6 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		fallthrough
 	case httpRes.StatusCode == 413:
 		fallthrough

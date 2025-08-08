@@ -15,6 +15,8 @@ type PatchWorkflowDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable payload schema validation
 	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `json:"isTranslationEnabled,omitempty"`
 }
 
 func (o *PatchWorkflowDto) GetActive() *bool {
@@ -57,4 +59,11 @@ func (o *PatchWorkflowDto) GetValidatePayload() *bool {
 		return nil
 	}
 	return o.ValidatePayload
+}
+
+func (o *PatchWorkflowDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
 }

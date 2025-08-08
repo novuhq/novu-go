@@ -292,7 +292,7 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"log"
 )
 
@@ -303,23 +303,18 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
+	res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+		StatusCodes: []float64{
+			200,
+			404,
+			500,
 		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+		CreatedGte: novugo.Float64(1640995200),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res.GetRequestsResponseDto != nil {
 		// handle response
 	}
 }
@@ -335,6 +330,7 @@ func main() {
 
 ### [Environments](docs/sdks/environments/README.md)
 
+* [GetTags](docs/sdks/environments/README.md#gettags) - Get environment tags
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -362,6 +358,7 @@ func main() {
 
 ### [Novu SDK](docs/sdks/novu/README.md)
 
+* [Retrieve](docs/sdks/novu/README.md#retrieve)
 * [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
@@ -378,8 +375,8 @@ func main() {
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
-* [Update](docs/sdks/credentials/README.md#update) - Update provider credentials
-* [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
+* [Update](docs/sdks/credentials/README.md#update) - Upsert provider credentials
+* [Append](docs/sdks/credentials/README.md#append) - Update provider credentials
 * [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
@@ -453,7 +450,7 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"log"
 	"models/operations"
@@ -466,19 +463,14 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
+	res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+		StatusCodes: []float64{
+			200,
+			404,
+			500,
 		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil, operations.WithRetries(
+		CreatedGte: novugo.Float64(1640995200),
+	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -492,7 +484,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res.GetRequestsResponseDto != nil {
 		// handle response
 	}
 }
@@ -506,7 +498,7 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"log"
 )
@@ -529,23 +521,18 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
+	res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+		StatusCodes: []float64{
+			200,
+			404,
+			500,
 		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+		CreatedGte: novugo.Float64(1640995200),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res.GetRequestsResponseDto != nil {
 		// handle response
 	}
 }
@@ -668,7 +655,7 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"log"
 )
 
@@ -680,23 +667,18 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
+	res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+		StatusCodes: []float64{
+			200,
+			404,
+			500,
 		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+		CreatedGte: novugo.Float64(1640995200),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res.GetRequestsResponseDto != nil {
 		// handle response
 	}
 }
@@ -712,7 +694,7 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/models/operations"
 	"log"
 )
 
@@ -724,23 +706,18 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
+	res, err := s.Retrieve(ctx, operations.ActivityControllerGetLogsRequest{
+		StatusCodes: []float64{
+			200,
+			404,
+			500,
 		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+		CreatedGte: novugo.Float64(1640995200),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res.GetRequestsResponseDto != nil {
 		// handle response
 	}
 }
@@ -765,12 +742,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/novuhq/novu-go"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = novugo.New(novugo.WithClient(httpClient))
 )
 ```
 

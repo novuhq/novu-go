@@ -8,6 +8,7 @@ Component type for the UI Schema Property
 | Name                                            | Value                                           |
 | ----------------------------------------------- | ----------------------------------------------- |
 | `UIComponentEnumEmailEditorSelect`              | EMAIL_EDITOR_SELECT                             |
+| `UIComponentEnumLayoutSelect`                   | LAYOUT_SELECT                                   |
 | `UIComponentEnumBlockEditor`                    | BLOCK_EDITOR                                    |
 | `UIComponentEnumEmailBody`                      | EMAIL_BODY                                      |
 | `UIComponentEnumTextFullLine`                   | TEXT_FULL_LINE                                  |
@@ -32,3 +33,4 @@ Component type for the UI Schema Property
 | `UIComponentEnumPushSubject`                    | PUSH_SUBJECT                                    |
 | `UIComponentEnumQueryEditor`                    | QUERY_EDITOR                                    |
 | `UIComponentEnumData`                           | DATA                                            |
+| `UIComponentEnumLayoutEmail`                    | LAYOUT_EMAIL                                    |

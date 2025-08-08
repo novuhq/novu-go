@@ -265,6 +265,12 @@ type UpdateWorkflowDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Workflow ID (allowed only for code-first workflows)
 	WorkflowID *string `json:"workflowId,omitempty"`
 	// Steps of the workflow
@@ -272,11 +278,7 @@ type UpdateWorkflowDto struct {
 	// Workflow preferences
 	Preferences PreferencesRequestDto `json:"preferences"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
-	// Enable or disable payload schema validation
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	Origin ResourceOriginEnum `json:"origin"`
 }
 
 func (u UpdateWorkflowDto) MarshalJSON() ([]byte, error) {
@@ -318,6 +320,27 @@ func (o *UpdateWorkflowDto) GetActive() *bool {
 	return o.Active
 }
 
+func (o *UpdateWorkflowDto) GetValidatePayload() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ValidatePayload
+}
+
+func (o *UpdateWorkflowDto) GetPayloadSchema() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.PayloadSchema
+}
+
+func (o *UpdateWorkflowDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
+}
+
 func (o *UpdateWorkflowDto) GetWorkflowID() *string {
 	if o == nil {
 		return nil
@@ -339,23 +362,9 @@ func (o *UpdateWorkflowDto) GetPreferences() PreferencesRequestDto {
 	return o.Preferences
 }
 
-func (o *UpdateWorkflowDto) GetOrigin() WorkflowOriginEnum {
+func (o *UpdateWorkflowDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
-}
-
-func (o *UpdateWorkflowDto) GetPayloadSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.PayloadSchema
-}
-
-func (o *UpdateWorkflowDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
 }

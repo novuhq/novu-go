@@ -63,6 +63,8 @@ const (
 	ProvidersIDEnumEazySms          ProvidersIDEnum = "eazy-sms"
 	ProvidersIDEnumMobishastra      ProvidersIDEnum = "mobishastra"
 	ProvidersIDEnumAfroMessage      ProvidersIDEnum = "afro-message"
+	ProvidersIDEnumSmsmode          ProvidersIDEnum = "smsmode"
+	ProvidersIDEnumImedia           ProvidersIDEnum = "imedia"
 	ProvidersIDEnumFcm              ProvidersIDEnum = "fcm"
 	ProvidersIDEnumApns             ProvidersIDEnum = "apns"
 	ProvidersIDEnumExpo             ProvidersIDEnum = "expo"
@@ -81,6 +83,7 @@ const (
 	ProvidersIDEnumGetstream        ProvidersIDEnum = "getstream"
 	ProvidersIDEnumRocketChat       ProvidersIDEnum = "rocket-chat"
 	ProvidersIDEnumWhatsappBusiness ProvidersIDEnum = "whatsapp-business"
+	ProvidersIDEnumChatWebhook      ProvidersIDEnum = "chat-webhook"
 )
 
 func (e ProvidersIDEnum) ToPointer() *ProvidersIDEnum {
@@ -196,6 +199,10 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "afro-message":
 		fallthrough
+	case "smsmode":
+		fallthrough
+	case "imedia":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -231,6 +238,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "rocket-chat":
 		fallthrough
 	case "whatsapp-business":
+		fallthrough
+	case "chat-webhook":
 		*e = ProvidersIDEnum(v)
 		return nil
 	default:

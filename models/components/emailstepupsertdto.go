@@ -3,96 +3,73 @@
 package components
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// EmailStepUpsertDtoEditorType - Type of editor to use for the body.
-type EmailStepUpsertDtoEditorType string
+type EmailStepUpsertDtoControlValuesType string
 
 const (
-	EmailStepUpsertDtoEditorTypeBlock EmailStepUpsertDtoEditorType = "block"
-	EmailStepUpsertDtoEditorTypeHTML  EmailStepUpsertDtoEditorType = "html"
+	EmailStepUpsertDtoControlValuesTypeEmailControlDto EmailStepUpsertDtoControlValuesType = "EmailControlDto"
+	EmailStepUpsertDtoControlValuesTypeMapOfAny        EmailStepUpsertDtoControlValuesType = "mapOfAny"
 )
 
-func (e EmailStepUpsertDtoEditorType) ToPointer() *EmailStepUpsertDtoEditorType {
-	return &e
-}
-func (e *EmailStepUpsertDtoEditorType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "block":
-		fallthrough
-	case "html":
-		*e = EmailStepUpsertDtoEditorType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EmailStepUpsertDtoEditorType: %v", v)
-	}
-}
-
-// EmailStepUpsertDtoControlValues - Control values for the Email step
+// EmailStepUpsertDtoControlValues - Control values for the Email step.
 type EmailStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Subject of the email.
-	Subject string `json:"subject"`
-	// Body content of the email, either a valid Maily JSON object, or html string.
-	Body *string `default:"" json:"body"`
-	// Type of editor to use for the body.
-	EditorType *EmailStepUpsertDtoEditorType `default:"block" json:"editorType"`
-	// Disable sanitization of the output.
-	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	EmailControlDto *EmailControlDto `queryParam:"inline"`
+	MapOfAny        map[string]any   `queryParam:"inline"`
+
+	Type EmailStepUpsertDtoControlValuesType
 }
 
-func (e EmailStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(e, "", false)
-}
+func CreateEmailStepUpsertDtoControlValuesEmailControlDto(emailControlDto EmailControlDto) EmailStepUpsertDtoControlValues {
+	typ := EmailStepUpsertDtoControlValuesTypeEmailControlDto
 
-func (e *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
-		return err
+	return EmailStepUpsertDtoControlValues{
+		EmailControlDto: &emailControlDto,
+		Type:            typ,
 	}
-	return nil
 }
 
-func (o *EmailStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func CreateEmailStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) EmailStepUpsertDtoControlValues {
+	typ := EmailStepUpsertDtoControlValuesTypeMapOfAny
+
+	return EmailStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var emailControlDto EmailControlDto = EmailControlDto{}
+	if err := utils.UnmarshalJSON(data, &emailControlDto, "", true, true); err == nil {
+		u.EmailControlDto = &emailControlDto
+		u.Type = EmailStepUpsertDtoControlValuesTypeEmailControlDto
 		return nil
 	}
-	return o.Skip
-}
 
-func (o *EmailStepUpsertDtoControlValues) GetSubject() string {
-	if o == nil {
-		return ""
-	}
-	return o.Subject
-}
-
-func (o *EmailStepUpsertDtoControlValues) GetBody() *string {
-	if o == nil {
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = EmailStepUpsertDtoControlValuesTypeMapOfAny
 		return nil
 	}
-	return o.Body
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for EmailStepUpsertDtoControlValues", string(data))
 }
 
-func (o *EmailStepUpsertDtoControlValues) GetEditorType() *EmailStepUpsertDtoEditorType {
-	if o == nil {
-		return nil
+func (u EmailStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.EmailControlDto != nil {
+		return utils.MarshalJSON(u.EmailControlDto, "", true)
 	}
-	return o.EditorType
-}
 
-func (o *EmailStepUpsertDtoControlValues) GetDisableOutputSanitization() *bool {
-	if o == nil {
-		return nil
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
-	return o.DisableOutputSanitization
+
+	return nil, errors.New("could not marshal union type EmailStepUpsertDtoControlValues: all fields are null")
 }
 
 type EmailStepUpsertDto struct {
@@ -102,7 +79,7 @@ type EmailStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Email step
+	// Control values for the Email step.
 	ControlValues *EmailStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 

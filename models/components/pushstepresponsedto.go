@@ -78,7 +78,7 @@ type PushStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -143,9 +143,9 @@ func (o *PushStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *PushStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *PushStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

@@ -4,16 +4,16 @@ package components
 
 type StepIntegrationIssue struct {
 	// Type of integration issue
-	IssueType StepIntegrationIssueEnum `json:"issueType"`
+	IssueType IntegrationIssueEnum `json:"issueType"`
 	// Name of the variable related to the issue
 	VariableName *string `json:"variableName,omitempty"`
 	// Detailed message describing the issue
 	Message string `json:"message"`
 }
 
-func (o *StepIntegrationIssue) GetIssueType() StepIntegrationIssueEnum {
+func (o *StepIntegrationIssue) GetIssueType() IntegrationIssueEnum {
 	if o == nil {
-		return StepIntegrationIssueEnum("")
+		return IntegrationIssueEnum("")
 	}
 	return o.IssueType
 }

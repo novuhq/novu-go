@@ -265,6 +265,12 @@ type CreateWorkflowDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Unique identifier for the workflow
 	WorkflowID string `json:"workflowId"`
 	// Steps of the workflow
@@ -273,10 +279,6 @@ type CreateWorkflowDto struct {
 	Source *WorkflowCreationSourceEnum `default:"editor" json:"__source"`
 	// Workflow preferences
 	Preferences *PreferencesRequestDto `json:"preferences,omitempty"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
-	// Enable or disable payload schema validation
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
 }
 
 func (c CreateWorkflowDto) MarshalJSON() ([]byte, error) {
@@ -318,6 +320,27 @@ func (o *CreateWorkflowDto) GetActive() *bool {
 	return o.Active
 }
 
+func (o *CreateWorkflowDto) GetValidatePayload() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ValidatePayload
+}
+
+func (o *CreateWorkflowDto) GetPayloadSchema() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.PayloadSchema
+}
+
+func (o *CreateWorkflowDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
+}
+
 func (o *CreateWorkflowDto) GetWorkflowID() string {
 	if o == nil {
 		return ""
@@ -344,18 +367,4 @@ func (o *CreateWorkflowDto) GetPreferences() *PreferencesRequestDto {
 		return nil
 	}
 	return o.Preferences
-}
-
-func (o *CreateWorkflowDto) GetPayloadSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.PayloadSchema
-}
-
-func (o *CreateWorkflowDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
 }

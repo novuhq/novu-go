@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/retry"
+	"io"
 	"math"
 	"math/rand"
 	"net/http"
@@ -51,7 +52,7 @@ func Retry(ctx context.Context, r Retries, operation func() (*http.Response, err
 			if err != nil {
 				urlError := new(url.Error)
 				if errors.As(err, &urlError) {
-					if (urlError.Temporary() || urlError.Timeout()) && r.Config.RetryConnectionErrors {
+					if (urlError.Temporary() || urlError.Timeout() || errors.Is(urlError.Err, io.EOF)) && r.Config.RetryConnectionErrors {
 						return err
 					}
 				}

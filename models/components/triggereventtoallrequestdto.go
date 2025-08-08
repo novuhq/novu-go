@@ -8,10 +8,25 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// TriggerEventToAllRequestDtoChannels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+type TriggerEventToAllRequestDtoChannels struct {
+	// Email channel specific overrides
+	Email *EmailChannelOverrides `json:"email,omitempty"`
+}
+
+func (o *TriggerEventToAllRequestDtoChannels) GetEmail() *EmailChannelOverrides {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
 // TriggerEventToAllRequestDtoOverrides - This could be used to override provider specific configurations
 type TriggerEventToAllRequestDtoOverrides struct {
-	// This could be used to override provider specific configurations
+	// This could be used to override provider specific configurations or layout at the step level
 	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+	Channels *TriggerEventToAllRequestDtoChannels `json:"channels,omitempty"`
 	// Overrides the provider configuration for the entire workflow and all steps
 	Providers map[string]map[string]any `json:"providers,omitempty"`
 	// Override the email provider specific configurations for the entire workflow
@@ -53,6 +68,13 @@ func (o *TriggerEventToAllRequestDtoOverrides) GetSteps() map[string]StepsOverri
 		return nil
 	}
 	return o.Steps
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetChannels() *TriggerEventToAllRequestDtoChannels {
+	if o == nil {
+		return nil
+	}
+	return o.Channels
 }
 
 func (o *TriggerEventToAllRequestDtoOverrides) GetProviders() map[string]map[string]any {

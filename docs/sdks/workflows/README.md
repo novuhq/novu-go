@@ -22,6 +22,7 @@ Creates a new workflow in the Novu Cloud environment
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_create" method="post" path="/v2/workflows" -->
 ```go
 package main
 
@@ -108,6 +109,7 @@ Retrieves a list of workflows with optional filtering and pagination
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_searchWorkflows" method="get" path="/v2/workflows" -->
 ```go
 package main
 
@@ -163,6 +165,7 @@ Updates the details of an existing workflow, here **workflowId** is the identifi
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_update" method="put" path="/v2/workflows/{workflowId}" -->
 ```go
 package main
 
@@ -209,7 +212,7 @@ func main() {
                 },
             },
         },
-        Origin: components.WorkflowOriginEnumExternal,
+        Origin: components.ResourceOriginEnumExternal,
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -250,6 +253,7 @@ Fetches details of a specific workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_getWorkflow" method="get" path="/v2/workflows/{workflowId}" -->
 ```go
 package main
 
@@ -306,6 +310,7 @@ Removes a specific workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_removeWorkflow" method="delete" path="/v2/workflows/{workflowId}" -->
 ```go
 package main
 
@@ -361,6 +366,7 @@ Partially updates a workflow by its unique identifier **workflowId**
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_patchWorkflow" method="patch" path="/v2/workflows/{workflowId}" -->
 ```go
 package main
 
@@ -418,6 +424,7 @@ Synchronizes a workflow to the target environment
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="WorkflowController_sync" method="put" path="/v2/workflows/{workflowId}/sync" -->
 ```go
 package main
 

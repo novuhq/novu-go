@@ -12,6 +12,7 @@ type UIComponentEnum string
 
 const (
 	UIComponentEnumEmailEditorSelect              UIComponentEnum = "EMAIL_EDITOR_SELECT"
+	UIComponentEnumLayoutSelect                   UIComponentEnum = "LAYOUT_SELECT"
 	UIComponentEnumBlockEditor                    UIComponentEnum = "BLOCK_EDITOR"
 	UIComponentEnumEmailBody                      UIComponentEnum = "EMAIL_BODY"
 	UIComponentEnumTextFullLine                   UIComponentEnum = "TEXT_FULL_LINE"
@@ -36,6 +37,7 @@ const (
 	UIComponentEnumPushSubject                    UIComponentEnum = "PUSH_SUBJECT"
 	UIComponentEnumQueryEditor                    UIComponentEnum = "QUERY_EDITOR"
 	UIComponentEnumData                           UIComponentEnum = "DATA"
+	UIComponentEnumLayoutEmail                    UIComponentEnum = "LAYOUT_EMAIL"
 )
 
 func (e UIComponentEnum) ToPointer() *UIComponentEnum {
@@ -48,6 +50,8 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "EMAIL_EDITOR_SELECT":
+		fallthrough
+	case "LAYOUT_SELECT":
 		fallthrough
 	case "BLOCK_EDITOR":
 		fallthrough
@@ -96,6 +100,8 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 	case "QUERY_EDITOR":
 		fallthrough
 	case "DATA":
+		fallthrough
+	case "LAYOUT_EMAIL":
 		*e = UIComponentEnum(v)
 		return nil
 	default:

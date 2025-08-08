@@ -84,11 +84,11 @@ type MessageResponseDto struct {
 	// Unique identifier for the message
 	ID *string `json:"_id,omitempty"`
 	// Template ID associated with the message
-	TemplateID string `json:"_templateId"`
+	TemplateID *string `json:"_templateId,omitempty"`
 	// Environment ID where the message is sent
 	EnvironmentID string `json:"_environmentId"`
 	// Message template ID
-	MessageTemplateID string `json:"_messageTemplateId"`
+	MessageTemplateID *string `json:"_messageTemplateId,omitempty"`
 	// Organization ID associated with the message
 	OrganizationID string `json:"_organizationId"`
 	// Notification ID associated with the message
@@ -110,7 +110,7 @@ type MessageResponseDto struct {
 	// Last read date of the message, if available
 	LastReadDate *string `json:"lastReadDate,omitempty"`
 	// Content of the message, can be an email block or a string
-	Content Content `json:"content"`
+	Content *Content `json:"content,omitempty"`
 	// Transaction ID associated with the message
 	TransactionID string `json:"transactionId"`
 	// Subject of the message, if applicable
@@ -158,9 +158,9 @@ func (o *MessageResponseDto) GetID() *string {
 	return o.ID
 }
 
-func (o *MessageResponseDto) GetTemplateID() string {
+func (o *MessageResponseDto) GetTemplateID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.TemplateID
 }
@@ -172,9 +172,9 @@ func (o *MessageResponseDto) GetEnvironmentID() string {
 	return o.EnvironmentID
 }
 
-func (o *MessageResponseDto) GetMessageTemplateID() string {
+func (o *MessageResponseDto) GetMessageTemplateID() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.MessageTemplateID
 }
@@ -249,9 +249,9 @@ func (o *MessageResponseDto) GetLastReadDate() *string {
 	return o.LastReadDate
 }
 
-func (o *MessageResponseDto) GetContent() Content {
+func (o *MessageResponseDto) GetContent() *Content {
 	if o == nil {
-		return Content{}
+		return nil
 	}
 	return o.Content
 }

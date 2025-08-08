@@ -8,10 +8,25 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// Channels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+type Channels struct {
+	// Email channel specific overrides
+	Email *EmailChannelOverrides `json:"email,omitempty"`
+}
+
+func (o *Channels) GetEmail() *EmailChannelOverrides {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
 // Overrides - This could be used to override provider specific configurations
 type Overrides struct {
-	// This could be used to override provider specific configurations
+	// This could be used to override provider specific configurations or layout at the step level
 	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+	Channels *Channels `json:"channels,omitempty"`
 	// Overrides the provider configuration for the entire workflow and all steps
 	Providers map[string]map[string]any `json:"providers,omitempty"`
 	// Override the email provider specific configurations for the entire workflow
@@ -41,6 +56,13 @@ func (o *Overrides) GetSteps() map[string]StepsOverrides {
 		return nil
 	}
 	return o.Steps
+}
+
+func (o *Overrides) GetChannels() *Channels {
+	if o == nil {
+		return nil
+	}
+	return o.Channels
 }
 
 func (o *Overrides) GetProviders() map[string]map[string]any {
@@ -421,7 +443,8 @@ type TriggerEventRequestDto struct {
 	Overrides *Overrides `json:"overrides,omitempty"`
 	// The recipients list of people who will receive the notification.
 	To To `json:"to"`
-	// A unique identifier for this transaction, we will generate a UUID if not provided.
+	// A unique identifier for deduplication. If the same **transactionId** is sent again,
+	//       the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your billing tier.
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
 	//     If a new actor object is provided, we will create a new subscriber in our system

@@ -46,6 +46,8 @@ type EmailControlDto struct {
 	EditorType *EditorType `default:"block" json:"editorType"`
 	// Disable sanitization of the output.
 	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID *string `json:"layoutId,omitempty"`
 }
 
 func (e EmailControlDto) MarshalJSON() ([]byte, error) {
@@ -53,7 +55,7 @@ func (e EmailControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, true); err != nil {
 		return err
 	}
 	return nil
@@ -92,4 +94,11 @@ func (o *EmailControlDto) GetDisableOutputSanitization() *bool {
 		return nil
 	}
 	return o.DisableOutputSanitization
+}
+
+func (o *EmailControlDto) GetLayoutID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutID
 }

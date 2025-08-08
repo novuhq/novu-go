@@ -7,9 +7,17 @@ import (
 )
 
 type SubscribersControllerCreateSubscriberRequest struct {
+	FailIfExists bool `queryParam:"style=form,explode=true,name=failIfExists"`
 	// A header for idempotency purposes
 	IdempotencyKey             *string                               `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateSubscriberRequestDto components.CreateSubscriberRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *SubscribersControllerCreateSubscriberRequest) GetFailIfExists() bool {
+	if o == nil {
+		return false
+	}
+	return o.FailIfExists
 }
 
 func (o *SubscribersControllerCreateSubscriberRequest) GetIdempotencyKey() *string {

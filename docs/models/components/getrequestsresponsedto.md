@@ -1,0 +1,11 @@
+# GetRequestsResponseDto
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Data`                                                                                 | [][components.RequestLogResponseDto](../../models/components/requestlogresponsedto.md) | :heavy_check_mark:                                                                     | Request log data                                                                       |
+| `Total`                                                                                | *float64*                                                                              | :heavy_check_mark:                                                                     | Total number of requests                                                               |
+| `PageSize`                                                                             | **float64*                                                                             | :heavy_minus_sign:                                                                     | Page size                                                                              |
+| `Page`                                                                                 | **float64*                                                                             | :heavy_minus_sign:                                                                     | Current page number                                                                    |

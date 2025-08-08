@@ -8,7 +8,7 @@ type ActivityNotificationTemplateResponseDto struct {
 	// Name of the template
 	Name string `json:"name"`
 	// Origin of the workflow
-	Origin *WorkflowOriginEnum `json:"origin,omitempty"`
+	Origin *ResourceOriginEnum `json:"origin,omitempty"`
 	// Triggers of the template
 	Triggers []NotificationTriggerDto `json:"triggers"`
 }
@@ -27,7 +27,7 @@ func (o *ActivityNotificationTemplateResponseDto) GetName() string {
 	return o.Name
 }
 
-func (o *ActivityNotificationTemplateResponseDto) GetOrigin() *WorkflowOriginEnum {
+func (o *ActivityNotificationTemplateResponseDto) GetOrigin() *ResourceOriginEnum {
 	if o == nil {
 		return nil
 	}
