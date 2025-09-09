@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type StepIssuesDto struct {
 	// Controls-related issues
 	Controls map[string][]StepContentIssueDto `json:"controls,omitempty"`
 	// Integration-related issues
 	Integration map[string][]StepIntegrationIssue `json:"integration,omitempty"`
+}
+
+func (s StepIssuesDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *StepIssuesDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *StepIssuesDto) GetControls() map[string][]StepContentIssueDto {

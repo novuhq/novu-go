@@ -18,10 +18,10 @@ const (
 )
 
 type Data struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
-	Boolean    *bool    `queryParam:"inline"`
-	Number     *float64 `queryParam:"inline"`
+	Str        *string  `queryParam:"inline" name:"data"`
+	ArrayOfStr []string `queryParam:"inline" name:"data"`
+	Boolean    *bool    `queryParam:"inline" name:"data"`
+	Number     *float64 `queryParam:"inline" name:"data"`
 
 	Type DataType
 }
@@ -65,28 +65,28 @@ func CreateDataNumber(number float64) Data {
 func (u *Data) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = DataTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = DataTypeArrayOfStr
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = DataTypeBoolean
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = DataTypeNumber
 		return nil
@@ -136,6 +136,17 @@ type SubscriberPayloadDto struct {
 	Channels []SubscriberChannelDto `json:"channels,omitempty"`
 	// The timezone of the subscriber.
 	Timezone *string `json:"timezone,omitempty"`
+}
+
+func (s SubscriberPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubscriberPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *SubscriberPayloadDto) GetSubscriberID() string {

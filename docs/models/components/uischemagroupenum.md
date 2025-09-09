@@ -15,3 +15,4 @@ Group of the UI Schema
 | `UISchemaGroupEnumChat`   | CHAT                      |
 | `UISchemaGroupEnumPush`   | PUSH                      |
 | `UISchemaGroupEnumSkip`   | SKIP                      |
+| `UISchemaGroupEnumLayout` | LAYOUT                    |

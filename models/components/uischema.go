@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type UISchema struct {
 	// Group of the UI Schema
 	Group *UISchemaGroupEnum `json:"group,omitempty"`
 	// Properties of the UI Schema
 	Properties map[string]UISchemaProperty `json:"properties,omitempty"`
+}
+
+func (u UISchema) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UISchema) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UISchema) GetGroup() *UISchemaGroupEnum {

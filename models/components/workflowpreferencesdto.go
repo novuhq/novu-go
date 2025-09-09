@@ -16,7 +16,7 @@ const (
 
 // All - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type All struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" name:"all"`
 
 	Type AllType
 }
@@ -33,7 +33,7 @@ func CreateAllWorkflowPreferenceDto(workflowPreferenceDto WorkflowPreferenceDto)
 func (u *All) UnmarshalJSON(data []byte) error {
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
-	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {
 		u.WorkflowPreferenceDto = &workflowPreferenceDto
 		u.Type = AllTypeWorkflowPreferenceDto
 		return nil

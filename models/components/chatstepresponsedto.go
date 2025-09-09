@@ -20,7 +20,7 @@ func (c ChatStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ChatStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -51,6 +51,17 @@ func (o *ChatStepResponseDtoControlValues) GetAdditionalProperties() map[string]
 type ChatStepResponseDtoSlug struct {
 }
 
+func (c ChatStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type ChatStepResponseDto struct {
 	// Controls metadata for the chat step
 	Controls ChatControlsMetadataResponseDto `json:"controls"`
@@ -69,13 +80,24 @@ type ChatStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (c ChatStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ChatStepResponseDto) GetControls() ChatControlsMetadataResponseDto {
@@ -134,9 +156,9 @@ func (o *ChatStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *ChatStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *ChatStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

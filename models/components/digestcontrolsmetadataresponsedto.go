@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type DigestControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -9,6 +13,17 @@ type DigestControlsMetadataResponseDto struct {
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Digest
 	Values DigestControlDto `json:"values"`
+}
+
+func (d DigestControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"values"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DigestControlsMetadataResponseDto) GetDataSchema() map[string]any {

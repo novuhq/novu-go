@@ -43,6 +43,10 @@ func (e *CreateIntegrationRequestDtoChannel) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Configurations for the integration
+type Configurations struct {
+}
+
 type CreateIntegrationRequestDto struct {
 	// The name of the integration
 	Name *string `json:"name,omitempty"`
@@ -62,6 +66,8 @@ type CreateIntegrationRequestDto struct {
 	Check *bool `json:"check,omitempty"`
 	// Conditions for the integration
 	Conditions []StepFilterDto `json:"conditions,omitempty"`
+	// Configurations for the integration
+	Configurations *Configurations `json:"configurations,omitempty"`
 }
 
 func (o *CreateIntegrationRequestDto) GetName() *string {
@@ -125,4 +131,11 @@ func (o *CreateIntegrationRequestDto) GetConditions() []StepFilterDto {
 		return nil
 	}
 	return o.Conditions
+}
+
+func (o *CreateIntegrationRequestDto) GetConfigurations() *Configurations {
+	if o == nil {
+		return nil
+	}
+	return o.Configurations
 }

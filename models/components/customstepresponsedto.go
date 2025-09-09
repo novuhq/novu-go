@@ -18,7 +18,7 @@ func (c CustomStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CustomStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -42,6 +42,17 @@ func (o *CustomStepResponseDtoControlValues) GetAdditionalProperties() map[strin
 type CustomStepResponseDtoSlug struct {
 }
 
+func (c CustomStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type CustomStepResponseDto struct {
 	// Controls metadata for the custom step
 	Controls CustomControlsMetadataResponseDto `json:"controls"`
@@ -60,13 +71,24 @@ type CustomStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (c CustomStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CustomStepResponseDto) GetControls() CustomControlsMetadataResponseDto {
@@ -125,9 +147,9 @@ func (o *CustomStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *CustomStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *CustomStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

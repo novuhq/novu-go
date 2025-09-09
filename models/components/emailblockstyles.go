@@ -2,9 +2,24 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type EmailBlockStyles struct {
 	// Text alignment for the email block
 	TextAlign TextAlignEnum `json:"textAlign"`
+}
+
+func (e EmailBlockStyles) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailBlockStyles) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"textAlign"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *EmailBlockStyles) GetTextAlign() TextAlignEnum {

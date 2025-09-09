@@ -2,6 +2,94 @@
 
 package components
 
+// WorkflowListResponseDtoLastName - User last name
+type WorkflowListResponseDtoLastName struct {
+}
+
+// WorkflowListResponseDtoUpdatedBy - User who last updated the workflow
+type WorkflowListResponseDtoUpdatedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *WorkflowListResponseDtoLastName `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (o *WorkflowListResponseDtoUpdatedBy) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *WorkflowListResponseDtoUpdatedBy) GetFirstName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FirstName
+}
+
+func (o *WorkflowListResponseDtoUpdatedBy) GetLastName() *WorkflowListResponseDtoLastName {
+	if o == nil {
+		return nil
+	}
+	return o.LastName
+}
+
+func (o *WorkflowListResponseDtoUpdatedBy) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
+// WorkflowListResponseDtoLastPublishedByLastName - User last name
+type WorkflowListResponseDtoLastPublishedByLastName struct {
+}
+
+// WorkflowListResponseDtoLastPublishedBy - User who last published the workflow
+type WorkflowListResponseDtoLastPublishedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *WorkflowListResponseDtoLastPublishedByLastName `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (o *WorkflowListResponseDtoLastPublishedBy) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *WorkflowListResponseDtoLastPublishedBy) GetFirstName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FirstName
+}
+
+func (o *WorkflowListResponseDtoLastPublishedBy) GetLastName() *WorkflowListResponseDtoLastPublishedByLastName {
+	if o == nil {
+		return nil
+	}
+	return o.LastName
+}
+
+func (o *WorkflowListResponseDtoLastPublishedBy) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
 type WorkflowListResponseDto struct {
 	// Name of the workflow
 	Name string `json:"name"`
@@ -11,6 +99,12 @@ type WorkflowListResponseDto struct {
 	UpdatedAt string `json:"updatedAt"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
+	// User who last updated the workflow
+	UpdatedBy *WorkflowListResponseDtoUpdatedBy `json:"updatedBy,omitempty"`
+	// Timestamp of the last workflow publication
+	LastPublishedAt *string `json:"lastPublishedAt,omitempty"`
+	// User who last published the workflow
+	LastPublishedBy *WorkflowListResponseDtoLastPublishedBy `json:"lastPublishedBy,omitempty"`
 	// Unique database identifier
 	ID string `json:"_id"`
 	// Workflow identifier
@@ -20,11 +114,15 @@ type WorkflowListResponseDto struct {
 	// Status of the workflow
 	Status WorkflowStatusEnum `json:"status"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
 	// Overview of step types in the workflow
 	StepTypeOverviews []StepTypeEnum `json:"stepTypeOverviews"`
+	// Is translation enabled for the workflow
+	IsTranslationEnabled *bool `json:"isTranslationEnabled,omitempty"`
+	// Steps of the workflow
+	Steps []StepListResponseDto `json:"steps"`
 }
 
 func (o *WorkflowListResponseDto) GetName() string {
@@ -55,6 +153,27 @@ func (o *WorkflowListResponseDto) GetCreatedAt() string {
 	return o.CreatedAt
 }
 
+func (o *WorkflowListResponseDto) GetUpdatedBy() *WorkflowListResponseDtoUpdatedBy {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedBy
+}
+
+func (o *WorkflowListResponseDto) GetLastPublishedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LastPublishedAt
+}
+
+func (o *WorkflowListResponseDto) GetLastPublishedBy() *WorkflowListResponseDtoLastPublishedBy {
+	if o == nil {
+		return nil
+	}
+	return o.LastPublishedBy
+}
+
 func (o *WorkflowListResponseDto) GetID() string {
 	if o == nil {
 		return ""
@@ -83,9 +202,9 @@ func (o *WorkflowListResponseDto) GetStatus() WorkflowStatusEnum {
 	return o.Status
 }
 
-func (o *WorkflowListResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *WorkflowListResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }
@@ -102,4 +221,18 @@ func (o *WorkflowListResponseDto) GetStepTypeOverviews() []StepTypeEnum {
 		return []StepTypeEnum{}
 	}
 	return o.StepTypeOverviews
+}
+
+func (o *WorkflowListResponseDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
+}
+
+func (o *WorkflowListResponseDto) GetSteps() []StepListResponseDto {
+	if o == nil {
+		return []StepListResponseDto{}
+	}
+	return o.Steps
 }

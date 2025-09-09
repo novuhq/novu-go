@@ -48,6 +48,8 @@ type CredentialsDto struct {
 	ChannelID                 *string     `json:"channelId,omitempty"`
 	PhoneNumberIdentification *string     `json:"phoneNumberIdentification,omitempty"`
 	AccessKey                 *string     `json:"accessKey,omitempty"`
+	AppSid                    *string     `json:"appSid,omitempty"`
+	SenderID                  *string     `json:"senderId,omitempty"`
 }
 
 func (o *CredentialsDto) GetAPIKey() *string {
@@ -342,4 +344,18 @@ func (o *CredentialsDto) GetAccessKey() *string {
 		return nil
 	}
 	return o.AccessKey
+}
+
+func (o *CredentialsDto) GetAppSid() *string {
+	if o == nil {
+		return nil
+	}
+	return o.AppSid
+}
+
+func (o *CredentialsDto) GetSenderID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SenderID
 }

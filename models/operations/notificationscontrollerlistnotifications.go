@@ -20,11 +20,13 @@ type NotificationsControllerListNotificationsRequest struct {
 	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Array of subscriber IDs or a single subscriber ID
 	SubscriberIds []string `queryParam:"style=form,explode=true,name=subscriberIds"`
+	// Array of severity levels or a single severity level
+	Severity []string `queryParam:"style=form,explode=true,name=severity"`
 	// Page number for pagination
 	Page *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
 	// Limit for pagination
 	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
-	// Transaction ID for filtering
+	// The transaction ID to filter by
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Topic Key for filtering notifications by topic
 	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`
@@ -41,7 +43,7 @@ func (n NotificationsControllerListNotificationsRequest) MarshalJSON() ([]byte, 
 }
 
 func (n *NotificationsControllerListNotificationsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -80,6 +82,13 @@ func (o *NotificationsControllerListNotificationsRequest) GetSubscriberIds() []s
 		return nil
 	}
 	return o.SubscriberIds
+}
+
+func (o *NotificationsControllerListNotificationsRequest) GetSeverity() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
 }
 
 func (o *NotificationsControllerListNotificationsRequest) GetPage() *float64 {

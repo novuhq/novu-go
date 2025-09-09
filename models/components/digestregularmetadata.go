@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DigestRegularMetadataUnit string
@@ -118,6 +119,17 @@ type DigestRegularMetadata struct {
 	BackoffAmount *float64                   `json:"backoffAmount,omitempty"`
 	BackoffUnit   *BackoffUnit               `json:"backoffUnit,omitempty"`
 	UpdateMode    *bool                      `json:"updateMode,omitempty"`
+}
+
+func (d DigestRegularMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestRegularMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DigestRegularMetadata) GetAmount() *float64 {

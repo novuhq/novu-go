@@ -1,10 +1,19 @@
 # CustomStepUpsertDtoControlValues
 
-Control values for the Custom step
+Control values for the Custom step.
 
 
-## Fields
+## Supported Types
 
-| Field                               | Type                                | Required                            | Description                         |
-| ----------------------------------- | ----------------------------------- | ----------------------------------- | ----------------------------------- |
-| `Custom`                            | map[string]*any*                    | :heavy_minus_sign:                  | Custom control values for the step. |
+### CustomControlDto
+
+```go
+customStepUpsertDtoControlValues := components.CreateCustomStepUpsertDtoControlValuesCustomControlDto(components.CustomControlDto{/* values here */})
+```
+
+### 
+
+```go
+customStepUpsertDtoControlValues := components.CreateCustomStepUpsertDtoControlValuesMapOfAny(map[string]any{/* values here */})
+```
+

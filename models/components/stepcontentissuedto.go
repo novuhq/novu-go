@@ -2,18 +2,33 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type StepContentIssueDto struct {
 	// Type of step content issue
-	IssueType StepContentIssueEnum `json:"issueType"`
+	IssueType ContentIssueEnum `json:"issueType"`
 	// Name of the variable related to the issue
 	VariableName *string `json:"variableName,omitempty"`
 	// Detailed message describing the issue
 	Message string `json:"message"`
 }
 
-func (o *StepContentIssueDto) GetIssueType() StepContentIssueEnum {
+func (s StepContentIssueDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *StepContentIssueDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"issueType", "message"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *StepContentIssueDto) GetIssueType() ContentIssueEnum {
 	if o == nil {
-		return StepContentIssueEnum("")
+		return ContentIssueEnum("")
 	}
 	return o.IssueType
 }

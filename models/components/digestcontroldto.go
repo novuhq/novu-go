@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 // DigestControlDtoType - The type of digest strategy. Determines which fields are applicable.
@@ -88,6 +89,17 @@ type DigestControlDto struct {
 	Cron *string `json:"cron,omitempty"`
 	// Specify a custom key for digesting events instead of the default event key.
 	DigestKey *string `json:"digestKey,omitempty"`
+}
+
+func (d DigestControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DigestControlDto) GetSkip() map[string]any {

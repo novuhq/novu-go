@@ -7,9 +7,18 @@ import (
 )
 
 type TopicsControllerUpsertTopicRequest struct {
+	// If true, the request will fail if a topic with the same key already exists
+	FailIfExists *bool `queryParam:"style=form,explode=true,name=failIfExists"`
 	// A header for idempotency purposes
 	IdempotencyKey              *string                                `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateUpdateTopicRequestDto components.CreateUpdateTopicRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *TopicsControllerUpsertTopicRequest) GetFailIfExists() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FailIfExists
 }
 
 func (o *TopicsControllerUpsertTopicRequest) GetIdempotencyKey() *string {

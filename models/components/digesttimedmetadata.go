@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DigestTimedMetadataUnit string
@@ -74,6 +75,17 @@ type DigestTimedMetadata struct {
 	DigestKey *string                  `json:"digestKey,omitempty"`
 	Type      DigestTimedMetadataType  `json:"type"`
 	Timed     *TimedConfig             `json:"timed,omitempty"`
+}
+
+func (d DigestTimedMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestTimedMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DigestTimedMetadata) GetAmount() *float64 {

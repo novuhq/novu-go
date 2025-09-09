@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type ChatControlDto struct {
 	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
 	Skip map[string]any `json:"skip,omitempty"`
 	// Content of the chat message.
 	Body *string `json:"body,omitempty"`
+}
+
+func (c ChatControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ChatControlDto) GetSkip() map[string]any {

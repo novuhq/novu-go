@@ -16,7 +16,7 @@ type ActivityNotificationExecutionDetailResponseDto struct {
 	// Whether the execution is a test or not
 	IsTest bool `json:"isTest"`
 	// Provider ID of the job
-	ProviderID ProvidersIDEnum `json:"providerId"`
+	ProviderID *ProvidersIDEnum `json:"providerId,omitempty"`
 	// Raw data of the execution
 	Raw *string `json:"raw,omitempty"`
 	// Source of the execution detail
@@ -65,9 +65,9 @@ func (o *ActivityNotificationExecutionDetailResponseDto) GetIsTest() bool {
 	return o.IsTest
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetProviderID() ProvidersIDEnum {
+func (o *ActivityNotificationExecutionDetailResponseDto) GetProviderID() *ProvidersIDEnum {
 	if o == nil {
-		return ProvidersIDEnum("")
+		return nil
 	}
 	return o.ProviderID
 }

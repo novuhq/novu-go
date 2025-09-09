@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type EmailBlock struct {
 	// Type of the email block
 	Type EmailBlockTypeEnum `json:"type"`
@@ -11,6 +15,17 @@ type EmailBlock struct {
 	URL *string `json:"url,omitempty"`
 	// Styles applied to the email block
 	Styles *EmailBlockStyles `json:"styles,omitempty"`
+}
+
+func (e EmailBlock) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailBlock) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"type", "content"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *EmailBlock) GetType() EmailBlockTypeEnum {

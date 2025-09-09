@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type PushControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -9,6 +13,17 @@ type PushControlsMetadataResponseDto struct {
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Push
 	Values PushControlDto `json:"values"`
+}
+
+func (p PushControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PushControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"values"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PushControlsMetadataResponseDto) GetDataSchema() map[string]any {

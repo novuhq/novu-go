@@ -20,10 +20,10 @@ const (
 )
 
 type Message5 struct {
-	Str      *string        `queryParam:"inline"`
-	Number   *float64       `queryParam:"inline"`
-	Boolean  *bool          `queryParam:"inline"`
-	MapOfAny map[string]any `queryParam:"inline"`
+	Str      *string        `queryParam:"inline" name:"five"`
+	Number   *float64       `queryParam:"inline" name:"five"`
+	Boolean  *bool          `queryParam:"inline" name:"five"`
+	MapOfAny map[string]any `queryParam:"inline" name:"five"`
 
 	Type Message5Type
 }
@@ -69,28 +69,28 @@ func CreateMessage5MapOfAny(mapOfAny map[string]any) Message5 {
 func (u *Message5) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = Message5TypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = Message5TypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = Message5TypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = Message5TypeMapOfAny
 		return nil
@@ -141,6 +141,17 @@ func (u Message5) Error() string {
 type Message4 struct {
 }
 
+func (m Message4) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *Message4) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type ValidationErrorDtoMessageType string
 
 const (
@@ -153,11 +164,11 @@ const (
 
 // ValidationErrorDtoMessage - Value that failed validation
 type ValidationErrorDtoMessage struct {
-	Str             *string     `queryParam:"inline"`
-	Number          *float64    `queryParam:"inline"`
-	Boolean         *bool       `queryParam:"inline"`
-	Message4        *Message4   `queryParam:"inline"`
-	ArrayOfMessage5 []*Message5 `queryParam:"inline"`
+	Str             *string     `queryParam:"inline" name:"message"`
+	Number          *float64    `queryParam:"inline" name:"message"`
+	Boolean         *bool       `queryParam:"inline" name:"message"`
+	Message4        *Message4   `queryParam:"inline" name:"message"`
+	ArrayOfMessage5 []*Message5 `queryParam:"inline" name:"message"`
 
 	Type ValidationErrorDtoMessageType
 }
@@ -212,35 +223,35 @@ func CreateValidationErrorDtoMessageArrayOfMessage5(arrayOfMessage5 []*Message5)
 func (u *ValidationErrorDtoMessage) UnmarshalJSON(data []byte) error {
 
 	var message4 Message4 = Message4{}
-	if err := utils.UnmarshalJSON(data, &message4, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &message4, "", true, nil); err == nil {
 		u.Message4 = &message4
 		u.Type = ValidationErrorDtoMessageTypeMessage4
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = ValidationErrorDtoMessageTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = ValidationErrorDtoMessageTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = ValidationErrorDtoMessageTypeBoolean
 		return nil
 	}
 
 	var arrayOfMessage5 []*Message5 = []*Message5{}
-	if err := utils.UnmarshalJSON(data, &arrayOfMessage5, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfMessage5, "", true, nil); err == nil {
 		u.ArrayOfMessage5 = arrayOfMessage5
 		u.Type = ValidationErrorDtoMessageTypeArrayOfMessage5
 		return nil

@@ -34,7 +34,7 @@ func (i InAppStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InAppStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -114,6 +114,17 @@ func (o *InAppStepResponseDtoControlValues) GetAdditionalProperties() map[string
 type InAppStepResponseDtoSlug struct {
 }
 
+func (i InAppStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *InAppStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type InAppStepResponseDto struct {
 	// Controls metadata for the in-app step
 	Controls InAppControlsMetadataResponseDto `json:"controls"`
@@ -132,13 +143,24 @@ type InAppStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (i InAppStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *InAppStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *InAppStepResponseDto) GetControls() InAppControlsMetadataResponseDto {
@@ -197,9 +219,9 @@ func (o *InAppStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *InAppStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *InAppStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

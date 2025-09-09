@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DelayRegularMetadataUnit string
@@ -72,6 +73,17 @@ type DelayRegularMetadata struct {
 	Amount *float64                  `json:"amount,omitempty"`
 	Unit   *DelayRegularMetadataUnit `json:"unit,omitempty"`
 	Type   DelayRegularMetadataType  `json:"type"`
+}
+
+func (d DelayRegularMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayRegularMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DelayRegularMetadata) GetAmount() *float64 {

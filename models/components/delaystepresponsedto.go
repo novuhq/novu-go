@@ -89,7 +89,7 @@ func (d DelayStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "unit"}); err != nil {
 		return err
 	}
 	return nil
@@ -134,6 +134,17 @@ func (o *DelayStepResponseDtoControlValues) GetAdditionalProperties() map[string
 type DelayStepResponseDtoSlug struct {
 }
 
+func (d DelayStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type DelayStepResponseDto struct {
 	// Controls metadata for the delay step
 	Controls DelayControlsMetadataResponseDto `json:"controls"`
@@ -152,13 +163,24 @@ type DelayStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (d DelayStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DelayStepResponseDto) GetControls() DelayControlsMetadataResponseDto {
@@ -217,9 +239,9 @@ func (o *DelayStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *DelayStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *DelayStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

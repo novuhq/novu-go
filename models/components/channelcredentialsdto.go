@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type ChannelCredentialsDto struct {
 	// The URL for the webhook associated with the channel.
 	WebhookURL *string `json:"webhookUrl,omitempty"`
 	// An array of device tokens for push notifications.
 	DeviceTokens []string `json:"deviceTokens,omitempty"`
+}
+
+func (c ChannelCredentialsDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChannelCredentialsDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ChannelCredentialsDto) GetWebhookURL() *string {

@@ -18,10 +18,10 @@ const (
 )
 
 type Placeholder5 struct {
-	Str      *string        `queryParam:"inline"`
-	Number   *float64       `queryParam:"inline"`
-	Boolean  *bool          `queryParam:"inline"`
-	MapOfAny map[string]any `queryParam:"inline"`
+	Str      *string        `queryParam:"inline" name:"five"`
+	Number   *float64       `queryParam:"inline" name:"five"`
+	Boolean  *bool          `queryParam:"inline" name:"five"`
+	MapOfAny map[string]any `queryParam:"inline" name:"five"`
 
 	Type Placeholder5Type
 }
@@ -65,28 +65,28 @@ func CreatePlaceholder5MapOfAny(mapOfAny map[string]any) Placeholder5 {
 func (u *Placeholder5) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = Placeholder5TypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = Placeholder5TypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = Placeholder5TypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = Placeholder5TypeMapOfAny
 		return nil
@@ -127,11 +127,11 @@ const (
 
 // Placeholder for the UI Schema Property
 type Placeholder struct {
-	Str                 *string        `queryParam:"inline"`
-	Number              *float64       `queryParam:"inline"`
-	Boolean             *bool          `queryParam:"inline"`
-	MapOfAny            map[string]any `queryParam:"inline"`
-	ArrayOfPlaceholder5 []Placeholder5 `queryParam:"inline"`
+	Str                 *string        `queryParam:"inline" name:"placeholder"`
+	Number              *float64       `queryParam:"inline" name:"placeholder"`
+	Boolean             *bool          `queryParam:"inline" name:"placeholder"`
+	MapOfAny            map[string]any `queryParam:"inline" name:"placeholder"`
+	ArrayOfPlaceholder5 []Placeholder5 `queryParam:"inline" name:"placeholder"`
 
 	Type PlaceholderType
 }
@@ -184,35 +184,35 @@ func CreatePlaceholderArrayOfPlaceholder5(arrayOfPlaceholder5 []Placeholder5) Pl
 func (u *Placeholder) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = PlaceholderTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = PlaceholderTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = PlaceholderTypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = PlaceholderTypeMapOfAny
 		return nil
 	}
 
 	var arrayOfPlaceholder5 []Placeholder5 = []Placeholder5{}
-	if err := utils.UnmarshalJSON(data, &arrayOfPlaceholder5, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfPlaceholder5, "", true, nil); err == nil {
 		u.ArrayOfPlaceholder5 = arrayOfPlaceholder5
 		u.Type = PlaceholderTypeArrayOfPlaceholder5
 		return nil
@@ -250,6 +250,19 @@ type UISchemaProperty struct {
 	Placeholder *Placeholder `json:"placeholder,omitempty"`
 	// Component type for the UI Schema Property
 	Component UIComponentEnum `json:"component"`
+	// Properties of the UI Schema
+	Properties map[string]UISchemaProperty `json:"properties,omitempty"`
+}
+
+func (u UISchemaProperty) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UISchemaProperty) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, []string{"component"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UISchemaProperty) GetPlaceholder() *Placeholder {
@@ -264,4 +277,11 @@ func (o *UISchemaProperty) GetComponent() UIComponentEnum {
 		return UIComponentEnum("")
 	}
 	return o.Component
+}
+
+func (o *UISchemaProperty) GetProperties() map[string]UISchemaProperty {
+	if o == nil {
+		return nil
+	}
+	return o.Properties
 }

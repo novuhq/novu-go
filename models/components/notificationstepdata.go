@@ -19,10 +19,10 @@ const (
 
 // NotificationStepDataMetadata - Metadata associated with the workflow step. Can vary based on the type of step.
 type NotificationStepDataMetadata struct {
-	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline"`
-	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline"`
-	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline"`
-	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline"`
+	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline" name:"metadata"`
+	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline" name:"metadata"`
+	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline" name:"metadata"`
+	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline" name:"metadata"`
 
 	Type NotificationStepDataMetadataType
 }
@@ -66,30 +66,30 @@ func CreateNotificationStepDataMetadataDelayScheduledMetadata(delayScheduledMeta
 func (u *NotificationStepDataMetadata) UnmarshalJSON(data []byte) error {
 
 	var delayScheduledMetadata DelayScheduledMetadata = DelayScheduledMetadata{}
-	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, nil); err == nil {
 		u.DelayScheduledMetadata = &delayScheduledMetadata
 		u.Type = NotificationStepDataMetadataTypeDelayScheduledMetadata
 		return nil
 	}
 
-	var delayRegularMetadata DelayRegularMetadata = DelayRegularMetadata{}
-	if err := utils.UnmarshalJSON(data, &delayRegularMetadata, "", true, true); err == nil {
-		u.DelayRegularMetadata = &delayRegularMetadata
-		u.Type = NotificationStepDataMetadataTypeDelayRegularMetadata
+	var digestRegularMetadata DigestRegularMetadata = DigestRegularMetadata{}
+	if err := utils.UnmarshalJSON(data, &digestRegularMetadata, "", true, nil); err == nil {
+		u.DigestRegularMetadata = &digestRegularMetadata
+		u.Type = NotificationStepDataMetadataTypeDigestRegularMetadata
 		return nil
 	}
 
 	var digestTimedMetadata DigestTimedMetadata = DigestTimedMetadata{}
-	if err := utils.UnmarshalJSON(data, &digestTimedMetadata, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &digestTimedMetadata, "", true, nil); err == nil {
 		u.DigestTimedMetadata = &digestTimedMetadata
 		u.Type = NotificationStepDataMetadataTypeDigestTimedMetadata
 		return nil
 	}
 
-	var digestRegularMetadata DigestRegularMetadata = DigestRegularMetadata{}
-	if err := utils.UnmarshalJSON(data, &digestRegularMetadata, "", true, true); err == nil {
-		u.DigestRegularMetadata = &digestRegularMetadata
-		u.Type = NotificationStepDataMetadataTypeDigestRegularMetadata
+	var delayRegularMetadata DelayRegularMetadata = DelayRegularMetadata{}
+	if err := utils.UnmarshalJSON(data, &delayRegularMetadata, "", true, nil); err == nil {
+		u.DelayRegularMetadata = &delayRegularMetadata
+		u.Type = NotificationStepDataMetadataTypeDelayRegularMetadata
 		return nil
 	}
 

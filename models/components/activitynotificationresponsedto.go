@@ -50,6 +50,10 @@ type ActivityNotificationResponseDto struct {
 	To *ActivityNotificationResponseDtoTo `json:"to,omitempty"`
 	// Topics of the notification
 	Topics []ActivityTopicDto `json:"topics,omitempty"`
+	// Severity of the workflow
+	Severity *SeverityLevelEnum `json:"severity,omitempty"`
+	// Criticality of the notification
+	Critical *bool `json:"critical,omitempty"`
 }
 
 func (o *ActivityNotificationResponseDto) GetID() *string {
@@ -176,4 +180,18 @@ func (o *ActivityNotificationResponseDto) GetTopics() []ActivityTopicDto {
 		return nil
 	}
 	return o.Topics
+}
+
+func (o *ActivityNotificationResponseDto) GetSeverity() *SeverityLevelEnum {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
+}
+
+func (o *ActivityNotificationResponseDto) GetCritical() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Critical
 }

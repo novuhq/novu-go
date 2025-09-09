@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type PushControlDto struct {
 	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
 	Skip map[string]any `json:"skip,omitempty"`
@@ -9,6 +13,17 @@ type PushControlDto struct {
 	Subject *string `json:"subject,omitempty"`
 	// Body content of the push notification.
 	Body *string `json:"body,omitempty"`
+}
+
+func (p PushControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PushControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PushControlDto) GetSkip() map[string]any {

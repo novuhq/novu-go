@@ -90,8 +90,12 @@ type NotificationFeedItemDto struct {
 	Status NotificationFeedItemDtoStatus `json:"status"`
 	// The payload that was used to send the notification trigger.
 	Payload map[string]any `json:"payload,omitempty"`
+	// The data sent with the notification.
+	Data map[string]any `json:"data,omitempty"`
 	// Provider-specific overrides used when triggering the notification.
 	Overrides map[string]any `json:"overrides,omitempty"`
+	// Tags associated with the workflow that triggered the notification.
+	Tags []string `json:"tags,omitempty"`
 }
 
 func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
@@ -99,7 +103,7 @@ func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NotificationFeedItemDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"_id", "_templateId", "_environmentId", "_organizationId", "_notificationId", "_subscriberId", "_jobId", "transactionId", "content", "channel", "read", "seen", "cta", "status"}); err != nil {
 		return err
 	}
 	return nil
@@ -280,9 +284,23 @@ func (o *NotificationFeedItemDto) GetPayload() map[string]any {
 	return o.Payload
 }
 
+func (o *NotificationFeedItemDto) GetData() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.Data
+}
+
 func (o *NotificationFeedItemDto) GetOverrides() map[string]any {
 	if o == nil {
 		return nil
 	}
 	return o.Overrides
+}
+
+func (o *NotificationFeedItemDto) GetTags() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Tags
 }

@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type ChatControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -9,6 +13,17 @@ type ChatControlsMetadataResponseDto struct {
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Chat
 	Values ChatControlDto `json:"values"`
+}
+
+func (c ChatControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"values"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ChatControlsMetadataResponseDto) GetDataSchema() map[string]any {

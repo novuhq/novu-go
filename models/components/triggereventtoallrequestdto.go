@@ -8,10 +8,25 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// TriggerEventToAllRequestDtoChannels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+type TriggerEventToAllRequestDtoChannels struct {
+	// Email channel specific overrides
+	Email *EmailChannelOverrides `json:"email,omitempty"`
+}
+
+func (o *TriggerEventToAllRequestDtoChannels) GetEmail() *EmailChannelOverrides {
+	if o == nil {
+		return nil
+	}
+	return o.Email
+}
+
 // TriggerEventToAllRequestDtoOverrides - This could be used to override provider specific configurations
 type TriggerEventToAllRequestDtoOverrides struct {
-	// This could be used to override provider specific configurations
+	// This could be used to override provider specific configurations or layout at the step level
 	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+	Channels *TriggerEventToAllRequestDtoChannels `json:"channels,omitempty"`
 	// Overrides the provider configuration for the entire workflow and all steps
 	Providers map[string]map[string]any `json:"providers,omitempty"`
 	// Override the email provider specific configurations for the entire workflow
@@ -33,7 +48,9 @@ type TriggerEventToAllRequestDtoOverrides struct {
 	// Override the layout identifier for the entire workflow
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	LayoutIdentifier     *string                   `json:"layoutIdentifier,omitempty"`
+	LayoutIdentifier *string `json:"layoutIdentifier,omitempty"`
+	// Severity of the workflow
+	Severity             *SeverityLevelEnum        `json:"severity,omitempty"`
 	AdditionalProperties map[string]map[string]any `additionalProperties:"true" json:"-"`
 }
 
@@ -42,7 +59,7 @@ func (t TriggerEventToAllRequestDtoOverrides) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TriggerEventToAllRequestDtoOverrides) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -53,6 +70,13 @@ func (o *TriggerEventToAllRequestDtoOverrides) GetSteps() map[string]StepsOverri
 		return nil
 	}
 	return o.Steps
+}
+
+func (o *TriggerEventToAllRequestDtoOverrides) GetChannels() *TriggerEventToAllRequestDtoChannels {
+	if o == nil {
+		return nil
+	}
+	return o.Channels
 }
 
 func (o *TriggerEventToAllRequestDtoOverrides) GetProviders() map[string]map[string]any {
@@ -97,6 +121,13 @@ func (o *TriggerEventToAllRequestDtoOverrides) GetLayoutIdentifier() *string {
 	return o.LayoutIdentifier
 }
 
+func (o *TriggerEventToAllRequestDtoOverrides) GetSeverity() *SeverityLevelEnum {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
+}
+
 func (o *TriggerEventToAllRequestDtoOverrides) GetAdditionalProperties() map[string]map[string]any {
 	if o == nil {
 		return nil
@@ -115,8 +146,8 @@ const (
 //
 //	If a new actor object is provided, we will create a new subscriber in our system
 type TriggerEventToAllRequestDtoActor struct {
-	Str                  *string               `queryParam:"inline"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline"`
+	Str                  *string               `queryParam:"inline" name:"actor"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" name:"actor"`
 
 	Type TriggerEventToAllRequestDtoActorType
 }
@@ -142,14 +173,14 @@ func CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(subscriberPayloa
 func (u *TriggerEventToAllRequestDtoActor) UnmarshalJSON(data []byte) error {
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
 		u.Type = TriggerEventToAllRequestDtoActorTypeSubscriberPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TriggerEventToAllRequestDtoActorTypeStr
 		return nil
@@ -181,8 +212,8 @@ const (
 //
 //	If a new tenant object is provided, we will create a new tenant.
 type TriggerEventToAllRequestDtoTenant struct {
-	Str              *string           `queryParam:"inline"`
-	TenantPayloadDto *TenantPayloadDto `queryParam:"inline"`
+	Str              *string           `queryParam:"inline" name:"tenant"`
+	TenantPayloadDto *TenantPayloadDto `queryParam:"inline" name:"tenant"`
 
 	Type TriggerEventToAllRequestDtoTenantType
 }
@@ -208,14 +239,14 @@ func CreateTriggerEventToAllRequestDtoTenantTenantPayloadDto(tenantPayloadDto Te
 func (u *TriggerEventToAllRequestDtoTenant) UnmarshalJSON(data []byte) error {
 
 	var tenantPayloadDto TenantPayloadDto = TenantPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, nil); err == nil {
 		u.TenantPayloadDto = &tenantPayloadDto
 		u.Type = TriggerEventToAllRequestDtoTenantTypeTenantPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TriggerEventToAllRequestDtoTenantTypeStr
 		return nil

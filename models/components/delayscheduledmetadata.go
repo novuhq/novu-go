@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DelayScheduledMetadataType string
@@ -33,6 +34,17 @@ func (e *DelayScheduledMetadataType) UnmarshalJSON(data []byte) error {
 type DelayScheduledMetadata struct {
 	Type      DelayScheduledMetadataType `json:"type"`
 	DelayPath string                     `json:"delayPath"`
+}
+
+func (d DelayScheduledMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayScheduledMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type", "delayPath"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DelayScheduledMetadata) GetType() DelayScheduledMetadataType {

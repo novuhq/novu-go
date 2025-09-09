@@ -60,6 +60,8 @@ type IntegrationResponseDto struct {
 	Channel Channel `json:"channel"`
 	// The credentials required for the integration to function, including API keys and other sensitive information.
 	Credentials CredentialsDto `json:"credentials"`
+	// The configurations required for enabling the additional configurations of the integration.
+	Configurations *ConfigurationsDto `json:"configurations,omitempty"`
 	// Indicates whether the integration is currently active. An active integration will process events and messages.
 	Active bool `json:"active"`
 	// Indicates whether the integration has been marked as deleted (soft delete).
@@ -128,6 +130,13 @@ func (o *IntegrationResponseDto) GetCredentials() CredentialsDto {
 		return CredentialsDto{}
 	}
 	return o.Credentials
+}
+
+func (o *IntegrationResponseDto) GetConfigurations() *ConfigurationsDto {
+	if o == nil {
+		return nil
+	}
+	return o.Configurations
 }
 
 func (o *IntegrationResponseDto) GetActive() bool {

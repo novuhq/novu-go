@@ -2,6 +2,10 @@
 
 package components
 
+// UpdateIntegrationRequestDtoConfigurations - Configurations for the integration
+type UpdateIntegrationRequestDtoConfigurations struct {
+}
+
 type UpdateIntegrationRequestDto struct {
 	Name          *string `json:"name,omitempty"`
 	Identifier    *string `json:"identifier,omitempty"`
@@ -11,6 +15,8 @@ type UpdateIntegrationRequestDto struct {
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	Check       *bool           `json:"check,omitempty"`
 	Conditions  []StepFilterDto `json:"conditions,omitempty"`
+	// Configurations for the integration
+	Configurations *UpdateIntegrationRequestDtoConfigurations `json:"configurations,omitempty"`
 }
 
 func (o *UpdateIntegrationRequestDto) GetName() *string {
@@ -60,4 +66,11 @@ func (o *UpdateIntegrationRequestDto) GetConditions() []StepFilterDto {
 		return nil
 	}
 	return o.Conditions
+}
+
+func (o *UpdateIntegrationRequestDto) GetConfigurations() *UpdateIntegrationRequestDtoConfigurations {
+	if o == nil {
+		return nil
+	}
+	return o.Configurations
 }

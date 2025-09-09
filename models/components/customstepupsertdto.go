@@ -2,17 +2,74 @@
 
 package components
 
-// CustomStepUpsertDtoControlValues - Control values for the Custom step
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
+type CustomStepUpsertDtoControlValuesType string
+
+const (
+	CustomStepUpsertDtoControlValuesTypeCustomControlDto CustomStepUpsertDtoControlValuesType = "CustomControlDto"
+	CustomStepUpsertDtoControlValuesTypeMapOfAny         CustomStepUpsertDtoControlValuesType = "mapOfAny"
+)
+
+// CustomStepUpsertDtoControlValues - Control values for the Custom step.
 type CustomStepUpsertDtoControlValues struct {
-	// Custom control values for the step.
-	Custom map[string]any `json:"custom,omitempty"`
+	CustomControlDto *CustomControlDto `queryParam:"inline" name:"controlValues"`
+	MapOfAny         map[string]any    `queryParam:"inline" name:"controlValues"`
+
+	Type CustomStepUpsertDtoControlValuesType
 }
 
-func (o *CustomStepUpsertDtoControlValues) GetCustom() map[string]any {
-	if o == nil {
+func CreateCustomStepUpsertDtoControlValuesCustomControlDto(customControlDto CustomControlDto) CustomStepUpsertDtoControlValues {
+	typ := CustomStepUpsertDtoControlValuesTypeCustomControlDto
+
+	return CustomStepUpsertDtoControlValues{
+		CustomControlDto: &customControlDto,
+		Type:             typ,
+	}
+}
+
+func CreateCustomStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) CustomStepUpsertDtoControlValues {
+	typ := CustomStepUpsertDtoControlValuesTypeMapOfAny
+
+	return CustomStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *CustomStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var customControlDto CustomControlDto = CustomControlDto{}
+	if err := utils.UnmarshalJSON(data, &customControlDto, "", true, nil); err == nil {
+		u.CustomControlDto = &customControlDto
+		u.Type = CustomStepUpsertDtoControlValuesTypeCustomControlDto
 		return nil
 	}
-	return o.Custom
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = CustomStepUpsertDtoControlValuesTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CustomStepUpsertDtoControlValues", string(data))
+}
+
+func (u CustomStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.CustomControlDto != nil {
+		return utils.MarshalJSON(u.CustomControlDto, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CustomStepUpsertDtoControlValues: all fields are null")
 }
 
 type CustomStepUpsertDto struct {
@@ -22,8 +79,19 @@ type CustomStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Custom step
+	// Control values for the Custom step.
 	ControlValues *CustomStepUpsertDtoControlValues `json:"controlValues,omitempty"`
+}
+
+func (c CustomStepUpsertDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomStepUpsertDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name", "type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *CustomStepUpsertDto) GetID() *string {

@@ -46,8 +46,10 @@ type EmailStepResponseDtoControlValues struct {
 	// Type of editor to use for the body.
 	EditorType *EmailStepResponseDtoEditorType `default:"block" json:"editorType"`
 	// Disable sanitization of the output.
-	DisableOutputSanitization *bool          `default:"false" json:"disableOutputSanitization"`
-	AdditionalProperties      map[string]any `additionalProperties:"true" json:"-"`
+	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID             *string        `json:"layoutId,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (e EmailStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
@@ -55,7 +57,7 @@ func (e EmailStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"subject"}); err != nil {
 		return err
 	}
 	return nil
@@ -96,6 +98,13 @@ func (o *EmailStepResponseDtoControlValues) GetDisableOutputSanitization() *bool
 	return o.DisableOutputSanitization
 }
 
+func (o *EmailStepResponseDtoControlValues) GetLayoutID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutID
+}
+
 func (o *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
 	if o == nil {
 		return nil
@@ -105,6 +114,17 @@ func (o *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string
 
 // EmailStepResponseDtoSlug - Slug of the step
 type EmailStepResponseDtoSlug struct {
+}
+
+func (e EmailStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type EmailStepResponseDto struct {
@@ -125,13 +145,24 @@ type EmailStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (e EmailStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *EmailStepResponseDto) GetControls() EmailControlsMetadataResponseDto {
@@ -190,9 +221,9 @@ func (o *EmailStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *EmailStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *EmailStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

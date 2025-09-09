@@ -5,24 +5,25 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// Unit of time for the look-back window.
-type Unit string
+// LookBackWindowDtoUnit - Unit of time for the look-back window.
+type LookBackWindowDtoUnit string
 
 const (
-	UnitSeconds Unit = "seconds"
-	UnitMinutes Unit = "minutes"
-	UnitHours   Unit = "hours"
-	UnitDays    Unit = "days"
-	UnitWeeks   Unit = "weeks"
-	UnitMonths  Unit = "months"
+	LookBackWindowDtoUnitSeconds LookBackWindowDtoUnit = "seconds"
+	LookBackWindowDtoUnitMinutes LookBackWindowDtoUnit = "minutes"
+	LookBackWindowDtoUnitHours   LookBackWindowDtoUnit = "hours"
+	LookBackWindowDtoUnitDays    LookBackWindowDtoUnit = "days"
+	LookBackWindowDtoUnitWeeks   LookBackWindowDtoUnit = "weeks"
+	LookBackWindowDtoUnitMonths  LookBackWindowDtoUnit = "months"
 )
 
-func (e Unit) ToPointer() *Unit {
+func (e LookBackWindowDtoUnit) ToPointer() *LookBackWindowDtoUnit {
 	return &e
 }
-func (e *Unit) UnmarshalJSON(data []byte) error {
+func (e *LookBackWindowDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -39,10 +40,10 @@ func (e *Unit) UnmarshalJSON(data []byte) error {
 	case "weeks":
 		fallthrough
 	case "months":
-		*e = Unit(v)
+		*e = LookBackWindowDtoUnit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Unit: %v", v)
+		return fmt.Errorf("invalid value for LookBackWindowDtoUnit: %v", v)
 	}
 }
 
@@ -50,7 +51,18 @@ type LookBackWindowDto struct {
 	// Amount of time for the look-back window.
 	Amount float64 `json:"amount"`
 	// Unit of time for the look-back window.
-	Unit Unit `json:"unit"`
+	Unit LookBackWindowDtoUnit `json:"unit"`
+}
+
+func (l LookBackWindowDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *LookBackWindowDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"amount", "unit"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *LookBackWindowDto) GetAmount() float64 {
@@ -60,9 +72,9 @@ func (o *LookBackWindowDto) GetAmount() float64 {
 	return o.Amount
 }
 
-func (o *LookBackWindowDto) GetUnit() Unit {
+func (o *LookBackWindowDto) GetUnit() LookBackWindowDtoUnit {
 	if o == nil {
-		return Unit("")
+		return LookBackWindowDtoUnit("")
 	}
 	return o.Unit
 }

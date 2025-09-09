@@ -7,9 +7,18 @@ import (
 )
 
 type SubscribersControllerCreateSubscriberRequest struct {
+	// If true, the request will fail if a subscriber with the same subscriberId already exists
+	FailIfExists *bool `queryParam:"style=form,explode=true,name=failIfExists"`
 	// A header for idempotency purposes
 	IdempotencyKey             *string                               `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateSubscriberRequestDto components.CreateSubscriberRequestDto `request:"mediaType=application/json"`
+}
+
+func (o *SubscribersControllerCreateSubscriberRequest) GetFailIfExists() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.FailIfExists
 }
 
 func (o *SubscribersControllerCreateSubscriberRequest) GetIdempotencyKey() *string {

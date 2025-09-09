@@ -2,9 +2,24 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type TopicPayloadDto struct {
 	TopicKey string                    `json:"topicKey"`
 	Type     TriggerRecipientsTypeEnum `json:"type"`
+}
+
+func (t TopicPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TopicPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"topicKey", "type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TopicPayloadDto) GetTopicKey() string {

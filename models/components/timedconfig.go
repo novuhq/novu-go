@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type WeekDays string
@@ -169,6 +170,17 @@ type TimedConfig struct {
 	Ordinal      *Ordinal      `json:"ordinal,omitempty"`
 	OrdinalValue *OrdinalValue `json:"ordinalValue,omitempty"`
 	MonthlyType  *MonthlyType  `json:"monthlyType,omitempty"`
+}
+
+func (t TimedConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TimedConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TimedConfig) GetAtTime() *string {

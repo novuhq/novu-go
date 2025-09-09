@@ -2,13 +2,39 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type TenantPayloadDtoData struct {
+}
+
+func (t TenantPayloadDtoData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TenantPayloadDtoData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TenantPayloadDto struct {
 	Identifier *string               `json:"identifier,omitempty"`
 	Name       *string               `json:"name,omitempty"`
 	Data       *TenantPayloadDtoData `json:"data,omitempty"`
+}
+
+func (t TenantPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TenantPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TenantPayloadDto) GetIdentifier() *string {

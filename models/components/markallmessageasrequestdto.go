@@ -18,8 +18,8 @@ const (
 
 // FeedIdentifier - Optional feed identifier or array of feed identifiers
 type FeedIdentifier struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
+	Str        *string  `queryParam:"inline" name:"feedIdentifier"`
+	ArrayOfStr []string `queryParam:"inline" name:"feedIdentifier"`
 
 	Type FeedIdentifierType
 }
@@ -45,14 +45,14 @@ func CreateFeedIdentifierArrayOfStr(arrayOfStr []string) FeedIdentifier {
 func (u *FeedIdentifier) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = FeedIdentifierTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = FeedIdentifierTypeArrayOfStr
 		return nil

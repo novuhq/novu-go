@@ -2,35 +2,74 @@
 
 package components
 
-// PushStepUpsertDtoControlValues - Control values for the Push step
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
+type PushStepUpsertDtoControlValuesType string
+
+const (
+	PushStepUpsertDtoControlValuesTypePushControlDto PushStepUpsertDtoControlValuesType = "PushControlDto"
+	PushStepUpsertDtoControlValuesTypeMapOfAny       PushStepUpsertDtoControlValuesType = "mapOfAny"
+)
+
+// PushStepUpsertDtoControlValues - Control values for the Push step.
 type PushStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Subject/title of the push notification.
-	Subject *string `json:"subject,omitempty"`
-	// Body content of the push notification.
-	Body *string `json:"body,omitempty"`
+	PushControlDto *PushControlDto `queryParam:"inline" name:"controlValues"`
+	MapOfAny       map[string]any  `queryParam:"inline" name:"controlValues"`
+
+	Type PushStepUpsertDtoControlValuesType
 }
 
-func (o *PushStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
-		return nil
+func CreatePushStepUpsertDtoControlValuesPushControlDto(pushControlDto PushControlDto) PushStepUpsertDtoControlValues {
+	typ := PushStepUpsertDtoControlValuesTypePushControlDto
+
+	return PushStepUpsertDtoControlValues{
+		PushControlDto: &pushControlDto,
+		Type:           typ,
 	}
-	return o.Skip
 }
 
-func (o *PushStepUpsertDtoControlValues) GetSubject() *string {
-	if o == nil {
-		return nil
+func CreatePushStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) PushStepUpsertDtoControlValues {
+	typ := PushStepUpsertDtoControlValuesTypeMapOfAny
+
+	return PushStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
 	}
-	return o.Subject
 }
 
-func (o *PushStepUpsertDtoControlValues) GetBody() *string {
-	if o == nil {
+func (u *PushStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var pushControlDto PushControlDto = PushControlDto{}
+	if err := utils.UnmarshalJSON(data, &pushControlDto, "", true, nil); err == nil {
+		u.PushControlDto = &pushControlDto
+		u.Type = PushStepUpsertDtoControlValuesTypePushControlDto
 		return nil
 	}
-	return o.Body
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = PushStepUpsertDtoControlValuesTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PushStepUpsertDtoControlValues", string(data))
+}
+
+func (u PushStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.PushControlDto != nil {
+		return utils.MarshalJSON(u.PushControlDto, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type PushStepUpsertDtoControlValues: all fields are null")
 }
 
 type PushStepUpsertDto struct {
@@ -40,8 +79,19 @@ type PushStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Push step
+	// Control values for the Push step.
 	ControlValues *PushStepUpsertDtoControlValues `json:"controlValues,omitempty"`
+}
+
+func (p PushStepUpsertDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PushStepUpsertDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"name", "type"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PushStepUpsertDto) GetID() *string {

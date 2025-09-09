@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 // ProviderID - The ID of the chat or push provider.
@@ -21,6 +22,8 @@ const (
 	ProviderIDGetstream        ProviderID = "getstream"
 	ProviderIDRocketChat       ProviderID = "rocket-chat"
 	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
+	ProviderIDChatWebhook      ProviderID = "chat-webhook"
+	ProviderIDNovuSlack        ProviderID = "novu-slack"
 	ProviderIDFcm              ProviderID = "fcm"
 	ProviderIDApns             ProviderID = "apns"
 	ProviderIDExpo             ProviderID = "expo"
@@ -59,6 +62,10 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "chat-webhook":
+		fallthrough
+	case "novu-slack":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -86,6 +93,17 @@ type SubscriberChannelDto struct {
 	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
 	// Credentials for the channel.
 	Credentials ChannelCredentialsDto `json:"credentials"`
+}
+
+func (s SubscriberChannelDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubscriberChannelDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"providerId", "credentials"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *SubscriberChannelDto) GetProviderID() ProviderID {

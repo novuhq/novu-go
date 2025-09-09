@@ -4,12 +4,21 @@ package components
 
 type StepsOverrides struct {
 	// Passing the provider id and the provider specific configurations
-	Providers map[string]map[string]any `json:"providers"`
+	Providers map[string]map[string]any `json:"providers,omitempty"`
+	// Override the or remove the layout for this specific step
+	LayoutID *string `json:"layoutId,omitempty"`
 }
 
 func (o *StepsOverrides) GetProviders() map[string]map[string]any {
 	if o == nil {
-		return map[string]map[string]any{}
+		return nil
 	}
 	return o.Providers
+}
+
+func (o *StepsOverrides) GetLayoutID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LayoutID
 }

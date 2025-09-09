@@ -13,6 +13,94 @@ import (
 type Slug struct {
 }
 
+// LastName - User last name
+type LastName struct {
+}
+
+// UpdatedBy - User who last updated the workflow
+type UpdatedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *LastName `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (o *UpdatedBy) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *UpdatedBy) GetFirstName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FirstName
+}
+
+func (o *UpdatedBy) GetLastName() *LastName {
+	if o == nil {
+		return nil
+	}
+	return o.LastName
+}
+
+func (o *UpdatedBy) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
+// WorkflowResponseDtoLastName - User last name
+type WorkflowResponseDtoLastName struct {
+}
+
+// LastPublishedBy - User who last published the workflow
+type LastPublishedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *WorkflowResponseDtoLastName `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (o *LastPublishedBy) GetID() string {
+	if o == nil {
+		return ""
+	}
+	return o.ID
+}
+
+func (o *LastPublishedBy) GetFirstName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.FirstName
+}
+
+func (o *LastPublishedBy) GetLastName() *WorkflowResponseDtoLastName {
+	if o == nil {
+		return nil
+	}
+	return o.LastName
+}
+
+func (o *LastPublishedBy) GetExternalID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ExternalID
+}
+
 type WorkflowResponseDtoStepsType string
 
 const (
@@ -27,14 +115,14 @@ const (
 )
 
 type WorkflowResponseDtoSteps struct {
-	InAppStepResponseDto  *InAppStepResponseDto  `queryParam:"inline"`
-	EmailStepResponseDto  *EmailStepResponseDto  `queryParam:"inline"`
-	SmsStepResponseDto    *SmsStepResponseDto    `queryParam:"inline"`
-	PushStepResponseDto   *PushStepResponseDto   `queryParam:"inline"`
-	ChatStepResponseDto   *ChatStepResponseDto   `queryParam:"inline"`
-	DelayStepResponseDto  *DelayStepResponseDto  `queryParam:"inline"`
-	DigestStepResponseDto *DigestStepResponseDto `queryParam:"inline"`
-	CustomStepResponseDto *CustomStepResponseDto `queryParam:"inline"`
+	InAppStepResponseDto  *InAppStepResponseDto  `queryParam:"inline" name:"steps"`
+	EmailStepResponseDto  *EmailStepResponseDto  `queryParam:"inline" name:"steps"`
+	SmsStepResponseDto    *SmsStepResponseDto    `queryParam:"inline" name:"steps"`
+	PushStepResponseDto   *PushStepResponseDto   `queryParam:"inline" name:"steps"`
+	ChatStepResponseDto   *ChatStepResponseDto   `queryParam:"inline" name:"steps"`
+	DelayStepResponseDto  *DelayStepResponseDto  `queryParam:"inline" name:"steps"`
+	DigestStepResponseDto *DigestStepResponseDto `queryParam:"inline" name:"steps"`
+	CustomStepResponseDto *CustomStepResponseDto `queryParam:"inline" name:"steps"`
 
 	Type WorkflowResponseDtoStepsType
 }
@@ -149,7 +237,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "in_app":
 		inAppStepResponseDto := new(InAppStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &inAppStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &inAppStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == in_app) type InAppStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -158,7 +246,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "email":
 		emailStepResponseDto := new(EmailStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &emailStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &emailStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == email) type EmailStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -167,7 +255,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "sms":
 		smsStepResponseDto := new(SmsStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &smsStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &smsStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == sms) type SmsStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -176,7 +264,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "push":
 		pushStepResponseDto := new(PushStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &pushStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &pushStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == push) type PushStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -185,7 +273,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "chat":
 		chatStepResponseDto := new(ChatStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &chatStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &chatStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == chat) type ChatStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -194,7 +282,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "delay":
 		delayStepResponseDto := new(DelayStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &delayStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &delayStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == delay) type DelayStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -203,7 +291,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "digest":
 		digestStepResponseDto := new(DigestStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &digestStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &digestStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == digest) type DigestStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -212,7 +300,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "custom":
 		customStepResponseDto := new(CustomStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &customStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &customStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == custom) type CustomStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -269,6 +357,12 @@ type WorkflowResponseDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Unique identifier of the workflow
 	ID string `json:"_id"`
 	// Workflow identifier
@@ -279,10 +373,16 @@ type WorkflowResponseDto struct {
 	UpdatedAt string `json:"updatedAt"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
+	// User who last updated the workflow
+	UpdatedBy *UpdatedBy `json:"updatedBy,omitempty"`
+	// Timestamp of the last workflow publication
+	LastPublishedAt *string `json:"lastPublishedAt,omitempty"`
+	// User who last published the workflow
+	LastPublishedBy *LastPublishedBy `json:"lastPublishedBy,omitempty"`
 	// Steps of the workflow
 	Steps []WorkflowResponseDtoSteps `json:"steps"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Preferences for the workflow
 	Preferences WorkflowPreferencesResponseDto `json:"preferences"`
 	// Status of the workflow
@@ -291,12 +391,10 @@ type WorkflowResponseDto struct {
 	Issues map[string]RuntimeIssueDto `json:"issues,omitempty"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Generated payload example based on the payload schema
 	PayloadExample map[string]any `json:"payloadExample,omitempty"`
-	// Whether payload schema validation is enabled
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Severity of the workflow
+	Severity SeverityLevelEnum `json:"severity"`
 }
 
 func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
@@ -304,7 +402,7 @@ func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"name", "_id", "workflowId", "slug", "updatedAt", "createdAt", "steps", "origin", "preferences", "status", "severity"}); err != nil {
 		return err
 	}
 	return nil
@@ -336,6 +434,27 @@ func (o *WorkflowResponseDto) GetActive() *bool {
 		return nil
 	}
 	return o.Active
+}
+
+func (o *WorkflowResponseDto) GetValidatePayload() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.ValidatePayload
+}
+
+func (o *WorkflowResponseDto) GetPayloadSchema() map[string]any {
+	if o == nil {
+		return nil
+	}
+	return o.PayloadSchema
+}
+
+func (o *WorkflowResponseDto) GetIsTranslationEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsTranslationEnabled
 }
 
 func (o *WorkflowResponseDto) GetID() string {
@@ -373,6 +492,27 @@ func (o *WorkflowResponseDto) GetCreatedAt() string {
 	return o.CreatedAt
 }
 
+func (o *WorkflowResponseDto) GetUpdatedBy() *UpdatedBy {
+	if o == nil {
+		return nil
+	}
+	return o.UpdatedBy
+}
+
+func (o *WorkflowResponseDto) GetLastPublishedAt() *string {
+	if o == nil {
+		return nil
+	}
+	return o.LastPublishedAt
+}
+
+func (o *WorkflowResponseDto) GetLastPublishedBy() *LastPublishedBy {
+	if o == nil {
+		return nil
+	}
+	return o.LastPublishedBy
+}
+
 func (o *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
 	if o == nil {
 		return []WorkflowResponseDtoSteps{}
@@ -380,9 +520,9 @@ func (o *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
 	return o.Steps
 }
 
-func (o *WorkflowResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *WorkflowResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }
@@ -415,13 +555,6 @@ func (o *WorkflowResponseDto) GetLastTriggeredAt() *string {
 	return o.LastTriggeredAt
 }
 
-func (o *WorkflowResponseDto) GetPayloadSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.PayloadSchema
-}
-
 func (o *WorkflowResponseDto) GetPayloadExample() map[string]any {
 	if o == nil {
 		return nil
@@ -429,9 +562,9 @@ func (o *WorkflowResponseDto) GetPayloadExample() map[string]any {
 	return o.PayloadExample
 }
 
-func (o *WorkflowResponseDto) GetValidatePayload() *bool {
+func (o *WorkflowResponseDto) GetSeverity() SeverityLevelEnum {
 	if o == nil {
-		return nil
+		return SeverityLevelEnum("")
 	}
-	return o.ValidatePayload
+	return o.Severity
 }

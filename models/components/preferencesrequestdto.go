@@ -16,7 +16,7 @@ const (
 
 // UserAll - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type UserAll struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" name:"all"`
 
 	Type UserAllType
 }
@@ -33,7 +33,7 @@ func CreateUserAllWorkflowPreferenceDto(workflowPreferenceDto WorkflowPreference
 func (u *UserAll) UnmarshalJSON(data []byte) error {
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
-	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {
 		u.WorkflowPreferenceDto = &workflowPreferenceDto
 		u.Type = UserAllTypeWorkflowPreferenceDto
 		return nil
@@ -55,6 +55,17 @@ type UserWorkflowPreferencesDto struct {
 	All UserAll `json:"all"`
 	// Preferences for different communication channels
 	Channels map[string]ChannelPreferenceDto `json:"channels"`
+}
+
+func (u UserWorkflowPreferencesDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UserWorkflowPreferencesDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, []string{"all", "channels"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *UserWorkflowPreferencesDto) GetAll() UserAll {
@@ -79,7 +90,7 @@ const (
 
 // User workflow preferences
 type User struct {
-	UserWorkflowPreferencesDto *UserWorkflowPreferencesDto `queryParam:"inline"`
+	UserWorkflowPreferencesDto *UserWorkflowPreferencesDto `queryParam:"inline" name:"user"`
 
 	Type UserType
 }
@@ -96,7 +107,7 @@ func CreateUserUserWorkflowPreferencesDto(userWorkflowPreferencesDto UserWorkflo
 func (u *User) UnmarshalJSON(data []byte) error {
 
 	var userWorkflowPreferencesDto UserWorkflowPreferencesDto = UserWorkflowPreferencesDto{}
-	if err := utils.UnmarshalJSON(data, &userWorkflowPreferencesDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &userWorkflowPreferencesDto, "", true, nil); err == nil {
 		u.UserWorkflowPreferencesDto = &userWorkflowPreferencesDto
 		u.Type = UserTypeUserWorkflowPreferencesDto
 		return nil
@@ -121,7 +132,7 @@ const (
 
 // PreferencesRequestDtoAll - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type PreferencesRequestDtoAll struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" name:"all"`
 
 	Type PreferencesRequestDtoAllType
 }
@@ -138,7 +149,7 @@ func CreatePreferencesRequestDtoAllWorkflowPreferenceDto(workflowPreferenceDto W
 func (u *PreferencesRequestDtoAll) UnmarshalJSON(data []byte) error {
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
-	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {
 		u.WorkflowPreferenceDto = &workflowPreferenceDto
 		u.Type = PreferencesRequestDtoAllTypeWorkflowPreferenceDto
 		return nil
@@ -155,22 +166,22 @@ func (u PreferencesRequestDtoAll) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type PreferencesRequestDtoAll: all fields are null")
 }
 
-// Workflow - Workflow-specific preferences
-type Workflow struct {
+// PreferencesRequestDtoWorkflow - Workflow-specific preferences
+type PreferencesRequestDtoWorkflow struct {
 	// A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 	All PreferencesRequestDtoAll `json:"all"`
 	// Preferences for different communication channels
 	Channels map[string]ChannelPreferenceDto `json:"channels"`
 }
 
-func (o *Workflow) GetAll() PreferencesRequestDtoAll {
+func (o *PreferencesRequestDtoWorkflow) GetAll() PreferencesRequestDtoAll {
 	if o == nil {
 		return PreferencesRequestDtoAll{}
 	}
 	return o.All
 }
 
-func (o *Workflow) GetChannels() map[string]ChannelPreferenceDto {
+func (o *PreferencesRequestDtoWorkflow) GetChannels() map[string]ChannelPreferenceDto {
 	if o == nil {
 		return map[string]ChannelPreferenceDto{}
 	}
@@ -181,7 +192,7 @@ type PreferencesRequestDto struct {
 	// User workflow preferences
 	User *User `json:"user,omitempty"`
 	// Workflow-specific preferences
-	Workflow *Workflow `json:"workflow,omitempty"`
+	Workflow *PreferencesRequestDtoWorkflow `json:"workflow,omitempty"`
 }
 
 func (o *PreferencesRequestDto) GetUser() *User {
@@ -191,7 +202,7 @@ func (o *PreferencesRequestDto) GetUser() *User {
 	return o.User
 }
 
-func (o *PreferencesRequestDto) GetWorkflow() *Workflow {
+func (o *PreferencesRequestDto) GetWorkflow() *PreferencesRequestDtoWorkflow {
 	if o == nil {
 		return nil
 	}

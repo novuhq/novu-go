@@ -98,7 +98,7 @@ func (d DigestStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DigestStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -164,6 +164,17 @@ func (o *DigestStepResponseDtoControlValues) GetAdditionalProperties() map[strin
 type DigestStepResponseDtoSlug struct {
 }
 
+func (d DigestStepResponseDtoSlug) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestStepResponseDtoSlug) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type DigestStepResponseDto struct {
 	// Controls metadata for the digest step
 	Controls DigestControlsMetadataResponseDto `json:"controls"`
@@ -182,13 +193,24 @@ type DigestStepResponseDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+}
+
+func (d DigestStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *DigestStepResponseDto) GetControls() DigestControlsMetadataResponseDto {
@@ -247,9 +269,9 @@ func (o *DigestStepResponseDto) GetType() StepTypeEnum {
 	return o.Type
 }
 
-func (o *DigestStepResponseDto) GetOrigin() WorkflowOriginEnum {
+func (o *DigestStepResponseDto) GetOrigin() ResourceOriginEnum {
 	if o == nil {
-		return WorkflowOriginEnum("")
+		return ResourceOriginEnum("")
 	}
 	return o.Origin
 }

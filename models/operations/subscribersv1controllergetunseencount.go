@@ -22,7 +22,7 @@ func (s SubscribersV1ControllerGetUnseenCountRequest) MarshalJSON() ([]byte, err
 }
 
 func (s *SubscribersV1ControllerGetUnseenCountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
 		return err
 	}
 	return nil
