@@ -8,10 +8,25 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// Channels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+type Channels struct {
+	// Email channel specific overrides
+	Email *EmailChannelOverrides `json:"email,omitempty"`
+}
+
+func (c *Channels) GetEmail() *EmailChannelOverrides {
+	if c == nil {
+		return nil
+	}
+	return c.Email
+}
+
 // Overrides - This could be used to override provider specific configurations
 type Overrides struct {
-	// This could be used to override provider specific configurations
+	// This could be used to override provider specific configurations or layout at the step level
 	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+	Channels *Channels `json:"channels,omitempty"`
 	// Overrides the provider configuration for the entire workflow and all steps
 	Providers map[string]map[string]any `json:"providers,omitempty"`
 	// Override the email provider specific configurations for the entire workflow
@@ -34,6 +49,8 @@ type Overrides struct {
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	LayoutIdentifier *string `json:"layoutIdentifier,omitempty"`
+	// Severity of the workflow
+	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 
 func (o *Overrides) GetSteps() map[string]StepsOverrides {
@@ -41,6 +58,13 @@ func (o *Overrides) GetSteps() map[string]StepsOverrides {
 		return nil
 	}
 	return o.Steps
+}
+
+func (o *Overrides) GetChannels() *Channels {
+	if o == nil {
+		return nil
+	}
+	return o.Channels
 }
 
 func (o *Overrides) GetProviders() map[string]map[string]any {
@@ -85,76 +109,83 @@ func (o *Overrides) GetLayoutIdentifier() *string {
 	return o.LayoutIdentifier
 }
 
-type OneType string
-
-const (
-	OneTypeSubscriberPayloadDto OneType = "SubscriberPayloadDto"
-	OneTypeTopicPayloadDto      OneType = "TopicPayloadDto"
-	OneTypeStr                  OneType = "str"
-)
-
-type One struct {
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline"`
-	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline"`
-	Str                  *string               `queryParam:"inline"`
-
-	Type OneType
+func (o *Overrides) GetSeverity() *SeverityLevelEnum {
+	if o == nil {
+		return nil
+	}
+	return o.Severity
 }
 
-func CreateOneSubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) One {
-	typ := OneTypeSubscriberPayloadDto
+type To1Type string
 
-	return One{
+const (
+	To1TypeSubscriberPayloadDto To1Type = "SubscriberPayloadDto"
+	To1TypeTopicPayloadDto      To1Type = "TopicPayloadDto"
+	To1TypeStr                  To1Type = "str"
+)
+
+type To1 struct {
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" name:"one"`
+	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline" name:"one"`
+	Str                  *string               `queryParam:"inline" name:"one"`
+
+	Type To1Type
+}
+
+func CreateTo1SubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) To1 {
+	typ := To1TypeSubscriberPayloadDto
+
+	return To1{
 		SubscriberPayloadDto: &subscriberPayloadDto,
 		Type:                 typ,
 	}
 }
 
-func CreateOneTopicPayloadDto(topicPayloadDto TopicPayloadDto) One {
-	typ := OneTypeTopicPayloadDto
+func CreateTo1TopicPayloadDto(topicPayloadDto TopicPayloadDto) To1 {
+	typ := To1TypeTopicPayloadDto
 
-	return One{
+	return To1{
 		TopicPayloadDto: &topicPayloadDto,
 		Type:            typ,
 	}
 }
 
-func CreateOneStr(str string) One {
-	typ := OneTypeStr
+func CreateTo1Str(str string) To1 {
+	typ := To1TypeStr
 
-	return One{
+	return To1{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func (u *One) UnmarshalJSON(data []byte) error {
+func (u *To1) UnmarshalJSON(data []byte) error {
 
 	var topicPayloadDto TopicPayloadDto = TopicPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, nil); err == nil {
 		u.TopicPayloadDto = &topicPayloadDto
-		u.Type = OneTypeTopicPayloadDto
+		u.Type = To1TypeTopicPayloadDto
 		return nil
 	}
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
-		u.Type = OneTypeSubscriberPayloadDto
+		u.Type = To1TypeSubscriberPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = OneTypeStr
+		u.Type = To1TypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for One", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for To1", string(data))
 }
 
-func (u One) MarshalJSON() ([]byte, error) {
+func (u To1) MarshalJSON() ([]byte, error) {
 	if u.SubscriberPayloadDto != nil {
 		return utils.MarshalJSON(u.SubscriberPayloadDto, "", true)
 	}
@@ -167,13 +198,13 @@ func (u One) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type One: all fields are null")
+	return nil, errors.New("could not marshal union type To1: all fields are null")
 }
 
 type ToType string
 
 const (
-	ToTypeArrayOf1             ToType = "arrayOf1"
+	ToTypeArrayOfTo1           ToType = "arrayOfTo1"
 	ToTypeStr                  ToType = "str"
 	ToTypeSubscriberPayloadDto ToType = "SubscriberPayloadDto"
 	ToTypeTopicPayloadDto      ToType = "TopicPayloadDto"
@@ -181,20 +212,20 @@ const (
 
 // To - The recipients list of people who will receive the notification.
 type To struct {
-	ArrayOf1             []One                 `queryParam:"inline"`
-	Str                  *string               `queryParam:"inline"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline"`
-	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline"`
+	ArrayOfTo1           []To1                 `queryParam:"inline" name:"to"`
+	Str                  *string               `queryParam:"inline" name:"to"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" name:"to"`
+	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline" name:"to"`
 
 	Type ToType
 }
 
-func CreateToArrayOf1(arrayOf1 []One) To {
-	typ := ToTypeArrayOf1
+func CreateToArrayOfTo1(arrayOfTo1 []To1) To {
+	typ := ToTypeArrayOfTo1
 
 	return To{
-		ArrayOf1: arrayOf1,
-		Type:     typ,
+		ArrayOfTo1: arrayOfTo1,
+		Type:       typ,
 	}
 }
 
@@ -228,28 +259,28 @@ func CreateToTopicPayloadDto(topicPayloadDto TopicPayloadDto) To {
 func (u *To) UnmarshalJSON(data []byte) error {
 
 	var topicPayloadDto TopicPayloadDto = TopicPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, nil); err == nil {
 		u.TopicPayloadDto = &topicPayloadDto
 		u.Type = ToTypeTopicPayloadDto
 		return nil
 	}
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
 		u.Type = ToTypeSubscriberPayloadDto
 		return nil
 	}
 
-	var arrayOf1 []One = []One{}
-	if err := utils.UnmarshalJSON(data, &arrayOf1, "", true, true); err == nil {
-		u.ArrayOf1 = arrayOf1
-		u.Type = ToTypeArrayOf1
+	var arrayOfTo1 []To1 = []To1{}
+	if err := utils.UnmarshalJSON(data, &arrayOfTo1, "", true, nil); err == nil {
+		u.ArrayOfTo1 = arrayOfTo1
+		u.Type = ToTypeArrayOfTo1
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = ToTypeStr
 		return nil
@@ -259,8 +290,8 @@ func (u *To) UnmarshalJSON(data []byte) error {
 }
 
 func (u To) MarshalJSON() ([]byte, error) {
-	if u.ArrayOf1 != nil {
-		return utils.MarshalJSON(u.ArrayOf1, "", true)
+	if u.ArrayOfTo1 != nil {
+		return utils.MarshalJSON(u.ArrayOfTo1, "", true)
 	}
 
 	if u.Str != nil {
@@ -289,8 +320,8 @@ const (
 //
 //	If a new actor object is provided, we will create a new subscriber in our system
 type Actor struct {
-	Str                  *string               `queryParam:"inline"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline"`
+	Str                  *string               `queryParam:"inline" name:"actor"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" name:"actor"`
 
 	Type ActorType
 }
@@ -316,14 +347,14 @@ func CreateActorSubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) 
 func (u *Actor) UnmarshalJSON(data []byte) error {
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
 		u.Type = ActorTypeSubscriberPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = ActorTypeStr
 		return nil
@@ -355,8 +386,8 @@ const (
 //
 //	Existing tenants will be updated with the provided details.
 type Tenant struct {
-	Str              *string           `queryParam:"inline"`
-	TenantPayloadDto *TenantPayloadDto `queryParam:"inline"`
+	Str              *string           `queryParam:"inline" name:"tenant"`
+	TenantPayloadDto *TenantPayloadDto `queryParam:"inline" name:"tenant"`
 
 	Type TenantType
 }
@@ -382,14 +413,14 @@ func CreateTenantTenantPayloadDto(tenantPayloadDto TenantPayloadDto) Tenant {
 func (u *Tenant) UnmarshalJSON(data []byte) error {
 
 	var tenantPayloadDto TenantPayloadDto = TenantPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, nil); err == nil {
 		u.TenantPayloadDto = &tenantPayloadDto
 		u.Type = TenantTypeTenantPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TenantTypeStr
 		return nil
@@ -421,7 +452,8 @@ type TriggerEventRequestDto struct {
 	Overrides *Overrides `json:"overrides,omitempty"`
 	// The recipients list of people who will receive the notification.
 	To To `json:"to"`
-	// A unique identifier for this transaction, we will generate a UUID if not provided.
+	// A unique identifier for deduplication. If the same **transactionId** is sent again,
+	//       the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your billing tier.
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
 	//     If a new actor object is provided, we will create a new subscriber in our system
@@ -431,51 +463,51 @@ type TriggerEventRequestDto struct {
 	Tenant *Tenant `json:"tenant,omitempty"`
 }
 
-func (o *TriggerEventRequestDto) GetWorkflowID() string {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetWorkflowID() string {
+	if t == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return t.WorkflowID
 }
 
-func (o *TriggerEventRequestDto) GetPayload() map[string]any {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetPayload() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Payload
+	return t.Payload
 }
 
-func (o *TriggerEventRequestDto) GetOverrides() *Overrides {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetOverrides() *Overrides {
+	if t == nil {
 		return nil
 	}
-	return o.Overrides
+	return t.Overrides
 }
 
-func (o *TriggerEventRequestDto) GetTo() To {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetTo() To {
+	if t == nil {
 		return To{}
 	}
-	return o.To
+	return t.To
 }
 
-func (o *TriggerEventRequestDto) GetTransactionID() *string {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetTransactionID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.TransactionID
+	return t.TransactionID
 }
 
-func (o *TriggerEventRequestDto) GetActor() *Actor {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetActor() *Actor {
+	if t == nil {
 		return nil
 	}
-	return o.Actor
+	return t.Actor
 }
 
-func (o *TriggerEventRequestDto) GetTenant() *Tenant {
-	if o == nil {
+func (t *TriggerEventRequestDto) GetTenant() *Tenant {
+	if t == nil {
 		return nil
 	}
-	return o.Tenant
+	return t.Tenant
 }

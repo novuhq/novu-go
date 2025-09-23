@@ -9,16 +9,16 @@ type ControlsMetadataDto struct {
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 }
 
-func (o *ControlsMetadataDto) GetDataSchema() map[string]any {
-	if o == nil {
+func (c *ControlsMetadataDto) GetDataSchema() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.DataSchema
+	return c.DataSchema
 }
 
-func (o *ControlsMetadataDto) GetUISchema() *UISchema {
-	if o == nil {
+func (c *ControlsMetadataDto) GetUISchema() *UISchema {
+	if c == nil {
 		return nil
 	}
-	return o.UISchema
+	return c.UISchema
 }

@@ -3,103 +3,73 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// ControlValues - Control values for the In-App step
-type ControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Content/body of the in-app message. Required if subject is empty.
-	Body *string `json:"body,omitempty"`
-	// Subject/title of the in-app message. Required if body is empty.
-	Subject *string `json:"subject,omitempty"`
-	// URL for an avatar image. Must be a valid URL or start with / or {{"{{"}} variable }}.
-	Avatar *string `json:"avatar,omitempty"`
-	// Primary action button details.
-	PrimaryAction *ActionDto `json:"primaryAction,omitempty"`
-	// Secondary action button details.
-	SecondaryAction *ActionDto `json:"secondaryAction,omitempty"`
-	// Redirection URL configuration for the main content click (if no actions defined/clicked)..
-	Redirect *RedirectDto `json:"redirect,omitempty"`
-	// Disable sanitization of the output.
-	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
-	// Additional data payload for the step.
-	Data map[string]any `json:"data,omitempty"`
+type InAppStepUpsertDtoControlValuesType string
+
+const (
+	InAppStepUpsertDtoControlValuesTypeInAppControlDto InAppStepUpsertDtoControlValuesType = "InAppControlDto"
+	InAppStepUpsertDtoControlValuesTypeMapOfAny        InAppStepUpsertDtoControlValuesType = "mapOfAny"
+)
+
+// InAppStepUpsertDtoControlValues - Control values for the In-App step.
+type InAppStepUpsertDtoControlValues struct {
+	InAppControlDto *InAppControlDto `queryParam:"inline" name:"controlValues"`
+	MapOfAny        map[string]any   `queryParam:"inline" name:"controlValues"`
+
+	Type InAppStepUpsertDtoControlValuesType
 }
 
-func (c ControlValues) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
+func CreateInAppStepUpsertDtoControlValuesInAppControlDto(inAppControlDto InAppControlDto) InAppStepUpsertDtoControlValues {
+	typ := InAppStepUpsertDtoControlValuesTypeInAppControlDto
 
-func (c *ControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
+	return InAppStepUpsertDtoControlValues{
+		InAppControlDto: &inAppControlDto,
+		Type:            typ,
 	}
-	return nil
 }
 
-func (o *ControlValues) GetSkip() map[string]any {
-	if o == nil {
+func CreateInAppStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) InAppStepUpsertDtoControlValues {
+	typ := InAppStepUpsertDtoControlValuesTypeMapOfAny
+
+	return InAppStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *InAppStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var inAppControlDto InAppControlDto = InAppControlDto{}
+	if err := utils.UnmarshalJSON(data, &inAppControlDto, "", true, nil); err == nil {
+		u.InAppControlDto = &inAppControlDto
+		u.Type = InAppStepUpsertDtoControlValuesTypeInAppControlDto
 		return nil
 	}
-	return o.Skip
-}
 
-func (o *ControlValues) GetBody() *string {
-	if o == nil {
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = InAppStepUpsertDtoControlValuesTypeMapOfAny
 		return nil
 	}
-	return o.Body
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for InAppStepUpsertDtoControlValues", string(data))
 }
 
-func (o *ControlValues) GetSubject() *string {
-	if o == nil {
-		return nil
+func (u InAppStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.InAppControlDto != nil {
+		return utils.MarshalJSON(u.InAppControlDto, "", true)
 	}
-	return o.Subject
-}
 
-func (o *ControlValues) GetAvatar() *string {
-	if o == nil {
-		return nil
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
-	return o.Avatar
-}
 
-func (o *ControlValues) GetPrimaryAction() *ActionDto {
-	if o == nil {
-		return nil
-	}
-	return o.PrimaryAction
-}
-
-func (o *ControlValues) GetSecondaryAction() *ActionDto {
-	if o == nil {
-		return nil
-	}
-	return o.SecondaryAction
-}
-
-func (o *ControlValues) GetRedirect() *RedirectDto {
-	if o == nil {
-		return nil
-	}
-	return o.Redirect
-}
-
-func (o *ControlValues) GetDisableOutputSanitization() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.DisableOutputSanitization
-}
-
-func (o *ControlValues) GetData() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.Data
+	return nil, errors.New("could not marshal union type InAppStepUpsertDtoControlValues: all fields are null")
 }
 
 type InAppStepUpsertDto struct {
@@ -109,34 +79,45 @@ type InAppStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the In-App step
-	ControlValues *ControlValues `json:"controlValues,omitempty"`
+	// Control values for the In-App step.
+	ControlValues *InAppStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 
-func (o *InAppStepUpsertDto) GetID() *string {
-	if o == nil {
+func (i InAppStepUpsertDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *InAppStepUpsertDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, []string{"name", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *InAppStepUpsertDto) GetID() *string {
+	if i == nil {
 		return nil
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *InAppStepUpsertDto) GetName() string {
-	if o == nil {
+func (i *InAppStepUpsertDto) GetName() string {
+	if i == nil {
 		return ""
 	}
-	return o.Name
+	return i.Name
 }
 
-func (o *InAppStepUpsertDto) GetType() StepTypeEnum {
-	if o == nil {
+func (i *InAppStepUpsertDto) GetType() StepTypeEnum {
+	if i == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return i.Type
 }
 
-func (o *InAppStepUpsertDto) GetControlValues() *ControlValues {
-	if o == nil {
+func (i *InAppStepUpsertDto) GetControlValues() *InAppStepUpsertDtoControlValues {
+	if i == nil {
 		return nil
 	}
-	return o.ControlValues
+	return i.ControlValues
 }

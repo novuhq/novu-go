@@ -43,6 +43,10 @@ func (e *CreateIntegrationRequestDtoChannel) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Configurations for the integration
+type Configurations struct {
+}
+
 type CreateIntegrationRequestDto struct {
 	// The name of the integration
 	Name *string `json:"name,omitempty"`
@@ -62,67 +66,76 @@ type CreateIntegrationRequestDto struct {
 	Check *bool `json:"check,omitempty"`
 	// Conditions for the integration
 	Conditions []StepFilterDto `json:"conditions,omitempty"`
+	// Configurations for the integration
+	Configurations *Configurations `json:"configurations,omitempty"`
 }
 
-func (o *CreateIntegrationRequestDto) GetName() *string {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CreateIntegrationRequestDto) GetIdentifier() *string {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Identifier
+	return c.Identifier
 }
 
-func (o *CreateIntegrationRequestDto) GetEnvironmentID() *string {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetEnvironmentID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.EnvironmentID
+	return c.EnvironmentID
 }
 
-func (o *CreateIntegrationRequestDto) GetProviderID() string {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetProviderID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ProviderID
+	return c.ProviderID
 }
 
-func (o *CreateIntegrationRequestDto) GetChannel() CreateIntegrationRequestDtoChannel {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetChannel() CreateIntegrationRequestDtoChannel {
+	if c == nil {
 		return CreateIntegrationRequestDtoChannel("")
 	}
-	return o.Channel
+	return c.Channel
 }
 
-func (o *CreateIntegrationRequestDto) GetCredentials() *CredentialsDto {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetCredentials() *CredentialsDto {
+	if c == nil {
 		return nil
 	}
-	return o.Credentials
+	return c.Credentials
 }
 
-func (o *CreateIntegrationRequestDto) GetActive() *bool {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetActive() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Active
+	return c.Active
 }
 
-func (o *CreateIntegrationRequestDto) GetCheck() *bool {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetCheck() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Check
+	return c.Check
 }
 
-func (o *CreateIntegrationRequestDto) GetConditions() []StepFilterDto {
-	if o == nil {
+func (c *CreateIntegrationRequestDto) GetConditions() []StepFilterDto {
+	if c == nil {
 		return nil
 	}
-	return o.Conditions
+	return c.Conditions
+}
+
+func (c *CreateIntegrationRequestDto) GetConfigurations() *Configurations {
+	if c == nil {
+		return nil
+	}
+	return c.Configurations
 }

@@ -5,17 +5,18 @@
 
 ### Available Operations
 
-* [Update](#update) - Update provider credentials
-* [Append](#append) - Upsert provider credentials
+* [Update](#update) - Upsert provider credentials
+* [Append](#append) - Update provider credentials
 * [Delete](#delete) - Delete provider credentials
 
 ## Update
 
-Update credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API appends the **deviceTokens** to the existing ones.
+Upsert credentials for a provider such as slack and push tokens. 
+      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_updateSubscriberChannel" method="put" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```go
 package main
 
@@ -36,18 +37,18 @@ func main() {
     res, err := s.Subscribers.Credentials.Update(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
         ProviderID: components.ChatOrPushProviderEnumSlack,
         Credentials: components.ChannelCredentials{
-            WebhookURL: novugo.String("https://example.com/webhook"),
-            Channel: novugo.String("general"),
+            WebhookURL: novugo.Pointer("https://example.com/webhook"),
+            Channel: novugo.Pointer("general"),
             DeviceTokens: []string{
                 "token1",
                 "token2",
                 "token3",
             },
-            AlertUID: novugo.String("12345-abcde"),
-            Title: novugo.String("Critical Alert"),
-            ImageURL: novugo.String("https://example.com/image.png"),
-            State: novugo.String("resolved"),
-            ExternalURL: novugo.String("https://example.com/details"),
+            AlertUID: novugo.Pointer("12345-abcde"),
+            Title: novugo.Pointer("Critical Alert"),
+            ImageURL: novugo.Pointer("https://example.com/image.png"),
+            State: novugo.Pointer("resolved"),
+            ExternalURL: novugo.Pointer("https://example.com/details"),
         },
     }, nil)
     if err != nil {
@@ -86,10 +87,11 @@ func main() {
 ## Append
 
 Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
+      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_modifySubscriberChannel" method="patch" path="/v1/subscribers/{subscriberId}/credentials" -->
 ```go
 package main
 
@@ -110,18 +112,18 @@ func main() {
     res, err := s.Subscribers.Credentials.Append(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
         ProviderID: components.ChatOrPushProviderEnumOneSignal,
         Credentials: components.ChannelCredentials{
-            WebhookURL: novugo.String("https://example.com/webhook"),
-            Channel: novugo.String("general"),
+            WebhookURL: novugo.Pointer("https://example.com/webhook"),
+            Channel: novugo.Pointer("general"),
             DeviceTokens: []string{
                 "token1",
                 "token2",
                 "token3",
             },
-            AlertUID: novugo.String("12345-abcde"),
-            Title: novugo.String("Critical Alert"),
-            ImageURL: novugo.String("https://example.com/image.png"),
-            State: novugo.String("resolved"),
-            ExternalURL: novugo.String("https://example.com/details"),
+            AlertUID: novugo.Pointer("12345-abcde"),
+            Title: novugo.Pointer("Critical Alert"),
+            ImageURL: novugo.Pointer("https://example.com/image.png"),
+            State: novugo.Pointer("resolved"),
+            ExternalURL: novugo.Pointer("https://example.com/details"),
         },
     }, nil)
     if err != nil {
@@ -164,6 +166,7 @@ Delete subscriber credentials for a provider such as **slack** and **FCM** by **
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_deleteSubscriberCredentials" method="delete" path="/v1/subscribers/{subscriberId}/credentials/{providerId}" -->
 ```go
 package main
 

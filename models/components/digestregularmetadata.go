@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DigestRegularMetadataUnit string
@@ -120,58 +121,69 @@ type DigestRegularMetadata struct {
 	UpdateMode    *bool                      `json:"updateMode,omitempty"`
 }
 
-func (o *DigestRegularMetadata) GetAmount() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.Amount
+func (d DigestRegularMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (o *DigestRegularMetadata) GetUnit() *DigestRegularMetadataUnit {
-	if o == nil {
-		return nil
+func (d *DigestRegularMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type"}); err != nil {
+		return err
 	}
-	return o.Unit
+	return nil
 }
 
-func (o *DigestRegularMetadata) GetDigestKey() *string {
-	if o == nil {
+func (d *DigestRegularMetadata) GetAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.DigestKey
+	return d.Amount
 }
 
-func (o *DigestRegularMetadata) GetType() DigestRegularMetadataType {
-	if o == nil {
+func (d *DigestRegularMetadata) GetUnit() *DigestRegularMetadataUnit {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DigestRegularMetadata) GetDigestKey() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DigestKey
+}
+
+func (d *DigestRegularMetadata) GetType() DigestRegularMetadataType {
+	if d == nil {
 		return DigestRegularMetadataType("")
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DigestRegularMetadata) GetBackoff() *bool {
-	if o == nil {
+func (d *DigestRegularMetadata) GetBackoff() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.Backoff
+	return d.Backoff
 }
 
-func (o *DigestRegularMetadata) GetBackoffAmount() *float64 {
-	if o == nil {
+func (d *DigestRegularMetadata) GetBackoffAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.BackoffAmount
+	return d.BackoffAmount
 }
 
-func (o *DigestRegularMetadata) GetBackoffUnit() *BackoffUnit {
-	if o == nil {
+func (d *DigestRegularMetadata) GetBackoffUnit() *BackoffUnit {
+	if d == nil {
 		return nil
 	}
-	return o.BackoffUnit
+	return d.BackoffUnit
 }
 
-func (o *DigestRegularMetadata) GetUpdateMode() *bool {
-	if o == nil {
+func (d *DigestRegularMetadata) GetUpdateMode() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.UpdateMode
+	return d.UpdateMode
 }

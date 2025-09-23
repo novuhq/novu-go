@@ -1,0 +1,9 @@
+# TranslationControllerImportMasterJSONEndpointResponse
+
+
+## Fields
+
+| Field                                                                                             | Type                                                                                              | Required                                                                                          | Description                                                                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                        | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                | :heavy_check_mark:                                                                                | N/A                                                                                               |
+| `ImportMasterJSONResponseDto`                                                                     | [*components.ImportMasterJSONResponseDto](../../models/components/importmasterjsonresponsedto.md) | :heavy_minus_sign:                                                                                | Master translations imported successfully                                                         |

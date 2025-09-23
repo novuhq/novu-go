@@ -9,16 +9,16 @@ type ReplyCallback struct {
 	URL *string `json:"url,omitempty"`
 }
 
-func (o *ReplyCallback) GetActive() *bool {
-	if o == nil {
+func (r *ReplyCallback) GetActive() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.Active
+	return r.Active
 }
 
-func (o *ReplyCallback) GetURL() *string {
-	if o == nil {
+func (r *ReplyCallback) GetURL() *string {
+	if r == nil {
 		return nil
 	}
-	return o.URL
+	return r.URL
 }

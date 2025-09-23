@@ -7,9 +7,9 @@ type CreateTopicSubscriptionsRequestDto struct {
 	SubscriberIds []string `json:"subscriberIds"`
 }
 
-func (o *CreateTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
-	if o == nil {
+func (c *CreateTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
+	if c == nil {
 		return []string{}
 	}
-	return o.SubscriberIds
+	return c.SubscriberIds
 }

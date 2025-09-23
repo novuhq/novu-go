@@ -2,14 +2,29 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type CustomControlDto struct {
 	// Custom control values for the step.
 	Custom map[string]any `json:"custom,omitempty"`
 }
 
-func (o *CustomControlDto) GetCustom() map[string]any {
-	if o == nil {
+func (c CustomControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *CustomControlDto) GetCustom() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Custom
+	return c.Custom
 }

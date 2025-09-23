@@ -12,25 +12,27 @@ import (
 type StepsType string
 
 const (
-	StepsTypeInApp  StepsType = "in_app"
-	StepsTypeEmail  StepsType = "email"
-	StepsTypeSms    StepsType = "sms"
-	StepsTypePush   StepsType = "push"
-	StepsTypeChat   StepsType = "chat"
-	StepsTypeDelay  StepsType = "delay"
-	StepsTypeDigest StepsType = "digest"
-	StepsTypeCustom StepsType = "custom"
+	StepsTypeInApp    StepsType = "in_app"
+	StepsTypeEmail    StepsType = "email"
+	StepsTypeSms      StepsType = "sms"
+	StepsTypePush     StepsType = "push"
+	StepsTypeChat     StepsType = "chat"
+	StepsTypeDelay    StepsType = "delay"
+	StepsTypeDigest   StepsType = "digest"
+	StepsTypeThrottle StepsType = "throttle"
+	StepsTypeCustom   StepsType = "custom"
 )
 
 type Steps struct {
-	InAppStepUpsertDto  *InAppStepUpsertDto  `queryParam:"inline"`
-	EmailStepUpsertDto  *EmailStepUpsertDto  `queryParam:"inline"`
-	SmsStepUpsertDto    *SmsStepUpsertDto    `queryParam:"inline"`
-	PushStepUpsertDto   *PushStepUpsertDto   `queryParam:"inline"`
-	ChatStepUpsertDto   *ChatStepUpsertDto   `queryParam:"inline"`
-	DelayStepUpsertDto  *DelayStepUpsertDto  `queryParam:"inline"`
-	DigestStepUpsertDto *DigestStepUpsertDto `queryParam:"inline"`
-	CustomStepUpsertDto *CustomStepUpsertDto `queryParam:"inline"`
+	InAppStepUpsertDto    *InAppStepUpsertDto    `queryParam:"inline" name:"steps"`
+	EmailStepUpsertDto    *EmailStepUpsertDto    `queryParam:"inline" name:"steps"`
+	SmsStepUpsertDto      *SmsStepUpsertDto      `queryParam:"inline" name:"steps"`
+	PushStepUpsertDto     *PushStepUpsertDto     `queryParam:"inline" name:"steps"`
+	ChatStepUpsertDto     *ChatStepUpsertDto     `queryParam:"inline" name:"steps"`
+	DelayStepUpsertDto    *DelayStepUpsertDto    `queryParam:"inline" name:"steps"`
+	DigestStepUpsertDto   *DigestStepUpsertDto   `queryParam:"inline" name:"steps"`
+	ThrottleStepUpsertDto *ThrottleStepUpsertDto `queryParam:"inline" name:"steps"`
+	CustomStepUpsertDto   *CustomStepUpsertDto   `queryParam:"inline" name:"steps"`
 
 	Type StepsType
 }
@@ -119,6 +121,18 @@ func CreateStepsDigest(digest DigestStepUpsertDto) Steps {
 	}
 }
 
+func CreateStepsThrottle(throttle ThrottleStepUpsertDto) Steps {
+	typ := StepsTypeThrottle
+
+	typStr := StepTypeEnum(typ)
+	throttle.Type = typStr
+
+	return Steps{
+		ThrottleStepUpsertDto: &throttle,
+		Type:                  typ,
+	}
+}
+
 func CreateStepsCustom(custom CustomStepUpsertDto) Steps {
 	typ := StepsTypeCustom
 
@@ -145,7 +159,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "in_app":
 		inAppStepUpsertDto := new(InAppStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &inAppStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &inAppStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == in_app) type InAppStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -154,7 +168,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "email":
 		emailStepUpsertDto := new(EmailStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &emailStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &emailStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == email) type EmailStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -163,7 +177,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "sms":
 		smsStepUpsertDto := new(SmsStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &smsStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &smsStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == sms) type SmsStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -172,7 +186,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "push":
 		pushStepUpsertDto := new(PushStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &pushStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &pushStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == push) type PushStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -181,7 +195,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "chat":
 		chatStepUpsertDto := new(ChatStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &chatStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &chatStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == chat) type ChatStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -190,7 +204,7 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "delay":
 		delayStepUpsertDto := new(DelayStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &delayStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &delayStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == delay) type DelayStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -199,16 +213,25 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "digest":
 		digestStepUpsertDto := new(DigestStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &digestStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &digestStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == digest) type DigestStepUpsertDto within Steps: %w", string(data), err)
 		}
 
 		u.DigestStepUpsertDto = digestStepUpsertDto
 		u.Type = StepsTypeDigest
 		return nil
+	case "throttle":
+		throttleStepUpsertDto := new(ThrottleStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &throttleStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == throttle) type ThrottleStepUpsertDto within Steps: %w", string(data), err)
+		}
+
+		u.ThrottleStepUpsertDto = throttleStepUpsertDto
+		u.Type = StepsTypeThrottle
+		return nil
 	case "custom":
 		customStepUpsertDto := new(CustomStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == custom) type CustomStepUpsertDto within Steps: %w", string(data), err)
 		}
 
@@ -249,6 +272,10 @@ func (u Steps) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.DigestStepUpsertDto, "", true)
 	}
 
+	if u.ThrottleStepUpsertDto != nil {
+		return utils.MarshalJSON(u.ThrottleStepUpsertDto, "", true)
+	}
+
 	if u.CustomStepUpsertDto != nil {
 		return utils.MarshalJSON(u.CustomStepUpsertDto, "", true)
 	}
@@ -265,6 +292,12 @@ type CreateWorkflowDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Unique identifier for the workflow
 	WorkflowID string `json:"workflowId"`
 	// Steps of the workflow
@@ -273,10 +306,8 @@ type CreateWorkflowDto struct {
 	Source *WorkflowCreationSourceEnum `default:"editor" json:"__source"`
 	// Workflow preferences
 	Preferences *PreferencesRequestDto `json:"preferences,omitempty"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
-	// Enable or disable payload schema validation
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Severity of the workflow
+	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 
 func (c CreateWorkflowDto) MarshalJSON() ([]byte, error) {
@@ -284,78 +315,92 @@ func (c CreateWorkflowDto) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateWorkflowDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name", "workflowId", "steps"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CreateWorkflowDto) GetName() string {
-	if o == nil {
+func (c *CreateWorkflowDto) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CreateWorkflowDto) GetDescription() *string {
-	if o == nil {
+func (c *CreateWorkflowDto) GetDescription() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Description
+	return c.Description
 }
 
-func (o *CreateWorkflowDto) GetTags() []string {
-	if o == nil {
+func (c *CreateWorkflowDto) GetTags() []string {
+	if c == nil {
 		return nil
 	}
-	return o.Tags
+	return c.Tags
 }
 
-func (o *CreateWorkflowDto) GetActive() *bool {
-	if o == nil {
+func (c *CreateWorkflowDto) GetActive() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Active
+	return c.Active
 }
 
-func (o *CreateWorkflowDto) GetWorkflowID() string {
-	if o == nil {
+func (c *CreateWorkflowDto) GetValidatePayload() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.ValidatePayload
+}
+
+func (c *CreateWorkflowDto) GetPayloadSchema() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.PayloadSchema
+}
+
+func (c *CreateWorkflowDto) GetIsTranslationEnabled() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.IsTranslationEnabled
+}
+
+func (c *CreateWorkflowDto) GetWorkflowID() string {
+	if c == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return c.WorkflowID
 }
 
-func (o *CreateWorkflowDto) GetSteps() []Steps {
-	if o == nil {
+func (c *CreateWorkflowDto) GetSteps() []Steps {
+	if c == nil {
 		return []Steps{}
 	}
-	return o.Steps
+	return c.Steps
 }
 
-func (o *CreateWorkflowDto) GetSource() *WorkflowCreationSourceEnum {
-	if o == nil {
+func (c *CreateWorkflowDto) GetSource() *WorkflowCreationSourceEnum {
+	if c == nil {
 		return nil
 	}
-	return o.Source
+	return c.Source
 }
 
-func (o *CreateWorkflowDto) GetPreferences() *PreferencesRequestDto {
-	if o == nil {
+func (c *CreateWorkflowDto) GetPreferences() *PreferencesRequestDto {
+	if c == nil {
 		return nil
 	}
-	return o.Preferences
+	return c.Preferences
 }
 
-func (o *CreateWorkflowDto) GetPayloadSchema() map[string]any {
-	if o == nil {
+func (c *CreateWorkflowDto) GetSeverity() *SeverityLevelEnum {
+	if c == nil {
 		return nil
 	}
-	return o.PayloadSchema
-}
-
-func (o *CreateWorkflowDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
+	return c.Severity
 }

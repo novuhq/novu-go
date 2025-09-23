@@ -56,22 +56,22 @@ func (r RedirectDto) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RedirectDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *RedirectDto) GetURL() *string {
-	if o == nil {
+func (r *RedirectDto) GetURL() *string {
+	if r == nil {
 		return nil
 	}
-	return o.URL
+	return r.URL
 }
 
-func (o *RedirectDto) GetTarget() *Target {
-	if o == nil {
+func (r *RedirectDto) GetTarget() *Target {
+	if r == nil {
 		return nil
 	}
-	return o.Target
+	return r.Target
 }

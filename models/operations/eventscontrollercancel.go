@@ -12,18 +12,18 @@ type EventsControllerCancelRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *EventsControllerCancelRequest) GetTransactionID() string {
-	if o == nil {
+func (e *EventsControllerCancelRequest) GetTransactionID() string {
+	if e == nil {
 		return ""
 	}
-	return o.TransactionID
+	return e.TransactionID
 }
 
-func (o *EventsControllerCancelRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EventsControllerCancelRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
 type EventsControllerCancelResponse struct {
@@ -32,23 +32,23 @@ type EventsControllerCancelResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *EventsControllerCancelResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EventsControllerCancelResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EventsControllerCancelResponse) GetBoolean() *bool {
-	if o == nil {
+func (e *EventsControllerCancelResponse) GetBoolean() *bool {
+	if e == nil {
 		return nil
 	}
-	return o.Boolean
+	return e.Boolean
 }
 
-func (o *EventsControllerCancelResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EventsControllerCancelResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

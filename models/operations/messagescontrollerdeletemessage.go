@@ -12,18 +12,18 @@ type MessagesControllerDeleteMessageRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *MessagesControllerDeleteMessageRequest) GetMessageID() string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessageRequest) GetMessageID() string {
+	if m == nil {
 		return ""
 	}
-	return o.MessageID
+	return m.MessageID
 }
 
-func (o *MessagesControllerDeleteMessageRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessageRequest) GetIdempotencyKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return m.IdempotencyKey
 }
 
 type MessagesControllerDeleteMessageResponse struct {
@@ -33,23 +33,23 @@ type MessagesControllerDeleteMessageResponse struct {
 	Headers                  map[string][]string
 }
 
-func (o *MessagesControllerDeleteMessageResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (m *MessagesControllerDeleteMessageResponse) GetHTTPMeta() components.HTTPMetadata {
+	if m == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return m.HTTPMeta
 }
 
-func (o *MessagesControllerDeleteMessageResponse) GetDeleteMessageResponseDto() *components.DeleteMessageResponseDto {
-	if o == nil {
+func (m *MessagesControllerDeleteMessageResponse) GetDeleteMessageResponseDto() *components.DeleteMessageResponseDto {
+	if m == nil {
 		return nil
 	}
-	return o.DeleteMessageResponseDto
+	return m.DeleteMessageResponseDto
 }
 
-func (o *MessagesControllerDeleteMessageResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessageResponse) GetHeaders() map[string][]string {
+	if m == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return m.Headers
 }

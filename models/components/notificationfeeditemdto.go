@@ -90,8 +90,12 @@ type NotificationFeedItemDto struct {
 	Status NotificationFeedItemDtoStatus `json:"status"`
 	// The payload that was used to send the notification trigger.
 	Payload map[string]any `json:"payload,omitempty"`
+	// The data sent with the notification.
+	Data map[string]any `json:"data,omitempty"`
 	// Provider-specific overrides used when triggering the notification.
 	Overrides map[string]any `json:"overrides,omitempty"`
+	// Tags associated with the workflow that triggered the notification.
+	Tags []string `json:"tags,omitempty"`
 }
 
 func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
@@ -99,190 +103,204 @@ func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NotificationFeedItemDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"_id", "_templateId", "_environmentId", "_organizationId", "_notificationId", "_subscriberId", "_jobId", "transactionId", "content", "channel", "read", "seen", "cta", "status"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *NotificationFeedItemDto) GetID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetID() string {
+	if n == nil {
 		return ""
 	}
-	return o.ID
+	return n.ID
 }
 
-func (o *NotificationFeedItemDto) GetTemplateID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetTemplateID() string {
+	if n == nil {
 		return ""
 	}
-	return o.TemplateID
+	return n.TemplateID
 }
 
-func (o *NotificationFeedItemDto) GetEnvironmentID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetEnvironmentID() string {
+	if n == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return n.EnvironmentID
 }
 
-func (o *NotificationFeedItemDto) GetMessageTemplateID() *string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetMessageTemplateID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.MessageTemplateID
+	return n.MessageTemplateID
 }
 
-func (o *NotificationFeedItemDto) GetOrganizationID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetOrganizationID() string {
+	if n == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return n.OrganizationID
 }
 
-func (o *NotificationFeedItemDto) GetNotificationID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetNotificationID() string {
+	if n == nil {
 		return ""
 	}
-	return o.NotificationID
+	return n.NotificationID
 }
 
-func (o *NotificationFeedItemDto) GetSubscriberID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetSubscriberID() string {
+	if n == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return n.SubscriberID
 }
 
-func (o *NotificationFeedItemDto) GetFeedID() *string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetFeedID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.FeedID
+	return n.FeedID
 }
 
-func (o *NotificationFeedItemDto) GetJobID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetJobID() string {
+	if n == nil {
 		return ""
 	}
-	return o.JobID
+	return n.JobID
 }
 
-func (o *NotificationFeedItemDto) GetCreatedAt() *time.Time {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetCreatedAt() *time.Time {
+	if n == nil {
 		return nil
 	}
-	return o.CreatedAt
+	return n.CreatedAt
 }
 
-func (o *NotificationFeedItemDto) GetUpdatedAt() *time.Time {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetUpdatedAt() *time.Time {
+	if n == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return n.UpdatedAt
 }
 
-func (o *NotificationFeedItemDto) GetActor() *ActorFeedItemDto {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetActor() *ActorFeedItemDto {
+	if n == nil {
 		return nil
 	}
-	return o.Actor
+	return n.Actor
 }
 
-func (o *NotificationFeedItemDto) GetSubscriber() *SubscriberFeedResponseDto {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetSubscriber() *SubscriberFeedResponseDto {
+	if n == nil {
 		return nil
 	}
-	return o.Subscriber
+	return n.Subscriber
 }
 
-func (o *NotificationFeedItemDto) GetTransactionID() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetTransactionID() string {
+	if n == nil {
 		return ""
 	}
-	return o.TransactionID
+	return n.TransactionID
 }
 
-func (o *NotificationFeedItemDto) GetTemplateIdentifier() *string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetTemplateIdentifier() *string {
+	if n == nil {
 		return nil
 	}
-	return o.TemplateIdentifier
+	return n.TemplateIdentifier
 }
 
-func (o *NotificationFeedItemDto) GetProviderID() *string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetProviderID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.ProviderID
+	return n.ProviderID
 }
 
-func (o *NotificationFeedItemDto) GetContent() string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetContent() string {
+	if n == nil {
 		return ""
 	}
-	return o.Content
+	return n.Content
 }
 
-func (o *NotificationFeedItemDto) GetSubject() *string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetSubject() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Subject
+	return n.Subject
 }
 
-func (o *NotificationFeedItemDto) GetChannel() ChannelTypeEnum {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetChannel() ChannelTypeEnum {
+	if n == nil {
 		return ChannelTypeEnum("")
 	}
-	return o.Channel
+	return n.Channel
 }
 
-func (o *NotificationFeedItemDto) GetRead() bool {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetRead() bool {
+	if n == nil {
 		return false
 	}
-	return o.Read
+	return n.Read
 }
 
-func (o *NotificationFeedItemDto) GetSeen() bool {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetSeen() bool {
+	if n == nil {
 		return false
 	}
-	return o.Seen
+	return n.Seen
 }
 
-func (o *NotificationFeedItemDto) GetDeviceTokens() []string {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetDeviceTokens() []string {
+	if n == nil {
 		return nil
 	}
-	return o.DeviceTokens
+	return n.DeviceTokens
 }
 
-func (o *NotificationFeedItemDto) GetCta() MessageCTA {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetCta() MessageCTA {
+	if n == nil {
 		return MessageCTA{}
 	}
-	return o.Cta
+	return n.Cta
 }
 
-func (o *NotificationFeedItemDto) GetStatus() NotificationFeedItemDtoStatus {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetStatus() NotificationFeedItemDtoStatus {
+	if n == nil {
 		return NotificationFeedItemDtoStatus("")
 	}
-	return o.Status
+	return n.Status
 }
 
-func (o *NotificationFeedItemDto) GetPayload() map[string]any {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetPayload() map[string]any {
+	if n == nil {
 		return nil
 	}
-	return o.Payload
+	return n.Payload
 }
 
-func (o *NotificationFeedItemDto) GetOverrides() map[string]any {
-	if o == nil {
+func (n *NotificationFeedItemDto) GetData() map[string]any {
+	if n == nil {
 		return nil
 	}
-	return o.Overrides
+	return n.Data
+}
+
+func (n *NotificationFeedItemDto) GetOverrides() map[string]any {
+	if n == nil {
+		return nil
+	}
+	return n.Overrides
+}
+
+func (n *NotificationFeedItemDto) GetTags() []string {
+	if n == nil {
+		return nil
+	}
+	return n.Tags
 }

@@ -9,16 +9,16 @@ type FailedOperationDto struct {
 	SubscriberID *string `json:"subscriberId,omitempty"`
 }
 
-func (o *FailedOperationDto) GetMessage() *string {
-	if o == nil {
+func (f *FailedOperationDto) GetMessage() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Message
+	return f.Message
 }
 
-func (o *FailedOperationDto) GetSubscriberID() *string {
-	if o == nil {
+func (f *FailedOperationDto) GetSubscriberID() *string {
+	if f == nil {
 		return nil
 	}
-	return o.SubscriberID
+	return f.SubscriberID
 }

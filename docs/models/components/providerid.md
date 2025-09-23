@@ -17,6 +17,8 @@ The ID of the chat or push provider.
 | `ProviderIDGetstream`        | getstream                    |
 | `ProviderIDRocketChat`       | rocket-chat                  |
 | `ProviderIDWhatsappBusiness` | whatsapp-business            |
+| `ProviderIDChatWebhook`      | chat-webhook                 |
+| `ProviderIDNovuSlack`        | novu-slack                   |
 | `ProviderIDFcm`              | fcm                          |
 | `ProviderIDApns`             | apns                         |
 | `ProviderIDExpo`             | expo                         |

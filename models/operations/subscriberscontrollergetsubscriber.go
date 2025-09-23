@@ -12,18 +12,18 @@ type SubscribersControllerGetSubscriberRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersControllerGetSubscriberRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerGetSubscriberRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersControllerGetSubscriberResponse struct {
@@ -33,23 +33,23 @@ type SubscribersControllerGetSubscriberResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *SubscribersControllerGetSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerGetSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberResponseDto
+	return s.SubscriberResponseDto
 }
 
-func (o *SubscribersControllerGetSubscriberResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

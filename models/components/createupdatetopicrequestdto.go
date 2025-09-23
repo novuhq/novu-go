@@ -9,16 +9,16 @@ type CreateUpdateTopicRequestDto struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *CreateUpdateTopicRequestDto) GetKey() string {
-	if o == nil {
+func (c *CreateUpdateTopicRequestDto) GetKey() string {
+	if c == nil {
 		return ""
 	}
-	return o.Key
+	return c.Key
 }
 
-func (o *CreateUpdateTopicRequestDto) GetName() *string {
-	if o == nil {
+func (c *CreateUpdateTopicRequestDto) GetName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Name
+	return c.Name
 }

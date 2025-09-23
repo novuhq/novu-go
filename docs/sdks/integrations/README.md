@@ -4,7 +4,7 @@
 ## Overview
 
 With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
-<https://docs.novu.co/channels-and-providers/integration-store>
+<https://docs.novu.co/platform/integrations/overview>
 
 ### Available Operations
 
@@ -12,6 +12,7 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [Create](#create) - Create an integration
 * [Update](#update) - Update an integration
 * [Delete](#delete) - Delete an integration
+* [IntegrationsControllerAutoConfigureIntegration](#integrationscontrollerautoconfigureintegration) - Auto-configure an integration for inbound webhooks
 * [SetAsPrimary](#setasprimary) - Update integration as primary
 * [ListActive](#listactive) - List active integrations
 
@@ -21,6 +22,7 @@ List all the channels integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_listIntegrations" method="get" path="/v1/integrations" -->
 ```go
 package main
 
@@ -76,6 +78,7 @@ Create an integration for the current environment the user is based on the API k
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_createIntegration" method="post" path="/v1/integrations" -->
 ```go
 package main
 
@@ -136,6 +139,7 @@ Update an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_updateIntegrationById" method="put" path="/v1/integrations/{integrationId}" -->
 ```go
 package main
 
@@ -194,6 +198,7 @@ Delete an integration by its unique key identifier **integrationId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_removeIntegration" method="delete" path="/v1/integrations/{integrationId}" -->
 ```go
 package main
 
@@ -243,6 +248,63 @@ func main() {
 | apierrors.ErrorDto                     | 500                                    | application/json                       |
 | apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
 
+## IntegrationsControllerAutoConfigureIntegration
+
+Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support. 
+    This will automatically generate required webhook signing keys and configure webhook endpoints.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IntegrationsController_autoConfigureIntegration" method="post" path="/v1/integrations/{integrationId}/auto-configure" -->
+```go
+package main
+
+import(
+	"context"
+	novugo "github.com/novuhq/novu-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := novugo.New(
+        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Integrations.IntegrationsControllerAutoConfigureIntegration(ctx, "<id>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.AutoConfigureIntegrationResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `integrationID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.IntegrationsControllerAutoConfigureIntegrationResponse](../../models/operations/integrationscontrollerautoconfigureintegrationresponse.md), error**
+
+### Errors
+
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| apierrors.ErrorDto                | 414                               | application/json                  |
+| apierrors.ErrorDto                | 400, 401, 403, 405, 409, 413, 415 | application/json                  |
+| apierrors.ValidationErrorDto      | 422                               | application/json                  |
+| apierrors.ErrorDto                | 500                               | application/json                  |
+| apierrors.APIError                | 4XX, 5XX                          | \*/\*                             |
+
 ## SetAsPrimary
 
 Update an integration as **primary** by its unique key identifier **integrationId**. 
@@ -251,6 +313,7 @@ Update an integration as **primary** by its unique key identifier **integrationI
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_setIntegrationAsPrimary" method="post" path="/v1/integrations/{integrationId}/set-primary" -->
 ```go
 package main
 
@@ -306,6 +369,7 @@ List all the active integrations created in the organization
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="IntegrationsController_getActiveIntegrations" method="get" path="/v1/integrations/active" -->
 ```go
 package main
 

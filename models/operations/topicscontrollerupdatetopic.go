@@ -14,25 +14,25 @@ type TopicsControllerUpdateTopicRequest struct {
 	UpdateTopicRequestDto components.UpdateTopicRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *TopicsControllerUpdateTopicRequest) GetTopicKey() string {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicRequest) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicsControllerUpdateTopicRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
-func (o *TopicsControllerUpdateTopicRequest) GetUpdateTopicRequestDto() components.UpdateTopicRequestDto {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicRequest) GetUpdateTopicRequestDto() components.UpdateTopicRequestDto {
+	if t == nil {
 		return components.UpdateTopicRequestDto{}
 	}
-	return o.UpdateTopicRequestDto
+	return t.UpdateTopicRequestDto
 }
 
 type TopicsControllerUpdateTopicResponse struct {
@@ -42,23 +42,23 @@ type TopicsControllerUpdateTopicResponse struct {
 	Headers          map[string][]string
 }
 
-func (o *TopicsControllerUpdateTopicResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerUpdateTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.TopicResponseDto
+	return t.TopicResponseDto
 }
 
-func (o *TopicsControllerUpdateTopicResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerUpdateTopicResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

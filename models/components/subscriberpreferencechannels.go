@@ -15,37 +15,37 @@ type SubscriberPreferenceChannels struct {
 	Push *bool `json:"push,omitempty"`
 }
 
-func (o *SubscriberPreferenceChannels) GetEmail() *bool {
-	if o == nil {
+func (s *SubscriberPreferenceChannels) GetEmail() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }
 
-func (o *SubscriberPreferenceChannels) GetSms() *bool {
-	if o == nil {
+func (s *SubscriberPreferenceChannels) GetSms() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Sms
+	return s.Sms
 }
 
-func (o *SubscriberPreferenceChannels) GetInApp() *bool {
-	if o == nil {
+func (s *SubscriberPreferenceChannels) GetInApp() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.InApp
+	return s.InApp
 }
 
-func (o *SubscriberPreferenceChannels) GetChat() *bool {
-	if o == nil {
+func (s *SubscriberPreferenceChannels) GetChat() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Chat
+	return s.Chat
 }
 
-func (o *SubscriberPreferenceChannels) GetPush() *bool {
-	if o == nil {
+func (s *SubscriberPreferenceChannels) GetPush() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Push
+	return s.Push
 }

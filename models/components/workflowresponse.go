@@ -32,149 +32,149 @@ type WorkflowResponse struct {
 	WorkflowIntegrationStatus *WorkflowIntegrationStatus   `json:"workflowIntegrationStatus,omitempty"`
 }
 
-func (o *WorkflowResponse) GetID() *string {
-	if o == nil {
+func (w *WorkflowResponse) GetID() *string {
+	if w == nil {
 		return nil
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WorkflowResponse) GetName() string {
-	if o == nil {
+func (w *WorkflowResponse) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WorkflowResponse) GetDescription() string {
-	if o == nil {
+func (w *WorkflowResponse) GetDescription() string {
+	if w == nil {
 		return ""
 	}
-	return o.Description
+	return w.Description
 }
 
-func (o *WorkflowResponse) GetActive() bool {
-	if o == nil {
+func (w *WorkflowResponse) GetActive() bool {
+	if w == nil {
 		return false
 	}
-	return o.Active
+	return w.Active
 }
 
-func (o *WorkflowResponse) GetDraft() bool {
-	if o == nil {
+func (w *WorkflowResponse) GetDraft() bool {
+	if w == nil {
 		return false
 	}
-	return o.Draft
+	return w.Draft
 }
 
-func (o *WorkflowResponse) GetPreferenceSettings() SubscriberPreferenceChannels {
-	if o == nil {
+func (w *WorkflowResponse) GetPreferenceSettings() SubscriberPreferenceChannels {
+	if w == nil {
 		return SubscriberPreferenceChannels{}
 	}
-	return o.PreferenceSettings
+	return w.PreferenceSettings
 }
 
-func (o *WorkflowResponse) GetCritical() bool {
-	if o == nil {
+func (w *WorkflowResponse) GetCritical() bool {
+	if w == nil {
 		return false
 	}
-	return o.Critical
+	return w.Critical
 }
 
-func (o *WorkflowResponse) GetTags() []string {
-	if o == nil {
+func (w *WorkflowResponse) GetTags() []string {
+	if w == nil {
 		return []string{}
 	}
-	return o.Tags
+	return w.Tags
 }
 
-func (o *WorkflowResponse) GetSteps() []NotificationStepDto {
-	if o == nil {
+func (w *WorkflowResponse) GetSteps() []NotificationStepDto {
+	if w == nil {
 		return []NotificationStepDto{}
 	}
-	return o.Steps
+	return w.Steps
 }
 
-func (o *WorkflowResponse) GetOrganizationID() string {
-	if o == nil {
+func (w *WorkflowResponse) GetOrganizationID() string {
+	if w == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return w.OrganizationID
 }
 
-func (o *WorkflowResponse) GetCreatorID() string {
-	if o == nil {
+func (w *WorkflowResponse) GetCreatorID() string {
+	if w == nil {
 		return ""
 	}
-	return o.CreatorID
+	return w.CreatorID
 }
 
-func (o *WorkflowResponse) GetEnvironmentID() string {
-	if o == nil {
+func (w *WorkflowResponse) GetEnvironmentID() string {
+	if w == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return w.EnvironmentID
 }
 
-func (o *WorkflowResponse) GetTriggers() []NotificationTrigger {
-	if o == nil {
+func (w *WorkflowResponse) GetTriggers() []NotificationTrigger {
+	if w == nil {
 		return []NotificationTrigger{}
 	}
-	return o.Triggers
+	return w.Triggers
 }
 
-func (o *WorkflowResponse) GetNotificationGroupID() string {
-	if o == nil {
+func (w *WorkflowResponse) GetNotificationGroupID() string {
+	if w == nil {
 		return ""
 	}
-	return o.NotificationGroupID
+	return w.NotificationGroupID
 }
 
-func (o *WorkflowResponse) GetParentID() *string {
-	if o == nil {
+func (w *WorkflowResponse) GetParentID() *string {
+	if w == nil {
 		return nil
 	}
-	return o.ParentID
+	return w.ParentID
 }
 
-func (o *WorkflowResponse) GetDeleted() bool {
-	if o == nil {
+func (w *WorkflowResponse) GetDeleted() bool {
+	if w == nil {
 		return false
 	}
-	return o.Deleted
+	return w.Deleted
 }
 
-func (o *WorkflowResponse) GetDeletedAt() string {
-	if o == nil {
+func (w *WorkflowResponse) GetDeletedAt() string {
+	if w == nil {
 		return ""
 	}
-	return o.DeletedAt
+	return w.DeletedAt
 }
 
-func (o *WorkflowResponse) GetDeletedBy() string {
-	if o == nil {
+func (w *WorkflowResponse) GetDeletedBy() string {
+	if w == nil {
 		return ""
 	}
-	return o.DeletedBy
+	return w.DeletedBy
 }
 
-func (o *WorkflowResponse) GetNotificationGroup() *NotificationGroup {
-	if o == nil {
+func (w *WorkflowResponse) GetNotificationGroup() *NotificationGroup {
+	if w == nil {
 		return nil
 	}
-	return o.NotificationGroup
+	return w.NotificationGroup
 }
 
-func (o *WorkflowResponse) GetData() *WorkflowResponseData {
-	if o == nil {
+func (w *WorkflowResponse) GetData() *WorkflowResponseData {
+	if w == nil {
 		return nil
 	}
-	return o.Data
+	return w.Data
 }
 
-func (o *WorkflowResponse) GetWorkflowIntegrationStatus() *WorkflowIntegrationStatus {
-	if o == nil {
+func (w *WorkflowResponse) GetWorkflowIntegrationStatus() *WorkflowIntegrationStatus {
+	if w == nil {
 		return nil
 	}
-	return o.WorkflowIntegrationStatus
+	return w.WorkflowIntegrationStatus
 }

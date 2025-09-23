@@ -23,14 +23,14 @@ const (
 )
 
 type UpdateWorkflowDtoSteps struct {
-	InAppStepUpsertDto  *InAppStepUpsertDto  `queryParam:"inline"`
-	EmailStepUpsertDto  *EmailStepUpsertDto  `queryParam:"inline"`
-	SmsStepUpsertDto    *SmsStepUpsertDto    `queryParam:"inline"`
-	PushStepUpsertDto   *PushStepUpsertDto   `queryParam:"inline"`
-	ChatStepUpsertDto   *ChatStepUpsertDto   `queryParam:"inline"`
-	DelayStepUpsertDto  *DelayStepUpsertDto  `queryParam:"inline"`
-	DigestStepUpsertDto *DigestStepUpsertDto `queryParam:"inline"`
-	CustomStepUpsertDto *CustomStepUpsertDto `queryParam:"inline"`
+	InAppStepUpsertDto  *InAppStepUpsertDto  `queryParam:"inline" name:"steps"`
+	EmailStepUpsertDto  *EmailStepUpsertDto  `queryParam:"inline" name:"steps"`
+	SmsStepUpsertDto    *SmsStepUpsertDto    `queryParam:"inline" name:"steps"`
+	PushStepUpsertDto   *PushStepUpsertDto   `queryParam:"inline" name:"steps"`
+	ChatStepUpsertDto   *ChatStepUpsertDto   `queryParam:"inline" name:"steps"`
+	DelayStepUpsertDto  *DelayStepUpsertDto  `queryParam:"inline" name:"steps"`
+	DigestStepUpsertDto *DigestStepUpsertDto `queryParam:"inline" name:"steps"`
+	CustomStepUpsertDto *CustomStepUpsertDto `queryParam:"inline" name:"steps"`
 
 	Type UpdateWorkflowDtoStepsType
 }
@@ -145,7 +145,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "in_app":
 		inAppStepUpsertDto := new(InAppStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &inAppStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &inAppStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == in_app) type InAppStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -154,7 +154,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "email":
 		emailStepUpsertDto := new(EmailStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &emailStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &emailStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == email) type EmailStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -163,7 +163,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "sms":
 		smsStepUpsertDto := new(SmsStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &smsStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &smsStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == sms) type SmsStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -172,7 +172,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "push":
 		pushStepUpsertDto := new(PushStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &pushStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &pushStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == push) type PushStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -181,7 +181,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "chat":
 		chatStepUpsertDto := new(ChatStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &chatStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &chatStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == chat) type ChatStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -190,7 +190,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "delay":
 		delayStepUpsertDto := new(DelayStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &delayStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &delayStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == delay) type DelayStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -199,7 +199,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "digest":
 		digestStepUpsertDto := new(DigestStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &digestStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &digestStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == digest) type DigestStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -208,7 +208,7 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "custom":
 		customStepUpsertDto := new(CustomStepUpsertDto)
-		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == custom) type CustomStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
 		}
 
@@ -265,18 +265,22 @@ type UpdateWorkflowDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Workflow ID (allowed only for code-first workflows)
 	WorkflowID *string `json:"workflowId,omitempty"`
 	// Steps of the workflow
 	Steps []UpdateWorkflowDtoSteps `json:"steps"`
 	// Workflow preferences
 	Preferences PreferencesRequestDto `json:"preferences"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
-	// Enable or disable payload schema validation
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
+	// Severity of the workflow
+	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 
 func (u UpdateWorkflowDto) MarshalJSON() ([]byte, error) {
@@ -284,78 +288,92 @@ func (u UpdateWorkflowDto) MarshalJSON() ([]byte, error) {
 }
 
 func (u *UpdateWorkflowDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &u, "", false, []string{"name", "steps", "preferences", "origin"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *UpdateWorkflowDto) GetName() string {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetName() string {
+	if u == nil {
 		return ""
 	}
-	return o.Name
+	return u.Name
 }
 
-func (o *UpdateWorkflowDto) GetDescription() *string {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetDescription() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Description
+	return u.Description
 }
 
-func (o *UpdateWorkflowDto) GetTags() []string {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetTags() []string {
+	if u == nil {
 		return nil
 	}
-	return o.Tags
+	return u.Tags
 }
 
-func (o *UpdateWorkflowDto) GetActive() *bool {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetActive() *bool {
+	if u == nil {
 		return nil
 	}
-	return o.Active
+	return u.Active
 }
 
-func (o *UpdateWorkflowDto) GetWorkflowID() *string {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetValidatePayload() *bool {
+	if u == nil {
 		return nil
 	}
-	return o.WorkflowID
+	return u.ValidatePayload
 }
 
-func (o *UpdateWorkflowDto) GetSteps() []UpdateWorkflowDtoSteps {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetPayloadSchema() map[string]any {
+	if u == nil {
+		return nil
+	}
+	return u.PayloadSchema
+}
+
+func (u *UpdateWorkflowDto) GetIsTranslationEnabled() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.IsTranslationEnabled
+}
+
+func (u *UpdateWorkflowDto) GetWorkflowID() *string {
+	if u == nil {
+		return nil
+	}
+	return u.WorkflowID
+}
+
+func (u *UpdateWorkflowDto) GetSteps() []UpdateWorkflowDtoSteps {
+	if u == nil {
 		return []UpdateWorkflowDtoSteps{}
 	}
-	return o.Steps
+	return u.Steps
 }
 
-func (o *UpdateWorkflowDto) GetPreferences() PreferencesRequestDto {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetPreferences() PreferencesRequestDto {
+	if u == nil {
 		return PreferencesRequestDto{}
 	}
-	return o.Preferences
+	return u.Preferences
 }
 
-func (o *UpdateWorkflowDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (u *UpdateWorkflowDto) GetOrigin() ResourceOriginEnum {
+	if u == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return u.Origin
 }
 
-func (o *UpdateWorkflowDto) GetPayloadSchema() map[string]any {
-	if o == nil {
+func (u *UpdateWorkflowDto) GetSeverity() *SeverityLevelEnum {
+	if u == nil {
 		return nil
 	}
-	return o.PayloadSchema
-}
-
-func (o *UpdateWorkflowDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
+	return u.Severity
 }

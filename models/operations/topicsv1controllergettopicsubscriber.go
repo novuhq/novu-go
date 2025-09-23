@@ -15,25 +15,25 @@ type TopicsV1ControllerGetTopicSubscriberRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberRequest) GetExternalSubscriberID() string {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberRequest) GetExternalSubscriberID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ExternalSubscriberID
+	return t.ExternalSubscriberID
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberRequest) GetTopicKey() string {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberRequest) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
 type TopicsV1ControllerGetTopicSubscriberResponse struct {
@@ -42,23 +42,23 @@ type TopicsV1ControllerGetTopicSubscriberResponse struct {
 	Headers            map[string][]string
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberResponse) GetTopicSubscriberDto() *components.TopicSubscriberDto {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberResponse) GetTopicSubscriberDto() *components.TopicSubscriberDto {
+	if t == nil {
 		return nil
 	}
-	return o.TopicSubscriberDto
+	return t.TopicSubscriberDto
 }
 
-func (o *TopicsV1ControllerGetTopicSubscriberResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsV1ControllerGetTopicSubscriberResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

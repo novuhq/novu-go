@@ -14,25 +14,25 @@ type WorkflowControllerPatchWorkflowRequest struct {
 	PatchWorkflowDto components.PatchWorkflowDto `request:"mediaType=application/json"`
 }
 
-func (o *WorkflowControllerPatchWorkflowRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerPatchWorkflowRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
-func (o *WorkflowControllerPatchWorkflowRequest) GetPatchWorkflowDto() components.PatchWorkflowDto {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowRequest) GetPatchWorkflowDto() components.PatchWorkflowDto {
+	if w == nil {
 		return components.PatchWorkflowDto{}
 	}
-	return o.PatchWorkflowDto
+	return w.PatchWorkflowDto
 }
 
 type WorkflowControllerPatchWorkflowResponse struct {
@@ -42,23 +42,23 @@ type WorkflowControllerPatchWorkflowResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *WorkflowControllerPatchWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerPatchWorkflowResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
+	if w == nil {
 		return nil
 	}
-	return o.WorkflowResponseDto
+	return w.WorkflowResponseDto
 }
 
-func (o *WorkflowControllerPatchWorkflowResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerPatchWorkflowResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type DelayControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -11,23 +15,34 @@ type DelayControlsMetadataResponseDto struct {
 	Values DelayControlDto `json:"values"`
 }
 
-func (o *DelayControlsMetadataResponseDto) GetDataSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.DataSchema
+func (d DelayControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (o *DelayControlsMetadataResponseDto) GetUISchema() *UISchema {
-	if o == nil {
-		return nil
+func (d *DelayControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"values"}); err != nil {
+		return err
 	}
-	return o.UISchema
+	return nil
 }
 
-func (o *DelayControlsMetadataResponseDto) GetValues() DelayControlDto {
-	if o == nil {
+func (d *DelayControlsMetadataResponseDto) GetDataSchema() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.DataSchema
+}
+
+func (d *DelayControlsMetadataResponseDto) GetUISchema() *UISchema {
+	if d == nil {
+		return nil
+	}
+	return d.UISchema
+}
+
+func (d *DelayControlsMetadataResponseDto) GetValues() DelayControlDto {
+	if d == nil {
 		return DelayControlDto{}
 	}
-	return o.Values
+	return d.Values
 }

@@ -15,6 +15,7 @@ import (
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 // Subscribers - A subscriber in Novu represents someone who should receive a message. A subscriber's profile information contains important attributes about the subscriber that will be used in messages (name, email). The subscriber object can contain other key-value pairs that can be used to further personalize your messages.
@@ -88,6 +89,11 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -394,8 +400,9 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 // Create a subscriber with the subscriber attributes.
 //
 //	**subscriberId** is a required field, rest other fields are optional, if the subscriber already exists, it will be updated
-func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
+func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, failIfExists *bool, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
 	request := operations.SubscribersControllerCreateSubscriberRequest{
+		FailIfExists:               failIfExists,
 		IdempotencyKey:             idempotencyKey,
 		CreateSubscriberRequestDto: createSubscriberRequestDto,
 	}
@@ -442,6 +449,11 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -459,6 +471,10 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -599,6 +615,29 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 409:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.SubscriberResponseDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -629,8 +668,6 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		fallthrough
 	case httpRes.StatusCode == 413:
 		fallthrough
@@ -787,6 +824,11 @@ func (s *Subscribers) Retrieve(ctx context.Context, subscriberID string, idempot
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -1138,6 +1180,11 @@ func (s *Subscribers) Patch(ctx context.Context, subscriberID string, patchSubsc
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -1485,6 +1532,11 @@ func (s *Subscribers) Delete(ctx context.Context, subscriberID string, idempoten
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -1830,6 +1882,11 @@ func (s *Subscribers) CreateBulk(ctx context.Context, bulkSubscriberCreateDto co
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

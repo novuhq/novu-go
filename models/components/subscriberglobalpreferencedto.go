@@ -7,18 +7,27 @@ type SubscriberGlobalPreferenceDto struct {
 	Enabled bool `json:"enabled"`
 	// Channel-specific preference settings
 	Channels SubscriberPreferenceChannels `json:"channels"`
+	// Subscriber schedule
+	Schedule *ScheduleDto `json:"schedule,omitempty"`
 }
 
-func (o *SubscriberGlobalPreferenceDto) GetEnabled() bool {
-	if o == nil {
+func (s *SubscriberGlobalPreferenceDto) GetEnabled() bool {
+	if s == nil {
 		return false
 	}
-	return o.Enabled
+	return s.Enabled
 }
 
-func (o *SubscriberGlobalPreferenceDto) GetChannels() SubscriberPreferenceChannels {
-	if o == nil {
+func (s *SubscriberGlobalPreferenceDto) GetChannels() SubscriberPreferenceChannels {
+	if s == nil {
 		return SubscriberPreferenceChannels{}
 	}
-	return o.Channels
+	return s.Channels
+}
+
+func (s *SubscriberGlobalPreferenceDto) GetSchedule() *ScheduleDto {
+	if s == nil {
+		return nil
+	}
+	return s.Schedule
 }

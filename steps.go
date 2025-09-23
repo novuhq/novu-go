@@ -14,6 +14,7 @@ import (
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
+	"time"
 )
 
 type Steps struct {
@@ -75,6 +76,11 @@ func (s *Steps) Retrieve(ctx context.Context, workflowID string, stepID string, 
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

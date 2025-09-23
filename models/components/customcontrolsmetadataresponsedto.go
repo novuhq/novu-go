@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type CustomControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -11,23 +15,34 @@ type CustomControlsMetadataResponseDto struct {
 	Values CustomControlDto `json:"values"`
 }
 
-func (o *CustomControlsMetadataResponseDto) GetDataSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.DataSchema
+func (c CustomControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
 }
 
-func (o *CustomControlsMetadataResponseDto) GetUISchema() *UISchema {
-	if o == nil {
-		return nil
+func (c *CustomControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"values"}); err != nil {
+		return err
 	}
-	return o.UISchema
+	return nil
 }
 
-func (o *CustomControlsMetadataResponseDto) GetValues() CustomControlDto {
-	if o == nil {
+func (c *CustomControlsMetadataResponseDto) GetDataSchema() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.DataSchema
+}
+
+func (c *CustomControlsMetadataResponseDto) GetUISchema() *UISchema {
+	if c == nil {
+		return nil
+	}
+	return c.UISchema
+}
+
+func (c *CustomControlsMetadataResponseDto) GetValues() CustomControlDto {
+	if c == nil {
 		return CustomControlDto{}
 	}
-	return o.Values
+	return c.Values
 }

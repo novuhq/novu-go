@@ -6,9 +6,9 @@ type BridgeConfigurationDto struct {
 	URL *string `json:"url,omitempty"`
 }
 
-func (o *BridgeConfigurationDto) GetURL() *string {
-	if o == nil {
+func (b *BridgeConfigurationDto) GetURL() *string {
+	if b == nil {
 		return nil
 	}
-	return o.URL
+	return b.URL
 }

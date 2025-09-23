@@ -13,25 +13,25 @@ type SubscribersV1ControllerMarkMessagesAsRequest struct {
 	MessageMarkAsRequestDto components.MessageMarkAsRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsRequest) GetMessageMarkAsRequestDto() components.MessageMarkAsRequestDto {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsRequest) GetMessageMarkAsRequestDto() components.MessageMarkAsRequestDto {
+	if s == nil {
 		return components.MessageMarkAsRequestDto{}
 	}
-	return o.MessageMarkAsRequestDto
+	return s.MessageMarkAsRequestDto
 }
 
 type SubscribersV1ControllerMarkMessagesAsResponse struct {
@@ -41,23 +41,23 @@ type SubscribersV1ControllerMarkMessagesAsResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsResponse) GetMessageResponseDtos() []components.MessageResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsResponse) GetMessageResponseDtos() []components.MessageResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.MessageResponseDtos
+	return s.MessageResponseDtos
 }
 
-func (o *SubscribersV1ControllerMarkMessagesAsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkMessagesAsResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

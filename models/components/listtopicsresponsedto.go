@@ -11,23 +11,23 @@ type ListTopicsResponseDto struct {
 	Previous *string `json:"previous"`
 }
 
-func (o *ListTopicsResponseDto) GetData() []TopicResponseDto {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetData() []TopicResponseDto {
+	if l == nil {
 		return []TopicResponseDto{}
 	}
-	return o.Data
+	return l.Data
 }
 
-func (o *ListTopicsResponseDto) GetNext() *string {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetNext() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Next
+	return l.Next
 }
 
-func (o *ListTopicsResponseDto) GetPrevious() *string {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetPrevious() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Previous
+	return l.Previous
 }

@@ -13,25 +13,25 @@ type WorkflowControllerGetWorkflowStepDataRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataRequest) GetStepID() string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataRequest) GetStepID() string {
+	if w == nil {
 		return ""
 	}
-	return o.StepID
+	return w.StepID
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
 type WorkflowControllerGetWorkflowStepDataResponse struct {
@@ -41,23 +41,23 @@ type WorkflowControllerGetWorkflowStepDataResponse struct {
 	Headers         map[string][]string
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataResponse) GetStepResponseDto() *components.StepResponseDto {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataResponse) GetStepResponseDto() *components.StepResponseDto {
+	if w == nil {
 		return nil
 	}
-	return o.StepResponseDto
+	return w.StepResponseDto
 }
 
-func (o *WorkflowControllerGetWorkflowStepDataResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowStepDataResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

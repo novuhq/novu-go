@@ -18,10 +18,10 @@ const (
 )
 
 type Value5 struct {
-	Str      *string        `queryParam:"inline"`
-	Number   *float64       `queryParam:"inline"`
-	Boolean  *bool          `queryParam:"inline"`
-	MapOfAny map[string]any `queryParam:"inline"`
+	Str      *string        `queryParam:"inline" name:"five"`
+	Number   *float64       `queryParam:"inline" name:"five"`
+	Boolean  *bool          `queryParam:"inline" name:"five"`
+	MapOfAny map[string]any `queryParam:"inline" name:"five"`
 
 	Type Value5Type
 }
@@ -65,28 +65,28 @@ func CreateValue5MapOfAny(mapOfAny map[string]any) Value5 {
 func (u *Value5) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = Value5TypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = Value5TypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = Value5TypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = Value5TypeMapOfAny
 		return nil
@@ -118,6 +118,17 @@ func (u Value5) MarshalJSON() ([]byte, error) {
 type Value4 struct {
 }
 
+func (v Value4) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *Value4) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type PayloadValidationErrorDtoValueType string
 
 const (
@@ -130,11 +141,11 @@ const (
 
 // PayloadValidationErrorDtoValue - The actual value that failed validation
 type PayloadValidationErrorDtoValue struct {
-	Str           *string   `queryParam:"inline"`
-	Number        *float64  `queryParam:"inline"`
-	Boolean       *bool     `queryParam:"inline"`
-	Value4        *Value4   `queryParam:"inline"`
-	ArrayOfValue5 []*Value5 `queryParam:"inline"`
+	Str           *string   `queryParam:"inline" name:"value"`
+	Number        *float64  `queryParam:"inline" name:"value"`
+	Boolean       *bool     `queryParam:"inline" name:"value"`
+	Value4        *Value4   `queryParam:"inline" name:"value"`
+	ArrayOfValue5 []*Value5 `queryParam:"inline" name:"value"`
 
 	Type PayloadValidationErrorDtoValueType
 }
@@ -187,35 +198,35 @@ func CreatePayloadValidationErrorDtoValueArrayOfValue5(arrayOfValue5 []*Value5) 
 func (u *PayloadValidationErrorDtoValue) UnmarshalJSON(data []byte) error {
 
 	var value4 Value4 = Value4{}
-	if err := utils.UnmarshalJSON(data, &value4, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &value4, "", true, nil); err == nil {
 		u.Value4 = &value4
 		u.Type = PayloadValidationErrorDtoValueTypeValue4
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = PayloadValidationErrorDtoValueTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = PayloadValidationErrorDtoValueTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = PayloadValidationErrorDtoValueTypeBoolean
 		return nil
 	}
 
 	var arrayOfValue5 []*Value5 = []*Value5{}
-	if err := utils.UnmarshalJSON(data, &arrayOfValue5, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfValue5, "", true, nil); err == nil {
 		u.ArrayOfValue5 = arrayOfValue5
 		u.Type = PayloadValidationErrorDtoValueTypeArrayOfValue5
 		return nil
@@ -259,30 +270,30 @@ type PayloadValidationErrorDto struct {
 	SchemaPath *string `json:"schemaPath,omitempty"`
 }
 
-func (o *PayloadValidationErrorDto) GetField() string {
-	if o == nil {
+func (p *PayloadValidationErrorDto) GetField() string {
+	if p == nil {
 		return ""
 	}
-	return o.Field
+	return p.Field
 }
 
-func (o *PayloadValidationErrorDto) GetMessage() string {
-	if o == nil {
+func (p *PayloadValidationErrorDto) GetMessage() string {
+	if p == nil {
 		return ""
 	}
-	return o.Message
+	return p.Message
 }
 
-func (o *PayloadValidationErrorDto) GetValue() *PayloadValidationErrorDtoValue {
-	if o == nil {
+func (p *PayloadValidationErrorDto) GetValue() *PayloadValidationErrorDtoValue {
+	if p == nil {
 		return nil
 	}
-	return o.Value
+	return p.Value
 }
 
-func (o *PayloadValidationErrorDto) GetSchemaPath() *string {
-	if o == nil {
+func (p *PayloadValidationErrorDto) GetSchemaPath() *string {
+	if p == nil {
 		return nil
 	}
-	return o.SchemaPath
+	return p.SchemaPath
 }

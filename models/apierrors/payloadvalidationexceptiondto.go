@@ -20,10 +20,10 @@ const (
 )
 
 type MessagePayloadValidationExceptionDto5 struct {
-	Str      *string        `queryParam:"inline"`
-	Number   *float64       `queryParam:"inline"`
-	Boolean  *bool          `queryParam:"inline"`
-	MapOfAny map[string]any `queryParam:"inline"`
+	Str      *string        `queryParam:"inline" name:"five"`
+	Number   *float64       `queryParam:"inline" name:"five"`
+	Boolean  *bool          `queryParam:"inline" name:"five"`
+	MapOfAny map[string]any `queryParam:"inline" name:"five"`
 
 	Type MessagePayloadValidationExceptionDto5Type
 }
@@ -69,28 +69,28 @@ func CreateMessagePayloadValidationExceptionDto5MapOfAny(mapOfAny map[string]any
 func (u *MessagePayloadValidationExceptionDto5) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = MessagePayloadValidationExceptionDto5TypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = MessagePayloadValidationExceptionDto5TypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = MessagePayloadValidationExceptionDto5TypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = MessagePayloadValidationExceptionDto5TypeMapOfAny
 		return nil
@@ -141,6 +141,17 @@ func (u MessagePayloadValidationExceptionDto5) Error() string {
 type MessagePayloadValidationExceptionDto4 struct {
 }
 
+func (m MessagePayloadValidationExceptionDto4) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(m, "", false)
+}
+
+func (m *MessagePayloadValidationExceptionDto4) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type PayloadValidationExceptionDtoMessageType string
 
 const (
@@ -153,11 +164,11 @@ const (
 
 // PayloadValidationExceptionDtoMessage - Value that failed validation
 type PayloadValidationExceptionDtoMessage struct {
-	Str                                          *string                                  `queryParam:"inline"`
-	Number                                       *float64                                 `queryParam:"inline"`
-	Boolean                                      *bool                                    `queryParam:"inline"`
-	MessagePayloadValidationExceptionDto4        *MessagePayloadValidationExceptionDto4   `queryParam:"inline"`
-	ArrayOfMessagePayloadValidationExceptionDto5 []*MessagePayloadValidationExceptionDto5 `queryParam:"inline"`
+	Str                                          *string                                  `queryParam:"inline" name:"message"`
+	Number                                       *float64                                 `queryParam:"inline" name:"message"`
+	Boolean                                      *bool                                    `queryParam:"inline" name:"message"`
+	MessagePayloadValidationExceptionDto4        *MessagePayloadValidationExceptionDto4   `queryParam:"inline" name:"message"`
+	ArrayOfMessagePayloadValidationExceptionDto5 []*MessagePayloadValidationExceptionDto5 `queryParam:"inline" name:"message"`
 
 	Type PayloadValidationExceptionDtoMessageType
 }
@@ -212,35 +223,35 @@ func CreatePayloadValidationExceptionDtoMessageArrayOfMessagePayloadValidationEx
 func (u *PayloadValidationExceptionDtoMessage) UnmarshalJSON(data []byte) error {
 
 	var messagePayloadValidationExceptionDto4 MessagePayloadValidationExceptionDto4 = MessagePayloadValidationExceptionDto4{}
-	if err := utils.UnmarshalJSON(data, &messagePayloadValidationExceptionDto4, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &messagePayloadValidationExceptionDto4, "", true, nil); err == nil {
 		u.MessagePayloadValidationExceptionDto4 = &messagePayloadValidationExceptionDto4
 		u.Type = PayloadValidationExceptionDtoMessageTypeMessagePayloadValidationExceptionDto4
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = PayloadValidationExceptionDtoMessageTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = PayloadValidationExceptionDtoMessageTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = PayloadValidationExceptionDtoMessageTypeBoolean
 		return nil
 	}
 
 	var arrayOfMessagePayloadValidationExceptionDto5 []*MessagePayloadValidationExceptionDto5 = []*MessagePayloadValidationExceptionDto5{}
-	if err := utils.UnmarshalJSON(data, &arrayOfMessagePayloadValidationExceptionDto5, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfMessagePayloadValidationExceptionDto5, "", true, nil); err == nil {
 		u.ArrayOfMessagePayloadValidationExceptionDto5 = arrayOfMessagePayloadValidationExceptionDto5
 		u.Type = PayloadValidationExceptionDtoMessageTypeArrayOfMessagePayloadValidationExceptionDto5
 		return nil

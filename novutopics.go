@@ -14,6 +14,7 @@ import (
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
+	"time"
 )
 
 type NovuTopics struct {
@@ -71,6 +72,11 @@ func (s *NovuTopics) List(ctx context.Context, request operations.SubscribersCon
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

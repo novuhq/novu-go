@@ -15,6 +15,7 @@ import (
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 type Notifications struct {
@@ -74,6 +75,11 @@ func (s *Notifications) List(ctx context.Context, request operations.Notificatio
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -423,6 +429,11 @@ func (s *Notifications) Retrieve(ctx context.Context, notificationID string, ide
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

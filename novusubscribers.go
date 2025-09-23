@@ -14,6 +14,7 @@ import (
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
+	"time"
 )
 
 type NovuSubscribers struct {
@@ -75,6 +76,11 @@ func (s *NovuSubscribers) Retrieve(ctx context.Context, externalSubscriberID str
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

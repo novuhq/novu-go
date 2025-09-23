@@ -89,49 +89,45 @@ func (d DelayStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "unit"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *DelayStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (d *DelayStepResponseDtoControlValues) GetSkip() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Skip
+	return d.Skip
 }
 
-func (o *DelayStepResponseDtoControlValues) GetType() *DelayStepResponseDtoType {
-	if o == nil {
+func (d *DelayStepResponseDtoControlValues) GetType() *DelayStepResponseDtoType {
+	if d == nil {
 		return nil
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DelayStepResponseDtoControlValues) GetAmount() float64 {
-	if o == nil {
+func (d *DelayStepResponseDtoControlValues) GetAmount() float64 {
+	if d == nil {
 		return 0.0
 	}
-	return o.Amount
+	return d.Amount
 }
 
-func (o *DelayStepResponseDtoControlValues) GetUnit() DelayStepResponseDtoUnit {
-	if o == nil {
+func (d *DelayStepResponseDtoControlValues) GetUnit() DelayStepResponseDtoUnit {
+	if d == nil {
 		return DelayStepResponseDtoUnit("")
 	}
-	return o.Unit
+	return d.Unit
 }
 
-func (o *DelayStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (d *DelayStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// DelayStepResponseDtoSlug - Slug of the step
-type DelayStepResponseDtoSlug struct {
+	return d.AdditionalProperties
 }
 
 type DelayStepResponseDto struct {
@@ -148,11 +144,11 @@ type DelayStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug DelayStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -161,86 +157,97 @@ type DelayStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *DelayStepResponseDto) GetControls() DelayControlsMetadataResponseDto {
-	if o == nil {
+func (d DelayStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *DelayStepResponseDto) GetControls() DelayControlsMetadataResponseDto {
+	if d == nil {
 		return DelayControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return d.Controls
 }
 
-func (o *DelayStepResponseDto) GetControlValues() *DelayStepResponseDtoControlValues {
-	if o == nil {
+func (d *DelayStepResponseDto) GetControlValues() *DelayStepResponseDtoControlValues {
+	if d == nil {
 		return nil
 	}
-	return o.ControlValues
+	return d.ControlValues
 }
 
-func (o *DelayStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (d *DelayStepResponseDto) GetVariables() map[string]any {
+	if d == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return d.Variables
 }
 
-func (o *DelayStepResponseDto) GetStepID() string {
-	if o == nil {
+func (d *DelayStepResponseDto) GetStepID() string {
+	if d == nil {
 		return ""
 	}
-	return o.StepID
+	return d.StepID
 }
 
-func (o *DelayStepResponseDto) GetID() string {
-	if o == nil {
+func (d *DelayStepResponseDto) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ID
+	return d.ID
 }
 
-func (o *DelayStepResponseDto) GetName() string {
-	if o == nil {
+func (d *DelayStepResponseDto) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return o.Name
+	return d.Name
 }
 
-func (o *DelayStepResponseDto) GetSlug() DelayStepResponseDtoSlug {
-	if o == nil {
-		return DelayStepResponseDtoSlug{}
+func (d *DelayStepResponseDto) GetSlug() string {
+	if d == nil {
+		return ""
 	}
-	return o.Slug
+	return d.Slug
 }
 
-func (o *DelayStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (d *DelayStepResponseDto) GetType() StepTypeEnum {
+	if d == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DelayStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (d *DelayStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if d == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return d.Origin
 }
 
-func (o *DelayStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (d *DelayStepResponseDto) GetWorkflowID() string {
+	if d == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return d.WorkflowID
 }
 
-func (o *DelayStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (d *DelayStepResponseDto) GetWorkflowDatabaseID() string {
+	if d == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return d.WorkflowDatabaseID
 }
 
-func (o *DelayStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (d *DelayStepResponseDto) GetIssues() *StepIssuesDto {
+	if d == nil {
 		return nil
 	}
-	return o.Issues
+	return d.Issues
 }

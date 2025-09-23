@@ -12,18 +12,18 @@ type SubscribersV1ControllerBulkCreateSubscribersRequest struct {
 	BulkSubscriberCreateDto components.BulkSubscriberCreateDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerBulkCreateSubscribersRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerBulkCreateSubscribersRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerBulkCreateSubscribersRequest) GetBulkSubscriberCreateDto() components.BulkSubscriberCreateDto {
-	if o == nil {
+func (s *SubscribersV1ControllerBulkCreateSubscribersRequest) GetBulkSubscriberCreateDto() components.BulkSubscriberCreateDto {
+	if s == nil {
 		return components.BulkSubscriberCreateDto{}
 	}
-	return o.BulkSubscriberCreateDto
+	return s.BulkSubscriberCreateDto
 }
 
 type SubscribersV1ControllerBulkCreateSubscribersResponse struct {
@@ -33,23 +33,23 @@ type SubscribersV1ControllerBulkCreateSubscribersResponse struct {
 	Headers                         map[string][]string
 }
 
-func (o *SubscribersV1ControllerBulkCreateSubscribersResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerBulkCreateSubscribersResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerBulkCreateSubscribersResponse) GetBulkCreateSubscriberResponseDto() *components.BulkCreateSubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerBulkCreateSubscribersResponse) GetBulkCreateSubscriberResponseDto() *components.BulkCreateSubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.BulkCreateSubscriberResponseDto
+	return s.BulkCreateSubscriberResponseDto
 }
 
-func (o *SubscribersV1ControllerBulkCreateSubscribersResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerBulkCreateSubscribersResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

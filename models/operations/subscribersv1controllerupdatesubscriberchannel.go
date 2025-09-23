@@ -13,25 +13,25 @@ type SubscribersV1ControllerUpdateSubscriberChannelRequest struct {
 	UpdateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetUpdateSubscriberChannelRequestDto() components.UpdateSubscriberChannelRequestDto {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetUpdateSubscriberChannelRequestDto() components.UpdateSubscriberChannelRequestDto {
+	if s == nil {
 		return components.UpdateSubscriberChannelRequestDto{}
 	}
-	return o.UpdateSubscriberChannelRequestDto
+	return s.UpdateSubscriberChannelRequestDto
 }
 
 type SubscribersV1ControllerUpdateSubscriberChannelResponse struct {
@@ -41,23 +41,23 @@ type SubscribersV1ControllerUpdateSubscriberChannelResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberResponseDto
+	return s.SubscriberResponseDto
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

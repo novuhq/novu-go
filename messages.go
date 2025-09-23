@@ -15,6 +15,7 @@ import (
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 // Messages - A message in Novu represents a notification delivered to a recipient on a particular channel. Messages contain information about the request that triggered its delivery, a view of the data sent to the recipient, and a timeline of its lifecycle events. Learn more about messages.
@@ -76,6 +77,11 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -426,6 +432,11 @@ func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey 
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -769,6 +780,11 @@ func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID stri
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

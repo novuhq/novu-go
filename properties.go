@@ -14,6 +14,7 @@ import (
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
+	"time"
 )
 
 type Properties struct {
@@ -79,6 +80,11 @@ func (s *Properties) UpdateOnlineFlag(ctx context.Context, subscriberID string, 
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

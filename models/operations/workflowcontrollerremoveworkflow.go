@@ -12,18 +12,18 @@ type WorkflowControllerRemoveWorkflowRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *WorkflowControllerRemoveWorkflowRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerRemoveWorkflowRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerRemoveWorkflowRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerRemoveWorkflowRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
 type WorkflowControllerRemoveWorkflowResponse struct {
@@ -31,16 +31,16 @@ type WorkflowControllerRemoveWorkflowResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *WorkflowControllerRemoveWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerRemoveWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerRemoveWorkflowResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerRemoveWorkflowResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

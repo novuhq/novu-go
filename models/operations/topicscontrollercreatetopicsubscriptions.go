@@ -14,25 +14,25 @@ type TopicsControllerCreateTopicSubscriptionsRequest struct {
 	CreateTopicSubscriptionsRequestDto components.CreateTopicSubscriptionsRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsRequest) GetTopicKey() string {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsRequest) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsRequest) GetCreateTopicSubscriptionsRequestDto() components.CreateTopicSubscriptionsRequestDto {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsRequest) GetCreateTopicSubscriptionsRequestDto() components.CreateTopicSubscriptionsRequestDto {
+	if t == nil {
 		return components.CreateTopicSubscriptionsRequestDto{}
 	}
-	return o.CreateTopicSubscriptionsRequestDto
+	return t.CreateTopicSubscriptionsRequestDto
 }
 
 type TopicsControllerCreateTopicSubscriptionsResponse struct {
@@ -42,23 +42,23 @@ type TopicsControllerCreateTopicSubscriptionsResponse struct {
 	Headers                             map[string][]string
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsResponse) GetCreateTopicSubscriptionsResponseDto() *components.CreateTopicSubscriptionsResponseDto {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetCreateTopicSubscriptionsResponseDto() *components.CreateTopicSubscriptionsResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.CreateTopicSubscriptionsResponseDto
+	return t.CreateTopicSubscriptionsResponseDto
 }
 
-func (o *TopicsControllerCreateTopicSubscriptionsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

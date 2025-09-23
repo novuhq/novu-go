@@ -13,25 +13,25 @@ type SubscribersControllerUpdateSubscriberPreferencesRequest struct {
 	PatchSubscriberPreferencesDto components.PatchSubscriberPreferencesDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesRequest) GetPatchSubscriberPreferencesDto() components.PatchSubscriberPreferencesDto {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesRequest) GetPatchSubscriberPreferencesDto() components.PatchSubscriberPreferencesDto {
+	if s == nil {
 		return components.PatchSubscriberPreferencesDto{}
 	}
-	return o.PatchSubscriberPreferencesDto
+	return s.PatchSubscriberPreferencesDto
 }
 
 type SubscribersControllerUpdateSubscriberPreferencesResponse struct {
@@ -41,23 +41,23 @@ type SubscribersControllerUpdateSubscriberPreferencesResponse struct {
 	Headers                     map[string][]string
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesResponse) GetGetSubscriberPreferencesDto() *components.GetSubscriberPreferencesDto {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesResponse) GetGetSubscriberPreferencesDto() *components.GetSubscriberPreferencesDto {
+	if s == nil {
 		return nil
 	}
-	return o.GetSubscriberPreferencesDto
+	return s.GetSubscriberPreferencesDto
 }
 
-func (o *SubscribersControllerUpdateSubscriberPreferencesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerUpdateSubscriberPreferencesResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

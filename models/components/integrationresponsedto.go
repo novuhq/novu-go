@@ -60,6 +60,8 @@ type IntegrationResponseDto struct {
 	Channel Channel `json:"channel"`
 	// The credentials required for the integration to function, including API keys and other sensitive information.
 	Credentials CredentialsDto `json:"credentials"`
+	// The configurations required for enabling the additional configurations of the integration.
+	Configurations *ConfigurationsDto `json:"configurations,omitempty"`
 	// Indicates whether the integration is currently active. An active integration will process events and messages.
 	Active bool `json:"active"`
 	// Indicates whether the integration has been marked as deleted (soft delete).
@@ -74,100 +76,107 @@ type IntegrationResponseDto struct {
 	Conditions []StepFilterDto `json:"conditions,omitempty"`
 }
 
-func (o *IntegrationResponseDto) GetID() *string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetID() *string {
+	if i == nil {
 		return nil
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *IntegrationResponseDto) GetEnvironmentID() string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetEnvironmentID() string {
+	if i == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return i.EnvironmentID
 }
 
-func (o *IntegrationResponseDto) GetOrganizationID() string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetOrganizationID() string {
+	if i == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return i.OrganizationID
 }
 
-func (o *IntegrationResponseDto) GetName() string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetName() string {
+	if i == nil {
 		return ""
 	}
-	return o.Name
+	return i.Name
 }
 
-func (o *IntegrationResponseDto) GetIdentifier() string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetIdentifier() string {
+	if i == nil {
 		return ""
 	}
-	return o.Identifier
+	return i.Identifier
 }
 
-func (o *IntegrationResponseDto) GetProviderID() string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetProviderID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ProviderID
+	return i.ProviderID
 }
 
-func (o *IntegrationResponseDto) GetChannel() Channel {
-	if o == nil {
+func (i *IntegrationResponseDto) GetChannel() Channel {
+	if i == nil {
 		return Channel("")
 	}
-	return o.Channel
+	return i.Channel
 }
 
-func (o *IntegrationResponseDto) GetCredentials() CredentialsDto {
-	if o == nil {
+func (i *IntegrationResponseDto) GetCredentials() CredentialsDto {
+	if i == nil {
 		return CredentialsDto{}
 	}
-	return o.Credentials
+	return i.Credentials
 }
 
-func (o *IntegrationResponseDto) GetActive() bool {
-	if o == nil {
-		return false
-	}
-	return o.Active
-}
-
-func (o *IntegrationResponseDto) GetDeleted() bool {
-	if o == nil {
-		return false
-	}
-	return o.Deleted
-}
-
-func (o *IntegrationResponseDto) GetDeletedAt() *string {
-	if o == nil {
+func (i *IntegrationResponseDto) GetConfigurations() *ConfigurationsDto {
+	if i == nil {
 		return nil
 	}
-	return o.DeletedAt
+	return i.Configurations
 }
 
-func (o *IntegrationResponseDto) GetDeletedBy() *string {
-	if o == nil {
-		return nil
-	}
-	return o.DeletedBy
-}
-
-func (o *IntegrationResponseDto) GetPrimary() bool {
-	if o == nil {
+func (i *IntegrationResponseDto) GetActive() bool {
+	if i == nil {
 		return false
 	}
-	return o.Primary
+	return i.Active
 }
 
-func (o *IntegrationResponseDto) GetConditions() []StepFilterDto {
-	if o == nil {
+func (i *IntegrationResponseDto) GetDeleted() bool {
+	if i == nil {
+		return false
+	}
+	return i.Deleted
+}
+
+func (i *IntegrationResponseDto) GetDeletedAt() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Conditions
+	return i.DeletedAt
+}
+
+func (i *IntegrationResponseDto) GetDeletedBy() *string {
+	if i == nil {
+		return nil
+	}
+	return i.DeletedBy
+}
+
+func (i *IntegrationResponseDto) GetPrimary() bool {
+	if i == nil {
+		return false
+	}
+	return i.Primary
+}
+
+func (i *IntegrationResponseDto) GetConditions() []StepFilterDto {
+	if i == nil {
+		return nil
+	}
+	return i.Conditions
 }

@@ -8,59 +8,59 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-type ContentType string
+type MessageResponseDtoContentType string
 
 const (
-	ContentTypeArrayOfEmailBlock ContentType = "arrayOfEmailBlock"
-	ContentTypeStr               ContentType = "str"
+	MessageResponseDtoContentTypeArrayOfEmailBlock MessageResponseDtoContentType = "arrayOfEmailBlock"
+	MessageResponseDtoContentTypeStr               MessageResponseDtoContentType = "str"
 )
 
-// Content of the message, can be an email block or a string
-type Content struct {
-	ArrayOfEmailBlock []EmailBlock `queryParam:"inline"`
-	Str               *string      `queryParam:"inline"`
+// MessageResponseDtoContent - Content of the message, can be an email block or a string
+type MessageResponseDtoContent struct {
+	ArrayOfEmailBlock []EmailBlock `queryParam:"inline" name:"content"`
+	Str               *string      `queryParam:"inline" name:"content"`
 
-	Type ContentType
+	Type MessageResponseDtoContentType
 }
 
-func CreateContentArrayOfEmailBlock(arrayOfEmailBlock []EmailBlock) Content {
-	typ := ContentTypeArrayOfEmailBlock
+func CreateMessageResponseDtoContentArrayOfEmailBlock(arrayOfEmailBlock []EmailBlock) MessageResponseDtoContent {
+	typ := MessageResponseDtoContentTypeArrayOfEmailBlock
 
-	return Content{
+	return MessageResponseDtoContent{
 		ArrayOfEmailBlock: arrayOfEmailBlock,
 		Type:              typ,
 	}
 }
 
-func CreateContentStr(str string) Content {
-	typ := ContentTypeStr
+func CreateMessageResponseDtoContentStr(str string) MessageResponseDtoContent {
+	typ := MessageResponseDtoContentTypeStr
 
-	return Content{
+	return MessageResponseDtoContent{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func (u *Content) UnmarshalJSON(data []byte) error {
+func (u *MessageResponseDtoContent) UnmarshalJSON(data []byte) error {
 
 	var arrayOfEmailBlock []EmailBlock = []EmailBlock{}
-	if err := utils.UnmarshalJSON(data, &arrayOfEmailBlock, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfEmailBlock, "", true, nil); err == nil {
 		u.ArrayOfEmailBlock = arrayOfEmailBlock
-		u.Type = ContentTypeArrayOfEmailBlock
+		u.Type = MessageResponseDtoContentTypeArrayOfEmailBlock
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ContentTypeStr
+		u.Type = MessageResponseDtoContentTypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Content", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MessageResponseDtoContent", string(data))
 }
 
-func (u Content) MarshalJSON() ([]byte, error) {
+func (u MessageResponseDtoContent) MarshalJSON() ([]byte, error) {
 	if u.ArrayOfEmailBlock != nil {
 		return utils.MarshalJSON(u.ArrayOfEmailBlock, "", true)
 	}
@@ -69,7 +69,7 @@ func (u Content) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Content: all fields are null")
+	return nil, errors.New("could not marshal union type MessageResponseDtoContent: all fields are null")
 }
 
 // MessageResponseDtoPayload - The payload that was used to send the notification trigger
@@ -84,11 +84,11 @@ type MessageResponseDto struct {
 	// Unique identifier for the message
 	ID *string `json:"_id,omitempty"`
 	// Template ID associated with the message
-	TemplateID string `json:"_templateId"`
+	TemplateID *string `json:"_templateId,omitempty"`
 	// Environment ID where the message is sent
 	EnvironmentID string `json:"_environmentId"`
 	// Message template ID
-	MessageTemplateID string `json:"_messageTemplateId"`
+	MessageTemplateID *string `json:"_messageTemplateId,omitempty"`
 	// Organization ID associated with the message
 	OrganizationID string `json:"_organizationId"`
 	// Notification ID associated with the message
@@ -110,7 +110,7 @@ type MessageResponseDto struct {
 	// Last read date of the message, if available
 	LastReadDate *string `json:"lastReadDate,omitempty"`
 	// Content of the message, can be an email block or a string
-	Content Content `json:"content"`
+	Content *MessageResponseDtoContent `json:"content,omitempty"`
 	// Transaction ID associated with the message
 	TransactionID string `json:"transactionId"`
 	// Subject of the message, if applicable
@@ -151,240 +151,240 @@ type MessageResponseDto struct {
 	Overrides *MessageResponseDtoOverrides `json:"overrides,omitempty"`
 }
 
-func (o *MessageResponseDto) GetID() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.ID
+	return m.ID
 }
 
-func (o *MessageResponseDto) GetTemplateID() string {
-	if o == nil {
-		return ""
-	}
-	return o.TemplateID
-}
-
-func (o *MessageResponseDto) GetEnvironmentID() string {
-	if o == nil {
-		return ""
-	}
-	return o.EnvironmentID
-}
-
-func (o *MessageResponseDto) GetMessageTemplateID() string {
-	if o == nil {
-		return ""
-	}
-	return o.MessageTemplateID
-}
-
-func (o *MessageResponseDto) GetOrganizationID() string {
-	if o == nil {
-		return ""
-	}
-	return o.OrganizationID
-}
-
-func (o *MessageResponseDto) GetNotificationID() string {
-	if o == nil {
-		return ""
-	}
-	return o.NotificationID
-}
-
-func (o *MessageResponseDto) GetSubscriberID() string {
-	if o == nil {
-		return ""
-	}
-	return o.SubscriberID
-}
-
-func (o *MessageResponseDto) GetSubscriber() *SubscriberResponseDto {
-	if o == nil {
+func (m *MessageResponseDto) GetTemplateID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Subscriber
+	return m.TemplateID
 }
 
-func (o *MessageResponseDto) GetTemplate() *WorkflowResponse {
-	if o == nil {
-		return nil
-	}
-	return o.Template
-}
-
-func (o *MessageResponseDto) GetTemplateIdentifier() *string {
-	if o == nil {
-		return nil
-	}
-	return o.TemplateIdentifier
-}
-
-func (o *MessageResponseDto) GetCreatedAt() string {
-	if o == nil {
+func (m *MessageResponseDto) GetEnvironmentID() string {
+	if m == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return m.EnvironmentID
 }
 
-func (o *MessageResponseDto) GetDeliveredAt() []string {
-	if o == nil {
+func (m *MessageResponseDto) GetMessageTemplateID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.DeliveredAt
+	return m.MessageTemplateID
 }
 
-func (o *MessageResponseDto) GetLastSeenDate() *string {
-	if o == nil {
-		return nil
-	}
-	return o.LastSeenDate
-}
-
-func (o *MessageResponseDto) GetLastReadDate() *string {
-	if o == nil {
-		return nil
-	}
-	return o.LastReadDate
-}
-
-func (o *MessageResponseDto) GetContent() Content {
-	if o == nil {
-		return Content{}
-	}
-	return o.Content
-}
-
-func (o *MessageResponseDto) GetTransactionID() string {
-	if o == nil {
+func (m *MessageResponseDto) GetOrganizationID() string {
+	if m == nil {
 		return ""
 	}
-	return o.TransactionID
+	return m.OrganizationID
 }
 
-func (o *MessageResponseDto) GetSubject() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetNotificationID() string {
+	if m == nil {
+		return ""
+	}
+	return m.NotificationID
+}
+
+func (m *MessageResponseDto) GetSubscriberID() string {
+	if m == nil {
+		return ""
+	}
+	return m.SubscriberID
+}
+
+func (m *MessageResponseDto) GetSubscriber() *SubscriberResponseDto {
+	if m == nil {
 		return nil
 	}
-	return o.Subject
+	return m.Subscriber
 }
 
-func (o *MessageResponseDto) GetChannel() ChannelTypeEnum {
-	if o == nil {
+func (m *MessageResponseDto) GetTemplate() *WorkflowResponse {
+	if m == nil {
+		return nil
+	}
+	return m.Template
+}
+
+func (m *MessageResponseDto) GetTemplateIdentifier() *string {
+	if m == nil {
+		return nil
+	}
+	return m.TemplateIdentifier
+}
+
+func (m *MessageResponseDto) GetCreatedAt() string {
+	if m == nil {
+		return ""
+	}
+	return m.CreatedAt
+}
+
+func (m *MessageResponseDto) GetDeliveredAt() []string {
+	if m == nil {
+		return nil
+	}
+	return m.DeliveredAt
+}
+
+func (m *MessageResponseDto) GetLastSeenDate() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LastSeenDate
+}
+
+func (m *MessageResponseDto) GetLastReadDate() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LastReadDate
+}
+
+func (m *MessageResponseDto) GetContent() *MessageResponseDtoContent {
+	if m == nil {
+		return nil
+	}
+	return m.Content
+}
+
+func (m *MessageResponseDto) GetTransactionID() string {
+	if m == nil {
+		return ""
+	}
+	return m.TransactionID
+}
+
+func (m *MessageResponseDto) GetSubject() *string {
+	if m == nil {
+		return nil
+	}
+	return m.Subject
+}
+
+func (m *MessageResponseDto) GetChannel() ChannelTypeEnum {
+	if m == nil {
 		return ChannelTypeEnum("")
 	}
-	return o.Channel
+	return m.Channel
 }
 
-func (o *MessageResponseDto) GetRead() bool {
-	if o == nil {
+func (m *MessageResponseDto) GetRead() bool {
+	if m == nil {
 		return false
 	}
-	return o.Read
+	return m.Read
 }
 
-func (o *MessageResponseDto) GetSeen() bool {
-	if o == nil {
+func (m *MessageResponseDto) GetSeen() bool {
+	if m == nil {
 		return false
 	}
-	return o.Seen
+	return m.Seen
 }
 
-func (o *MessageResponseDto) GetSnoozedUntil() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetSnoozedUntil() *string {
+	if m == nil {
 		return nil
 	}
-	return o.SnoozedUntil
+	return m.SnoozedUntil
 }
 
-func (o *MessageResponseDto) GetEmail() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetEmail() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Email
+	return m.Email
 }
 
-func (o *MessageResponseDto) GetPhone() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetPhone() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Phone
+	return m.Phone
 }
 
-func (o *MessageResponseDto) GetDirectWebhookURL() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetDirectWebhookURL() *string {
+	if m == nil {
 		return nil
 	}
-	return o.DirectWebhookURL
+	return m.DirectWebhookURL
 }
 
-func (o *MessageResponseDto) GetProviderID() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetProviderID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.ProviderID
+	return m.ProviderID
 }
 
-func (o *MessageResponseDto) GetDeviceTokens() []string {
-	if o == nil {
+func (m *MessageResponseDto) GetDeviceTokens() []string {
+	if m == nil {
 		return nil
 	}
-	return o.DeviceTokens
+	return m.DeviceTokens
 }
 
-func (o *MessageResponseDto) GetTitle() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetTitle() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Title
+	return m.Title
 }
 
-func (o *MessageResponseDto) GetCta() MessageCTA {
-	if o == nil {
+func (m *MessageResponseDto) GetCta() MessageCTA {
+	if m == nil {
 		return MessageCTA{}
 	}
-	return o.Cta
+	return m.Cta
 }
 
-func (o *MessageResponseDto) GetFeedID() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetFeedID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.FeedID
+	return m.FeedID
 }
 
-func (o *MessageResponseDto) GetStatus() MessageStatusEnum {
-	if o == nil {
+func (m *MessageResponseDto) GetStatus() MessageStatusEnum {
+	if m == nil {
 		return MessageStatusEnum("")
 	}
-	return o.Status
+	return m.Status
 }
 
-func (o *MessageResponseDto) GetErrorID() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetErrorID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.ErrorID
+	return m.ErrorID
 }
 
-func (o *MessageResponseDto) GetErrorText() *string {
-	if o == nil {
+func (m *MessageResponseDto) GetErrorText() *string {
+	if m == nil {
 		return nil
 	}
-	return o.ErrorText
+	return m.ErrorText
 }
 
-func (o *MessageResponseDto) GetPayload() *MessageResponseDtoPayload {
-	if o == nil {
+func (m *MessageResponseDto) GetPayload() *MessageResponseDtoPayload {
+	if m == nil {
 		return nil
 	}
-	return o.Payload
+	return m.Payload
 }
 
-func (o *MessageResponseDto) GetOverrides() *MessageResponseDtoOverrides {
-	if o == nil {
+func (m *MessageResponseDto) GetOverrides() *MessageResponseDtoOverrides {
+	if m == nil {
 		return nil
 	}
-	return o.Overrides
+	return m.Overrides
 }

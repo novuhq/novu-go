@@ -13,30 +13,30 @@ type SubscriberPreferencesWorkflowInfoDto struct {
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
-func (o *SubscriberPreferencesWorkflowInfoDto) GetSlug() string {
-	if o == nil {
+func (s *SubscriberPreferencesWorkflowInfoDto) GetSlug() string {
+	if s == nil {
 		return ""
 	}
-	return o.Slug
+	return s.Slug
 }
 
-func (o *SubscriberPreferencesWorkflowInfoDto) GetIdentifier() string {
-	if o == nil {
+func (s *SubscriberPreferencesWorkflowInfoDto) GetIdentifier() string {
+	if s == nil {
 		return ""
 	}
-	return o.Identifier
+	return s.Identifier
 }
 
-func (o *SubscriberPreferencesWorkflowInfoDto) GetName() string {
-	if o == nil {
+func (s *SubscriberPreferencesWorkflowInfoDto) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *SubscriberPreferencesWorkflowInfoDto) GetUpdatedAt() *string {
-	if o == nil {
+func (s *SubscriberPreferencesWorkflowInfoDto) GetUpdatedAt() *string {
+	if s == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return s.UpdatedAt
 }

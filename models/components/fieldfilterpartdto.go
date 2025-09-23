@@ -102,30 +102,30 @@ type FieldFilterPartDto struct {
 	On       On       `json:"on"`
 }
 
-func (o *FieldFilterPartDto) GetField() string {
-	if o == nil {
+func (f *FieldFilterPartDto) GetField() string {
+	if f == nil {
 		return ""
 	}
-	return o.Field
+	return f.Field
 }
 
-func (o *FieldFilterPartDto) GetValue() string {
-	if o == nil {
+func (f *FieldFilterPartDto) GetValue() string {
+	if f == nil {
 		return ""
 	}
-	return o.Value
+	return f.Value
 }
 
-func (o *FieldFilterPartDto) GetOperator() Operator {
-	if o == nil {
+func (f *FieldFilterPartDto) GetOperator() Operator {
+	if f == nil {
 		return Operator("")
 	}
-	return o.Operator
+	return f.Operator
 }
 
-func (o *FieldFilterPartDto) GetOn() On {
-	if o == nil {
+func (f *FieldFilterPartDto) GetOn() On {
+	if f == nil {
 		return On("")
 	}
-	return o.On
+	return f.On
 }

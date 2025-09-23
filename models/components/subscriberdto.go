@@ -17,44 +17,44 @@ type SubscriberDto struct {
 	Email *string `json:"email,omitempty"`
 }
 
-func (o *SubscriberDto) GetID() string {
-	if o == nil {
+func (s *SubscriberDto) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *SubscriberDto) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscriberDto) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscriberDto) GetAvatar() *string {
-	if o == nil {
+func (s *SubscriberDto) GetAvatar() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Avatar
+	return s.Avatar
 }
 
-func (o *SubscriberDto) GetFirstName() *string {
-	if o == nil {
+func (s *SubscriberDto) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *SubscriberDto) GetLastName() *string {
-	if o == nil {
+func (s *SubscriberDto) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *SubscriberDto) GetEmail() *string {
-	if o == nil {
+func (s *SubscriberDto) GetEmail() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }

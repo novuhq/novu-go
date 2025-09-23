@@ -22,42 +22,38 @@ func (p PushStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PushStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *PushStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (p *PushStepResponseDtoControlValues) GetSkip() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.Skip
+	return p.Skip
 }
 
-func (o *PushStepResponseDtoControlValues) GetSubject() *string {
-	if o == nil {
+func (p *PushStepResponseDtoControlValues) GetSubject() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Subject
+	return p.Subject
 }
 
-func (o *PushStepResponseDtoControlValues) GetBody() *string {
-	if o == nil {
+func (p *PushStepResponseDtoControlValues) GetBody() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Body
+	return p.Body
 }
 
-func (o *PushStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (p *PushStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// PushStepResponseDtoSlug - Slug of the step
-type PushStepResponseDtoSlug struct {
+	return p.AdditionalProperties
 }
 
 type PushStepResponseDto struct {
@@ -74,11 +70,11 @@ type PushStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug PushStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -87,86 +83,97 @@ type PushStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *PushStepResponseDto) GetControls() PushControlsMetadataResponseDto {
-	if o == nil {
+func (p PushStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PushStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p *PushStepResponseDto) GetControls() PushControlsMetadataResponseDto {
+	if p == nil {
 		return PushControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return p.Controls
 }
 
-func (o *PushStepResponseDto) GetControlValues() *PushStepResponseDtoControlValues {
-	if o == nil {
+func (p *PushStepResponseDto) GetControlValues() *PushStepResponseDtoControlValues {
+	if p == nil {
 		return nil
 	}
-	return o.ControlValues
+	return p.ControlValues
 }
 
-func (o *PushStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (p *PushStepResponseDto) GetVariables() map[string]any {
+	if p == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return p.Variables
 }
 
-func (o *PushStepResponseDto) GetStepID() string {
-	if o == nil {
+func (p *PushStepResponseDto) GetStepID() string {
+	if p == nil {
 		return ""
 	}
-	return o.StepID
+	return p.StepID
 }
 
-func (o *PushStepResponseDto) GetID() string {
-	if o == nil {
+func (p *PushStepResponseDto) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PushStepResponseDto) GetName() string {
-	if o == nil {
+func (p *PushStepResponseDto) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *PushStepResponseDto) GetSlug() PushStepResponseDtoSlug {
-	if o == nil {
-		return PushStepResponseDtoSlug{}
+func (p *PushStepResponseDto) GetSlug() string {
+	if p == nil {
+		return ""
 	}
-	return o.Slug
+	return p.Slug
 }
 
-func (o *PushStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (p *PushStepResponseDto) GetType() StepTypeEnum {
+	if p == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return p.Type
 }
 
-func (o *PushStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (p *PushStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if p == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return p.Origin
 }
 
-func (o *PushStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (p *PushStepResponseDto) GetWorkflowID() string {
+	if p == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return p.WorkflowID
 }
 
-func (o *PushStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (p *PushStepResponseDto) GetWorkflowDatabaseID() string {
+	if p == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return p.WorkflowDatabaseID
 }
 
-func (o *PushStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (p *PushStepResponseDto) GetIssues() *StepIssuesDto {
+	if p == nil {
 		return nil
 	}
-	return o.Issues
+	return p.Issues
 }

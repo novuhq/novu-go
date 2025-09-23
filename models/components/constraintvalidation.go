@@ -18,10 +18,10 @@ const (
 )
 
 type Five struct {
-	Str      *string        `queryParam:"inline"`
-	Number   *float64       `queryParam:"inline"`
-	Boolean  *bool          `queryParam:"inline"`
-	MapOfAny map[string]any `queryParam:"inline"`
+	Str      *string        `queryParam:"inline" name:"five"`
+	Number   *float64       `queryParam:"inline" name:"five"`
+	Boolean  *bool          `queryParam:"inline" name:"five"`
+	MapOfAny map[string]any `queryParam:"inline" name:"five"`
 
 	Type FiveType
 }
@@ -65,28 +65,28 @@ func CreateFiveMapOfAny(mapOfAny map[string]any) Five {
 func (u *Five) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = FiveTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = FiveTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = FiveTypeBoolean
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = FiveTypeMapOfAny
 		return nil
@@ -118,6 +118,17 @@ func (u Five) MarshalJSON() ([]byte, error) {
 type Four struct {
 }
 
+func (f Four) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(f, "", false)
+}
+
+func (f *Four) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &f, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
 type ValueType string
 
 const (
@@ -130,11 +141,11 @@ const (
 
 // Value that failed validation
 type Value struct {
-	Str      *string  `queryParam:"inline"`
-	Number   *float64 `queryParam:"inline"`
-	Boolean  *bool    `queryParam:"inline"`
-	Four     *Four    `queryParam:"inline"`
-	ArrayOf5 []*Five  `queryParam:"inline"`
+	Str      *string  `queryParam:"inline" name:"value"`
+	Number   *float64 `queryParam:"inline" name:"value"`
+	Boolean  *bool    `queryParam:"inline" name:"value"`
+	Four     *Four    `queryParam:"inline" name:"value"`
+	ArrayOf5 []*Five  `queryParam:"inline" name:"value"`
 
 	Type ValueType
 }
@@ -187,35 +198,35 @@ func CreateValueArrayOf5(arrayOf5 []*Five) Value {
 func (u *Value) UnmarshalJSON(data []byte) error {
 
 	var four Four = Four{}
-	if err := utils.UnmarshalJSON(data, &four, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &four, "", true, nil); err == nil {
 		u.Four = &four
 		u.Type = ValueTypeFour
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = ValueTypeStr
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = ValueTypeNumber
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = ValueTypeBoolean
 		return nil
 	}
 
 	var arrayOf5 []*Five = []*Five{}
-	if err := utils.UnmarshalJSON(data, &arrayOf5, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOf5, "", true, nil); err == nil {
 		u.ArrayOf5 = arrayOf5
 		u.Type = ValueTypeArrayOf5
 		return nil
@@ -255,16 +266,16 @@ type ConstraintValidation struct {
 	Value *Value `json:"value,omitempty"`
 }
 
-func (o *ConstraintValidation) GetMessages() []string {
-	if o == nil {
+func (c *ConstraintValidation) GetMessages() []string {
+	if c == nil {
 		return []string{}
 	}
-	return o.Messages
+	return c.Messages
 }
 
-func (o *ConstraintValidation) GetValue() *Value {
-	if o == nil {
+func (c *ConstraintValidation) GetValue() *Value {
+	if c == nil {
 		return nil
 	}
-	return o.Value
+	return c.Value
 }

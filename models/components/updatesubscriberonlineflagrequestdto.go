@@ -6,9 +6,9 @@ type UpdateSubscriberOnlineFlagRequestDto struct {
 	IsOnline bool `json:"isOnline"`
 }
 
-func (o *UpdateSubscriberOnlineFlagRequestDto) GetIsOnline() bool {
-	if o == nil {
+func (u *UpdateSubscriberOnlineFlagRequestDto) GetIsOnline() bool {
+	if u == nil {
 		return false
 	}
-	return o.IsOnline
+	return u.IsOnline
 }

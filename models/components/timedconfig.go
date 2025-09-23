@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type WeekDays string
@@ -171,44 +172,55 @@ type TimedConfig struct {
 	MonthlyType  *MonthlyType  `json:"monthlyType,omitempty"`
 }
 
-func (o *TimedConfig) GetAtTime() *string {
-	if o == nil {
-		return nil
-	}
-	return o.AtTime
+func (t TimedConfig) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TimedConfig) GetWeekDays() []WeekDays {
-	if o == nil {
-		return nil
+func (t *TimedConfig) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.WeekDays
+	return nil
 }
 
-func (o *TimedConfig) GetMonthDays() []string {
-	if o == nil {
+func (t *TimedConfig) GetAtTime() *string {
+	if t == nil {
 		return nil
 	}
-	return o.MonthDays
+	return t.AtTime
 }
 
-func (o *TimedConfig) GetOrdinal() *Ordinal {
-	if o == nil {
+func (t *TimedConfig) GetWeekDays() []WeekDays {
+	if t == nil {
 		return nil
 	}
-	return o.Ordinal
+	return t.WeekDays
 }
 
-func (o *TimedConfig) GetOrdinalValue() *OrdinalValue {
-	if o == nil {
+func (t *TimedConfig) GetMonthDays() []string {
+	if t == nil {
 		return nil
 	}
-	return o.OrdinalValue
+	return t.MonthDays
 }
 
-func (o *TimedConfig) GetMonthlyType() *MonthlyType {
-	if o == nil {
+func (t *TimedConfig) GetOrdinal() *Ordinal {
+	if t == nil {
 		return nil
 	}
-	return o.MonthlyType
+	return t.Ordinal
+}
+
+func (t *TimedConfig) GetOrdinalValue() *OrdinalValue {
+	if t == nil {
+		return nil
+	}
+	return t.OrdinalValue
+}
+
+func (t *TimedConfig) GetMonthlyType() *MonthlyType {
+	if t == nil {
+		return nil
+	}
+	return t.MonthlyType
 }

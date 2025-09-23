@@ -32,71 +32,71 @@ func (i InAppControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InAppControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *InAppControlDto) GetSkip() map[string]any {
-	if o == nil {
+func (i *InAppControlDto) GetSkip() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.Skip
+	return i.Skip
 }
 
-func (o *InAppControlDto) GetBody() *string {
-	if o == nil {
+func (i *InAppControlDto) GetBody() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Body
+	return i.Body
 }
 
-func (o *InAppControlDto) GetSubject() *string {
-	if o == nil {
+func (i *InAppControlDto) GetSubject() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Subject
+	return i.Subject
 }
 
-func (o *InAppControlDto) GetAvatar() *string {
-	if o == nil {
+func (i *InAppControlDto) GetAvatar() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Avatar
+	return i.Avatar
 }
 
-func (o *InAppControlDto) GetPrimaryAction() *ActionDto {
-	if o == nil {
+func (i *InAppControlDto) GetPrimaryAction() *ActionDto {
+	if i == nil {
 		return nil
 	}
-	return o.PrimaryAction
+	return i.PrimaryAction
 }
 
-func (o *InAppControlDto) GetSecondaryAction() *ActionDto {
-	if o == nil {
+func (i *InAppControlDto) GetSecondaryAction() *ActionDto {
+	if i == nil {
 		return nil
 	}
-	return o.SecondaryAction
+	return i.SecondaryAction
 }
 
-func (o *InAppControlDto) GetRedirect() *RedirectDto {
-	if o == nil {
+func (i *InAppControlDto) GetRedirect() *RedirectDto {
+	if i == nil {
 		return nil
 	}
-	return o.Redirect
+	return i.Redirect
 }
 
-func (o *InAppControlDto) GetDisableOutputSanitization() *bool {
-	if o == nil {
+func (i *InAppControlDto) GetDisableOutputSanitization() *bool {
+	if i == nil {
 		return nil
 	}
-	return o.DisableOutputSanitization
+	return i.DisableOutputSanitization
 }
 
-func (o *InAppControlDto) GetData() map[string]any {
-	if o == nil {
+func (i *InAppControlDto) GetData() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.Data
+	return i.Data
 }

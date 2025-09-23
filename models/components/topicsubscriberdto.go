@@ -17,44 +17,44 @@ type TopicSubscriberDto struct {
 	ExternalSubscriberID string `json:"externalSubscriberId"`
 }
 
-func (o *TopicSubscriberDto) GetOrganizationID() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetOrganizationID() string {
+	if t == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return t.OrganizationID
 }
 
-func (o *TopicSubscriberDto) GetEnvironmentID() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetEnvironmentID() string {
+	if t == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return t.EnvironmentID
 }
 
-func (o *TopicSubscriberDto) GetSubscriberID() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetSubscriberID() string {
+	if t == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return t.SubscriberID
 }
 
-func (o *TopicSubscriberDto) GetTopicID() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetTopicID() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicID
+	return t.TopicID
 }
 
-func (o *TopicSubscriberDto) GetTopicKey() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicSubscriberDto) GetExternalSubscriberID() string {
-	if o == nil {
+func (t *TopicSubscriberDto) GetExternalSubscriberID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ExternalSubscriberID
+	return t.ExternalSubscriberID
 }

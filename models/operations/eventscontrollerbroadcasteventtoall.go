@@ -12,18 +12,18 @@ type EventsControllerBroadcastEventToAllRequest struct {
 	TriggerEventToAllRequestDto components.TriggerEventToAllRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *EventsControllerBroadcastEventToAllRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EventsControllerBroadcastEventToAllRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
-func (o *EventsControllerBroadcastEventToAllRequest) GetTriggerEventToAllRequestDto() components.TriggerEventToAllRequestDto {
-	if o == nil {
+func (e *EventsControllerBroadcastEventToAllRequest) GetTriggerEventToAllRequestDto() components.TriggerEventToAllRequestDto {
+	if e == nil {
 		return components.TriggerEventToAllRequestDto{}
 	}
-	return o.TriggerEventToAllRequestDto
+	return e.TriggerEventToAllRequestDto
 }
 
 type EventsControllerBroadcastEventToAllResponse struct {
@@ -33,23 +33,23 @@ type EventsControllerBroadcastEventToAllResponse struct {
 	Headers                 map[string][]string
 }
 
-func (o *EventsControllerBroadcastEventToAllResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EventsControllerBroadcastEventToAllResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EventsControllerBroadcastEventToAllResponse) GetTriggerEventResponseDto() *components.TriggerEventResponseDto {
-	if o == nil {
+func (e *EventsControllerBroadcastEventToAllResponse) GetTriggerEventResponseDto() *components.TriggerEventResponseDto {
+	if e == nil {
 		return nil
 	}
-	return o.TriggerEventResponseDto
+	return e.TriggerEventResponseDto
 }
 
-func (o *EventsControllerBroadcastEventToAllResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EventsControllerBroadcastEventToAllResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

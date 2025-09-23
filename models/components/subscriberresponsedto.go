@@ -47,142 +47,142 @@ type SubscriberResponseDto struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
-func (o *SubscriberResponseDto) GetID() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *SubscriberResponseDto) GetFirstName() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *SubscriberResponseDto) GetLastName() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *SubscriberResponseDto) GetEmail() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetEmail() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }
 
-func (o *SubscriberResponseDto) GetPhone() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetPhone() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Phone
+	return s.Phone
 }
 
-func (o *SubscriberResponseDto) GetAvatar() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetAvatar() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Avatar
+	return s.Avatar
 }
 
-func (o *SubscriberResponseDto) GetLocale() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetLocale() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Locale
+	return s.Locale
 }
 
-func (o *SubscriberResponseDto) GetChannels() []ChannelSettingsDto {
-	if o == nil {
+func (s *SubscriberResponseDto) GetChannels() []ChannelSettingsDto {
+	if s == nil {
 		return nil
 	}
-	return o.Channels
+	return s.Channels
 }
 
-func (o *SubscriberResponseDto) GetTopics() []string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetTopics() []string {
+	if s == nil {
 		return nil
 	}
-	return o.Topics
+	return s.Topics
 }
 
-func (o *SubscriberResponseDto) GetIsOnline() *bool {
-	if o == nil {
+func (s *SubscriberResponseDto) GetIsOnline() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.IsOnline
+	return s.IsOnline
 }
 
-func (o *SubscriberResponseDto) GetLastOnlineAt() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetLastOnlineAt() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastOnlineAt
+	return s.LastOnlineAt
 }
 
-func (o *SubscriberResponseDto) GetV() *float64 {
-	if o == nil {
+func (s *SubscriberResponseDto) GetV() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.V
+	return s.V
 }
 
-func (o *SubscriberResponseDto) GetData() map[string]any {
-	if o == nil {
+func (s *SubscriberResponseDto) GetData() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.Data
+	return s.Data
 }
 
-func (o *SubscriberResponseDto) GetTimezone() *string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetTimezone() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Timezone
+	return s.Timezone
 }
 
-func (o *SubscriberResponseDto) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscriberResponseDto) GetOrganizationID() string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetOrganizationID() string {
+	if s == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return s.OrganizationID
 }
 
-func (o *SubscriberResponseDto) GetEnvironmentID() string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetEnvironmentID() string {
+	if s == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return s.EnvironmentID
 }
 
-func (o *SubscriberResponseDto) GetDeleted() bool {
-	if o == nil {
+func (s *SubscriberResponseDto) GetDeleted() bool {
+	if s == nil {
 		return false
 	}
-	return o.Deleted
+	return s.Deleted
 }
 
-func (o *SubscriberResponseDto) GetCreatedAt() string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetCreatedAt() string {
+	if s == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return s.CreatedAt
 }
 
-func (o *SubscriberResponseDto) GetUpdatedAt() string {
-	if o == nil {
+func (s *SubscriberResponseDto) GetUpdatedAt() string {
+	if s == nil {
 		return ""
 	}
-	return o.UpdatedAt
+	return s.UpdatedAt
 }

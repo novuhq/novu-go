@@ -2,18 +2,6 @@
 
 package components
 
-// ActivityNotificationResponseDtoPayload - Payload of the notification
-type ActivityNotificationResponseDtoPayload struct {
-}
-
-// Controls associated with the notification
-type Controls struct {
-}
-
-// ActivityNotificationResponseDtoTo - To field for subscriber definition
-type ActivityNotificationResponseDtoTo struct {
-}
-
 type ActivityNotificationResponseDto struct {
 	// Unique identifier of the notification
 	ID *string `json:"_id,omitempty"`
@@ -41,139 +29,157 @@ type ActivityNotificationResponseDto struct {
 	// Jobs of the notification
 	Jobs []ActivityNotificationJobResponseDto `json:"jobs,omitempty"`
 	// Payload of the notification
-	Payload *ActivityNotificationResponseDtoPayload `json:"payload,omitempty"`
+	Payload map[string]any `json:"payload,omitempty"`
 	// Tags associated with the notification
 	Tags []string `json:"tags,omitempty"`
 	// Controls associated with the notification
-	Controls *Controls `json:"controls,omitempty"`
+	Controls map[string]any `json:"controls,omitempty"`
 	// To field for subscriber definition
-	To *ActivityNotificationResponseDtoTo `json:"to,omitempty"`
+	To map[string]any `json:"to,omitempty"`
 	// Topics of the notification
 	Topics []ActivityTopicDto `json:"topics,omitempty"`
+	// Severity of the workflow
+	Severity *SeverityLevelEnum `json:"severity,omitempty"`
+	// Criticality of the notification
+	Critical *bool `json:"critical,omitempty"`
 }
 
-func (o *ActivityNotificationResponseDto) GetID() *string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityNotificationResponseDto) GetEnvironmentID() string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetEnvironmentID() string {
+	if a == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return a.EnvironmentID
 }
 
-func (o *ActivityNotificationResponseDto) GetOrganizationID() string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetOrganizationID() string {
+	if a == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return a.OrganizationID
 }
 
-func (o *ActivityNotificationResponseDto) GetSubscriberID() string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetSubscriberID() string {
+	if a == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return a.SubscriberID
 }
 
-func (o *ActivityNotificationResponseDto) GetTransactionID() string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTransactionID() string {
+	if a == nil {
 		return ""
 	}
-	return o.TransactionID
+	return a.TransactionID
 }
 
-func (o *ActivityNotificationResponseDto) GetTemplateID() *string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTemplateID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TemplateID
+	return a.TemplateID
 }
 
-func (o *ActivityNotificationResponseDto) GetDigestedNotificationID() *string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetDigestedNotificationID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DigestedNotificationID
+	return a.DigestedNotificationID
 }
 
-func (o *ActivityNotificationResponseDto) GetCreatedAt() *string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetCreatedAt() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *ActivityNotificationResponseDto) GetUpdatedAt() *string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetUpdatedAt() *string {
+	if a == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return a.UpdatedAt
 }
 
-func (o *ActivityNotificationResponseDto) GetChannels() []StepTypeEnum {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetChannels() []StepTypeEnum {
+	if a == nil {
 		return nil
 	}
-	return o.Channels
+	return a.Channels
 }
 
-func (o *ActivityNotificationResponseDto) GetSubscriber() *ActivityNotificationSubscriberResponseDto {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetSubscriber() *ActivityNotificationSubscriberResponseDto {
+	if a == nil {
 		return nil
 	}
-	return o.Subscriber
+	return a.Subscriber
 }
 
-func (o *ActivityNotificationResponseDto) GetTemplate() *ActivityNotificationTemplateResponseDto {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTemplate() *ActivityNotificationTemplateResponseDto {
+	if a == nil {
 		return nil
 	}
-	return o.Template
+	return a.Template
 }
 
-func (o *ActivityNotificationResponseDto) GetJobs() []ActivityNotificationJobResponseDto {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetJobs() []ActivityNotificationJobResponseDto {
+	if a == nil {
 		return nil
 	}
-	return o.Jobs
+	return a.Jobs
 }
 
-func (o *ActivityNotificationResponseDto) GetPayload() *ActivityNotificationResponseDtoPayload {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetPayload() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Payload
+	return a.Payload
 }
 
-func (o *ActivityNotificationResponseDto) GetTags() []string {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTags() []string {
+	if a == nil {
 		return nil
 	}
-	return o.Tags
+	return a.Tags
 }
 
-func (o *ActivityNotificationResponseDto) GetControls() *Controls {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetControls() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Controls
+	return a.Controls
 }
 
-func (o *ActivityNotificationResponseDto) GetTo() *ActivityNotificationResponseDtoTo {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTo() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.To
+	return a.To
 }
 
-func (o *ActivityNotificationResponseDto) GetTopics() []ActivityTopicDto {
-	if o == nil {
+func (a *ActivityNotificationResponseDto) GetTopics() []ActivityTopicDto {
+	if a == nil {
 		return nil
 	}
-	return o.Topics
+	return a.Topics
+}
+
+func (a *ActivityNotificationResponseDto) GetSeverity() *SeverityLevelEnum {
+	if a == nil {
+		return nil
+	}
+	return a.Severity
+}
+
+func (a *ActivityNotificationResponseDto) GetCritical() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.Critical
 }

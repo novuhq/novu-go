@@ -19,10 +19,10 @@ const (
 
 // Metadata associated with the workflow step. Can vary based on the type of step.
 type Metadata struct {
-	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline"`
-	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline"`
-	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline"`
-	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline"`
+	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline" name:"metadata"`
+	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline" name:"metadata"`
+	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline" name:"metadata"`
+	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline" name:"metadata"`
 
 	Type MetadataType
 }
@@ -66,30 +66,30 @@ func CreateMetadataDelayScheduledMetadata(delayScheduledMetadata DelayScheduledM
 func (u *Metadata) UnmarshalJSON(data []byte) error {
 
 	var delayScheduledMetadata DelayScheduledMetadata = DelayScheduledMetadata{}
-	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, nil); err == nil {
 		u.DelayScheduledMetadata = &delayScheduledMetadata
 		u.Type = MetadataTypeDelayScheduledMetadata
 		return nil
 	}
 
-	var delayRegularMetadata DelayRegularMetadata = DelayRegularMetadata{}
-	if err := utils.UnmarshalJSON(data, &delayRegularMetadata, "", true, true); err == nil {
-		u.DelayRegularMetadata = &delayRegularMetadata
-		u.Type = MetadataTypeDelayRegularMetadata
+	var digestRegularMetadata DigestRegularMetadata = DigestRegularMetadata{}
+	if err := utils.UnmarshalJSON(data, &digestRegularMetadata, "", true, nil); err == nil {
+		u.DigestRegularMetadata = &digestRegularMetadata
+		u.Type = MetadataTypeDigestRegularMetadata
 		return nil
 	}
 
 	var digestTimedMetadata DigestTimedMetadata = DigestTimedMetadata{}
-	if err := utils.UnmarshalJSON(data, &digestTimedMetadata, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &digestTimedMetadata, "", true, nil); err == nil {
 		u.DigestTimedMetadata = &digestTimedMetadata
 		u.Type = MetadataTypeDigestTimedMetadata
 		return nil
 	}
 
-	var digestRegularMetadata DigestRegularMetadata = DigestRegularMetadata{}
-	if err := utils.UnmarshalJSON(data, &digestRegularMetadata, "", true, true); err == nil {
-		u.DigestRegularMetadata = &digestRegularMetadata
-		u.Type = MetadataTypeDigestRegularMetadata
+	var delayRegularMetadata DelayRegularMetadata = DelayRegularMetadata{}
+	if err := utils.UnmarshalJSON(data, &delayRegularMetadata, "", true, nil); err == nil {
+		u.DelayRegularMetadata = &delayRegularMetadata
+		u.Type = MetadataTypeDelayRegularMetadata
 		return nil
 	}
 
@@ -142,86 +142,86 @@ type NotificationStepDto struct {
 	Variants      []NotificationStepData `json:"variants,omitempty"`
 }
 
-func (o *NotificationStepDto) GetID() *string {
-	if o == nil {
+func (n *NotificationStepDto) GetID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.ID
+	return n.ID
 }
 
-func (o *NotificationStepDto) GetUUID() *string {
-	if o == nil {
+func (n *NotificationStepDto) GetUUID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.UUID
+	return n.UUID
 }
 
-func (o *NotificationStepDto) GetName() *string {
-	if o == nil {
+func (n *NotificationStepDto) GetName() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Name
+	return n.Name
 }
 
-func (o *NotificationStepDto) GetTemplateID() *string {
-	if o == nil {
+func (n *NotificationStepDto) GetTemplateID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.TemplateID
+	return n.TemplateID
 }
 
-func (o *NotificationStepDto) GetActive() *bool {
-	if o == nil {
+func (n *NotificationStepDto) GetActive() *bool {
+	if n == nil {
 		return nil
 	}
-	return o.Active
+	return n.Active
 }
 
-func (o *NotificationStepDto) GetShouldStopOnFail() *bool {
-	if o == nil {
+func (n *NotificationStepDto) GetShouldStopOnFail() *bool {
+	if n == nil {
 		return nil
 	}
-	return o.ShouldStopOnFail
+	return n.ShouldStopOnFail
 }
 
-func (o *NotificationStepDto) GetTemplate() *MessageTemplate {
-	if o == nil {
+func (n *NotificationStepDto) GetTemplate() *MessageTemplate {
+	if n == nil {
 		return nil
 	}
-	return o.Template
+	return n.Template
 }
 
-func (o *NotificationStepDto) GetFilters() []StepFilterDto {
-	if o == nil {
+func (n *NotificationStepDto) GetFilters() []StepFilterDto {
+	if n == nil {
 		return nil
 	}
-	return o.Filters
+	return n.Filters
 }
 
-func (o *NotificationStepDto) GetParentID() *string {
-	if o == nil {
+func (n *NotificationStepDto) GetParentID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.ParentID
+	return n.ParentID
 }
 
-func (o *NotificationStepDto) GetMetadata() *Metadata {
-	if o == nil {
+func (n *NotificationStepDto) GetMetadata() *Metadata {
+	if n == nil {
 		return nil
 	}
-	return o.Metadata
+	return n.Metadata
 }
 
-func (o *NotificationStepDto) GetReplyCallback() *ReplyCallback {
-	if o == nil {
+func (n *NotificationStepDto) GetReplyCallback() *ReplyCallback {
+	if n == nil {
 		return nil
 	}
-	return o.ReplyCallback
+	return n.ReplyCallback
 }
 
-func (o *NotificationStepDto) GetVariants() []NotificationStepData {
-	if o == nil {
+func (n *NotificationStepDto) GetVariants() []NotificationStepData {
+	if n == nil {
 		return nil
 	}
-	return o.Variants
+	return n.Variants
 }

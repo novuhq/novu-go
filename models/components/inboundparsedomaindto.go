@@ -6,9 +6,9 @@ type InBoundParseDomainDto struct {
 	InboundParseDomain *string `json:"inboundParseDomain,omitempty"`
 }
 
-func (o *InBoundParseDomainDto) GetInboundParseDomain() *string {
-	if o == nil {
+func (i *InBoundParseDomainDto) GetInboundParseDomain() *string {
+	if i == nil {
 		return nil
 	}
-	return o.InboundParseDomain
+	return i.InboundParseDomain
 }

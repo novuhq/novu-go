@@ -21,58 +21,58 @@ type PatchSubscriberRequestDto struct {
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (o *PatchSubscriberRequestDto) GetFirstName() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetFirstName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.FirstName
+	return p.FirstName
 }
 
-func (o *PatchSubscriberRequestDto) GetLastName() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetLastName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.LastName
+	return p.LastName
 }
 
-func (o *PatchSubscriberRequestDto) GetEmail() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetEmail() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Email
+	return p.Email
 }
 
-func (o *PatchSubscriberRequestDto) GetPhone() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetPhone() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Phone
+	return p.Phone
 }
 
-func (o *PatchSubscriberRequestDto) GetAvatar() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetAvatar() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Avatar
+	return p.Avatar
 }
 
-func (o *PatchSubscriberRequestDto) GetTimezone() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetTimezone() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Timezone
+	return p.Timezone
 }
 
-func (o *PatchSubscriberRequestDto) GetLocale() *string {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetLocale() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Locale
+	return p.Locale
 }
 
-func (o *PatchSubscriberRequestDto) GetData() map[string]any {
-	if o == nil {
+func (p *PatchSubscriberRequestDto) GetData() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.Data
+	return p.Data
 }

@@ -16,7 +16,7 @@ const (
 
 // WorkflowPreferencesResponseDtoAll - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type WorkflowPreferencesResponseDtoAll struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" name:"all"`
 
 	Type WorkflowPreferencesResponseDtoAllType
 }
@@ -33,7 +33,7 @@ func CreateWorkflowPreferencesResponseDtoAllWorkflowPreferenceDto(workflowPrefer
 func (u *WorkflowPreferencesResponseDtoAll) UnmarshalJSON(data []byte) error {
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
-	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {
 		u.WorkflowPreferenceDto = &workflowPreferenceDto
 		u.Type = WorkflowPreferencesResponseDtoAllTypeWorkflowPreferenceDto
 		return nil
@@ -58,18 +58,18 @@ type WorkflowPreferencesResponseDtoUser struct {
 	Channels map[string]ChannelPreferenceDto `json:"channels"`
 }
 
-func (o *WorkflowPreferencesResponseDtoUser) GetAll() WorkflowPreferencesResponseDtoAll {
-	if o == nil {
+func (w *WorkflowPreferencesResponseDtoUser) GetAll() WorkflowPreferencesResponseDtoAll {
+	if w == nil {
 		return WorkflowPreferencesResponseDtoAll{}
 	}
-	return o.All
+	return w.All
 }
 
-func (o *WorkflowPreferencesResponseDtoUser) GetChannels() map[string]ChannelPreferenceDto {
-	if o == nil {
+func (w *WorkflowPreferencesResponseDtoUser) GetChannels() map[string]ChannelPreferenceDto {
+	if w == nil {
 		return map[string]ChannelPreferenceDto{}
 	}
-	return o.Channels
+	return w.Channels
 }
 
 type WorkflowPreferencesResponseDto struct {
@@ -79,16 +79,16 @@ type WorkflowPreferencesResponseDto struct {
 	Default WorkflowPreferencesDto `json:"default"`
 }
 
-func (o *WorkflowPreferencesResponseDto) GetUser() *WorkflowPreferencesResponseDtoUser {
-	if o == nil {
+func (w *WorkflowPreferencesResponseDto) GetUser() *WorkflowPreferencesResponseDtoUser {
+	if w == nil {
 		return nil
 	}
-	return o.User
+	return w.User
 }
 
-func (o *WorkflowPreferencesResponseDto) GetDefault() WorkflowPreferencesDto {
-	if o == nil {
+func (w *WorkflowPreferencesResponseDto) GetDefault() WorkflowPreferencesDto {
+	if w == nil {
 		return WorkflowPreferencesDto{}
 	}
-	return o.Default
+	return w.Default
 }

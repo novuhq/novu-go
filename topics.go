@@ -15,6 +15,7 @@ import (
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
 	"net/url"
+	"time"
 )
 
 // Topics are a way to group subscribers together so that they can be notified of events at once. A topic is identified by a custom key. This can be helpful for things like sending out marketing emails or notifying users of new features. Topics can also be used to send notifications to the subscribers who have been grouped together based on their interests, location, activities and much more.
@@ -81,6 +82,11 @@ func (s *Topics) List(ctx context.Context, request operations.TopicsControllerLi
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -384,9 +390,10 @@ func (s *Topics) List(ctx context.Context, request operations.TopicsControllerLi
 }
 
 // Create a topic
-// Creates a new topic if it does not exist, or updates an existing topic if it already exists
-func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto components.CreateUpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpsertTopicResponse, error) {
+// Creates a new topic if it does not exist, or updates an existing topic if it already exists. Use ?failIfExists=true to prevent updates.
+func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto components.CreateUpdateTopicRequestDto, failIfExists *bool, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpsertTopicResponse, error) {
 	request := operations.TopicsControllerUpsertTopicRequest{
+		FailIfExists:                failIfExists,
 		IdempotencyKey:              idempotencyKey,
 		CreateUpdateTopicRequestDto: createUpdateTopicRequestDto,
 	}
@@ -433,6 +440,11 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -450,6 +462,10 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -592,6 +608,29 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 409:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.TopicResponseDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -622,8 +661,6 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		fallthrough
 	case httpRes.StatusCode == 413:
 		fallthrough
@@ -778,6 +815,11 @@ func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *strin
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -1127,6 +1169,11 @@ func (s *Topics) Update(ctx context.Context, topicKey string, updateTopicRequest
 		timeout = s.sdkConfiguration.Timeout
 	}
 
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
+	}
+
 	if timeout != nil {
 		var cancel context.CancelFunc
 		ctx, cancel = context.WithTimeout(ctx, *timeout)
@@ -1472,6 +1519,11 @@ func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *st
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

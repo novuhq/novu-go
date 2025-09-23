@@ -13,25 +13,25 @@ type WorkflowControllerGetWorkflowRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *WorkflowControllerGetWorkflowRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerGetWorkflowRequest) GetEnvironmentID() *string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowRequest) GetEnvironmentID() *string {
+	if w == nil {
 		return nil
 	}
-	return o.EnvironmentID
+	return w.EnvironmentID
 }
 
-func (o *WorkflowControllerGetWorkflowRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
 type WorkflowControllerGetWorkflowResponse struct {
@@ -41,23 +41,23 @@ type WorkflowControllerGetWorkflowResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *WorkflowControllerGetWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerGetWorkflowResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
+	if w == nil {
 		return nil
 	}
-	return o.WorkflowResponseDto
+	return w.WorkflowResponseDto
 }
 
-func (o *WorkflowControllerGetWorkflowResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerGetWorkflowResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

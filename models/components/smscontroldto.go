@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type SmsControlDto struct {
 	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
 	Skip map[string]any `json:"skip,omitempty"`
@@ -9,16 +13,27 @@ type SmsControlDto struct {
 	Body *string `json:"body,omitempty"`
 }
 
-func (o *SmsControlDto) GetSkip() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.Skip
+func (s SmsControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *SmsControlDto) GetBody() *string {
-	if o == nil {
+func (s *SmsControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SmsControlDto) GetSkip() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.Body
+	return s.Skip
+}
+
+func (s *SmsControlDto) GetBody() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Body
 }

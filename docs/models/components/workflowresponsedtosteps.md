@@ -51,3 +51,9 @@ workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsDigest(comp
 workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsCustom(components.CustomStepResponseDto{/* values here */})
 ```
 
+### ThrottleStepResponseDto
+
+```go
+workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsThrottle(components.ThrottleStepResponseDto{/* values here */})
+```
+

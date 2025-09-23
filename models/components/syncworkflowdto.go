@@ -7,9 +7,9 @@ type SyncWorkflowDto struct {
 	TargetEnvironmentID string `json:"targetEnvironmentId"`
 }
 
-func (o *SyncWorkflowDto) GetTargetEnvironmentID() string {
-	if o == nil {
+func (s *SyncWorkflowDto) GetTargetEnvironmentID() string {
+	if s == nil {
 		return ""
 	}
-	return o.TargetEnvironmentID
+	return s.TargetEnvironmentID
 }

@@ -8,10 +8,25 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
+// TriggerEventToAllRequestDtoChannels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+type TriggerEventToAllRequestDtoChannels struct {
+	// Email channel specific overrides
+	Email *EmailChannelOverrides `json:"email,omitempty"`
+}
+
+func (t *TriggerEventToAllRequestDtoChannels) GetEmail() *EmailChannelOverrides {
+	if t == nil {
+		return nil
+	}
+	return t.Email
+}
+
 // TriggerEventToAllRequestDtoOverrides - This could be used to override provider specific configurations
 type TriggerEventToAllRequestDtoOverrides struct {
-	// This could be used to override provider specific configurations
+	// This could be used to override provider specific configurations or layout at the step level
 	Steps map[string]StepsOverrides `json:"steps,omitempty"`
+	// Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
+	Channels *TriggerEventToAllRequestDtoChannels `json:"channels,omitempty"`
 	// Overrides the provider configuration for the entire workflow and all steps
 	Providers map[string]map[string]any `json:"providers,omitempty"`
 	// Override the email provider specific configurations for the entire workflow
@@ -33,7 +48,9 @@ type TriggerEventToAllRequestDtoOverrides struct {
 	// Override the layout identifier for the entire workflow
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
-	LayoutIdentifier     *string                   `json:"layoutIdentifier,omitempty"`
+	LayoutIdentifier *string `json:"layoutIdentifier,omitempty"`
+	// Severity of the workflow
+	Severity             *SeverityLevelEnum        `json:"severity,omitempty"`
 	AdditionalProperties map[string]map[string]any `additionalProperties:"true" json:"-"`
 }
 
@@ -42,66 +59,80 @@ func (t TriggerEventToAllRequestDtoOverrides) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TriggerEventToAllRequestDtoOverrides) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetSteps() map[string]StepsOverrides {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetSteps() map[string]StepsOverrides {
+	if t == nil {
 		return nil
 	}
-	return o.Steps
+	return t.Steps
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetProviders() map[string]map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetChannels() *TriggerEventToAllRequestDtoChannels {
+	if t == nil {
 		return nil
 	}
-	return o.Providers
+	return t.Channels
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetEmail() map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetProviders() map[string]map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Email
+	return t.Providers
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetPush() map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetEmail() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Push
+	return t.Email
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetSms() map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetPush() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Sms
+	return t.Push
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetChat() map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetSms() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.Chat
+	return t.Sms
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetLayoutIdentifier() *string {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetChat() map[string]any {
+	if t == nil {
 		return nil
 	}
-	return o.LayoutIdentifier
+	return t.Chat
 }
 
-func (o *TriggerEventToAllRequestDtoOverrides) GetAdditionalProperties() map[string]map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDtoOverrides) GetLayoutIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.AdditionalProperties
+	return t.LayoutIdentifier
+}
+
+func (t *TriggerEventToAllRequestDtoOverrides) GetSeverity() *SeverityLevelEnum {
+	if t == nil {
+		return nil
+	}
+	return t.Severity
+}
+
+func (t *TriggerEventToAllRequestDtoOverrides) GetAdditionalProperties() map[string]map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.AdditionalProperties
 }
 
 type TriggerEventToAllRequestDtoActorType string
@@ -115,8 +146,8 @@ const (
 //
 //	If a new actor object is provided, we will create a new subscriber in our system
 type TriggerEventToAllRequestDtoActor struct {
-	Str                  *string               `queryParam:"inline"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline"`
+	Str                  *string               `queryParam:"inline" name:"actor"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" name:"actor"`
 
 	Type TriggerEventToAllRequestDtoActorType
 }
@@ -142,14 +173,14 @@ func CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(subscriberPayloa
 func (u *TriggerEventToAllRequestDtoActor) UnmarshalJSON(data []byte) error {
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
 		u.Type = TriggerEventToAllRequestDtoActorTypeSubscriberPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TriggerEventToAllRequestDtoActorTypeStr
 		return nil
@@ -181,8 +212,8 @@ const (
 //
 //	If a new tenant object is provided, we will create a new tenant.
 type TriggerEventToAllRequestDtoTenant struct {
-	Str              *string           `queryParam:"inline"`
-	TenantPayloadDto *TenantPayloadDto `queryParam:"inline"`
+	Str              *string           `queryParam:"inline" name:"tenant"`
+	TenantPayloadDto *TenantPayloadDto `queryParam:"inline" name:"tenant"`
 
 	Type TriggerEventToAllRequestDtoTenantType
 }
@@ -208,14 +239,14 @@ func CreateTriggerEventToAllRequestDtoTenantTenantPayloadDto(tenantPayloadDto Te
 func (u *TriggerEventToAllRequestDtoTenant) UnmarshalJSON(data []byte) error {
 
 	var tenantPayloadDto TenantPayloadDto = TenantPayloadDto{}
-	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &tenantPayloadDto, "", true, nil); err == nil {
 		u.TenantPayloadDto = &tenantPayloadDto
 		u.Type = TriggerEventToAllRequestDtoTenantTypeTenantPayloadDto
 		return nil
 	}
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TriggerEventToAllRequestDtoTenantTypeStr
 		return nil
@@ -257,44 +288,44 @@ type TriggerEventToAllRequestDto struct {
 	Tenant *TriggerEventToAllRequestDtoTenant `json:"tenant,omitempty"`
 }
 
-func (o *TriggerEventToAllRequestDto) GetName() string {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetName() string {
+	if t == nil {
 		return ""
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TriggerEventToAllRequestDto) GetPayload() map[string]any {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetPayload() map[string]any {
+	if t == nil {
 		return map[string]any{}
 	}
-	return o.Payload
+	return t.Payload
 }
 
-func (o *TriggerEventToAllRequestDto) GetOverrides() *TriggerEventToAllRequestDtoOverrides {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetOverrides() *TriggerEventToAllRequestDtoOverrides {
+	if t == nil {
 		return nil
 	}
-	return o.Overrides
+	return t.Overrides
 }
 
-func (o *TriggerEventToAllRequestDto) GetTransactionID() *string {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetTransactionID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.TransactionID
+	return t.TransactionID
 }
 
-func (o *TriggerEventToAllRequestDto) GetActor() *TriggerEventToAllRequestDtoActor {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetActor() *TriggerEventToAllRequestDtoActor {
+	if t == nil {
 		return nil
 	}
-	return o.Actor
+	return t.Actor
 }
 
-func (o *TriggerEventToAllRequestDto) GetTenant() *TriggerEventToAllRequestDtoTenant {
-	if o == nil {
+func (t *TriggerEventToAllRequestDto) GetTenant() *TriggerEventToAllRequestDtoTenant {
+	if t == nil {
 		return nil
 	}
-	return o.Tenant
+	return t.Tenant
 }

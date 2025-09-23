@@ -14,25 +14,25 @@ type WorkflowControllerUpdateRequest struct {
 	UpdateWorkflowDto components.UpdateWorkflowDto `request:"mediaType=application/json"`
 }
 
-func (o *WorkflowControllerUpdateRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerUpdateRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerUpdateRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerUpdateRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
-func (o *WorkflowControllerUpdateRequest) GetUpdateWorkflowDto() components.UpdateWorkflowDto {
-	if o == nil {
+func (w *WorkflowControllerUpdateRequest) GetUpdateWorkflowDto() components.UpdateWorkflowDto {
+	if w == nil {
 		return components.UpdateWorkflowDto{}
 	}
-	return o.UpdateWorkflowDto
+	return w.UpdateWorkflowDto
 }
 
 type WorkflowControllerUpdateResponse struct {
@@ -42,23 +42,23 @@ type WorkflowControllerUpdateResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *WorkflowControllerUpdateResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerUpdateResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerUpdateResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
-	if o == nil {
+func (w *WorkflowControllerUpdateResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
+	if w == nil {
 		return nil
 	}
-	return o.WorkflowResponseDto
+	return w.WorkflowResponseDto
 }
 
-func (o *WorkflowControllerUpdateResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerUpdateResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

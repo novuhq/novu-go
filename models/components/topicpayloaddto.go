@@ -2,21 +2,36 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type TopicPayloadDto struct {
 	TopicKey string                    `json:"topicKey"`
 	Type     TriggerRecipientsTypeEnum `json:"type"`
 }
 
-func (o *TopicPayloadDto) GetTopicKey() string {
-	if o == nil {
-		return ""
-	}
-	return o.TopicKey
+func (t TopicPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TopicPayloadDto) GetType() TriggerRecipientsTypeEnum {
-	if o == nil {
+func (t *TopicPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"topicKey", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *TopicPayloadDto) GetTopicKey() string {
+	if t == nil {
+		return ""
+	}
+	return t.TopicKey
+}
+
+func (t *TopicPayloadDto) GetType() TriggerRecipientsTypeEnum {
+	if t == nil {
 		return TriggerRecipientsTypeEnum("")
 	}
-	return o.Type
+	return t.Type
 }

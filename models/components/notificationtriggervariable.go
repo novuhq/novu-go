@@ -7,9 +7,9 @@ type NotificationTriggerVariable struct {
 	Name string `json:"name"`
 }
 
-func (o *NotificationTriggerVariable) GetName() string {
-	if o == nil {
+func (n *NotificationTriggerVariable) GetName() string {
+	if n == nil {
 		return ""
 	}
-	return o.Name
+	return n.Name
 }

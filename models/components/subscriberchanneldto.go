@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 // ProviderID - The ID of the chat or push provider.
@@ -21,6 +22,8 @@ const (
 	ProviderIDGetstream        ProviderID = "getstream"
 	ProviderIDRocketChat       ProviderID = "rocket-chat"
 	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
+	ProviderIDChatWebhook      ProviderID = "chat-webhook"
+	ProviderIDNovuSlack        ProviderID = "novu-slack"
 	ProviderIDFcm              ProviderID = "fcm"
 	ProviderIDApns             ProviderID = "apns"
 	ProviderIDExpo             ProviderID = "expo"
@@ -59,6 +62,10 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "chat-webhook":
+		fallthrough
+	case "novu-slack":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -88,23 +95,34 @@ type SubscriberChannelDto struct {
 	Credentials ChannelCredentialsDto `json:"credentials"`
 }
 
-func (o *SubscriberChannelDto) GetProviderID() ProviderID {
-	if o == nil {
+func (s SubscriberChannelDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubscriberChannelDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"providerId", "credentials"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SubscriberChannelDto) GetProviderID() ProviderID {
+	if s == nil {
 		return ProviderID("")
 	}
-	return o.ProviderID
+	return s.ProviderID
 }
 
-func (o *SubscriberChannelDto) GetIntegrationIdentifier() *string {
-	if o == nil {
+func (s *SubscriberChannelDto) GetIntegrationIdentifier() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IntegrationIdentifier
+	return s.IntegrationIdentifier
 }
 
-func (o *SubscriberChannelDto) GetCredentials() ChannelCredentialsDto {
-	if o == nil {
+func (s *SubscriberChannelDto) GetCredentials() ChannelCredentialsDto {
+	if s == nil {
 		return ChannelCredentialsDto{}
 	}
-	return o.Credentials
+	return s.Credentials
 }

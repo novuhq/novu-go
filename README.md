@@ -292,7 +292,6 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
 	"log"
 )
 
@@ -303,23 +302,11 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
-		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -335,6 +322,7 @@ func main() {
 
 ### [Environments](docs/sdks/environments/README.md)
 
+* [GetTags](docs/sdks/environments/README.md#gettags) - Get environment tags
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -346,8 +334,20 @@ func main() {
 * [Create](docs/sdks/integrations/README.md#create) - Create an integration
 * [Update](docs/sdks/integrations/README.md#update) - Update an integration
 * [Delete](docs/sdks/integrations/README.md#delete) - Delete an integration
+* [IntegrationsControllerAutoConfigureIntegration](docs/sdks/integrations/README.md#integrationscontrollerautoconfigureintegration) - Auto-configure an integration for inbound webhooks
 * [SetAsPrimary](docs/sdks/integrations/README.md#setasprimary) - Update integration as primary
 * [ListActive](docs/sdks/integrations/README.md#listactive) - List active integrations
+
+### [Layouts](docs/sdks/layouts/README.md)
+
+* [Create](docs/sdks/layouts/README.md#create) - Create a layout
+* [List](docs/sdks/layouts/README.md#list) - List all layouts
+* [Update](docs/sdks/layouts/README.md#update) - Update a layout
+* [Retrieve](docs/sdks/layouts/README.md#retrieve) - Retrieve a layout
+* [Delete](docs/sdks/layouts/README.md#delete) - Delete a layout
+* [Duplicate](docs/sdks/layouts/README.md#duplicate) - Duplicate a layout
+* [GeneratePreview](docs/sdks/layouts/README.md#generatepreview) - Generate layout preview
+* [Usage](docs/sdks/layouts/README.md#usage) - Get layout usage
 
 ### [Messages](docs/sdks/messages/README.md)
 
@@ -362,6 +362,7 @@ func main() {
 
 ### [Novu SDK](docs/sdks/novu/README.md)
 
+* [InboundWebhooksControllerHandleWebhook](docs/sdks/novu/README.md#inboundwebhookscontrollerhandlewebhook)
 * [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
@@ -378,8 +379,8 @@ func main() {
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
-* [Update](docs/sdks/credentials/README.md#update) - Update provider credentials
-* [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
+* [Update](docs/sdks/credentials/README.md#update) - Upsert provider credentials
+* [Append](docs/sdks/credentials/README.md#append) - Update provider credentials
 * [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
@@ -397,6 +398,7 @@ func main() {
 
 * [List](docs/sdks/preferences/README.md#list) - Retrieve subscriber preferences
 * [Update](docs/sdks/preferences/README.md#update) - Update subscriber preferences
+* [BulkUpdate](docs/sdks/preferences/README.md#bulkupdate) - Bulk update subscriber preferences
 
 #### [Subscribers.Properties](docs/sdks/properties/README.md)
 
@@ -423,6 +425,24 @@ func main() {
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+
+### [Translations](docs/sdks/translations/README.md)
+
+* [Create](docs/sdks/translations/README.md#create) - Create a translation
+* [Retrieve](docs/sdks/translations/README.md#retrieve) - Retrieve a translation
+* [Delete](docs/sdks/translations/README.md#delete) - Delete a translation
+* [Upload](docs/sdks/translations/README.md#upload) - Upload translation files
+
+#### [Translations.Groups](docs/sdks/groups/README.md)
+
+* [Delete](docs/sdks/groups/README.md#delete) - Delete a translation group
+* [Retrieve](docs/sdks/groups/README.md#retrieve) - Retrieve a translation group
+
+#### [Translations.Master](docs/sdks/master/README.md)
+
+* [Retrieve](docs/sdks/master/README.md#retrieve) - Retrieve master translations JSON
+* [Import](docs/sdks/master/README.md#import) - Import master translations JSON
+* [Upload](docs/sdks/master/README.md#upload) - Upload master translations JSON file
 
 ### [Workflows](docs/sdks/workflows/README.md)
 
@@ -453,7 +473,6 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
 	"github.com/novuhq/novu-go/retry"
 	"log"
 	"models/operations"
@@ -466,19 +485,7 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
-		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil, operations.WithRetries(
+	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -492,7 +499,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -506,7 +513,6 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
 	"github.com/novuhq/novu-go/retry"
 	"log"
 )
@@ -529,23 +535,11 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
-		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -668,7 +662,6 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
 	"log"
 )
 
@@ -680,23 +673,11 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
-		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -712,7 +693,6 @@ package main
 import (
 	"context"
 	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
 	"log"
 )
 
@@ -724,23 +704,11 @@ func main() {
 		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
-		WorkflowID: "workflow_identifier",
-		Payload: map[string]any{
-			"comment_id": "string",
-			"post": map[string]any{
-				"text": "string",
-			},
-		},
-		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
-			"SUBSCRIBER_ID",
-		),
-	}, nil)
+	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.TriggerEventResponseDto != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -765,12 +733,13 @@ The built-in `net/http` client satisfies this interface and a default client bas
 import (
 	"net/http"
 	"time"
-	"github.com/myorg/your-go-sdk"
+
+	"github.com/novuhq/novu-go"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+	sdkClient  = novugo.New(novugo.WithClient(httpClient))
 )
 ```
 

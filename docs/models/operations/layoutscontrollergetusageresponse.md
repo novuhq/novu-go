@@ -1,0 +1,10 @@
+# LayoutsControllerGetUsageResponse
+
+
+## Fields
+
+| Field                                                                                         | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                    | [components.HTTPMetadata](../../models/components/httpmetadata.md)                            | :heavy_check_mark:                                                                            | N/A                                                                                           |
+| `GetLayoutUsageResponseDto`                                                                   | [*components.GetLayoutUsageResponseDto](../../models/components/getlayoutusageresponsedto.md) | :heavy_minus_sign:                                                                            | OK                                                                                            |
+| `Headers`                                                                                     | map[string][]*string*                                                                         | :heavy_check_mark:                                                                            | N/A                                                                                           |

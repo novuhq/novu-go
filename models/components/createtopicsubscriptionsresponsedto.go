@@ -11,23 +11,23 @@ type CreateTopicSubscriptionsResponseDto struct {
 	Errors []SubscriptionErrorDto `json:"errors,omitempty"`
 }
 
-func (o *CreateTopicSubscriptionsResponseDto) GetData() []SubscriptionDto {
-	if o == nil {
+func (c *CreateTopicSubscriptionsResponseDto) GetData() []SubscriptionDto {
+	if c == nil {
 		return []SubscriptionDto{}
 	}
-	return o.Data
+	return c.Data
 }
 
-func (o *CreateTopicSubscriptionsResponseDto) GetMeta() MetaDto {
-	if o == nil {
+func (c *CreateTopicSubscriptionsResponseDto) GetMeta() MetaDto {
+	if c == nil {
 		return MetaDto{}
 	}
-	return o.Meta
+	return c.Meta
 }
 
-func (o *CreateTopicSubscriptionsResponseDto) GetErrors() []SubscriptionErrorDto {
-	if o == nil {
+func (c *CreateTopicSubscriptionsResponseDto) GetErrors() []SubscriptionErrorDto {
+	if c == nil {
 		return nil
 	}
-	return o.Errors
+	return c.Errors
 }

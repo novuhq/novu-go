@@ -12,18 +12,18 @@ type IntegrationsControllerSetIntegrationAsPrimaryRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *IntegrationsControllerSetIntegrationAsPrimaryRequest) GetIntegrationID() string {
-	if o == nil {
+func (i *IntegrationsControllerSetIntegrationAsPrimaryRequest) GetIntegrationID() string {
+	if i == nil {
 		return ""
 	}
-	return o.IntegrationID
+	return i.IntegrationID
 }
 
-func (o *IntegrationsControllerSetIntegrationAsPrimaryRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (i *IntegrationsControllerSetIntegrationAsPrimaryRequest) GetIdempotencyKey() *string {
+	if i == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return i.IdempotencyKey
 }
 
 type IntegrationsControllerSetIntegrationAsPrimaryResponse struct {
@@ -33,23 +33,23 @@ type IntegrationsControllerSetIntegrationAsPrimaryResponse struct {
 	Headers                map[string][]string
 }
 
-func (o *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (i *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetHTTPMeta() components.HTTPMetadata {
+	if i == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return i.HTTPMeta
 }
 
-func (o *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
-	if o == nil {
+func (i *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
+	if i == nil {
 		return nil
 	}
-	return o.IntegrationResponseDto
+	return i.IntegrationResponseDto
 }
 
-func (o *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (i *IntegrationsControllerSetIntegrationAsPrimaryResponse) GetHeaders() map[string][]string {
+	if i == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return i.Headers
 }

@@ -14,6 +14,7 @@ import (
 	"github.com/novuhq/novu-go/models/operations"
 	"github.com/novuhq/novu-go/retry"
 	"net/http"
+	"time"
 )
 
 type Credentials struct {
@@ -30,10 +31,10 @@ func newCredentials(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hoo
 	}
 }
 
-// Update provider credentials
-// Update credentials for a provider such as slack and push tokens.
+// Update - Upsert provider credentials
+// Upsert credentials for a provider such as slack and push tokens.
 //
-//	**providerId** is required field. This API appends the **deviceTokens** to the existing ones.
+//	**providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerUpdateSubscriberChannelResponse, error) {
 	request := operations.SubscribersV1ControllerUpdateSubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
@@ -81,6 +82,11 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -382,10 +388,10 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 
 }
 
-// Append - Upsert provider credentials
+// Append - Update provider credentials
 // Update credentials for a provider such as **slack** and **FCM**.
 //
-//	**providerId** is required field. This API replaces the existing deviceTokens with the provided ones.
+//	**providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSubscriberChannelRequestDto components.UpdateSubscriberChannelRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerModifySubscriberChannelResponse, error) {
 	request := operations.SubscribersV1ControllerModifySubscriberChannelRequest{
 		SubscriberID:                      subscriberID,
@@ -433,6 +439,11 @@ func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSub
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {
@@ -781,6 +792,11 @@ func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerI
 	timeout := o.Timeout
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
+	}
+
+	if timeout == nil {
+		defaultTimeout := time.Duration(5000 * time.Millisecond)
+		timeout = &defaultTimeout
 	}
 
 	if timeout != nil {

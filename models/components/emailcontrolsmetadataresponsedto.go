@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type EmailControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -11,23 +15,34 @@ type EmailControlsMetadataResponseDto struct {
 	Values EmailControlDto `json:"values"`
 }
 
-func (o *EmailControlsMetadataResponseDto) GetDataSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.DataSchema
+func (e EmailControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
 }
 
-func (o *EmailControlsMetadataResponseDto) GetUISchema() *UISchema {
-	if o == nil {
-		return nil
+func (e *EmailControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"values"}); err != nil {
+		return err
 	}
-	return o.UISchema
+	return nil
 }
 
-func (o *EmailControlsMetadataResponseDto) GetValues() EmailControlDto {
-	if o == nil {
+func (e *EmailControlsMetadataResponseDto) GetDataSchema() map[string]any {
+	if e == nil {
+		return nil
+	}
+	return e.DataSchema
+}
+
+func (e *EmailControlsMetadataResponseDto) GetUISchema() *UISchema {
+	if e == nil {
+		return nil
+	}
+	return e.UISchema
+}
+
+func (e *EmailControlsMetadataResponseDto) GetValues() EmailControlDto {
+	if e == nil {
 		return EmailControlDto{}
 	}
-	return o.Values
+	return e.Values
 }

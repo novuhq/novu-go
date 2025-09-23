@@ -10,37 +10,37 @@ type NotificationGroup struct {
 	ParentID       *string `json:"_parentId,omitempty"`
 }
 
-func (o *NotificationGroup) GetID() *string {
-	if o == nil {
+func (n *NotificationGroup) GetID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.ID
+	return n.ID
 }
 
-func (o *NotificationGroup) GetName() string {
-	if o == nil {
+func (n *NotificationGroup) GetName() string {
+	if n == nil {
 		return ""
 	}
-	return o.Name
+	return n.Name
 }
 
-func (o *NotificationGroup) GetEnvironmentID() string {
-	if o == nil {
+func (n *NotificationGroup) GetEnvironmentID() string {
+	if n == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return n.EnvironmentID
 }
 
-func (o *NotificationGroup) GetOrganizationID() string {
-	if o == nil {
+func (n *NotificationGroup) GetOrganizationID() string {
+	if n == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return n.OrganizationID
 }
 
-func (o *NotificationGroup) GetParentID() *string {
-	if o == nil {
+func (n *NotificationGroup) GetParentID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.ParentID
+	return n.ParentID
 }

@@ -8,7 +8,7 @@ The recipients list of people who will receive the notification.
 ### 
 
 ```go
-to := components.CreateToArrayOf1([]components.One{/* values here */})
+to := components.CreateToArrayOfTo1([]components.To1{/* values here */})
 ```
 
 ### 

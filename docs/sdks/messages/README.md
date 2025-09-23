@@ -20,6 +20,7 @@ List all messages for the current environment.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="MessagesController_getMessages" method="get" path="/v1/messages" -->
 ```go
 package main
 
@@ -76,6 +77,7 @@ Delete a message entity from the Novu platform by **messageId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="MessagesController_deleteMessage" method="delete" path="/v1/messages/{messageId}" -->
 ```go
 package main
 
@@ -132,6 +134,7 @@ Delete multiple messages from the Novu platform using **transactionId** of trigg
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="MessagesController_deleteMessagesByTransactionId" method="delete" path="/v1/messages/transaction/{transactionId}" -->
 ```go
 package main
 
