@@ -13,18 +13,18 @@ type EnvironmentsControllerV1DeleteEnvironmentRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *EnvironmentsControllerV1DeleteEnvironmentRequest) GetEnvironmentID() string {
-	if o == nil {
+func (e *EnvironmentsControllerV1DeleteEnvironmentRequest) GetEnvironmentID() string {
+	if e == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return e.EnvironmentID
 }
 
-func (o *EnvironmentsControllerV1DeleteEnvironmentRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EnvironmentsControllerV1DeleteEnvironmentRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
 type EnvironmentsControllerV1DeleteEnvironmentResponse struct {
@@ -32,16 +32,16 @@ type EnvironmentsControllerV1DeleteEnvironmentResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *EnvironmentsControllerV1DeleteEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EnvironmentsControllerV1DeleteEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EnvironmentsControllerV1DeleteEnvironmentResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EnvironmentsControllerV1DeleteEnvironmentResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

@@ -11,23 +11,23 @@ type MetaDto struct {
 	Failed float64 `json:"failed"`
 }
 
-func (o *MetaDto) GetTotalCount() float64 {
-	if o == nil {
+func (m *MetaDto) GetTotalCount() float64 {
+	if m == nil {
 		return 0.0
 	}
-	return o.TotalCount
+	return m.TotalCount
 }
 
-func (o *MetaDto) GetSuccessful() float64 {
-	if o == nil {
+func (m *MetaDto) GetSuccessful() float64 {
+	if m == nil {
 		return 0.0
 	}
-	return o.Successful
+	return m.Successful
 }
 
-func (o *MetaDto) GetFailed() float64 {
-	if o == nil {
+func (m *MetaDto) GetFailed() float64 {
+	if m == nil {
 		return 0.0
 	}
-	return o.Failed
+	return m.Failed
 }

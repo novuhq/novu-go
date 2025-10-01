@@ -18,28 +18,24 @@ func (c CustomStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CustomStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CustomStepResponseDtoControlValues) GetCustom() map[string]any {
-	if o == nil {
+func (c *CustomStepResponseDtoControlValues) GetCustom() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Custom
+	return c.Custom
 }
 
-func (o *CustomStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (c *CustomStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// CustomStepResponseDtoSlug - Slug of the step
-type CustomStepResponseDtoSlug struct {
+	return c.AdditionalProperties
 }
 
 type CustomStepResponseDto struct {
@@ -56,11 +52,11 @@ type CustomStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug CustomStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -69,86 +65,97 @@ type CustomStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *CustomStepResponseDto) GetControls() CustomControlsMetadataResponseDto {
-	if o == nil {
+func (c CustomStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *CustomStepResponseDto) GetControls() CustomControlsMetadataResponseDto {
+	if c == nil {
 		return CustomControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return c.Controls
 }
 
-func (o *CustomStepResponseDto) GetControlValues() *CustomStepResponseDtoControlValues {
-	if o == nil {
+func (c *CustomStepResponseDto) GetControlValues() *CustomStepResponseDtoControlValues {
+	if c == nil {
 		return nil
 	}
-	return o.ControlValues
+	return c.ControlValues
 }
 
-func (o *CustomStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (c *CustomStepResponseDto) GetVariables() map[string]any {
+	if c == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return c.Variables
 }
 
-func (o *CustomStepResponseDto) GetStepID() string {
-	if o == nil {
+func (c *CustomStepResponseDto) GetStepID() string {
+	if c == nil {
 		return ""
 	}
-	return o.StepID
+	return c.StepID
 }
 
-func (o *CustomStepResponseDto) GetID() string {
-	if o == nil {
+func (c *CustomStepResponseDto) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CustomStepResponseDto) GetName() string {
-	if o == nil {
+func (c *CustomStepResponseDto) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CustomStepResponseDto) GetSlug() CustomStepResponseDtoSlug {
-	if o == nil {
-		return CustomStepResponseDtoSlug{}
+func (c *CustomStepResponseDto) GetSlug() string {
+	if c == nil {
+		return ""
 	}
-	return o.Slug
+	return c.Slug
 }
 
-func (o *CustomStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (c *CustomStepResponseDto) GetType() StepTypeEnum {
+	if c == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return c.Type
 }
 
-func (o *CustomStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (c *CustomStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if c == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return c.Origin
 }
 
-func (o *CustomStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (c *CustomStepResponseDto) GetWorkflowID() string {
+	if c == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return c.WorkflowID
 }
 
-func (o *CustomStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (c *CustomStepResponseDto) GetWorkflowDatabaseID() string {
+	if c == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return c.WorkflowDatabaseID
 }
 
-func (o *CustomStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (c *CustomStepResponseDto) GetIssues() *StepIssuesDto {
+	if c == nil {
 		return nil
 	}
-	return o.Issues
+	return c.Issues
 }

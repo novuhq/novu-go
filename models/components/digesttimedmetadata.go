@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 type DigestTimedMetadataUnit string
@@ -76,37 +77,48 @@ type DigestTimedMetadata struct {
 	Timed     *TimedConfig             `json:"timed,omitempty"`
 }
 
-func (o *DigestTimedMetadata) GetAmount() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.Amount
+func (d DigestTimedMetadata) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (o *DigestTimedMetadata) GetUnit() *DigestTimedMetadataUnit {
-	if o == nil {
-		return nil
+func (d *DigestTimedMetadata) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"type"}); err != nil {
+		return err
 	}
-	return o.Unit
+	return nil
 }
 
-func (o *DigestTimedMetadata) GetDigestKey() *string {
-	if o == nil {
+func (d *DigestTimedMetadata) GetAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.DigestKey
+	return d.Amount
 }
 
-func (o *DigestTimedMetadata) GetType() DigestTimedMetadataType {
-	if o == nil {
+func (d *DigestTimedMetadata) GetUnit() *DigestTimedMetadataUnit {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DigestTimedMetadata) GetDigestKey() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DigestKey
+}
+
+func (d *DigestTimedMetadata) GetType() DigestTimedMetadataType {
+	if d == nil {
 		return DigestTimedMetadataType("")
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DigestTimedMetadata) GetTimed() *TimedConfig {
-	if o == nil {
+func (d *DigestTimedMetadata) GetTimed() *TimedConfig {
+	if d == nil {
 		return nil
 	}
-	return o.Timed
+	return d.Timed
 }

@@ -13,16 +13,16 @@ type MessageActionResult struct {
 	Type *ButtonTypeEnum `json:"type,omitempty"`
 }
 
-func (o *MessageActionResult) GetPayload() *Payload {
-	if o == nil {
+func (m *MessageActionResult) GetPayload() *Payload {
+	if m == nil {
 		return nil
 	}
-	return o.Payload
+	return m.Payload
 }
 
-func (o *MessageActionResult) GetType() *ButtonTypeEnum {
-	if o == nil {
+func (m *MessageActionResult) GetType() *ButtonTypeEnum {
+	if m == nil {
 		return nil
 	}
-	return o.Type
+	return m.Type
 }

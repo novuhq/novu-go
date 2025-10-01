@@ -12,6 +12,7 @@ type UIComponentEnum string
 
 const (
 	UIComponentEnumEmailEditorSelect              UIComponentEnum = "EMAIL_EDITOR_SELECT"
+	UIComponentEnumLayoutSelect                   UIComponentEnum = "LAYOUT_SELECT"
 	UIComponentEnumBlockEditor                    UIComponentEnum = "BLOCK_EDITOR"
 	UIComponentEnumEmailBody                      UIComponentEnum = "EMAIL_BODY"
 	UIComponentEnumTextFullLine                   UIComponentEnum = "TEXT_FULL_LINE"
@@ -30,12 +31,20 @@ const (
 	UIComponentEnumDelayType                      UIComponentEnum = "DELAY_TYPE"
 	UIComponentEnumDelayAmount                    UIComponentEnum = "DELAY_AMOUNT"
 	UIComponentEnumDelayUnit                      UIComponentEnum = "DELAY_UNIT"
+	UIComponentEnumThrottleType                   UIComponentEnum = "THROTTLE_TYPE"
+	UIComponentEnumThrottleWindow                 UIComponentEnum = "THROTTLE_WINDOW"
+	UIComponentEnumThrottleUnit                   UIComponentEnum = "THROTTLE_UNIT"
+	UIComponentEnumThrottleDynamicKey             UIComponentEnum = "THROTTLE_DYNAMIC_KEY"
+	UIComponentEnumThrottleThreshold              UIComponentEnum = "THROTTLE_THRESHOLD"
+	UIComponentEnumThrottleKey                    UIComponentEnum = "THROTTLE_KEY"
+	UIComponentEnumExtendToSchedule               UIComponentEnum = "EXTEND_TO_SCHEDULE"
 	UIComponentEnumSmsBody                        UIComponentEnum = "SMS_BODY"
 	UIComponentEnumChatBody                       UIComponentEnum = "CHAT_BODY"
 	UIComponentEnumPushBody                       UIComponentEnum = "PUSH_BODY"
 	UIComponentEnumPushSubject                    UIComponentEnum = "PUSH_SUBJECT"
 	UIComponentEnumQueryEditor                    UIComponentEnum = "QUERY_EDITOR"
 	UIComponentEnumData                           UIComponentEnum = "DATA"
+	UIComponentEnumLayoutEmail                    UIComponentEnum = "LAYOUT_EMAIL"
 )
 
 func (e UIComponentEnum) ToPointer() *UIComponentEnum {
@@ -48,6 +57,8 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "EMAIL_EDITOR_SELECT":
+		fallthrough
+	case "LAYOUT_SELECT":
 		fallthrough
 	case "BLOCK_EDITOR":
 		fallthrough
@@ -85,6 +96,20 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "DELAY_UNIT":
 		fallthrough
+	case "THROTTLE_TYPE":
+		fallthrough
+	case "THROTTLE_WINDOW":
+		fallthrough
+	case "THROTTLE_UNIT":
+		fallthrough
+	case "THROTTLE_DYNAMIC_KEY":
+		fallthrough
+	case "THROTTLE_THRESHOLD":
+		fallthrough
+	case "THROTTLE_KEY":
+		fallthrough
+	case "EXTEND_TO_SCHEDULE":
+		fallthrough
 	case "SMS_BODY":
 		fallthrough
 	case "CHAT_BODY":
@@ -96,6 +121,8 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 	case "QUERY_EDITOR":
 		fallthrough
 	case "DATA":
+		fallthrough
+	case "LAYOUT_EMAIL":
 		*e = UIComponentEnum(v)
 		return nil
 	default:

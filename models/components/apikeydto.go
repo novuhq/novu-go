@@ -11,23 +11,23 @@ type APIKeyDto struct {
 	Hash *string `json:"hash,omitempty"`
 }
 
-func (o *APIKeyDto) GetKey() string {
-	if o == nil {
+func (a *APIKeyDto) GetKey() string {
+	if a == nil {
 		return ""
 	}
-	return o.Key
+	return a.Key
 }
 
-func (o *APIKeyDto) GetUserID() string {
-	if o == nil {
+func (a *APIKeyDto) GetUserID() string {
+	if a == nil {
 		return ""
 	}
-	return o.UserID
+	return a.UserID
 }
 
-func (o *APIKeyDto) GetHash() *string {
-	if o == nil {
+func (a *APIKeyDto) GetHash() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Hash
+	return a.Hash
 }

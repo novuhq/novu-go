@@ -14,25 +14,25 @@ type EnvironmentsControllerV1UpdateMyEnvironmentRequest struct {
 	UpdateEnvironmentRequestDto components.UpdateEnvironmentRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetEnvironmentID() string {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetEnvironmentID() string {
+	if e == nil {
 		return ""
 	}
-	return o.EnvironmentID
+	return e.EnvironmentID
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetUpdateEnvironmentRequestDto() components.UpdateEnvironmentRequestDto {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetUpdateEnvironmentRequestDto() components.UpdateEnvironmentRequestDto {
+	if e == nil {
 		return components.UpdateEnvironmentRequestDto{}
 	}
-	return o.UpdateEnvironmentRequestDto
+	return e.UpdateEnvironmentRequestDto
 }
 
 type EnvironmentsControllerV1UpdateMyEnvironmentResponse struct {
@@ -42,23 +42,23 @@ type EnvironmentsControllerV1UpdateMyEnvironmentResponse struct {
 	Headers                map[string][]string
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetEnvironmentResponseDto() *components.EnvironmentResponseDto {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetEnvironmentResponseDto() *components.EnvironmentResponseDto {
+	if e == nil {
 		return nil
 	}
-	return o.EnvironmentResponseDto
+	return e.EnvironmentResponseDto
 }
 
-func (o *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

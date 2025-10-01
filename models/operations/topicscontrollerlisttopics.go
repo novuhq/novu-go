@@ -56,67 +56,67 @@ type TopicsControllerListTopicsRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *TopicsControllerListTopicsRequest) GetAfter() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetAfter() *string {
+	if t == nil {
 		return nil
 	}
-	return o.After
+	return t.After
 }
 
-func (o *TopicsControllerListTopicsRequest) GetBefore() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetBefore() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Before
+	return t.Before
 }
 
-func (o *TopicsControllerListTopicsRequest) GetLimit() *float64 {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetLimit() *float64 {
+	if t == nil {
 		return nil
 	}
-	return o.Limit
+	return t.Limit
 }
 
-func (o *TopicsControllerListTopicsRequest) GetOrderDirection() *TopicsControllerListTopicsQueryParamOrderDirection {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetOrderDirection() *TopicsControllerListTopicsQueryParamOrderDirection {
+	if t == nil {
 		return nil
 	}
-	return o.OrderDirection
+	return t.OrderDirection
 }
 
-func (o *TopicsControllerListTopicsRequest) GetOrderBy() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetOrderBy() *string {
+	if t == nil {
 		return nil
 	}
-	return o.OrderBy
+	return t.OrderBy
 }
 
-func (o *TopicsControllerListTopicsRequest) GetIncludeCursor() *bool {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetIncludeCursor() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.IncludeCursor
+	return t.IncludeCursor
 }
 
-func (o *TopicsControllerListTopicsRequest) GetKey() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Key
+	return t.Key
 }
 
-func (o *TopicsControllerListTopicsRequest) GetName() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TopicsControllerListTopicsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerListTopicsRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
 type TopicsControllerListTopicsResponse struct {
@@ -126,23 +126,23 @@ type TopicsControllerListTopicsResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *TopicsControllerListTopicsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerListTopicsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerListTopicsResponse) GetListTopicsResponseDto() *components.ListTopicsResponseDto {
-	if o == nil {
+func (t *TopicsControllerListTopicsResponse) GetListTopicsResponseDto() *components.ListTopicsResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.ListTopicsResponseDto
+	return t.ListTopicsResponseDto
 }
 
-func (o *TopicsControllerListTopicsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerListTopicsResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

@@ -11,23 +11,23 @@ type UpdateSubscriberChannelRequestDto struct {
 	Credentials ChannelCredentials `json:"credentials"`
 }
 
-func (o *UpdateSubscriberChannelRequestDto) GetProviderID() ChatOrPushProviderEnum {
-	if o == nil {
+func (u *UpdateSubscriberChannelRequestDto) GetProviderID() ChatOrPushProviderEnum {
+	if u == nil {
 		return ChatOrPushProviderEnum("")
 	}
-	return o.ProviderID
+	return u.ProviderID
 }
 
-func (o *UpdateSubscriberChannelRequestDto) GetIntegrationIdentifier() *string {
-	if o == nil {
+func (u *UpdateSubscriberChannelRequestDto) GetIntegrationIdentifier() *string {
+	if u == nil {
 		return nil
 	}
-	return o.IntegrationIdentifier
+	return u.IntegrationIdentifier
 }
 
-func (o *UpdateSubscriberChannelRequestDto) GetCredentials() ChannelCredentials {
-	if o == nil {
+func (u *UpdateSubscriberChannelRequestDto) GetCredentials() ChannelCredentials {
+	if u == nil {
 		return ChannelCredentials{}
 	}
-	return o.Credentials
+	return u.Credentials
 }

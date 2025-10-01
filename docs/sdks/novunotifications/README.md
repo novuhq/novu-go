@@ -14,6 +14,7 @@ Retrieve subscriber in-app (inbox) notifications by its unique key identifier **
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_getNotificationsFeed" method="get" path="/v1/subscribers/{subscriberId}/notifications/feed" -->
 ```go
 package main
 
@@ -33,7 +34,7 @@ func main() {
 
     res, err := s.Subscribers.Notifications.Feed(ctx, operations.SubscribersV1ControllerGetNotificationsFeedRequest{
         SubscriberID: "<id>",
-        Payload: novugo.String("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
+        Payload: novugo.Pointer("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
     })
     if err != nil {
         log.Fatal(err)
@@ -72,6 +73,7 @@ Retrieve unseen in-app (inbox) notifications count for a subscriber by its uniqu
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_getUnseenCount" method="get" path="/v1/subscribers/{subscriberId}/notifications/unseen" -->
 ```go
 package main
 
@@ -88,7 +90,7 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", novugo.Bool(false), novugo.Float64(100), nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", novugo.Pointer(false), novugo.Pointer[float64](100), nil)
     if err != nil {
         log.Fatal(err)
     }

@@ -13,25 +13,25 @@ type SubscribersV1ControllerDeleteSubscriberCredentialsRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetProviderID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetProviderID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ProviderID
+	return s.ProviderID
 }
 
-func (o *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersV1ControllerDeleteSubscriberCredentialsResponse struct {
@@ -39,16 +39,16 @@ type SubscribersV1ControllerDeleteSubscriberCredentialsResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *SubscribersV1ControllerDeleteSubscriberCredentialsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerDeleteSubscriberCredentialsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerDeleteSubscriberCredentialsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerDeleteSubscriberCredentialsResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

@@ -7,9 +7,9 @@ type DeleteTopicSubscriptionsRequestDto struct {
 	SubscriberIds []string `json:"subscriberIds"`
 }
 
-func (o *DeleteTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
-	if o == nil {
+func (d *DeleteTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
+	if d == nil {
 		return []string{}
 	}
-	return o.SubscriberIds
+	return d.SubscriberIds
 }

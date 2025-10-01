@@ -7,9 +7,9 @@ type UpdateTopicRequestDto struct {
 	Name string `json:"name"`
 }
 
-func (o *UpdateTopicRequestDto) GetName() string {
-	if o == nil {
+func (u *UpdateTopicRequestDto) GetName() string {
+	if u == nil {
 		return ""
 	}
-	return o.Name
+	return u.Name
 }

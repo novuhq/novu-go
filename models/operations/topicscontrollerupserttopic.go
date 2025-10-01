@@ -7,23 +7,32 @@ import (
 )
 
 type TopicsControllerUpsertTopicRequest struct {
+	// If true, the request will fail if a topic with the same key already exists
+	FailIfExists *bool `queryParam:"style=form,explode=true,name=failIfExists"`
 	// A header for idempotency purposes
 	IdempotencyKey              *string                                `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateUpdateTopicRequestDto components.CreateUpdateTopicRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *TopicsControllerUpsertTopicRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerUpsertTopicRequest) GetFailIfExists() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.FailIfExists
 }
 
-func (o *TopicsControllerUpsertTopicRequest) GetCreateUpdateTopicRequestDto() components.CreateUpdateTopicRequestDto {
-	if o == nil {
+func (t *TopicsControllerUpsertTopicRequest) GetIdempotencyKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IdempotencyKey
+}
+
+func (t *TopicsControllerUpsertTopicRequest) GetCreateUpdateTopicRequestDto() components.CreateUpdateTopicRequestDto {
+	if t == nil {
 		return components.CreateUpdateTopicRequestDto{}
 	}
-	return o.CreateUpdateTopicRequestDto
+	return t.CreateUpdateTopicRequestDto
 }
 
 type TopicsControllerUpsertTopicResponse struct {
@@ -33,23 +42,23 @@ type TopicsControllerUpsertTopicResponse struct {
 	Headers          map[string][]string
 }
 
-func (o *TopicsControllerUpsertTopicResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerUpsertTopicResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerUpsertTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
-	if o == nil {
+func (t *TopicsControllerUpsertTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.TopicResponseDto
+	return t.TopicResponseDto
 }
 
-func (o *TopicsControllerUpsertTopicResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerUpsertTopicResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

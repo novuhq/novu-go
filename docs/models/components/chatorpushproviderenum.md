@@ -17,6 +17,8 @@ The provider identifier for the credentials
 | `ChatOrPushProviderEnumGetstream`        | getstream                                |
 | `ChatOrPushProviderEnumRocketChat`       | rocket-chat                              |
 | `ChatOrPushProviderEnumWhatsappBusiness` | whatsapp-business                        |
+| `ChatOrPushProviderEnumChatWebhook`      | chat-webhook                             |
+| `ChatOrPushProviderEnumNovuSlack`        | novu-slack                               |
 | `ChatOrPushProviderEnumFcm`              | fcm                                      |
 | `ChatOrPushProviderEnumApns`             | apns                                     |
 | `ChatOrPushProviderEnumExpo`             | expo                                     |

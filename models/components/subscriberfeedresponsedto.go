@@ -15,37 +15,37 @@ type SubscriberFeedResponseDto struct {
 	SubscriberID string `json:"subscriberId"`
 }
 
-func (o *SubscriberFeedResponseDto) GetID() *string {
-	if o == nil {
+func (s *SubscriberFeedResponseDto) GetID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *SubscriberFeedResponseDto) GetFirstName() *string {
-	if o == nil {
+func (s *SubscriberFeedResponseDto) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *SubscriberFeedResponseDto) GetLastName() *string {
-	if o == nil {
+func (s *SubscriberFeedResponseDto) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *SubscriberFeedResponseDto) GetAvatar() *string {
-	if o == nil {
+func (s *SubscriberFeedResponseDto) GetAvatar() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Avatar
+	return s.Avatar
 }
 
-func (o *SubscriberFeedResponseDto) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscriberFeedResponseDto) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }

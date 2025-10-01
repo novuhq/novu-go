@@ -13,30 +13,30 @@ type SubscriberWorkflowPreferenceDto struct {
 	Workflow SubscriberPreferencesWorkflowInfoDto `json:"workflow"`
 }
 
-func (o *SubscriberWorkflowPreferenceDto) GetEnabled() bool {
-	if o == nil {
+func (s *SubscriberWorkflowPreferenceDto) GetEnabled() bool {
+	if s == nil {
 		return false
 	}
-	return o.Enabled
+	return s.Enabled
 }
 
-func (o *SubscriberWorkflowPreferenceDto) GetChannels() SubscriberPreferenceChannels {
-	if o == nil {
+func (s *SubscriberWorkflowPreferenceDto) GetChannels() SubscriberPreferenceChannels {
+	if s == nil {
 		return SubscriberPreferenceChannels{}
 	}
-	return o.Channels
+	return s.Channels
 }
 
-func (o *SubscriberWorkflowPreferenceDto) GetOverrides() []SubscriberPreferenceOverrideDto {
-	if o == nil {
+func (s *SubscriberWorkflowPreferenceDto) GetOverrides() []SubscriberPreferenceOverrideDto {
+	if s == nil {
 		return []SubscriberPreferenceOverrideDto{}
 	}
-	return o.Overrides
+	return s.Overrides
 }
 
-func (o *SubscriberWorkflowPreferenceDto) GetWorkflow() SubscriberPreferencesWorkflowInfoDto {
-	if o == nil {
+func (s *SubscriberWorkflowPreferenceDto) GetWorkflow() SubscriberPreferencesWorkflowInfoDto {
+	if s == nil {
 		return SubscriberPreferencesWorkflowInfoDto{}
 	}
-	return o.Workflow
+	return s.Workflow
 }

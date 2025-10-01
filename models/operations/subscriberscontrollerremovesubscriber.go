@@ -12,18 +12,18 @@ type SubscribersControllerRemoveSubscriberRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersControllerRemoveSubscriberRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersControllerRemoveSubscriberRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerRemoveSubscriberRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerRemoveSubscriberRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersControllerRemoveSubscriberResponse struct {
@@ -33,23 +33,23 @@ type SubscribersControllerRemoveSubscriberResponse struct {
 	Headers                     map[string][]string
 }
 
-func (o *SubscribersControllerRemoveSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerRemoveSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerRemoveSubscriberResponse) GetRemoveSubscriberResponseDto() *components.RemoveSubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersControllerRemoveSubscriberResponse) GetRemoveSubscriberResponseDto() *components.RemoveSubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.RemoveSubscriberResponseDto
+	return s.RemoveSubscriberResponseDto
 }
 
-func (o *SubscribersControllerRemoveSubscriberResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerRemoveSubscriberResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

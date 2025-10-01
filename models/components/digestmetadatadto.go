@@ -69,72 +69,72 @@ type DigestMetadataDto struct {
 	Timed *DigestTimedConfigDto `json:"timed,omitempty"`
 }
 
-func (o *DigestMetadataDto) GetDigestKey() *string {
-	if o == nil {
+func (d *DigestMetadataDto) GetDigestKey() *string {
+	if d == nil {
 		return nil
 	}
-	return o.DigestKey
+	return d.DigestKey
 }
 
-func (o *DigestMetadataDto) GetAmount() *float64 {
-	if o == nil {
+func (d *DigestMetadataDto) GetAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.Amount
+	return d.Amount
 }
 
-func (o *DigestMetadataDto) GetUnit() *DigestMetadataDtoUnit {
-	if o == nil {
+func (d *DigestMetadataDto) GetUnit() *DigestMetadataDtoUnit {
+	if d == nil {
 		return nil
 	}
-	return o.Unit
+	return d.Unit
 }
 
-func (o *DigestMetadataDto) GetType() DigestTypeEnum {
-	if o == nil {
+func (d *DigestMetadataDto) GetType() DigestTypeEnum {
+	if d == nil {
 		return DigestTypeEnum("")
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DigestMetadataDto) GetEvents() []map[string]any {
-	if o == nil {
+func (d *DigestMetadataDto) GetEvents() []map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Events
+	return d.Events
 }
 
-func (o *DigestMetadataDto) GetBackoff() *bool {
-	if o == nil {
+func (d *DigestMetadataDto) GetBackoff() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.Backoff
+	return d.Backoff
 }
 
-func (o *DigestMetadataDto) GetBackoffAmount() *float64 {
-	if o == nil {
+func (d *DigestMetadataDto) GetBackoffAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.BackoffAmount
+	return d.BackoffAmount
 }
 
-func (o *DigestMetadataDto) GetBackoffUnit() *DigestUnitEnum {
-	if o == nil {
+func (d *DigestMetadataDto) GetBackoffUnit() *DigestUnitEnum {
+	if d == nil {
 		return nil
 	}
-	return o.BackoffUnit
+	return d.BackoffUnit
 }
 
-func (o *DigestMetadataDto) GetUpdateMode() *bool {
-	if o == nil {
+func (d *DigestMetadataDto) GetUpdateMode() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.UpdateMode
+	return d.UpdateMode
 }
 
-func (o *DigestMetadataDto) GetTimed() *DigestTimedConfigDto {
-	if o == nil {
+func (d *DigestMetadataDto) GetTimed() *DigestTimedConfigDto {
+	if d == nil {
 		return nil
 	}
-	return o.Timed
+	return d.Timed
 }

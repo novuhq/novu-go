@@ -11,15 +11,16 @@ import (
 type ActivityNotificationJobResponseDtoType string
 
 const (
-	ActivityNotificationJobResponseDtoTypeInApp   ActivityNotificationJobResponseDtoType = "in_app"
-	ActivityNotificationJobResponseDtoTypeEmail   ActivityNotificationJobResponseDtoType = "email"
-	ActivityNotificationJobResponseDtoTypeSms     ActivityNotificationJobResponseDtoType = "sms"
-	ActivityNotificationJobResponseDtoTypeChat    ActivityNotificationJobResponseDtoType = "chat"
-	ActivityNotificationJobResponseDtoTypePush    ActivityNotificationJobResponseDtoType = "push"
-	ActivityNotificationJobResponseDtoTypeDigest  ActivityNotificationJobResponseDtoType = "digest"
-	ActivityNotificationJobResponseDtoTypeTrigger ActivityNotificationJobResponseDtoType = "trigger"
-	ActivityNotificationJobResponseDtoTypeDelay   ActivityNotificationJobResponseDtoType = "delay"
-	ActivityNotificationJobResponseDtoTypeCustom  ActivityNotificationJobResponseDtoType = "custom"
+	ActivityNotificationJobResponseDtoTypeInApp    ActivityNotificationJobResponseDtoType = "in_app"
+	ActivityNotificationJobResponseDtoTypeEmail    ActivityNotificationJobResponseDtoType = "email"
+	ActivityNotificationJobResponseDtoTypeSms      ActivityNotificationJobResponseDtoType = "sms"
+	ActivityNotificationJobResponseDtoTypeChat     ActivityNotificationJobResponseDtoType = "chat"
+	ActivityNotificationJobResponseDtoTypePush     ActivityNotificationJobResponseDtoType = "push"
+	ActivityNotificationJobResponseDtoTypeDigest   ActivityNotificationJobResponseDtoType = "digest"
+	ActivityNotificationJobResponseDtoTypeTrigger  ActivityNotificationJobResponseDtoType = "trigger"
+	ActivityNotificationJobResponseDtoTypeDelay    ActivityNotificationJobResponseDtoType = "delay"
+	ActivityNotificationJobResponseDtoTypeThrottle ActivityNotificationJobResponseDtoType = "throttle"
+	ActivityNotificationJobResponseDtoTypeCustom   ActivityNotificationJobResponseDtoType = "custom"
 )
 
 func (e ActivityNotificationJobResponseDtoType) ToPointer() *ActivityNotificationJobResponseDtoType {
@@ -46,6 +47,8 @@ func (e *ActivityNotificationJobResponseDtoType) UnmarshalJSON(data []byte) erro
 	case "trigger":
 		fallthrough
 	case "delay":
+		fallthrough
+	case "throttle":
 		fallthrough
 	case "custom":
 		*e = ActivityNotificationJobResponseDtoType(v)
@@ -80,74 +83,83 @@ type ActivityNotificationJobResponseDto struct {
 	Status string `json:"status"`
 	// Updated time of the notification
 	UpdatedAt *string `json:"updatedAt,omitempty"`
+	// The number of times the digest/delay job has been extended to align with the subscribers schedule
+	ScheduleExtensionsCount *float64 `json:"scheduleExtensionsCount,omitempty"`
 }
 
-func (o *ActivityNotificationJobResponseDto) GetID() string {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityNotificationJobResponseDto) GetType() ActivityNotificationJobResponseDtoType {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetType() ActivityNotificationJobResponseDtoType {
+	if a == nil {
 		return ActivityNotificationJobResponseDtoType("")
 	}
-	return o.Type
+	return a.Type
 }
 
-func (o *ActivityNotificationJobResponseDto) GetDigest() *DigestMetadataDto {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetDigest() *DigestMetadataDto {
+	if a == nil {
 		return nil
 	}
-	return o.Digest
+	return a.Digest
 }
 
-func (o *ActivityNotificationJobResponseDto) GetExecutionDetails() []ActivityNotificationExecutionDetailResponseDto {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetExecutionDetails() []ActivityNotificationExecutionDetailResponseDto {
+	if a == nil {
 		return []ActivityNotificationExecutionDetailResponseDto{}
 	}
-	return o.ExecutionDetails
+	return a.ExecutionDetails
 }
 
-func (o *ActivityNotificationJobResponseDto) GetStep() ActivityNotificationStepResponseDto {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetStep() ActivityNotificationStepResponseDto {
+	if a == nil {
 		return ActivityNotificationStepResponseDto{}
 	}
-	return o.Step
+	return a.Step
 }
 
-func (o *ActivityNotificationJobResponseDto) GetOverrides() map[string]any {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetOverrides() map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Overrides
+	return a.Overrides
 }
 
-func (o *ActivityNotificationJobResponseDto) GetPayload() *ActivityNotificationJobResponseDtoPayload {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetPayload() *ActivityNotificationJobResponseDtoPayload {
+	if a == nil {
 		return nil
 	}
-	return o.Payload
+	return a.Payload
 }
 
-func (o *ActivityNotificationJobResponseDto) GetProviderID() ProvidersIDEnum {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetProviderID() ProvidersIDEnum {
+	if a == nil {
 		return ProvidersIDEnum("")
 	}
-	return o.ProviderID
+	return a.ProviderID
 }
 
-func (o *ActivityNotificationJobResponseDto) GetStatus() string {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetStatus() string {
+	if a == nil {
 		return ""
 	}
-	return o.Status
+	return a.Status
 }
 
-func (o *ActivityNotificationJobResponseDto) GetUpdatedAt() *string {
-	if o == nil {
+func (a *ActivityNotificationJobResponseDto) GetUpdatedAt() *string {
+	if a == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return a.UpdatedAt
+}
+
+func (a *ActivityNotificationJobResponseDto) GetScheduleExtensionsCount() *float64 {
+	if a == nil {
+		return nil
+	}
+	return a.ScheduleExtensionsCount
 }

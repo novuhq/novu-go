@@ -56,67 +56,67 @@ type SubscribersControllerListSubscriberTopicsRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetAfter() *string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetAfter() *string {
+	if s == nil {
 		return nil
 	}
-	return o.After
+	return s.After
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetBefore() *string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetBefore() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Before
+	return s.Before
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetLimit() *float64 {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetLimit() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.Limit
+	return s.Limit
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetOrderDirection() *QueryParamOrderDirection {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetOrderDirection() *QueryParamOrderDirection {
+	if s == nil {
 		return nil
 	}
-	return o.OrderDirection
+	return s.OrderDirection
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetOrderBy() *string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetOrderBy() *string {
+	if s == nil {
 		return nil
 	}
-	return o.OrderBy
+	return s.OrderBy
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetIncludeCursor() *bool {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetIncludeCursor() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.IncludeCursor
+	return s.IncludeCursor
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetKey() *string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Key
+	return s.Key
 }
 
-func (o *SubscribersControllerListSubscriberTopicsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersControllerListSubscriberTopicsResponse struct {
@@ -126,23 +126,23 @@ type SubscribersControllerListSubscriberTopicsResponse struct {
 	Headers                           map[string][]string
 }
 
-func (o *SubscribersControllerListSubscriberTopicsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerListSubscriberTopicsResponse) GetListTopicSubscriptionsResponseDto() *components.ListTopicSubscriptionsResponseDto {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsResponse) GetListTopicSubscriptionsResponseDto() *components.ListTopicSubscriptionsResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.ListTopicSubscriptionsResponseDto
+	return s.ListTopicSubscriptionsResponseDto
 }
 
-func (o *SubscribersControllerListSubscriberTopicsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerListSubscriberTopicsResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

@@ -11,23 +11,23 @@ type BulkCreateSubscriberResponseDto struct {
 	Failed []FailedOperationDto `json:"failed"`
 }
 
-func (o *BulkCreateSubscriberResponseDto) GetUpdated() []UpdatedSubscriberDto {
-	if o == nil {
+func (b *BulkCreateSubscriberResponseDto) GetUpdated() []UpdatedSubscriberDto {
+	if b == nil {
 		return []UpdatedSubscriberDto{}
 	}
-	return o.Updated
+	return b.Updated
 }
 
-func (o *BulkCreateSubscriberResponseDto) GetCreated() []CreatedSubscriberDto {
-	if o == nil {
+func (b *BulkCreateSubscriberResponseDto) GetCreated() []CreatedSubscriberDto {
+	if b == nil {
 		return []CreatedSubscriberDto{}
 	}
-	return o.Created
+	return b.Created
 }
 
-func (o *BulkCreateSubscriberResponseDto) GetFailed() []FailedOperationDto {
-	if o == nil {
+func (b *BulkCreateSubscriberResponseDto) GetFailed() []FailedOperationDto {
+	if b == nil {
 		return []FailedOperationDto{}
 	}
-	return o.Failed
+	return b.Failed
 }

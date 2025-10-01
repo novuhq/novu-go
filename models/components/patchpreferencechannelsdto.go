@@ -15,37 +15,37 @@ type PatchPreferenceChannelsDto struct {
 	Chat *bool `json:"chat,omitempty"`
 }
 
-func (o *PatchPreferenceChannelsDto) GetEmail() *bool {
-	if o == nil {
+func (p *PatchPreferenceChannelsDto) GetEmail() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Email
+	return p.Email
 }
 
-func (o *PatchPreferenceChannelsDto) GetSms() *bool {
-	if o == nil {
+func (p *PatchPreferenceChannelsDto) GetSms() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Sms
+	return p.Sms
 }
 
-func (o *PatchPreferenceChannelsDto) GetInApp() *bool {
-	if o == nil {
+func (p *PatchPreferenceChannelsDto) GetInApp() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.InApp
+	return p.InApp
 }
 
-func (o *PatchPreferenceChannelsDto) GetPush() *bool {
-	if o == nil {
+func (p *PatchPreferenceChannelsDto) GetPush() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Push
+	return p.Push
 }
 
-func (o *PatchPreferenceChannelsDto) GetChat() *bool {
-	if o == nil {
+func (p *PatchPreferenceChannelsDto) GetChat() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Chat
+	return p.Chat
 }

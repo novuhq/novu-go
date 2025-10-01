@@ -11,23 +11,23 @@ type DeleteTopicSubscriptionsResponseDto struct {
 	Errors []SubscriptionsDeleteErrorDto `json:"errors,omitempty"`
 }
 
-func (o *DeleteTopicSubscriptionsResponseDto) GetData() []SubscriptionDto {
-	if o == nil {
+func (d *DeleteTopicSubscriptionsResponseDto) GetData() []SubscriptionDto {
+	if d == nil {
 		return []SubscriptionDto{}
 	}
-	return o.Data
+	return d.Data
 }
 
-func (o *DeleteTopicSubscriptionsResponseDto) GetMeta() MetaDto {
-	if o == nil {
+func (d *DeleteTopicSubscriptionsResponseDto) GetMeta() MetaDto {
+	if d == nil {
 		return MetaDto{}
 	}
-	return o.Meta
+	return d.Meta
 }
 
-func (o *DeleteTopicSubscriptionsResponseDto) GetErrors() []SubscriptionsDeleteErrorDto {
-	if o == nil {
+func (d *DeleteTopicSubscriptionsResponseDto) GetErrors() []SubscriptionsDeleteErrorDto {
+	if d == nil {
 		return nil
 	}
-	return o.Errors
+	return d.Errors
 }

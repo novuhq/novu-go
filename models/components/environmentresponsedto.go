@@ -2,6 +2,38 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// EnvironmentResponseDtoType - Type of the environment
+type EnvironmentResponseDtoType string
+
+const (
+	EnvironmentResponseDtoTypeDev  EnvironmentResponseDtoType = "dev"
+	EnvironmentResponseDtoTypeProd EnvironmentResponseDtoType = "prod"
+)
+
+func (e EnvironmentResponseDtoType) ToPointer() *EnvironmentResponseDtoType {
+	return &e
+}
+func (e *EnvironmentResponseDtoType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "dev":
+		fallthrough
+	case "prod":
+		*e = EnvironmentResponseDtoType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EnvironmentResponseDtoType: %v", v)
+	}
+}
+
 type EnvironmentResponseDto struct {
 	// Unique identifier of the environment
 	ID string `json:"_id"`
@@ -11,6 +43,8 @@ type EnvironmentResponseDto struct {
 	OrganizationID string `json:"_organizationId"`
 	// Unique identifier for the environment
 	Identifier string `json:"identifier"`
+	// Type of the environment
+	Type *EnvironmentResponseDtoType `json:"type,omitempty"`
 	// List of API keys associated with the environment
 	APIKeys []APIKeyDto `json:"apiKeys,omitempty"`
 	// Parent environment ID
@@ -19,51 +53,58 @@ type EnvironmentResponseDto struct {
 	Slug *string `json:"slug,omitempty"`
 }
 
-func (o *EnvironmentResponseDto) GetID() string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return o.ID
+	return e.ID
 }
 
-func (o *EnvironmentResponseDto) GetName() string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetName() string {
+	if e == nil {
 		return ""
 	}
-	return o.Name
+	return e.Name
 }
 
-func (o *EnvironmentResponseDto) GetOrganizationID() string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetOrganizationID() string {
+	if e == nil {
 		return ""
 	}
-	return o.OrganizationID
+	return e.OrganizationID
 }
 
-func (o *EnvironmentResponseDto) GetIdentifier() string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetIdentifier() string {
+	if e == nil {
 		return ""
 	}
-	return o.Identifier
+	return e.Identifier
 }
 
-func (o *EnvironmentResponseDto) GetAPIKeys() []APIKeyDto {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetType() *EnvironmentResponseDtoType {
+	if e == nil {
 		return nil
 	}
-	return o.APIKeys
+	return e.Type
 }
 
-func (o *EnvironmentResponseDto) GetParentID() *string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetAPIKeys() []APIKeyDto {
+	if e == nil {
 		return nil
 	}
-	return o.ParentID
+	return e.APIKeys
 }
 
-func (o *EnvironmentResponseDto) GetSlug() *string {
-	if o == nil {
+func (e *EnvironmentResponseDto) GetParentID() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Slug
+	return e.ParentID
+}
+
+func (e *EnvironmentResponseDto) GetSlug() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Slug
 }

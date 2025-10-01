@@ -22,38 +22,38 @@ func (s SubscribersV1ControllerGetUnseenCountRequest) MarshalJSON() ([]byte, err
 }
 
 func (s *SubscribersV1ControllerGetUnseenCountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountRequest) GetSeen() *bool {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountRequest) GetSeen() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Seen
+	return s.Seen
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountRequest) GetLimit() *float64 {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountRequest) GetLimit() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.Limit
+	return s.Limit
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersV1ControllerGetUnseenCountResponse struct {
@@ -63,23 +63,23 @@ type SubscribersV1ControllerGetUnseenCountResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountResponse) GetUnseenCountResponse() *components.UnseenCountResponse {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountResponse) GetUnseenCountResponse() *components.UnseenCountResponse {
+	if s == nil {
 		return nil
 	}
-	return o.UnseenCountResponse
+	return s.UnseenCountResponse
 }
 
-func (o *SubscribersV1ControllerGetUnseenCountResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetUnseenCountResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

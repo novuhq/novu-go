@@ -15,37 +15,37 @@ type FeedResponseDto struct {
 	Page float64 `json:"page"`
 }
 
-func (o *FeedResponseDto) GetTotalCount() *float64 {
-	if o == nil {
+func (f *FeedResponseDto) GetTotalCount() *float64 {
+	if f == nil {
 		return nil
 	}
-	return o.TotalCount
+	return f.TotalCount
 }
 
-func (o *FeedResponseDto) GetHasMore() bool {
-	if o == nil {
+func (f *FeedResponseDto) GetHasMore() bool {
+	if f == nil {
 		return false
 	}
-	return o.HasMore
+	return f.HasMore
 }
 
-func (o *FeedResponseDto) GetData() []NotificationFeedItemDto {
-	if o == nil {
+func (f *FeedResponseDto) GetData() []NotificationFeedItemDto {
+	if f == nil {
 		return []NotificationFeedItemDto{}
 	}
-	return o.Data
+	return f.Data
 }
 
-func (o *FeedResponseDto) GetPageSize() float64 {
-	if o == nil {
+func (f *FeedResponseDto) GetPageSize() float64 {
+	if f == nil {
 		return 0.0
 	}
-	return o.PageSize
+	return f.PageSize
 }
 
-func (o *FeedResponseDto) GetPage() float64 {
-	if o == nil {
+func (f *FeedResponseDto) GetPage() float64 {
+	if f == nil {
 		return 0.0
 	}
-	return o.Page
+	return f.Page
 }

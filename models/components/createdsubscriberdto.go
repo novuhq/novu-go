@@ -7,9 +7,9 @@ type CreatedSubscriberDto struct {
 	SubscriberID string `json:"subscriberId"`
 }
 
-func (o *CreatedSubscriberDto) GetSubscriberID() string {
-	if o == nil {
+func (c *CreatedSubscriberDto) GetSubscriberID() string {
+	if c == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return c.SubscriberID
 }

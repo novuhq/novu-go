@@ -12,18 +12,18 @@ type NotificationsControllerGetNotificationRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *NotificationsControllerGetNotificationRequest) GetNotificationID() string {
-	if o == nil {
+func (n *NotificationsControllerGetNotificationRequest) GetNotificationID() string {
+	if n == nil {
 		return ""
 	}
-	return o.NotificationID
+	return n.NotificationID
 }
 
-func (o *NotificationsControllerGetNotificationRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (n *NotificationsControllerGetNotificationRequest) GetIdempotencyKey() *string {
+	if n == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return n.IdempotencyKey
 }
 
 type NotificationsControllerGetNotificationResponse struct {
@@ -33,23 +33,23 @@ type NotificationsControllerGetNotificationResponse struct {
 	Headers                         map[string][]string
 }
 
-func (o *NotificationsControllerGetNotificationResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (n *NotificationsControllerGetNotificationResponse) GetHTTPMeta() components.HTTPMetadata {
+	if n == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return n.HTTPMeta
 }
 
-func (o *NotificationsControllerGetNotificationResponse) GetActivityNotificationResponseDto() *components.ActivityNotificationResponseDto {
-	if o == nil {
+func (n *NotificationsControllerGetNotificationResponse) GetActivityNotificationResponseDto() *components.ActivityNotificationResponseDto {
+	if n == nil {
 		return nil
 	}
-	return o.ActivityNotificationResponseDto
+	return n.ActivityNotificationResponseDto
 }
 
-func (o *NotificationsControllerGetNotificationResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (n *NotificationsControllerGetNotificationResponse) GetHeaders() map[string][]string {
+	if n == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return n.Headers
 }

@@ -40,30 +40,30 @@ type StepFilterDto struct {
 	Children  []FieldFilterPartDto `json:"children"`
 }
 
-func (o *StepFilterDto) GetIsNegated() bool {
-	if o == nil {
+func (s *StepFilterDto) GetIsNegated() bool {
+	if s == nil {
 		return false
 	}
-	return o.IsNegated
+	return s.IsNegated
 }
 
-func (o *StepFilterDto) GetType() BuilderFieldTypeEnum {
-	if o == nil {
+func (s *StepFilterDto) GetType() BuilderFieldTypeEnum {
+	if s == nil {
 		return BuilderFieldTypeEnum("")
 	}
-	return o.Type
+	return s.Type
 }
 
-func (o *StepFilterDto) GetValue() StepFilterDtoValue {
-	if o == nil {
+func (s *StepFilterDto) GetValue() StepFilterDtoValue {
+	if s == nil {
 		return StepFilterDtoValue("")
 	}
-	return o.Value
+	return s.Value
 }
 
-func (o *StepFilterDto) GetChildren() []FieldFilterPartDto {
-	if o == nil {
+func (s *StepFilterDto) GetChildren() []FieldFilterPartDto {
+	if s == nil {
 		return []FieldFilterPartDto{}
 	}
-	return o.Children
+	return s.Children
 }

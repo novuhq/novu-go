@@ -5,6 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 )
 
 // DigestControlDtoType - The type of digest strategy. Determines which fields are applicable.
@@ -90,51 +91,62 @@ type DigestControlDto struct {
 	DigestKey *string `json:"digestKey,omitempty"`
 }
 
-func (o *DigestControlDto) GetSkip() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.Skip
+func (d DigestControlDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (o *DigestControlDto) GetType() *DigestControlDtoType {
-	if o == nil {
-		return nil
+func (d *DigestControlDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
 	}
-	return o.Type
+	return nil
 }
 
-func (o *DigestControlDto) GetAmount() *float64 {
-	if o == nil {
+func (d *DigestControlDto) GetSkip() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Amount
+	return d.Skip
 }
 
-func (o *DigestControlDto) GetUnit() *DigestControlDtoUnit {
-	if o == nil {
+func (d *DigestControlDto) GetType() *DigestControlDtoType {
+	if d == nil {
 		return nil
 	}
-	return o.Unit
+	return d.Type
 }
 
-func (o *DigestControlDto) GetLookBackWindow() *LookBackWindowDto {
-	if o == nil {
+func (d *DigestControlDto) GetAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.LookBackWindow
+	return d.Amount
 }
 
-func (o *DigestControlDto) GetCron() *string {
-	if o == nil {
+func (d *DigestControlDto) GetUnit() *DigestControlDtoUnit {
+	if d == nil {
 		return nil
 	}
-	return o.Cron
+	return d.Unit
 }
 
-func (o *DigestControlDto) GetDigestKey() *string {
-	if o == nil {
+func (d *DigestControlDto) GetLookBackWindow() *LookBackWindowDto {
+	if d == nil {
 		return nil
 	}
-	return o.DigestKey
+	return d.LookBackWindow
+}
+
+func (d *DigestControlDto) GetCron() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Cron
+}
+
+func (d *DigestControlDto) GetDigestKey() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DigestKey
 }

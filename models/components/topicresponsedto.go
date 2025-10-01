@@ -15,37 +15,37 @@ type TopicResponseDto struct {
 	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
-func (o *TopicResponseDto) GetID() string {
-	if o == nil {
+func (t *TopicResponseDto) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TopicResponseDto) GetKey() string {
-	if o == nil {
+func (t *TopicResponseDto) GetKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.Key
+	return t.Key
 }
 
-func (o *TopicResponseDto) GetName() *string {
-	if o == nil {
+func (t *TopicResponseDto) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TopicResponseDto) GetCreatedAt() *string {
-	if o == nil {
+func (t *TopicResponseDto) GetCreatedAt() *string {
+	if t == nil {
 		return nil
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TopicResponseDto) GetUpdatedAt() *string {
-	if o == nil {
+func (t *TopicResponseDto) GetUpdatedAt() *string {
+	if t == nil {
 		return nil
 	}
-	return o.UpdatedAt
+	return t.UpdatedAt
 }

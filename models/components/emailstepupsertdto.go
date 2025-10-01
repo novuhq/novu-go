@@ -3,96 +3,73 @@
 package components
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// EmailStepUpsertDtoEditorType - Type of editor to use for the body.
-type EmailStepUpsertDtoEditorType string
+type EmailStepUpsertDtoControlValuesType string
 
 const (
-	EmailStepUpsertDtoEditorTypeBlock EmailStepUpsertDtoEditorType = "block"
-	EmailStepUpsertDtoEditorTypeHTML  EmailStepUpsertDtoEditorType = "html"
+	EmailStepUpsertDtoControlValuesTypeEmailControlDto EmailStepUpsertDtoControlValuesType = "EmailControlDto"
+	EmailStepUpsertDtoControlValuesTypeMapOfAny        EmailStepUpsertDtoControlValuesType = "mapOfAny"
 )
 
-func (e EmailStepUpsertDtoEditorType) ToPointer() *EmailStepUpsertDtoEditorType {
-	return &e
-}
-func (e *EmailStepUpsertDtoEditorType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "block":
-		fallthrough
-	case "html":
-		*e = EmailStepUpsertDtoEditorType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for EmailStepUpsertDtoEditorType: %v", v)
-	}
-}
-
-// EmailStepUpsertDtoControlValues - Control values for the Email step
+// EmailStepUpsertDtoControlValues - Control values for the Email step.
 type EmailStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Subject of the email.
-	Subject string `json:"subject"`
-	// Body content of the email, either a valid Maily JSON object, or html string.
-	Body *string `default:"" json:"body"`
-	// Type of editor to use for the body.
-	EditorType *EmailStepUpsertDtoEditorType `default:"block" json:"editorType"`
-	// Disable sanitization of the output.
-	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	EmailControlDto *EmailControlDto `queryParam:"inline,name=controlValues"`
+	MapOfAny        map[string]any   `queryParam:"inline,name=controlValues"`
+
+	Type EmailStepUpsertDtoControlValuesType
 }
 
-func (e EmailStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(e, "", false)
-}
+func CreateEmailStepUpsertDtoControlValuesEmailControlDto(emailControlDto EmailControlDto) EmailStepUpsertDtoControlValues {
+	typ := EmailStepUpsertDtoControlValuesTypeEmailControlDto
 
-func (e *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
-		return err
+	return EmailStepUpsertDtoControlValues{
+		EmailControlDto: &emailControlDto,
+		Type:            typ,
 	}
-	return nil
 }
 
-func (o *EmailStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func CreateEmailStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) EmailStepUpsertDtoControlValues {
+	typ := EmailStepUpsertDtoControlValuesTypeMapOfAny
+
+	return EmailStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var emailControlDto EmailControlDto = EmailControlDto{}
+	if err := utils.UnmarshalJSON(data, &emailControlDto, "", true, nil); err == nil {
+		u.EmailControlDto = &emailControlDto
+		u.Type = EmailStepUpsertDtoControlValuesTypeEmailControlDto
 		return nil
 	}
-	return o.Skip
-}
 
-func (o *EmailStepUpsertDtoControlValues) GetSubject() string {
-	if o == nil {
-		return ""
-	}
-	return o.Subject
-}
-
-func (o *EmailStepUpsertDtoControlValues) GetBody() *string {
-	if o == nil {
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = EmailStepUpsertDtoControlValuesTypeMapOfAny
 		return nil
 	}
-	return o.Body
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for EmailStepUpsertDtoControlValues", string(data))
 }
 
-func (o *EmailStepUpsertDtoControlValues) GetEditorType() *EmailStepUpsertDtoEditorType {
-	if o == nil {
-		return nil
+func (u EmailStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.EmailControlDto != nil {
+		return utils.MarshalJSON(u.EmailControlDto, "", true)
 	}
-	return o.EditorType
-}
 
-func (o *EmailStepUpsertDtoControlValues) GetDisableOutputSanitization() *bool {
-	if o == nil {
-		return nil
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
-	return o.DisableOutputSanitization
+
+	return nil, errors.New("could not marshal union type EmailStepUpsertDtoControlValues: all fields are null")
 }
 
 type EmailStepUpsertDto struct {
@@ -102,34 +79,45 @@ type EmailStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Email step
+	// Control values for the Email step.
 	ControlValues *EmailStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 
-func (o *EmailStepUpsertDto) GetID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.ID
+func (e EmailStepUpsertDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
 }
 
-func (o *EmailStepUpsertDto) GetName() string {
-	if o == nil {
+func (e *EmailStepUpsertDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"name", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *EmailStepUpsertDto) GetID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ID
+}
+
+func (e *EmailStepUpsertDto) GetName() string {
+	if e == nil {
 		return ""
 	}
-	return o.Name
+	return e.Name
 }
 
-func (o *EmailStepUpsertDto) GetType() StepTypeEnum {
-	if o == nil {
+func (e *EmailStepUpsertDto) GetType() StepTypeEnum {
+	if e == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return e.Type
 }
 
-func (o *EmailStepUpsertDto) GetControlValues() *EmailStepUpsertDtoControlValues {
-	if o == nil {
+func (e *EmailStepUpsertDto) GetControlValues() *EmailStepUpsertDtoControlValues {
+	if e == nil {
 		return nil
 	}
-	return o.ControlValues
+	return e.ControlValues
 }

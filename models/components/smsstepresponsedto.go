@@ -20,35 +20,31 @@ func (s SmsStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SmsStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *SmsStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (s *SmsStepResponseDtoControlValues) GetSkip() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.Skip
+	return s.Skip
 }
 
-func (o *SmsStepResponseDtoControlValues) GetBody() *string {
-	if o == nil {
+func (s *SmsStepResponseDtoControlValues) GetBody() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Body
+	return s.Body
 }
 
-func (o *SmsStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (s *SmsStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// SmsStepResponseDtoSlug - Slug of the step
-type SmsStepResponseDtoSlug struct {
+	return s.AdditionalProperties
 }
 
 type SmsStepResponseDto struct {
@@ -65,11 +61,11 @@ type SmsStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug SmsStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -78,86 +74,97 @@ type SmsStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *SmsStepResponseDto) GetControls() SmsControlsMetadataResponseDto {
-	if o == nil {
+func (s SmsStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SmsStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SmsStepResponseDto) GetControls() SmsControlsMetadataResponseDto {
+	if s == nil {
 		return SmsControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return s.Controls
 }
 
-func (o *SmsStepResponseDto) GetControlValues() *SmsStepResponseDtoControlValues {
-	if o == nil {
+func (s *SmsStepResponseDto) GetControlValues() *SmsStepResponseDtoControlValues {
+	if s == nil {
 		return nil
 	}
-	return o.ControlValues
+	return s.ControlValues
 }
 
-func (o *SmsStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (s *SmsStepResponseDto) GetVariables() map[string]any {
+	if s == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return s.Variables
 }
 
-func (o *SmsStepResponseDto) GetStepID() string {
-	if o == nil {
+func (s *SmsStepResponseDto) GetStepID() string {
+	if s == nil {
 		return ""
 	}
-	return o.StepID
+	return s.StepID
 }
 
-func (o *SmsStepResponseDto) GetID() string {
-	if o == nil {
+func (s *SmsStepResponseDto) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *SmsStepResponseDto) GetName() string {
-	if o == nil {
+func (s *SmsStepResponseDto) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *SmsStepResponseDto) GetSlug() SmsStepResponseDtoSlug {
-	if o == nil {
-		return SmsStepResponseDtoSlug{}
+func (s *SmsStepResponseDto) GetSlug() string {
+	if s == nil {
+		return ""
 	}
-	return o.Slug
+	return s.Slug
 }
 
-func (o *SmsStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (s *SmsStepResponseDto) GetType() StepTypeEnum {
+	if s == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return s.Type
 }
 
-func (o *SmsStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (s *SmsStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if s == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return s.Origin
 }
 
-func (o *SmsStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (s *SmsStepResponseDto) GetWorkflowID() string {
+	if s == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return s.WorkflowID
 }
 
-func (o *SmsStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (s *SmsStepResponseDto) GetWorkflowDatabaseID() string {
+	if s == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return s.WorkflowDatabaseID
 }
 
-func (o *SmsStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (s *SmsStepResponseDto) GetIssues() *StepIssuesDto {
+	if s == nil {
 		return nil
 	}
-	return o.Issues
+	return s.Issues
 }

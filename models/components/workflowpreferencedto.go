@@ -18,22 +18,22 @@ func (w WorkflowPreferenceDto) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowPreferenceDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WorkflowPreferenceDto) GetEnabled() *bool {
-	if o == nil {
+func (w *WorkflowPreferenceDto) GetEnabled() *bool {
+	if w == nil {
 		return nil
 	}
-	return o.Enabled
+	return w.Enabled
 }
 
-func (o *WorkflowPreferenceDto) GetReadOnly() *bool {
-	if o == nil {
+func (w *WorkflowPreferenceDto) GetReadOnly() *bool {
+	if w == nil {
 		return nil
 	}
-	return o.ReadOnly
+	return w.ReadOnly
 }

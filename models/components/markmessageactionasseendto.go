@@ -45,16 +45,16 @@ type MarkMessageActionAsSeenDto struct {
 	Payload *MarkMessageActionAsSeenDtoPayload `json:"payload,omitempty"`
 }
 
-func (o *MarkMessageActionAsSeenDto) GetStatus() MarkMessageActionAsSeenDtoStatus {
-	if o == nil {
+func (m *MarkMessageActionAsSeenDto) GetStatus() MarkMessageActionAsSeenDtoStatus {
+	if m == nil {
 		return MarkMessageActionAsSeenDtoStatus("")
 	}
-	return o.Status
+	return m.Status
 }
 
-func (o *MarkMessageActionAsSeenDto) GetPayload() *MarkMessageActionAsSeenDtoPayload {
-	if o == nil {
+func (m *MarkMessageActionAsSeenDto) GetPayload() *MarkMessageActionAsSeenDtoPayload {
+	if m == nil {
 		return nil
 	}
-	return o.Payload
+	return m.Payload
 }

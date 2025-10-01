@@ -20,35 +20,31 @@ func (c ChatStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ChatStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *ChatStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (c *ChatStepResponseDtoControlValues) GetSkip() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Skip
+	return c.Skip
 }
 
-func (o *ChatStepResponseDtoControlValues) GetBody() *string {
-	if o == nil {
+func (c *ChatStepResponseDtoControlValues) GetBody() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Body
+	return c.Body
 }
 
-func (o *ChatStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (c *ChatStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// ChatStepResponseDtoSlug - Slug of the step
-type ChatStepResponseDtoSlug struct {
+	return c.AdditionalProperties
 }
 
 type ChatStepResponseDto struct {
@@ -65,11 +61,11 @@ type ChatStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug ChatStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -78,86 +74,97 @@ type ChatStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *ChatStepResponseDto) GetControls() ChatControlsMetadataResponseDto {
-	if o == nil {
+func (c ChatStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *ChatStepResponseDto) GetControls() ChatControlsMetadataResponseDto {
+	if c == nil {
 		return ChatControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return c.Controls
 }
 
-func (o *ChatStepResponseDto) GetControlValues() *ChatStepResponseDtoControlValues {
-	if o == nil {
+func (c *ChatStepResponseDto) GetControlValues() *ChatStepResponseDtoControlValues {
+	if c == nil {
 		return nil
 	}
-	return o.ControlValues
+	return c.ControlValues
 }
 
-func (o *ChatStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (c *ChatStepResponseDto) GetVariables() map[string]any {
+	if c == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return c.Variables
 }
 
-func (o *ChatStepResponseDto) GetStepID() string {
-	if o == nil {
+func (c *ChatStepResponseDto) GetStepID() string {
+	if c == nil {
 		return ""
 	}
-	return o.StepID
+	return c.StepID
 }
 
-func (o *ChatStepResponseDto) GetID() string {
-	if o == nil {
+func (c *ChatStepResponseDto) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *ChatStepResponseDto) GetName() string {
-	if o == nil {
+func (c *ChatStepResponseDto) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *ChatStepResponseDto) GetSlug() ChatStepResponseDtoSlug {
-	if o == nil {
-		return ChatStepResponseDtoSlug{}
+func (c *ChatStepResponseDto) GetSlug() string {
+	if c == nil {
+		return ""
 	}
-	return o.Slug
+	return c.Slug
 }
 
-func (o *ChatStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (c *ChatStepResponseDto) GetType() StepTypeEnum {
+	if c == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return c.Type
 }
 
-func (o *ChatStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (c *ChatStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if c == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return c.Origin
 }
 
-func (o *ChatStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (c *ChatStepResponseDto) GetWorkflowID() string {
+	if c == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return c.WorkflowID
 }
 
-func (o *ChatStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (c *ChatStepResponseDto) GetWorkflowDatabaseID() string {
+	if c == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return c.WorkflowDatabaseID
 }
 
-func (o *ChatStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (c *ChatStepResponseDto) GetIssues() *StepIssuesDto {
+	if c == nil {
 		return nil
 	}
-	return o.Issues
+	return c.Issues
 }

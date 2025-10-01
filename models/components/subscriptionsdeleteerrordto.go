@@ -11,23 +11,23 @@ type SubscriptionsDeleteErrorDto struct {
 	Message string `json:"message"`
 }
 
-func (o *SubscriptionsDeleteErrorDto) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscriptionsDeleteErrorDto) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscriptionsDeleteErrorDto) GetCode() string {
-	if o == nil {
+func (s *SubscriptionsDeleteErrorDto) GetCode() string {
+	if s == nil {
 		return ""
 	}
-	return o.Code
+	return s.Code
 }
 
-func (o *SubscriptionsDeleteErrorDto) GetMessage() string {
-	if o == nil {
+func (s *SubscriptionsDeleteErrorDto) GetMessage() string {
+	if s == nil {
 		return ""
 	}
-	return o.Message
+	return s.Message
 }

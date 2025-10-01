@@ -21,58 +21,58 @@ type ChannelCredentials struct {
 	ExternalURL *string `json:"externalUrl,omitempty"`
 }
 
-func (o *ChannelCredentials) GetWebhookURL() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetWebhookURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.WebhookURL
+	return c.WebhookURL
 }
 
-func (o *ChannelCredentials) GetChannel() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetChannel() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Channel
+	return c.Channel
 }
 
-func (o *ChannelCredentials) GetDeviceTokens() []string {
-	if o == nil {
+func (c *ChannelCredentials) GetDeviceTokens() []string {
+	if c == nil {
 		return nil
 	}
-	return o.DeviceTokens
+	return c.DeviceTokens
 }
 
-func (o *ChannelCredentials) GetAlertUID() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetAlertUID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.AlertUID
+	return c.AlertUID
 }
 
-func (o *ChannelCredentials) GetTitle() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetTitle() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Title
+	return c.Title
 }
 
-func (o *ChannelCredentials) GetImageURL() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetImageURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ImageURL
+	return c.ImageURL
 }
 
-func (o *ChannelCredentials) GetState() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetState() *string {
+	if c == nil {
 		return nil
 	}
-	return o.State
+	return c.State
 }
 
-func (o *ChannelCredentials) GetExternalURL() *string {
-	if o == nil {
+func (c *ChannelCredentials) GetExternalURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalURL
+	return c.ExternalURL
 }

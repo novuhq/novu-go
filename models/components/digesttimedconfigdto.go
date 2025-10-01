@@ -65,51 +65,51 @@ type DigestTimedConfigDto struct {
 	CronExpression *string `json:"cronExpression,omitempty"`
 }
 
-func (o *DigestTimedConfigDto) GetAtTime() *string {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetAtTime() *string {
+	if d == nil {
 		return nil
 	}
-	return o.AtTime
+	return d.AtTime
 }
 
-func (o *DigestTimedConfigDto) GetWeekDays() []DigestTimedConfigDtoWeekDays {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetWeekDays() []DigestTimedConfigDtoWeekDays {
+	if d == nil {
 		return nil
 	}
-	return o.WeekDays
+	return d.WeekDays
 }
 
-func (o *DigestTimedConfigDto) GetMonthDays() []float64 {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetMonthDays() []float64 {
+	if d == nil {
 		return nil
 	}
-	return o.MonthDays
+	return d.MonthDays
 }
 
-func (o *DigestTimedConfigDto) GetOrdinal() *OrdinalEnum {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetOrdinal() *OrdinalEnum {
+	if d == nil {
 		return nil
 	}
-	return o.Ordinal
+	return d.Ordinal
 }
 
-func (o *DigestTimedConfigDto) GetOrdinalValue() *OrdinalValueEnum {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetOrdinalValue() *OrdinalValueEnum {
+	if d == nil {
 		return nil
 	}
-	return o.OrdinalValue
+	return d.OrdinalValue
 }
 
-func (o *DigestTimedConfigDto) GetMonthlyType() *MonthlyTypeEnum {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetMonthlyType() *MonthlyTypeEnum {
+	if d == nil {
 		return nil
 	}
-	return o.MonthlyType
+	return d.MonthlyType
 }
 
-func (o *DigestTimedConfigDto) GetCronExpression() *string {
-	if o == nil {
+func (d *DigestTimedConfigDto) GetCronExpression() *string {
+	if d == nil {
 		return nil
 	}
-	return o.CronExpression
+	return d.CronExpression
 }

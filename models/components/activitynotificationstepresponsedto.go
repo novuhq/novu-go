@@ -45,86 +45,86 @@ type ActivityNotificationStepResponseDto struct {
 	ParentID *string `json:"_parentId,omitempty"`
 }
 
-func (o *ActivityNotificationStepResponseDto) GetID() string {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityNotificationStepResponseDto) GetActive() bool {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetActive() bool {
+	if a == nil {
 		return false
 	}
-	return o.Active
+	return a.Active
 }
 
-func (o *ActivityNotificationStepResponseDto) GetReplyCallback() *ActivityNotificationStepResponseDtoReplyCallback {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetReplyCallback() *ActivityNotificationStepResponseDtoReplyCallback {
+	if a == nil {
 		return nil
 	}
-	return o.ReplyCallback
+	return a.ReplyCallback
 }
 
-func (o *ActivityNotificationStepResponseDto) GetControlVariables() *ControlVariables {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetControlVariables() *ControlVariables {
+	if a == nil {
 		return nil
 	}
-	return o.ControlVariables
+	return a.ControlVariables
 }
 
-func (o *ActivityNotificationStepResponseDto) GetMetadata() *ActivityNotificationStepResponseDtoMetadata {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetMetadata() *ActivityNotificationStepResponseDtoMetadata {
+	if a == nil {
 		return nil
 	}
-	return o.Metadata
+	return a.Metadata
 }
 
-func (o *ActivityNotificationStepResponseDto) GetIssues() *Issues {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetIssues() *Issues {
+	if a == nil {
 		return nil
 	}
-	return o.Issues
+	return a.Issues
 }
 
-func (o *ActivityNotificationStepResponseDto) GetFilters() []StepFilterDto {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetFilters() []StepFilterDto {
+	if a == nil {
 		return []StepFilterDto{}
 	}
-	return o.Filters
+	return a.Filters
 }
 
-func (o *ActivityNotificationStepResponseDto) GetTemplate() *MessageTemplateDto {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetTemplate() *MessageTemplateDto {
+	if a == nil {
 		return nil
 	}
-	return o.Template
+	return a.Template
 }
 
-func (o *ActivityNotificationStepResponseDto) GetVariants() []ActivityNotificationStepResponseDto {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetVariants() []ActivityNotificationStepResponseDto {
+	if a == nil {
 		return nil
 	}
-	return o.Variants
+	return a.Variants
 }
 
-func (o *ActivityNotificationStepResponseDto) GetTemplateID() string {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetTemplateID() string {
+	if a == nil {
 		return ""
 	}
-	return o.TemplateID
+	return a.TemplateID
 }
 
-func (o *ActivityNotificationStepResponseDto) GetName() *string {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Name
+	return a.Name
 }
 
-func (o *ActivityNotificationStepResponseDto) GetParentID() *string {
-	if o == nil {
+func (a *ActivityNotificationStepResponseDto) GetParentID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ParentID
+	return a.ParentID
 }

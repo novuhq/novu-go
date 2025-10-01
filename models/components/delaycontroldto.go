@@ -32,22 +32,22 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// DelayControlDtoUnit - Unit of time for the delay amount.
-type DelayControlDtoUnit string
+// Unit of time for the delay amount.
+type Unit string
 
 const (
-	DelayControlDtoUnitSeconds DelayControlDtoUnit = "seconds"
-	DelayControlDtoUnitMinutes DelayControlDtoUnit = "minutes"
-	DelayControlDtoUnitHours   DelayControlDtoUnit = "hours"
-	DelayControlDtoUnitDays    DelayControlDtoUnit = "days"
-	DelayControlDtoUnitWeeks   DelayControlDtoUnit = "weeks"
-	DelayControlDtoUnitMonths  DelayControlDtoUnit = "months"
+	UnitSeconds Unit = "seconds"
+	UnitMinutes Unit = "minutes"
+	UnitHours   Unit = "hours"
+	UnitDays    Unit = "days"
+	UnitWeeks   Unit = "weeks"
+	UnitMonths  Unit = "months"
 )
 
-func (e DelayControlDtoUnit) ToPointer() *DelayControlDtoUnit {
+func (e Unit) ToPointer() *Unit {
 	return &e
 }
-func (e *DelayControlDtoUnit) UnmarshalJSON(data []byte) error {
+func (e *Unit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -64,10 +64,10 @@ func (e *DelayControlDtoUnit) UnmarshalJSON(data []byte) error {
 	case "weeks":
 		fallthrough
 	case "months":
-		*e = DelayControlDtoUnit(v)
+		*e = Unit(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for DelayControlDtoUnit: %v", v)
+		return fmt.Errorf("invalid value for Unit: %v", v)
 	}
 }
 
@@ -79,7 +79,7 @@ type DelayControlDto struct {
 	// Amount of time to delay.
 	Amount float64 `json:"amount"`
 	// Unit of time for the delay amount.
-	Unit DelayControlDtoUnit `json:"unit"`
+	Unit Unit `json:"unit"`
 }
 
 func (d DelayControlDto) MarshalJSON() ([]byte, error) {
@@ -87,36 +87,36 @@ func (d DelayControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "unit"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *DelayControlDto) GetSkip() map[string]any {
-	if o == nil {
+func (d *DelayControlDto) GetSkip() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Skip
+	return d.Skip
 }
 
-func (o *DelayControlDto) GetType() *Type {
-	if o == nil {
+func (d *DelayControlDto) GetType() *Type {
+	if d == nil {
 		return nil
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DelayControlDto) GetAmount() float64 {
-	if o == nil {
+func (d *DelayControlDto) GetAmount() float64 {
+	if d == nil {
 		return 0.0
 	}
-	return o.Amount
+	return d.Amount
 }
 
-func (o *DelayControlDto) GetUnit() DelayControlDtoUnit {
-	if o == nil {
-		return DelayControlDtoUnit("")
+func (d *DelayControlDto) GetUnit() Unit {
+	if d == nil {
+		return Unit("")
 	}
-	return o.Unit
+	return d.Unit
 }

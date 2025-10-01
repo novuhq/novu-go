@@ -11,23 +11,23 @@ type CreateEnvironmentRequestDto struct {
 	Color string `json:"color"`
 }
 
-func (o *CreateEnvironmentRequestDto) GetName() string {
-	if o == nil {
+func (c *CreateEnvironmentRequestDto) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CreateEnvironmentRequestDto) GetParentID() *string {
-	if o == nil {
+func (c *CreateEnvironmentRequestDto) GetParentID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ParentID
+	return c.ParentID
 }
 
-func (o *CreateEnvironmentRequestDto) GetColor() string {
-	if o == nil {
+func (c *CreateEnvironmentRequestDto) GetColor() string {
+	if c == nil {
 		return ""
 	}
-	return o.Color
+	return c.Color
 }

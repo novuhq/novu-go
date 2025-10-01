@@ -15,37 +15,37 @@ type MessagesResponseDto struct {
 	Page float64 `json:"page"`
 }
 
-func (o *MessagesResponseDto) GetTotalCount() *float64 {
-	if o == nil {
+func (m *MessagesResponseDto) GetTotalCount() *float64 {
+	if m == nil {
 		return nil
 	}
-	return o.TotalCount
+	return m.TotalCount
 }
 
-func (o *MessagesResponseDto) GetHasMore() bool {
-	if o == nil {
+func (m *MessagesResponseDto) GetHasMore() bool {
+	if m == nil {
 		return false
 	}
-	return o.HasMore
+	return m.HasMore
 }
 
-func (o *MessagesResponseDto) GetData() []MessageResponseDto {
-	if o == nil {
+func (m *MessagesResponseDto) GetData() []MessageResponseDto {
+	if m == nil {
 		return []MessageResponseDto{}
 	}
-	return o.Data
+	return m.Data
 }
 
-func (o *MessagesResponseDto) GetPageSize() float64 {
-	if o == nil {
+func (m *MessagesResponseDto) GetPageSize() float64 {
+	if m == nil {
 		return 0.0
 	}
-	return o.PageSize
+	return m.PageSize
 }
 
-func (o *MessagesResponseDto) GetPage() float64 {
-	if o == nil {
+func (m *MessagesResponseDto) GetPage() float64 {
+	if m == nil {
 		return 0.0
 	}
-	return o.Page
+	return m.Page
 }

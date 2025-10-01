@@ -6,9 +6,9 @@ type BulkTriggerEventDto struct {
 	Events []TriggerEventRequestDto `json:"events"`
 }
 
-func (o *BulkTriggerEventDto) GetEvents() []TriggerEventRequestDto {
-	if o == nil {
+func (b *BulkTriggerEventDto) GetEvents() []TriggerEventRequestDto {
+	if b == nil {
 		return []TriggerEventRequestDto{}
 	}
-	return o.Events
+	return b.Events
 }

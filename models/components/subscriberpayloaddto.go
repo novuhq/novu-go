@@ -18,10 +18,10 @@ const (
 )
 
 type Data struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
-	Boolean    *bool    `queryParam:"inline"`
-	Number     *float64 `queryParam:"inline"`
+	Str        *string  `queryParam:"inline,name=data"`
+	ArrayOfStr []string `queryParam:"inline,name=data"`
+	Boolean    *bool    `queryParam:"inline,name=data"`
+	Number     *float64 `queryParam:"inline,name=data"`
 
 	Type DataType
 }
@@ -65,28 +65,28 @@ func CreateDataNumber(number float64) Data {
 func (u *Data) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = DataTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = DataTypeArrayOfStr
 		return nil
 	}
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = DataTypeBoolean
 		return nil
 	}
 
 	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
 		u.Number = &number
 		u.Type = DataTypeNumber
 		return nil
@@ -138,72 +138,83 @@ type SubscriberPayloadDto struct {
 	Timezone *string `json:"timezone,omitempty"`
 }
 
-func (o *SubscriberPayloadDto) GetSubscriberID() string {
-	if o == nil {
+func (s SubscriberPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SubscriberPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SubscriberPayloadDto) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscriberPayloadDto) GetEmail() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetEmail() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }
 
-func (o *SubscriberPayloadDto) GetFirstName() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *SubscriberPayloadDto) GetLastName() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *SubscriberPayloadDto) GetPhone() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetPhone() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Phone
+	return s.Phone
 }
 
-func (o *SubscriberPayloadDto) GetAvatar() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetAvatar() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Avatar
+	return s.Avatar
 }
 
-func (o *SubscriberPayloadDto) GetLocale() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetLocale() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Locale
+	return s.Locale
 }
 
-func (o *SubscriberPayloadDto) GetData() map[string]Data {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetData() map[string]Data {
+	if s == nil {
 		return nil
 	}
-	return o.Data
+	return s.Data
 }
 
-func (o *SubscriberPayloadDto) GetChannels() []SubscriberChannelDto {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetChannels() []SubscriberChannelDto {
+	if s == nil {
 		return nil
 	}
-	return o.Channels
+	return s.Channels
 }
 
-func (o *SubscriberPayloadDto) GetTimezone() *string {
-	if o == nil {
+func (s *SubscriberPayloadDto) GetTimezone() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Timezone
+	return s.Timezone
 }

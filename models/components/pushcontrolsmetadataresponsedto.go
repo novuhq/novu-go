@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type PushControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -11,23 +15,34 @@ type PushControlsMetadataResponseDto struct {
 	Values PushControlDto `json:"values"`
 }
 
-func (o *PushControlsMetadataResponseDto) GetDataSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.DataSchema
+func (p PushControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
 }
 
-func (o *PushControlsMetadataResponseDto) GetUISchema() *UISchema {
-	if o == nil {
-		return nil
+func (p *PushControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"values"}); err != nil {
+		return err
 	}
-	return o.UISchema
+	return nil
 }
 
-func (o *PushControlsMetadataResponseDto) GetValues() PushControlDto {
-	if o == nil {
+func (p *PushControlsMetadataResponseDto) GetDataSchema() map[string]any {
+	if p == nil {
+		return nil
+	}
+	return p.DataSchema
+}
+
+func (p *PushControlsMetadataResponseDto) GetUISchema() *UISchema {
+	if p == nil {
+		return nil
+	}
+	return p.UISchema
+}
+
+func (p *PushControlsMetadataResponseDto) GetValues() PushControlDto {
+	if p == nil {
 		return PushControlDto{}
 	}
-	return o.Values
+	return p.Values
 }

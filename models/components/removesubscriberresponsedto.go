@@ -9,16 +9,16 @@ type RemoveSubscriberResponseDto struct {
 	Status string `json:"status"`
 }
 
-func (o *RemoveSubscriberResponseDto) GetAcknowledged() bool {
-	if o == nil {
+func (r *RemoveSubscriberResponseDto) GetAcknowledged() bool {
+	if r == nil {
 		return false
 	}
-	return o.Acknowledged
+	return r.Acknowledged
 }
 
-func (o *RemoveSubscriberResponseDto) GetStatus() string {
-	if o == nil {
+func (r *RemoveSubscriberResponseDto) GetStatus() string {
+	if r == nil {
 		return ""
 	}
-	return o.Status
+	return r.Status
 }

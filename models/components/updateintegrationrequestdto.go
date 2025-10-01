@@ -2,6 +2,10 @@
 
 package components
 
+// UpdateIntegrationRequestDtoConfigurations - Configurations for the integration
+type UpdateIntegrationRequestDtoConfigurations struct {
+}
+
 type UpdateIntegrationRequestDto struct {
 	Name          *string `json:"name,omitempty"`
 	Identifier    *string `json:"identifier,omitempty"`
@@ -11,53 +15,62 @@ type UpdateIntegrationRequestDto struct {
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	Check       *bool           `json:"check,omitempty"`
 	Conditions  []StepFilterDto `json:"conditions,omitempty"`
+	// Configurations for the integration
+	Configurations *UpdateIntegrationRequestDtoConfigurations `json:"configurations,omitempty"`
 }
 
-func (o *UpdateIntegrationRequestDto) GetName() *string {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetName() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Name
+	return u.Name
 }
 
-func (o *UpdateIntegrationRequestDto) GetIdentifier() *string {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetIdentifier() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Identifier
+	return u.Identifier
 }
 
-func (o *UpdateIntegrationRequestDto) GetEnvironmentID() *string {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetEnvironmentID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.EnvironmentID
+	return u.EnvironmentID
 }
 
-func (o *UpdateIntegrationRequestDto) GetActive() *bool {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetActive() *bool {
+	if u == nil {
 		return nil
 	}
-	return o.Active
+	return u.Active
 }
 
-func (o *UpdateIntegrationRequestDto) GetCredentials() *CredentialsDto {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetCredentials() *CredentialsDto {
+	if u == nil {
 		return nil
 	}
-	return o.Credentials
+	return u.Credentials
 }
 
-func (o *UpdateIntegrationRequestDto) GetCheck() *bool {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetCheck() *bool {
+	if u == nil {
 		return nil
 	}
-	return o.Check
+	return u.Check
 }
 
-func (o *UpdateIntegrationRequestDto) GetConditions() []StepFilterDto {
-	if o == nil {
+func (u *UpdateIntegrationRequestDto) GetConditions() []StepFilterDto {
+	if u == nil {
 		return nil
 	}
-	return o.Conditions
+	return u.Conditions
+}
+
+func (u *UpdateIntegrationRequestDto) GetConfigurations() *UpdateIntegrationRequestDtoConfigurations {
+	if u == nil {
+		return nil
+	}
+	return u.Configurations
 }

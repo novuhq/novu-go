@@ -7,23 +7,32 @@ import (
 )
 
 type SubscribersControllerCreateSubscriberRequest struct {
+	// If true, the request will fail if a subscriber with the same subscriberId already exists
+	FailIfExists *bool `queryParam:"style=form,explode=true,name=failIfExists"`
 	// A header for idempotency purposes
 	IdempotencyKey             *string                               `header:"style=simple,explode=false,name=idempotency-key"`
 	CreateSubscriberRequestDto components.CreateSubscriberRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersControllerCreateSubscriberRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerCreateSubscriberRequest) GetFailIfExists() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.FailIfExists
 }
 
-func (o *SubscribersControllerCreateSubscriberRequest) GetCreateSubscriberRequestDto() components.CreateSubscriberRequestDto {
-	if o == nil {
+func (s *SubscribersControllerCreateSubscriberRequest) GetIdempotencyKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.IdempotencyKey
+}
+
+func (s *SubscribersControllerCreateSubscriberRequest) GetCreateSubscriberRequestDto() components.CreateSubscriberRequestDto {
+	if s == nil {
 		return components.CreateSubscriberRequestDto{}
 	}
-	return o.CreateSubscriberRequestDto
+	return s.CreateSubscriberRequestDto
 }
 
 type SubscribersControllerCreateSubscriberResponse struct {
@@ -33,23 +42,23 @@ type SubscribersControllerCreateSubscriberResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *SubscribersControllerCreateSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerCreateSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerCreateSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersControllerCreateSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberResponseDto
+	return s.SubscriberResponseDto
 }
 
-func (o *SubscribersControllerCreateSubscriberResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerCreateSubscriberResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

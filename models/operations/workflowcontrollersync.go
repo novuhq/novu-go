@@ -14,25 +14,25 @@ type WorkflowControllerSyncRequest struct {
 	SyncWorkflowDto components.SyncWorkflowDto `request:"mediaType=application/json"`
 }
 
-func (o *WorkflowControllerSyncRequest) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowControllerSyncRequest) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowControllerSyncRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerSyncRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
-func (o *WorkflowControllerSyncRequest) GetSyncWorkflowDto() components.SyncWorkflowDto {
-	if o == nil {
+func (w *WorkflowControllerSyncRequest) GetSyncWorkflowDto() components.SyncWorkflowDto {
+	if w == nil {
 		return components.SyncWorkflowDto{}
 	}
-	return o.SyncWorkflowDto
+	return w.SyncWorkflowDto
 }
 
 type WorkflowControllerSyncResponse struct {
@@ -42,23 +42,23 @@ type WorkflowControllerSyncResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *WorkflowControllerSyncResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerSyncResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerSyncResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
-	if o == nil {
+func (w *WorkflowControllerSyncResponse) GetWorkflowResponseDto() *components.WorkflowResponseDto {
+	if w == nil {
 		return nil
 	}
-	return o.WorkflowResponseDto
+	return w.WorkflowResponseDto
 }
 
-func (o *WorkflowControllerSyncResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerSyncResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

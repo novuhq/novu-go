@@ -46,8 +46,10 @@ type EmailStepResponseDtoControlValues struct {
 	// Type of editor to use for the body.
 	EditorType *EmailStepResponseDtoEditorType `default:"block" json:"editorType"`
 	// Disable sanitization of the output.
-	DisableOutputSanitization *bool          `default:"false" json:"disableOutputSanitization"`
-	AdditionalProperties      map[string]any `additionalProperties:"true" json:"-"`
+	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID             *string        `json:"layoutId,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (e EmailStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
@@ -55,56 +57,59 @@ func (e EmailStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"subject"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *EmailStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetSkip() map[string]any {
+	if e == nil {
 		return nil
 	}
-	return o.Skip
+	return e.Skip
 }
 
-func (o *EmailStepResponseDtoControlValues) GetSubject() string {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetSubject() string {
+	if e == nil {
 		return ""
 	}
-	return o.Subject
+	return e.Subject
 }
 
-func (o *EmailStepResponseDtoControlValues) GetBody() *string {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetBody() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Body
+	return e.Body
 }
 
-func (o *EmailStepResponseDtoControlValues) GetEditorType() *EmailStepResponseDtoEditorType {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetEditorType() *EmailStepResponseDtoEditorType {
+	if e == nil {
 		return nil
 	}
-	return o.EditorType
+	return e.EditorType
 }
 
-func (o *EmailStepResponseDtoControlValues) GetDisableOutputSanitization() *bool {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetDisableOutputSanitization() *bool {
+	if e == nil {
 		return nil
 	}
-	return o.DisableOutputSanitization
+	return e.DisableOutputSanitization
 }
 
-func (o *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (e *EmailStepResponseDtoControlValues) GetLayoutID() *string {
+	if e == nil {
 		return nil
 	}
-	return o.AdditionalProperties
+	return e.LayoutID
 }
 
-// EmailStepResponseDtoSlug - Slug of the step
-type EmailStepResponseDtoSlug struct {
+func (e *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if e == nil {
+		return nil
+	}
+	return e.AdditionalProperties
 }
 
 type EmailStepResponseDto struct {
@@ -121,11 +126,11 @@ type EmailStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug EmailStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -134,86 +139,97 @@ type EmailStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *EmailStepResponseDto) GetControls() EmailControlsMetadataResponseDto {
-	if o == nil {
+func (e EmailStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *EmailStepResponseDto) GetControls() EmailControlsMetadataResponseDto {
+	if e == nil {
 		return EmailControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return e.Controls
 }
 
-func (o *EmailStepResponseDto) GetControlValues() *EmailStepResponseDtoControlValues {
-	if o == nil {
+func (e *EmailStepResponseDto) GetControlValues() *EmailStepResponseDtoControlValues {
+	if e == nil {
 		return nil
 	}
-	return o.ControlValues
+	return e.ControlValues
 }
 
-func (o *EmailStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (e *EmailStepResponseDto) GetVariables() map[string]any {
+	if e == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return e.Variables
 }
 
-func (o *EmailStepResponseDto) GetStepID() string {
-	if o == nil {
+func (e *EmailStepResponseDto) GetStepID() string {
+	if e == nil {
 		return ""
 	}
-	return o.StepID
+	return e.StepID
 }
 
-func (o *EmailStepResponseDto) GetID() string {
-	if o == nil {
+func (e *EmailStepResponseDto) GetID() string {
+	if e == nil {
 		return ""
 	}
-	return o.ID
+	return e.ID
 }
 
-func (o *EmailStepResponseDto) GetName() string {
-	if o == nil {
+func (e *EmailStepResponseDto) GetName() string {
+	if e == nil {
 		return ""
 	}
-	return o.Name
+	return e.Name
 }
 
-func (o *EmailStepResponseDto) GetSlug() EmailStepResponseDtoSlug {
-	if o == nil {
-		return EmailStepResponseDtoSlug{}
+func (e *EmailStepResponseDto) GetSlug() string {
+	if e == nil {
+		return ""
 	}
-	return o.Slug
+	return e.Slug
 }
 
-func (o *EmailStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (e *EmailStepResponseDto) GetType() StepTypeEnum {
+	if e == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return e.Type
 }
 
-func (o *EmailStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (e *EmailStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if e == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return e.Origin
 }
 
-func (o *EmailStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (e *EmailStepResponseDto) GetWorkflowID() string {
+	if e == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return e.WorkflowID
 }
 
-func (o *EmailStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (e *EmailStepResponseDto) GetWorkflowDatabaseID() string {
+	if e == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return e.WorkflowDatabaseID
 }
 
-func (o *EmailStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (e *EmailStepResponseDto) GetIssues() *StepIssuesDto {
+	if e == nil {
 		return nil
 	}
-	return o.Issues
+	return e.Issues
 }

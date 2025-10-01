@@ -15,46 +15,55 @@ type PatchWorkflowDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable payload schema validation
 	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `json:"isTranslationEnabled,omitempty"`
 }
 
-func (o *PatchWorkflowDto) GetActive() *bool {
-	if o == nil {
+func (p *PatchWorkflowDto) GetActive() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Active
+	return p.Active
 }
 
-func (o *PatchWorkflowDto) GetName() *string {
-	if o == nil {
+func (p *PatchWorkflowDto) GetName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *PatchWorkflowDto) GetDescription() *string {
-	if o == nil {
+func (p *PatchWorkflowDto) GetDescription() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Description
+	return p.Description
 }
 
-func (o *PatchWorkflowDto) GetTags() []string {
-	if o == nil {
+func (p *PatchWorkflowDto) GetTags() []string {
+	if p == nil {
 		return nil
 	}
-	return o.Tags
+	return p.Tags
 }
 
-func (o *PatchWorkflowDto) GetPayloadSchema() map[string]any {
-	if o == nil {
+func (p *PatchWorkflowDto) GetPayloadSchema() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.PayloadSchema
+	return p.PayloadSchema
 }
 
-func (o *PatchWorkflowDto) GetValidatePayload() *bool {
-	if o == nil {
+func (p *PatchWorkflowDto) GetValidatePayload() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.ValidatePayload
+	return p.ValidatePayload
+}
+
+func (p *PatchWorkflowDto) GetIsTranslationEnabled() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.IsTranslationEnabled
 }

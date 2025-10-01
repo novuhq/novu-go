@@ -1,0 +1,10 @@
+# EnvironmentsControllerGetEnvironmentTagsResponse
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                             | [components.HTTPMetadata](../../models/components/httpmetadata.md)                     | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `GetEnvironmentTagsDtos`                                                               | [][components.GetEnvironmentTagsDto](../../models/components/getenvironmenttagsdto.md) | :heavy_minus_sign:                                                                     | OK                                                                                     |
+| `Headers`                                                                              | map[string][]*string*                                                                  | :heavy_check_mark:                                                                     | N/A                                                                                    |

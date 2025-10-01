@@ -2,26 +2,74 @@
 
 package components
 
-// ChatStepUpsertDtoControlValues - Control values for the Chat step
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
+type ChatStepUpsertDtoControlValuesType string
+
+const (
+	ChatStepUpsertDtoControlValuesTypeChatControlDto ChatStepUpsertDtoControlValuesType = "ChatControlDto"
+	ChatStepUpsertDtoControlValuesTypeMapOfAny       ChatStepUpsertDtoControlValuesType = "mapOfAny"
+)
+
+// ChatStepUpsertDtoControlValues - Control values for the Chat step.
 type ChatStepUpsertDtoControlValues struct {
-	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
-	Skip map[string]any `json:"skip,omitempty"`
-	// Content of the chat message.
-	Body *string `json:"body,omitempty"`
+	ChatControlDto *ChatControlDto `queryParam:"inline,name=controlValues"`
+	MapOfAny       map[string]any  `queryParam:"inline,name=controlValues"`
+
+	Type ChatStepUpsertDtoControlValuesType
 }
 
-func (o *ChatStepUpsertDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
-		return nil
+func CreateChatStepUpsertDtoControlValuesChatControlDto(chatControlDto ChatControlDto) ChatStepUpsertDtoControlValues {
+	typ := ChatStepUpsertDtoControlValuesTypeChatControlDto
+
+	return ChatStepUpsertDtoControlValues{
+		ChatControlDto: &chatControlDto,
+		Type:           typ,
 	}
-	return o.Skip
 }
 
-func (o *ChatStepUpsertDtoControlValues) GetBody() *string {
-	if o == nil {
+func CreateChatStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) ChatStepUpsertDtoControlValues {
+	typ := ChatStepUpsertDtoControlValuesTypeMapOfAny
+
+	return ChatStepUpsertDtoControlValues{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func (u *ChatStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+
+	var chatControlDto ChatControlDto = ChatControlDto{}
+	if err := utils.UnmarshalJSON(data, &chatControlDto, "", true, nil); err == nil {
+		u.ChatControlDto = &chatControlDto
+		u.Type = ChatStepUpsertDtoControlValuesTypeChatControlDto
 		return nil
 	}
-	return o.Body
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = ChatStepUpsertDtoControlValuesTypeMapOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ChatStepUpsertDtoControlValues", string(data))
+}
+
+func (u ChatStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+	if u.ChatControlDto != nil {
+		return utils.MarshalJSON(u.ChatControlDto, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ChatStepUpsertDtoControlValues: all fields are null")
 }
 
 type ChatStepUpsertDto struct {
@@ -31,34 +79,45 @@ type ChatStepUpsertDto struct {
 	Name string `json:"name"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Control values for the Chat step
+	// Control values for the Chat step.
 	ControlValues *ChatStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 }
 
-func (o *ChatStepUpsertDto) GetID() *string {
-	if o == nil {
-		return nil
-	}
-	return o.ID
+func (c ChatStepUpsertDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
 }
 
-func (o *ChatStepUpsertDto) GetName() string {
-	if o == nil {
+func (c *ChatStepUpsertDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name", "type"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *ChatStepUpsertDto) GetID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ID
+}
+
+func (c *ChatStepUpsertDto) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *ChatStepUpsertDto) GetType() StepTypeEnum {
-	if o == nil {
+func (c *ChatStepUpsertDto) GetType() StepTypeEnum {
+	if c == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return c.Type
 }
 
-func (o *ChatStepUpsertDto) GetControlValues() *ChatStepUpsertDtoControlValues {
-	if o == nil {
+func (c *ChatStepUpsertDto) GetControlValues() *ChatStepUpsertDtoControlValues {
+	if c == nil {
 		return nil
 	}
-	return o.ControlValues
+	return c.ControlValues
 }

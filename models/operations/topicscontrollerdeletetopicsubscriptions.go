@@ -14,25 +14,25 @@ type TopicsControllerDeleteTopicSubscriptionsRequest struct {
 	DeleteTopicSubscriptionsRequestDto components.DeleteTopicSubscriptionsRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsRequest) GetTopicKey() string {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsRequest) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsRequest) GetDeleteTopicSubscriptionsRequestDto() components.DeleteTopicSubscriptionsRequestDto {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsRequest) GetDeleteTopicSubscriptionsRequestDto() components.DeleteTopicSubscriptionsRequestDto {
+	if t == nil {
 		return components.DeleteTopicSubscriptionsRequestDto{}
 	}
-	return o.DeleteTopicSubscriptionsRequestDto
+	return t.DeleteTopicSubscriptionsRequestDto
 }
 
 type TopicsControllerDeleteTopicSubscriptionsResponse struct {
@@ -42,23 +42,23 @@ type TopicsControllerDeleteTopicSubscriptionsResponse struct {
 	Headers                             map[string][]string
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsResponse) GetDeleteTopicSubscriptionsResponseDto() *components.DeleteTopicSubscriptionsResponseDto {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsResponse) GetDeleteTopicSubscriptionsResponseDto() *components.DeleteTopicSubscriptionsResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.DeleteTopicSubscriptionsResponseDto
+	return t.DeleteTopicSubscriptionsResponseDto
 }
 
-func (o *TopicsControllerDeleteTopicSubscriptionsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerDeleteTopicSubscriptionsResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }
