@@ -48,298 +48,314 @@ type CredentialsDto struct {
 	ChannelID                 *string     `json:"channelId,omitempty"`
 	PhoneNumberIdentification *string     `json:"phoneNumberIdentification,omitempty"`
 	AccessKey                 *string     `json:"accessKey,omitempty"`
+	AppSid                    *string     `json:"appSid,omitempty"`
+	SenderID                  *string     `json:"senderId,omitempty"`
 }
 
-func (o *CredentialsDto) GetAPIKey() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAPIKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.APIKey
+	return c.APIKey
 }
 
-func (o *CredentialsDto) GetUser() *string {
-	if o == nil {
+func (c *CredentialsDto) GetUser() *string {
+	if c == nil {
 		return nil
 	}
-	return o.User
+	return c.User
 }
 
-func (o *CredentialsDto) GetSecretKey() *string {
-	if o == nil {
+func (c *CredentialsDto) GetSecretKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SecretKey
+	return c.SecretKey
 }
 
-func (o *CredentialsDto) GetDomain() *string {
-	if o == nil {
+func (c *CredentialsDto) GetDomain() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Domain
+	return c.Domain
 }
 
-func (o *CredentialsDto) GetPassword() *string {
-	if o == nil {
+func (c *CredentialsDto) GetPassword() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Password
+	return c.Password
 }
 
-func (o *CredentialsDto) GetHost() *string {
-	if o == nil {
+func (c *CredentialsDto) GetHost() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Host
+	return c.Host
 }
 
-func (o *CredentialsDto) GetPort() *string {
-	if o == nil {
+func (c *CredentialsDto) GetPort() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Port
+	return c.Port
 }
 
-func (o *CredentialsDto) GetSecure() *bool {
-	if o == nil {
+func (c *CredentialsDto) GetSecure() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Secure
+	return c.Secure
 }
 
-func (o *CredentialsDto) GetRegion() *string {
-	if o == nil {
+func (c *CredentialsDto) GetRegion() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Region
+	return c.Region
 }
 
-func (o *CredentialsDto) GetAccountSid() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAccountSid() *string {
+	if c == nil {
 		return nil
 	}
-	return o.AccountSid
+	return c.AccountSid
 }
 
-func (o *CredentialsDto) GetMessageProfileID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetMessageProfileID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MessageProfileID
+	return c.MessageProfileID
 }
 
-func (o *CredentialsDto) GetToken() *string {
-	if o == nil {
+func (c *CredentialsDto) GetToken() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Token
+	return c.Token
 }
 
-func (o *CredentialsDto) GetFrom() *string {
-	if o == nil {
+func (c *CredentialsDto) GetFrom() *string {
+	if c == nil {
 		return nil
 	}
-	return o.From
+	return c.From
 }
 
-func (o *CredentialsDto) GetSenderName() *string {
-	if o == nil {
+func (c *CredentialsDto) GetSenderName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SenderName
+	return c.SenderName
 }
 
-func (o *CredentialsDto) GetProjectName() *string {
-	if o == nil {
+func (c *CredentialsDto) GetProjectName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ProjectName
+	return c.ProjectName
 }
 
-func (o *CredentialsDto) GetApplicationID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetApplicationID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ApplicationID
+	return c.ApplicationID
 }
 
-func (o *CredentialsDto) GetClientID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetClientID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ClientID
+	return c.ClientID
 }
 
-func (o *CredentialsDto) GetRequireTLS() *bool {
-	if o == nil {
+func (c *CredentialsDto) GetRequireTLS() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.RequireTLS
+	return c.RequireTLS
 }
 
-func (o *CredentialsDto) GetIgnoreTLS() *bool {
-	if o == nil {
+func (c *CredentialsDto) GetIgnoreTLS() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.IgnoreTLS
+	return c.IgnoreTLS
 }
 
-func (o *CredentialsDto) GetTLSOptions() *TLSOptions {
-	if o == nil {
+func (c *CredentialsDto) GetTLSOptions() *TLSOptions {
+	if c == nil {
 		return nil
 	}
-	return o.TLSOptions
+	return c.TLSOptions
 }
 
-func (o *CredentialsDto) GetBaseURL() *string {
-	if o == nil {
+func (c *CredentialsDto) GetBaseURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BaseURL
+	return c.BaseURL
 }
 
-func (o *CredentialsDto) GetWebhookURL() *string {
-	if o == nil {
+func (c *CredentialsDto) GetWebhookURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.WebhookURL
+	return c.WebhookURL
 }
 
-func (o *CredentialsDto) GetRedirectURL() *string {
-	if o == nil {
+func (c *CredentialsDto) GetRedirectURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return c.RedirectURL
 }
 
-func (o *CredentialsDto) GetHmac() *bool {
-	if o == nil {
+func (c *CredentialsDto) GetHmac() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.Hmac
+	return c.Hmac
 }
 
-func (o *CredentialsDto) GetServiceAccount() *string {
-	if o == nil {
+func (c *CredentialsDto) GetServiceAccount() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ServiceAccount
+	return c.ServiceAccount
 }
 
-func (o *CredentialsDto) GetIPPoolName() *string {
-	if o == nil {
+func (c *CredentialsDto) GetIPPoolName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IPPoolName
+	return c.IPPoolName
 }
 
-func (o *CredentialsDto) GetAPIKeyRequestHeader() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAPIKeyRequestHeader() *string {
+	if c == nil {
 		return nil
 	}
-	return o.APIKeyRequestHeader
+	return c.APIKeyRequestHeader
 }
 
-func (o *CredentialsDto) GetSecretKeyRequestHeader() *string {
-	if o == nil {
+func (c *CredentialsDto) GetSecretKeyRequestHeader() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SecretKeyRequestHeader
+	return c.SecretKeyRequestHeader
 }
 
-func (o *CredentialsDto) GetIDPath() *string {
-	if o == nil {
+func (c *CredentialsDto) GetIDPath() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IDPath
+	return c.IDPath
 }
 
-func (o *CredentialsDto) GetDatePath() *string {
-	if o == nil {
+func (c *CredentialsDto) GetDatePath() *string {
+	if c == nil {
 		return nil
 	}
-	return o.DatePath
+	return c.DatePath
 }
 
-func (o *CredentialsDto) GetAPIToken() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAPIToken() *string {
+	if c == nil {
 		return nil
 	}
-	return o.APIToken
+	return c.APIToken
 }
 
-func (o *CredentialsDto) GetAuthenticateByToken() *bool {
-	if o == nil {
+func (c *CredentialsDto) GetAuthenticateByToken() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.AuthenticateByToken
+	return c.AuthenticateByToken
 }
 
-func (o *CredentialsDto) GetAuthenticationTokenKey() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAuthenticationTokenKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.AuthenticationTokenKey
+	return c.AuthenticationTokenKey
 }
 
-func (o *CredentialsDto) GetInstanceID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetInstanceID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.InstanceID
+	return c.InstanceID
 }
 
-func (o *CredentialsDto) GetAlertUID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAlertUID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.AlertUID
+	return c.AlertUID
 }
 
-func (o *CredentialsDto) GetTitle() *string {
-	if o == nil {
+func (c *CredentialsDto) GetTitle() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Title
+	return c.Title
 }
 
-func (o *CredentialsDto) GetImageURL() *string {
-	if o == nil {
+func (c *CredentialsDto) GetImageURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ImageURL
+	return c.ImageURL
 }
 
-func (o *CredentialsDto) GetState() *string {
-	if o == nil {
+func (c *CredentialsDto) GetState() *string {
+	if c == nil {
 		return nil
 	}
-	return o.State
+	return c.State
 }
 
-func (o *CredentialsDto) GetExternalLink() *string {
-	if o == nil {
+func (c *CredentialsDto) GetExternalLink() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalLink
+	return c.ExternalLink
 }
 
-func (o *CredentialsDto) GetChannelID() *string {
-	if o == nil {
+func (c *CredentialsDto) GetChannelID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ChannelID
+	return c.ChannelID
 }
 
-func (o *CredentialsDto) GetPhoneNumberIdentification() *string {
-	if o == nil {
+func (c *CredentialsDto) GetPhoneNumberIdentification() *string {
+	if c == nil {
 		return nil
 	}
-	return o.PhoneNumberIdentification
+	return c.PhoneNumberIdentification
 }
 
-func (o *CredentialsDto) GetAccessKey() *string {
-	if o == nil {
+func (c *CredentialsDto) GetAccessKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.AccessKey
+	return c.AccessKey
+}
+
+func (c *CredentialsDto) GetAppSid() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AppSid
+}
+
+func (c *CredentialsDto) GetSenderID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.SenderID
 }

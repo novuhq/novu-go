@@ -9,16 +9,16 @@ type ActorFeedItemDto struct {
 	Type ActorTypeEnum `json:"type"`
 }
 
-func (o *ActorFeedItemDto) GetData() *string {
-	if o == nil {
+func (a *ActorFeedItemDto) GetData() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Data
+	return a.Data
 }
 
-func (o *ActorFeedItemDto) GetType() ActorTypeEnum {
-	if o == nil {
+func (a *ActorFeedItemDto) GetType() ActorTypeEnum {
+	if a == nil {
 		return ActorTypeEnum("")
 	}
-	return o.Type
+	return a.Type
 }

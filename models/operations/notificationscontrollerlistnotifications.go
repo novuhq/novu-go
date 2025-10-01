@@ -20,11 +20,13 @@ type NotificationsControllerListNotificationsRequest struct {
 	Search *string `queryParam:"style=form,explode=true,name=search"`
 	// Array of subscriber IDs or a single subscriber ID
 	SubscriberIds []string `queryParam:"style=form,explode=true,name=subscriberIds"`
+	// Array of severity levels or a single severity level
+	Severity []string `queryParam:"style=form,explode=true,name=severity"`
 	// Page number for pagination
 	Page *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
 	// Limit for pagination
 	Limit *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
-	// Transaction ID for filtering
+	// The transaction ID to filter by
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Topic Key for filtering notifications by topic
 	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`
@@ -41,94 +43,101 @@ func (n NotificationsControllerListNotificationsRequest) MarshalJSON() ([]byte, 
 }
 
 func (n *NotificationsControllerListNotificationsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetChannels() []components.ChannelTypeEnum {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetChannels() []components.ChannelTypeEnum {
+	if n == nil {
 		return nil
 	}
-	return o.Channels
+	return n.Channels
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetTemplates() []string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetTemplates() []string {
+	if n == nil {
 		return nil
 	}
-	return o.Templates
+	return n.Templates
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetEmails() []string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetEmails() []string {
+	if n == nil {
 		return nil
 	}
-	return o.Emails
+	return n.Emails
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetSearch() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetSearch() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Search
+	return n.Search
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetSubscriberIds() []string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetSubscriberIds() []string {
+	if n == nil {
 		return nil
 	}
-	return o.SubscriberIds
+	return n.SubscriberIds
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetPage() *float64 {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetSeverity() []string {
+	if n == nil {
 		return nil
 	}
-	return o.Page
+	return n.Severity
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetLimit() *float64 {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetPage() *float64 {
+	if n == nil {
 		return nil
 	}
-	return o.Limit
+	return n.Page
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetTransactionID() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetLimit() *float64 {
+	if n == nil {
 		return nil
 	}
-	return o.TransactionID
+	return n.Limit
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetTopicKey() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetTransactionID() *string {
+	if n == nil {
 		return nil
 	}
-	return o.TopicKey
+	return n.TransactionID
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetAfter() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetTopicKey() *string {
+	if n == nil {
 		return nil
 	}
-	return o.After
+	return n.TopicKey
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetBefore() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetAfter() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Before
+	return n.After
 }
 
-func (o *NotificationsControllerListNotificationsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsRequest) GetBefore() *string {
+	if n == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return n.Before
+}
+
+func (n *NotificationsControllerListNotificationsRequest) GetIdempotencyKey() *string {
+	if n == nil {
+		return nil
+	}
+	return n.IdempotencyKey
 }
 
 type NotificationsControllerListNotificationsResponse struct {
@@ -137,23 +146,23 @@ type NotificationsControllerListNotificationsResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *NotificationsControllerListNotificationsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if n == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return n.HTTPMeta
 }
 
-func (o *NotificationsControllerListNotificationsResponse) GetActivitiesResponseDto() *components.ActivitiesResponseDto {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsResponse) GetActivitiesResponseDto() *components.ActivitiesResponseDto {
+	if n == nil {
 		return nil
 	}
-	return o.ActivitiesResponseDto
+	return n.ActivitiesResponseDto
 }
 
-func (o *NotificationsControllerListNotificationsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (n *NotificationsControllerListNotificationsResponse) GetHeaders() map[string][]string {
+	if n == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return n.Headers
 }

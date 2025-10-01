@@ -60,81 +60,81 @@ type SubscribersControllerSearchSubscribersRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetAfter() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetAfter() *string {
+	if s == nil {
 		return nil
 	}
-	return o.After
+	return s.After
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetBefore() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetBefore() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Before
+	return s.Before
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetLimit() *float64 {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetLimit() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.Limit
+	return s.Limit
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *OrderDirection {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *OrderDirection {
+	if s == nil {
 		return nil
 	}
-	return o.OrderDirection
+	return s.OrderDirection
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetOrderBy() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetOrderBy() *string {
+	if s == nil {
 		return nil
 	}
-	return o.OrderBy
+	return s.OrderBy
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetIncludeCursor() *bool {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetIncludeCursor() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.IncludeCursor
+	return s.IncludeCursor
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetEmail() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetEmail() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetName() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetPhone() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetPhone() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Phone
+	return s.Phone
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetSubscriberID() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetSubscriberID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerSearchSubscribersRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersControllerSearchSubscribersResponse struct {
@@ -144,23 +144,23 @@ type SubscribersControllerSearchSubscribersResponse struct {
 	Headers                    map[string][]string
 }
 
-func (o *SubscribersControllerSearchSubscribersResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerSearchSubscribersResponse) GetListSubscribersResponseDto() *components.ListSubscribersResponseDto {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersResponse) GetListSubscribersResponseDto() *components.ListSubscribersResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.ListSubscribersResponseDto
+	return s.ListSubscribersResponseDto
 }
 
-func (o *SubscribersControllerSearchSubscribersResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerSearchSubscribersResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

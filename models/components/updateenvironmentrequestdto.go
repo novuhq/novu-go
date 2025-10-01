@@ -11,44 +11,44 @@ type UpdateEnvironmentRequestDto struct {
 	Bridge     *BridgeConfigurationDto `json:"bridge,omitempty"`
 }
 
-func (o *UpdateEnvironmentRequestDto) GetName() *string {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetName() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Name
+	return u.Name
 }
 
-func (o *UpdateEnvironmentRequestDto) GetIdentifier() *string {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetIdentifier() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Identifier
+	return u.Identifier
 }
 
-func (o *UpdateEnvironmentRequestDto) GetParentID() *string {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetParentID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.ParentID
+	return u.ParentID
 }
 
-func (o *UpdateEnvironmentRequestDto) GetColor() *string {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetColor() *string {
+	if u == nil {
 		return nil
 	}
-	return o.Color
+	return u.Color
 }
 
-func (o *UpdateEnvironmentRequestDto) GetDNS() *InBoundParseDomainDto {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetDNS() *InBoundParseDomainDto {
+	if u == nil {
 		return nil
 	}
-	return o.DNS
+	return u.DNS
 }
 
-func (o *UpdateEnvironmentRequestDto) GetBridge() *BridgeConfigurationDto {
-	if o == nil {
+func (u *UpdateEnvironmentRequestDto) GetBridge() *BridgeConfigurationDto {
+	if u == nil {
 		return nil
 	}
-	return o.Bridge
+	return u.Bridge
 }

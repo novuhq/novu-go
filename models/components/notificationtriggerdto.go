@@ -42,30 +42,30 @@ type NotificationTriggerDto struct {
 	SubscriberVariables []NotificationTriggerVariable `json:"subscriberVariables,omitempty"`
 }
 
-func (o *NotificationTriggerDto) GetType() NotificationTriggerDtoType {
-	if o == nil {
+func (n *NotificationTriggerDto) GetType() NotificationTriggerDtoType {
+	if n == nil {
 		return NotificationTriggerDtoType("")
 	}
-	return o.Type
+	return n.Type
 }
 
-func (o *NotificationTriggerDto) GetIdentifier() string {
-	if o == nil {
+func (n *NotificationTriggerDto) GetIdentifier() string {
+	if n == nil {
 		return ""
 	}
-	return o.Identifier
+	return n.Identifier
 }
 
-func (o *NotificationTriggerDto) GetVariables() []NotificationTriggerVariable {
-	if o == nil {
+func (n *NotificationTriggerDto) GetVariables() []NotificationTriggerVariable {
+	if n == nil {
 		return []NotificationTriggerVariable{}
 	}
-	return o.Variables
+	return n.Variables
 }
 
-func (o *NotificationTriggerDto) GetSubscriberVariables() []NotificationTriggerVariable {
-	if o == nil {
+func (n *NotificationTriggerDto) GetSubscriberVariables() []NotificationTriggerVariable {
+	if n == nil {
 		return nil
 	}
-	return o.SubscriberVariables
+	return n.SubscriberVariables
 }

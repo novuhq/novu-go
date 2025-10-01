@@ -59,6 +59,9 @@ Provider ID of the job
 | `ProvidersIDEnumEazySms`          | eazy-sms                          |
 | `ProvidersIDEnumMobishastra`      | mobishastra                       |
 | `ProvidersIDEnumAfroMessage`      | afro-message                      |
+| `ProvidersIDEnumUnifonic`         | unifonic                          |
+| `ProvidersIDEnumSmsmode`          | smsmode                           |
+| `ProvidersIDEnumImedia`           | imedia                            |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |
@@ -77,3 +80,5 @@ Provider ID of the job
 | `ProvidersIDEnumGetstream`        | getstream                         |
 | `ProvidersIDEnumRocketChat`       | rocket-chat                       |
 | `ProvidersIDEnumWhatsappBusiness` | whatsapp-business                 |
+| `ProvidersIDEnumChatWebhook`      | chat-webhook                      |
+| `ProvidersIDEnumNovuSlack`        | novu-slack                        |

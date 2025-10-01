@@ -9,16 +9,16 @@ type ActivityTopicDto struct {
 	TopicKey string `json:"topicKey"`
 }
 
-func (o *ActivityTopicDto) GetTopicID() string {
-	if o == nil {
+func (a *ActivityTopicDto) GetTopicID() string {
+	if a == nil {
 		return ""
 	}
-	return o.TopicID
+	return a.TopicID
 }
 
-func (o *ActivityTopicDto) GetTopicKey() string {
-	if o == nil {
+func (a *ActivityTopicDto) GetTopicKey() string {
+	if a == nil {
 		return ""
 	}
-	return o.TopicKey
+	return a.TopicKey
 }

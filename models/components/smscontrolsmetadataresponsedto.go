@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type SmsControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
@@ -11,23 +15,34 @@ type SmsControlsMetadataResponseDto struct {
 	Values SmsControlDto `json:"values"`
 }
 
-func (o *SmsControlsMetadataResponseDto) GetDataSchema() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.DataSchema
+func (s SmsControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *SmsControlsMetadataResponseDto) GetUISchema() *UISchema {
-	if o == nil {
-		return nil
+func (s *SmsControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"values"}); err != nil {
+		return err
 	}
-	return o.UISchema
+	return nil
 }
 
-func (o *SmsControlsMetadataResponseDto) GetValues() SmsControlDto {
-	if o == nil {
+func (s *SmsControlsMetadataResponseDto) GetDataSchema() map[string]any {
+	if s == nil {
+		return nil
+	}
+	return s.DataSchema
+}
+
+func (s *SmsControlsMetadataResponseDto) GetUISchema() *UISchema {
+	if s == nil {
+		return nil
+	}
+	return s.UISchema
+}
+
+func (s *SmsControlsMetadataResponseDto) GetValues() SmsControlDto {
+	if s == nil {
 		return SmsControlDto{}
 	}
-	return o.Values
+	return s.Values
 }

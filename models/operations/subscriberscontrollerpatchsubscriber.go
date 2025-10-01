@@ -13,25 +13,25 @@ type SubscribersControllerPatchSubscriberRequest struct {
 	PatchSubscriberRequestDto components.PatchSubscriberRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersControllerPatchSubscriberRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersControllerPatchSubscriberRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersControllerPatchSubscriberRequest) GetPatchSubscriberRequestDto() components.PatchSubscriberRequestDto {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberRequest) GetPatchSubscriberRequestDto() components.PatchSubscriberRequestDto {
+	if s == nil {
 		return components.PatchSubscriberRequestDto{}
 	}
-	return o.PatchSubscriberRequestDto
+	return s.PatchSubscriberRequestDto
 }
 
 type SubscribersControllerPatchSubscriberResponse struct {
@@ -41,23 +41,23 @@ type SubscribersControllerPatchSubscriberResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *SubscribersControllerPatchSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerPatchSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberResponseDto
+	return s.SubscriberResponseDto
 }
 
-func (o *SubscribersControllerPatchSubscriberResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerPatchSubscriberResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

@@ -9,16 +9,16 @@ type SubscriberPreferenceOverrideDto struct {
 	Source PreferenceOverrideSourceEnum `json:"source"`
 }
 
-func (o *SubscriberPreferenceOverrideDto) GetChannel() ChannelTypeEnum {
-	if o == nil {
+func (s *SubscriberPreferenceOverrideDto) GetChannel() ChannelTypeEnum {
+	if s == nil {
 		return ChannelTypeEnum("")
 	}
-	return o.Channel
+	return s.Channel
 }
 
-func (o *SubscriberPreferenceOverrideDto) GetSource() PreferenceOverrideSourceEnum {
-	if o == nil {
+func (s *SubscriberPreferenceOverrideDto) GetSource() PreferenceOverrideSourceEnum {
+	if s == nil {
 		return PreferenceOverrideSourceEnum("")
 	}
-	return o.Source
+	return s.Source
 }

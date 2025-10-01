@@ -2,6 +2,86 @@
 
 package components
 
+// WorkflowListResponseDtoUpdatedBy - User who last updated the workflow
+type WorkflowListResponseDtoUpdatedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *string `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (w *WorkflowListResponseDtoUpdatedBy) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WorkflowListResponseDtoUpdatedBy) GetFirstName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.FirstName
+}
+
+func (w *WorkflowListResponseDtoUpdatedBy) GetLastName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LastName
+}
+
+func (w *WorkflowListResponseDtoUpdatedBy) GetExternalID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ExternalID
+}
+
+// WorkflowListResponseDtoLastPublishedBy - User who last published the workflow
+type WorkflowListResponseDtoLastPublishedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *string `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (w *WorkflowListResponseDtoLastPublishedBy) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WorkflowListResponseDtoLastPublishedBy) GetFirstName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.FirstName
+}
+
+func (w *WorkflowListResponseDtoLastPublishedBy) GetLastName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LastName
+}
+
+func (w *WorkflowListResponseDtoLastPublishedBy) GetExternalID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ExternalID
+}
+
 type WorkflowListResponseDto struct {
 	// Name of the workflow
 	Name string `json:"name"`
@@ -11,6 +91,12 @@ type WorkflowListResponseDto struct {
 	UpdatedAt string `json:"updatedAt"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
+	// User who last updated the workflow
+	UpdatedBy *WorkflowListResponseDtoUpdatedBy `json:"updatedBy,omitempty"`
+	// Timestamp of the last workflow publication
+	LastPublishedAt *string `json:"lastPublishedAt,omitempty"`
+	// User who last published the workflow
+	LastPublishedBy *WorkflowListResponseDtoLastPublishedBy `json:"lastPublishedBy,omitempty"`
 	// Unique database identifier
 	ID string `json:"_id"`
 	// Workflow identifier
@@ -19,87 +105,126 @@ type WorkflowListResponseDto struct {
 	Slug string `json:"slug"`
 	// Status of the workflow
 	Status WorkflowStatusEnum `json:"status"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
 	// Overview of step types in the workflow
 	StepTypeOverviews []StepTypeEnum `json:"stepTypeOverviews"`
+	// Is translation enabled for the workflow
+	IsTranslationEnabled *bool `json:"isTranslationEnabled,omitempty"`
+	// Steps of the workflow
+	Steps []StepListResponseDto `json:"steps"`
 }
 
-func (o *WorkflowListResponseDto) GetName() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WorkflowListResponseDto) GetTags() []string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetTags() []string {
+	if w == nil {
 		return nil
 	}
-	return o.Tags
+	return w.Tags
 }
 
-func (o *WorkflowListResponseDto) GetUpdatedAt() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetUpdatedAt() string {
+	if w == nil {
 		return ""
 	}
-	return o.UpdatedAt
+	return w.UpdatedAt
 }
 
-func (o *WorkflowListResponseDto) GetCreatedAt() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetCreatedAt() string {
+	if w == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return w.CreatedAt
 }
 
-func (o *WorkflowListResponseDto) GetID() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetUpdatedBy() *WorkflowListResponseDtoUpdatedBy {
+	if w == nil {
+		return nil
+	}
+	return w.UpdatedBy
+}
+
+func (w *WorkflowListResponseDto) GetLastPublishedAt() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LastPublishedAt
+}
+
+func (w *WorkflowListResponseDto) GetLastPublishedBy() *WorkflowListResponseDtoLastPublishedBy {
+	if w == nil {
+		return nil
+	}
+	return w.LastPublishedBy
+}
+
+func (w *WorkflowListResponseDto) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WorkflowListResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowListResponseDto) GetSlug() string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetSlug() string {
+	if w == nil {
 		return ""
 	}
-	return o.Slug
+	return w.Slug
 }
 
-func (o *WorkflowListResponseDto) GetStatus() WorkflowStatusEnum {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetStatus() WorkflowStatusEnum {
+	if w == nil {
 		return WorkflowStatusEnum("")
 	}
-	return o.Status
+	return w.Status
 }
 
-func (o *WorkflowListResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (w *WorkflowListResponseDto) GetOrigin() ResourceOriginEnum {
+	if w == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return w.Origin
 }
 
-func (o *WorkflowListResponseDto) GetLastTriggeredAt() *string {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetLastTriggeredAt() *string {
+	if w == nil {
 		return nil
 	}
-	return o.LastTriggeredAt
+	return w.LastTriggeredAt
 }
 
-func (o *WorkflowListResponseDto) GetStepTypeOverviews() []StepTypeEnum {
-	if o == nil {
+func (w *WorkflowListResponseDto) GetStepTypeOverviews() []StepTypeEnum {
+	if w == nil {
 		return []StepTypeEnum{}
 	}
-	return o.StepTypeOverviews
+	return w.StepTypeOverviews
+}
+
+func (w *WorkflowListResponseDto) GetIsTranslationEnabled() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.IsTranslationEnabled
+}
+
+func (w *WorkflowListResponseDto) GetSteps() []StepListResponseDto {
+	if w == nil {
+		return []StepListResponseDto{}
+	}
+	return w.Steps
 }

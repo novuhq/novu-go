@@ -38,16 +38,16 @@ type DeleteMessageResponseDto struct {
 	Status DeleteMessageResponseDtoStatus `json:"status"`
 }
 
-func (o *DeleteMessageResponseDto) GetAcknowledged() bool {
-	if o == nil {
+func (d *DeleteMessageResponseDto) GetAcknowledged() bool {
+	if d == nil {
 		return false
 	}
-	return o.Acknowledged
+	return d.Acknowledged
 }
 
-func (o *DeleteMessageResponseDto) GetStatus() DeleteMessageResponseDtoStatus {
-	if o == nil {
+func (d *DeleteMessageResponseDto) GetStatus() DeleteMessageResponseDtoStatus {
+	if d == nil {
 		return DeleteMessageResponseDtoStatus("")
 	}
-	return o.Status
+	return d.Status
 }

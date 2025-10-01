@@ -9,16 +9,16 @@ type ListWorkflowResponse struct {
 	TotalCount float64 `json:"totalCount"`
 }
 
-func (o *ListWorkflowResponse) GetWorkflows() []WorkflowListResponseDto {
-	if o == nil {
+func (l *ListWorkflowResponse) GetWorkflows() []WorkflowListResponseDto {
+	if l == nil {
 		return []WorkflowListResponseDto{}
 	}
-	return o.Workflows
+	return l.Workflows
 }
 
-func (o *ListWorkflowResponse) GetTotalCount() float64 {
-	if o == nil {
+func (l *ListWorkflowResponse) GetTotalCount() float64 {
+	if l == nil {
 		return 0.0
 	}
-	return o.TotalCount
+	return l.TotalCount
 }

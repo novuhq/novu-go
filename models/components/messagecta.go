@@ -11,23 +11,23 @@ type MessageCTA struct {
 	Action *MessageAction `json:"action,omitempty"`
 }
 
-func (o *MessageCTA) GetType() *ChannelCTATypeEnum {
-	if o == nil {
+func (m *MessageCTA) GetType() *ChannelCTATypeEnum {
+	if m == nil {
 		return nil
 	}
-	return o.Type
+	return m.Type
 }
 
-func (o *MessageCTA) GetData() *MessageCTAData {
-	if o == nil {
+func (m *MessageCTA) GetData() *MessageCTAData {
+	if m == nil {
 		return nil
 	}
-	return o.Data
+	return m.Data
 }
 
-func (o *MessageCTA) GetAction() *MessageAction {
-	if o == nil {
+func (m *MessageCTA) GetAction() *MessageAction {
+	if m == nil {
 		return nil
 	}
-	return o.Action
+	return m.Action
 }

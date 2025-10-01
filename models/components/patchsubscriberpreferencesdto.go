@@ -4,21 +4,30 @@ package components
 
 type PatchSubscriberPreferencesDto struct {
 	// Channel-specific preference settings
-	Channels PatchPreferenceChannelsDto `json:"channels"`
+	Channels *PatchPreferenceChannelsDto `json:"channels,omitempty"`
 	// Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences
 	WorkflowID *string `json:"workflowId,omitempty"`
+	// Subscriber schedule
+	Schedule *ScheduleDto `json:"schedule,omitempty"`
 }
 
-func (o *PatchSubscriberPreferencesDto) GetChannels() PatchPreferenceChannelsDto {
-	if o == nil {
-		return PatchPreferenceChannelsDto{}
-	}
-	return o.Channels
-}
-
-func (o *PatchSubscriberPreferencesDto) GetWorkflowID() *string {
-	if o == nil {
+func (p *PatchSubscriberPreferencesDto) GetChannels() *PatchPreferenceChannelsDto {
+	if p == nil {
 		return nil
 	}
-	return o.WorkflowID
+	return p.Channels
+}
+
+func (p *PatchSubscriberPreferencesDto) GetWorkflowID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.WorkflowID
+}
+
+func (p *PatchSubscriberPreferencesDto) GetSchedule() *ScheduleDto {
+	if p == nil {
+		return nil
+	}
+	return p.Schedule
 }

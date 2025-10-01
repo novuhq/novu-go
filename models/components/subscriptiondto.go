@@ -18,46 +18,46 @@ type Subscriber struct {
 	Email *string `json:"email,omitempty"`
 }
 
-func (o *Subscriber) GetID() string {
-	if o == nil {
+func (s *Subscriber) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *Subscriber) GetSubscriberID() string {
-	if o == nil {
+func (s *Subscriber) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *Subscriber) GetAvatar() *string {
-	if o == nil {
+func (s *Subscriber) GetAvatar() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Avatar
+	return s.Avatar
 }
 
-func (o *Subscriber) GetFirstName() *string {
-	if o == nil {
+func (s *Subscriber) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *Subscriber) GetLastName() *string {
-	if o == nil {
+func (s *Subscriber) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *Subscriber) GetEmail() *string {
-	if o == nil {
+func (s *Subscriber) GetEmail() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Email
+	return s.Email
 }
 
 type SubscriptionDto struct {
@@ -73,37 +73,37 @@ type SubscriptionDto struct {
 	UpdatedAt string `json:"updatedAt"`
 }
 
-func (o *SubscriptionDto) GetID() string {
-	if o == nil {
+func (s *SubscriptionDto) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *SubscriptionDto) GetTopic() TopicDto {
-	if o == nil {
+func (s *SubscriptionDto) GetTopic() TopicDto {
+	if s == nil {
 		return TopicDto{}
 	}
-	return o.Topic
+	return s.Topic
 }
 
-func (o *SubscriptionDto) GetSubscriber() *Subscriber {
-	if o == nil {
+func (s *SubscriptionDto) GetSubscriber() *Subscriber {
+	if s == nil {
 		return nil
 	}
-	return o.Subscriber
+	return s.Subscriber
 }
 
-func (o *SubscriptionDto) GetCreatedAt() string {
-	if o == nil {
+func (s *SubscriptionDto) GetCreatedAt() string {
+	if s == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return s.CreatedAt
 }
 
-func (o *SubscriptionDto) GetUpdatedAt() string {
-	if o == nil {
+func (s *SubscriptionDto) GetUpdatedAt() string {
+	if s == nil {
 		return ""
 	}
-	return o.UpdatedAt
+	return s.UpdatedAt
 }

@@ -9,16 +9,16 @@ type GetSubscriberPreferencesDto struct {
 	Workflows []SubscriberWorkflowPreferenceDto `json:"workflows"`
 }
 
-func (o *GetSubscriberPreferencesDto) GetGlobal() SubscriberGlobalPreferenceDto {
-	if o == nil {
+func (g *GetSubscriberPreferencesDto) GetGlobal() SubscriberGlobalPreferenceDto {
+	if g == nil {
 		return SubscriberGlobalPreferenceDto{}
 	}
-	return o.Global
+	return g.Global
 }
 
-func (o *GetSubscriberPreferencesDto) GetWorkflows() []SubscriberWorkflowPreferenceDto {
-	if o == nil {
+func (g *GetSubscriberPreferencesDto) GetWorkflows() []SubscriberWorkflowPreferenceDto {
+	if g == nil {
 		return []SubscriberWorkflowPreferenceDto{}
 	}
-	return o.Workflows
+	return g.Workflows
 }

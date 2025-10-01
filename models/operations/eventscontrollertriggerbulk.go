@@ -12,18 +12,18 @@ type EventsControllerTriggerBulkRequest struct {
 	BulkTriggerEventDto components.BulkTriggerEventDto `request:"mediaType=application/json"`
 }
 
-func (o *EventsControllerTriggerBulkRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EventsControllerTriggerBulkRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
-func (o *EventsControllerTriggerBulkRequest) GetBulkTriggerEventDto() components.BulkTriggerEventDto {
-	if o == nil {
+func (e *EventsControllerTriggerBulkRequest) GetBulkTriggerEventDto() components.BulkTriggerEventDto {
+	if e == nil {
 		return components.BulkTriggerEventDto{}
 	}
-	return o.BulkTriggerEventDto
+	return e.BulkTriggerEventDto
 }
 
 type EventsControllerTriggerBulkResponse struct {
@@ -33,23 +33,23 @@ type EventsControllerTriggerBulkResponse struct {
 	Headers                  map[string][]string
 }
 
-func (o *EventsControllerTriggerBulkResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EventsControllerTriggerBulkResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EventsControllerTriggerBulkResponse) GetTriggerEventResponseDtos() []components.TriggerEventResponseDto {
-	if o == nil {
+func (e *EventsControllerTriggerBulkResponse) GetTriggerEventResponseDtos() []components.TriggerEventResponseDto {
+	if e == nil {
 		return nil
 	}
-	return o.TriggerEventResponseDtos
+	return e.TriggerEventResponseDtos
 }
 
-func (o *EventsControllerTriggerBulkResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EventsControllerTriggerBulkResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

@@ -17,44 +17,44 @@ type ActivityNotificationSubscriberResponseDto struct {
 	Phone *string `json:"phone,omitempty"`
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetFirstName() *string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetFirstName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FirstName
+	return a.FirstName
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetSubscriberID() string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetSubscriberID() string {
+	if a == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return a.SubscriberID
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetID() string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetLastName() *string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetLastName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.LastName
+	return a.LastName
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetEmail() *string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetEmail() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Email
+	return a.Email
 }
 
-func (o *ActivityNotificationSubscriberResponseDto) GetPhone() *string {
-	if o == nil {
+func (a *ActivityNotificationSubscriberResponseDto) GetPhone() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Phone
+	return a.Phone
 }

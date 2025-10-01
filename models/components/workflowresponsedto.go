@@ -9,32 +9,110 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// Slug of the workflow
-type Slug struct {
+// WorkflowResponseDtoUpdatedBy - User who last updated the workflow
+type WorkflowResponseDtoUpdatedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *string `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (w *WorkflowResponseDtoUpdatedBy) GetID() string {
+	if w == nil {
+		return ""
+	}
+	return w.ID
+}
+
+func (w *WorkflowResponseDtoUpdatedBy) GetFirstName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.FirstName
+}
+
+func (w *WorkflowResponseDtoUpdatedBy) GetLastName() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LastName
+}
+
+func (w *WorkflowResponseDtoUpdatedBy) GetExternalID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ExternalID
+}
+
+// LastPublishedBy - User who last published the workflow
+type LastPublishedBy struct {
+	// User ID
+	ID string `json:"_id"`
+	// User first name
+	FirstName *string `json:"firstName,omitempty"`
+	// User last name
+	LastName *string `json:"lastName,omitempty"`
+	// User external ID
+	ExternalID *string `json:"externalId,omitempty"`
+}
+
+func (l *LastPublishedBy) GetID() string {
+	if l == nil {
+		return ""
+	}
+	return l.ID
+}
+
+func (l *LastPublishedBy) GetFirstName() *string {
+	if l == nil {
+		return nil
+	}
+	return l.FirstName
+}
+
+func (l *LastPublishedBy) GetLastName() *string {
+	if l == nil {
+		return nil
+	}
+	return l.LastName
+}
+
+func (l *LastPublishedBy) GetExternalID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ExternalID
 }
 
 type WorkflowResponseDtoStepsType string
 
 const (
-	WorkflowResponseDtoStepsTypeInApp  WorkflowResponseDtoStepsType = "in_app"
-	WorkflowResponseDtoStepsTypeEmail  WorkflowResponseDtoStepsType = "email"
-	WorkflowResponseDtoStepsTypeSms    WorkflowResponseDtoStepsType = "sms"
-	WorkflowResponseDtoStepsTypePush   WorkflowResponseDtoStepsType = "push"
-	WorkflowResponseDtoStepsTypeChat   WorkflowResponseDtoStepsType = "chat"
-	WorkflowResponseDtoStepsTypeDelay  WorkflowResponseDtoStepsType = "delay"
-	WorkflowResponseDtoStepsTypeDigest WorkflowResponseDtoStepsType = "digest"
-	WorkflowResponseDtoStepsTypeCustom WorkflowResponseDtoStepsType = "custom"
+	WorkflowResponseDtoStepsTypeInApp    WorkflowResponseDtoStepsType = "in_app"
+	WorkflowResponseDtoStepsTypeEmail    WorkflowResponseDtoStepsType = "email"
+	WorkflowResponseDtoStepsTypeSms      WorkflowResponseDtoStepsType = "sms"
+	WorkflowResponseDtoStepsTypePush     WorkflowResponseDtoStepsType = "push"
+	WorkflowResponseDtoStepsTypeChat     WorkflowResponseDtoStepsType = "chat"
+	WorkflowResponseDtoStepsTypeDelay    WorkflowResponseDtoStepsType = "delay"
+	WorkflowResponseDtoStepsTypeDigest   WorkflowResponseDtoStepsType = "digest"
+	WorkflowResponseDtoStepsTypeCustom   WorkflowResponseDtoStepsType = "custom"
+	WorkflowResponseDtoStepsTypeThrottle WorkflowResponseDtoStepsType = "throttle"
 )
 
 type WorkflowResponseDtoSteps struct {
-	InAppStepResponseDto  *InAppStepResponseDto  `queryParam:"inline"`
-	EmailStepResponseDto  *EmailStepResponseDto  `queryParam:"inline"`
-	SmsStepResponseDto    *SmsStepResponseDto    `queryParam:"inline"`
-	PushStepResponseDto   *PushStepResponseDto   `queryParam:"inline"`
-	ChatStepResponseDto   *ChatStepResponseDto   `queryParam:"inline"`
-	DelayStepResponseDto  *DelayStepResponseDto  `queryParam:"inline"`
-	DigestStepResponseDto *DigestStepResponseDto `queryParam:"inline"`
-	CustomStepResponseDto *CustomStepResponseDto `queryParam:"inline"`
+	InAppStepResponseDto    *InAppStepResponseDto    `queryParam:"inline,name=steps"`
+	EmailStepResponseDto    *EmailStepResponseDto    `queryParam:"inline,name=steps"`
+	SmsStepResponseDto      *SmsStepResponseDto      `queryParam:"inline,name=steps"`
+	PushStepResponseDto     *PushStepResponseDto     `queryParam:"inline,name=steps"`
+	ChatStepResponseDto     *ChatStepResponseDto     `queryParam:"inline,name=steps"`
+	DelayStepResponseDto    *DelayStepResponseDto    `queryParam:"inline,name=steps"`
+	DigestStepResponseDto   *DigestStepResponseDto   `queryParam:"inline,name=steps"`
+	CustomStepResponseDto   *CustomStepResponseDto   `queryParam:"inline,name=steps"`
+	ThrottleStepResponseDto *ThrottleStepResponseDto `queryParam:"inline,name=steps"`
 
 	Type WorkflowResponseDtoStepsType
 }
@@ -135,6 +213,18 @@ func CreateWorkflowResponseDtoStepsCustom(custom CustomStepResponseDto) Workflow
 	}
 }
 
+func CreateWorkflowResponseDtoStepsThrottle(throttle ThrottleStepResponseDto) WorkflowResponseDtoSteps {
+	typ := WorkflowResponseDtoStepsTypeThrottle
+
+	typStr := StepTypeEnum(typ)
+	throttle.Type = typStr
+
+	return WorkflowResponseDtoSteps{
+		ThrottleStepResponseDto: &throttle,
+		Type:                    typ,
+	}
+}
+
 func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -149,7 +239,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 	switch dis.Type {
 	case "in_app":
 		inAppStepResponseDto := new(InAppStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &inAppStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &inAppStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == in_app) type InAppStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -158,7 +248,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "email":
 		emailStepResponseDto := new(EmailStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &emailStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &emailStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == email) type EmailStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -167,7 +257,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "sms":
 		smsStepResponseDto := new(SmsStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &smsStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &smsStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == sms) type SmsStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -176,7 +266,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "push":
 		pushStepResponseDto := new(PushStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &pushStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &pushStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == push) type PushStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -185,7 +275,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "chat":
 		chatStepResponseDto := new(ChatStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &chatStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &chatStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == chat) type ChatStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -194,7 +284,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "delay":
 		delayStepResponseDto := new(DelayStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &delayStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &delayStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == delay) type DelayStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -203,7 +293,7 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "digest":
 		digestStepResponseDto := new(DigestStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &digestStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &digestStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == digest) type DigestStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
@@ -212,12 +302,21 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		return nil
 	case "custom":
 		customStepResponseDto := new(CustomStepResponseDto)
-		if err := utils.UnmarshalJSON(data, &customStepResponseDto, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &customStepResponseDto, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Type == custom) type CustomStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
 		}
 
 		u.CustomStepResponseDto = customStepResponseDto
 		u.Type = WorkflowResponseDtoStepsTypeCustom
+		return nil
+	case "throttle":
+		throttleStepResponseDto := new(ThrottleStepResponseDto)
+		if err := utils.UnmarshalJSON(data, &throttleStepResponseDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == throttle) type ThrottleStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
+		}
+
+		u.ThrottleStepResponseDto = throttleStepResponseDto
+		u.Type = WorkflowResponseDtoStepsTypeThrottle
 		return nil
 	}
 
@@ -257,6 +356,10 @@ func (u WorkflowResponseDtoSteps) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CustomStepResponseDto, "", true)
 	}
 
+	if u.ThrottleStepResponseDto != nil {
+		return utils.MarshalJSON(u.ThrottleStepResponseDto, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type WorkflowResponseDtoSteps: all fields are null")
 }
 
@@ -269,20 +372,32 @@ type WorkflowResponseDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Whether the workflow is active
 	Active *bool `default:"false" json:"active"`
+	// Enable or disable payload schema validation
+	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// The payload JSON Schema for the workflow
+	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
+	// Enable or disable translations for this workflow
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Unique identifier of the workflow
 	ID string `json:"_id"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Slug of the workflow
-	Slug Slug `json:"slug"`
+	Slug string `json:"slug"`
 	// Last updated timestamp
 	UpdatedAt string `json:"updatedAt"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
+	// User who last updated the workflow
+	UpdatedBy *WorkflowResponseDtoUpdatedBy `json:"updatedBy,omitempty"`
+	// Timestamp of the last workflow publication
+	LastPublishedAt *string `json:"lastPublishedAt,omitempty"`
+	// User who last published the workflow
+	LastPublishedBy *LastPublishedBy `json:"lastPublishedBy,omitempty"`
 	// Steps of the workflow
 	Steps []WorkflowResponseDtoSteps `json:"steps"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Preferences for the workflow
 	Preferences WorkflowPreferencesResponseDto `json:"preferences"`
 	// Status of the workflow
@@ -291,12 +406,10 @@ type WorkflowResponseDto struct {
 	Issues map[string]RuntimeIssueDto `json:"issues,omitempty"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
-	// The payload JSON Schema for the workflow
-	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Generated payload example based on the payload schema
 	PayloadExample map[string]any `json:"payloadExample,omitempty"`
-	// Whether payload schema validation is enabled
-	ValidatePayload *bool `json:"validatePayload,omitempty"`
+	// Severity of the workflow
+	Severity SeverityLevelEnum `json:"severity"`
 }
 
 func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
@@ -304,134 +417,169 @@ func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"name", "_id", "workflowId", "slug", "updatedAt", "createdAt", "steps", "origin", "preferences", "status", "severity"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *WorkflowResponseDto) GetName() string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetName() string {
+	if w == nil {
 		return ""
 	}
-	return o.Name
+	return w.Name
 }
 
-func (o *WorkflowResponseDto) GetDescription() *string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetDescription() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Description
+	return w.Description
 }
 
-func (o *WorkflowResponseDto) GetTags() []string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetTags() []string {
+	if w == nil {
 		return nil
 	}
-	return o.Tags
+	return w.Tags
 }
 
-func (o *WorkflowResponseDto) GetActive() *bool {
-	if o == nil {
+func (w *WorkflowResponseDto) GetActive() *bool {
+	if w == nil {
 		return nil
 	}
-	return o.Active
+	return w.Active
 }
 
-func (o *WorkflowResponseDto) GetID() string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetValidatePayload() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.ValidatePayload
+}
+
+func (w *WorkflowResponseDto) GetPayloadSchema() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.PayloadSchema
+}
+
+func (w *WorkflowResponseDto) GetIsTranslationEnabled() *bool {
+	if w == nil {
+		return nil
+	}
+	return w.IsTranslationEnabled
+}
+
+func (w *WorkflowResponseDto) GetID() string {
+	if w == nil {
 		return ""
 	}
-	return o.ID
+	return w.ID
 }
 
-func (o *WorkflowResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetWorkflowID() string {
+	if w == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return w.WorkflowID
 }
 
-func (o *WorkflowResponseDto) GetSlug() Slug {
-	if o == nil {
-		return Slug{}
-	}
-	return o.Slug
-}
-
-func (o *WorkflowResponseDto) GetUpdatedAt() string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetSlug() string {
+	if w == nil {
 		return ""
 	}
-	return o.UpdatedAt
+	return w.Slug
 }
 
-func (o *WorkflowResponseDto) GetCreatedAt() string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetUpdatedAt() string {
+	if w == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return w.UpdatedAt
 }
 
-func (o *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
-	if o == nil {
+func (w *WorkflowResponseDto) GetCreatedAt() string {
+	if w == nil {
+		return ""
+	}
+	return w.CreatedAt
+}
+
+func (w *WorkflowResponseDto) GetUpdatedBy() *WorkflowResponseDtoUpdatedBy {
+	if w == nil {
+		return nil
+	}
+	return w.UpdatedBy
+}
+
+func (w *WorkflowResponseDto) GetLastPublishedAt() *string {
+	if w == nil {
+		return nil
+	}
+	return w.LastPublishedAt
+}
+
+func (w *WorkflowResponseDto) GetLastPublishedBy() *LastPublishedBy {
+	if w == nil {
+		return nil
+	}
+	return w.LastPublishedBy
+}
+
+func (w *WorkflowResponseDto) GetSteps() []WorkflowResponseDtoSteps {
+	if w == nil {
 		return []WorkflowResponseDtoSteps{}
 	}
-	return o.Steps
+	return w.Steps
 }
 
-func (o *WorkflowResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (w *WorkflowResponseDto) GetOrigin() ResourceOriginEnum {
+	if w == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return w.Origin
 }
 
-func (o *WorkflowResponseDto) GetPreferences() WorkflowPreferencesResponseDto {
-	if o == nil {
+func (w *WorkflowResponseDto) GetPreferences() WorkflowPreferencesResponseDto {
+	if w == nil {
 		return WorkflowPreferencesResponseDto{}
 	}
-	return o.Preferences
+	return w.Preferences
 }
 
-func (o *WorkflowResponseDto) GetStatus() WorkflowStatusEnum {
-	if o == nil {
+func (w *WorkflowResponseDto) GetStatus() WorkflowStatusEnum {
+	if w == nil {
 		return WorkflowStatusEnum("")
 	}
-	return o.Status
+	return w.Status
 }
 
-func (o *WorkflowResponseDto) GetIssues() map[string]RuntimeIssueDto {
-	if o == nil {
+func (w *WorkflowResponseDto) GetIssues() map[string]RuntimeIssueDto {
+	if w == nil {
 		return nil
 	}
-	return o.Issues
+	return w.Issues
 }
 
-func (o *WorkflowResponseDto) GetLastTriggeredAt() *string {
-	if o == nil {
+func (w *WorkflowResponseDto) GetLastTriggeredAt() *string {
+	if w == nil {
 		return nil
 	}
-	return o.LastTriggeredAt
+	return w.LastTriggeredAt
 }
 
-func (o *WorkflowResponseDto) GetPayloadSchema() map[string]any {
-	if o == nil {
+func (w *WorkflowResponseDto) GetPayloadExample() map[string]any {
+	if w == nil {
 		return nil
 	}
-	return o.PayloadSchema
+	return w.PayloadExample
 }
 
-func (o *WorkflowResponseDto) GetPayloadExample() map[string]any {
-	if o == nil {
-		return nil
+func (w *WorkflowResponseDto) GetSeverity() SeverityLevelEnum {
+	if w == nil {
+		return SeverityLevelEnum("")
 	}
-	return o.PayloadExample
-}
-
-func (o *WorkflowResponseDto) GetValidatePayload() *bool {
-	if o == nil {
-		return nil
-	}
-	return o.ValidatePayload
+	return w.Severity
 }

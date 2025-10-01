@@ -12,18 +12,18 @@ type EnvironmentsControllerV1CreateEnvironmentRequest struct {
 	CreateEnvironmentRequestDto components.CreateEnvironmentRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *EnvironmentsControllerV1CreateEnvironmentRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EnvironmentsControllerV1CreateEnvironmentRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
-func (o *EnvironmentsControllerV1CreateEnvironmentRequest) GetCreateEnvironmentRequestDto() components.CreateEnvironmentRequestDto {
-	if o == nil {
+func (e *EnvironmentsControllerV1CreateEnvironmentRequest) GetCreateEnvironmentRequestDto() components.CreateEnvironmentRequestDto {
+	if e == nil {
 		return components.CreateEnvironmentRequestDto{}
 	}
-	return o.CreateEnvironmentRequestDto
+	return e.CreateEnvironmentRequestDto
 }
 
 type EnvironmentsControllerV1CreateEnvironmentResponse struct {
@@ -33,23 +33,23 @@ type EnvironmentsControllerV1CreateEnvironmentResponse struct {
 	Headers                map[string][]string
 }
 
-func (o *EnvironmentsControllerV1CreateEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EnvironmentsControllerV1CreateEnvironmentResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EnvironmentsControllerV1CreateEnvironmentResponse) GetEnvironmentResponseDto() *components.EnvironmentResponseDto {
-	if o == nil {
+func (e *EnvironmentsControllerV1CreateEnvironmentResponse) GetEnvironmentResponseDto() *components.EnvironmentResponseDto {
+	if e == nil {
 		return nil
 	}
-	return o.EnvironmentResponseDto
+	return e.EnvironmentResponseDto
 }
 
-func (o *EnvironmentsControllerV1CreateEnvironmentResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EnvironmentsControllerV1CreateEnvironmentResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

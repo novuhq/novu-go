@@ -11,23 +11,23 @@ type MessageAction struct {
 	Result *MessageActionResult `json:"result,omitempty"`
 }
 
-func (o *MessageAction) GetStatus() *MessageActionStatusEnum {
-	if o == nil {
+func (m *MessageAction) GetStatus() *MessageActionStatusEnum {
+	if m == nil {
 		return nil
 	}
-	return o.Status
+	return m.Status
 }
 
-func (o *MessageAction) GetButtons() []MessageButton {
-	if o == nil {
+func (m *MessageAction) GetButtons() []MessageButton {
+	if m == nil {
 		return nil
 	}
-	return o.Buttons
+	return m.Buttons
 }
 
-func (o *MessageAction) GetResult() *MessageActionResult {
-	if o == nil {
+func (m *MessageAction) GetResult() *MessageActionResult {
+	if m == nil {
 		return nil
 	}
-	return o.Result
+	return m.Result
 }

@@ -17,8 +17,8 @@ const (
 )
 
 type MessageID struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
+	Str        *string  `queryParam:"inline,name=messageId"`
+	ArrayOfStr []string `queryParam:"inline,name=messageId"`
 
 	Type MessageIDType
 }
@@ -44,14 +44,14 @@ func CreateMessageIDArrayOfStr(arrayOfStr []string) MessageID {
 func (u *MessageID) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = MessageIDTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = MessageIDTypeArrayOfStr
 		return nil
@@ -109,16 +109,16 @@ type MessageMarkAsRequestDto struct {
 	MarkAs    MessageMarkAsRequestDtoMarkAs `json:"markAs"`
 }
 
-func (o *MessageMarkAsRequestDto) GetMessageID() MessageID {
-	if o == nil {
+func (m *MessageMarkAsRequestDto) GetMessageID() MessageID {
+	if m == nil {
 		return MessageID{}
 	}
-	return o.MessageID
+	return m.MessageID
 }
 
-func (o *MessageMarkAsRequestDto) GetMarkAs() MessageMarkAsRequestDtoMarkAs {
-	if o == nil {
+func (m *MessageMarkAsRequestDto) GetMarkAs() MessageMarkAsRequestDtoMarkAs {
+	if m == nil {
 		return MessageMarkAsRequestDtoMarkAs("")
 	}
-	return o.MarkAs
+	return m.MarkAs
 }

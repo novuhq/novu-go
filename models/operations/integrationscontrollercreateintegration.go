@@ -12,18 +12,18 @@ type IntegrationsControllerCreateIntegrationRequest struct {
 	CreateIntegrationRequestDto components.CreateIntegrationRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *IntegrationsControllerCreateIntegrationRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (i *IntegrationsControllerCreateIntegrationRequest) GetIdempotencyKey() *string {
+	if i == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return i.IdempotencyKey
 }
 
-func (o *IntegrationsControllerCreateIntegrationRequest) GetCreateIntegrationRequestDto() components.CreateIntegrationRequestDto {
-	if o == nil {
+func (i *IntegrationsControllerCreateIntegrationRequest) GetCreateIntegrationRequestDto() components.CreateIntegrationRequestDto {
+	if i == nil {
 		return components.CreateIntegrationRequestDto{}
 	}
-	return o.CreateIntegrationRequestDto
+	return i.CreateIntegrationRequestDto
 }
 
 type IntegrationsControllerCreateIntegrationResponse struct {
@@ -33,23 +33,23 @@ type IntegrationsControllerCreateIntegrationResponse struct {
 	Headers                map[string][]string
 }
 
-func (o *IntegrationsControllerCreateIntegrationResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (i *IntegrationsControllerCreateIntegrationResponse) GetHTTPMeta() components.HTTPMetadata {
+	if i == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return i.HTTPMeta
 }
 
-func (o *IntegrationsControllerCreateIntegrationResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
-	if o == nil {
+func (i *IntegrationsControllerCreateIntegrationResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
+	if i == nil {
 		return nil
 	}
-	return o.IntegrationResponseDto
+	return i.IntegrationResponseDto
 }
 
-func (o *IntegrationsControllerCreateIntegrationResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (i *IntegrationsControllerCreateIntegrationResponse) GetHeaders() map[string][]string {
+	if i == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return i.Headers
 }

@@ -2,7 +2,22 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type TenantPayloadDtoData struct {
+}
+
+func (t TenantPayloadDtoData) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TenantPayloadDtoData) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 type TenantPayloadDto struct {
@@ -11,23 +26,34 @@ type TenantPayloadDto struct {
 	Data       *TenantPayloadDtoData `json:"data,omitempty"`
 }
 
-func (o *TenantPayloadDto) GetIdentifier() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Identifier
+func (t TenantPayloadDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
 }
 
-func (o *TenantPayloadDto) GetName() *string {
-	if o == nil {
-		return nil
+func (t *TenantPayloadDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
 	}
-	return o.Name
+	return nil
 }
 
-func (o *TenantPayloadDto) GetData() *TenantPayloadDtoData {
-	if o == nil {
+func (t *TenantPayloadDto) GetIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Data
+	return t.Identifier
+}
+
+func (t *TenantPayloadDto) GetName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Name
+}
+
+func (t *TenantPayloadDto) GetData() *TenantPayloadDtoData {
+	if t == nil {
+		return nil
+	}
+	return t.Data
 }

@@ -11,11 +11,11 @@ type EnvironmentsControllerV1ListMyEnvironmentsRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *EnvironmentsControllerV1ListMyEnvironmentsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (e *EnvironmentsControllerV1ListMyEnvironmentsRequest) GetIdempotencyKey() *string {
+	if e == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return e.IdempotencyKey
 }
 
 type EnvironmentsControllerV1ListMyEnvironmentsResponse struct {
@@ -25,23 +25,23 @@ type EnvironmentsControllerV1ListMyEnvironmentsResponse struct {
 	Headers                 map[string][]string
 }
 
-func (o *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (e *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if e == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return e.HTTPMeta
 }
 
-func (o *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetEnvironmentResponseDtos() []components.EnvironmentResponseDto {
-	if o == nil {
+func (e *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetEnvironmentResponseDtos() []components.EnvironmentResponseDto {
+	if e == nil {
 		return nil
 	}
-	return o.EnvironmentResponseDtos
+	return e.EnvironmentResponseDtos
 }
 
-func (o *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (e *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetHeaders() map[string][]string {
+	if e == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return e.Headers
 }

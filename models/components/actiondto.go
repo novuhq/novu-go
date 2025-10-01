@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type ActionDto struct {
 	// Label for the action button.
 	Label *string `json:"label,omitempty"`
@@ -9,16 +13,27 @@ type ActionDto struct {
 	Redirect *RedirectDto `json:"redirect,omitempty"`
 }
 
-func (o *ActionDto) GetLabel() *string {
-	if o == nil {
-		return nil
-	}
-	return o.Label
+func (a ActionDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(a, "", false)
 }
 
-func (o *ActionDto) GetRedirect() *RedirectDto {
-	if o == nil {
+func (a *ActionDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (a *ActionDto) GetLabel() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Redirect
+	return a.Label
+}
+
+func (a *ActionDto) GetRedirect() *RedirectDto {
+	if a == nil {
+		return nil
+	}
+	return a.Redirect
 }

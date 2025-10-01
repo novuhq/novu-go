@@ -2,32 +2,47 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type StepContentIssueDto struct {
 	// Type of step content issue
-	IssueType StepContentIssueEnum `json:"issueType"`
+	IssueType ContentIssueEnum `json:"issueType"`
 	// Name of the variable related to the issue
 	VariableName *string `json:"variableName,omitempty"`
 	// Detailed message describing the issue
 	Message string `json:"message"`
 }
 
-func (o *StepContentIssueDto) GetIssueType() StepContentIssueEnum {
-	if o == nil {
-		return StepContentIssueEnum("")
-	}
-	return o.IssueType
+func (s StepContentIssueDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *StepContentIssueDto) GetVariableName() *string {
-	if o == nil {
+func (s *StepContentIssueDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"issueType", "message"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *StepContentIssueDto) GetIssueType() ContentIssueEnum {
+	if s == nil {
+		return ContentIssueEnum("")
+	}
+	return s.IssueType
+}
+
+func (s *StepContentIssueDto) GetVariableName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.VariableName
+	return s.VariableName
 }
 
-func (o *StepContentIssueDto) GetMessage() string {
-	if o == nil {
+func (s *StepContentIssueDto) GetMessage() string {
+	if s == nil {
 		return ""
 	}
-	return o.Message
+	return s.Message
 }

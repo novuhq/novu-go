@@ -13,30 +13,30 @@ type ActivitiesResponseDto struct {
 	Page float64 `json:"page"`
 }
 
-func (o *ActivitiesResponseDto) GetHasMore() bool {
-	if o == nil {
+func (a *ActivitiesResponseDto) GetHasMore() bool {
+	if a == nil {
 		return false
 	}
-	return o.HasMore
+	return a.HasMore
 }
 
-func (o *ActivitiesResponseDto) GetData() []ActivityNotificationResponseDto {
-	if o == nil {
+func (a *ActivitiesResponseDto) GetData() []ActivityNotificationResponseDto {
+	if a == nil {
 		return []ActivityNotificationResponseDto{}
 	}
-	return o.Data
+	return a.Data
 }
 
-func (o *ActivitiesResponseDto) GetPageSize() float64 {
-	if o == nil {
+func (a *ActivitiesResponseDto) GetPageSize() float64 {
+	if a == nil {
 		return 0.0
 	}
-	return o.PageSize
+	return a.PageSize
 }
 
-func (o *ActivitiesResponseDto) GetPage() float64 {
-	if o == nil {
+func (a *ActivitiesResponseDto) GetPage() float64 {
+	if a == nil {
 		return 0.0
 	}
-	return o.Page
+	return a.Page
 }

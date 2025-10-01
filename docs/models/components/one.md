@@ -1,23 +1,9 @@
 # One
 
 
-## Supported Types
+## Fields
 
-### SubscriberPayloadDto
-
-```go
-one := components.CreateOneSubscriberPayloadDto(components.SubscriberPayloadDto{/* values here */})
-```
-
-### TopicPayloadDto
-
-```go
-one := components.CreateOneTopicPayloadDto(components.TopicPayloadDto{/* values here */})
-```
-
-### 
-
-```go
-one := components.CreateOneStr(string{/* values here */})
-```
-
+| Field                                                                                     | Type                                                                                      | Required                                                                                  | Description                                                                               |
+| ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `Type`                                                                                    | [*components.ResultType](../../models/components/resulttype.md)                           | :heavy_minus_sign:                                                                        | N/A                                                                                       |
+| `Preview`                                                                                 | [*components.EmailLayoutRenderOutput](../../models/components/emaillayoutrenderoutput.md) | :heavy_minus_sign:                                                                        | N/A                                                                                       |

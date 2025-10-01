@@ -7,9 +7,9 @@ type MessageCTAData struct {
 	URL *string `json:"url,omitempty"`
 }
 
-func (o *MessageCTAData) GetURL() *string {
-	if o == nil {
+func (m *MessageCTAData) GetURL() *string {
+	if m == nil {
 		return nil
 	}
-	return o.URL
+	return m.URL
 }

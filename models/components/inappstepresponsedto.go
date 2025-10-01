@@ -34,84 +34,80 @@ func (i InAppStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InAppStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *InAppStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetSkip() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.Skip
+	return i.Skip
 }
 
-func (o *InAppStepResponseDtoControlValues) GetBody() *string {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetBody() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Body
+	return i.Body
 }
 
-func (o *InAppStepResponseDtoControlValues) GetSubject() *string {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetSubject() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Subject
+	return i.Subject
 }
 
-func (o *InAppStepResponseDtoControlValues) GetAvatar() *string {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetAvatar() *string {
+	if i == nil {
 		return nil
 	}
-	return o.Avatar
+	return i.Avatar
 }
 
-func (o *InAppStepResponseDtoControlValues) GetPrimaryAction() *ActionDto {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetPrimaryAction() *ActionDto {
+	if i == nil {
 		return nil
 	}
-	return o.PrimaryAction
+	return i.PrimaryAction
 }
 
-func (o *InAppStepResponseDtoControlValues) GetSecondaryAction() *ActionDto {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetSecondaryAction() *ActionDto {
+	if i == nil {
 		return nil
 	}
-	return o.SecondaryAction
+	return i.SecondaryAction
 }
 
-func (o *InAppStepResponseDtoControlValues) GetRedirect() *RedirectDto {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetRedirect() *RedirectDto {
+	if i == nil {
 		return nil
 	}
-	return o.Redirect
+	return i.Redirect
 }
 
-func (o *InAppStepResponseDtoControlValues) GetDisableOutputSanitization() *bool {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetDisableOutputSanitization() *bool {
+	if i == nil {
 		return nil
 	}
-	return o.DisableOutputSanitization
+	return i.DisableOutputSanitization
 }
 
-func (o *InAppStepResponseDtoControlValues) GetData() map[string]any {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetData() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.Data
+	return i.Data
 }
 
-func (o *InAppStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (i *InAppStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if i == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// InAppStepResponseDtoSlug - Slug of the step
-type InAppStepResponseDtoSlug struct {
+	return i.AdditionalProperties
 }
 
 type InAppStepResponseDto struct {
@@ -128,11 +124,11 @@ type InAppStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug InAppStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -141,86 +137,97 @@ type InAppStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *InAppStepResponseDto) GetControls() InAppControlsMetadataResponseDto {
-	if o == nil {
+func (i InAppStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(i, "", false)
+}
+
+func (i *InAppStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &i, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (i *InAppStepResponseDto) GetControls() InAppControlsMetadataResponseDto {
+	if i == nil {
 		return InAppControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return i.Controls
 }
 
-func (o *InAppStepResponseDto) GetControlValues() *InAppStepResponseDtoControlValues {
-	if o == nil {
+func (i *InAppStepResponseDto) GetControlValues() *InAppStepResponseDtoControlValues {
+	if i == nil {
 		return nil
 	}
-	return o.ControlValues
+	return i.ControlValues
 }
 
-func (o *InAppStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (i *InAppStepResponseDto) GetVariables() map[string]any {
+	if i == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return i.Variables
 }
 
-func (o *InAppStepResponseDto) GetStepID() string {
-	if o == nil {
+func (i *InAppStepResponseDto) GetStepID() string {
+	if i == nil {
 		return ""
 	}
-	return o.StepID
+	return i.StepID
 }
 
-func (o *InAppStepResponseDto) GetID() string {
-	if o == nil {
+func (i *InAppStepResponseDto) GetID() string {
+	if i == nil {
 		return ""
 	}
-	return o.ID
+	return i.ID
 }
 
-func (o *InAppStepResponseDto) GetName() string {
-	if o == nil {
+func (i *InAppStepResponseDto) GetName() string {
+	if i == nil {
 		return ""
 	}
-	return o.Name
+	return i.Name
 }
 
-func (o *InAppStepResponseDto) GetSlug() InAppStepResponseDtoSlug {
-	if o == nil {
-		return InAppStepResponseDtoSlug{}
+func (i *InAppStepResponseDto) GetSlug() string {
+	if i == nil {
+		return ""
 	}
-	return o.Slug
+	return i.Slug
 }
 
-func (o *InAppStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (i *InAppStepResponseDto) GetType() StepTypeEnum {
+	if i == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return i.Type
 }
 
-func (o *InAppStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (i *InAppStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if i == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return i.Origin
 }
 
-func (o *InAppStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (i *InAppStepResponseDto) GetWorkflowID() string {
+	if i == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return i.WorkflowID
 }
 
-func (o *InAppStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (i *InAppStepResponseDto) GetWorkflowDatabaseID() string {
+	if i == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return i.WorkflowDatabaseID
 }
 
-func (o *InAppStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (i *InAppStepResponseDto) GetIssues() *StepIssuesDto {
+	if i == nil {
 		return nil
 	}
-	return o.Issues
+	return i.Issues
 }

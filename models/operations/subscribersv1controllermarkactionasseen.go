@@ -15,39 +15,39 @@ type SubscribersV1ControllerMarkActionAsSeenRequest struct {
 	MarkMessageActionAsSeenDto components.MarkMessageActionAsSeenDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenRequest) GetMessageID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetMessageID() string {
+	if s == nil {
 		return ""
 	}
-	return o.MessageID
+	return s.MessageID
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenRequest) GetType() any {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetType() any {
+	if s == nil {
 		return nil
 	}
-	return o.Type
+	return s.Type
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenRequest) GetMarkMessageActionAsSeenDto() components.MarkMessageActionAsSeenDto {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetMarkMessageActionAsSeenDto() components.MarkMessageActionAsSeenDto {
+	if s == nil {
 		return components.MarkMessageActionAsSeenDto{}
 	}
-	return o.MarkMessageActionAsSeenDto
+	return s.MarkMessageActionAsSeenDto
 }
 
 type SubscribersV1ControllerMarkActionAsSeenResponse struct {
@@ -57,23 +57,23 @@ type SubscribersV1ControllerMarkActionAsSeenResponse struct {
 	Headers            map[string][]string
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenResponse) GetMessageResponseDto() *components.MessageResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenResponse) GetMessageResponseDto() *components.MessageResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.MessageResponseDto
+	return s.MessageResponseDto
 }
 
-func (o *SubscribersV1ControllerMarkActionAsSeenResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerMarkActionAsSeenResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

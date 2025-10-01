@@ -25,60 +25,60 @@ type WorkflowControllerSearchWorkflowsRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetLimit() *float64 {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetLimit() *float64 {
+	if w == nil {
 		return nil
 	}
-	return o.Limit
+	return w.Limit
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetOffset() *float64 {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetOffset() *float64 {
+	if w == nil {
 		return nil
 	}
-	return o.Offset
+	return w.Offset
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetOrderDirection() *components.DirectionEnum {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetOrderDirection() *components.DirectionEnum {
+	if w == nil {
 		return nil
 	}
-	return o.OrderDirection
+	return w.OrderDirection
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetOrderBy() *components.WorkflowResponseDtoSortField {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetOrderBy() *components.WorkflowResponseDtoSortField {
+	if w == nil {
 		return nil
 	}
-	return o.OrderBy
+	return w.OrderBy
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetQuery() *string {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetQuery() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Query
+	return w.Query
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetTags() []string {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetTags() []string {
+	if w == nil {
 		return nil
 	}
-	return o.Tags
+	return w.Tags
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetStatus() []components.WorkflowStatusEnum {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetStatus() []components.WorkflowStatusEnum {
+	if w == nil {
 		return nil
 	}
-	return o.Status
+	return w.Status
 }
 
-func (o *WorkflowControllerSearchWorkflowsRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsRequest) GetIdempotencyKey() *string {
+	if w == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return w.IdempotencyKey
 }
 
 type WorkflowControllerSearchWorkflowsResponse struct {
@@ -88,23 +88,23 @@ type WorkflowControllerSearchWorkflowsResponse struct {
 	Headers              map[string][]string
 }
 
-func (o *WorkflowControllerSearchWorkflowsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsResponse) GetHTTPMeta() components.HTTPMetadata {
+	if w == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return w.HTTPMeta
 }
 
-func (o *WorkflowControllerSearchWorkflowsResponse) GetListWorkflowResponse() *components.ListWorkflowResponse {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsResponse) GetListWorkflowResponse() *components.ListWorkflowResponse {
+	if w == nil {
 		return nil
 	}
-	return o.ListWorkflowResponse
+	return w.ListWorkflowResponse
 }
 
-func (o *WorkflowControllerSearchWorkflowsResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (w *WorkflowControllerSearchWorkflowsResponse) GetHeaders() map[string][]string {
+	if w == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return w.Headers
 }

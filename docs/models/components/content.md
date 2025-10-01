@@ -1,19 +1,9 @@
 # Content
 
-Content of the message, can be an email block or a string
+Translation content as JSON object
 
 
-## Supported Types
+## Fields
 
-### 
-
-```go
-content := components.CreateContentArrayOfEmailBlock([]components.EmailBlock{/* values here */})
-```
-
-### 
-
-```go
-content := components.CreateContentStr(string{/* values here */})
-```
-
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |

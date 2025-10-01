@@ -16,72 +16,72 @@ type ActivityNotificationExecutionDetailResponseDto struct {
 	// Whether the execution is a test or not
 	IsTest bool `json:"isTest"`
 	// Provider ID of the job
-	ProviderID ProvidersIDEnum `json:"providerId"`
+	ProviderID *ProvidersIDEnum `json:"providerId,omitempty"`
 	// Raw data of the execution
 	Raw *string `json:"raw,omitempty"`
 	// Source of the execution detail
 	Source ExecutionDetailsSourceEnum `json:"source"`
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetID() string {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetCreatedAt() *string {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetCreatedAt() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetStatus() ExecutionDetailsStatusEnum {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetStatus() ExecutionDetailsStatusEnum {
+	if a == nil {
 		return ExecutionDetailsStatusEnum("")
 	}
-	return o.Status
+	return a.Status
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetDetail() string {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetDetail() string {
+	if a == nil {
 		return ""
 	}
-	return o.Detail
+	return a.Detail
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetIsRetry() bool {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetIsRetry() bool {
+	if a == nil {
 		return false
 	}
-	return o.IsRetry
+	return a.IsRetry
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetIsTest() bool {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetIsTest() bool {
+	if a == nil {
 		return false
 	}
-	return o.IsTest
+	return a.IsTest
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetProviderID() ProvidersIDEnum {
-	if o == nil {
-		return ProvidersIDEnum("")
-	}
-	return o.ProviderID
-}
-
-func (o *ActivityNotificationExecutionDetailResponseDto) GetRaw() *string {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetProviderID() *ProvidersIDEnum {
+	if a == nil {
 		return nil
 	}
-	return o.Raw
+	return a.ProviderID
 }
 
-func (o *ActivityNotificationExecutionDetailResponseDto) GetSource() ExecutionDetailsSourceEnum {
-	if o == nil {
+func (a *ActivityNotificationExecutionDetailResponseDto) GetRaw() *string {
+	if a == nil {
+		return nil
+	}
+	return a.Raw
+}
+
+func (a *ActivityNotificationExecutionDetailResponseDto) GetSource() ExecutionDetailsSourceEnum {
+	if a == nil {
 		return ExecutionDetailsSourceEnum("")
 	}
-	return o.Source
+	return a.Source
 }

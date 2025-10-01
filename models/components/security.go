@@ -6,9 +6,9 @@ type Security struct {
 	SecretKey *string `security:"scheme,type=apiKey,subtype=header,name=Authorization,env=novu_secret_key"`
 }
 
-func (o *Security) GetSecretKey() *string {
-	if o == nil {
+func (s *Security) GetSecretKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.SecretKey
+	return s.SecretKey
 }

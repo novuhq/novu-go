@@ -23,52 +23,52 @@ func (m MessagesControllerGetMessagesRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MessagesControllerGetMessagesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetChannel() *components.ChannelTypeEnum {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetChannel() *components.ChannelTypeEnum {
+	if m == nil {
 		return nil
 	}
-	return o.Channel
+	return m.Channel
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetSubscriberID() *string {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetSubscriberID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.SubscriberID
+	return m.SubscriberID
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetTransactionID() []string {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetTransactionID() []string {
+	if m == nil {
 		return nil
 	}
-	return o.TransactionID
+	return m.TransactionID
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetPage() *float64 {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetPage() *float64 {
+	if m == nil {
 		return nil
 	}
-	return o.Page
+	return m.Page
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetLimit() *float64 {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetLimit() *float64 {
+	if m == nil {
 		return nil
 	}
-	return o.Limit
+	return m.Limit
 }
 
-func (o *MessagesControllerGetMessagesRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (m *MessagesControllerGetMessagesRequest) GetIdempotencyKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return m.IdempotencyKey
 }
 
 type MessagesControllerGetMessagesResponse struct {
@@ -77,23 +77,23 @@ type MessagesControllerGetMessagesResponse struct {
 	Headers             map[string][]string
 }
 
-func (o *MessagesControllerGetMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (m *MessagesControllerGetMessagesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if m == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return m.HTTPMeta
 }
 
-func (o *MessagesControllerGetMessagesResponse) GetMessagesResponseDto() *components.MessagesResponseDto {
-	if o == nil {
+func (m *MessagesControllerGetMessagesResponse) GetMessagesResponseDto() *components.MessagesResponseDto {
+	if m == nil {
 		return nil
 	}
-	return o.MessagesResponseDto
+	return m.MessagesResponseDto
 }
 
-func (o *MessagesControllerGetMessagesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (m *MessagesControllerGetMessagesResponse) GetHeaders() map[string][]string {
+	if m == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return m.Headers
 }

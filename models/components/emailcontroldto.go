@@ -8,18 +8,18 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// EditorType - Type of editor to use for the body.
-type EditorType string
+// EmailControlDtoEditorType - Type of editor to use for the body.
+type EmailControlDtoEditorType string
 
 const (
-	EditorTypeBlock EditorType = "block"
-	EditorTypeHTML  EditorType = "html"
+	EmailControlDtoEditorTypeBlock EmailControlDtoEditorType = "block"
+	EmailControlDtoEditorTypeHTML  EmailControlDtoEditorType = "html"
 )
 
-func (e EditorType) ToPointer() *EditorType {
+func (e EmailControlDtoEditorType) ToPointer() *EmailControlDtoEditorType {
 	return &e
 }
-func (e *EditorType) UnmarshalJSON(data []byte) error {
+func (e *EmailControlDtoEditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *EditorType) UnmarshalJSON(data []byte) error {
 	case "block":
 		fallthrough
 	case "html":
-		*e = EditorType(v)
+		*e = EmailControlDtoEditorType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for EditorType: %v", v)
+		return fmt.Errorf("invalid value for EmailControlDtoEditorType: %v", v)
 	}
 }
 
@@ -43,9 +43,11 @@ type EmailControlDto struct {
 	// Body content of the email, either a valid Maily JSON object, or html string.
 	Body *string `default:"" json:"body"`
 	// Type of editor to use for the body.
-	EditorType *EditorType `default:"block" json:"editorType"`
+	EditorType *EmailControlDtoEditorType `default:"block" json:"editorType"`
 	// Disable sanitization of the output.
 	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID *string `json:"layoutId,omitempty"`
 }
 
 func (e EmailControlDto) MarshalJSON() ([]byte, error) {
@@ -53,43 +55,50 @@ func (e EmailControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"subject"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *EmailControlDto) GetSkip() map[string]any {
-	if o == nil {
+func (e *EmailControlDto) GetSkip() map[string]any {
+	if e == nil {
 		return nil
 	}
-	return o.Skip
+	return e.Skip
 }
 
-func (o *EmailControlDto) GetSubject() string {
-	if o == nil {
+func (e *EmailControlDto) GetSubject() string {
+	if e == nil {
 		return ""
 	}
-	return o.Subject
+	return e.Subject
 }
 
-func (o *EmailControlDto) GetBody() *string {
-	if o == nil {
+func (e *EmailControlDto) GetBody() *string {
+	if e == nil {
 		return nil
 	}
-	return o.Body
+	return e.Body
 }
 
-func (o *EmailControlDto) GetEditorType() *EditorType {
-	if o == nil {
+func (e *EmailControlDto) GetEditorType() *EmailControlDtoEditorType {
+	if e == nil {
 		return nil
 	}
-	return o.EditorType
+	return e.EditorType
 }
 
-func (o *EmailControlDto) GetDisableOutputSanitization() *bool {
-	if o == nil {
+func (e *EmailControlDto) GetDisableOutputSanitization() *bool {
+	if e == nil {
 		return nil
 	}
-	return o.DisableOutputSanitization
+	return e.DisableOutputSanitization
+}
+
+func (e *EmailControlDto) GetLayoutID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LayoutID
 }

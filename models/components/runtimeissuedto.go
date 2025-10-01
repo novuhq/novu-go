@@ -48,23 +48,23 @@ type RuntimeIssueDto struct {
 	Message      string    `json:"message"`
 }
 
-func (o *RuntimeIssueDto) GetIssueType() IssueType {
-	if o == nil {
+func (r *RuntimeIssueDto) GetIssueType() IssueType {
+	if r == nil {
 		return IssueType("")
 	}
-	return o.IssueType
+	return r.IssueType
 }
 
-func (o *RuntimeIssueDto) GetVariableName() *string {
-	if o == nil {
+func (r *RuntimeIssueDto) GetVariableName() *string {
+	if r == nil {
 		return nil
 	}
-	return o.VariableName
+	return r.VariableName
 }
 
-func (o *RuntimeIssueDto) GetMessage() string {
-	if o == nil {
+func (r *RuntimeIssueDto) GetMessage() string {
+	if r == nil {
 		return ""
 	}
-	return o.Message
+	return r.Message
 }

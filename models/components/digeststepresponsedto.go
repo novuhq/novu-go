@@ -98,70 +98,66 @@ func (d DigestStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DigestStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *DigestStepResponseDtoControlValues) GetSkip() map[string]any {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetSkip() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Skip
+	return d.Skip
 }
 
-func (o *DigestStepResponseDtoControlValues) GetType() *DigestStepResponseDtoType {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetType() *DigestStepResponseDtoType {
+	if d == nil {
 		return nil
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DigestStepResponseDtoControlValues) GetAmount() *float64 {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetAmount() *float64 {
+	if d == nil {
 		return nil
 	}
-	return o.Amount
+	return d.Amount
 }
 
-func (o *DigestStepResponseDtoControlValues) GetUnit() *DigestStepResponseDtoUnit {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetUnit() *DigestStepResponseDtoUnit {
+	if d == nil {
 		return nil
 	}
-	return o.Unit
+	return d.Unit
 }
 
-func (o *DigestStepResponseDtoControlValues) GetLookBackWindow() *LookBackWindowDto {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetLookBackWindow() *LookBackWindowDto {
+	if d == nil {
 		return nil
 	}
-	return o.LookBackWindow
+	return d.LookBackWindow
 }
 
-func (o *DigestStepResponseDtoControlValues) GetCron() *string {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetCron() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Cron
+	return d.Cron
 }
 
-func (o *DigestStepResponseDtoControlValues) GetDigestKey() *string {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetDigestKey() *string {
+	if d == nil {
 		return nil
 	}
-	return o.DigestKey
+	return d.DigestKey
 }
 
-func (o *DigestStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
-	if o == nil {
+func (d *DigestStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.AdditionalProperties
-}
-
-// DigestStepResponseDtoSlug - Slug of the step
-type DigestStepResponseDtoSlug struct {
+	return d.AdditionalProperties
 }
 
 type DigestStepResponseDto struct {
@@ -178,11 +174,11 @@ type DigestStepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug DigestStepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -191,86 +187,97 @@ type DigestStepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *DigestStepResponseDto) GetControls() DigestControlsMetadataResponseDto {
-	if o == nil {
+func (d DigestStepResponseDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestStepResponseDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"controls", "variables", "stepId", "_id", "name", "slug", "type", "origin", "workflowId", "workflowDatabaseId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *DigestStepResponseDto) GetControls() DigestControlsMetadataResponseDto {
+	if d == nil {
 		return DigestControlsMetadataResponseDto{}
 	}
-	return o.Controls
+	return d.Controls
 }
 
-func (o *DigestStepResponseDto) GetControlValues() *DigestStepResponseDtoControlValues {
-	if o == nil {
+func (d *DigestStepResponseDto) GetControlValues() *DigestStepResponseDtoControlValues {
+	if d == nil {
 		return nil
 	}
-	return o.ControlValues
+	return d.ControlValues
 }
 
-func (o *DigestStepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (d *DigestStepResponseDto) GetVariables() map[string]any {
+	if d == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return d.Variables
 }
 
-func (o *DigestStepResponseDto) GetStepID() string {
-	if o == nil {
+func (d *DigestStepResponseDto) GetStepID() string {
+	if d == nil {
 		return ""
 	}
-	return o.StepID
+	return d.StepID
 }
 
-func (o *DigestStepResponseDto) GetID() string {
-	if o == nil {
+func (d *DigestStepResponseDto) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ID
+	return d.ID
 }
 
-func (o *DigestStepResponseDto) GetName() string {
-	if o == nil {
+func (d *DigestStepResponseDto) GetName() string {
+	if d == nil {
 		return ""
 	}
-	return o.Name
+	return d.Name
 }
 
-func (o *DigestStepResponseDto) GetSlug() DigestStepResponseDtoSlug {
-	if o == nil {
-		return DigestStepResponseDtoSlug{}
+func (d *DigestStepResponseDto) GetSlug() string {
+	if d == nil {
+		return ""
 	}
-	return o.Slug
+	return d.Slug
 }
 
-func (o *DigestStepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (d *DigestStepResponseDto) GetType() StepTypeEnum {
+	if d == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return d.Type
 }
 
-func (o *DigestStepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (d *DigestStepResponseDto) GetOrigin() ResourceOriginEnum {
+	if d == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return d.Origin
 }
 
-func (o *DigestStepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (d *DigestStepResponseDto) GetWorkflowID() string {
+	if d == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return d.WorkflowID
 }
 
-func (o *DigestStepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (d *DigestStepResponseDto) GetWorkflowDatabaseID() string {
+	if d == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return d.WorkflowDatabaseID
 }
 
-func (o *DigestStepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (d *DigestStepResponseDto) GetIssues() *StepIssuesDto {
+	if d == nil {
 		return nil
 	}
-	return o.Issues
+	return d.Issues
 }

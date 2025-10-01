@@ -11,23 +11,23 @@ type TopicDto struct {
 	Name *string `json:"name,omitempty"`
 }
 
-func (o *TopicDto) GetID() string {
-	if o == nil {
+func (t *TopicDto) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TopicDto) GetKey() string {
-	if o == nil {
+func (t *TopicDto) GetKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.Key
+	return t.Key
 }
 
-func (o *TopicDto) GetName() *string {
-	if o == nil {
+func (t *TopicDto) GetName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Name
+	return t.Name
 }

@@ -11,23 +11,23 @@ type MessageButton struct {
 	ResultContent *string `json:"resultContent,omitempty"`
 }
 
-func (o *MessageButton) GetType() ButtonTypeEnum {
-	if o == nil {
+func (m *MessageButton) GetType() ButtonTypeEnum {
+	if m == nil {
 		return ButtonTypeEnum("")
 	}
-	return o.Type
+	return m.Type
 }
 
-func (o *MessageButton) GetContent() string {
-	if o == nil {
+func (m *MessageButton) GetContent() string {
+	if m == nil {
 		return ""
 	}
-	return o.Content
+	return m.Content
 }
 
-func (o *MessageButton) GetResultContent() *string {
-	if o == nil {
+func (m *MessageButton) GetResultContent() *string {
+	if m == nil {
 		return nil
 	}
-	return o.ResultContent
+	return m.ResultContent
 }

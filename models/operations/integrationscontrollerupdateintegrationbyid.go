@@ -13,25 +13,25 @@ type IntegrationsControllerUpdateIntegrationByIDRequest struct {
 	UpdateIntegrationRequestDto components.UpdateIntegrationRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetIntegrationID() string {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDRequest) GetIntegrationID() string {
+	if i == nil {
 		return ""
 	}
-	return o.IntegrationID
+	return i.IntegrationID
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDRequest) GetIdempotencyKey() *string {
+	if i == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return i.IdempotencyKey
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDRequest) GetUpdateIntegrationRequestDto() components.UpdateIntegrationRequestDto {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDRequest) GetUpdateIntegrationRequestDto() components.UpdateIntegrationRequestDto {
+	if i == nil {
 		return components.UpdateIntegrationRequestDto{}
 	}
-	return o.UpdateIntegrationRequestDto
+	return i.UpdateIntegrationRequestDto
 }
 
 type IntegrationsControllerUpdateIntegrationByIDResponse struct {
@@ -41,23 +41,23 @@ type IntegrationsControllerUpdateIntegrationByIDResponse struct {
 	Headers                map[string][]string
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDResponse) GetHTTPMeta() components.HTTPMetadata {
+	if i == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return i.HTTPMeta
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDResponse) GetIntegrationResponseDto() *components.IntegrationResponseDto {
+	if i == nil {
 		return nil
 	}
-	return o.IntegrationResponseDto
+	return i.IntegrationResponseDto
 }
 
-func (o *IntegrationsControllerUpdateIntegrationByIDResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (i *IntegrationsControllerUpdateIntegrationByIDResponse) GetHeaders() map[string][]string {
+	if i == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return i.Headers
 }

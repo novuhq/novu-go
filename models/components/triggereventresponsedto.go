@@ -60,30 +60,30 @@ type TriggerEventResponseDto struct {
 	TransactionID *string `json:"transactionId,omitempty"`
 }
 
-func (o *TriggerEventResponseDto) GetAcknowledged() bool {
-	if o == nil {
+func (t *TriggerEventResponseDto) GetAcknowledged() bool {
+	if t == nil {
 		return false
 	}
-	return o.Acknowledged
+	return t.Acknowledged
 }
 
-func (o *TriggerEventResponseDto) GetStatus() Status {
-	if o == nil {
+func (t *TriggerEventResponseDto) GetStatus() Status {
+	if t == nil {
 		return Status("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TriggerEventResponseDto) GetError() []string {
-	if o == nil {
+func (t *TriggerEventResponseDto) GetError() []string {
+	if t == nil {
 		return nil
 	}
-	return o.Error
+	return t.Error
 }
 
-func (o *TriggerEventResponseDto) GetTransactionID() *string {
-	if o == nil {
+func (t *TriggerEventResponseDto) GetTransactionID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.TransactionID
+	return t.TransactionID
 }

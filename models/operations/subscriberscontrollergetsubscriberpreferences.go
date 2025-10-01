@@ -3,27 +3,78 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
+	"github.com/novuhq/novu-go/internal/utils"
 	"github.com/novuhq/novu-go/models/components"
 )
 
+type Criticality string
+
+const (
+	CriticalityCritical    Criticality = "critical"
+	CriticalityNonCritical Criticality = "nonCritical"
+	CriticalityAll         Criticality = "all"
+)
+
+func (e Criticality) ToPointer() *Criticality {
+	return &e
+}
+func (e *Criticality) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "critical":
+		fallthrough
+	case "nonCritical":
+		fallthrough
+	case "all":
+		*e = Criticality(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Criticality: %v", v)
+	}
+}
+
 type SubscribersControllerGetSubscriberPreferencesRequest struct {
-	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
+	SubscriberID string       `pathParam:"style=simple,explode=false,name=subscriberId"`
+	Criticality  *Criticality `default:"nonCritical" queryParam:"style=form,explode=true,name=criticality"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *SubscribersControllerGetSubscriberPreferencesRequest) GetSubscriberID() string {
-	if o == nil {
-		return ""
-	}
-	return o.SubscriberID
+func (s SubscribersControllerGetSubscriberPreferencesRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
 }
 
-func (o *SubscribersControllerGetSubscriberPreferencesRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberPreferencesRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetSubscriberID() string {
+	if s == nil {
+		return ""
+	}
+	return s.SubscriberID
+}
+
+func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetCriticality() *Criticality {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.Criticality
+}
+
+func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetIdempotencyKey() *string {
+	if s == nil {
+		return nil
+	}
+	return s.IdempotencyKey
 }
 
 type SubscribersControllerGetSubscriberPreferencesResponse struct {
@@ -33,23 +84,23 @@ type SubscribersControllerGetSubscriberPreferencesResponse struct {
 	Headers                     map[string][]string
 }
 
-func (o *SubscribersControllerGetSubscriberPreferencesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberPreferencesResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersControllerGetSubscriberPreferencesResponse) GetGetSubscriberPreferencesDto() *components.GetSubscriberPreferencesDto {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberPreferencesResponse) GetGetSubscriberPreferencesDto() *components.GetSubscriberPreferencesDto {
+	if s == nil {
 		return nil
 	}
-	return o.GetSubscriberPreferencesDto
+	return s.GetSubscriberPreferencesDto
 }
 
-func (o *SubscribersControllerGetSubscriberPreferencesResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersControllerGetSubscriberPreferencesResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

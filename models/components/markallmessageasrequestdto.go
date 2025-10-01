@@ -18,8 +18,8 @@ const (
 
 // FeedIdentifier - Optional feed identifier or array of feed identifiers
 type FeedIdentifier struct {
-	Str        *string  `queryParam:"inline"`
-	ArrayOfStr []string `queryParam:"inline"`
+	Str        *string  `queryParam:"inline,name=feedIdentifier"`
+	ArrayOfStr []string `queryParam:"inline,name=feedIdentifier"`
 
 	Type FeedIdentifierType
 }
@@ -45,14 +45,14 @@ func CreateFeedIdentifierArrayOfStr(arrayOfStr []string) FeedIdentifier {
 func (u *FeedIdentifier) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = FeedIdentifierTypeStr
 		return nil
 	}
 
 	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
 		u.ArrayOfStr = arrayOfStr
 		u.Type = FeedIdentifierTypeArrayOfStr
 		return nil
@@ -113,16 +113,16 @@ type MarkAllMessageAsRequestDto struct {
 	MarkAs MarkAs `json:"markAs"`
 }
 
-func (o *MarkAllMessageAsRequestDto) GetFeedIdentifier() *FeedIdentifier {
-	if o == nil {
+func (m *MarkAllMessageAsRequestDto) GetFeedIdentifier() *FeedIdentifier {
+	if m == nil {
 		return nil
 	}
-	return o.FeedIdentifier
+	return m.FeedIdentifier
 }
 
-func (o *MarkAllMessageAsRequestDto) GetMarkAs() MarkAs {
-	if o == nil {
+func (m *MarkAllMessageAsRequestDto) GetMarkAs() MarkAs {
+	if m == nil {
 		return MarkAs("")
 	}
-	return o.MarkAs
+	return m.MarkAs
 }

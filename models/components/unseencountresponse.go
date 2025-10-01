@@ -6,9 +6,9 @@ type UnseenCountResponse struct {
 	Count float64 `json:"count"`
 }
 
-func (o *UnseenCountResponse) GetCount() float64 {
-	if o == nil {
+func (u *UnseenCountResponse) GetCount() float64 {
+	if u == nil {
 		return 0.0
 	}
-	return o.Count
+	return u.Count
 }

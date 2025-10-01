@@ -13,18 +13,18 @@ type TopicsControllerGetTopicRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *TopicsControllerGetTopicRequest) GetTopicKey() string {
-	if o == nil {
+func (t *TopicsControllerGetTopicRequest) GetTopicKey() string {
+	if t == nil {
 		return ""
 	}
-	return o.TopicKey
+	return t.TopicKey
 }
 
-func (o *TopicsControllerGetTopicRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (t *TopicsControllerGetTopicRequest) GetIdempotencyKey() *string {
+	if t == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return t.IdempotencyKey
 }
 
 type TopicsControllerGetTopicResponse struct {
@@ -34,23 +34,23 @@ type TopicsControllerGetTopicResponse struct {
 	Headers          map[string][]string
 }
 
-func (o *TopicsControllerGetTopicResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (t *TopicsControllerGetTopicResponse) GetHTTPMeta() components.HTTPMetadata {
+	if t == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return t.HTTPMeta
 }
 
-func (o *TopicsControllerGetTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
-	if o == nil {
+func (t *TopicsControllerGetTopicResponse) GetTopicResponseDto() *components.TopicResponseDto {
+	if t == nil {
 		return nil
 	}
-	return o.TopicResponseDto
+	return t.TopicResponseDto
 }
 
-func (o *TopicsControllerGetTopicResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (t *TopicsControllerGetTopicResponse) GetHeaders() map[string][]string {
+	if t == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return t.Headers
 }

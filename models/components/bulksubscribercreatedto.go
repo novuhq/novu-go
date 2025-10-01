@@ -7,9 +7,9 @@ type BulkSubscriberCreateDto struct {
 	Subscribers []CreateSubscriberRequestDto `json:"subscribers"`
 }
 
-func (o *BulkSubscriberCreateDto) GetSubscribers() []CreateSubscriberRequestDto {
-	if o == nil {
+func (b *BulkSubscriberCreateDto) GetSubscribers() []CreateSubscriberRequestDto {
+	if b == nil {
 		return []CreateSubscriberRequestDto{}
 	}
-	return o.Subscribers
+	return b.Subscribers
 }

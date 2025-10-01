@@ -52,25 +52,25 @@ type MessagesControllerDeleteMessagesByTransactionIDRequest struct {
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetChannel() *Channel {
-	if o == nil {
+func (m *MessagesControllerDeleteMessagesByTransactionIDRequest) GetChannel() *Channel {
+	if m == nil {
 		return nil
 	}
-	return o.Channel
+	return m.Channel
 }
 
-func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetTransactionID() string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessagesByTransactionIDRequest) GetTransactionID() string {
+	if m == nil {
 		return ""
 	}
-	return o.TransactionID
+	return m.TransactionID
 }
 
-func (o *MessagesControllerDeleteMessagesByTransactionIDRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessagesByTransactionIDRequest) GetIdempotencyKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return m.IdempotencyKey
 }
 
 type MessagesControllerDeleteMessagesByTransactionIDResponse struct {
@@ -78,16 +78,16 @@ type MessagesControllerDeleteMessagesByTransactionIDResponse struct {
 	Headers  map[string][]string
 }
 
-func (o *MessagesControllerDeleteMessagesByTransactionIDResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (m *MessagesControllerDeleteMessagesByTransactionIDResponse) GetHTTPMeta() components.HTTPMetadata {
+	if m == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return m.HTTPMeta
 }
 
-func (o *MessagesControllerDeleteMessagesByTransactionIDResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (m *MessagesControllerDeleteMessagesByTransactionIDResponse) GetHeaders() map[string][]string {
+	if m == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return m.Headers
 }

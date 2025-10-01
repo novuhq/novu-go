@@ -22,6 +22,7 @@ Search subscribers by their **email**, **phone**, **subscriberId** and **name**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_searchSubscribers" method="get" path="/v2/subscribers" -->
 ```go
 package main
 
@@ -78,6 +79,7 @@ Create a subscriber with the subscriber attributes.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_createSubscriber" method="post" path="/v2/subscribers" -->
 ```go
 package main
 
@@ -97,7 +99,7 @@ func main() {
 
     res, err := s.Subscribers.Create(ctx, components.CreateSubscriberRequestDto{
         SubscriberID: "<id>",
-    }, nil)
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -113,6 +115,7 @@ func main() {
 | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
 | `createSubscriberRequestDto`                                                                   | [components.CreateSubscriberRequestDto](../../models/components/createsubscriberrequestdto.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `failIfExists`                                                                                 | **bool*                                                                                        | :heavy_minus_sign:                                                                             | If true, the request will fail if a subscriber with the same subscriberId already exists       |
 | `idempotencyKey`                                                                               | **string*                                                                                      | :heavy_minus_sign:                                                                             | A header for idempotency purposes                                                              |
 | `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
 
@@ -122,13 +125,14 @@ func main() {
 
 ### Errors
 
-| Error Type                             | Status Code                            | Content Type                           |
-| -------------------------------------- | -------------------------------------- | -------------------------------------- |
-| apierrors.ErrorDto                     | 414                                    | application/json                       |
-| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
-| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
-| apierrors.ErrorDto                     | 500                                    | application/json                       |
-| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+| Error Type                        | Status Code                       | Content Type                      |
+| --------------------------------- | --------------------------------- | --------------------------------- |
+| apierrors.SubscriberResponseDto   | 409                               | application/json                  |
+| apierrors.ErrorDto                | 414                               | application/json                  |
+| apierrors.ErrorDto                | 400, 401, 403, 404, 405, 413, 415 | application/json                  |
+| apierrors.ValidationErrorDto      | 422                               | application/json                  |
+| apierrors.ErrorDto                | 500                               | application/json                  |
+| apierrors.APIError                | 4XX, 5XX                          | \*/\*                             |
 
 ## Retrieve
 
@@ -137,6 +141,7 @@ Retrieve a subscriber by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_getSubscriber" method="get" path="/v2/subscribers/{subscriberId}" -->
 ```go
 package main
 
@@ -193,6 +198,7 @@ Update a subscriber by its unique key identifier **subscriberId**.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_patchSubscriber" method="patch" path="/v2/subscribers/{subscriberId}" -->
 ```go
 package main
 
@@ -251,6 +257,7 @@ Deletes a subscriber entity from the Novu platform along with associated message
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersController_removeSubscriber" method="delete" path="/v2/subscribers/{subscriberId}" -->
 ```go
 package main
 
@@ -308,6 +315,7 @@ func main() {
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="SubscribersV1Controller_bulkCreateSubscribers" method="post" path="/v1/subscribers/bulk" -->
 ```go
 package main
 

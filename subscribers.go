@@ -394,8 +394,9 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 // Create a subscriber with the subscriber attributes.
 //
 //	**subscriberId** is a required field, rest other fields are optional, if the subscriber already exists, it will be updated
-func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
+func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto components.CreateSubscriberRequestDto, failIfExists *bool, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerCreateSubscriberResponse, error) {
 	request := operations.SubscribersControllerCreateSubscriberRequest{
+		FailIfExists:               failIfExists,
 		IdempotencyKey:             idempotencyKey,
 		CreateSubscriberRequestDto: createSubscriberRequestDto,
 	}
@@ -459,6 +460,10 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
+
+	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+		return nil, fmt.Errorf("error populating query params: %w", err)
+	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -599,6 +604,29 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 			}
 			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
+	case httpRes.StatusCode == 409:
+		res.Headers = httpRes.Header
+
+		switch {
+		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+
+			var out apierrors.SubscriberResponseDto
+			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
+				return nil, err
+			}
+
+			return nil, &out
+		default:
+			rawBody, err := utils.ConsumeRawBody(httpRes)
+			if err != nil {
+				return nil, err
+			}
+			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+		}
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
@@ -629,8 +657,6 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode == 405:
-		fallthrough
-	case httpRes.StatusCode == 409:
 		fallthrough
 	case httpRes.StatusCode == 413:
 		fallthrough

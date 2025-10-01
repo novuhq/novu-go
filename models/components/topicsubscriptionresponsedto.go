@@ -13,30 +13,30 @@ type TopicSubscriptionResponseDto struct {
 	Subscriber SubscriberDto `json:"subscriber"`
 }
 
-func (o *TopicSubscriptionResponseDto) GetID() string {
-	if o == nil {
+func (t *TopicSubscriptionResponseDto) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TopicSubscriptionResponseDto) GetCreatedAt() string {
-	if o == nil {
+func (t *TopicSubscriptionResponseDto) GetCreatedAt() string {
+	if t == nil {
 		return ""
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TopicSubscriptionResponseDto) GetTopic() TopicResponseDto {
-	if o == nil {
+func (t *TopicSubscriptionResponseDto) GetTopic() TopicResponseDto {
+	if t == nil {
 		return TopicResponseDto{}
 	}
-	return o.Topic
+	return t.Topic
 }
 
-func (o *TopicSubscriptionResponseDto) GetSubscriber() SubscriberDto {
-	if o == nil {
+func (t *TopicSubscriptionResponseDto) GetSubscriber() SubscriberDto {
+	if t == nil {
 		return SubscriberDto{}
 	}
-	return o.Subscriber
+	return t.Subscriber
 }

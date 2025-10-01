@@ -13,30 +13,30 @@ type ChannelSettingsDto struct {
 	IntegrationID string `json:"_integrationId"`
 }
 
-func (o *ChannelSettingsDto) GetProviderID() ChatOrPushProviderEnum {
-	if o == nil {
+func (c *ChannelSettingsDto) GetProviderID() ChatOrPushProviderEnum {
+	if c == nil {
 		return ChatOrPushProviderEnum("")
 	}
-	return o.ProviderID
+	return c.ProviderID
 }
 
-func (o *ChannelSettingsDto) GetIntegrationIdentifier() *string {
-	if o == nil {
+func (c *ChannelSettingsDto) GetIntegrationIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IntegrationIdentifier
+	return c.IntegrationIdentifier
 }
 
-func (o *ChannelSettingsDto) GetCredentials() ChannelCredentials {
-	if o == nil {
+func (c *ChannelSettingsDto) GetCredentials() ChannelCredentials {
+	if c == nil {
 		return ChannelCredentials{}
 	}
-	return o.Credentials
+	return c.Credentials
 }
 
-func (o *ChannelSettingsDto) GetIntegrationID() string {
-	if o == nil {
+func (c *ChannelSettingsDto) GetIntegrationID() string {
+	if c == nil {
 		return ""
 	}
-	return o.IntegrationID
+	return c.IntegrationID
 }

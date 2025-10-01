@@ -13,25 +13,25 @@ type SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest struct {
 	UpdateSubscriberOnlineFlagRequestDto components.UpdateSubscriberOnlineFlagRequestDto `request:"mediaType=application/json"`
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetUpdateSubscriberOnlineFlagRequestDto() components.UpdateSubscriberOnlineFlagRequestDto {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetUpdateSubscriberOnlineFlagRequestDto() components.UpdateSubscriberOnlineFlagRequestDto {
+	if s == nil {
 		return components.UpdateSubscriberOnlineFlagRequestDto{}
 	}
-	return o.UpdateSubscriberOnlineFlagRequestDto
+	return s.UpdateSubscriberOnlineFlagRequestDto
 }
 
 type SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse struct {
@@ -41,23 +41,23 @@ type SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse struct {
 	Headers               map[string][]string
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetSubscriberResponseDto() *components.SubscriberResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.SubscriberResponseDto
+	return s.SubscriberResponseDto
 }
 
-func (o *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

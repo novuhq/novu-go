@@ -23,65 +23,65 @@ type CreateSubscriberRequestDto struct {
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (o *CreateSubscriberRequestDto) GetSubscriberID() string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetSubscriberID() string {
+	if c == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return c.SubscriberID
 }
 
-func (o *CreateSubscriberRequestDto) GetFirstName() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetFirstName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.FirstName
+	return c.FirstName
 }
 
-func (o *CreateSubscriberRequestDto) GetLastName() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetLastName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.LastName
+	return c.LastName
 }
 
-func (o *CreateSubscriberRequestDto) GetEmail() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetEmail() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Email
+	return c.Email
 }
 
-func (o *CreateSubscriberRequestDto) GetPhone() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetPhone() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Phone
+	return c.Phone
 }
 
-func (o *CreateSubscriberRequestDto) GetAvatar() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetAvatar() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Avatar
+	return c.Avatar
 }
 
-func (o *CreateSubscriberRequestDto) GetTimezone() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetTimezone() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Timezone
+	return c.Timezone
 }
 
-func (o *CreateSubscriberRequestDto) GetLocale() *string {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetLocale() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Locale
+	return c.Locale
 }
 
-func (o *CreateSubscriberRequestDto) GetData() map[string]any {
-	if o == nil {
+func (c *CreateSubscriberRequestDto) GetData() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.Data
+	return c.Data
 }

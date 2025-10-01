@@ -9,25 +9,43 @@ type ListTopicsResponseDto struct {
 	Next *string `json:"next"`
 	// The cursor for the previous page of results, or null if this is the first page.
 	Previous *string `json:"previous"`
+	// The total count of items (up to 50,000)
+	TotalCount float64 `json:"totalCount"`
+	// Whether there are more than 50,000 results available
+	TotalCountCapped bool `json:"totalCountCapped"`
 }
 
-func (o *ListTopicsResponseDto) GetData() []TopicResponseDto {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetData() []TopicResponseDto {
+	if l == nil {
 		return []TopicResponseDto{}
 	}
-	return o.Data
+	return l.Data
 }
 
-func (o *ListTopicsResponseDto) GetNext() *string {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetNext() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Next
+	return l.Next
 }
 
-func (o *ListTopicsResponseDto) GetPrevious() *string {
-	if o == nil {
+func (l *ListTopicsResponseDto) GetPrevious() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Previous
+	return l.Previous
+}
+
+func (l *ListTopicsResponseDto) GetTotalCount() float64 {
+	if l == nil {
+		return 0.0
+	}
+	return l.TotalCount
+}
+
+func (l *ListTopicsResponseDto) GetTotalCountCapped() bool {
+	if l == nil {
+		return false
+	}
+	return l.TotalCountCapped
 }

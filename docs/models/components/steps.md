@@ -45,6 +45,12 @@ steps := components.CreateStepsDelay(components.DelayStepUpsertDto{/* values her
 steps := components.CreateStepsDigest(components.DigestStepUpsertDto{/* values here */})
 ```
 
+### ThrottleStepUpsertDto
+
+```go
+steps := components.CreateStepsThrottle(components.ThrottleStepUpsertDto{/* values here */})
+```
+
 ### CustomStepUpsertDto
 
 ```go

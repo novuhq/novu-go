@@ -24,59 +24,59 @@ func (s SubscribersV1ControllerGetNotificationsFeedRequest) MarshalJSON() ([]byt
 }
 
 func (s *SubscribersV1ControllerGetNotificationsFeedRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetSubscriberID() string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetSubscriberID() string {
+	if s == nil {
 		return ""
 	}
-	return o.SubscriberID
+	return s.SubscriberID
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetPage() *float64 {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetPage() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.Page
+	return s.Page
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetLimit() *float64 {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetLimit() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.Limit
+	return s.Limit
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetRead() *bool {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetRead() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Read
+	return s.Read
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetSeen() *bool {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetSeen() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.Seen
+	return s.Seen
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetPayload() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetPayload() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Payload
+	return s.Payload
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetIdempotencyKey() *string {
+	if s == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return s.IdempotencyKey
 }
 
 type SubscribersV1ControllerGetNotificationsFeedResponse struct {
@@ -86,23 +86,23 @@ type SubscribersV1ControllerGetNotificationsFeedResponse struct {
 	Headers         map[string][]string
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedResponse) GetHTTPMeta() components.HTTPMetadata {
+	if s == nil {
 		return components.HTTPMetadata{}
 	}
-	return o.HTTPMeta
+	return s.HTTPMeta
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedResponse) GetFeedResponseDto() *components.FeedResponseDto {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedResponse) GetFeedResponseDto() *components.FeedResponseDto {
+	if s == nil {
 		return nil
 	}
-	return o.FeedResponseDto
+	return s.FeedResponseDto
 }
 
-func (o *SubscribersV1ControllerGetNotificationsFeedResponse) GetHeaders() map[string][]string {
-	if o == nil {
+func (s *SubscribersV1ControllerGetNotificationsFeedResponse) GetHeaders() map[string][]string {
+	if s == nil {
 		return map[string][]string{}
 	}
-	return o.Headers
+	return s.Headers
 }

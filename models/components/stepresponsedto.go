@@ -2,10 +2,6 @@
 
 package components
 
-// StepResponseDtoSlug - Slug of the step
-type StepResponseDtoSlug struct {
-}
-
 type StepResponseDto struct {
 	// Controls metadata for the step
 	Controls ControlsMetadataDto `json:"controls"`
@@ -20,11 +16,11 @@ type StepResponseDto struct {
 	// Name of the step
 	Name string `json:"name"`
 	// Slug of the step
-	Slug StepResponseDtoSlug `json:"slug"`
+	Slug string `json:"slug"`
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
-	// Origin of the workflow
-	Origin WorkflowOriginEnum `json:"origin"`
+	// Origin of the layout
+	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
 	// Workflow database identifier
@@ -33,86 +29,86 @@ type StepResponseDto struct {
 	Issues *StepIssuesDto `json:"issues,omitempty"`
 }
 
-func (o *StepResponseDto) GetControls() ControlsMetadataDto {
-	if o == nil {
+func (s *StepResponseDto) GetControls() ControlsMetadataDto {
+	if s == nil {
 		return ControlsMetadataDto{}
 	}
-	return o.Controls
+	return s.Controls
 }
 
-func (o *StepResponseDto) GetControlValues() map[string]any {
-	if o == nil {
+func (s *StepResponseDto) GetControlValues() map[string]any {
+	if s == nil {
 		return nil
 	}
-	return o.ControlValues
+	return s.ControlValues
 }
 
-func (o *StepResponseDto) GetVariables() map[string]any {
-	if o == nil {
+func (s *StepResponseDto) GetVariables() map[string]any {
+	if s == nil {
 		return map[string]any{}
 	}
-	return o.Variables
+	return s.Variables
 }
 
-func (o *StepResponseDto) GetStepID() string {
-	if o == nil {
+func (s *StepResponseDto) GetStepID() string {
+	if s == nil {
 		return ""
 	}
-	return o.StepID
+	return s.StepID
 }
 
-func (o *StepResponseDto) GetID() string {
-	if o == nil {
+func (s *StepResponseDto) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *StepResponseDto) GetName() string {
-	if o == nil {
+func (s *StepResponseDto) GetName() string {
+	if s == nil {
 		return ""
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *StepResponseDto) GetSlug() StepResponseDtoSlug {
-	if o == nil {
-		return StepResponseDtoSlug{}
+func (s *StepResponseDto) GetSlug() string {
+	if s == nil {
+		return ""
 	}
-	return o.Slug
+	return s.Slug
 }
 
-func (o *StepResponseDto) GetType() StepTypeEnum {
-	if o == nil {
+func (s *StepResponseDto) GetType() StepTypeEnum {
+	if s == nil {
 		return StepTypeEnum("")
 	}
-	return o.Type
+	return s.Type
 }
 
-func (o *StepResponseDto) GetOrigin() WorkflowOriginEnum {
-	if o == nil {
-		return WorkflowOriginEnum("")
+func (s *StepResponseDto) GetOrigin() ResourceOriginEnum {
+	if s == nil {
+		return ResourceOriginEnum("")
 	}
-	return o.Origin
+	return s.Origin
 }
 
-func (o *StepResponseDto) GetWorkflowID() string {
-	if o == nil {
+func (s *StepResponseDto) GetWorkflowID() string {
+	if s == nil {
 		return ""
 	}
-	return o.WorkflowID
+	return s.WorkflowID
 }
 
-func (o *StepResponseDto) GetWorkflowDatabaseID() string {
-	if o == nil {
+func (s *StepResponseDto) GetWorkflowDatabaseID() string {
+	if s == nil {
 		return ""
 	}
-	return o.WorkflowDatabaseID
+	return s.WorkflowDatabaseID
 }
 
-func (o *StepResponseDto) GetIssues() *StepIssuesDto {
-	if o == nil {
+func (s *StepResponseDto) GetIssues() *StepIssuesDto {
+	if s == nil {
 		return nil
 	}
-	return o.Issues
+	return s.Issues
 }

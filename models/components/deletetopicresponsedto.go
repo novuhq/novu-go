@@ -7,9 +7,9 @@ type DeleteTopicResponseDto struct {
 	Acknowledged bool `json:"acknowledged"`
 }
 
-func (o *DeleteTopicResponseDto) GetAcknowledged() bool {
-	if o == nil {
+func (d *DeleteTopicResponseDto) GetAcknowledged() bool {
+	if d == nil {
 		return false
 	}
-	return o.Acknowledged
+	return d.Acknowledged
 }
