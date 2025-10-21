@@ -126,10 +126,15 @@ func (h *NovuHooks) AfterSuccess(hookCtx AfterSuccessContext, res *http.Response
 
 	// Check if response has a 'data' key
 	dataBytes, ok := jsonResponse["data"]
-	if ok {
+	if ok && len(jsonResponse) == 1 {
+		// Only extract data if it's the ONLY field (simple wrapper)
+		// If there are other fields (pagination, metadata, etc.), keep the full response
 		newBody := io.NopCloser(bytes.NewBuffer(dataBytes))
 		res.Body = newBody
 		res.ContentLength = int64(len(dataBytes))
+	} else {
+		// Multiple fields or no data field - keep the full response
+		res.Body = io.NopCloser(bytes.NewBuffer(bodyBytes))
 	}
 
 	return res, nil
