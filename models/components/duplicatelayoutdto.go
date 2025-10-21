@@ -2,9 +2,26 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 type DuplicateLayoutDto struct {
 	// Name of the layout
 	Name string `json:"name"`
+	// Enable or disable translations for this layout
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
+}
+
+func (d DuplicateLayoutDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DuplicateLayoutDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"name"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (d *DuplicateLayoutDto) GetName() string {
@@ -12,4 +29,11 @@ func (d *DuplicateLayoutDto) GetName() string {
 		return ""
 	}
 	return d.Name
+}
+
+func (d *DuplicateLayoutDto) GetIsTranslationEnabled() *bool {
+	if d == nil {
+		return nil
+	}
+	return d.IsTranslationEnabled
 }

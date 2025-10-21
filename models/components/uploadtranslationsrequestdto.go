@@ -12,6 +12,7 @@ type UploadTranslationsRequestDtoResourceType string
 
 const (
 	UploadTranslationsRequestDtoResourceTypeWorkflow UploadTranslationsRequestDtoResourceType = "workflow"
+	UploadTranslationsRequestDtoResourceTypeLayout   UploadTranslationsRequestDtoResourceType = "layout"
 )
 
 func (e UploadTranslationsRequestDtoResourceType) ToPointer() *UploadTranslationsRequestDtoResourceType {
@@ -24,6 +25,8 @@ func (e *UploadTranslationsRequestDtoResourceType) UnmarshalJSON(data []byte) er
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = UploadTranslationsRequestDtoResourceType(v)
 		return nil
 	default:

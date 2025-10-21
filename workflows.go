@@ -74,7 +74,7 @@ func (s *Workflows) Create(ctx context.Context, createWorkflowDto components.Cre
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_create",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateWorkflowDto", "json", `request:"mediaType=application/json"`)
@@ -418,7 +418,7 @@ func (s *Workflows) List(ctx context.Context, request operations.WorkflowControl
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_searchWorkflows",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -765,7 +765,7 @@ func (s *Workflows) Update(ctx context.Context, workflowID string, updateWorkflo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_update",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateWorkflowDto", "json", `request:"mediaType=application/json"`)
@@ -1115,7 +1115,7 @@ func (s *Workflows) Get(ctx context.Context, workflowID string, environmentID *s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_getWorkflow",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1461,7 +1461,7 @@ func (s *Workflows) Delete(ctx context.Context, workflowID string, idempotencyKe
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_removeWorkflow",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1782,7 +1782,7 @@ func (s *Workflows) Patch(ctx context.Context, workflowID string, patchWorkflowD
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_patchWorkflow",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PatchWorkflowDto", "json", `request:"mediaType=application/json"`)
@@ -2132,7 +2132,7 @@ func (s *Workflows) Sync(ctx context.Context, workflowID string, syncWorkflowDto
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_sync",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "SyncWorkflowDto", "json", `request:"mediaType=application/json"`)

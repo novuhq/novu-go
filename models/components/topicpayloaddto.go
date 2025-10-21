@@ -9,6 +9,8 @@ import (
 type TopicPayloadDto struct {
 	TopicKey string                    `json:"topicKey"`
 	Type     TriggerRecipientsTypeEnum `json:"type"`
+	// Optional array of subscriber IDs to exclude from the topic trigger
+	Exclude []string `json:"exclude,omitempty"`
 }
 
 func (t TopicPayloadDto) MarshalJSON() ([]byte, error) {
@@ -34,4 +36,11 @@ func (t *TopicPayloadDto) GetType() TriggerRecipientsTypeEnum {
 		return TriggerRecipientsTypeEnum("")
 	}
 	return t.Type
+}
+
+func (t *TopicPayloadDto) GetExclude() []string {
+	if t == nil {
+		return nil
+	}
+	return t.Exclude
 }

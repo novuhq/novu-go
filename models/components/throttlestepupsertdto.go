@@ -73,8 +73,10 @@ func (u ThrottleStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 type ThrottleStepUpsertDto struct {
-	// Unique identifier of the step
+	// Database identifier of the step. Used for updating the step.
 	ID *string `json:"_id,omitempty"`
+	// Unique identifier for the step
+	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
 	// Type of the step
@@ -99,6 +101,13 @@ func (t *ThrottleStepUpsertDto) GetID() *string {
 		return nil
 	}
 	return t.ID
+}
+
+func (t *ThrottleStepUpsertDto) GetStepID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.StepID
 }
 
 func (t *ThrottleStepUpsertDto) GetName() string {

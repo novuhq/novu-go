@@ -13,6 +13,7 @@ type DelayStepResponseDtoType string
 
 const (
 	DelayStepResponseDtoTypeRegular DelayStepResponseDtoType = "regular"
+	DelayStepResponseDtoTypeTimed   DelayStepResponseDtoType = "timed"
 )
 
 func (e DelayStepResponseDtoType) ToPointer() *DelayStepResponseDtoType {
@@ -25,6 +26,8 @@ func (e *DelayStepResponseDtoType) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "regular":
+		fallthrough
+	case "timed":
 		*e = DelayStepResponseDtoType(v)
 		return nil
 	default:
@@ -78,10 +81,12 @@ type DelayStepResponseDtoControlValues struct {
 	// Type of the delay. Currently only 'regular' is supported by the schema.
 	Type *DelayStepResponseDtoType `default:"regular" json:"type"`
 	// Amount of time to delay.
-	Amount float64 `json:"amount"`
+	Amount *float64 `json:"amount,omitempty"`
 	// Unit of time for the delay amount.
-	Unit                 DelayStepResponseDtoUnit `json:"unit"`
-	AdditionalProperties map[string]any           `additionalProperties:"true" json:"-"`
+	Unit *DelayStepResponseDtoUnit `json:"unit,omitempty"`
+	// Cron expression for the delay. Min length 1.
+	Cron                 *string        `json:"cron,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
 func (d DelayStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
@@ -89,7 +94,7 @@ func (d DelayStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayStepResponseDtoControlValues) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "unit"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -109,18 +114,25 @@ func (d *DelayStepResponseDtoControlValues) GetType() *DelayStepResponseDtoType 
 	return d.Type
 }
 
-func (d *DelayStepResponseDtoControlValues) GetAmount() float64 {
+func (d *DelayStepResponseDtoControlValues) GetAmount() *float64 {
 	if d == nil {
-		return 0.0
+		return nil
 	}
 	return d.Amount
 }
 
-func (d *DelayStepResponseDtoControlValues) GetUnit() DelayStepResponseDtoUnit {
+func (d *DelayStepResponseDtoControlValues) GetUnit() *DelayStepResponseDtoUnit {
 	if d == nil {
-		return DelayStepResponseDtoUnit("")
+		return nil
 	}
 	return d.Unit
+}
+
+func (d *DelayStepResponseDtoControlValues) GetCron() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Cron
 }
 
 func (d *DelayStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {

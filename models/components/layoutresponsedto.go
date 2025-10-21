@@ -53,6 +53,8 @@ type LayoutResponseDto struct {
 	Name string `json:"name"`
 	// Whether the layout is the default layout
 	IsDefault bool `json:"isDefault"`
+	// Whether the layout translations are enabled
+	IsTranslationEnabled bool `json:"isTranslationEnabled"`
 	// Last updated timestamp
 	UpdatedAt string `json:"updatedAt"`
 	// User who last updated the layout
@@ -102,6 +104,13 @@ func (l *LayoutResponseDto) GetIsDefault() bool {
 		return false
 	}
 	return l.IsDefault
+}
+
+func (l *LayoutResponseDto) GetIsTranslationEnabled() bool {
+	if l == nil {
+		return false
+	}
+	return l.IsTranslationEnabled
 }
 
 func (l *LayoutResponseDto) GetUpdatedAt() string {

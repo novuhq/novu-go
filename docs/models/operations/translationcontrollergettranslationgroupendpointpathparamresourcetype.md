@@ -8,3 +8,4 @@ Resource type
 | Name                                                                            | Value                                                                           |
 | ------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | `TranslationControllerGetTranslationGroupEndpointPathParamResourceTypeWorkflow` | workflow                                                                        |
+| `TranslationControllerGetTranslationGroupEndpointPathParamResourceTypeLayout`   | layout                                                                          |

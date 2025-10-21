@@ -26,11 +26,13 @@ const (
 	UIComponentEnumURLTextBox                     UIComponentEnum = "URL_TEXT_BOX"
 	UIComponentEnumDigestAmount                   UIComponentEnum = "DIGEST_AMOUNT"
 	UIComponentEnumDigestUnit                     UIComponentEnum = "DIGEST_UNIT"
+	UIComponentEnumDigestType                     UIComponentEnum = "DIGEST_TYPE"
 	UIComponentEnumDigestKey                      UIComponentEnum = "DIGEST_KEY"
 	UIComponentEnumDigestCron                     UIComponentEnum = "DIGEST_CRON"
-	UIComponentEnumDelayType                      UIComponentEnum = "DELAY_TYPE"
 	UIComponentEnumDelayAmount                    UIComponentEnum = "DELAY_AMOUNT"
 	UIComponentEnumDelayUnit                      UIComponentEnum = "DELAY_UNIT"
+	UIComponentEnumDelayType                      UIComponentEnum = "DELAY_TYPE"
+	UIComponentEnumDelayCron                      UIComponentEnum = "DELAY_CRON"
 	UIComponentEnumThrottleType                   UIComponentEnum = "THROTTLE_TYPE"
 	UIComponentEnumThrottleWindow                 UIComponentEnum = "THROTTLE_WINDOW"
 	UIComponentEnumThrottleUnit                   UIComponentEnum = "THROTTLE_UNIT"
@@ -86,15 +88,19 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "DIGEST_UNIT":
 		fallthrough
+	case "DIGEST_TYPE":
+		fallthrough
 	case "DIGEST_KEY":
 		fallthrough
 	case "DIGEST_CRON":
 		fallthrough
-	case "DELAY_TYPE":
-		fallthrough
 	case "DELAY_AMOUNT":
 		fallthrough
 	case "DELAY_UNIT":
+		fallthrough
+	case "DELAY_TYPE":
+		fallthrough
+	case "DELAY_CRON":
 		fallthrough
 	case "THROTTLE_TYPE":
 		fallthrough

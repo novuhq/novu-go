@@ -68,7 +68,7 @@ func (s *Groups) Delete(ctx context.Context, resourceType operations.ResourceTyp
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_deleteTranslationGroupEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -236,7 +236,7 @@ func (s *Groups) Delete(ctx context.Context, resourceType operations.ResourceTyp
 }
 
 // Retrieve a translation group
-// Retrieves a single translation group by resource type (workflow) and resource ID (workflowId)
+// Retrieves a single translation group by resource type (workflow, layout) and resource ID (workflowId, layoutId)
 func (s *Groups) Retrieve(ctx context.Context, resourceType operations.TranslationControllerGetTranslationGroupEndpointPathParamResourceType, resourceID string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerGetTranslationGroupEndpointResponse, error) {
 	request := operations.TranslationControllerGetTranslationGroupEndpointRequest{
 		ResourceType:   resourceType,
@@ -273,7 +273,7 @@ func (s *Groups) Retrieve(ctx context.Context, resourceType operations.Translati
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_getTranslationGroupEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

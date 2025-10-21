@@ -64,7 +64,7 @@ func (s *NovuTopics) List(ctx context.Context, request operations.SubscribersCon
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_listSubscriberTopics",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

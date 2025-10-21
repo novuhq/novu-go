@@ -63,6 +63,8 @@ type DigestTimedConfigDto struct {
 	MonthlyType *MonthlyTypeEnum `json:"monthlyType,omitempty"`
 	// Cron expression for scheduling
 	CronExpression *string `json:"cronExpression,omitempty"`
+	// Until date for scheduling
+	UntilDate *string `json:"untilDate,omitempty"`
 }
 
 func (d *DigestTimedConfigDto) GetAtTime() *string {
@@ -112,4 +114,11 @@ func (d *DigestTimedConfigDto) GetCronExpression() *string {
 		return nil
 	}
 	return d.CronExpression
+}
+
+func (d *DigestTimedConfigDto) GetUntilDate() *string {
+	if d == nil {
+		return nil
+	}
+	return d.UntilDate
 }

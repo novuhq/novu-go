@@ -74,7 +74,7 @@ func (s *Topics) List(ctx context.Context, request operations.TopicsControllerLi
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_listTopics",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -421,7 +421,7 @@ func (s *Topics) Create(ctx context.Context, createUpdateTopicRequestDto compone
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_upsertTopic",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateUpdateTopicRequestDto", "json", `request:"mediaType=application/json"`)
@@ -797,7 +797,7 @@ func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *strin
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_getTopic",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1140,7 +1140,7 @@ func (s *Topics) Update(ctx context.Context, topicKey string, updateTopicRequest
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_updateTopic",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateTopicRequestDto", "json", `request:"mediaType=application/json"`)
@@ -1491,7 +1491,7 @@ func (s *Topics) Delete(ctx context.Context, topicKey string, idempotencyKey *st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_deleteTopic",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

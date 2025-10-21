@@ -13,6 +13,7 @@ type TranslationControllerGetTranslationGroupEndpointPathParamResourceType strin
 
 const (
 	TranslationControllerGetTranslationGroupEndpointPathParamResourceTypeWorkflow TranslationControllerGetTranslationGroupEndpointPathParamResourceType = "workflow"
+	TranslationControllerGetTranslationGroupEndpointPathParamResourceTypeLayout   TranslationControllerGetTranslationGroupEndpointPathParamResourceType = "layout"
 )
 
 func (e TranslationControllerGetTranslationGroupEndpointPathParamResourceType) ToPointer() *TranslationControllerGetTranslationGroupEndpointPathParamResourceType {
@@ -25,6 +26,8 @@ func (e *TranslationControllerGetTranslationGroupEndpointPathParamResourceType) 
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = TranslationControllerGetTranslationGroupEndpointPathParamResourceType(v)
 		return nil
 	default:

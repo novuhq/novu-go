@@ -62,7 +62,7 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_getNotificationsFeed",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -410,7 +410,7 @@ func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_getUnseenCount",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

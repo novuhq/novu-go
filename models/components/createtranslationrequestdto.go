@@ -12,6 +12,7 @@ type ResourceType string
 
 const (
 	ResourceTypeWorkflow ResourceType = "workflow"
+	ResourceTypeLayout   ResourceType = "layout"
 )
 
 func (e ResourceType) ToPointer() *ResourceType {
@@ -24,6 +25,8 @@ func (e *ResourceType) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = ResourceType(v)
 		return nil
 	default:

@@ -2,7 +2,7 @@
 
 package novugo
 
-// Generated from OpenAPI doc version 3.9.0 and generator version 2.716.16
+// Generated from OpenAPI doc version 3.9.0 and generator version 2.727.9
 
 import (
 	"bytes"
@@ -166,9 +166,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "1.4.0",
+		SDKVersion: "1.5.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.4.0 2.716.16 3.9.0 github.com/novuhq/novu-go",
+			UserAgent:  "speakeasy-sdk/go 1.5.0 2.727.9 3.9.0 github.com/novuhq/novu-go",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -245,7 +245,7 @@ func (s *Novu) InboundWebhooksControllerHandleWebhook(ctx context.Context, envir
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "InboundWebhooksController_handleWebhook",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -449,7 +449,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EventsController_trigger",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TriggerEventRequestDto", "json", `request:"mediaType=application/json"`)
@@ -821,7 +821,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EventsController_cancel",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1165,7 +1165,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EventsController_broadcastEventToAll",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TriggerEventToAllRequestDto", "json", `request:"mediaType=application/json"`)
@@ -1539,7 +1539,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EventsController_triggerBulk",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "BulkTriggerEventDto", "json", `request:"mediaType=application/json"`)

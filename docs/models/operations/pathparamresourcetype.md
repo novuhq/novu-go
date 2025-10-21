@@ -8,3 +8,4 @@ Resource type
 | Name                            | Value                           |
 | ------------------------------- | ------------------------------- |
 | `PathParamResourceTypeWorkflow` | workflow                        |
+| `PathParamResourceTypeLayout`   | layout                          |

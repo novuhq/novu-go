@@ -8,3 +8,4 @@ The resource type to associate localizations with
 | Name                                               | Value                                              |
 | -------------------------------------------------- | -------------------------------------------------- |
 | `UploadTranslationsRequestDtoResourceTypeWorkflow` | workflow                                           |
+| `UploadTranslationsRequestDtoResourceTypeLayout`   | layout                                             |

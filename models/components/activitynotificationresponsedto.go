@@ -42,6 +42,8 @@ type ActivityNotificationResponseDto struct {
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 	// Criticality of the notification
 	Critical *bool `json:"critical,omitempty"`
+	// Contexts (keys) in which the notification was sent
+	ContextKeys []string `json:"contextKeys,omitempty"`
 }
 
 func (a *ActivityNotificationResponseDto) GetID() *string {
@@ -182,4 +184,11 @@ func (a *ActivityNotificationResponseDto) GetCritical() *bool {
 		return nil
 	}
 	return a.Critical
+}
+
+func (a *ActivityNotificationResponseDto) GetContextKeys() []string {
+	if a == nil {
+		return nil
+	}
+	return a.ContextKeys
 }

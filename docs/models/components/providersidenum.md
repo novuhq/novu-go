@@ -62,6 +62,7 @@ Provider ID of the job
 | `ProvidersIDEnumUnifonic`         | unifonic                          |
 | `ProvidersIDEnumSmsmode`          | smsmode                           |
 | `ProvidersIDEnumImedia`           | imedia                            |
+| `ProvidersIDEnumSinch`            | sinch                             |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |

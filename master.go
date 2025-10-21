@@ -68,7 +68,7 @@ func (s *Master) Retrieve(ctx context.Context, locale *string, idempotencyKey *s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_getMasterJsonEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -294,7 +294,7 @@ func (s *Master) Import(ctx context.Context, importMasterJSONRequestDto componen
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_importMasterJsonEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "ImportMasterJSONRequestDto", "json", `request:"mediaType=application/json"`)
@@ -522,7 +522,7 @@ func (s *Master) Upload(ctx context.Context, idempotencyKey *string, opts ...ope
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_uploadMasterJsonEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
