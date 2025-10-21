@@ -64,7 +64,7 @@ func (s *Subscriptions) List(ctx context.Context, request operations.TopicsContr
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_listTopicSubscriptions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -413,7 +413,7 @@ func (s *Subscriptions) Create(ctx context.Context, topicKey string, createTopic
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_createTopicSubscriptions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateTopicSubscriptionsRequestDto", "json", `request:"mediaType=application/json"`)
@@ -763,7 +763,7 @@ func (s *Subscriptions) Delete(ctx context.Context, topicKey string, deleteTopic
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsController_deleteTopicSubscriptions",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "DeleteTopicSubscriptionsRequestDto", "json", `request:"mediaType=application/json"`)

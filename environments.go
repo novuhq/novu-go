@@ -71,7 +71,7 @@ func (s *Environments) GetTags(ctx context.Context, environmentID string, idempo
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EnvironmentsController_getEnvironmentTags",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -416,7 +416,7 @@ func (s *Environments) Create(ctx context.Context, createEnvironmentRequestDto c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EnvironmentsControllerV1_createEnvironment",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateEnvironmentRequestDto", "json", `request:"mediaType=application/json"`)
@@ -768,7 +768,7 @@ func (s *Environments) List(ctx context.Context, idempotencyKey *string, opts ..
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EnvironmentsControllerV1_listMyEnvironments",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1113,7 +1113,7 @@ func (s *Environments) Update(ctx context.Context, environmentID string, updateE
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EnvironmentsControllerV1_updateMyEnvironment",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateEnvironmentRequestDto", "json", `request:"mediaType=application/json"`)
@@ -1464,7 +1464,7 @@ func (s *Environments) Delete(ctx context.Context, environmentID string, idempot
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "EnvironmentsControllerV1_deleteEnvironment",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

@@ -6,9 +6,15 @@ package components
 type Workflows struct {
 }
 
+// Layouts - All translations for given locale organized by layout identifier
+type Layouts struct {
+}
+
 type GetMasterJSONResponseDto struct {
 	// All translations for given locale organized by workflow identifier
 	Workflows Workflows `json:"workflows"`
+	// All translations for given locale organized by layout identifier
+	Layouts Layouts `json:"layouts"`
 }
 
 func (g *GetMasterJSONResponseDto) GetWorkflows() Workflows {
@@ -16,4 +22,11 @@ func (g *GetMasterJSONResponseDto) GetWorkflows() Workflows {
 		return Workflows{}
 	}
 	return g.Workflows
+}
+
+func (g *GetMasterJSONResponseDto) GetLayouts() Layouts {
+	if g == nil {
+		return Layouts{}
+	}
+	return g.Layouts
 }

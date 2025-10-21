@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/novuhq/novu-go/internal/utils"
+)
+
 // ControlValues - Control values for the layout
 type ControlValues struct {
 	// Email layout controls
@@ -18,8 +22,21 @@ func (c *ControlValues) GetEmail() *EmailControlsDto {
 type UpdateLayoutDto struct {
 	// Name of the layout
 	Name string `json:"name"`
+	// Enable or disable translations for this layout
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Control values for the layout
 	ControlValues *ControlValues `json:"controlValues,omitempty"`
+}
+
+func (u UpdateLayoutDto) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(u, "", false)
+}
+
+func (u *UpdateLayoutDto) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &u, "", false, []string{"name"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (u *UpdateLayoutDto) GetName() string {
@@ -27,6 +44,13 @@ func (u *UpdateLayoutDto) GetName() string {
 		return ""
 	}
 	return u.Name
+}
+
+func (u *UpdateLayoutDto) GetIsTranslationEnabled() *bool {
+	if u == nil {
+		return nil
+	}
+	return u.IsTranslationEnabled
 }
 
 func (u *UpdateLayoutDto) GetControlValues() *ControlValues {

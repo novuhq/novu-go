@@ -76,7 +76,7 @@ func (s *Translations) Create(ctx context.Context, createTranslationRequestDto c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_createTranslationEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateTranslationRequestDto", "json", `request:"mediaType=application/json"`)
@@ -307,7 +307,7 @@ func (s *Translations) Retrieve(ctx context.Context, resourceType operations.Pat
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_getSingleTranslation",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -533,7 +533,7 @@ func (s *Translations) Delete(ctx context.Context, resourceType operations.Trans
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_deleteTranslationEndpoint",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -737,7 +737,7 @@ func (s *Translations) Upload(ctx context.Context, uploadTranslationsRequestDto 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TranslationController_uploadTranslationFiles",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UploadTranslationsRequestDto", "multipart", `request:"mediaType=multipart/form-data"`)

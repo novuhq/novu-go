@@ -73,8 +73,10 @@ func (u DigestStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 type DigestStepUpsertDto struct {
-	// Unique identifier of the step
+	// Database identifier of the step. Used for updating the step.
 	ID *string `json:"_id,omitempty"`
+	// Unique identifier for the step
+	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
 	// Type of the step
@@ -99,6 +101,13 @@ func (d *DigestStepUpsertDto) GetID() *string {
 		return nil
 	}
 	return d.ID
+}
+
+func (d *DigestStepUpsertDto) GetStepID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.StepID
 }
 
 func (d *DigestStepUpsertDto) GetName() string {

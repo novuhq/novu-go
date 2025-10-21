@@ -8,3 +8,4 @@ Resource type
 | Name                                                                          | Value                                                                         |
 | ----------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
 | `TranslationControllerDeleteTranslationEndpointPathParamResourceTypeWorkflow` | workflow                                                                      |
+| `TranslationControllerDeleteTranslationEndpointPathParamResourceTypeLayout`   | layout                                                                        |

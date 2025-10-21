@@ -8,3 +8,4 @@ Resource type
 | Name                                         | Value                                        |
 | -------------------------------------------- | -------------------------------------------- |
 | `TranslationResponseDtoResourceTypeWorkflow` | workflow                                     |
+| `TranslationResponseDtoResourceTypeLayout`   | layout                                       |

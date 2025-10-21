@@ -11,6 +11,8 @@ type CreateLayoutDto struct {
 	LayoutID string `json:"layoutId"`
 	// Name of the layout
 	Name string `json:"name"`
+	// Enable or disable translations for this layout
+	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 	// Source of layout creation
 	Source *LayoutCreationSourceEnum `default:"dashboard" json:"__source"`
 }
@@ -38,6 +40,13 @@ func (c *CreateLayoutDto) GetName() string {
 		return ""
 	}
 	return c.Name
+}
+
+func (c *CreateLayoutDto) GetIsTranslationEnabled() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.IsTranslationEnabled
 }
 
 func (c *CreateLayoutDto) GetSource() *LayoutCreationSourceEnum {

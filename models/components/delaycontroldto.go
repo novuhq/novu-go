@@ -13,6 +13,7 @@ type Type string
 
 const (
 	TypeRegular Type = "regular"
+	TypeTimed   Type = "timed"
 )
 
 func (e Type) ToPointer() *Type {
@@ -25,6 +26,8 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "regular":
+		fallthrough
+	case "timed":
 		*e = Type(v)
 		return nil
 	default:
@@ -77,9 +80,11 @@ type DelayControlDto struct {
 	// Type of the delay. Currently only 'regular' is supported by the schema.
 	Type *Type `default:"regular" json:"type"`
 	// Amount of time to delay.
-	Amount float64 `json:"amount"`
+	Amount *float64 `json:"amount,omitempty"`
 	// Unit of time for the delay amount.
-	Unit Unit `json:"unit"`
+	Unit *Unit `json:"unit,omitempty"`
+	// Cron expression for the delay. Min length 1.
+	Cron *string `json:"cron,omitempty"`
 }
 
 func (d DelayControlDto) MarshalJSON() ([]byte, error) {
@@ -87,7 +92,7 @@ func (d DelayControlDto) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayControlDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"amount", "unit"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -107,16 +112,23 @@ func (d *DelayControlDto) GetType() *Type {
 	return d.Type
 }
 
-func (d *DelayControlDto) GetAmount() float64 {
+func (d *DelayControlDto) GetAmount() *float64 {
 	if d == nil {
-		return 0.0
+		return nil
 	}
 	return d.Amount
 }
 
-func (d *DelayControlDto) GetUnit() Unit {
+func (d *DelayControlDto) GetUnit() *Unit {
 	if d == nil {
-		return Unit("")
+		return nil
 	}
 	return d.Unit
+}
+
+func (d *DelayControlDto) GetCron() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Cron
 }

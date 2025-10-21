@@ -68,7 +68,7 @@ func (s *Properties) UpdateOnlineFlag(ctx context.Context, subscriberID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_updateSubscriberOnlineFlag",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberOnlineFlagRequestDto", "json", `request:"mediaType=application/json"`)

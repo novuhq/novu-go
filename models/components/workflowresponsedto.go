@@ -378,7 +378,7 @@ type WorkflowResponseDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable translations for this workflow
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
-	// Unique identifier of the workflow
+	// Database identifier of the workflow
 	ID string `json:"_id"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`

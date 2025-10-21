@@ -13,6 +13,7 @@ type TranslationControllerDeleteTranslationEndpointPathParamResourceType string
 
 const (
 	TranslationControllerDeleteTranslationEndpointPathParamResourceTypeWorkflow TranslationControllerDeleteTranslationEndpointPathParamResourceType = "workflow"
+	TranslationControllerDeleteTranslationEndpointPathParamResourceTypeLayout   TranslationControllerDeleteTranslationEndpointPathParamResourceType = "layout"
 )
 
 func (e TranslationControllerDeleteTranslationEndpointPathParamResourceType) ToPointer() *TranslationControllerDeleteTranslationEndpointPathParamResourceType {
@@ -25,6 +26,8 @@ func (e *TranslationControllerDeleteTranslationEndpointPathParamResourceType) Un
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = TranslationControllerDeleteTranslationEndpointPathParamResourceType(v)
 		return nil
 	default:
