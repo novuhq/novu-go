@@ -70,7 +70,7 @@ func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ..
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_listIntegrations",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -414,7 +414,7 @@ func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_createIntegration",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateIntegrationRequestDto", "json", `request:"mediaType=application/json"`)
@@ -766,7 +766,7 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_updateIntegrationById",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateIntegrationRequestDto", "json", `request:"mediaType=application/json"`)
@@ -1117,7 +1117,7 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_removeIntegration",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1461,7 +1461,7 @@ func (s *Integrations) IntegrationsControllerAutoConfigureIntegration(ctx contex
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_autoConfigureIntegration",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1806,7 +1806,7 @@ func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, i
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_setIntegrationAsPrimary",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -2147,7 +2147,7 @@ func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, o
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "IntegrationsController_getActiveIntegrations",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

@@ -69,7 +69,7 @@ func (s *Messages) Retrieve(ctx context.Context, request operations.MessagesCont
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "MessagesController_getMessages",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -417,7 +417,7 @@ func (s *Messages) Delete(ctx context.Context, messageID string, idempotencyKey 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "MessagesController_deleteMessage",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -762,7 +762,7 @@ func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID stri
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "MessagesController_deleteMessagesByTransactionId",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

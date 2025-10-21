@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 44a5b62332c57de1b9643418e03be023
+  docChecksum: 34915c5092089c5efb6093b48eb04859
   docVersion: 3.9.0
-  speakeasyVersion: 1.631.5
-  generationVersion: 2.716.16
-  releaseVersion: 1.4.0
-  configChecksum: 439d92384e36e4587cb423e66c7625a1
+  speakeasyVersion: 1.637.3
+  generationVersion: 2.727.9
+  releaseVersion: 1.5.0
+  configChecksum: 635652b41bcf4afa5fbe237049e09d0e
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.11.1
+    core: 3.12.0
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
@@ -25,14 +25,14 @@ features:
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.3
-    groups: 2.81.2
+    groups: 2.81.3
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.2.0
+    nullables: 0.2.1
     responseFormat: 0.1.2
     retries: 2.84.2
     sdkHooks: 0.2.0
-    unions: 2.85.14
+    unions: 2.86.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -539,6 +539,7 @@ generatedFiles:
   - docs/models/components/layoutpreviewrequestdto.md
   - docs/models/components/layoutresponsedto.md
   - docs/models/components/layoutresponsedtosortfield.md
+  - docs/models/components/layouts.md
   - docs/models/components/listlayoutresponsedto.md
   - docs/models/components/listsubscribersresponsedto.md
   - docs/models/components/listtopicsresponsedto.md
@@ -1935,10 +1936,10 @@ examples:
   LayoutsController_create:
     speakeasy-default-layouts-controller-create:
       requestBody:
-        application/json: {"layoutId": "<id>", "name": "<value>", "__source": "dashboard"}
+        application/json: {"layoutId": "<id>", "name": "<value>", "isTranslationEnabled": false, "__source": "dashboard"}
       responses:
         "201":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "updatedAt": "1735665022530", "createdAt": "1730096151643", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735665022530", "createdAt": "1730096151643", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1951,7 +1952,7 @@ examples:
     speakeasy-default-layouts-controller-list:
       responses:
         "200":
-          application/json: {"layouts": [{"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "updatedAt": "1735604623075", "createdAt": "1732563359623", "origin": "external", "type": "ECHO", "controls": {"values": {}}}], "totalCount": 8515.1}
+          application/json: {"layouts": [{"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": false, "updatedAt": "1735604623075", "createdAt": "1732563359623", "origin": "external", "type": "ECHO", "controls": {"values": {}}}], "totalCount": 8515.1}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1966,10 +1967,10 @@ examples:
         path:
           layoutId: "<id>"
       requestBody:
-        application/json: {"name": "<value>"}
+        application/json: {"name": "<value>", "isTranslationEnabled": false}
       responses:
         "200":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "updatedAt": "1735617825142", "createdAt": "1712735891318", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735617825142", "createdAt": "1712735891318", "origin": "novu-cloud-v1", "type": "BRIDGE", "controls": {"values": {}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1985,7 +1986,7 @@ examples:
           layoutId: "<id>"
       responses:
         "200":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "updatedAt": "1735664130299", "createdAt": "1727615996858", "origin": "external", "type": "ECHO", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": false, "isTranslationEnabled": false, "updatedAt": "1735664130299", "createdAt": "1727615996858", "origin": "external", "type": "ECHO", "controls": {"values": {}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -2014,10 +2015,10 @@ examples:
         path:
           layoutId: "<id>"
       requestBody:
-        application/json: {"name": "<value>"}
+        application/json: {"name": "<value>", "isTranslationEnabled": false}
       responses:
         "201":
-          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "updatedAt": "1735641806286", "createdAt": "1705127183206", "origin": "novu-cloud", "type": "BRIDGE", "controls": {"values": {}}}
+          application/json: {"_id": "<id>", "layoutId": "<id>", "slug": "<value>", "name": "<value>", "isDefault": true, "isTranslationEnabled": true, "updatedAt": "1735641806286", "createdAt": "1705127183206", "origin": "novu-cloud", "type": "BRIDGE", "controls": {"values": {}}}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -2131,7 +2132,7 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"workflows": {}}
+          application/json: {"workflows": {}, "layouts": {}}
   TranslationController_importMasterJsonEndpoint:
     speakeasy-default-translation-controller-import-master-json-endpoint:
       requestBody:
@@ -2162,4 +2163,4 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Subscribers.Create()`: \n  *  `request.FailIfExists` **Added**\n  *  `error` **Changed** **Breaking** :warning:\n* `Novu.Notifications.Retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Notifications.List()`: \n  *  `request.Request.Severity` **Added**\n  *  `response.Data.[]` **Changed** **Breaking** :warning:\n* `Novu.Messages.Retrieve()`:  `response.Data.[]` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Steps.Retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Sync()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Patch()`: \n  *  `request.PatchWorkflowDto` **Changed**\n  *  `response` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Get()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Update()`: \n  *  `request.UpdateWorkflowDto` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Novu.Workflows.Create()`: \n  *  `request.CreateWorkflowDto` **Changed** **Breaking** :warning:\n  *  `response` **Changed** **Breaking** :warning:\n* `Novu.Topics.Create()`: \n  *  `request.FailIfExists` **Added**\n  *  `error` **Changed** **Breaking** :warning:\n* `Novu.Subscribers.Messages.MarkAllAs()`:  `response.[]` **Changed** **Breaking** :warning:\n* `Novu.Subscribers.Messages.UpdateAsSeen()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Translations.Delete()`: **Added**\n* `Novu.Topics.Subscriptions.List()`:  `response` **Changed**\n* `Novu.Translations.Groups.Delete()`: **Added**\n* `Novu.Translations.Groups.Retrieve()`: **Added**\n* `Novu.Translations.Master.Retrieve()`: **Added**\n* `Novu.Translations.Master.Import()`: **Added**\n* `Novu.Translations.Master.Upload()`: **Added**\n* `Novu.Integrations.IntegrationsControllerAutoConfigureIntegration()`: **Added**\n* `Novu.Trigger()`: \n  *  `request.TriggerEventRequestDto.Overrides` **Changed**\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Overrides` **Changed**\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[].Overrides` **Changed**\n* `Novu.Subscribers.Search()`:  `response` **Changed**\n* `Novu.InboundWebhooksControllerHandleWebhook()`: **Added**\n* `Novu.Subscribers.Preferences.List()`: \n  *  `request.Criticality` **Added**\n  *  `response.Global.Schedule` **Added**\n* `Novu.Subscribers.Preferences.Update()`: \n  *  `request.PatchSubscriberPreferencesDto` **Changed**\n  *  `response.Global.Schedule` **Added**\n* `Novu.Subscribers.Topics.List()`:  `response` **Changed**\n* `Novu.Translations.Retrieve()`: **Added**\n* `Novu.Translations.Create()`: **Added**\n* `Novu.Subscribers.Notifications.Feed()`:  `response.Data.[]` **Changed**\n* `Novu.Topics.List()`:  `response` **Changed**\n* `Novu.Subscribers.Preferences.BulkUpdate()`: **Added**\n* `Novu.Translations.Upload()`: **Added**\n* `Novu.Layouts.Usage()`: **Added**\n* `Novu.Workflows.List()`:  `response.Workflows.[]` **Changed**\n* `Novu.Layouts.GeneratePreview()`: **Added**\n* `Novu.Layouts.Duplicate()`: **Added**\n* `Novu.Layouts.Delete()`: **Added**\n* `Novu.Layouts.Retrieve()`: **Added**\n* `Novu.Layouts.Update()`: **Added**\n* `Novu.Environments.Create()`:  `response.Type` **Added**\n* `Novu.Environments.List()`:  `response.[].Type` **Added**\n* `Novu.Environments.Update()`:  `response.Type` **Added**\n* `Novu.Integrations.List()`:  `response.[]` **Changed**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto` **Changed**\n  *  `response` **Changed**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto` **Changed**\n  *  `response` **Changed**\n* `Novu.Integrations.Delete()`:  `response.[]` **Changed**\n* `Novu.Integrations.SetAsPrimary()`:  `response` **Changed**\n* `Novu.Integrations.ListActive()`:  `response.[]` **Changed**\n* `Novu.Layouts.List()`: **Added**\n* `Novu.Layouts.Create()`: **Added**\n* `Novu.Environments.GetTags()`: **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Trigger()`: \n  *  `request.TriggerEventRequestDto.To.[array].[].[topicPayloadDto].Exclude` **Added**\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[].To.[topicPayloadDto].Exclude` **Added**\n* `Novu.Layouts.Create()`: \n  *  `request.CreateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.List()`:  `response.Layouts.[].IsTranslationEnabled` **Added**\n* `Novu.Layouts.Update()`: \n  *  `request.UpdateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.Retrieve()`:  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.Duplicate()`: \n  *  `request.DuplicateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Translations.Retrieve()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Delete()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Upload()`: \n  *  `request.UploadTranslationsRequestDto.ResourceType` **Changed**\n* `Novu.Translations.Groups.Delete()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Groups.Retrieve()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Master.Retrieve()`:  `response.Layouts` **Added**\n* `Novu.Workflows.Create()`: \n  *  `request.CreateWorkflowDto.Steps.[]` **Changed**\n  *  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Update()`: \n  *  `request.UpdateWorkflowDto.Steps.[]` **Changed**\n  *  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Get()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Patch()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Sync()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Notifications.List()`:  `response.Data.[]` **Changed**\n* `Novu.Notifications.Retrieve()`:  `response` **Changed**\n"

@@ -22,11 +22,13 @@ Component type for the UI Schema Property
 | `UIComponentEnumURLTextBox`                     | URL_TEXT_BOX                                    |
 | `UIComponentEnumDigestAmount`                   | DIGEST_AMOUNT                                   |
 | `UIComponentEnumDigestUnit`                     | DIGEST_UNIT                                     |
+| `UIComponentEnumDigestType`                     | DIGEST_TYPE                                     |
 | `UIComponentEnumDigestKey`                      | DIGEST_KEY                                      |
 | `UIComponentEnumDigestCron`                     | DIGEST_CRON                                     |
-| `UIComponentEnumDelayType`                      | DELAY_TYPE                                      |
 | `UIComponentEnumDelayAmount`                    | DELAY_AMOUNT                                    |
 | `UIComponentEnumDelayUnit`                      | DELAY_UNIT                                      |
+| `UIComponentEnumDelayType`                      | DELAY_TYPE                                      |
+| `UIComponentEnumDelayCron`                      | DELAY_CRON                                      |
 | `UIComponentEnumThrottleType`                   | THROTTLE_TYPE                                   |
 | `UIComponentEnumThrottleWindow`                 | THROTTLE_WINDOW                                 |
 | `UIComponentEnumThrottleUnit`                   | THROTTLE_UNIT                                   |

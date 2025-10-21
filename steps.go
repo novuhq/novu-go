@@ -68,7 +68,7 @@ func (s *Steps) Retrieve(ctx context.Context, workflowID string, stepID string, 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "WorkflowController_getWorkflowStepData",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

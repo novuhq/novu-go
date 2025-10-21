@@ -12,6 +12,7 @@ type TranslationGroupDtoResourceType string
 
 const (
 	TranslationGroupDtoResourceTypeWorkflow TranslationGroupDtoResourceType = "workflow"
+	TranslationGroupDtoResourceTypeLayout   TranslationGroupDtoResourceType = "layout"
 )
 
 func (e TranslationGroupDtoResourceType) ToPointer() *TranslationGroupDtoResourceType {
@@ -24,6 +25,8 @@ func (e *TranslationGroupDtoResourceType) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = TranslationGroupDtoResourceType(v)
 		return nil
 	default:

@@ -64,7 +64,7 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_markActionAsSeen",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkMessageActionAsSeenDto", "json", `request:"mediaType=application/json"`)
@@ -414,7 +414,7 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_markAllUnreadAsRead",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MarkAllMessageAsRequestDto", "json", `request:"mediaType=application/json"`)
@@ -766,7 +766,7 @@ func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messa
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_markMessagesAs",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MessageMarkAsRequestDto", "json", `request:"mediaType=application/json"`)

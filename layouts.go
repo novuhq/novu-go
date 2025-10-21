@@ -71,7 +71,7 @@ func (s *Layouts) Create(ctx context.Context, createLayoutDto components.CreateL
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_create",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateLayoutDto", "json", `request:"mediaType=application/json"`)
@@ -415,7 +415,7 @@ func (s *Layouts) List(ctx context.Context, request operations.LayoutsController
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_list",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -762,7 +762,7 @@ func (s *Layouts) Update(ctx context.Context, layoutID string, updateLayoutDto c
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_update",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateLayoutDto", "json", `request:"mediaType=application/json"`)
@@ -1111,7 +1111,7 @@ func (s *Layouts) Retrieve(ctx context.Context, layoutID string, idempotencyKey 
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_get",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1453,7 +1453,7 @@ func (s *Layouts) Delete(ctx context.Context, layoutID string, idempotencyKey *s
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController__delete",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1774,7 +1774,7 @@ func (s *Layouts) Duplicate(ctx context.Context, layoutID string, duplicateLayou
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_duplicate",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "DuplicateLayoutDto", "json", `request:"mediaType=application/json"`)
@@ -2124,7 +2124,7 @@ func (s *Layouts) GeneratePreview(ctx context.Context, layoutID string, layoutPr
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_generatePreview",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "LayoutPreviewRequestDto", "json", `request:"mediaType=application/json"`)
@@ -2473,7 +2473,7 @@ func (s *Layouts) Usage(ctx context.Context, layoutID string, idempotencyKey *st
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "LayoutsController_getUsage",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

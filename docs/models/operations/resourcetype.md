@@ -8,3 +8,4 @@ Resource type
 | Name                   | Value                  |
 | ---------------------- | ---------------------- |
 | `ResourceTypeWorkflow` | workflow               |
+| `ResourceTypeLayout`   | layout                 |

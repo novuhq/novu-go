@@ -73,8 +73,10 @@ func (u DelayStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
 }
 
 type DelayStepUpsertDto struct {
-	// Unique identifier of the step
+	// Database identifier of the step. Used for updating the step.
 	ID *string `json:"_id,omitempty"`
+	// Unique identifier for the step
+	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
 	// Type of the step
@@ -99,6 +101,13 @@ func (d *DelayStepUpsertDto) GetID() *string {
 		return nil
 	}
 	return d.ID
+}
+
+func (d *DelayStepUpsertDto) GetStepID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.StepID
 }
 
 func (d *DelayStepUpsertDto) GetName() string {

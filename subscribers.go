@@ -81,7 +81,7 @@ func (s *Subscribers) Search(ctx context.Context, request operations.Subscribers
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_searchSubscribers",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -430,7 +430,7 @@ func (s *Subscribers) Create(ctx context.Context, createSubscriberRequestDto com
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_createSubscriber",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "CreateSubscriberRequestDto", "json", `request:"mediaType=application/json"`)
@@ -806,7 +806,7 @@ func (s *Subscribers) Retrieve(ctx context.Context, subscriberID string, idempot
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_getSubscriber",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1151,7 +1151,7 @@ func (s *Subscribers) Patch(ctx context.Context, subscriberID string, patchSubsc
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_patchSubscriber",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PatchSubscriberRequestDto", "json", `request:"mediaType=application/json"`)
@@ -1502,7 +1502,7 @@ func (s *Subscribers) Delete(ctx context.Context, subscriberID string, idempoten
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_removeSubscriber",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -1845,7 +1845,7 @@ func (s *Subscribers) CreateBulk(ctx context.Context, bulkSubscriberCreateDto co
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_bulkCreateSubscribers",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "BulkSubscriberCreateDto", "json", `request:"mediaType=application/json"`)

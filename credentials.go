@@ -70,7 +70,7 @@ func (s *Credentials) Update(ctx context.Context, subscriberID string, updateSub
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_updateSubscriberChannel",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberChannelRequestDto", "json", `request:"mediaType=application/json"`)
@@ -422,7 +422,7 @@ func (s *Credentials) Append(ctx context.Context, subscriberID string, updateSub
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_modifySubscriberChannel",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UpdateSubscriberChannelRequestDto", "json", `request:"mediaType=application/json"`)
@@ -774,7 +774,7 @@ func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerI
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersV1Controller_deleteSubscriberCredentials",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

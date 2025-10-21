@@ -67,7 +67,7 @@ func (s *Notifications) List(ctx context.Context, request operations.Notificatio
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "NotificationsController_listNotifications",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -416,7 +416,7 @@ func (s *Notifications) Retrieve(ctx context.Context, notificationID string, ide
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "NotificationsController_getNotification",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

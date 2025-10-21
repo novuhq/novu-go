@@ -70,7 +70,7 @@ func (s *Preferences) List(ctx context.Context, subscriberID string, criticality
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_getSubscriberPreferences",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -420,7 +420,7 @@ func (s *Preferences) Update(ctx context.Context, subscriberID string, patchSubs
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_updateSubscriberPreferences",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PatchSubscriberPreferencesDto", "json", `request:"mediaType=application/json"`)
@@ -772,7 +772,7 @@ func (s *Preferences) BulkUpdate(ctx context.Context, subscriberID string, bulkU
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "SubscribersController_bulkUpdateSubscriberPreferences",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "BulkUpdateSubscriberPreferencesDto", "json", `request:"mediaType=application/json"`)

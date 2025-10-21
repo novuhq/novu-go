@@ -8,3 +8,4 @@ Type of the delay. Currently only 'regular' is supported by the schema.
 | Name                              | Value                             |
 | --------------------------------- | --------------------------------- |
 | `DelayStepResponseDtoTypeRegular` | regular                           |
+| `DelayStepResponseDtoTypeTimed`   | timed                             |

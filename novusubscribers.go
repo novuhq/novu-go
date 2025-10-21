@@ -68,7 +68,7 @@ func (s *NovuSubscribers) Retrieve(ctx context.Context, externalSubscriberID str
 		BaseURL:          baseURL,
 		Context:          ctx,
 		OperationID:      "TopicsV1Controller_getTopicSubscriber",
-		OAuth2Scopes:     []string{},
+		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 

@@ -13,6 +13,7 @@ type PathParamResourceType string
 
 const (
 	PathParamResourceTypeWorkflow PathParamResourceType = "workflow"
+	PathParamResourceTypeLayout   PathParamResourceType = "layout"
 )
 
 func (e PathParamResourceType) ToPointer() *PathParamResourceType {
@@ -25,6 +26,8 @@ func (e *PathParamResourceType) UnmarshalJSON(data []byte) error {
 	}
 	switch v {
 	case "workflow":
+		fallthrough
+	case "layout":
 		*e = PathParamResourceType(v)
 		return nil
 	default:
