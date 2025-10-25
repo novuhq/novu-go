@@ -38,7 +38,12 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Messages.Retrieve(ctx, operations.MessagesControllerGetMessagesRequest{})
+    res, err := s.Messages.Retrieve(ctx, operations.MessagesControllerGetMessagesRequest{
+        ContextKeys: []string{
+            "tenant:org-123",
+            "region:us-east-1",
+        },
+    })
     if err != nil {
         log.Fatal(err)
     }
