@@ -35,7 +35,12 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Notifications.List(ctx, operations.NotificationsControllerListNotificationsRequest{})
+    res, err := s.Notifications.List(ctx, operations.NotificationsControllerListNotificationsRequest{
+        ContextKeys: []string{
+            "tenant:org-123",
+            "region:us-east-1",
+        },
+    })
     if err != nil {
         log.Fatal(err)
     }

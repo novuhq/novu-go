@@ -8,18 +8,18 @@ import (
 	"github.com/novuhq/novu-go/internal/utils"
 )
 
-// Type of the delay. Currently only 'regular' is supported by the schema.
-type Type string
+// DelayControlDtoType - Type of the delay. Currently only 'regular' is supported by the schema.
+type DelayControlDtoType string
 
 const (
-	TypeRegular Type = "regular"
-	TypeTimed   Type = "timed"
+	DelayControlDtoTypeRegular DelayControlDtoType = "regular"
+	DelayControlDtoTypeTimed   DelayControlDtoType = "timed"
 )
 
-func (e Type) ToPointer() *Type {
+func (e DelayControlDtoType) ToPointer() *DelayControlDtoType {
 	return &e
 }
-func (e *Type) UnmarshalJSON(data []byte) error {
+func (e *DelayControlDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *Type) UnmarshalJSON(data []byte) error {
 	case "regular":
 		fallthrough
 	case "timed":
-		*e = Type(v)
+		*e = DelayControlDtoType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Type: %v", v)
+		return fmt.Errorf("invalid value for DelayControlDtoType: %v", v)
 	}
 }
 
@@ -78,7 +78,7 @@ type DelayControlDto struct {
 	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
 	Skip map[string]any `json:"skip,omitempty"`
 	// Type of the delay. Currently only 'regular' is supported by the schema.
-	Type *Type `default:"regular" json:"type"`
+	Type *DelayControlDtoType `default:"regular" json:"type"`
 	// Amount of time to delay.
 	Amount *float64 `json:"amount,omitempty"`
 	// Unit of time for the delay amount.
@@ -105,7 +105,7 @@ func (d *DelayControlDto) GetSkip() map[string]any {
 	return d.Skip
 }
 
-func (d *DelayControlDto) GetType() *Type {
+func (d *DelayControlDto) GetType() *DelayControlDtoType {
 	if d == nil {
 		return nil
 	}

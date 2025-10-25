@@ -1,11 +1,7 @@
 # Type
 
-Type of the delay. Currently only 'regular' is supported by the schema.
 
+## Fields
 
-## Values
-
-| Name          | Value         |
-| ------------- | ------------- |
-| `TypeRegular` | regular       |
-| `TypeTimed`   | timed         |
+| Field       | Type        | Required    | Description |
+| ----------- | ----------- | ----------- | ----------- |
