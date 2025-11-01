@@ -70,6 +70,7 @@ Provider ID of the job
 | `ProvidersIDEnumPushpad`          | pushpad                           |
 | `ProvidersIDEnumPushWebhook`      | push-webhook                      |
 | `ProvidersIDEnumPusherBeams`      | pusher-beams                      |
+| `ProvidersIDEnumAppio`            | appio                             |
 | `ProvidersIDEnumNovu`             | novu                              |
 | `ProvidersIDEnumSlack`            | slack                             |
 | `ProvidersIDEnumDiscord`          | discord                           |

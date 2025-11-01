@@ -149,6 +149,8 @@ type MessageResponseDto struct {
 	Payload *MessageResponseDtoPayload `json:"payload,omitempty"`
 	// Provider specific overrides used when triggering the notification
 	Overrides *MessageResponseDtoOverrides `json:"overrides,omitempty"`
+	// Context keys associated with the message (format: "type:id")
+	ContextKeys []string `json:"contextKeys,omitempty"`
 }
 
 func (m *MessageResponseDto) GetID() *string {
@@ -387,4 +389,11 @@ func (m *MessageResponseDto) GetOverrides() *MessageResponseDtoOverrides {
 		return nil
 	}
 	return m.Overrides
+}
+
+func (m *MessageResponseDto) GetContextKeys() []string {
+	if m == nil {
+		return nil
+	}
+	return m.ContextKeys
 }

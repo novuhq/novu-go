@@ -26,3 +26,4 @@ The ID of the chat or push provider.
 | `ProviderIDPushpad`          | pushpad                      |
 | `ProviderIDPushWebhook`      | push-webhook                 |
 | `ProviderIDPusherBeams`      | pusher-beams                 |
+| `ProviderIDAppio`            | appio                        |

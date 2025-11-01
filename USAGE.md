@@ -30,6 +30,11 @@ func main() {
 		To: components.CreateToStr(
 			"SUBSCRIBER_ID",
 		),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)

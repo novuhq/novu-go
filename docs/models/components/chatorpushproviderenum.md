@@ -26,3 +26,4 @@ The provider identifier for the credentials
 | `ChatOrPushProviderEnumPushpad`          | pushpad                                  |
 | `ChatOrPushProviderEnumPushWebhook`      | push-webhook                             |
 | `ChatOrPushProviderEnumPusherBeams`      | pusher-beams                             |
+| `ChatOrPushProviderEnumAppio`            | appio                                    |

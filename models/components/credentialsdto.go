@@ -50,6 +50,7 @@ type CredentialsDto struct {
 	AccessKey                 *string     `json:"accessKey,omitempty"`
 	AppSid                    *string     `json:"appSid,omitempty"`
 	SenderID                  *string     `json:"senderId,omitempty"`
+	AppIOBaseURL              *string     `json:"AppIOBaseUrl,omitempty"`
 }
 
 func (c *CredentialsDto) GetAPIKey() *string {
@@ -358,4 +359,11 @@ func (c *CredentialsDto) GetSenderID() *string {
 		return nil
 	}
 	return c.SenderID
+}
+
+func (c *CredentialsDto) GetAppIOBaseURL() *string {
+	if c == nil {
+		return nil
+	}
+	return c.AppIOBaseURL
 }

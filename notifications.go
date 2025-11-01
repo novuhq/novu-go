@@ -34,7 +34,7 @@ func newNotifications(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *h
 // List all events
 // List all notification events (triggered events) for the current environment.
 //
-//	This API supports filtering by **channels**, **templates**, **emails**, **subscriberIds**, **transactionId**, **topicKey**.
+//	This API supports filtering by **channels**, **templates**, **emails**, **subscriberIds**, **transactionId**, **topicKey**, **severity**, **contextKeys**.
 //	Checkout all available filters in the query section.
 //	This API returns event triggers, to list each channel notifications, check messages APIs.
 func (s *Notifications) List(ctx context.Context, request operations.NotificationsControllerListNotificationsRequest, opts ...operations.Option) (*operations.NotificationsControllerListNotificationsResponse, error) {
