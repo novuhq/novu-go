@@ -30,6 +30,14 @@ func main() {
 		To: components.CreateToStr(
 			"SUBSCRIBER_ID",
 		),
+		Actor: novugo.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -106,6 +114,18 @@ func main() {
 				},
 			},
 		},
+		Actor: novugo.Pointer(components.CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(
+			components.SubscriberPayloadDto{
+				FirstName:    novugo.Pointer("John"),
+				LastName:     novugo.Pointer("Doe"),
+				Email:        novugo.Pointer("john.doe@example.com"),
+				Phone:        novugo.Pointer("+1234567890"),
+				Avatar:       novugo.Pointer("https://example.com/avatar.jpg"),
+				Locale:       novugo.Pointer("en-US"),
+				Timezone:     novugo.Pointer("America/New_York"),
+				SubscriberID: "<id>",
+			},
+		)),
 	}, nil)
 	if err != nil {
 		log.Fatal(err)

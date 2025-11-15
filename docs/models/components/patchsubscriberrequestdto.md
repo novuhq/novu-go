@@ -3,13 +3,13 @@
 
 ## Fields
 
-| Field                                     | Type                                      | Required                                  | Description                               |
-| ----------------------------------------- | ----------------------------------------- | ----------------------------------------- | ----------------------------------------- |
-| `FirstName`                               | **string*                                 | :heavy_minus_sign:                        | First name of the subscriber              |
-| `LastName`                                | **string*                                 | :heavy_minus_sign:                        | Last name of the subscriber               |
-| `Email`                                   | **string*                                 | :heavy_minus_sign:                        | Email address of the subscriber           |
-| `Phone`                                   | **string*                                 | :heavy_minus_sign:                        | Phone number of the subscriber            |
-| `Avatar`                                  | **string*                                 | :heavy_minus_sign:                        | Avatar URL or identifier                  |
-| `Timezone`                                | **string*                                 | :heavy_minus_sign:                        | Timezone of the subscriber                |
-| `Locale`                                  | **string*                                 | :heavy_minus_sign:                        | Locale of the subscriber                  |
-| `Data`                                    | map[string]*any*                          | :heavy_minus_sign:                        | Additional custom data for the subscriber |
+| Field                                                 | Type                                                  | Required                                              | Description                                           | Example                                               |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| `FirstName`                                           | **string*                                             | :heavy_minus_sign:                                    | First name of the subscriber                          | John                                                  |
+| `LastName`                                            | **string*                                             | :heavy_minus_sign:                                    | Last name of the subscriber                           | Doe                                                   |
+| `Email`                                               | **string*                                             | :heavy_minus_sign:                                    | Email address of the subscriber                       | john.doe@example.com                                  |
+| `Phone`                                               | **string*                                             | :heavy_minus_sign:                                    | Phone number of the subscriber                        | +1234567890                                           |
+| `Avatar`                                              | **string*                                             | :heavy_minus_sign:                                    | Avatar URL or identifier                              | https://example.com/avatar.jpg                        |
+| `Locale`                                              | **string*                                             | :heavy_minus_sign:                                    | Locale of the subscriber                              | en-US                                                 |
+| `Timezone`                                            | **string*                                             | :heavy_minus_sign:                                    | Timezone of the subscriber                            | America/New_York                                      |
+| `Data`                                                | map[string]*any*                                      | :heavy_minus_sign:                                    | Additional custom data associated with the subscriber |                                                       |

@@ -33,6 +33,7 @@ const (
 	UIComponentEnumDelayUnit                      UIComponentEnum = "DELAY_UNIT"
 	UIComponentEnumDelayType                      UIComponentEnum = "DELAY_TYPE"
 	UIComponentEnumDelayCron                      UIComponentEnum = "DELAY_CRON"
+	UIComponentEnumDelayDynamicKey                UIComponentEnum = "DELAY_DYNAMIC_KEY"
 	UIComponentEnumThrottleType                   UIComponentEnum = "THROTTLE_TYPE"
 	UIComponentEnumThrottleWindow                 UIComponentEnum = "THROTTLE_WINDOW"
 	UIComponentEnumThrottleUnit                   UIComponentEnum = "THROTTLE_UNIT"
@@ -101,6 +102,8 @@ func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
 	case "DELAY_TYPE":
 		fallthrough
 	case "DELAY_CRON":
+		fallthrough
+	case "DELAY_DYNAMIC_KEY":
 		fallthrough
 	case "THROTTLE_TYPE":
 		fallthrough

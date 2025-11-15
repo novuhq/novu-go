@@ -7,23 +7,23 @@ import (
 	"fmt"
 )
 
-// Status of the trigger
-type Status string
+// TriggerEventResponseDtoStatus - Status of the trigger
+type TriggerEventResponseDtoStatus string
 
 const (
-	StatusError                        Status = "error"
-	StatusTriggerNotActive             Status = "trigger_not_active"
-	StatusNoWorkflowActiveStepsDefined Status = "no_workflow_active_steps_defined"
-	StatusNoWorkflowStepsDefined       Status = "no_workflow_steps_defined"
-	StatusProcessed                    Status = "processed"
-	StatusNoTenantFound                Status = "no_tenant_found"
-	StatusInvalidRecipients            Status = "invalid_recipients"
+	TriggerEventResponseDtoStatusError                        TriggerEventResponseDtoStatus = "error"
+	TriggerEventResponseDtoStatusTriggerNotActive             TriggerEventResponseDtoStatus = "trigger_not_active"
+	TriggerEventResponseDtoStatusNoWorkflowActiveStepsDefined TriggerEventResponseDtoStatus = "no_workflow_active_steps_defined"
+	TriggerEventResponseDtoStatusNoWorkflowStepsDefined       TriggerEventResponseDtoStatus = "no_workflow_steps_defined"
+	TriggerEventResponseDtoStatusProcessed                    TriggerEventResponseDtoStatus = "processed"
+	TriggerEventResponseDtoStatusNoTenantFound                TriggerEventResponseDtoStatus = "no_tenant_found"
+	TriggerEventResponseDtoStatusInvalidRecipients            TriggerEventResponseDtoStatus = "invalid_recipients"
 )
 
-func (e Status) ToPointer() *Status {
+func (e TriggerEventResponseDtoStatus) ToPointer() *TriggerEventResponseDtoStatus {
 	return &e
 }
-func (e *Status) UnmarshalJSON(data []byte) error {
+func (e *TriggerEventResponseDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -42,10 +42,10 @@ func (e *Status) UnmarshalJSON(data []byte) error {
 	case "no_tenant_found":
 		fallthrough
 	case "invalid_recipients":
-		*e = Status(v)
+		*e = TriggerEventResponseDtoStatus(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Status: %v", v)
+		return fmt.Errorf("invalid value for TriggerEventResponseDtoStatus: %v", v)
 	}
 }
 
@@ -53,7 +53,7 @@ type TriggerEventResponseDto struct {
 	// Indicates whether the trigger was acknowledged or not
 	Acknowledged bool `json:"acknowledged"`
 	// Status of the trigger
-	Status Status `json:"status"`
+	Status TriggerEventResponseDtoStatus `json:"status"`
 	// In case of an error, this field will contain the error message(s)
 	Error []string `json:"error,omitempty"`
 	// The returned transaction ID of the trigger
@@ -67,9 +67,9 @@ func (t *TriggerEventResponseDto) GetAcknowledged() bool {
 	return t.Acknowledged
 }
 
-func (t *TriggerEventResponseDto) GetStatus() Status {
+func (t *TriggerEventResponseDto) GetStatus() TriggerEventResponseDtoStatus {
 	if t == nil {
-		return Status("")
+		return TriggerEventResponseDtoStatus("")
 	}
 	return t.Status
 }

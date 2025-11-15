@@ -5,14 +5,14 @@
 
 ### Available Operations
 
-* [Update](#update) - Upsert provider credentials
-* [Append](#append) - Update provider credentials
+* [Update](#update) - Update provider credentials
+* [Append](#append) - Upsert provider credentials
 * [Delete](#delete) - Delete provider credentials
 
 ## Update
 
-Upsert credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
+Update credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 
 ### Example Usage
 
@@ -86,8 +86,8 @@ func main() {
 
 ## Append
 
-Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
+Upsert credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 
 ### Example Usage
 
