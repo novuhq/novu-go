@@ -3,8 +3,6 @@
 package components
 
 type CreateSubscriberRequestDto struct {
-	// Unique identifier of the subscriber
-	SubscriberID string `json:"subscriberId"`
 	// First name of the subscriber
 	FirstName *string `json:"firstName,omitempty"`
 	// Last name of the subscriber
@@ -15,19 +13,14 @@ type CreateSubscriberRequestDto struct {
 	Phone *string `json:"phone,omitempty"`
 	// Avatar URL or identifier
 	Avatar *string `json:"avatar,omitempty"`
-	// Timezone of the subscriber
-	Timezone *string `json:"timezone,omitempty"`
 	// Locale of the subscriber
 	Locale *string `json:"locale,omitempty"`
-	// Additional custom data for the subscriber
+	// Timezone of the subscriber
+	Timezone *string `json:"timezone,omitempty"`
+	// Additional custom data associated with the subscriber
 	Data map[string]any `json:"data,omitempty"`
-}
-
-func (c *CreateSubscriberRequestDto) GetSubscriberID() string {
-	if c == nil {
-		return ""
-	}
-	return c.SubscriberID
+	// Unique identifier of the subscriber
+	SubscriberID string `json:"subscriberId"`
 }
 
 func (c *CreateSubscriberRequestDto) GetFirstName() *string {
@@ -65,13 +58,6 @@ func (c *CreateSubscriberRequestDto) GetAvatar() *string {
 	return c.Avatar
 }
 
-func (c *CreateSubscriberRequestDto) GetTimezone() *string {
-	if c == nil {
-		return nil
-	}
-	return c.Timezone
-}
-
 func (c *CreateSubscriberRequestDto) GetLocale() *string {
 	if c == nil {
 		return nil
@@ -79,9 +65,23 @@ func (c *CreateSubscriberRequestDto) GetLocale() *string {
 	return c.Locale
 }
 
+func (c *CreateSubscriberRequestDto) GetTimezone() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Timezone
+}
+
 func (c *CreateSubscriberRequestDto) GetData() map[string]any {
 	if c == nil {
 		return nil
 	}
 	return c.Data
+}
+
+func (c *CreateSubscriberRequestDto) GetSubscriberID() string {
+	if c == nil {
+		return ""
+	}
+	return c.SubscriberID
 }

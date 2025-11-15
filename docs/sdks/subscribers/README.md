@@ -98,6 +98,13 @@ func main() {
     )
 
     res, err := s.Subscribers.Create(ctx, components.CreateSubscriberRequestDto{
+        FirstName: novugo.Pointer("John"),
+        LastName: novugo.Pointer("Doe"),
+        Email: novugo.Pointer("john.doe@example.com"),
+        Phone: novugo.Pointer("+1234567890"),
+        Avatar: novugo.Pointer("https://example.com/avatar.jpg"),
+        Locale: novugo.Pointer("en-US"),
+        Timezone: novugo.Pointer("America/New_York"),
         SubscriberID: "<id>",
     }, nil, nil)
     if err != nil {
@@ -216,7 +223,15 @@ func main() {
         novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{}, nil)
+    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{
+        FirstName: novugo.Pointer("John"),
+        LastName: novugo.Pointer("Doe"),
+        Email: novugo.Pointer("john.doe@example.com"),
+        Phone: novugo.Pointer("+1234567890"),
+        Avatar: novugo.Pointer("https://example.com/avatar.jpg"),
+        Locale: novugo.Pointer("en-US"),
+        Timezone: novugo.Pointer("America/New_York"),
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

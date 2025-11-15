@@ -67,6 +67,7 @@ const (
 	ProvidersIDEnumSmsmode          ProvidersIDEnum = "smsmode"
 	ProvidersIDEnumImedia           ProvidersIDEnum = "imedia"
 	ProvidersIDEnumSinch            ProvidersIDEnum = "sinch"
+	ProvidersIDEnumIsendproSms      ProvidersIDEnum = "isendpro-sms"
 	ProvidersIDEnumFcm              ProvidersIDEnum = "fcm"
 	ProvidersIDEnumApns             ProvidersIDEnum = "apns"
 	ProvidersIDEnumExpo             ProvidersIDEnum = "expo"
@@ -74,6 +75,7 @@ const (
 	ProvidersIDEnumPushpad          ProvidersIDEnum = "pushpad"
 	ProvidersIDEnumPushWebhook      ProvidersIDEnum = "push-webhook"
 	ProvidersIDEnumPusherBeams      ProvidersIDEnum = "pusher-beams"
+	ProvidersIDEnumAppio            ProvidersIDEnum = "appio"
 	ProvidersIDEnumNovu             ProvidersIDEnum = "novu"
 	ProvidersIDEnumSlack            ProvidersIDEnum = "slack"
 	ProvidersIDEnumDiscord          ProvidersIDEnum = "discord"
@@ -210,6 +212,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "sinch":
 		fallthrough
+	case "isendpro-sms":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -223,6 +227,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "push-webhook":
 		fallthrough
 	case "pusher-beams":
+		fallthrough
+	case "appio":
 		fallthrough
 	case "novu":
 		fallthrough
