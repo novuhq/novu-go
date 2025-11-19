@@ -13,11 +13,11 @@ type PatchSubscriberRequestDto struct {
 	Phone *string `json:"phone,omitempty"`
 	// Avatar URL or identifier
 	Avatar *string `json:"avatar,omitempty"`
-	// Timezone of the subscriber
-	Timezone *string `json:"timezone,omitempty"`
 	// Locale of the subscriber
 	Locale *string `json:"locale,omitempty"`
-	// Additional custom data for the subscriber
+	// Timezone of the subscriber
+	Timezone *string `json:"timezone,omitempty"`
+	// Additional custom data associated with the subscriber
 	Data map[string]any `json:"data,omitempty"`
 }
 
@@ -56,18 +56,18 @@ func (p *PatchSubscriberRequestDto) GetAvatar() *string {
 	return p.Avatar
 }
 
-func (p *PatchSubscriberRequestDto) GetTimezone() *string {
-	if p == nil {
-		return nil
-	}
-	return p.Timezone
-}
-
 func (p *PatchSubscriberRequestDto) GetLocale() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Locale
+}
+
+func (p *PatchSubscriberRequestDto) GetTimezone() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Timezone
 }
 
 func (p *PatchSubscriberRequestDto) GetData() map[string]any {

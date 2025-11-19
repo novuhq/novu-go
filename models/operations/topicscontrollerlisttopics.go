@@ -5,7 +5,7 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 // TopicsControllerListTopicsQueryParamOrderDirection - Direction of sorting

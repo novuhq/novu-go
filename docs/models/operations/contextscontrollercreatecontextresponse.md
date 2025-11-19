@@ -1,0 +1,10 @@
+# ContextsControllerCreateContextResponse
+
+
+## Fields
+
+| Field                                                                                 | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                            | [components.HTTPMetadata](../../models/components/httpmetadata.md)                    | :heavy_check_mark:                                                                    | N/A                                                                                   |
+| `GetContextResponseDto`                                                               | [*components.GetContextResponseDto](../../models/components/getcontextresponsedto.md) | :heavy_minus_sign:                                                                    | Created                                                                               |
+| `Headers`                                                                             | map[string][]*string*                                                                 | :heavy_check_mark:                                                                    | N/A                                                                                   |

@@ -4,8 +4,8 @@ package operations
 
 import (
 	"errors"
-	"github.com/novuhq/novu-go/internal/utils"
-	"github.com/novuhq/novu-go/retry"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+	"github.com/novuhq/novu-go/v3/retry"
 	"time"
 )
 
@@ -21,8 +21,8 @@ const (
 type AcceptHeaderEnum string
 
 const (
-	AcceptHeaderEnumWildcardRootWildcard AcceptHeaderEnum = "*/*"
 	AcceptHeaderEnumApplicationJson      AcceptHeaderEnum = "application/json"
+	AcceptHeaderEnumWildcardRootWildcard AcceptHeaderEnum = "*/*"
 )
 
 func (e AcceptHeaderEnum) ToPointer() *AcceptHeaderEnum {

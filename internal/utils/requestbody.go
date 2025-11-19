@@ -15,7 +15,7 @@ import (
 	"reflect"
 	"regexp"
 
-	"github.com/novuhq/novu-go/optionalnullable"
+	"github.com/novuhq/novu-go/v3/optionalnullable"
 )
 
 const (

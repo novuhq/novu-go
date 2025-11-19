@@ -5,7 +5,7 @@ package components
 import (
 	"errors"
 	"fmt"
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
 // TriggerEventToAllRequestDtoChannels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.

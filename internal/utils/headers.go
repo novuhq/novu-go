@@ -9,7 +9,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/novuhq/novu-go/optionalnullable"
+	"github.com/novuhq/novu-go/v3/optionalnullable"
 )
 
 func PopulateHeaders(_ context.Context, req *http.Request, headers interface{}, globals interface{}) {

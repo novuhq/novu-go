@@ -28,16 +28,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Search(ctx, operations.SubscribersControllerSearchSubscribersRequest{})
@@ -85,19 +85,26 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Create(ctx, components.CreateSubscriberRequestDto{
+        FirstName: v3.Pointer("John"),
+        LastName: v3.Pointer("Doe"),
+        Email: v3.Pointer("john.doe@example.com"),
+        Phone: v3.Pointer("+1234567890"),
+        Avatar: v3.Pointer("https://example.com/avatar.jpg"),
+        Locale: v3.Pointer("en-US"),
+        Timezone: v3.Pointer("America/New_York"),
         SubscriberID: "<id>",
     }, nil, nil)
     if err != nil {
@@ -147,15 +154,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Retrieve(ctx, "<id>", nil)
@@ -204,19 +211,27 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{}, nil)
+    res, err := s.Subscribers.Patch(ctx, "<id>", components.PatchSubscriberRequestDto{
+        FirstName: v3.Pointer("John"),
+        LastName: v3.Pointer("Doe"),
+        Email: v3.Pointer("john.doe@example.com"),
+        Phone: v3.Pointer("+1234567890"),
+        Avatar: v3.Pointer("https://example.com/avatar.jpg"),
+        Locale: v3.Pointer("en-US"),
+        Timezone: v3.Pointer("America/New_York"),
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -263,15 +278,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Delete(ctx, "<id>", nil)
@@ -321,16 +336,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.CreateBulk(ctx, components.BulkSubscriberCreateDto{

@@ -5,7 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
 // ProviderID - The ID of the chat or push provider.
@@ -31,6 +31,7 @@ const (
 	ProviderIDPushpad          ProviderID = "pushpad"
 	ProviderIDPushWebhook      ProviderID = "push-webhook"
 	ProviderIDPusherBeams      ProviderID = "pusher-beams"
+	ProviderIDAppio            ProviderID = "appio"
 )
 
 func (e ProviderID) ToPointer() *ProviderID {
@@ -79,6 +80,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	case "push-webhook":
 		fallthrough
 	case "pusher-beams":
+		fallthrough
+	case "appio":
 		*e = ProviderID(v)
 		return nil
 	default:

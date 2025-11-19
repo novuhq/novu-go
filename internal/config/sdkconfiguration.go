@@ -4,7 +4,7 @@ package config
 
 import (
 	"context"
-	"github.com/novuhq/novu-go/retry"
+	"github.com/novuhq/novu-go/v3/retry"
 	"net/http"
 	"time"
 )

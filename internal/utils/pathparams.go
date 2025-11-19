@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/novuhq/novu-go/optionalnullable"
-	"github.com/novuhq/novu-go/types"
+	"github.com/novuhq/novu-go/v3/optionalnullable"
+	"github.com/novuhq/novu-go/v3/types"
 )
 
 func GenerateURL(_ context.Context, serverURL, path string, pathParams interface{}, globals interface{}) (string, error) {

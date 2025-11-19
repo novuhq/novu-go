@@ -5,7 +5,7 @@ package hooks
 import (
 	"context"
 	"errors"
-	"github.com/novuhq/novu-go/internal/config"
+	"github.com/novuhq/novu-go/v3/internal/config"
 	"net/http"
 )
 

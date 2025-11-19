@@ -5,7 +5,7 @@ package components
 import (
 	"errors"
 	"fmt"
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
 // Channels - Channel-specific overrides that apply to all steps of a particular channel type. Step-level overrides take precedence over channel-level overrides.
@@ -441,6 +441,101 @@ func (u Tenant) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Tenant: all fields are null")
 }
 
+// Two - Rich context object with id and optional data
+type Two struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (t Two) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Two) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *Two) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *Two) GetData() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Data
+}
+
+type ContextType string
+
+const (
+	ContextTypeStr ContextType = "str"
+	ContextTypeTwo ContextType = "2"
+)
+
+type Context struct {
+	Str *string `queryParam:"inline,name=context"`
+	Two *Two    `queryParam:"inline,name=context"`
+
+	Type ContextType
+}
+
+func CreateContextStr(str string) Context {
+	typ := ContextTypeStr
+
+	return Context{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateContextTwo(two Two) Context {
+	typ := ContextTypeTwo
+
+	return Context{
+		Two:  &two,
+		Type: typ,
+	}
+}
+
+func (u *Context) UnmarshalJSON(data []byte) error {
+
+	var two Two = Two{}
+	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
+		u.Two = &two
+		u.Type = ContextTypeTwo
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = ContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Context", string(data))
+}
+
+func (u Context) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Two != nil {
+		return utils.MarshalJSON(u.Two, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Context: all fields are null")
+}
+
 type TriggerEventRequestDto struct {
 	// The trigger identifier of the workflow you wish to send. This identifier can be found on the workflow page.
 	WorkflowID string `json:"name"`
@@ -460,7 +555,8 @@ type TriggerEventRequestDto struct {
 	Actor *Actor `json:"actor,omitempty"`
 	// It is used to specify a tenant context during trigger event.
 	//     Existing tenants will be updated with the provided details.
-	Tenant *Tenant `json:"tenant,omitempty"`
+	Tenant  *Tenant            `json:"tenant,omitempty"`
+	Context map[string]Context `json:"context,omitempty"`
 }
 
 func (t *TriggerEventRequestDto) GetWorkflowID() string {
@@ -510,4 +606,11 @@ func (t *TriggerEventRequestDto) GetTenant() *Tenant {
 		return nil
 	}
 	return t.Tenant
+}
+
+func (t *TriggerEventRequestDto) GetContext() map[string]Context {
+	if t == nil {
+		return nil
+	}
+	return t.Context
 }

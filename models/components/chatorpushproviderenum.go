@@ -30,6 +30,7 @@ const (
 	ChatOrPushProviderEnumPushpad          ChatOrPushProviderEnum = "pushpad"
 	ChatOrPushProviderEnumPushWebhook      ChatOrPushProviderEnum = "push-webhook"
 	ChatOrPushProviderEnumPusherBeams      ChatOrPushProviderEnum = "pusher-beams"
+	ChatOrPushProviderEnumAppio            ChatOrPushProviderEnum = "appio"
 )
 
 func (e ChatOrPushProviderEnum) ToPointer() *ChatOrPushProviderEnum {
@@ -78,6 +79,8 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 	case "push-webhook":
 		fallthrough
 	case "pusher-beams":
+		fallthrough
+	case "appio":
 		*e = ChatOrPushProviderEnum(v)
 		return nil
 	default:

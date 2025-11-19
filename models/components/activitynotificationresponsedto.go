@@ -42,7 +42,7 @@ type ActivityNotificationResponseDto struct {
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 	// Criticality of the notification
 	Critical *bool `json:"critical,omitempty"`
-	// Contexts (keys) in which the notification was sent
+	// Context (single or multi) in which the notification was sent
 	ContextKeys []string `json:"contextKeys,omitempty"`
 }
 
