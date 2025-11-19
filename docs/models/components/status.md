@@ -1,16 +1,29 @@
 # Status
 
-Status of the trigger
+Status of the event
 
 
 ## Values
 
-| Name                                 | Value                                |
-| ------------------------------------ | ------------------------------------ |
-| `StatusError`                        | error                                |
-| `StatusTriggerNotActive`             | trigger_not_active                   |
-| `StatusNoWorkflowActiveStepsDefined` | no_workflow_active_steps_defined     |
-| `StatusNoWorkflowStepsDefined`       | no_workflow_steps_defined            |
-| `StatusProcessed`                    | processed                            |
-| `StatusNoTenantFound`                | no_tenant_found                      |
-| `StatusInvalidRecipients`            | invalid_recipients                   |
+| Name                 | Value                |
+| -------------------- | -------------------- |
+| `StatusOpened`       | opened               |
+| `StatusRejected`     | rejected             |
+| `StatusSent`         | sent                 |
+| `StatusDeferred`     | deferred             |
+| `StatusDelivered`    | delivered            |
+| `StatusBounced`      | bounced              |
+| `StatusDropped`      | dropped              |
+| `StatusClicked`      | clicked              |
+| `StatusBlocked`      | blocked              |
+| `StatusSpam`         | spam                 |
+| `StatusUnsubscribed` | unsubscribed         |
+| `StatusDelayed`      | delayed              |
+| `StatusComplaint`    | complaint            |
+| `StatusCreated`      | created              |
+| `StatusAccepted`     | accepted             |
+| `StatusQueued`       | queued               |
+| `StatusSending`      | sending              |
+| `StatusFailed`       | failed               |
+| `StatusUndelivered`  | undelivered          |
+| `StatusDismissed`    | dismissed            |

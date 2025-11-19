@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/novuhq/novu-go/internal/utils"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 type NotificationsControllerListNotificationsRequest struct {
@@ -30,6 +30,8 @@ type NotificationsControllerListNotificationsRequest struct {
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Topic Key for filtering notifications by topic
 	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`
+	// Filter by exact context keys, order insensitive (format: "type:id")
+	ContextKeys []string `queryParam:"style=form,explode=true,name=contextKeys"`
 	// Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan
 	After *string `queryParam:"style=form,explode=true,name=after"`
 	// Date filter for records before this timestamp. Defaults to current time of request (now)
@@ -117,6 +119,13 @@ func (n *NotificationsControllerListNotificationsRequest) GetTopicKey() *string 
 		return nil
 	}
 	return n.TopicKey
+}
+
+func (n *NotificationsControllerListNotificationsRequest) GetContextKeys() []string {
+	if n == nil {
+		return nil
+	}
+	return n.ContextKeys
 }
 
 func (n *NotificationsControllerListNotificationsRequest) GetAfter() *string {

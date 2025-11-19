@@ -1,0 +1,12 @@
+# ListContextsResponseDto
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Data`                                                                                 | [][components.GetContextResponseDto](../../models/components/getcontextresponsedto.md) | :heavy_check_mark:                                                                     | List of returned Contexts                                                              |
+| `Next`                                                                                 | *string*                                                                               | :heavy_check_mark:                                                                     | The cursor for the next page of results, or null if there are no more pages.           |
+| `Previous`                                                                             | *string*                                                                               | :heavy_check_mark:                                                                     | The cursor for the previous page of results, or null if this is the first page.        |
+| `TotalCount`                                                                           | *float64*                                                                              | :heavy_check_mark:                                                                     | The total count of items (up to 50,000)                                                |
+| `TotalCountCapped`                                                                     | *bool*                                                                                 | :heavy_check_mark:                                                                     | Whether there are more than 50,000 results available                                   |

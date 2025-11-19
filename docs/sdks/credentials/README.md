@@ -5,14 +5,14 @@
 
 ### Available Operations
 
-* [Update](#update) - Upsert provider credentials
-* [Append](#append) - Update provider credentials
+* [Update](#update) - Update provider credentials
+* [Append](#append) - Upsert provider credentials
 * [Delete](#delete) - Delete provider credentials
 
 ## Update
 
-Upsert credentials for a provider such as slack and push tokens. 
-      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
+Update credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
 
 ### Example Usage
 
@@ -22,33 +22,33 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Update(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
         ProviderID: components.ChatOrPushProviderEnumSlack,
         Credentials: components.ChannelCredentials{
-            WebhookURL: novugo.Pointer("https://example.com/webhook"),
-            Channel: novugo.Pointer("general"),
+            WebhookURL: v3.Pointer("https://example.com/webhook"),
+            Channel: v3.Pointer("general"),
             DeviceTokens: []string{
                 "token1",
                 "token2",
                 "token3",
             },
-            AlertUID: novugo.Pointer("12345-abcde"),
-            Title: novugo.Pointer("Critical Alert"),
-            ImageURL: novugo.Pointer("https://example.com/image.png"),
-            State: novugo.Pointer("resolved"),
-            ExternalURL: novugo.Pointer("https://example.com/details"),
+            AlertUID: v3.Pointer("12345-abcde"),
+            Title: v3.Pointer("Critical Alert"),
+            ImageURL: v3.Pointer("https://example.com/image.png"),
+            State: v3.Pointer("resolved"),
+            ExternalURL: v3.Pointer("https://example.com/details"),
         },
     }, nil)
     if err != nil {
@@ -86,8 +86,8 @@ func main() {
 
 ## Append
 
-Update credentials for a provider such as **slack** and **FCM**. 
-      **providerId** is required field. This API creates the **deviceTokens** or replaces the existing ones.
+Upsert credentials for a provider such as **slack** and **FCM**. 
+      **providerId** is required field. This API creates **deviceTokens** or appends to the existing ones.
 
 ### Example Usage
 
@@ -97,33 +97,33 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Append(ctx, "<id>", components.UpdateSubscriberChannelRequestDto{
         ProviderID: components.ChatOrPushProviderEnumOneSignal,
         Credentials: components.ChannelCredentials{
-            WebhookURL: novugo.Pointer("https://example.com/webhook"),
-            Channel: novugo.Pointer("general"),
+            WebhookURL: v3.Pointer("https://example.com/webhook"),
+            Channel: v3.Pointer("general"),
             DeviceTokens: []string{
                 "token1",
                 "token2",
                 "token3",
             },
-            AlertUID: novugo.Pointer("12345-abcde"),
-            Title: novugo.Pointer("Critical Alert"),
-            ImageURL: novugo.Pointer("https://example.com/image.png"),
-            State: novugo.Pointer("resolved"),
-            ExternalURL: novugo.Pointer("https://example.com/details"),
+            AlertUID: v3.Pointer("12345-abcde"),
+            Title: v3.Pointer("Critical Alert"),
+            ImageURL: v3.Pointer("https://example.com/image.png"),
+            State: v3.Pointer("resolved"),
+            ExternalURL: v3.Pointer("https://example.com/details"),
         },
     }, nil)
     if err != nil {
@@ -172,15 +172,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Credentials.Delete(ctx, "<id>", "<id>", nil)

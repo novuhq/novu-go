@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 34915c5092089c5efb6093b48eb04859
-  docVersion: 3.9.0
-  speakeasyVersion: 1.637.3
-  generationVersion: 2.727.9
-  releaseVersion: 1.5.0
-  configChecksum: 635652b41bcf4afa5fbe237049e09d0e
+  docChecksum: 62b98c433791e4481a836b5c4c15bee5
+  docVersion: 3.11.0
+  speakeasyVersion: 1.658.2
+  generationVersion: 2.755.9
+  releaseVersion: 3.11.0
+  configChecksum: 30ba2f466e648d5e904c565df3f69ca8
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.12.0
+    core: 3.13.2
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
@@ -24,7 +24,7 @@ features:
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.3
+    globalServerURLs: 2.83.0
     groups: 2.81.3
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
@@ -32,7 +32,7 @@ features:
     responseFormat: 0.1.2
     retries: 2.84.2
     sdkHooks: 0.2.0
-    unions: 2.86.0
+    unions: 2.87.1
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -79,6 +79,7 @@ generatedFiles:
   - /models/components/constraintvalidation.go
   - /models/components/contentissueenum.go
   - /models/components/controlsmetadatadto.go
+  - /models/components/createcontextrequestdto.go
   - /models/components/createdsubscriberdto.go
   - /models/components/createenvironmentrequestdto.go
   - /models/components/createintegrationrequestdto.go
@@ -127,12 +128,14 @@ generatedFiles:
   - /models/components/emailstepresponsedto.go
   - /models/components/emailstepupsertdto.go
   - /models/components/environmentresponsedto.go
+  - /models/components/eventbody.go
   - /models/components/executiondetailssourceenum.go
   - /models/components/executiondetailsstatusenum.go
   - /models/components/failedoperationdto.go
   - /models/components/feedresponsedto.go
   - /models/components/fieldfilterpartdto.go
   - /models/components/generatelayoutpreviewresponsedto.go
+  - /models/components/getcontextresponsedto.go
   - /models/components/getenvironmenttagsdto.go
   - /models/components/getlayoutusageresponsedto.go
   - /models/components/getmasterjsonresponsedto.go
@@ -155,6 +158,7 @@ generatedFiles:
   - /models/components/layoutpreviewrequestdto.go
   - /models/components/layoutresponsedto.go
   - /models/components/layoutresponsedtosortfield.go
+  - /models/components/listcontextsresponsedto.go
   - /models/components/listlayoutresponsedto.go
   - /models/components/listsubscribersresponsedto.go
   - /models/components/listtopicsresponsedto.go
@@ -259,6 +263,7 @@ generatedFiles:
   - /models/components/uischemagroupenum.go
   - /models/components/uischemaproperty.go
   - /models/components/unseencountresponse.go
+  - /models/components/updatecontextrequestdto.go
   - /models/components/updatedsubscriberdto.go
   - /models/components/updateenvironmentrequestdto.go
   - /models/components/updateintegrationrequestdto.go
@@ -269,6 +274,7 @@ generatedFiles:
   - /models/components/updateworkflowdto.go
   - /models/components/uploadtranslationsrequestdto.go
   - /models/components/uploadtranslationsresponsedto.go
+  - /models/components/webhookresultdto.go
   - /models/components/workflowcreationsourceenum.go
   - /models/components/workflowinfodto.go
   - /models/components/workflowlistresponsedto.go
@@ -279,6 +285,11 @@ generatedFiles:
   - /models/components/workflowresponsedto.go
   - /models/components/workflowresponsedtosortfield.go
   - /models/components/workflowstatusenum.go
+  - /models/operations/contextscontrollercreatecontext.go
+  - /models/operations/contextscontrollerdeletecontext.go
+  - /models/operations/contextscontrollergetcontext.go
+  - /models/operations/contextscontrollerlistcontexts.go
+  - /models/operations/contextscontrollerupdatecontext.go
   - /models/operations/environmentscontrollergetenvironmenttags.go
   - /models/operations/environmentscontrollerv1createenvironment.go
   - /models/operations/environmentscontrollerv1deleteenvironment.go
@@ -355,6 +366,8 @@ generatedFiles:
   - /models/operations/workflowcontrollersync.go
   - /models/operations/workflowcontrollerupdate.go
   - USAGE.md
+  - activity.go
+  - contexts.go
   - credentials.go
   - docs/models/apierrors/errordto.md
   - docs/models/apierrors/five.md
@@ -419,9 +432,11 @@ generatedFiles:
   - docs/models/components/constraintvalidation.md
   - docs/models/components/content.md
   - docs/models/components/contentissueenum.md
+  - docs/models/components/context.md
   - docs/models/components/controlsmetadatadto.md
   - docs/models/components/controlvalues.md
   - docs/models/components/controlvariables.md
+  - docs/models/components/createcontextrequestdto.md
   - docs/models/components/createdsubscriberdto.md
   - docs/models/components/createenvironmentrequestdto.md
   - docs/models/components/createintegrationrequestdto.md
@@ -500,6 +515,7 @@ generatedFiles:
   - docs/models/components/emailstepupsertdtocontrolvalues.md
   - docs/models/components/environmentresponsedto.md
   - docs/models/components/environmentresponsedtotype.md
+  - docs/models/components/eventbody.md
   - docs/models/components/executiondetailssourceenum.md
   - docs/models/components/executiondetailsstatusenum.md
   - docs/models/components/failedoperationdto.md
@@ -510,6 +526,8 @@ generatedFiles:
   - docs/models/components/four.md
   - docs/models/components/friday.md
   - docs/models/components/generatelayoutpreviewresponsedto.md
+  - docs/models/components/getcontextresponsedto.md
+  - docs/models/components/getcontextresponsedtodata.md
   - docs/models/components/getenvironmenttagsdto.md
   - docs/models/components/getlayoutusageresponsedto.md
   - docs/models/components/getmasterjsonresponsedto.md
@@ -540,6 +558,7 @@ generatedFiles:
   - docs/models/components/layoutresponsedto.md
   - docs/models/components/layoutresponsedtosortfield.md
   - docs/models/components/layouts.md
+  - docs/models/components/listcontextsresponsedto.md
   - docs/models/components/listlayoutresponsedto.md
   - docs/models/components/listsubscribersresponsedto.md
   - docs/models/components/listtopicsresponsedto.md
@@ -696,6 +715,7 @@ generatedFiles:
   - docs/models/components/translationresponsedtoresourcetype.md
   - docs/models/components/triggereventrequestdto.md
   - docs/models/components/triggereventresponsedto.md
+  - docs/models/components/triggereventresponsedtostatus.md
   - docs/models/components/triggereventtoallrequestdto.md
   - docs/models/components/triggereventtoallrequestdtoactor.md
   - docs/models/components/triggereventtoallrequestdtochannels.md
@@ -703,6 +723,7 @@ generatedFiles:
   - docs/models/components/triggereventtoallrequestdtotenant.md
   - docs/models/components/triggerrecipientstypeenum.md
   - docs/models/components/tuesday.md
+  - docs/models/components/two.md
   - docs/models/components/type.md
   - docs/models/components/uicomponentenum.md
   - docs/models/components/uischema.md
@@ -710,6 +731,8 @@ generatedFiles:
   - docs/models/components/uischemaproperty.md
   - docs/models/components/unit.md
   - docs/models/components/unseencountresponse.md
+  - docs/models/components/updatecontextrequestdto.md
+  - docs/models/components/updatecontextrequestdtodata.md
   - docs/models/components/updatedby.md
   - docs/models/components/updatedsubscriberdto.md
   - docs/models/components/updateenvironmentrequestdto.md
@@ -730,6 +753,7 @@ generatedFiles:
   - docs/models/components/value.md
   - docs/models/components/value4.md
   - docs/models/components/value5.md
+  - docs/models/components/webhookresultdto.md
   - docs/models/components/wednesday.md
   - docs/models/components/weekdays.md
   - docs/models/components/weeklyschedule.md
@@ -754,6 +778,16 @@ generatedFiles:
   - docs/models/components/workflows.md
   - docs/models/components/workflowstatusenum.md
   - docs/models/operations/channel.md
+  - docs/models/operations/contextscontrollercreatecontextrequest.md
+  - docs/models/operations/contextscontrollercreatecontextresponse.md
+  - docs/models/operations/contextscontrollerdeletecontextrequest.md
+  - docs/models/operations/contextscontrollerdeletecontextresponse.md
+  - docs/models/operations/contextscontrollergetcontextrequest.md
+  - docs/models/operations/contextscontrollergetcontextresponse.md
+  - docs/models/operations/contextscontrollerlistcontextsrequest.md
+  - docs/models/operations/contextscontrollerlistcontextsresponse.md
+  - docs/models/operations/contextscontrollerupdatecontextrequest.md
+  - docs/models/operations/contextscontrollerupdatecontextresponse.md
   - docs/models/operations/criticality.md
   - docs/models/operations/environmentscontrollergetenvironmenttagsrequest.md
   - docs/models/operations/environmentscontrollergetenvironmenttagsresponse.md
@@ -828,6 +862,7 @@ generatedFiles:
   - docs/models/operations/subscriberscontrollergetsubscriberpreferencesresponse.md
   - docs/models/operations/subscriberscontrollergetsubscriberrequest.md
   - docs/models/operations/subscriberscontrollergetsubscriberresponse.md
+  - docs/models/operations/subscriberscontrollerlistsubscribertopicsqueryparamorderdirection.md
   - docs/models/operations/subscriberscontrollerlistsubscribertopicsrequest.md
   - docs/models/operations/subscriberscontrollerlistsubscribertopicsresponse.md
   - docs/models/operations/subscriberscontrollerpatchsubscriberrequest.md
@@ -914,6 +949,8 @@ generatedFiles:
   - docs/models/operations/workflowcontrollersyncresponse.md
   - docs/models/operations/workflowcontrollerupdaterequest.md
   - docs/models/operations/workflowcontrollerupdateresponse.md
+  - docs/sdks/activity/README.md
+  - docs/sdks/contexts/README.md
   - docs/sdks/credentials/README.md
   - docs/sdks/environments/README.md
   - docs/sdks/groups/README.md
@@ -982,7 +1019,7 @@ examples:
   EventsController_trigger:
     speakeasy-default-events-controller-trigger:
       requestBody:
-        application/json: {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {}, "to": "SUBSCRIBER_ID"}
+        application/json: {"name": "workflow_identifier", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {}, "to": "SUBSCRIBER_ID", "actor": "<value>", "context": {"key": "org-acme"}}
       responses:
         "201":
           application/json: {"acknowledged": true, "status": "processed"}
@@ -1015,7 +1052,7 @@ examples:
   EventsController_broadcastEventToAll:
     speakeasy-default-events-controller-broadcast-event-to-all:
       requestBody:
-        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}}
+        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "invalid_recipients"}
@@ -1062,7 +1099,7 @@ examples:
   SubscribersController_createSubscriber:
     speakeasy-default-subscribers-controller-create-subscriber:
       requestBody:
-        application/json: {"subscriberId": "<id>"}
+        application/json: {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}
       responses:
         "201":
           application/json: {"channels": [{"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "zulip", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1714470810745", "updatedAt": "1735674320193"}
@@ -1098,7 +1135,7 @@ examples:
         path:
           subscriberId: "<id>"
       requestBody:
-        application/json: {}
+        application/json: {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York"}
       responses:
         "200":
           application/json: {"channels": [{"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "fcm", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1732490680659", "updatedAt": "1735674157313"}
@@ -1255,7 +1292,7 @@ examples:
         application/json: {"status": "pending"}
       responses:
         "201":
-          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1718333764322", "updatedAt": "1735651735471"}, "template": {"name": "<value>", "description": "loaf than of familiarize puppet transom worth", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1712367103281", "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "sent"}
+          application/json: {"_environmentId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "getstream", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": false, "createdAt": "1718333764322", "updatedAt": "1735651735471"}, "template": {"name": "<value>", "description": "loaf than of familiarize puppet transom worth", "active": true, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": [], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}, {"type": "event", "identifier": "<value>", "variables": [{"name": "<value>"}, {"name": "<value>"}]}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1712367103281", "transactionId": "<id>", "channel": "in_app", "read": false, "seen": false, "cta": {}, "status": "sent", "contextKeys": ["tenant:org-123", "region:us-east-1"]}
         "414":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
         "400":
@@ -1620,6 +1657,7 @@ examples:
         query:
           page: 0
           limit: 10
+          contextKeys: ["tenant:org-123", "region:us-east-1"]
       responses:
         "200":
           application/json: {"hasMore": true, "data": [{"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}, {"_templateId": "<id>", "_environmentId": "<id>", "_messageTemplateId": "<id>", "_organizationId": "<id>", "_notificationId": "<id>", "_subscriberId": "<id>", "subscriber": {"channels": [{"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}, {"providerId": "pushpad", "credentials": {"webhookUrl": "https://example.com/webhook", "channel": "general", "deviceTokens": ["token1", "token2", "token3"], "alertUid": "12345-abcde", "title": "Critical Alert", "imageUrl": "https://example.com/image.png", "state": "resolved", "externalUrl": "https://example.com/details"}, "_integrationId": "<id>"}], "subscriberId": "<id>", "_organizationId": "<id>", "_environmentId": "<id>", "deleted": true, "createdAt": "1719298308933", "updatedAt": "1735648395125"}, "template": {"name": "<value>", "description": "ack what ceramics", "active": false, "draft": true, "preferenceSettings": {"email": true, "sms": false, "in_app": true, "chat": false, "push": true}, "critical": true, "tags": ["<value 1>", "<value 2>"], "steps": [{}, {}, {}], "_organizationId": "<id>", "_creatorId": "<id>", "_environmentId": "<id>", "triggers": [{"type": "event", "identifier": "<value>", "variables": []}, {"type": "event", "identifier": "<value>", "variables": []}], "_notificationGroupId": "<id>", "deleted": true, "deletedAt": "<value>", "deletedBy": "<value>"}, "createdAt": "1734200353431", "content": [{"type": "text", "content": "<value>"}, {"type": "text", "content": "<value>"}], "transactionId": "<id>", "channel": "push", "read": false, "seen": false, "cta": {}, "status": "error"}], "pageSize": 3755.69, "page": 3670.04}
@@ -1917,6 +1955,11 @@ examples:
         path:
           environmentId: "<id>"
           integrationId: "<id>"
+      requestBody:
+        application/json: "<value>"
+      responses:
+        "200":
+          application/json: [{"id": "<id>", "event": {"status": "rejected", "date": "2024-05-16"}}]
   EnvironmentsController_getEnvironmentTags:
     speakeasy-default-environments-controller-get-environment-tags:
       parameters:
@@ -2161,6 +2204,89 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": ["xx xx xx "]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  ContextsController_createContext:
+    speakeasy-default-contexts-controller-create-context:
+      requestBody:
+        application/json: {"type": "tenant", "id": "org-acme", "data": {}}
+      responses:
+        "201":
+          application/json: {"type": "<value>", "id": "<id>", "data": {}, "createdAt": "1711061300606", "updatedAt": "1735610973353"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": ["xx xx xx "]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  ContextsController_listContexts:
+    speakeasy-default-contexts-controller-list-contexts:
+      parameters:
+        query:
+          id: "tenant-prod-123"
+          search: "tenant"
+      responses:
+        "200":
+          application/json: {"data": [], "next": "<value>", "previous": "<value>", "totalCount": 1187.63, "totalCountCapped": true}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  ContextsController_updateContext:
+    speakeasy-default-contexts-controller-update-context:
+      parameters:
+        path:
+          id: "<id>"
+          type: "<value>"
+      requestBody:
+        application/json: {"data": {}}
+      responses:
+        "200":
+          application/json: {"type": "<value>", "id": "<id>", "data": {}, "createdAt": "1716731814509", "updatedAt": "1735639126648"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": ["xx xx xx "]}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  ContextsController_getContext:
+    speakeasy-default-contexts-controller-get-context:
+      parameters:
+        path:
+          id: "<id>"
+          type: "<value>"
+      responses:
+        "200":
+          application/json: {"type": "<value>", "id": "<id>", "data": {}, "createdAt": "1718193821107", "updatedAt": "1735604359935"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": {}}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  ContextsController_deleteContext:
+    speakeasy-default-contexts-controller-delete-context:
+      parameters:
+        path:
+          id: "<id>"
+          type: "<value>"
+      responses:
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Trigger()`: \n  *  `request.TriggerEventRequestDto.To.[array].[].[topicPayloadDto].Exclude` **Added**\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[].To.[array].[].[topicPayloadDto].Exclude` **Added**\n* `Novu.Layouts.Create()`: \n  *  `request.CreateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.List()`:  `response.Layouts.[].IsTranslationEnabled` **Added**\n* `Novu.Layouts.Update()`: \n  *  `request.UpdateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.Retrieve()`:  `response.IsTranslationEnabled` **Added**\n* `Novu.Layouts.Duplicate()`: \n  *  `request.DuplicateLayoutDto.IsTranslationEnabled` **Added**\n  *  `response.IsTranslationEnabled` **Added**\n* `Novu.Translations.Retrieve()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Delete()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Upload()`: \n  *  `request.UploadTranslationsRequestDto.ResourceType` **Changed**\n* `Novu.Translations.Groups.Delete()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Groups.Retrieve()`:  `request.ResourceType` **Changed**\n* `Novu.Translations.Master.Retrieve()`:  `response.Layouts` **Added**\n* `Novu.Workflows.Create()`: \n  *  `request.CreateWorkflowDto.Steps.[]` **Changed**\n  *  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Update()`: \n  *  `request.UpdateWorkflowDto.Steps.[]` **Changed**\n  *  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Get()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Patch()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Workflows.Sync()`:  `response.Steps.[].[delay]` **Changed**\n* `Novu.Notifications.List()`:  `response.Data.[]` **Changed**\n* `Novu.Notifications.Retrieve()`:  `response` **Changed**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Trigger()`:  `request.TriggerEventRequestDto` **Changed** **Breaking** :warning:\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[]` **Changed** **Breaking** :warning:\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Actor.[subscriberPayloadDto]` **Changed** **Breaking** :warning:\n* `Novu.Subscribers.Messages.UpdateAsSeen()`:  `response.ContextKeys` **Added**\n* `Novu.Integrations.List()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Activity.Track()`: **Added**\n* `Novu.InboundWebhooksControllerHandleWebhook()`: **Deleted** **Breaking** :warning:\n* `Novu.Contexts.Retrieve()`: **Added**\n* `Novu.Contexts.Update()`: **Added**\n* `Novu.Contexts.List()`: **Added**\n* `Novu.Contexts.Create()`: **Added**\n* `Novu.Subscribers.Messages.MarkAllAs()`:  `response.[].ContextKeys` **Added**\n* `Novu.Contexts.Delete()`: **Added**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Delete()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.SetAsPrimary()`:  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.ListActive()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Messages.Retrieve()`: \n  *  `request.Request.ContextKeys` **Added**\n  *  `response.Data.[].ContextKeys` **Added**\n* `Novu.Notifications.List()`: \n  *  `request.Request.ContextKeys` **Added**\n"

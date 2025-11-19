@@ -28,16 +28,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{})
@@ -84,21 +84,21 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Create(ctx, components.CreateUpdateTopicRequestDto{
         Key: "task:12345",
-        Name: novugo.Pointer("Task Title"),
+        Name: v3.Pointer("Task Title"),
     }, nil, nil)
     if err != nil {
         log.Fatal(err)
@@ -146,15 +146,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Get(ctx, "<value>", nil)
@@ -202,16 +202,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Update(ctx, "<value>", components.UpdateTopicRequestDto{
@@ -263,15 +263,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Topics.Delete(ctx, "<value>", nil)

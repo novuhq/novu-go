@@ -20,21 +20,21 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Subscribers.Notifications.Feed(ctx, operations.SubscribersV1ControllerGetNotificationsFeedRequest{
         SubscriberID: "<id>",
-        Payload: novugo.Pointer("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
+        Payload: v3.Pointer("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
     })
     if err != nil {
         log.Fatal(err)
@@ -79,18 +79,18 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", novugo.Pointer(false), novugo.Pointer[float64](100), nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", v3.Pointer(false), v3.Pointer[float64](100), nil)
     if err != nil {
         log.Fatal(err)
     }

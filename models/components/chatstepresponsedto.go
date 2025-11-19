@@ -3,7 +3,7 @@
 package components
 
 import (
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
 // ChatStepResponseDtoControlValues - Control values for the chat step

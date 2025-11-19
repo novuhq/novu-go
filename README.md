@@ -76,7 +76,7 @@ For more information about the API: [Novu Documentation](https://docs.novu.co)
 
 To add the SDK as a dependency to your project:
 ```bash
-go get github.com/novuhq/novu-go
+go get github.com/novuhq/novu-go/v3
 ```
 <!-- End SDK Installation [installation] -->
 
@@ -90,16 +90,16 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -114,6 +114,14 @@ func main() {
 		To: components.CreateToStr(
 			"SUBSCRIBER_ID",
 		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -132,15 +140,15 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Cancel(ctx, "<id>", nil)
@@ -161,16 +169,16 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.TriggerBroadcast(ctx, components.TriggerEventToAllRequestDto{
@@ -190,6 +198,18 @@ func main() {
 				},
 			},
 		},
+		Actor: v3.Pointer(components.CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(
+			components.SubscriberPayloadDto{
+				FirstName:    v3.Pointer("John"),
+				LastName:     v3.Pointer("Doe"),
+				Email:        v3.Pointer("john.doe@example.com"),
+				Phone:        v3.Pointer("+1234567890"),
+				Avatar:       v3.Pointer("https://example.com/avatar.jpg"),
+				Locale:       v3.Pointer("en-US"),
+				Timezone:     v3.Pointer("America/New_York"),
+				SubscriberID: "<id>",
+			},
+		)),
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -208,16 +228,16 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.TriggerBulk(ctx, components.BulkTriggerEventDto{
@@ -291,22 +311,43 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
+	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
+		WorkflowID: "workflow_identifier",
+		Payload: map[string]any{
+			"comment_id": "string",
+			"post": map[string]any{
+				"text": "string",
+			},
+		},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
+		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.TriggerEventResponseDto != nil {
 		// handle response
 	}
 }
@@ -319,6 +360,18 @@ func main() {
 
 <details open>
 <summary>Available methods</summary>
+
+### [Activity](docs/sdks/activity/README.md)
+
+* [Track](docs/sdks/activity/README.md#track) - Track activity and engagement events
+
+### [Contexts](docs/sdks/contexts/README.md)
+
+* [Create](docs/sdks/contexts/README.md#create) - Create a context
+* [List](docs/sdks/contexts/README.md#list) - List all contexts
+* [Update](docs/sdks/contexts/README.md#update) - Update a context
+* [Retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
+* [Delete](docs/sdks/contexts/README.md#delete) - Delete a context
 
 ### [Environments](docs/sdks/environments/README.md)
 
@@ -362,7 +415,6 @@ func main() {
 
 ### [Novu SDK](docs/sdks/novu/README.md)
 
-* [InboundWebhooksControllerHandleWebhook](docs/sdks/novu/README.md#inboundwebhookscontrollerhandlewebhook)
 * [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
 * [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
 * [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
@@ -379,8 +431,8 @@ func main() {
 
 #### [Subscribers.Credentials](docs/sdks/credentials/README.md)
 
-* [Update](docs/sdks/credentials/README.md#update) - Upsert provider credentials
-* [Append](docs/sdks/credentials/README.md#append) - Update provider credentials
+* [Update](docs/sdks/credentials/README.md#update) - Update provider credentials
+* [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
 * [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
 #### [Subscribers.Messages](docs/sdks/novumessages/README.md)
@@ -472,8 +524,9 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/retry"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"github.com/novuhq/novu-go/v3/retry"
 	"log"
 	"models/operations"
 )
@@ -481,11 +534,31 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil, operations.WithRetries(
+	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
+		WorkflowID: "workflow_identifier",
+		Payload: map[string]any{
+			"comment_id": "string",
+			"post": map[string]any{
+				"text": "string",
+			},
+		},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
+		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
+	}, nil, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -499,7 +572,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.TriggerEventResponseDto != nil {
 		// handle response
 	}
 }
@@ -512,16 +585,17 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/retry"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"github.com/novuhq/novu-go/v3/retry"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithRetryConfig(
+	s := v3.New(
+		v3.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
 				Backoff: &retry.BackoffStrategy{
@@ -532,14 +606,34 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
+	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
+		WorkflowID: "workflow_identifier",
+		Payload: map[string]any{
+			"comment_id": "string",
+			"post": map[string]any{
+				"text": "string",
+			},
+		},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
+		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.TriggerEventResponseDto != nil {
 		// handle response
 	}
 }
@@ -573,17 +667,17 @@ package main
 import (
 	"context"
 	"errors"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/apierrors"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/apierrors"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
 	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
@@ -598,6 +692,14 @@ func main() {
 		To: components.CreateToStr(
 			"SUBSCRIBER_ID",
 		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 
@@ -661,23 +763,44 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithServerIndex(1),
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithServerIndex(0),
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
+	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
+		WorkflowID: "workflow_identifier",
+		Payload: map[string]any{
+			"comment_id": "string",
+			"post": map[string]any{
+				"text": "string",
+			},
+		},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
+		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.TriggerEventResponseDto != nil {
 		// handle response
 	}
 }
@@ -692,23 +815,44 @@ package main
 
 import (
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
 	ctx := context.Background()
 
-	s := novugo.New(
-		novugo.WithServerURL("https://eu.api.novu.co"),
-		novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	s := v3.New(
+		v3.WithServerURL("https://eu.api.novu.co"),
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
 	)
 
-	res, err := s.InboundWebhooksControllerHandleWebhook(ctx, "<id>", "<id>", nil)
+	res, err := s.Trigger(ctx, components.TriggerEventRequestDto{
+		WorkflowID: "workflow_identifier",
+		Payload: map[string]any{
+			"comment_id": "string",
+			"post": map[string]any{
+				"text": "string",
+			},
+		},
+		Overrides: &components.Overrides{},
+		To: components.CreateToStr(
+			"SUBSCRIBER_ID",
+		),
+		Actor: v3.Pointer(components.CreateActorStr(
+			"<value>",
+		)),
+		Context: map[string]components.Context{
+			"key": components.CreateContextStr(
+				"org-acme",
+			),
+		},
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res != nil {
+	if res.TriggerEventResponseDto != nil {
 		// handle response
 	}
 }
@@ -734,12 +878,12 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 )
 
 var (
 	httpClient = &http.Client{Timeout: 30 * time.Second}
-	sdkClient  = novugo.New(novugo.WithClient(httpClient))
+	sdkClient  = v3.New(v3.WithClient(httpClient))
 )
 ```
 

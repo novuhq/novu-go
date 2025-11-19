@@ -20,16 +20,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Translations.Groups.Delete(ctx, operations.ResourceTypeWorkflow, "welcome-email", nil)
@@ -74,16 +74,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Translations.Groups.Retrieve(ctx, operations.TranslationControllerGetTranslationGroupEndpointPathParamResourceTypeWorkflow, "welcome-email", nil)

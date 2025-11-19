@@ -26,19 +26,24 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Messages.Retrieve(ctx, operations.MessagesControllerGetMessagesRequest{})
+    res, err := s.Messages.Retrieve(ctx, operations.MessagesControllerGetMessagesRequest{
+        ContextKeys: []string{
+            "tenant:org-123",
+            "region:us-east-1",
+        },
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -83,15 +88,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Messages.Delete(ctx, "507f1f77bcf86cd799439011", nil)
@@ -140,15 +145,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Messages.DeleteByTransactionID(ctx, "507f1f77bcf86cd799439011", nil, nil)

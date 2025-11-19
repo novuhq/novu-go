@@ -3,14 +3,18 @@
 package operations
 
 import (
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 type InboundWebhooksControllerHandleWebhookRequest struct {
+	// The environment identifier
 	EnvironmentID string `pathParam:"style=simple,explode=false,name=environmentId"`
+	// The integration identifier for the delivery provider
 	IntegrationID string `pathParam:"style=simple,explode=false,name=integrationId"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
+	// Webhook event payload from the delivery provider
+	RequestBody any `request:"mediaType=application/json"`
 }
 
 func (i *InboundWebhooksControllerHandleWebhookRequest) GetEnvironmentID() string {
@@ -34,8 +38,17 @@ func (i *InboundWebhooksControllerHandleWebhookRequest) GetIdempotencyKey() *str
 	return i.IdempotencyKey
 }
 
+func (i *InboundWebhooksControllerHandleWebhookRequest) GetRequestBody() any {
+	if i == nil {
+		return nil
+	}
+	return i.RequestBody
+}
+
 type InboundWebhooksControllerHandleWebhookResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
+	// Successfully processed webhook events
+	WebhookResultDtos []components.WebhookResultDto
 }
 
 func (i *InboundWebhooksControllerHandleWebhookResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -43,4 +56,11 @@ func (i *InboundWebhooksControllerHandleWebhookResponse) GetHTTPMeta() component
 		return components.HTTPMetadata{}
 	}
 	return i.HTTPMeta
+}
+
+func (i *InboundWebhooksControllerHandleWebhookResponse) GetWebhookResultDtos() []components.WebhookResultDto {
+	if i == nil {
+		return nil
+	}
+	return i.WebhookResultDtos
 }

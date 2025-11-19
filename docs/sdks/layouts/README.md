@@ -29,16 +29,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Create(ctx, components.CreateLayoutDto{
@@ -89,16 +89,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.List(ctx, operations.LayoutsControllerListRequest{})
@@ -145,16 +145,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Update(ctx, "<id>", components.UpdateLayoutDto{
@@ -205,15 +205,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Retrieve(ctx, "<id>", nil)
@@ -261,15 +261,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Delete(ctx, "<id>", nil)
@@ -317,16 +317,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Duplicate(ctx, "<id>", components.DuplicateLayoutDto{
@@ -377,16 +377,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.GeneratePreview(ctx, "<id>", components.LayoutPreviewRequestDto{
@@ -396,18 +396,18 @@ func main() {
                     components.ChannelSettingsDto{
                         ProviderID: components.ChatOrPushProviderEnumMattermost,
                         Credentials: components.ChannelCredentials{
-                            WebhookURL: novugo.Pointer("https://example.com/webhook"),
-                            Channel: novugo.Pointer("general"),
+                            WebhookURL: v3.Pointer("https://example.com/webhook"),
+                            Channel: v3.Pointer("general"),
                             DeviceTokens: []string{
                                 "token1",
                                 "token2",
                                 "token3",
                             },
-                            AlertUID: novugo.Pointer("12345-abcde"),
-                            Title: novugo.Pointer("Critical Alert"),
-                            ImageURL: novugo.Pointer("https://example.com/image.png"),
-                            State: novugo.Pointer("resolved"),
-                            ExternalURL: novugo.Pointer("https://example.com/details"),
+                            AlertUID: v3.Pointer("12345-abcde"),
+                            Title: v3.Pointer("Critical Alert"),
+                            ImageURL: v3.Pointer("https://example.com/image.png"),
+                            State: v3.Pointer("resolved"),
+                            ExternalURL: v3.Pointer("https://example.com/details"),
                         },
                         IntegrationID: "<id>",
                     },
@@ -460,15 +460,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Layouts.Usage(ctx, "<id>", nil)

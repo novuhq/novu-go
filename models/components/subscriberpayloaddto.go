@@ -3,139 +3,30 @@
 package components
 
 import (
-	"errors"
-	"fmt"
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
-
-type DataType string
-
-const (
-	DataTypeStr        DataType = "str"
-	DataTypeArrayOfStr DataType = "arrayOfStr"
-	DataTypeBoolean    DataType = "boolean"
-	DataTypeNumber     DataType = "number"
-)
-
-type Data struct {
-	Str        *string  `queryParam:"inline,name=data"`
-	ArrayOfStr []string `queryParam:"inline,name=data"`
-	Boolean    *bool    `queryParam:"inline,name=data"`
-	Number     *float64 `queryParam:"inline,name=data"`
-
-	Type DataType
-}
-
-func CreateDataStr(str string) Data {
-	typ := DataTypeStr
-
-	return Data{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreateDataArrayOfStr(arrayOfStr []string) Data {
-	typ := DataTypeArrayOfStr
-
-	return Data{
-		ArrayOfStr: arrayOfStr,
-		Type:       typ,
-	}
-}
-
-func CreateDataBoolean(boolean bool) Data {
-	typ := DataTypeBoolean
-
-	return Data{
-		Boolean: &boolean,
-		Type:    typ,
-	}
-}
-
-func CreateDataNumber(number float64) Data {
-	typ := DataTypeNumber
-
-	return Data{
-		Number: &number,
-		Type:   typ,
-	}
-}
-
-func (u *Data) UnmarshalJSON(data []byte) error {
-
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		u.Str = &str
-		u.Type = DataTypeStr
-		return nil
-	}
-
-	var arrayOfStr []string = []string{}
-	if err := utils.UnmarshalJSON(data, &arrayOfStr, "", true, nil); err == nil {
-		u.ArrayOfStr = arrayOfStr
-		u.Type = DataTypeArrayOfStr
-		return nil
-	}
-
-	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
-		u.Boolean = &boolean
-		u.Type = DataTypeBoolean
-		return nil
-	}
-
-	var number float64 = float64(0)
-	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
-		u.Number = &number
-		u.Type = DataTypeNumber
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Data", string(data))
-}
-
-func (u Data) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.ArrayOfStr != nil {
-		return utils.MarshalJSON(u.ArrayOfStr, "", true)
-	}
-
-	if u.Boolean != nil {
-		return utils.MarshalJSON(u.Boolean, "", true)
-	}
-
-	if u.Number != nil {
-		return utils.MarshalJSON(u.Number, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type Data: all fields are null")
-}
 
 type SubscriberPayloadDto struct {
+	// First name of the subscriber
+	FirstName *string `json:"firstName,omitempty"`
+	// Last name of the subscriber
+	LastName *string `json:"lastName,omitempty"`
+	// Email address of the subscriber
+	Email *string `json:"email,omitempty"`
+	// Phone number of the subscriber
+	Phone *string `json:"phone,omitempty"`
+	// Avatar URL or identifier
+	Avatar *string `json:"avatar,omitempty"`
+	// Locale of the subscriber
+	Locale *string `json:"locale,omitempty"`
+	// Timezone of the subscriber
+	Timezone *string `json:"timezone,omitempty"`
+	// Additional custom data associated with the subscriber
+	Data map[string]any `json:"data,omitempty"`
 	// The internal identifier you used to create this subscriber, usually correlates to the id the user in your systems
 	SubscriberID string `json:"subscriberId"`
-	// The email address of the subscriber.
-	Email *string `json:"email,omitempty"`
-	// The first name of the subscriber.
-	FirstName *string `json:"firstName,omitempty"`
-	// The last name of the subscriber.
-	LastName *string `json:"lastName,omitempty"`
-	// The phone number of the subscriber.
-	Phone *string `json:"phone,omitempty"`
-	// An HTTP URL to the profile image of your subscriber.
-	Avatar *string `json:"avatar,omitempty"`
-	// The locale of the subscriber.
-	Locale *string `json:"locale,omitempty"`
-	// An optional payload object that can contain any properties.
-	Data map[string]Data `json:"data,omitempty"`
 	// An optional array of subscriber channels.
 	Channels []SubscriberChannelDto `json:"channels,omitempty"`
-	// The timezone of the subscriber.
-	Timezone *string `json:"timezone,omitempty"`
 }
 
 func (s SubscriberPayloadDto) MarshalJSON() ([]byte, error) {
@@ -147,20 +38,6 @@ func (s *SubscriberPayloadDto) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (s *SubscriberPayloadDto) GetSubscriberID() string {
-	if s == nil {
-		return ""
-	}
-	return s.SubscriberID
-}
-
-func (s *SubscriberPayloadDto) GetEmail() *string {
-	if s == nil {
-		return nil
-	}
-	return s.Email
 }
 
 func (s *SubscriberPayloadDto) GetFirstName() *string {
@@ -175,6 +52,13 @@ func (s *SubscriberPayloadDto) GetLastName() *string {
 		return nil
 	}
 	return s.LastName
+}
+
+func (s *SubscriberPayloadDto) GetEmail() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Email
 }
 
 func (s *SubscriberPayloadDto) GetPhone() *string {
@@ -198,11 +82,25 @@ func (s *SubscriberPayloadDto) GetLocale() *string {
 	return s.Locale
 }
 
-func (s *SubscriberPayloadDto) GetData() map[string]Data {
+func (s *SubscriberPayloadDto) GetTimezone() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Timezone
+}
+
+func (s *SubscriberPayloadDto) GetData() map[string]any {
 	if s == nil {
 		return nil
 	}
 	return s.Data
+}
+
+func (s *SubscriberPayloadDto) GetSubscriberID() string {
+	if s == nil {
+		return ""
+	}
+	return s.SubscriberID
 }
 
 func (s *SubscriberPayloadDto) GetChannels() []SubscriberChannelDto {
@@ -210,11 +108,4 @@ func (s *SubscriberPayloadDto) GetChannels() []SubscriberChannelDto {
 		return nil
 	}
 	return s.Channels
-}
-
-func (s *SubscriberPayloadDto) GetTimezone() *string {
-	if s == nil {
-		return nil
-	}
-	return s.Timezone
 }

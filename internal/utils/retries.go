@@ -6,7 +6,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/novuhq/novu-go/retry"
+	"github.com/novuhq/novu-go/v3/retry"
 	"io"
 	"math"
 	"math/rand"

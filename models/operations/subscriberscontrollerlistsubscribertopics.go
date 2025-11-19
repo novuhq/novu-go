@@ -5,21 +5,21 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-// QueryParamOrderDirection - Direction of sorting
-type QueryParamOrderDirection string
+// SubscribersControllerListSubscriberTopicsQueryParamOrderDirection - Direction of sorting
+type SubscribersControllerListSubscriberTopicsQueryParamOrderDirection string
 
 const (
-	QueryParamOrderDirectionAsc  QueryParamOrderDirection = "ASC"
-	QueryParamOrderDirectionDesc QueryParamOrderDirection = "DESC"
+	SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionAsc  SubscribersControllerListSubscriberTopicsQueryParamOrderDirection = "ASC"
+	SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionDesc SubscribersControllerListSubscriberTopicsQueryParamOrderDirection = "DESC"
 )
 
-func (e QueryParamOrderDirection) ToPointer() *QueryParamOrderDirection {
+func (e SubscribersControllerListSubscriberTopicsQueryParamOrderDirection) ToPointer() *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection {
 	return &e
 }
-func (e *QueryParamOrderDirection) UnmarshalJSON(data []byte) error {
+func (e *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *QueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	case "ASC":
 		fallthrough
 	case "DESC":
-		*e = QueryParamOrderDirection(v)
+		*e = SubscribersControllerListSubscriberTopicsQueryParamOrderDirection(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for QueryParamOrderDirection: %v", v)
+		return fmt.Errorf("invalid value for SubscribersControllerListSubscriberTopicsQueryParamOrderDirection: %v", v)
 	}
 }
 
@@ -45,7 +45,7 @@ type SubscribersControllerListSubscriberTopicsRequest struct {
 	// Limit the number of items to return (max 100)
 	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
 	// Direction of sorting
-	OrderDirection *QueryParamOrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
+	OrderDirection *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
 	// Field to order by
 	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
 	// Include cursor item in response
@@ -84,7 +84,7 @@ func (s *SubscribersControllerListSubscriberTopicsRequest) GetLimit() *float64 {
 	return s.Limit
 }
 
-func (s *SubscribersControllerListSubscriberTopicsRequest) GetOrderDirection() *QueryParamOrderDirection {
+func (s *SubscribersControllerListSubscriberTopicsRequest) GetOrderDirection() *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection {
 	if s == nil {
 		return nil
 	}

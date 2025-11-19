@@ -63,6 +63,7 @@ Provider ID of the job
 | `ProvidersIDEnumSmsmode`          | smsmode                           |
 | `ProvidersIDEnumImedia`           | imedia                            |
 | `ProvidersIDEnumSinch`            | sinch                             |
+| `ProvidersIDEnumIsendproSms`      | isendpro-sms                      |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |
@@ -70,6 +71,7 @@ Provider ID of the job
 | `ProvidersIDEnumPushpad`          | pushpad                           |
 | `ProvidersIDEnumPushWebhook`      | push-webhook                      |
 | `ProvidersIDEnumPusherBeams`      | pusher-beams                      |
+| `ProvidersIDEnumAppio`            | appio                             |
 | `ProvidersIDEnumNovu`             | novu                              |
 | `ProvidersIDEnumSlack`            | slack                             |
 | `ProvidersIDEnumDiscord`          | discord                           |

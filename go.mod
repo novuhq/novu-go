@@ -1,4 +1,4 @@
-module github.com/novuhq/novu-go
+module github.com/novuhq/novu-go/v3
 
 go 1.22
 

@@ -28,16 +28,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Create(ctx, components.CreateWorkflowDto{
@@ -45,7 +45,7 @@ func main() {
         WorkflowID: "<id>",
         Steps: []components.Steps{},
         Preferences: &components.PreferencesRequestDto{
-            User: novugo.Pointer(components.CreateUserUserWorkflowPreferencesDto(
+            User: v3.Pointer(components.CreateUserUserWorkflowPreferencesDto(
                 components.UserWorkflowPreferencesDto{
                     All: components.CreateUserAllWorkflowPreferenceDto(
                         components.WorkflowPreferenceDto{},
@@ -53,7 +53,7 @@ func main() {
                     Channels: map[string]components.ChannelPreferenceDto{
                         "email": components.ChannelPreferenceDto{},
                         "sms": components.ChannelPreferenceDto{
-                            Enabled: novugo.Pointer(false),
+                            Enabled: v3.Pointer(false),
                         },
                     },
                 },
@@ -65,7 +65,7 @@ func main() {
                 Channels: map[string]components.ChannelPreferenceDto{
                     "email": components.ChannelPreferenceDto{},
                     "sms": components.ChannelPreferenceDto{
-                        Enabled: novugo.Pointer(false),
+                        Enabled: v3.Pointer(false),
                     },
                 },
             },
@@ -115,16 +115,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/operations"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.List(ctx, operations.WorkflowControllerSearchWorkflowsRequest{})
@@ -171,23 +171,23 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Update(ctx, "<id>", components.UpdateWorkflowDto{
         Name: "<value>",
         Steps: []components.UpdateWorkflowDtoSteps{},
         Preferences: components.PreferencesRequestDto{
-            User: novugo.Pointer(components.CreateUserUserWorkflowPreferencesDto(
+            User: v3.Pointer(components.CreateUserUserWorkflowPreferencesDto(
                 components.UserWorkflowPreferencesDto{
                     All: components.CreateUserAllWorkflowPreferenceDto(
                         components.WorkflowPreferenceDto{},
@@ -195,7 +195,7 @@ func main() {
                     Channels: map[string]components.ChannelPreferenceDto{
                         "email": components.ChannelPreferenceDto{},
                         "sms": components.ChannelPreferenceDto{
-                            Enabled: novugo.Pointer(false),
+                            Enabled: v3.Pointer(false),
                         },
                     },
                 },
@@ -207,7 +207,7 @@ func main() {
                 Channels: map[string]components.ChannelPreferenceDto{
                     "email": components.ChannelPreferenceDto{},
                     "sms": components.ChannelPreferenceDto{
-                        Enabled: novugo.Pointer(false),
+                        Enabled: v3.Pointer(false),
                     },
                 },
             },
@@ -259,15 +259,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Get(ctx, "<id>", nil, nil)
@@ -316,15 +316,15 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
+	"github.com/novuhq/novu-go/v3"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Delete(ctx, "<id>", nil)
@@ -372,16 +372,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Patch(ctx, "<id>", components.PatchWorkflowDto{}, nil)
@@ -430,16 +430,16 @@ package main
 
 import(
 	"context"
-	novugo "github.com/novuhq/novu-go"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
 func main() {
     ctx := context.Background()
 
-    s := novugo.New(
-        novugo.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
     res, err := s.Workflows.Sync(ctx, "<id>", components.SyncWorkflowDto{

@@ -5,21 +5,21 @@ package operations
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-// OrderDirection - Direction of sorting
-type OrderDirection string
+// QueryParamOrderDirection - Direction of sorting
+type QueryParamOrderDirection string
 
 const (
-	OrderDirectionAsc  OrderDirection = "ASC"
-	OrderDirectionDesc OrderDirection = "DESC"
+	QueryParamOrderDirectionAsc  QueryParamOrderDirection = "ASC"
+	QueryParamOrderDirectionDesc QueryParamOrderDirection = "DESC"
 )
 
-func (e OrderDirection) ToPointer() *OrderDirection {
+func (e QueryParamOrderDirection) ToPointer() *QueryParamOrderDirection {
 	return &e
 }
-func (e *OrderDirection) UnmarshalJSON(data []byte) error {
+func (e *QueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,10 +28,10 @@ func (e *OrderDirection) UnmarshalJSON(data []byte) error {
 	case "ASC":
 		fallthrough
 	case "DESC":
-		*e = OrderDirection(v)
+		*e = QueryParamOrderDirection(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for OrderDirection: %v", v)
+		return fmt.Errorf("invalid value for QueryParamOrderDirection: %v", v)
 	}
 }
 
@@ -43,7 +43,7 @@ type SubscribersControllerSearchSubscribersRequest struct {
 	// Limit the number of items to return
 	Limit *float64 `queryParam:"style=form,explode=true,name=limit"`
 	// Direction of sorting
-	OrderDirection *OrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
+	OrderDirection *QueryParamOrderDirection `queryParam:"style=form,explode=true,name=orderDirection"`
 	// Field to order by
 	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
 	// Include cursor item in response
@@ -81,7 +81,7 @@ func (s *SubscribersControllerSearchSubscribersRequest) GetLimit() *float64 {
 	return s.Limit
 }
 
-func (s *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *OrderDirection {
+func (s *SubscribersControllerSearchSubscribersRequest) GetOrderDirection() *QueryParamOrderDirection {
 	if s == nil {
 		return nil
 	}

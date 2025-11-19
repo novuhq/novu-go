@@ -29,6 +29,7 @@ Component type for the UI Schema Property
 | `UIComponentEnumDelayUnit`                      | DELAY_UNIT                                      |
 | `UIComponentEnumDelayType`                      | DELAY_TYPE                                      |
 | `UIComponentEnumDelayCron`                      | DELAY_CRON                                      |
+| `UIComponentEnumDelayDynamicKey`                | DELAY_DYNAMIC_KEY                               |
 | `UIComponentEnumThrottleType`                   | THROTTLE_TYPE                                   |
 | `UIComponentEnumThrottleWindow`                 | THROTTLE_WINDOW                                 |
 | `UIComponentEnumThrottleUnit`                   | THROTTLE_UNIT                                   |

@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/novuhq/novu-go/internal/utils"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 type SubscribersV1ControllerGetNotificationsFeedRequest struct {

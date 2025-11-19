@@ -3,8 +3,8 @@
 package operations
 
 import (
-	"github.com/novuhq/novu-go/internal/utils"
-	"github.com/novuhq/novu-go/models/components"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 type MessagesControllerGetMessagesRequest struct {
@@ -12,8 +12,10 @@ type MessagesControllerGetMessagesRequest struct {
 	Channel       *components.ChannelTypeEnum `queryParam:"style=form,explode=true,name=channel"`
 	SubscriberID  *string                     `queryParam:"style=form,explode=true,name=subscriberId"`
 	TransactionID []string                    `queryParam:"style=form,explode=true,name=transactionId"`
-	Page          *float64                    `default:"0" queryParam:"style=form,explode=true,name=page"`
-	Limit         *float64                    `default:"10" queryParam:"style=form,explode=true,name=limit"`
+	// Filter by exact context keys, order insensitive (format: "type:id")
+	ContextKeys []string `queryParam:"style=form,explode=true,name=contextKeys"`
+	Page        *float64 `default:"0" queryParam:"style=form,explode=true,name=page"`
+	Limit       *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
@@ -48,6 +50,13 @@ func (m *MessagesControllerGetMessagesRequest) GetTransactionID() []string {
 		return nil
 	}
 	return m.TransactionID
+}
+
+func (m *MessagesControllerGetMessagesRequest) GetContextKeys() []string {
+	if m == nil {
+		return nil
+	}
+	return m.ContextKeys
 }
 
 func (m *MessagesControllerGetMessagesRequest) GetPage() *float64 {

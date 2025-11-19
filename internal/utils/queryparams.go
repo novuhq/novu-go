@@ -12,8 +12,8 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/novuhq/novu-go/optionalnullable"
-	"github.com/novuhq/novu-go/types"
+	"github.com/novuhq/novu-go/v3/optionalnullable"
+	"github.com/novuhq/novu-go/v3/types"
 )
 
 func PopulateQueryParams(_ context.Context, req *http.Request, queryParams interface{}, globals interface{}) error {
@@ -42,10 +42,13 @@ func PopulateQueryParams(_ context.Context, req *http.Request, queryParams inter
 }
 
 func populateQueryParams(queryParams interface{}, globals interface{}, values url.Values, skipFields []string) ([]string, error) {
-	queryParamsStructType, queryParamsValType := dereferencePointers(reflect.TypeOf(queryParams), reflect.ValueOf(queryParams))
+	queryParamsVal := reflect.ValueOf(queryParams)
+	if queryParamsVal.Kind() == reflect.Pointer && queryParamsVal.IsNil() {
+		return nil, nil
+	}
+	queryParamsStructType, queryParamsValType := dereferencePointers(reflect.TypeOf(queryParams), queryParamsVal)
 
 	globalsAlreadyPopulated := []string{}
-
 	for i := 0; i < queryParamsStructType.NumField(); i++ {
 		fieldType := queryParamsStructType.Field(i)
 		valType := queryParamsValType.Field(i)

@@ -5,7 +5,7 @@ package components
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/novuhq/novu-go/internal/utils"
+	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
 // LookBackWindowDtoUnit - Unit of time for the look-back window.
