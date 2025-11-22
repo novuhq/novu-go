@@ -2,31 +2,23 @@
 
 package components
 
-// Workflows - All translations for given locale organized by workflow identifier
-type Workflows struct {
-}
-
-// Layouts - All translations for given locale organized by layout identifier
-type Layouts struct {
-}
-
 type GetMasterJSONResponseDto struct {
 	// All translations for given locale organized by workflow identifier
-	Workflows Workflows `json:"workflows"`
+	Workflows map[string]any `json:"workflows"`
 	// All translations for given locale organized by layout identifier
-	Layouts Layouts `json:"layouts"`
+	Layouts map[string]any `json:"layouts"`
 }
 
-func (g *GetMasterJSONResponseDto) GetWorkflows() Workflows {
+func (g *GetMasterJSONResponseDto) GetWorkflows() map[string]any {
 	if g == nil {
-		return Workflows{}
+		return map[string]any{}
 	}
 	return g.Workflows
 }
 
-func (g *GetMasterJSONResponseDto) GetLayouts() Layouts {
+func (g *GetMasterJSONResponseDto) GetLayouts() map[string]any {
 	if g == nil {
-		return Layouts{}
+		return map[string]any{}
 	}
 	return g.Layouts
 }
