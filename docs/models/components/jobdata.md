@@ -1,6 +1,4 @@
-# Workflows
-
-All translations for given locale organized by workflow identifier
+# JobData
 
 
 ## Fields

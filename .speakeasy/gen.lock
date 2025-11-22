@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 62b98c433791e4481a836b5c4c15bee5
+  docChecksum: 29e41df81030a1ffab1ae0ef41d8df85
   docVersion: 3.11.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 3.11.0
-  configChecksum: 30ba2f466e648d5e904c565df3f69ca8
+  speakeasyVersion: 1.660.0
+  generationVersion: 2.760.2
+  releaseVersion: 3.12.0
+  configChecksum: 887cd4d73a18727821d63a36da02fecb
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -33,6 +33,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     unions: 2.87.1
+    uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -272,7 +273,6 @@ generatedFiles:
   - /models/components/updatesubscriberonlineflagrequestdto.go
   - /models/components/updatetopicrequestdto.go
   - /models/components/updateworkflowdto.go
-  - /models/components/uploadtranslationsrequestdto.go
   - /models/components/uploadtranslationsresponsedto.go
   - /models/components/webhookresultdto.go
   - /models/components/workflowcreationsourceenum.go
@@ -433,6 +433,7 @@ generatedFiles:
   - docs/models/components/content.md
   - docs/models/components/contentissueenum.md
   - docs/models/components/context.md
+  - docs/models/components/context2.md
   - docs/models/components/controlsmetadatadto.md
   - docs/models/components/controlvalues.md
   - docs/models/components/controlvariables.md
@@ -549,6 +550,7 @@ generatedFiles:
   - docs/models/components/integrationresponsedto.md
   - docs/models/components/issues.md
   - docs/models/components/issuetype.md
+  - docs/models/components/jobdata.md
   - docs/models/components/lastpublishedby.md
   - docs/models/components/layoutcontrolsdto.md
   - docs/models/components/layoutcontrolvaluesdto.md
@@ -557,7 +559,6 @@ generatedFiles:
   - docs/models/components/layoutpreviewrequestdto.md
   - docs/models/components/layoutresponsedto.md
   - docs/models/components/layoutresponsedtosortfield.md
-  - docs/models/components/layouts.md
   - docs/models/components/listcontextsresponsedto.md
   - docs/models/components/listlayoutresponsedto.md
   - docs/models/components/listsubscribersresponsedto.md
@@ -571,7 +572,6 @@ generatedFiles:
   - docs/models/components/markmessageactionasseendto.md
   - docs/models/components/markmessageactionasseendtopayload.md
   - docs/models/components/markmessageactionasseendtostatus.md
-  - docs/models/components/masterjson.md
   - docs/models/components/messageaction.md
   - docs/models/components/messageactionresult.md
   - docs/models/components/messageactionstatusenum.md
@@ -582,7 +582,6 @@ generatedFiles:
   - docs/models/components/messagemarkasrequestdto.md
   - docs/models/components/messagemarkasrequestdtomarkas.md
   - docs/models/components/messageresponsedto.md
-  - docs/models/components/messageresponsedtocontent.md
   - docs/models/components/messageresponsedtooverrides.md
   - docs/models/components/messageresponsedtopayload.md
   - docs/models/components/messagesresponsedto.md
@@ -711,7 +710,6 @@ generatedFiles:
   - docs/models/components/translationgroupdto.md
   - docs/models/components/translationgroupdtoresourcetype.md
   - docs/models/components/translationresponsedto.md
-  - docs/models/components/translationresponsedtocontent.md
   - docs/models/components/translationresponsedtoresourcetype.md
   - docs/models/components/triggereventrequestdto.md
   - docs/models/components/triggereventresponsedto.md
@@ -719,6 +717,7 @@ generatedFiles:
   - docs/models/components/triggereventtoallrequestdto.md
   - docs/models/components/triggereventtoallrequestdtoactor.md
   - docs/models/components/triggereventtoallrequestdtochannels.md
+  - docs/models/components/triggereventtoallrequestdtocontext.md
   - docs/models/components/triggereventtoallrequestdtooverrides.md
   - docs/models/components/triggereventtoallrequestdtotenant.md
   - docs/models/components/triggerrecipientstypeenum.md
@@ -744,8 +743,6 @@ generatedFiles:
   - docs/models/components/updatetopicrequestdto.md
   - docs/models/components/updateworkflowdto.md
   - docs/models/components/updateworkflowdtosteps.md
-  - docs/models/components/uploadtranslationsrequestdto.md
-  - docs/models/components/uploadtranslationsrequestdtoresourcetype.md
   - docs/models/components/uploadtranslationsresponsedto.md
   - docs/models/components/user.md
   - docs/models/components/userall.md
@@ -775,7 +772,6 @@ generatedFiles:
   - docs/models/components/workflowresponsedtosortfield.md
   - docs/models/components/workflowresponsedtosteps.md
   - docs/models/components/workflowresponsedtoupdatedby.md
-  - docs/models/components/workflows.md
   - docs/models/components/workflowstatusenum.md
   - docs/models/operations/channel.md
   - docs/models/operations/contextscontrollercreatecontextrequest.md
@@ -807,6 +803,8 @@ generatedFiles:
   - docs/models/operations/eventscontrollertriggerbulkresponse.md
   - docs/models/operations/eventscontrollertriggerrequest.md
   - docs/models/operations/eventscontrollertriggerresponse.md
+  - docs/models/operations/file.md
+  - docs/models/operations/files.md
   - docs/models/operations/inboundwebhookscontrollerhandlewebhookrequest.md
   - docs/models/operations/inboundwebhookscontrollerhandlewebhookresponse.md
   - docs/models/operations/integrationscontrollerautoconfigureintegrationrequest.md
@@ -918,6 +916,7 @@ generatedFiles:
   - docs/models/operations/translationcontrollerdeletetranslationendpointpathparamresourcetype.md
   - docs/models/operations/translationcontrollerdeletetranslationendpointrequest.md
   - docs/models/operations/translationcontrollerdeletetranslationendpointresponse.md
+  - docs/models/operations/translationcontrollerdeletetranslationgroupendpointpathparamresourcetype.md
   - docs/models/operations/translationcontrollerdeletetranslationgroupendpointrequest.md
   - docs/models/operations/translationcontrollerdeletetranslationgroupendpointresponse.md
   - docs/models/operations/translationcontrollergetmasterjsonendpointrequest.md
@@ -930,8 +929,10 @@ generatedFiles:
   - docs/models/operations/translationcontrollerimportmasterjsonendpointrequest.md
   - docs/models/operations/translationcontrollerimportmasterjsonendpointresponse.md
   - docs/models/operations/translationcontrolleruploadmasterjsonendpointrequest.md
+  - docs/models/operations/translationcontrolleruploadmasterjsonendpointrequestbody.md
   - docs/models/operations/translationcontrolleruploadmasterjsonendpointresponse.md
   - docs/models/operations/translationcontrolleruploadtranslationfilesrequest.md
+  - docs/models/operations/translationcontrolleruploadtranslationfilesrequestbody.md
   - docs/models/operations/translationcontrolleruploadtranslationfilesresponse.md
   - docs/models/operations/workflowcontrollercreaterequest.md
   - docs/models/operations/workflowcontrollercreateresponse.md
@@ -1052,7 +1053,7 @@ examples:
   EventsController_broadcastEventToAll:
     speakeasy-default-events-controller-broadcast-event-to-all:
       requestBody:
-        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}}
+        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}, "context": {"key": "org-acme"}}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "invalid_recipients"}
@@ -2125,10 +2126,10 @@ examples:
   TranslationController_createTranslationEndpoint:
     speakeasy-default-translation-controller-create-translation-endpoint:
       requestBody:
-        application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}}
+        application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}}
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_getSingleTranslation:
     speakeasy-default-translation-controller-get-single-translation:
       parameters:
@@ -2138,7 +2139,7 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_deleteTranslationEndpoint:
     speakeasy-default-translation-controller-delete-translation-endpoint:
       parameters:
@@ -2149,7 +2150,7 @@ examples:
   TranslationController_uploadTranslationFiles:
     speakeasy-default-translation-controller-upload-translation-files:
       requestBody:
-        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow"}
+        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow", "files": []}
       responses:
         "200":
           application/json: {"totalFiles": 3, "successfulUploads": 2, "failedUploads": 1, "errors": ["Invalid JSON in file: es-ES.json"]}
@@ -2175,16 +2176,18 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"workflows": {}, "layouts": {}}
+          application/json: {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}, "layouts": {"default-layout": {"layout.title": "Default layout", "layout.message": "Hello there!"}}}
   TranslationController_importMasterJsonEndpoint:
     speakeasy-default-translation-controller-import-master-json-endpoint:
       requestBody:
-        application/json: {"locale": "en_US", "masterJson": {}}
+        application/json: {"locale": "en_US", "masterJson": {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}}}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
   TranslationController_uploadMasterJsonEndpoint:
     speakeasy-default-translation-controller-upload-master-json-endpoint:
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
@@ -2289,4 +2292,4 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Trigger()`:  `request.TriggerEventRequestDto` **Changed** **Breaking** :warning:\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[]` **Changed** **Breaking** :warning:\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Actor.[subscriberPayloadDto]` **Changed** **Breaking** :warning:\n* `Novu.Subscribers.Messages.UpdateAsSeen()`:  `response.ContextKeys` **Added**\n* `Novu.Integrations.List()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Activity.Track()`: **Added**\n* `Novu.InboundWebhooksControllerHandleWebhook()`: **Deleted** **Breaking** :warning:\n* `Novu.Contexts.Retrieve()`: **Added**\n* `Novu.Contexts.Update()`: **Added**\n* `Novu.Contexts.List()`: **Added**\n* `Novu.Contexts.Create()`: **Added**\n* `Novu.Subscribers.Messages.MarkAllAs()`:  `response.[].ContextKeys` **Added**\n* `Novu.Contexts.Delete()`: **Added**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Delete()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.SetAsPrimary()`:  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.ListActive()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Messages.Retrieve()`: \n  *  `request.Request.ContextKeys` **Added**\n  *  `response.Data.[].ContextKeys` **Added**\n* `Novu.Notifications.List()`: \n  *  `request.Request.ContextKeys` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Translations.Create()`: \n  *  `request.CreateTranslationRequestDto.Content` **Changed** **Breaking** :warning:\n  *  `response.Content` **Changed** **Breaking** :warning:\n* `Novu.Translations.Retrieve()`:  `response.Content` **Changed** **Breaking** :warning:\n* `Novu.Translations.Upload()`:  `request` **Changed** **Breaking** :warning:\n* `Novu.Translations.Master.Retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Translations.Master.Import()`: \n  *  `request.ImportMasterJsonRequestDto.MasterJson` **Changed** **Breaking** :warning:\n* `Novu.Translations.Master.Upload()`:  `request.RequestBody` **Added** **Breaking** :warning:\n* `Novu.Trigger()`:  `response.JobData` **Added**\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Context` **Added**\n  *  `response.JobData` **Added**\n* `Novu.TriggerBulk()`:  `response.[].JobData` **Added**\n"
