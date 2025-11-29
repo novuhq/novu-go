@@ -210,6 +210,11 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		)),
+		Context: map[string]components.TriggerEventToAllRequestDtoContext{
+			"key": components.CreateTriggerEventToAllRequestDtoContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -477,6 +482,7 @@ func main() {
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+* [Update](docs/sdks/subscriptions/README.md#update) - Update a topic subscription
 
 ### [Translations](docs/sdks/translations/README.md)
 

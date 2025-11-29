@@ -2,30 +2,30 @@
 
 package components
 
-type CreateTopicSubscriptionsResponseDto struct {
+type CreateSubscriptionsResponseDto struct {
 	// The list of successfully created subscriptions
-	Data []SubscriptionDto `json:"data"`
+	Data []SubscriptionResponseDto `json:"data"`
 	// Metadata about the operation
 	Meta MetaDto `json:"meta"`
 	// The list of errors for failed subscription attempts
 	Errors []SubscriptionErrorDto `json:"errors,omitempty"`
 }
 
-func (c *CreateTopicSubscriptionsResponseDto) GetData() []SubscriptionDto {
+func (c *CreateSubscriptionsResponseDto) GetData() []SubscriptionResponseDto {
 	if c == nil {
-		return []SubscriptionDto{}
+		return []SubscriptionResponseDto{}
 	}
 	return c.Data
 }
 
-func (c *CreateTopicSubscriptionsResponseDto) GetMeta() MetaDto {
+func (c *CreateSubscriptionsResponseDto) GetMeta() MetaDto {
 	if c == nil {
 		return MetaDto{}
 	}
 	return c.Meta
 }
 
-func (c *CreateTopicSubscriptionsResponseDto) GetErrors() []SubscriptionErrorDto {
+func (c *CreateSubscriptionsResponseDto) GetErrors() []SubscriptionErrorDto {
 	if c == nil {
 		return nil
 	}

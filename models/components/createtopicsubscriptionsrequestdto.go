@@ -2,14 +2,197 @@
 
 package components
 
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+)
+
+type SubscriptionsType string
+
+const (
+	SubscriptionsTypeStr                          SubscriptionsType = "str"
+	SubscriptionsTypeTopicSubscriberIdentifierDto SubscriptionsType = "TopicSubscriberIdentifierDto"
+)
+
+type Subscriptions struct {
+	Str                          *string                       `queryParam:"inline,name=subscriptions"`
+	TopicSubscriberIdentifierDto *TopicSubscriberIdentifierDto `queryParam:"inline,name=subscriptions"`
+
+	Type SubscriptionsType
+}
+
+func CreateSubscriptionsStr(str string) Subscriptions {
+	typ := SubscriptionsTypeStr
+
+	return Subscriptions{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateSubscriptionsTopicSubscriberIdentifierDto(topicSubscriberIdentifierDto TopicSubscriberIdentifierDto) Subscriptions {
+	typ := SubscriptionsTypeTopicSubscriberIdentifierDto
+
+	return Subscriptions{
+		TopicSubscriberIdentifierDto: &topicSubscriberIdentifierDto,
+		Type:                         typ,
+	}
+}
+
+func (u *Subscriptions) UnmarshalJSON(data []byte) error {
+
+	var topicSubscriberIdentifierDto TopicSubscriberIdentifierDto = TopicSubscriberIdentifierDto{}
+	if err := utils.UnmarshalJSON(data, &topicSubscriberIdentifierDto, "", true, nil); err == nil {
+		u.TopicSubscriberIdentifierDto = &topicSubscriberIdentifierDto
+		u.Type = SubscriptionsTypeTopicSubscriberIdentifierDto
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = SubscriptionsTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Subscriptions", string(data))
+}
+
+func (u Subscriptions) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.TopicSubscriberIdentifierDto != nil {
+		return utils.MarshalJSON(u.TopicSubscriberIdentifierDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Subscriptions: all fields are null")
+}
+
+type PreferencesType string
+
+const (
+	PreferencesTypeStr                          PreferencesType = "str"
+	PreferencesTypeWorkflowPreferenceRequestDto PreferencesType = "WorkflowPreferenceRequestDto"
+	PreferencesTypeGroupPreferenceFilterDto     PreferencesType = "GroupPreferenceFilterDto"
+)
+
+type Preferences struct {
+	Str                          *string                       `queryParam:"inline,name=preferences"`
+	WorkflowPreferenceRequestDto *WorkflowPreferenceRequestDto `queryParam:"inline,name=preferences"`
+	GroupPreferenceFilterDto     *GroupPreferenceFilterDto     `queryParam:"inline,name=preferences"`
+
+	Type PreferencesType
+}
+
+func CreatePreferencesStr(str string) Preferences {
+	typ := PreferencesTypeStr
+
+	return Preferences{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreatePreferencesWorkflowPreferenceRequestDto(workflowPreferenceRequestDto WorkflowPreferenceRequestDto) Preferences {
+	typ := PreferencesTypeWorkflowPreferenceRequestDto
+
+	return Preferences{
+		WorkflowPreferenceRequestDto: &workflowPreferenceRequestDto,
+		Type:                         typ,
+	}
+}
+
+func CreatePreferencesGroupPreferenceFilterDto(groupPreferenceFilterDto GroupPreferenceFilterDto) Preferences {
+	typ := PreferencesTypeGroupPreferenceFilterDto
+
+	return Preferences{
+		GroupPreferenceFilterDto: &groupPreferenceFilterDto,
+		Type:                     typ,
+	}
+}
+
+func (u *Preferences) UnmarshalJSON(data []byte) error {
+
+	var workflowPreferenceRequestDto WorkflowPreferenceRequestDto = WorkflowPreferenceRequestDto{}
+	if err := utils.UnmarshalJSON(data, &workflowPreferenceRequestDto, "", true, nil); err == nil {
+		u.WorkflowPreferenceRequestDto = &workflowPreferenceRequestDto
+		u.Type = PreferencesTypeWorkflowPreferenceRequestDto
+		return nil
+	}
+
+	var groupPreferenceFilterDto GroupPreferenceFilterDto = GroupPreferenceFilterDto{}
+	if err := utils.UnmarshalJSON(data, &groupPreferenceFilterDto, "", true, nil); err == nil {
+		u.GroupPreferenceFilterDto = &groupPreferenceFilterDto
+		u.Type = PreferencesTypeGroupPreferenceFilterDto
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = PreferencesTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Preferences", string(data))
+}
+
+func (u Preferences) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.WorkflowPreferenceRequestDto != nil {
+		return utils.MarshalJSON(u.WorkflowPreferenceRequestDto, "", true)
+	}
+
+	if u.GroupPreferenceFilterDto != nil {
+		return utils.MarshalJSON(u.GroupPreferenceFilterDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Preferences: all fields are null")
+}
+
 type CreateTopicSubscriptionsRequestDto struct {
-	// List of subscriber identifiers to subscribe to the topic (max: 100)
-	SubscriberIds []string `json:"subscriberIds"`
+	// List of subscriber IDs to subscribe to the topic (max: 100). @deprecated Use the "subscriptions" property instead.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	SubscriberIds []string `json:"subscriberIds,omitempty"`
+	// List of subscriptions to subscribe to the topic (max: 100). Can be either a string array of subscriber IDs or an array of objects with identifier and subscriberId
+	Subscriptions []Subscriptions `json:"subscriptions,omitempty"`
+	// The name of the topic
+	Name *string `json:"name,omitempty"`
+	// The preferences of the topic. Can be a simple workflow ID string, workflow preference object, or group filter object
+	Preferences []Preferences `json:"preferences,omitempty"`
 }
 
 func (c *CreateTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
 	if c == nil {
-		return []string{}
+		return nil
 	}
 	return c.SubscriberIds
+}
+
+func (c *CreateTopicSubscriptionsRequestDto) GetSubscriptions() []Subscriptions {
+	if c == nil {
+		return nil
+	}
+	return c.Subscriptions
+}
+
+func (c *CreateTopicSubscriptionsRequestDto) GetName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Name
+}
+
+func (c *CreateTopicSubscriptionsRequestDto) GetPreferences() []Preferences {
+	if c == nil {
+		return nil
+	}
+	return c.Preferences
 }

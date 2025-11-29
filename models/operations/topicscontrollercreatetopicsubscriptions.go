@@ -38,8 +38,8 @@ func (t *TopicsControllerCreateTopicSubscriptionsRequest) GetCreateTopicSubscrip
 type TopicsControllerCreateTopicSubscriptionsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Subscriptions created successfully
-	CreateTopicSubscriptionsResponseDto *components.CreateTopicSubscriptionsResponseDto
-	Headers                             map[string][]string
+	CreateSubscriptionsResponseDto *components.CreateSubscriptionsResponseDto
+	Headers                        map[string][]string
 }
 
 func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -49,11 +49,11 @@ func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetHTTPMeta() compone
 	return t.HTTPMeta
 }
 
-func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetCreateTopicSubscriptionsResponseDto() *components.CreateTopicSubscriptionsResponseDto {
+func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetCreateSubscriptionsResponseDto() *components.CreateSubscriptionsResponseDto {
 	if t == nil {
 		return nil
 	}
-	return t.CreateTopicSubscriptionsResponseDto
+	return t.CreateSubscriptionsResponseDto
 }
 
 func (t *TopicsControllerCreateTopicSubscriptionsResponse) GetHeaders() map[string][]string {
