@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: 62b98c433791e4481a836b5c4c15bee5
+  docChecksum: 8ec7ddd8a96cc53dfbc039f7ae20b7be
   docVersion: 3.11.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 3.11.0
-  configChecksum: 30ba2f466e648d5e904c565df3f69ca8
+  speakeasyVersion: 1.665.0
+  generationVersion: 2.767.2
+  releaseVersion: 3.12.0
+  configChecksum: a8cdeaf80275781ae5cce63db299db60
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 features:
@@ -14,7 +14,7 @@ features:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
-    core: 3.13.2
+    core: 3.13.5
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
@@ -31,8 +31,9 @@ features:
     nullables: 0.2.1
     responseFormat: 0.1.2
     retries: 2.84.2
-    sdkHooks: 0.2.0
-    unions: 2.87.1
+    sdkHooks: 0.3.0
+    unions: 2.87.2
+    uploadStreams: 0.1.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -85,8 +86,8 @@ generatedFiles:
   - /models/components/createintegrationrequestdto.go
   - /models/components/createlayoutdto.go
   - /models/components/createsubscriberrequestdto.go
+  - /models/components/createsubscriptionsresponsedto.go
   - /models/components/createtopicsubscriptionsrequestdto.go
-  - /models/components/createtopicsubscriptionsresponsedto.go
   - /models/components/createtranslationrequestdto.go
   - /models/components/createupdatetopicrequestdto.go
   - /models/components/createworkflowdto.go
@@ -141,6 +142,8 @@ generatedFiles:
   - /models/components/getmasterjsonresponsedto.go
   - /models/components/getpreferencesresponsedto.go
   - /models/components/getsubscriberpreferencesdto.go
+  - /models/components/grouppreferencefilterdetailsdto.go
+  - /models/components/grouppreferencefilterdto.go
   - /models/components/httpmetadata.go
   - /models/components/importmasterjsonrequestdto.go
   - /models/components/importmasterjsonresponsedto.go
@@ -237,6 +240,8 @@ generatedFiles:
   - /models/components/subscriberworkflowpreferencedto.go
   - /models/components/subscriptiondto.go
   - /models/components/subscriptionerrordto.go
+  - /models/components/subscriptionpreferencedto.go
+  - /models/components/subscriptionresponsedto.go
   - /models/components/subscriptionsdeleteerrordto.go
   - /models/components/syncworkflowdto.go
   - /models/components/tenantpayloaddto.go
@@ -251,6 +256,7 @@ generatedFiles:
   - /models/components/topicpayloaddto.go
   - /models/components/topicresponsedto.go
   - /models/components/topicsubscriberdto.go
+  - /models/components/topicsubscriberidentifierdto.go
   - /models/components/topicsubscriptionresponsedto.go
   - /models/components/translationgroupdto.go
   - /models/components/translationresponsedto.go
@@ -271,14 +277,15 @@ generatedFiles:
   - /models/components/updatesubscriberchannelrequestdto.go
   - /models/components/updatesubscriberonlineflagrequestdto.go
   - /models/components/updatetopicrequestdto.go
+  - /models/components/updatetopicsubscriptionrequestdto.go
   - /models/components/updateworkflowdto.go
-  - /models/components/uploadtranslationsrequestdto.go
   - /models/components/uploadtranslationsresponsedto.go
   - /models/components/webhookresultdto.go
   - /models/components/workflowcreationsourceenum.go
   - /models/components/workflowinfodto.go
   - /models/components/workflowlistresponsedto.go
   - /models/components/workflowpreferencedto.go
+  - /models/components/workflowpreferencerequestdto.go
   - /models/components/workflowpreferencesdto.go
   - /models/components/workflowpreferencesresponsedto.go
   - /models/components/workflowresponse.go
@@ -346,6 +353,7 @@ generatedFiles:
   - /models/operations/topicscontrollerlisttopics.go
   - /models/operations/topicscontrollerlisttopicsubscriptions.go
   - /models/operations/topicscontrollerupdatetopic.go
+  - /models/operations/topicscontrollerupdatetopicsubscription.go
   - /models/operations/topicscontrollerupserttopic.go
   - /models/operations/topicsv1controllergettopicsubscriber.go
   - /models/operations/translationcontrollercreatetranslationendpoint.go
@@ -433,6 +441,7 @@ generatedFiles:
   - docs/models/components/content.md
   - docs/models/components/contentissueenum.md
   - docs/models/components/context.md
+  - docs/models/components/context2.md
   - docs/models/components/controlsmetadatadto.md
   - docs/models/components/controlvalues.md
   - docs/models/components/controlvariables.md
@@ -443,8 +452,8 @@ generatedFiles:
   - docs/models/components/createintegrationrequestdtochannel.md
   - docs/models/components/createlayoutdto.md
   - docs/models/components/createsubscriberrequestdto.md
+  - docs/models/components/createsubscriptionsresponsedto.md
   - docs/models/components/createtopicsubscriptionsrequestdto.md
-  - docs/models/components/createtopicsubscriptionsresponsedto.md
   - docs/models/components/createtranslationrequestdto.md
   - docs/models/components/createupdatetopicrequestdto.md
   - docs/models/components/createworkflowdto.md
@@ -534,6 +543,8 @@ generatedFiles:
   - docs/models/components/getpreferencesresponsedto.md
   - docs/models/components/getpreferencesresponsedtodata.md
   - docs/models/components/getsubscriberpreferencesdto.md
+  - docs/models/components/grouppreferencefilterdetailsdto.md
+  - docs/models/components/grouppreferencefilterdto.md
   - docs/models/components/httpmetadata.md
   - docs/models/components/importmasterjsonrequestdto.md
   - docs/models/components/importmasterjsonresponsedto.md
@@ -549,6 +560,7 @@ generatedFiles:
   - docs/models/components/integrationresponsedto.md
   - docs/models/components/issues.md
   - docs/models/components/issuetype.md
+  - docs/models/components/jobdata.md
   - docs/models/components/lastpublishedby.md
   - docs/models/components/layoutcontrolsdto.md
   - docs/models/components/layoutcontrolvaluesdto.md
@@ -557,7 +569,6 @@ generatedFiles:
   - docs/models/components/layoutpreviewrequestdto.md
   - docs/models/components/layoutresponsedto.md
   - docs/models/components/layoutresponsedtosortfield.md
-  - docs/models/components/layouts.md
   - docs/models/components/listcontextsresponsedto.md
   - docs/models/components/listlayoutresponsedto.md
   - docs/models/components/listsubscribersresponsedto.md
@@ -571,7 +582,6 @@ generatedFiles:
   - docs/models/components/markmessageactionasseendto.md
   - docs/models/components/markmessageactionasseendtopayload.md
   - docs/models/components/markmessageactionasseendtostatus.md
-  - docs/models/components/masterjson.md
   - docs/models/components/messageaction.md
   - docs/models/components/messageactionresult.md
   - docs/models/components/messageactionstatusenum.md
@@ -582,7 +592,6 @@ generatedFiles:
   - docs/models/components/messagemarkasrequestdto.md
   - docs/models/components/messagemarkasrequestdtomarkas.md
   - docs/models/components/messageresponsedto.md
-  - docs/models/components/messageresponsedtocontent.md
   - docs/models/components/messageresponsedtooverrides.md
   - docs/models/components/messageresponsedtopayload.md
   - docs/models/components/messagesresponsedto.md
@@ -624,6 +633,7 @@ generatedFiles:
   - docs/models/components/placeholder5.md
   - docs/models/components/preferencelevelenum.md
   - docs/models/components/preferenceoverridesourceenum.md
+  - docs/models/components/preferences.md
   - docs/models/components/preferencesrequestdto.md
   - docs/models/components/preferencesrequestdtoall.md
   - docs/models/components/preferencesrequestdtoworkflow.md
@@ -678,7 +688,13 @@ generatedFiles:
   - docs/models/components/subscriberresponsedtooptional.md
   - docs/models/components/subscriberworkflowpreferencedto.md
   - docs/models/components/subscriptiondto.md
+  - docs/models/components/subscriptiondtosubscriber.md
   - docs/models/components/subscriptionerrordto.md
+  - docs/models/components/subscriptionpreferencedto.md
+  - docs/models/components/subscriptionpreferencedtodata.md
+  - docs/models/components/subscriptionpreferencedtoworkflow.md
+  - docs/models/components/subscriptionresponsedto.md
+  - docs/models/components/subscriptions.md
   - docs/models/components/subscriptionsdeleteerrordto.md
   - docs/models/components/sunday.md
   - docs/models/components/syncworkflowdto.md
@@ -707,11 +723,11 @@ generatedFiles:
   - docs/models/components/topicpayloaddto.md
   - docs/models/components/topicresponsedto.md
   - docs/models/components/topicsubscriberdto.md
+  - docs/models/components/topicsubscriberidentifierdto.md
   - docs/models/components/topicsubscriptionresponsedto.md
   - docs/models/components/translationgroupdto.md
   - docs/models/components/translationgroupdtoresourcetype.md
   - docs/models/components/translationresponsedto.md
-  - docs/models/components/translationresponsedtocontent.md
   - docs/models/components/translationresponsedtoresourcetype.md
   - docs/models/components/triggereventrequestdto.md
   - docs/models/components/triggereventresponsedto.md
@@ -719,6 +735,7 @@ generatedFiles:
   - docs/models/components/triggereventtoallrequestdto.md
   - docs/models/components/triggereventtoallrequestdtoactor.md
   - docs/models/components/triggereventtoallrequestdtochannels.md
+  - docs/models/components/triggereventtoallrequestdtocontext.md
   - docs/models/components/triggereventtoallrequestdtooverrides.md
   - docs/models/components/triggereventtoallrequestdtotenant.md
   - docs/models/components/triggerrecipientstypeenum.md
@@ -742,10 +759,10 @@ generatedFiles:
   - docs/models/components/updatesubscriberchannelrequestdto.md
   - docs/models/components/updatesubscriberonlineflagrequestdto.md
   - docs/models/components/updatetopicrequestdto.md
+  - docs/models/components/updatetopicsubscriptionrequestdto.md
+  - docs/models/components/updatetopicsubscriptionrequestdtopreferences.md
   - docs/models/components/updateworkflowdto.md
   - docs/models/components/updateworkflowdtosteps.md
-  - docs/models/components/uploadtranslationsrequestdto.md
-  - docs/models/components/uploadtranslationsrequestdtoresourcetype.md
   - docs/models/components/uploadtranslationsresponsedto.md
   - docs/models/components/user.md
   - docs/models/components/userall.md
@@ -765,6 +782,7 @@ generatedFiles:
   - docs/models/components/workflowlistresponsedtolastpublishedby.md
   - docs/models/components/workflowlistresponsedtoupdatedby.md
   - docs/models/components/workflowpreferencedto.md
+  - docs/models/components/workflowpreferencerequestdto.md
   - docs/models/components/workflowpreferencesdto.md
   - docs/models/components/workflowpreferencesresponsedto.md
   - docs/models/components/workflowpreferencesresponsedtoall.md
@@ -775,7 +793,6 @@ generatedFiles:
   - docs/models/components/workflowresponsedtosortfield.md
   - docs/models/components/workflowresponsedtosteps.md
   - docs/models/components/workflowresponsedtoupdatedby.md
-  - docs/models/components/workflows.md
   - docs/models/components/workflowstatusenum.md
   - docs/models/operations/channel.md
   - docs/models/operations/contextscontrollercreatecontextrequest.md
@@ -807,6 +824,8 @@ generatedFiles:
   - docs/models/operations/eventscontrollertriggerbulkresponse.md
   - docs/models/operations/eventscontrollertriggerrequest.md
   - docs/models/operations/eventscontrollertriggerresponse.md
+  - docs/models/operations/file.md
+  - docs/models/operations/files.md
   - docs/models/operations/inboundwebhookscontrollerhandlewebhookrequest.md
   - docs/models/operations/inboundwebhookscontrollerhandlewebhookresponse.md
   - docs/models/operations/integrationscontrollerautoconfigureintegrationrequest.md
@@ -909,6 +928,8 @@ generatedFiles:
   - docs/models/operations/topicscontrollerlisttopicsubscriptionsresponse.md
   - docs/models/operations/topicscontrollerupdatetopicrequest.md
   - docs/models/operations/topicscontrollerupdatetopicresponse.md
+  - docs/models/operations/topicscontrollerupdatetopicsubscriptionrequest.md
+  - docs/models/operations/topicscontrollerupdatetopicsubscriptionresponse.md
   - docs/models/operations/topicscontrollerupserttopicrequest.md
   - docs/models/operations/topicscontrollerupserttopicresponse.md
   - docs/models/operations/topicsv1controllergettopicsubscriberrequest.md
@@ -918,6 +939,7 @@ generatedFiles:
   - docs/models/operations/translationcontrollerdeletetranslationendpointpathparamresourcetype.md
   - docs/models/operations/translationcontrollerdeletetranslationendpointrequest.md
   - docs/models/operations/translationcontrollerdeletetranslationendpointresponse.md
+  - docs/models/operations/translationcontrollerdeletetranslationgroupendpointpathparamresourcetype.md
   - docs/models/operations/translationcontrollerdeletetranslationgroupendpointrequest.md
   - docs/models/operations/translationcontrollerdeletetranslationgroupendpointresponse.md
   - docs/models/operations/translationcontrollergetmasterjsonendpointrequest.md
@@ -930,8 +952,10 @@ generatedFiles:
   - docs/models/operations/translationcontrollerimportmasterjsonendpointrequest.md
   - docs/models/operations/translationcontrollerimportmasterjsonendpointresponse.md
   - docs/models/operations/translationcontrolleruploadmasterjsonendpointrequest.md
+  - docs/models/operations/translationcontrolleruploadmasterjsonendpointrequestbody.md
   - docs/models/operations/translationcontrolleruploadmasterjsonendpointresponse.md
   - docs/models/operations/translationcontrolleruploadtranslationfilesrequest.md
+  - docs/models/operations/translationcontrolleruploadtranslationfilesrequestbody.md
   - docs/models/operations/translationcontrolleruploadtranslationfilesresponse.md
   - docs/models/operations/workflowcontrollercreaterequest.md
   - docs/models/operations/workflowcontrollercreateresponse.md
@@ -1052,7 +1076,7 @@ examples:
   EventsController_broadcastEventToAll:
     speakeasy-default-events-controller-broadcast-event-to-all:
       requestBody:
-        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}}
+        application/json: {"name": "<value>", "payload": {"comment_id": "string", "post": {"text": "string"}}, "overrides": {"fcm": {"data": {"key": "value"}}}, "actor": {"firstName": "John", "lastName": "Doe", "email": "john.doe@example.com", "phone": "+1234567890", "avatar": "https://example.com/avatar.jpg", "locale": "en-US", "timezone": "America/New_York", "subscriberId": "<id>"}, "context": {"key": "org-acme"}}
       responses:
         "200":
           application/json: {"acknowledged": false, "status": "invalid_recipients"}
@@ -1513,7 +1537,7 @@ examples:
         path:
           topicKey: "<value>"
       requestBody:
-        application/json: {"subscriberIds": ["subscriberId1", "subscriberId2"]}
+        application/json: {"subscriptions": [{"identifier": "subscriber-123-subscription-a", "subscriberId": "subscriber-123"}, {"identifier": "subscriber-456-subscription-b", "subscriberId": "subscriber-456"}], "name": "My Topic", "preferences": [{"condition": {"===": [{"var": "tier"}, "premium"]}, "workflowId": "workflow-123"}]}
       responses:
         "201":
           application/json: {"data": [{"_id": "64f5e95d3d7946d80d0cb679", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}], "meta": {"totalCount": 3, "successful": 2, "failed": 1}, "errors": [{"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}, {"subscriberId": "invalid-subscriber-id", "code": "SUBSCRIBER_NOT_FOUND", "message": "Subscriber with ID invalid-subscriber-id could not be found"}]}
@@ -2125,10 +2149,10 @@ examples:
   TranslationController_createTranslationEndpoint:
     speakeasy-default-translation-controller-create-translation-endpoint:
       requestBody:
-        application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}}
+        application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}}
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_getSingleTranslation:
     speakeasy-default-translation-controller-get-single-translation:
       parameters:
@@ -2138,7 +2162,7 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
+          application/json: {"resourceId": "welcome-email", "resourceType": "workflow", "locale": "en_US", "content": {"welcome.title": "Welcome", "welcome.message": "Hello there!"}, "createdAt": "2024-01-01T00:00:00.000Z", "updatedAt": "2024-01-01T00:00:00.000Z"}
   TranslationController_deleteTranslationEndpoint:
     speakeasy-default-translation-controller-delete-translation-endpoint:
       parameters:
@@ -2149,7 +2173,7 @@ examples:
   TranslationController_uploadTranslationFiles:
     speakeasy-default-translation-controller-upload-translation-files:
       requestBody:
-        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow"}
+        multipart/form-data: {"resourceId": "welcome-email", "resourceType": "workflow", "files": []}
       responses:
         "200":
           application/json: {"totalFiles": 3, "successfulUploads": 2, "failedUploads": 1, "errors": ["Invalid JSON in file: es-ES.json"]}
@@ -2175,16 +2199,18 @@ examples:
           locale: "en_US"
       responses:
         "200":
-          application/json: {"workflows": {}, "layouts": {}}
+          application/json: {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}, "layouts": {"default-layout": {"layout.title": "Default layout", "layout.message": "Hello there!"}}}
   TranslationController_importMasterJsonEndpoint:
     speakeasy-default-translation-controller-import-master-json-endpoint:
       requestBody:
-        application/json: {"locale": "en_US", "masterJson": {}}
+        application/json: {"locale": "en_US", "masterJson": {"workflows": {"welcome-email": {"welcome.title": "Welcome to our platform", "welcome.message": "Hello there!"}, "password-reset": {"reset.title": "Reset your password", "reset.message": "Click the link to reset"}}}}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
   TranslationController_uploadMasterJsonEndpoint:
     speakeasy-default-translation-controller-upload-master-json-endpoint:
+      requestBody:
+        multipart/form-data: {"file": "x-file: example.file"}
       responses:
         "200":
           application/json: {"success": true, "message": "Successfully imported translations for 2 resources: welcome-email, password-reset", "successful": ["welcome-email", "password-reset"], "failed": ["missing-workflow"]}
@@ -2287,6 +2313,25 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
         "500":
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+  TopicsController_updateTopicSubscription:
+    speakeasy-default-topics-controller-update-topic-subscription:
+      parameters:
+        path:
+          topicKey: "<value>"
+          subscriptionId: "<id>"
+      requestBody:
+        application/json: {"name": "My Subscription", "preferences": [{"condition": {"===": [{"var": "tier"}, "premium"]}, "workflowId": "workflow-123"}]}
+      responses:
+        "200":
+          application/json: {"_id": "64f5e95d3d7946d80d0cb679", "identifier": "tk=product-updates:si=subscriber-123", "name": "My Subscription", "topic": {"_id": "64f5e95d3d7946d80d0cb677", "key": "product-updates", "name": "Product Updates"}, "subscriber": {"_id": "64da692e9a94fb2e6449ad07", "subscriberId": "user-123", "avatar": "https://example.com/avatar.png", "firstName": "John", "lastName": "Doe", "email": "john@example.com"}, "preferences": [{"subscriptionId": "64f5e95d3d7946d80d0cb679", "workflow": {"id": "64a1b2c3d4e5f6g7h8i9j0k1", "identifier": "welcome-email", "name": "Welcome Email Workflow", "critical": false, "tags": ["user-onboarding", "email"], "data": {}, "severity": "medium"}, "enabled": true, "condition": {"and": [{"===": [{"var": "tier"}, "premium"]}]}}], "createdAt": "2025-04-24T05:40:21Z", "updatedAt": "2025-04-24T05:40:21Z"}
+        "414":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "400":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
+        "422":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123", "errors": {"fieldName1": {"messages": ["Field is required", "Must be a valid email address"], "value": "invalidEmail"}, "fieldName2": {"messages": ["Must be at least 18 years old"], "value": 17}, "fieldName3": {"messages": ["Must be a boolean value"], "value": true}, "fieldName4": {"messages": ["Must be a valid object"], "value": false}, "fieldName5": {"messages": ["Field is missing"], "value": null}, "fieldName6": {"messages": ["Undefined value"]}}}
+        "500":
+          application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Novu.Trigger()`:  `request.TriggerEventRequestDto` **Changed** **Breaking** :warning:\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events.[]` **Changed** **Breaking** :warning:\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Actor.[subscriberPayloadDto]` **Changed** **Breaking** :warning:\n* `Novu.Subscribers.Messages.UpdateAsSeen()`:  `response.ContextKeys` **Added**\n* `Novu.Integrations.List()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Activity.Track()`: **Added**\n* `Novu.InboundWebhooksControllerHandleWebhook()`: **Deleted** **Breaking** :warning:\n* `Novu.Contexts.Retrieve()`: **Added**\n* `Novu.Contexts.Update()`: **Added**\n* `Novu.Contexts.List()`: **Added**\n* `Novu.Contexts.Create()`: **Added**\n* `Novu.Subscribers.Messages.MarkAllAs()`:  `response.[].ContextKeys` **Added**\n* `Novu.Contexts.Delete()`: **Added**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto.Credentials.AppIoBaseUrl` **Added**\n  *  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.Delete()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.SetAsPrimary()`:  `response.Credentials.AppIoBaseUrl` **Added**\n* `Novu.Integrations.ListActive()`:  `response.[].Credentials.AppIoBaseUrl` **Added**\n* `Novu.Messages.Retrieve()`: \n  *  `request.Request.ContextKeys` **Added**\n  *  `response.Data.[].ContextKeys` **Added**\n* `Novu.Notifications.List()`: \n  *  `request.Request.ContextKeys` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Novu.Translations.Create()`: \n  *  `request.CreateTranslationRequestDto.Content` **Changed** **Breaking** :warning:\n  *  `response.Content` **Changed** **Breaking** :warning:\n* `Novu.Translations.Master.Upload()`:  `request.RequestBody` **Added** **Breaking** :warning:\n* `Novu.Translations.Master.Import()`: \n  *  `request.ImportMasterJsonRequestDto.MasterJson` **Changed** **Breaking** :warning:\n* `Novu.Translations.Master.Retrieve()`:  `response` **Changed** **Breaking** :warning:\n* `Novu.Translations.Upload()`:  `request` **Changed** **Breaking** :warning:\n* `Novu.Translations.Retrieve()`:  `response.Content` **Changed** **Breaking** :warning:\n* `Novu.Topics.Subscriptions.Create()`: \n  *  `request.CreateTopicSubscriptionsRequestDto` **Changed**\n  *  `response.Data.[]` **Changed**\n* `Novu.Topics.Subscriptions.Delete()`:  `response.Data.[].Identifier` **Added**\n* `Novu.Topics.Subscriptions.Update()`: **Added**\n* `Novu.TriggerBulk()`:  `response.[].JobData` **Added**\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Context` **Added**\n  *  `response.JobData` **Added**\n* `Novu.Trigger()`:  `response.JobData` **Added**\n* `Novu.Integrations.List()`:  `response.[].Credentials.TenantId` **Added**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto.Credentials.TenantId` **Added**\n  *  `response.Credentials.TenantId` **Added**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto.Credentials.TenantId` **Added**\n  *  `response.Credentials.TenantId` **Added**\n* `Novu.Integrations.Delete()`:  `response.[].Credentials.TenantId` **Added**\n* `Novu.Integrations.SetAsPrimary()`:  `response.Credentials.TenantId` **Added**\n* `Novu.Integrations.ListActive()`:  `response.[].Credentials.TenantId` **Added**\n"

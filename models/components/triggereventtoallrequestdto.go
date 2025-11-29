@@ -267,6 +267,101 @@ func (u TriggerEventToAllRequestDtoTenant) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type TriggerEventToAllRequestDtoTenant: all fields are null")
 }
 
+// Context2 - Rich context object with id and optional data
+type Context2 struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (c Context2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Context2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *Context2) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *Context2) GetData() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Data
+}
+
+type TriggerEventToAllRequestDtoContextType string
+
+const (
+	TriggerEventToAllRequestDtoContextTypeStr      TriggerEventToAllRequestDtoContextType = "str"
+	TriggerEventToAllRequestDtoContextTypeContext2 TriggerEventToAllRequestDtoContextType = "context_2"
+)
+
+type TriggerEventToAllRequestDtoContext struct {
+	Str      *string   `queryParam:"inline,name=context"`
+	Context2 *Context2 `queryParam:"inline,name=context"`
+
+	Type TriggerEventToAllRequestDtoContextType
+}
+
+func CreateTriggerEventToAllRequestDtoContextStr(str string) TriggerEventToAllRequestDtoContext {
+	typ := TriggerEventToAllRequestDtoContextTypeStr
+
+	return TriggerEventToAllRequestDtoContext{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateTriggerEventToAllRequestDtoContextContext2(context2 Context2) TriggerEventToAllRequestDtoContext {
+	typ := TriggerEventToAllRequestDtoContextTypeContext2
+
+	return TriggerEventToAllRequestDtoContext{
+		Context2: &context2,
+		Type:     typ,
+	}
+}
+
+func (u *TriggerEventToAllRequestDtoContext) UnmarshalJSON(data []byte) error {
+
+	var context2 Context2 = Context2{}
+	if err := utils.UnmarshalJSON(data, &context2, "", true, nil); err == nil {
+		u.Context2 = &context2
+		u.Type = TriggerEventToAllRequestDtoContextTypeContext2
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = TriggerEventToAllRequestDtoContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TriggerEventToAllRequestDtoContext", string(data))
+}
+
+func (u TriggerEventToAllRequestDtoContext) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Context2 != nil {
+		return utils.MarshalJSON(u.Context2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type TriggerEventToAllRequestDtoContext: all fields are null")
+}
+
 type TriggerEventToAllRequestDto struct {
 	// The trigger identifier associated for the template you wish to send. This identifier can be found on the template page.
 	Name string `json:"name"`
@@ -285,7 +380,8 @@ type TriggerEventToAllRequestDto struct {
 	// It is used to specify a tenant context during trigger event.
 	//     If a new tenant object is provided, we will create a new tenant.
 	//
-	Tenant *TriggerEventToAllRequestDtoTenant `json:"tenant,omitempty"`
+	Tenant  *TriggerEventToAllRequestDtoTenant            `json:"tenant,omitempty"`
+	Context map[string]TriggerEventToAllRequestDtoContext `json:"context,omitempty"`
 }
 
 func (t *TriggerEventToAllRequestDto) GetName() string {
@@ -328,4 +424,11 @@ func (t *TriggerEventToAllRequestDto) GetTenant() *TriggerEventToAllRequestDtoTe
 		return nil
 	}
 	return t.Tenant
+}
+
+func (t *TriggerEventToAllRequestDto) GetContext() map[string]TriggerEventToAllRequestDtoContext {
+	if t == nil {
+		return nil
+	}
+	return t.Context
 }

@@ -1,6 +1,6 @@
-# MasterJSON
+# SubscriptionPreferenceDtoData
 
-Master JSON object containing all translations organized by workflow identifier
+Custom data associated with the workflow
 
 
 ## Fields
