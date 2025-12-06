@@ -126,6 +126,11 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		)),
+		Context: map[string]components.TriggerEventToAllRequestDtoContext{
+			"key": components.CreateTriggerEventToAllRequestDtoContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)

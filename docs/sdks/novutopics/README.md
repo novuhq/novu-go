@@ -1,5 +1,4 @@
-# NovuTopics
-(*Subscribers.Topics*)
+# Subscribers.Topics
 
 ## Overview
 
@@ -34,6 +33,7 @@ func main() {
 
     res, err := s.Subscribers.Topics.List(ctx, operations.SubscribersControllerListSubscriberTopicsRequest{
         SubscriberID: "<id>",
+        Limit: v3.Pointer[float64](10),
     })
     if err != nil {
         log.Fatal(err)

@@ -1,5 +1,4 @@
 # Integrations
-(*Integrations*)
 
 ## Overview
 

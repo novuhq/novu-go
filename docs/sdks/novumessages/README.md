@@ -1,5 +1,4 @@
-# NovuMessages
-(*Subscribers.Messages*)
+# Subscribers.Messages
 
 ## Overview
 

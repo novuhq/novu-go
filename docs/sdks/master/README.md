@@ -1,5 +1,4 @@
-# Master
-(*Translations.Master*)
+# Translations.Master
 
 ## Overview
 
@@ -87,7 +86,18 @@ func main() {
 
     res, err := s.Translations.Master.Import(ctx, components.ImportMasterJSONRequestDto{
         Locale: "en_US",
-        MasterJSON: components.MasterJSON{},
+        MasterJSON: map[string]any{
+            "workflows": map[string]any{
+                "welcome-email": map[string]any{
+                    "welcome.title": "Welcome to our platform",
+                    "welcome.message": "Hello there!",
+                },
+                "password-reset": map[string]any{
+                    "reset.title": "Reset your password",
+                    "reset.message": "Click the link to reset",
+                },
+            },
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -130,6 +140,8 @@ package main
 import(
 	"context"
 	"github.com/novuhq/novu-go/v3"
+	"os"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
@@ -140,7 +152,17 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Translations.Master.Upload(ctx, nil)
+    example, fileErr := os.Open("example.file")
+    if fileErr != nil {
+        panic(fileErr)
+    }
+
+    res, err := s.Translations.Master.Upload(ctx, operations.TranslationControllerUploadMasterJSONEndpointRequestBody{
+        File: operations.File{
+            FileName: "example.file",
+            Content: example,
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -152,11 +174,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                                                                                                                  | Type                                                                                                                                                       | Required                                                                                                                                                   | Description                                                                                                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                                                      | :heavy_check_mark:                                                                                                                                         | The context to use for the request.                                                                                                                        |
+| `requestBody`                                                                                                                                              | [operations.TranslationControllerUploadMasterJSONEndpointRequestBody](../../models/operations/translationcontrolleruploadmasterjsonendpointrequestbody.md) | :heavy_check_mark:                                                                                                                                         | N/A                                                                                                                                                        |
+| `idempotencyKey`                                                                                                                                           | **string*                                                                                                                                                  | :heavy_minus_sign:                                                                                                                                         | A header for idempotency purposes                                                                                                                          |
+| `opts`                                                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                                                   | :heavy_minus_sign:                                                                                                                                         | The options for this request.                                                                                                                              |
 
 ### Response
 

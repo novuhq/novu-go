@@ -6,9 +6,42 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
+type File struct {
+	FileName string `multipartForm:"name=fileName"`
+	// This field accepts []byte data or io.Reader implementations, such as *os.File.
+	Content any `multipartForm:"content"`
+}
+
+func (f *File) GetFileName() string {
+	if f == nil {
+		return ""
+	}
+	return f.FileName
+}
+
+func (f *File) GetContent() any {
+	if f == nil {
+		return nil
+	}
+	return f.Content
+}
+
+type TranslationControllerUploadMasterJSONEndpointRequestBody struct {
+	// Master JSON file with locale as filename (e.g., en_US.json)
+	File File `multipartForm:"file,name=file"`
+}
+
+func (t *TranslationControllerUploadMasterJSONEndpointRequestBody) GetFile() File {
+	if t == nil {
+		return File{}
+	}
+	return t.File
+}
+
 type TranslationControllerUploadMasterJSONEndpointRequest struct {
 	// A header for idempotency purposes
-	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
+	IdempotencyKey *string                                                  `header:"style=simple,explode=false,name=idempotency-key"`
+	RequestBody    TranslationControllerUploadMasterJSONEndpointRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 func (t *TranslationControllerUploadMasterJSONEndpointRequest) GetIdempotencyKey() *string {
@@ -16,6 +49,13 @@ func (t *TranslationControllerUploadMasterJSONEndpointRequest) GetIdempotencyKey
 		return nil
 	}
 	return t.IdempotencyKey
+}
+
+func (t *TranslationControllerUploadMasterJSONEndpointRequest) GetRequestBody() TranslationControllerUploadMasterJSONEndpointRequestBody {
+	if t == nil {
+		return TranslationControllerUploadMasterJSONEndpointRequestBody{}
+	}
+	return t.RequestBody
 }
 
 type TranslationControllerUploadMasterJSONEndpointResponse struct {

@@ -1,5 +1,4 @@
-# Properties
-(*Subscribers.Properties*)
+# Subscribers.Properties
 
 ## Overview
 

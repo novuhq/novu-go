@@ -3,14 +3,92 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
+// ResourceType - The resource type to associate localizations with
+type ResourceType string
+
+const (
+	ResourceTypeWorkflow ResourceType = "workflow"
+	ResourceTypeLayout   ResourceType = "layout"
+)
+
+func (e ResourceType) ToPointer() *ResourceType {
+	return &e
+}
+func (e *ResourceType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "workflow":
+		fallthrough
+	case "layout":
+		*e = ResourceType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ResourceType: %v", v)
+	}
+}
+
+type Files struct {
+	FileName string `multipartForm:"name=fileName"`
+	// This field accepts []byte data or io.Reader implementations, such as *os.File.
+	Content any `multipartForm:"content"`
+}
+
+func (f *Files) GetFileName() string {
+	if f == nil {
+		return ""
+	}
+	return f.FileName
+}
+
+func (f *Files) GetContent() any {
+	if f == nil {
+		return nil
+	}
+	return f.Content
+}
+
+type TranslationControllerUploadTranslationFilesRequestBody struct {
+	// The resource ID to associate localizations with. Accepts identifier or slug format
+	ResourceID string `multipartForm:"name=resourceId"`
+	// The resource type to associate localizations with
+	ResourceType ResourceType `multipartForm:"name=resourceType"`
+	// One or more JSON translation files. Filenames must match locale format (e.g., en_US.json, fr_FR.json). Field name can be "files" or "files[]".
+	Files []Files `multipartForm:"file,name=files"`
+}
+
+func (t *TranslationControllerUploadTranslationFilesRequestBody) GetResourceID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ResourceID
+}
+
+func (t *TranslationControllerUploadTranslationFilesRequestBody) GetResourceType() ResourceType {
+	if t == nil {
+		return ResourceType("")
+	}
+	return t.ResourceType
+}
+
+func (t *TranslationControllerUploadTranslationFilesRequestBody) GetFiles() []Files {
+	if t == nil {
+		return []Files{}
+	}
+	return t.Files
+}
+
 type TranslationControllerUploadTranslationFilesRequest struct {
 	// A header for idempotency purposes
-	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
-	// Translation files upload body details
-	UploadTranslationsRequestDto components.UploadTranslationsRequestDto `request:"mediaType=multipart/form-data"`
+	IdempotencyKey *string                                                `header:"style=simple,explode=false,name=idempotency-key"`
+	RequestBody    TranslationControllerUploadTranslationFilesRequestBody `request:"mediaType=multipart/form-data"`
 }
 
 func (t *TranslationControllerUploadTranslationFilesRequest) GetIdempotencyKey() *string {
@@ -20,11 +98,11 @@ func (t *TranslationControllerUploadTranslationFilesRequest) GetIdempotencyKey()
 	return t.IdempotencyKey
 }
 
-func (t *TranslationControllerUploadTranslationFilesRequest) GetUploadTranslationsRequestDto() components.UploadTranslationsRequestDto {
+func (t *TranslationControllerUploadTranslationFilesRequest) GetRequestBody() TranslationControllerUploadTranslationFilesRequestBody {
 	if t == nil {
-		return components.UploadTranslationsRequestDto{}
+		return TranslationControllerUploadTranslationFilesRequestBody{}
 	}
-	return t.UploadTranslationsRequestDto
+	return t.RequestBody
 }
 
 type TranslationControllerUploadTranslationFilesResponse struct {
