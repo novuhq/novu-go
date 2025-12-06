@@ -701,11 +701,11 @@ func (s *Translations) Delete(ctx context.Context, resourceType operations.Trans
 }
 
 // Upload translation files
-// Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json
-func (s *Translations) Upload(ctx context.Context, uploadTranslationsRequestDto components.UploadTranslationsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadTranslationFilesResponse, error) {
+// Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both "files" and "files[]" field names for backwards compatibility.
+func (s *Translations) Upload(ctx context.Context, requestBody operations.TranslationControllerUploadTranslationFilesRequestBody, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadTranslationFilesResponse, error) {
 	request := operations.TranslationControllerUploadTranslationFilesRequest{
-		IdempotencyKey:               idempotencyKey,
-		UploadTranslationsRequestDto: uploadTranslationsRequestDto,
+		IdempotencyKey: idempotencyKey,
+		RequestBody:    requestBody,
 	}
 
 	o := operations.Options{}
@@ -740,7 +740,7 @@ func (s *Translations) Upload(ctx context.Context, uploadTranslationsRequestDto 
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "UploadTranslationsRequestDto", "multipart", `request:"mediaType=multipart/form-data"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "multipart", `request:"mediaType=multipart/form-data"`)
 	if err != nil {
 		return nil, err
 	}

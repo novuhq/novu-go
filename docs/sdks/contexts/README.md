@@ -1,5 +1,4 @@
 # Contexts
-(*Contexts*)
 
 ## Overview
 
@@ -39,7 +38,13 @@ func main() {
     res, err := s.Contexts.Create(ctx, components.CreateContextRequestDto{
         Type: "tenant",
         ID: "org-acme",
-        Data: &components.Data{},
+        Data: map[string]any{
+            "tenantName": "Acme Corp",
+            "region": "us-east-1",
+            "settings": map[string]any{
+                "theme": "dark",
+            },
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -101,6 +106,7 @@ func main() {
     )
 
     res, err := s.Contexts.List(ctx, operations.ContextsControllerListContextsRequest{
+        Limit: v3.Pointer[float64](10),
         ID: v3.Pointer("tenant-prod-123"),
         Search: v3.Pointer("tenant"),
     })
@@ -162,7 +168,13 @@ func main() {
     )
 
     res, err := s.Contexts.Update(ctx, "<id>", "<value>", components.UpdateContextRequestDto{
-        Data: components.UpdateContextRequestDtoData{},
+        Data: map[string]any{
+            "tenantName": "Acme Corp",
+            "region": "us-east-1",
+            "settings": map[string]any{
+                "theme": "dark",
+            },
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)

@@ -6,24 +6,24 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-type TenantPayloadDtoData struct {
+type Data struct {
 }
 
-func (t TenantPayloadDtoData) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
+func (d Data) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
 }
 
-func (t *TenantPayloadDtoData) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+func (d *Data) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
 type TenantPayloadDto struct {
-	Identifier *string               `json:"identifier,omitempty"`
-	Name       *string               `json:"name,omitempty"`
-	Data       *TenantPayloadDtoData `json:"data,omitempty"`
+	Identifier *string `json:"identifier,omitempty"`
+	Name       *string `json:"name,omitempty"`
+	Data       *Data   `json:"data,omitempty"`
 }
 
 func (t TenantPayloadDto) MarshalJSON() ([]byte, error) {
@@ -51,7 +51,7 @@ func (t *TenantPayloadDto) GetName() *string {
 	return t.Name
 }
 
-func (t *TenantPayloadDto) GetData() *TenantPayloadDtoData {
+func (t *TenantPayloadDto) GetData() *Data {
 	if t == nil {
 		return nil
 	}

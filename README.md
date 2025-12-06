@@ -210,6 +210,11 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		)),
+		Context: map[string]components.TriggerEventToAllRequestDtoContext{
+			"key": components.CreateTriggerEventToAllRequestDtoContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -361,6 +366,13 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
+### [Novu SDK](docs/sdks/novu/README.md)
+
+* [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
+* [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
+* [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
+* [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
+
 ### [Activity](docs/sdks/activity/README.md)
 
 * [Track](docs/sdks/activity/README.md#track) - Track activity and engagement events
@@ -412,13 +424,6 @@ func main() {
 
 * [List](docs/sdks/notifications/README.md#list) - List all events
 * [Retrieve](docs/sdks/notifications/README.md#retrieve) - Retrieve an event
-
-### [Novu SDK](docs/sdks/novu/README.md)
-
-* [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
-* [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
-* [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
-* [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
@@ -477,6 +482,7 @@ func main() {
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+* [Update](docs/sdks/subscriptions/README.md#update) - Update a topic subscription
 
 ### [Translations](docs/sdks/translations/README.md)
 

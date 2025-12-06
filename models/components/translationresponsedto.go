@@ -34,10 +34,6 @@ func (e *TranslationResponseDtoResourceType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// TranslationResponseDtoContent - Translation content as JSON object
-type TranslationResponseDtoContent struct {
-}
-
 type TranslationResponseDto struct {
 	// Resource identifier
 	ResourceID string `json:"resourceId"`
@@ -46,7 +42,7 @@ type TranslationResponseDto struct {
 	// Locale code
 	Locale string `json:"locale"`
 	// Translation content as JSON object
-	Content TranslationResponseDtoContent `json:"content"`
+	Content map[string]any `json:"content"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
 	// Last update timestamp
@@ -74,9 +70,9 @@ func (t *TranslationResponseDto) GetLocale() string {
 	return t.Locale
 }
 
-func (t *TranslationResponseDto) GetContent() TranslationResponseDtoContent {
+func (t *TranslationResponseDto) GetContent() map[string]any {
 	if t == nil {
-		return TranslationResponseDtoContent{}
+		return map[string]any{}
 	}
 	return t.Content
 }

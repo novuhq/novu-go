@@ -2,17 +2,13 @@
 
 package components
 
-// Data - Optional custom data to associate with this context.
-type Data struct {
-}
-
 type CreateContextRequestDto struct {
 	// Context type (e.g., tenant, app, workspace). Must be lowercase alphanumeric with optional separators.
 	Type string `json:"type"`
 	// Unique identifier for this context. Must be lowercase alphanumeric with optional separators.
 	ID string `json:"id"`
 	// Optional custom data to associate with this context.
-	Data *Data `json:"data,omitempty"`
+	Data map[string]any `json:"data,omitempty"`
 }
 
 func (c *CreateContextRequestDto) GetType() string {
@@ -29,7 +25,7 @@ func (c *CreateContextRequestDto) GetID() string {
 	return c.ID
 }
 
-func (c *CreateContextRequestDto) GetData() *Data {
+func (c *CreateContextRequestDto) GetData() map[string]any {
 	if c == nil {
 		return nil
 	}

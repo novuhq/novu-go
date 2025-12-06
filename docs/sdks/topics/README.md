@@ -1,5 +1,4 @@
 # Topics
-(*Topics*)
 
 ## Overview
 
@@ -40,7 +39,9 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{})
+    res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{
+        Limit: v3.Pointer[float64](10),
+    })
     if err != nil {
         log.Fatal(err)
     }

@@ -2,8 +2,8 @@
 
 package components
 
-// Subscriber - The subscriber information
-type Subscriber struct {
+// SubscriptionDtoSubscriber - The subscriber information
+type SubscriptionDtoSubscriber struct {
 	// The identifier of the subscriber
 	ID string `json:"_id"`
 	// The external identifier of the subscriber
@@ -18,42 +18,42 @@ type Subscriber struct {
 	Email *string `json:"email,omitempty"`
 }
 
-func (s *Subscriber) GetID() string {
+func (s *SubscriptionDtoSubscriber) GetID() string {
 	if s == nil {
 		return ""
 	}
 	return s.ID
 }
 
-func (s *Subscriber) GetSubscriberID() string {
+func (s *SubscriptionDtoSubscriber) GetSubscriberID() string {
 	if s == nil {
 		return ""
 	}
 	return s.SubscriberID
 }
 
-func (s *Subscriber) GetAvatar() *string {
+func (s *SubscriptionDtoSubscriber) GetAvatar() *string {
 	if s == nil {
 		return nil
 	}
 	return s.Avatar
 }
 
-func (s *Subscriber) GetFirstName() *string {
+func (s *SubscriptionDtoSubscriber) GetFirstName() *string {
 	if s == nil {
 		return nil
 	}
 	return s.FirstName
 }
 
-func (s *Subscriber) GetLastName() *string {
+func (s *SubscriptionDtoSubscriber) GetLastName() *string {
 	if s == nil {
 		return nil
 	}
 	return s.LastName
 }
 
-func (s *Subscriber) GetEmail() *string {
+func (s *SubscriptionDtoSubscriber) GetEmail() *string {
 	if s == nil {
 		return nil
 	}
@@ -63,10 +63,12 @@ func (s *Subscriber) GetEmail() *string {
 type SubscriptionDto struct {
 	// The unique identifier of the subscription
 	ID string `json:"_id"`
+	// The identifier of the subscription
+	Identifier *string `json:"identifier,omitempty"`
 	// The topic information
 	Topic TopicDto `json:"topic"`
 	// The subscriber information
-	Subscriber *Subscriber `json:"subscriber"`
+	Subscriber *SubscriptionDtoSubscriber `json:"subscriber"`
 	// The creation date of the subscription
 	CreatedAt string `json:"createdAt"`
 	// The last update date of the subscription
@@ -80,6 +82,13 @@ func (s *SubscriptionDto) GetID() string {
 	return s.ID
 }
 
+func (s *SubscriptionDto) GetIdentifier() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Identifier
+}
+
 func (s *SubscriptionDto) GetTopic() TopicDto {
 	if s == nil {
 		return TopicDto{}
@@ -87,7 +96,7 @@ func (s *SubscriptionDto) GetTopic() TopicDto {
 	return s.Topic
 }
 
-func (s *SubscriptionDto) GetSubscriber() *Subscriber {
+func (s *SubscriptionDto) GetSubscriber() *SubscriptionDtoSubscriber {
 	if s == nil {
 		return nil
 	}

@@ -92,7 +92,7 @@ func (s *Master) Retrieve(ctx context.Context, locale *string, idempotencyKey *s
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -488,9 +488,10 @@ func (s *Master) Import(ctx context.Context, importMasterJSONRequestDto componen
 
 // Upload master translations JSON file
 // Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
-func (s *Master) Upload(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadMasterJSONEndpointResponse, error) {
+func (s *Master) Upload(ctx context.Context, requestBody operations.TranslationControllerUploadMasterJSONEndpointRequestBody, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadMasterJSONEndpointResponse, error) {
 	request := operations.TranslationControllerUploadMasterJSONEndpointRequest{
 		IdempotencyKey: idempotencyKey,
+		RequestBody:    requestBody,
 	}
 
 	o := operations.Options{}
@@ -525,6 +526,10 @@ func (s *Master) Upload(ctx context.Context, idempotencyKey *string, opts ...ope
 		OAuth2Scopes:     nil,
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "RequestBody", "multipart", `request:"mediaType=multipart/form-data"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -537,12 +542,15 @@ func (s *Master) Upload(ctx context.Context, idempotencyKey *string, opts ...ope
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 

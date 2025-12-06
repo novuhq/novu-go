@@ -8,18 +8,18 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-// ResourceType - Resource type
-type ResourceType string
+// TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType - Resource type
+type TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType string
 
 const (
-	ResourceTypeWorkflow ResourceType = "workflow"
-	ResourceTypeLayout   ResourceType = "layout"
+	TranslationControllerDeleteTranslationGroupEndpointPathParamResourceTypeWorkflow TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType = "workflow"
+	TranslationControllerDeleteTranslationGroupEndpointPathParamResourceTypeLayout   TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType = "layout"
 )
 
-func (e ResourceType) ToPointer() *ResourceType {
+func (e TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType) ToPointer() *TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType {
 	return &e
 }
-func (e *ResourceType) UnmarshalJSON(data []byte) error {
+func (e *TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -28,25 +28,25 @@ func (e *ResourceType) UnmarshalJSON(data []byte) error {
 	case "workflow":
 		fallthrough
 	case "layout":
-		*e = ResourceType(v)
+		*e = TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ResourceType: %v", v)
+		return fmt.Errorf("invalid value for TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType: %v", v)
 	}
 }
 
 type TranslationControllerDeleteTranslationGroupEndpointRequest struct {
 	// Resource type
-	ResourceType ResourceType `pathParam:"style=simple,explode=false,name=resourceType"`
+	ResourceType TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType `pathParam:"style=simple,explode=false,name=resourceType"`
 	// Resource ID
 	ResourceID string `pathParam:"style=simple,explode=false,name=resourceId"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (t *TranslationControllerDeleteTranslationGroupEndpointRequest) GetResourceType() ResourceType {
+func (t *TranslationControllerDeleteTranslationGroupEndpointRequest) GetResourceType() TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType {
 	if t == nil {
-		return ResourceType("")
+		return TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType("")
 	}
 	return t.ResourceType
 }

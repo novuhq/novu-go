@@ -1,5 +1,4 @@
 # Workflows
-(*Workflows*)
 
 ## Overview
 
@@ -127,7 +126,10 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Workflows.List(ctx, operations.WorkflowControllerSearchWorkflowsRequest{})
+    res, err := s.Workflows.List(ctx, operations.WorkflowControllerSearchWorkflowsRequest{
+        Limit: v3.Pointer[float64](10),
+        Offset: v3.Pointer[float64](0),
+    })
     if err != nil {
         log.Fatal(err)
     }
