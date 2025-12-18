@@ -83,7 +83,7 @@ type NotificationFeedItemDto struct {
 	// Indicates whether the notification has been seen by the subscriber.
 	Seen bool `json:"seen"`
 	// Indicates whether the notification has been archived.
-	IsArchived bool `json:"isArchived"`
+	IsArchived *bool `json:"isArchived,omitempty"`
 	// Device tokens for push notifications, if applicable.
 	DeviceTokens []string `json:"deviceTokens,omitempty"`
 	// Call-to-action information associated with the notification.
@@ -105,7 +105,7 @@ func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NotificationFeedItemDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"_id", "_templateId", "_environmentId", "_organizationId", "_notificationId", "_subscriberId", "_jobId", "transactionId", "content", "channel", "read", "seen", "isArchived", "cta", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"_id", "_templateId", "_environmentId", "_organizationId", "_notificationId", "_subscriberId", "_jobId", "transactionId", "content", "channel", "read", "seen", "cta", "status"}); err != nil {
 		return err
 	}
 	return nil
@@ -258,9 +258,9 @@ func (n *NotificationFeedItemDto) GetSeen() bool {
 	return n.Seen
 }
 
-func (n *NotificationFeedItemDto) GetIsArchived() bool {
+func (n *NotificationFeedItemDto) GetIsArchived() *bool {
 	if n == nil {
-		return false
+		return nil
 	}
 	return n.IsArchived
 }
