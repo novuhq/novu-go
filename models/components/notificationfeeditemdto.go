@@ -83,7 +83,7 @@ type NotificationFeedItemDto struct {
 	// Indicates whether the notification has been seen by the subscriber.
 	Seen bool `json:"seen"`
 	// Indicates whether the notification has been archived.
-	IsArchived *bool `json:"isArchived,omitempty"`
+	IsArchived *bool `json:"archived,omitempty"`
 	// Device tokens for push notifications, if applicable.
 	DeviceTokens []string `json:"deviceTokens,omitempty"`
 	// Call-to-action information associated with the notification.
