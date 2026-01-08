@@ -24,15 +24,15 @@ const (
 )
 
 type Steps struct {
-	InAppStepUpsertDto    *InAppStepUpsertDto    `queryParam:"inline,name=steps"`
-	EmailStepUpsertDto    *EmailStepUpsertDto    `queryParam:"inline,name=steps"`
-	SmsStepUpsertDto      *SmsStepUpsertDto      `queryParam:"inline,name=steps"`
-	PushStepUpsertDto     *PushStepUpsertDto     `queryParam:"inline,name=steps"`
-	ChatStepUpsertDto     *ChatStepUpsertDto     `queryParam:"inline,name=steps"`
-	DelayStepUpsertDto    *DelayStepUpsertDto    `queryParam:"inline,name=steps"`
-	DigestStepUpsertDto   *DigestStepUpsertDto   `queryParam:"inline,name=steps"`
-	ThrottleStepUpsertDto *ThrottleStepUpsertDto `queryParam:"inline,name=steps"`
-	CustomStepUpsertDto   *CustomStepUpsertDto   `queryParam:"inline,name=steps"`
+	InAppStepUpsertDto    *InAppStepUpsertDto    `queryParam:"inline" union:"member"`
+	EmailStepUpsertDto    *EmailStepUpsertDto    `queryParam:"inline" union:"member"`
+	SmsStepUpsertDto      *SmsStepUpsertDto      `queryParam:"inline" union:"member"`
+	PushStepUpsertDto     *PushStepUpsertDto     `queryParam:"inline" union:"member"`
+	ChatStepUpsertDto     *ChatStepUpsertDto     `queryParam:"inline" union:"member"`
+	DelayStepUpsertDto    *DelayStepUpsertDto    `queryParam:"inline" union:"member"`
+	DigestStepUpsertDto   *DigestStepUpsertDto   `queryParam:"inline" union:"member"`
+	ThrottleStepUpsertDto *ThrottleStepUpsertDto `queryParam:"inline" union:"member"`
+	CustomStepUpsertDto   *CustomStepUpsertDto   `queryParam:"inline" union:"member"`
 
 	Type StepsType
 }
@@ -315,7 +315,7 @@ func (c CreateWorkflowDto) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateWorkflowDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name", "workflowId", "steps"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil

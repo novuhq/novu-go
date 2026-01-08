@@ -32,7 +32,7 @@ func newGroups(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 
 // Delete a translation group
 // Delete an entire translation group and all its translations
-func (s *Groups) Delete(ctx context.Context, resourceType operations.ResourceType, resourceID string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerDeleteTranslationGroupEndpointResponse, error) {
+func (s *Groups) Delete(ctx context.Context, resourceType operations.TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType, resourceID string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerDeleteTranslationGroupEndpointResponse, error) {
 	request := operations.TranslationControllerDeleteTranslationGroupEndpointRequest{
 		ResourceType:   resourceType,
 		ResourceID:     resourceID,

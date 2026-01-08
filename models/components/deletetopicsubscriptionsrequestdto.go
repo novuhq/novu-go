@@ -2,14 +2,94 @@
 
 package components
 
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+)
+
+type DeleteTopicSubscriptionsRequestDtoSubscriptionsType string
+
+const (
+	DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeStr                                DeleteTopicSubscriptionsRequestDtoSubscriptionsType = "str"
+	DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeDeleteTopicSubscriberIdentifierDto DeleteTopicSubscriptionsRequestDtoSubscriptionsType = "DeleteTopicSubscriberIdentifierDto"
+)
+
+type DeleteTopicSubscriptionsRequestDtoSubscriptions struct {
+	Str                                *string                             `queryParam:"inline" union:"member"`
+	DeleteTopicSubscriberIdentifierDto *DeleteTopicSubscriberIdentifierDto `queryParam:"inline" union:"member"`
+
+	Type DeleteTopicSubscriptionsRequestDtoSubscriptionsType
+}
+
+func CreateDeleteTopicSubscriptionsRequestDtoSubscriptionsStr(str string) DeleteTopicSubscriptionsRequestDtoSubscriptions {
+	typ := DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeStr
+
+	return DeleteTopicSubscriptionsRequestDtoSubscriptions{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateDeleteTopicSubscriptionsRequestDtoSubscriptionsDeleteTopicSubscriberIdentifierDto(deleteTopicSubscriberIdentifierDto DeleteTopicSubscriberIdentifierDto) DeleteTopicSubscriptionsRequestDtoSubscriptions {
+	typ := DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeDeleteTopicSubscriberIdentifierDto
+
+	return DeleteTopicSubscriptionsRequestDtoSubscriptions{
+		DeleteTopicSubscriberIdentifierDto: &deleteTopicSubscriberIdentifierDto,
+		Type:                               typ,
+	}
+}
+
+func (u *DeleteTopicSubscriptionsRequestDtoSubscriptions) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeStr
+		return nil
+	}
+
+	var deleteTopicSubscriberIdentifierDto DeleteTopicSubscriberIdentifierDto = DeleteTopicSubscriberIdentifierDto{}
+	if err := utils.UnmarshalJSON(data, &deleteTopicSubscriberIdentifierDto, "", true, nil); err == nil {
+		u.DeleteTopicSubscriberIdentifierDto = &deleteTopicSubscriberIdentifierDto
+		u.Type = DeleteTopicSubscriptionsRequestDtoSubscriptionsTypeDeleteTopicSubscriberIdentifierDto
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for DeleteTopicSubscriptionsRequestDtoSubscriptions", string(data))
+}
+
+func (u DeleteTopicSubscriptionsRequestDtoSubscriptions) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.DeleteTopicSubscriberIdentifierDto != nil {
+		return utils.MarshalJSON(u.DeleteTopicSubscriberIdentifierDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type DeleteTopicSubscriptionsRequestDtoSubscriptions: all fields are null")
+}
+
 type DeleteTopicSubscriptionsRequestDto struct {
-	// List of subscriber identifiers to unsubscribe from the topic (max: 100)
-	SubscriberIds []string `json:"subscriberIds"`
+	// List of subscriber identifiers to unsubscribe from the topic (max: 100). @deprecated Use the "subscriptions" property instead.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	SubscriberIds []string `json:"subscriberIds,omitempty"`
+	// List of subscriptions to unsubscribe from the topic (max: 100). Can be either a string array of subscriber IDs or an array of objects with identifier and/or subscriberId. If only subscriberId is provided, all subscriptions for that subscriber within the topic will be deleted.
+	Subscriptions []DeleteTopicSubscriptionsRequestDtoSubscriptions `json:"subscriptions,omitempty"`
 }
 
 func (d *DeleteTopicSubscriptionsRequestDto) GetSubscriberIds() []string {
 	if d == nil {
-		return []string{}
+		return nil
 	}
 	return d.SubscriberIds
+}
+
+func (d *DeleteTopicSubscriptionsRequestDto) GetSubscriptions() []DeleteTopicSubscriptionsRequestDtoSubscriptions {
+	if d == nil {
+		return nil
+	}
+	return d.Subscriptions
 }

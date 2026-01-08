@@ -73,6 +73,10 @@ func (w *Workflow) GetSeverity() SeverityLevelEnum {
 	return w.Severity
 }
 
+// Condition using JSON Logic rules
+type Condition struct {
+}
+
 type GetPreferencesResponseDto struct {
 	// The level of the preference (global or template)
 	Level PreferenceLevelEnum `json:"level"`
@@ -82,6 +86,8 @@ type GetPreferencesResponseDto struct {
 	Enabled bool `json:"enabled"`
 	// Channel-specific preference settings
 	Channels SubscriberPreferenceChannels `json:"channels"`
+	// Condition using JSON Logic rules
+	Condition *Condition `json:"condition,omitempty"`
 }
 
 func (g *GetPreferencesResponseDto) GetLevel() PreferenceLevelEnum {
@@ -110,4 +116,11 @@ func (g *GetPreferencesResponseDto) GetChannels() SubscriberPreferenceChannels {
 		return SubscriberPreferenceChannels{}
 	}
 	return g.Channels
+}
+
+func (g *GetPreferencesResponseDto) GetCondition() *Condition {
+	if g == nil {
+		return nil
+	}
+	return g.Condition
 }

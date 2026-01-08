@@ -5,6 +5,8 @@ package components
 type TopicSubscriptionResponseDto struct {
 	// The identifier of the subscription
 	ID string `json:"_id"`
+	// The identifier of the subscription
+	Identifier string `json:"identifier"`
 	// The date and time the subscription was created
 	CreatedAt string `json:"createdAt"`
 	// Topic information
@@ -18,6 +20,13 @@ func (t *TopicSubscriptionResponseDto) GetID() string {
 		return ""
 	}
 	return t.ID
+}
+
+func (t *TopicSubscriptionResponseDto) GetIdentifier() string {
+	if t == nil {
+		return ""
+	}
+	return t.Identifier
 }
 
 func (t *TopicSubscriptionResponseDto) GetCreatedAt() string {

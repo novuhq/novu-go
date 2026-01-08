@@ -17,8 +17,8 @@ const (
 
 // ThrottleStepUpsertDtoControlValues - Control values for the Throttle step.
 type ThrottleStepUpsertDtoControlValues struct {
-	ThrottleControlDto *ThrottleControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny           map[string]any      `queryParam:"inline,name=controlValues"`
+	ThrottleControlDto *ThrottleControlDto `queryParam:"inline" union:"member"`
+	MapOfAny           map[string]any      `queryParam:"inline" union:"member"`
 
 	Type ThrottleStepUpsertDtoControlValuesType
 }

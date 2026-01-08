@@ -22,7 +22,7 @@ func (c CreateLayoutDto) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateLayoutDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"layoutId", "name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil

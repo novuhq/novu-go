@@ -125,9 +125,9 @@ const (
 )
 
 type To1 struct {
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline,name=one"`
-	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline,name=one"`
-	Str                  *string               `queryParam:"inline,name=one"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" union:"member"`
+	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline" union:"member"`
+	Str                  *string               `queryParam:"inline" union:"member"`
 
 	Type To1Type
 }
@@ -210,12 +210,12 @@ const (
 	ToTypeTopicPayloadDto      ToType = "TopicPayloadDto"
 )
 
-// To - The recipients list of people who will receive the notification.
+// To - The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
 type To struct {
-	ArrayOfTo1           []To1                 `queryParam:"inline,name=to"`
-	Str                  *string               `queryParam:"inline,name=to"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline,name=to"`
-	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline,name=to"`
+	ArrayOfTo1           []To1                 `queryParam:"inline" union:"member"`
+	Str                  *string               `queryParam:"inline" union:"member"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" union:"member"`
+	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline" union:"member"`
 
 	Type ToType
 }
@@ -320,8 +320,8 @@ const (
 //
 //	If a new actor object is provided, we will create a new subscriber in our system
 type Actor struct {
-	Str                  *string               `queryParam:"inline,name=actor"`
-	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline,name=actor"`
+	Str                  *string               `queryParam:"inline" union:"member"`
+	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" union:"member"`
 
 	Type ActorType
 }
@@ -386,8 +386,8 @@ const (
 //
 //	Existing tenants will be updated with the provided details.
 type Tenant struct {
-	Str              *string           `queryParam:"inline,name=tenant"`
-	TenantPayloadDto *TenantPayloadDto `queryParam:"inline,name=tenant"`
+	Str              *string           `queryParam:"inline" union:"member"`
+	TenantPayloadDto *TenantPayloadDto `queryParam:"inline" union:"member"`
 
 	Type TenantType
 }
@@ -441,99 +441,99 @@ func (u Tenant) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Tenant: all fields are null")
 }
 
-// Two - Rich context object with id and optional data
-type Two struct {
+// TriggerEventRequestDtoContext2 - Rich context object with id and optional data
+type TriggerEventRequestDtoContext2 struct {
 	ID string `json:"id"`
 	// Optional additional context data
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (t Two) MarshalJSON() ([]byte, error) {
+func (t TriggerEventRequestDtoContext2) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *Two) UnmarshalJSON(data []byte) error {
+func (t *TriggerEventRequestDtoContext2) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *Two) GetID() string {
+func (t *TriggerEventRequestDtoContext2) GetID() string {
 	if t == nil {
 		return ""
 	}
 	return t.ID
 }
 
-func (t *Two) GetData() map[string]any {
+func (t *TriggerEventRequestDtoContext2) GetData() map[string]any {
 	if t == nil {
 		return nil
 	}
 	return t.Data
 }
 
-type ContextType string
+type TriggerEventRequestDtoContextType string
 
 const (
-	ContextTypeStr ContextType = "str"
-	ContextTypeTwo ContextType = "2"
+	TriggerEventRequestDtoContextTypeStr                            TriggerEventRequestDtoContextType = "str"
+	TriggerEventRequestDtoContextTypeTriggerEventRequestDtoContext2 TriggerEventRequestDtoContextType = "TriggerEventRequestDto_context_2"
 )
 
-type Context struct {
-	Str *string `queryParam:"inline,name=context"`
-	Two *Two    `queryParam:"inline,name=context"`
+type TriggerEventRequestDtoContext struct {
+	Str                            *string                         `queryParam:"inline" union:"member"`
+	TriggerEventRequestDtoContext2 *TriggerEventRequestDtoContext2 `queryParam:"inline" union:"member"`
 
-	Type ContextType
+	Type TriggerEventRequestDtoContextType
 }
 
-func CreateContextStr(str string) Context {
-	typ := ContextTypeStr
+func CreateTriggerEventRequestDtoContextStr(str string) TriggerEventRequestDtoContext {
+	typ := TriggerEventRequestDtoContextTypeStr
 
-	return Context{
+	return TriggerEventRequestDtoContext{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateContextTwo(two Two) Context {
-	typ := ContextTypeTwo
+func CreateTriggerEventRequestDtoContextTriggerEventRequestDtoContext2(triggerEventRequestDtoContext2 TriggerEventRequestDtoContext2) TriggerEventRequestDtoContext {
+	typ := TriggerEventRequestDtoContextTypeTriggerEventRequestDtoContext2
 
-	return Context{
-		Two:  &two,
-		Type: typ,
+	return TriggerEventRequestDtoContext{
+		TriggerEventRequestDtoContext2: &triggerEventRequestDtoContext2,
+		Type:                           typ,
 	}
 }
 
-func (u *Context) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventRequestDtoContext) UnmarshalJSON(data []byte) error {
 
-	var two Two = Two{}
-	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
-		u.Two = &two
-		u.Type = ContextTypeTwo
+	var triggerEventRequestDtoContext2 TriggerEventRequestDtoContext2 = TriggerEventRequestDtoContext2{}
+	if err := utils.UnmarshalJSON(data, &triggerEventRequestDtoContext2, "", true, nil); err == nil {
+		u.TriggerEventRequestDtoContext2 = &triggerEventRequestDtoContext2
+		u.Type = TriggerEventRequestDtoContextTypeTriggerEventRequestDtoContext2
 		return nil
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ContextTypeStr
+		u.Type = TriggerEventRequestDtoContextTypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Context", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TriggerEventRequestDtoContext", string(data))
 }
 
-func (u Context) MarshalJSON() ([]byte, error) {
+func (u TriggerEventRequestDtoContext) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.Two != nil {
-		return utils.MarshalJSON(u.Two, "", true)
+	if u.TriggerEventRequestDtoContext2 != nil {
+		return utils.MarshalJSON(u.TriggerEventRequestDtoContext2, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Context: all fields are null")
+	return nil, errors.New("could not marshal union type TriggerEventRequestDtoContext: all fields are null")
 }
 
 type TriggerEventRequestDto struct {
@@ -545,7 +545,7 @@ type TriggerEventRequestDto struct {
 	Payload map[string]any `json:"payload,omitempty"`
 	// This could be used to override provider specific configurations
 	Overrides *Overrides `json:"overrides,omitempty"`
-	// The recipients list of people who will receive the notification.
+	// The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
 	To To `json:"to"`
 	// A unique identifier for deduplication. If the same **transactionId** is sent again,
 	//       the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your billing tier.
@@ -555,8 +555,8 @@ type TriggerEventRequestDto struct {
 	Actor *Actor `json:"actor,omitempty"`
 	// It is used to specify a tenant context during trigger event.
 	//     Existing tenants will be updated with the provided details.
-	Tenant  *Tenant            `json:"tenant,omitempty"`
-	Context map[string]Context `json:"context,omitempty"`
+	Tenant  *Tenant                                  `json:"tenant,omitempty"`
+	Context map[string]TriggerEventRequestDtoContext `json:"context,omitempty"`
 }
 
 func (t *TriggerEventRequestDto) GetWorkflowID() string {
@@ -608,7 +608,7 @@ func (t *TriggerEventRequestDto) GetTenant() *Tenant {
 	return t.Tenant
 }
 
-func (t *TriggerEventRequestDto) GetContext() map[string]Context {
+func (t *TriggerEventRequestDto) GetContext() map[string]TriggerEventRequestDtoContext {
 	if t == nil {
 		return nil
 	}

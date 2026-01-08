@@ -1,5 +1,4 @@
 # Translations
-(*Translations*)
 
 ## Overview
 
@@ -41,7 +40,10 @@ func main() {
         ResourceID: "welcome-email",
         ResourceType: components.ResourceTypeWorkflow,
         Locale: "en_US",
-        Content: components.Content{},
+        Content: map[string]any{
+            "welcome.title": "Welcome",
+            "welcome.message": "Hello there!",
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -183,7 +185,7 @@ func main() {
 
 ## Upload
 
-Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json
+Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both "files" and "files[]" field names for backwards compatibility.
 
 ### Example Usage
 
@@ -194,7 +196,7 @@ package main
 import(
 	"context"
 	"github.com/novuhq/novu-go/v3"
-	"github.com/novuhq/novu-go/v3/models/components"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
@@ -205,9 +207,10 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Translations.Upload(ctx, components.UploadTranslationsRequestDto{
+    res, err := s.Translations.Upload(ctx, operations.TranslationControllerUploadTranslationFilesRequestBody{
         ResourceID: "welcome-email",
-        ResourceType: components.UploadTranslationsRequestDtoResourceTypeWorkflow,
+        ResourceType: operations.ResourceTypeWorkflow,
+        Files: []operations.Files{},
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -220,12 +223,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                          | Type                                                                                               | Required                                                                                           | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                              | :heavy_check_mark:                                                                                 | The context to use for the request.                                                                |
-| `uploadTranslationsRequestDto`                                                                     | [components.UploadTranslationsRequestDto](../../models/components/uploadtranslationsrequestdto.md) | :heavy_check_mark:                                                                                 | Translation files upload body details                                                              |
-| `idempotencyKey`                                                                                   | **string*                                                                                          | :heavy_minus_sign:                                                                                 | A header for idempotency purposes                                                                  |
-| `opts`                                                                                             | [][operations.Option](../../models/operations/option.md)                                           | :heavy_minus_sign:                                                                                 | The options for this request.                                                                      |
+| Parameter                                                                                                                                              | Type                                                                                                                                                   | Required                                                                                                                                               | Description                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                                                                                  | :heavy_check_mark:                                                                                                                                     | The context to use for the request.                                                                                                                    |
+| `requestBody`                                                                                                                                          | [operations.TranslationControllerUploadTranslationFilesRequestBody](../../models/operations/translationcontrolleruploadtranslationfilesrequestbody.md) | :heavy_check_mark:                                                                                                                                     | N/A                                                                                                                                                    |
+| `idempotencyKey`                                                                                                                                       | **string*                                                                                                                                              | :heavy_minus_sign:                                                                                                                                     | A header for idempotency purposes                                                                                                                      |
+| `opts`                                                                                                                                                 | [][operations.Option](../../models/operations/option.md)                                                                                               | :heavy_minus_sign:                                                                                                                                     | The options for this request.                                                                                                                          |
 
 ### Response
 

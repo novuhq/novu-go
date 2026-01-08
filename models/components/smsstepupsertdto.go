@@ -17,8 +17,8 @@ const (
 
 // SmsStepUpsertDtoControlValues - Control values for the SMS step.
 type SmsStepUpsertDtoControlValues struct {
-	SmsControlDto *SmsControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny      map[string]any `queryParam:"inline,name=controlValues"`
+	SmsControlDto *SmsControlDto `queryParam:"inline" union:"member"`
+	MapOfAny      map[string]any `queryParam:"inline" union:"member"`
 
 	Type SmsStepUpsertDtoControlValuesType
 }

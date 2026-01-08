@@ -14,7 +14,7 @@ type InAppStepResponseDtoControlValues struct {
 	Body *string `json:"body,omitempty"`
 	// Subject/title of the in-app message. Required if body is empty.
 	Subject *string `json:"subject,omitempty"`
-	// URL for an avatar image. Must be a valid URL or start with / or {{"{{"}} variable }}.
+	// URL for an avatar image. Must be a valid URL or start with / or {{ variable }}.
 	Avatar *string `json:"avatar,omitempty"`
 	// Primary action button details.
 	PrimaryAction *ActionDto `json:"primaryAction,omitempty"`

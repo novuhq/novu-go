@@ -1,5 +1,4 @@
-# Preferences
-(*Subscribers.Preferences*)
+# Subscribers.Preferences
 
 ## Overview
 

@@ -1,6 +1,6 @@
 # Channel
 
-The channel of the message to be deleted
+Filter by channel type (email, sms, push, chat, etc.).
 
 
 ## Values

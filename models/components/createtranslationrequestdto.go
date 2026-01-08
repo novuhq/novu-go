@@ -34,10 +34,6 @@ func (e *ResourceType) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Content - Translation content as JSON object
-type Content struct {
-}
-
 type CreateTranslationRequestDto struct {
 	// The resource ID to associate translation with. Accepts identifier or slug format
 	ResourceID string `json:"resourceId"`
@@ -46,7 +42,7 @@ type CreateTranslationRequestDto struct {
 	// Locale code (e.g., en_US, es_ES)
 	Locale string `json:"locale"`
 	// Translation content as JSON object
-	Content Content `json:"content"`
+	Content map[string]any `json:"content"`
 }
 
 func (c *CreateTranslationRequestDto) GetResourceID() string {
@@ -70,9 +66,9 @@ func (c *CreateTranslationRequestDto) GetLocale() string {
 	return c.Locale
 }
 
-func (c *CreateTranslationRequestDto) GetContent() Content {
+func (c *CreateTranslationRequestDto) GetContent() map[string]any {
 	if c == nil {
-		return Content{}
+		return map[string]any{}
 	}
 	return c.Content
 }

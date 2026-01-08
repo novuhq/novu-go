@@ -17,8 +17,8 @@ const (
 
 // CustomStepUpsertDtoControlValues - Control values for the Custom step.
 type CustomStepUpsertDtoControlValues struct {
-	CustomControlDto *CustomControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny         map[string]any    `queryParam:"inline,name=controlValues"`
+	CustomControlDto *CustomControlDto `queryParam:"inline" union:"member"`
+	MapOfAny         map[string]any    `queryParam:"inline" union:"member"`
 
 	Type CustomStepUpsertDtoControlValuesType
 }

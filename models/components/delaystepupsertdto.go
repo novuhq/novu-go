@@ -17,8 +17,8 @@ const (
 
 // DelayStepUpsertDtoControlValues - Control values for the Delay step.
 type DelayStepUpsertDtoControlValues struct {
-	DelayControlDto *DelayControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny        map[string]any   `queryParam:"inline,name=controlValues"`
+	DelayControlDto *DelayControlDto `queryParam:"inline" union:"member"`
+	MapOfAny        map[string]any   `queryParam:"inline" union:"member"`
 
 	Type DelayStepUpsertDtoControlValuesType
 }

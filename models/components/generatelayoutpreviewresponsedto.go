@@ -70,7 +70,7 @@ const (
 
 // Result - Preview result
 type Result struct {
-	One *One `queryParam:"inline,name=result"`
+	One *One `queryParam:"inline" union:"member"`
 
 	Type ResultUnionType
 }

@@ -50,7 +50,7 @@ func (s SubscribersControllerGetSubscriberPreferencesRequest) MarshalJSON() ([]b
 }
 
 func (s *SubscribersControllerGetSubscriberPreferencesRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"subscriberId"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil

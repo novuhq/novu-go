@@ -2,18 +2,14 @@
 
 package components
 
-// UpdateContextRequestDtoData - Custom data to associate with this context. Replaces existing data.
-type UpdateContextRequestDtoData struct {
-}
-
 type UpdateContextRequestDto struct {
 	// Custom data to associate with this context. Replaces existing data.
-	Data UpdateContextRequestDtoData `json:"data"`
+	Data map[string]any `json:"data"`
 }
 
-func (u *UpdateContextRequestDto) GetData() UpdateContextRequestDtoData {
+func (u *UpdateContextRequestDto) GetData() map[string]any {
 	if u == nil {
-		return UpdateContextRequestDtoData{}
+		return map[string]any{}
 	}
 	return u.Data
 }

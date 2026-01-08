@@ -17,8 +17,8 @@ const (
 
 // ChatStepUpsertDtoControlValues - Control values for the Chat step.
 type ChatStepUpsertDtoControlValues struct {
-	ChatControlDto *ChatControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny       map[string]any  `queryParam:"inline,name=controlValues"`
+	ChatControlDto *ChatControlDto `queryParam:"inline" union:"member"`
+	MapOfAny       map[string]any  `queryParam:"inline" union:"member"`
 
 	Type ChatStepUpsertDtoControlValuesType
 }

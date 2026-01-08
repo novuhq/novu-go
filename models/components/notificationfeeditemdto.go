@@ -82,6 +82,8 @@ type NotificationFeedItemDto struct {
 	Read bool `json:"read"`
 	// Indicates whether the notification has been seen by the subscriber.
 	Seen bool `json:"seen"`
+	// Indicates whether the notification has been archived by the subscriber.
+	Archived bool `json:"archived"`
 	// Device tokens for push notifications, if applicable.
 	DeviceTokens []string `json:"deviceTokens,omitempty"`
 	// Call-to-action information associated with the notification.
@@ -103,7 +105,7 @@ func (n NotificationFeedItemDto) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NotificationFeedItemDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"_id", "_templateId", "_environmentId", "_organizationId", "_notificationId", "_subscriberId", "_jobId", "transactionId", "content", "channel", "read", "seen", "cta", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -254,6 +256,13 @@ func (n *NotificationFeedItemDto) GetSeen() bool {
 		return false
 	}
 	return n.Seen
+}
+
+func (n *NotificationFeedItemDto) GetArchived() bool {
+	if n == nil {
+		return false
+	}
+	return n.Archived
 }
 
 func (n *NotificationFeedItemDto) GetDeviceTokens() []string {

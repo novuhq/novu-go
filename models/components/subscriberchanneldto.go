@@ -8,36 +8,36 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// ProviderID - The ID of the chat or push provider.
-type ProviderID string
+// SubscriberChannelDtoProviderID - The ID of the chat or push provider.
+type SubscriberChannelDtoProviderID string
 
 const (
-	ProviderIDSlack            ProviderID = "slack"
-	ProviderIDDiscord          ProviderID = "discord"
-	ProviderIDMsteams          ProviderID = "msteams"
-	ProviderIDMattermost       ProviderID = "mattermost"
-	ProviderIDRyver            ProviderID = "ryver"
-	ProviderIDZulip            ProviderID = "zulip"
-	ProviderIDGrafanaOnCall    ProviderID = "grafana-on-call"
-	ProviderIDGetstream        ProviderID = "getstream"
-	ProviderIDRocketChat       ProviderID = "rocket-chat"
-	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
-	ProviderIDChatWebhook      ProviderID = "chat-webhook"
-	ProviderIDNovuSlack        ProviderID = "novu-slack"
-	ProviderIDFcm              ProviderID = "fcm"
-	ProviderIDApns             ProviderID = "apns"
-	ProviderIDExpo             ProviderID = "expo"
-	ProviderIDOneSignal        ProviderID = "one-signal"
-	ProviderIDPushpad          ProviderID = "pushpad"
-	ProviderIDPushWebhook      ProviderID = "push-webhook"
-	ProviderIDPusherBeams      ProviderID = "pusher-beams"
-	ProviderIDAppio            ProviderID = "appio"
+	SubscriberChannelDtoProviderIDSlack            SubscriberChannelDtoProviderID = "slack"
+	SubscriberChannelDtoProviderIDDiscord          SubscriberChannelDtoProviderID = "discord"
+	SubscriberChannelDtoProviderIDMsteams          SubscriberChannelDtoProviderID = "msteams"
+	SubscriberChannelDtoProviderIDMattermost       SubscriberChannelDtoProviderID = "mattermost"
+	SubscriberChannelDtoProviderIDRyver            SubscriberChannelDtoProviderID = "ryver"
+	SubscriberChannelDtoProviderIDZulip            SubscriberChannelDtoProviderID = "zulip"
+	SubscriberChannelDtoProviderIDGrafanaOnCall    SubscriberChannelDtoProviderID = "grafana-on-call"
+	SubscriberChannelDtoProviderIDGetstream        SubscriberChannelDtoProviderID = "getstream"
+	SubscriberChannelDtoProviderIDRocketChat       SubscriberChannelDtoProviderID = "rocket-chat"
+	SubscriberChannelDtoProviderIDWhatsappBusiness SubscriberChannelDtoProviderID = "whatsapp-business"
+	SubscriberChannelDtoProviderIDChatWebhook      SubscriberChannelDtoProviderID = "chat-webhook"
+	SubscriberChannelDtoProviderIDNovuSlack        SubscriberChannelDtoProviderID = "novu-slack"
+	SubscriberChannelDtoProviderIDFcm              SubscriberChannelDtoProviderID = "fcm"
+	SubscriberChannelDtoProviderIDApns             SubscriberChannelDtoProviderID = "apns"
+	SubscriberChannelDtoProviderIDExpo             SubscriberChannelDtoProviderID = "expo"
+	SubscriberChannelDtoProviderIDOneSignal        SubscriberChannelDtoProviderID = "one-signal"
+	SubscriberChannelDtoProviderIDPushpad          SubscriberChannelDtoProviderID = "pushpad"
+	SubscriberChannelDtoProviderIDPushWebhook      SubscriberChannelDtoProviderID = "push-webhook"
+	SubscriberChannelDtoProviderIDPusherBeams      SubscriberChannelDtoProviderID = "pusher-beams"
+	SubscriberChannelDtoProviderIDAppio            SubscriberChannelDtoProviderID = "appio"
 )
 
-func (e ProviderID) ToPointer() *ProviderID {
+func (e SubscriberChannelDtoProviderID) ToPointer() *SubscriberChannelDtoProviderID {
 	return &e
 }
-func (e *ProviderID) UnmarshalJSON(data []byte) error {
+func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -82,16 +82,16 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	case "pusher-beams":
 		fallthrough
 	case "appio":
-		*e = ProviderID(v)
+		*e = SubscriberChannelDtoProviderID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProviderID: %v", v)
+		return fmt.Errorf("invalid value for SubscriberChannelDtoProviderID: %v", v)
 	}
 }
 
 type SubscriberChannelDto struct {
 	// The ID of the chat or push provider.
-	ProviderID ProviderID `json:"providerId"`
+	ProviderID SubscriberChannelDtoProviderID `json:"providerId"`
 	// An optional identifier for the integration.
 	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
 	// Credentials for the channel.
@@ -109,9 +109,9 @@ func (s *SubscriberChannelDto) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (s *SubscriberChannelDto) GetProviderID() ProviderID {
+func (s *SubscriberChannelDto) GetProviderID() SubscriberChannelDtoProviderID {
 	if s == nil {
-		return ProviderID("")
+		return SubscriberChannelDtoProviderID("")
 	}
 	return s.ProviderID
 }

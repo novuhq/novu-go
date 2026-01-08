@@ -18,8 +18,8 @@ const (
 
 // FeedIdentifier - Optional feed identifier or array of feed identifiers
 type FeedIdentifier struct {
-	Str        *string  `queryParam:"inline,name=feedIdentifier"`
-	ArrayOfStr []string `queryParam:"inline,name=feedIdentifier"`
+	Str        *string  `queryParam:"inline" union:"member"`
+	ArrayOfStr []string `queryParam:"inline" union:"member"`
 
 	Type FeedIdentifierType
 }

@@ -19,10 +19,10 @@ const (
 )
 
 type Five struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type FiveType
 }
@@ -163,11 +163,11 @@ const (
 
 // Message - Value that failed validation
 type Message struct {
-	Str      *string  `queryParam:"inline,name=message"`
-	Number   *float64 `queryParam:"inline,name=message"`
-	Boolean  *bool    `queryParam:"inline,name=message"`
-	Four     *Four    `queryParam:"inline,name=message"`
-	ArrayOf5 []*Five  `queryParam:"inline,name=message"`
+	Str      *string  `queryParam:"inline" union:"member"`
+	Number   *float64 `queryParam:"inline" union:"member"`
+	Boolean  *bool    `queryParam:"inline" union:"member"`
+	Four     *Four    `queryParam:"inline" union:"member"`
+	ArrayOf5 []*Five  `queryParam:"inline" union:"member"`
 
 	Type MessageType
 }

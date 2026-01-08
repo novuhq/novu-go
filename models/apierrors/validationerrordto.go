@@ -20,10 +20,10 @@ const (
 )
 
 type Message5 struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type Message5Type
 }
@@ -164,11 +164,11 @@ const (
 
 // ValidationErrorDtoMessage - Value that failed validation
 type ValidationErrorDtoMessage struct {
-	Str             *string     `queryParam:"inline,name=message"`
-	Number          *float64    `queryParam:"inline,name=message"`
-	Boolean         *bool       `queryParam:"inline,name=message"`
-	Message4        *Message4   `queryParam:"inline,name=message"`
-	ArrayOfMessage5 []*Message5 `queryParam:"inline,name=message"`
+	Str             *string     `queryParam:"inline" union:"member"`
+	Number          *float64    `queryParam:"inline" union:"member"`
+	Boolean         *bool       `queryParam:"inline" union:"member"`
+	Message4        *Message4   `queryParam:"inline" union:"member"`
+	ArrayOfMessage5 []*Message5 `queryParam:"inline" union:"member"`
 
 	Type ValidationErrorDtoMessageType
 }

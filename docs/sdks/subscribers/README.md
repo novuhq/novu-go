@@ -1,5 +1,4 @@
 # Subscribers
-(*Subscribers*)
 
 ## Overview
 
@@ -40,7 +39,9 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Search(ctx, operations.SubscribersControllerSearchSubscribersRequest{})
+    res, err := s.Subscribers.Search(ctx, operations.SubscribersControllerSearchSubscribersRequest{
+        Limit: v3.Pointer[float64](10),
+    })
     if err != nil {
         log.Fatal(err)
     }

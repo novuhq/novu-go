@@ -17,8 +17,8 @@ const (
 
 // EmailStepUpsertDtoControlValues - Control values for the Email step.
 type EmailStepUpsertDtoControlValues struct {
-	EmailControlDto *EmailControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny        map[string]any   `queryParam:"inline,name=controlValues"`
+	EmailControlDto *EmailControlDto `queryParam:"inline" union:"member"`
+	MapOfAny        map[string]any   `queryParam:"inline" union:"member"`
 
 	Type EmailStepUpsertDtoControlValuesType
 }

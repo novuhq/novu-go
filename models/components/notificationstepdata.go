@@ -19,10 +19,10 @@ const (
 
 // NotificationStepDataMetadata - Metadata associated with the workflow step. Can vary based on the type of step.
 type NotificationStepDataMetadata struct {
-	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline,name=metadata"`
-	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline,name=metadata"`
-	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline,name=metadata"`
-	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline,name=metadata"`
+	DigestRegularMetadata  *DigestRegularMetadata  `queryParam:"inline" union:"member"`
+	DigestTimedMetadata    *DigestTimedMetadata    `queryParam:"inline" union:"member"`
+	DelayRegularMetadata   *DelayRegularMetadata   `queryParam:"inline" union:"member"`
+	DelayScheduledMetadata *DelayScheduledMetadata `queryParam:"inline" union:"member"`
 
 	Type NotificationStepDataMetadataType
 }

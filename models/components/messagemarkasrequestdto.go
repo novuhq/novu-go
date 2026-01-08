@@ -17,8 +17,8 @@ const (
 )
 
 type MessageID struct {
-	Str        *string  `queryParam:"inline,name=messageId"`
-	ArrayOfStr []string `queryParam:"inline,name=messageId"`
+	Str        *string  `queryParam:"inline" union:"member"`
+	ArrayOfStr []string `queryParam:"inline" union:"member"`
 
 	Type MessageIDType
 }

@@ -33,8 +33,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -126,6 +126,11 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		)),
+		Context: map[string]components.TriggerEventToAllRequestDtoContext{
+			"key": components.CreateTriggerEventToAllRequestDtoContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)

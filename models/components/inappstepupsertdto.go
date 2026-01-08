@@ -17,8 +17,8 @@ const (
 
 // InAppStepUpsertDtoControlValues - Control values for the In-App step.
 type InAppStepUpsertDtoControlValues struct {
-	InAppControlDto *InAppControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny        map[string]any   `queryParam:"inline,name=controlValues"`
+	InAppControlDto *InAppControlDto `queryParam:"inline" union:"member"`
+	MapOfAny        map[string]any   `queryParam:"inline" union:"member"`
 
 	Type InAppStepUpsertDtoControlValuesType
 }

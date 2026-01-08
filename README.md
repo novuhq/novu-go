@@ -117,8 +117,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -210,6 +210,11 @@ func main() {
 				SubscriberID: "<id>",
 			},
 		)),
+		Context: map[string]components.TriggerEventToAllRequestDtoContext{
+			"key": components.CreateTriggerEventToAllRequestDtoContextStr(
+				"org-acme",
+			),
+		},
 	}, nil)
 	if err != nil {
 		log.Fatal(err)
@@ -338,8 +343,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -361,9 +366,32 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
+### [Novu SDK](docs/sdks/novu/README.md)
+
+* [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
+* [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
+* [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
+* [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
+
 ### [Activity](docs/sdks/activity/README.md)
 
 * [Track](docs/sdks/activity/README.md#track) - Track activity and engagement events
+
+### [ChannelConnections](docs/sdks/channelconnections/README.md)
+
+* [List](docs/sdks/channelconnections/README.md#list) - List all channel connections
+* [Create](docs/sdks/channelconnections/README.md#create) - Create a channel connection
+* [Retrieve](docs/sdks/channelconnections/README.md#retrieve) - Retrieve a channel connection
+* [Update](docs/sdks/channelconnections/README.md#update) - Update a channel connection
+* [Delete](docs/sdks/channelconnections/README.md#delete) - Delete a channel connection
+
+### [ChannelEndpoints](docs/sdks/channelendpoints/README.md)
+
+* [List](docs/sdks/channelendpoints/README.md#list) - List all channel endpoints
+* [Create](docs/sdks/channelendpoints/README.md#create) - Create a channel endpoint
+* [Retrieve](docs/sdks/channelendpoints/README.md#retrieve) - Retrieve a channel endpoint
+* [Update](docs/sdks/channelendpoints/README.md#update) - Update a channel endpoint
+* [Delete](docs/sdks/channelendpoints/README.md#delete) - Delete a channel endpoint
 
 ### [Contexts](docs/sdks/contexts/README.md)
 
@@ -390,6 +418,7 @@ func main() {
 * [IntegrationsControllerAutoConfigureIntegration](docs/sdks/integrations/README.md#integrationscontrollerautoconfigureintegration) - Auto-configure an integration for inbound webhooks
 * [SetAsPrimary](docs/sdks/integrations/README.md#setasprimary) - Update integration as primary
 * [ListActive](docs/sdks/integrations/README.md#listactive) - List active integrations
+* [GenerateChatOAuthURL](docs/sdks/integrations/README.md#generatechatoauthurl) - Generate chat OAuth URL
 
 ### [Layouts](docs/sdks/layouts/README.md)
 
@@ -412,13 +441,6 @@ func main() {
 
 * [List](docs/sdks/notifications/README.md#list) - List all events
 * [Retrieve](docs/sdks/notifications/README.md#retrieve) - Retrieve an event
-
-### [Novu SDK](docs/sdks/novu/README.md)
-
-* [Trigger](docs/sdks/novu/README.md#trigger) - Trigger event
-* [Cancel](docs/sdks/novu/README.md#cancel) - Cancel triggered event
-* [TriggerBroadcast](docs/sdks/novu/README.md#triggerbroadcast) - Broadcast event to all
-* [TriggerBulk](docs/sdks/novu/README.md#triggerbulk) - Bulk trigger event
 
 ### [Subscribers](docs/sdks/subscribers/README.md)
 
@@ -477,6 +499,8 @@ func main() {
 * [List](docs/sdks/subscriptions/README.md#list) - List topic subscriptions
 * [Create](docs/sdks/subscriptions/README.md#create) - Create topic subscriptions
 * [Delete](docs/sdks/subscriptions/README.md#delete) - Delete topic subscriptions
+* [GetSubscription](docs/sdks/subscriptions/README.md#getsubscription) - Get a topic subscription
+* [Update](docs/sdks/subscriptions/README.md#update) - Update a topic subscription
 
 ### [Translations](docs/sdks/translations/README.md)
 
@@ -553,8 +577,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -624,8 +648,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -695,8 +719,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -791,8 +815,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},
@@ -843,8 +867,8 @@ func main() {
 		Actor: v3.Pointer(components.CreateActorStr(
 			"<value>",
 		)),
-		Context: map[string]components.Context{
-			"key": components.CreateContextStr(
+		Context: map[string]components.TriggerEventRequestDtoContext{
+			"key": components.CreateTriggerEventRequestDtoContextStr(
 				"org-acme",
 			),
 		},

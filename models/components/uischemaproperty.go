@@ -18,10 +18,10 @@ const (
 )
 
 type Placeholder5 struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type Placeholder5Type
 }
@@ -127,11 +127,11 @@ const (
 
 // Placeholder for the UI Schema Property
 type Placeholder struct {
-	Str                 *string        `queryParam:"inline,name=placeholder"`
-	Number              *float64       `queryParam:"inline,name=placeholder"`
-	Boolean             *bool          `queryParam:"inline,name=placeholder"`
-	MapOfAny            map[string]any `queryParam:"inline,name=placeholder"`
-	ArrayOfPlaceholder5 []Placeholder5 `queryParam:"inline,name=placeholder"`
+	Str                 *string        `queryParam:"inline" union:"member"`
+	Number              *float64       `queryParam:"inline" union:"member"`
+	Boolean             *bool          `queryParam:"inline" union:"member"`
+	MapOfAny            map[string]any `queryParam:"inline" union:"member"`
+	ArrayOfPlaceholder5 []Placeholder5 `queryParam:"inline" union:"member"`
 
 	Type PlaceholderType
 }

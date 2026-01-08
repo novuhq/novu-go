@@ -18,10 +18,10 @@ const (
 )
 
 type Value5 struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type Value5Type
 }
@@ -141,11 +141,11 @@ const (
 
 // PayloadValidationErrorDtoValue - The actual value that failed validation
 type PayloadValidationErrorDtoValue struct {
-	Str           *string   `queryParam:"inline,name=value"`
-	Number        *float64  `queryParam:"inline,name=value"`
-	Boolean       *bool     `queryParam:"inline,name=value"`
-	Value4        *Value4   `queryParam:"inline,name=value"`
-	ArrayOfValue5 []*Value5 `queryParam:"inline,name=value"`
+	Str           *string   `queryParam:"inline" union:"member"`
+	Number        *float64  `queryParam:"inline" union:"member"`
+	Boolean       *bool     `queryParam:"inline" union:"member"`
+	Value4        *Value4   `queryParam:"inline" union:"member"`
+	ArrayOfValue5 []*Value5 `queryParam:"inline" union:"member"`
 
 	Type PayloadValidationErrorDtoValueType
 }

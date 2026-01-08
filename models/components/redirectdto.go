@@ -45,7 +45,7 @@ func (e *Target) UnmarshalJSON(data []byte) error {
 }
 
 type RedirectDto struct {
-	// URL for redirection. Must be a valid URL or start with / or {{"{{"}} variable }}.
+	// URL for redirection. Must be a valid URL or start with / or {{ variable }}.
 	URL *string `json:"url,omitempty"`
 	// Target window for the redirection.
 	Target *Target `default:"_self" json:"target"`

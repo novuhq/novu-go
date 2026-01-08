@@ -16,7 +16,7 @@ const (
 
 // UserAll - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type UserAll struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline,name=all"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" union:"member"`
 
 	Type UserAllType
 }
@@ -90,7 +90,7 @@ const (
 
 // User workflow preferences
 type User struct {
-	UserWorkflowPreferencesDto *UserWorkflowPreferencesDto `queryParam:"inline,name=user"`
+	UserWorkflowPreferencesDto *UserWorkflowPreferencesDto `queryParam:"inline" union:"member"`
 
 	Type UserType
 }
@@ -132,7 +132,7 @@ const (
 
 // PreferencesRequestDtoAll - A preference for the workflow. The values specified here will be used if no preference is specified for a channel.
 type PreferencesRequestDtoAll struct {
-	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline,name=all"`
+	WorkflowPreferenceDto *WorkflowPreferenceDto `queryParam:"inline" union:"member"`
 
 	Type PreferencesRequestDtoAllType
 }

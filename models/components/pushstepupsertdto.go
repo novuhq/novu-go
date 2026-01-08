@@ -17,8 +17,8 @@ const (
 
 // PushStepUpsertDtoControlValues - Control values for the Push step.
 type PushStepUpsertDtoControlValues struct {
-	PushControlDto *PushControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny       map[string]any  `queryParam:"inline,name=controlValues"`
+	PushControlDto *PushControlDto `queryParam:"inline" union:"member"`
+	MapOfAny       map[string]any  `queryParam:"inline" union:"member"`
 
 	Type PushStepUpsertDtoControlValuesType
 }

@@ -86,7 +86,7 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -434,7 +434,7 @@ func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, nil, nil); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

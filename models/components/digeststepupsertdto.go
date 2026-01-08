@@ -17,8 +17,8 @@ const (
 
 // DigestStepUpsertDtoControlValues - Control values for the Digest step.
 type DigestStepUpsertDtoControlValues struct {
-	DigestControlDto *DigestControlDto `queryParam:"inline,name=controlValues"`
-	MapOfAny         map[string]any    `queryParam:"inline,name=controlValues"`
+	DigestControlDto *DigestControlDto `queryParam:"inline" union:"member"`
+	MapOfAny         map[string]any    `queryParam:"inline" union:"member"`
 
 	Type DigestStepUpsertDtoControlValuesType
 }
