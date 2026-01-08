@@ -1,5 +1,4 @@
 # Layouts
-(*Layouts*)
 
 ## Overview
 
@@ -101,7 +100,10 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Layouts.List(ctx, operations.LayoutsControllerListRequest{})
+    res, err := s.Layouts.List(ctx, operations.LayoutsControllerListRequest{
+        Limit: v3.Pointer[float64](10),
+        Offset: v3.Pointer[float64](0),
+    })
     if err != nil {
         log.Fatal(err)
     }

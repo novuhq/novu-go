@@ -1,5 +1,4 @@
-# NovuNotifications
-(*Subscribers.Notifications*)
+# Subscribers.Notifications
 
 ## Overview
 
@@ -34,6 +33,7 @@ func main() {
 
     res, err := s.Subscribers.Notifications.Feed(ctx, operations.SubscribersV1ControllerGetNotificationsFeedRequest{
         SubscriberID: "<id>",
+        Page: v3.Pointer[float64](0),
         Payload: v3.Pointer("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
     })
     if err != nil {

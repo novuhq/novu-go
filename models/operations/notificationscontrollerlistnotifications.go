@@ -30,6 +30,8 @@ type NotificationsControllerListNotificationsRequest struct {
 	TransactionID *string `queryParam:"style=form,explode=true,name=transactionId"`
 	// Topic Key for filtering notifications by topic
 	TopicKey *string `queryParam:"style=form,explode=true,name=topicKey"`
+	// Subscription ID for filtering notifications by subscription
+	SubscriptionID *string `queryParam:"style=form,explode=true,name=subscriptionId"`
 	// Filter by exact context keys, order insensitive (format: "type:id")
 	ContextKeys []string `queryParam:"style=form,explode=true,name=contextKeys"`
 	// Date filter for records after this timestamp. Defaults to earliest date allowed by subscription plan
@@ -119,6 +121,13 @@ func (n *NotificationsControllerListNotificationsRequest) GetTopicKey() *string 
 		return nil
 	}
 	return n.TopicKey
+}
+
+func (n *NotificationsControllerListNotificationsRequest) GetSubscriptionID() *string {
+	if n == nil {
+		return nil
+	}
+	return n.SubscriptionID
 }
 
 func (n *NotificationsControllerListNotificationsRequest) GetContextKeys() []string {

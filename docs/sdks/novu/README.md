@@ -17,7 +17,7 @@ Novu Documentation
 ## Trigger
 
 
-    Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+    Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Maximum number of recipients can be 100. Additional information can be passed according the body interface below.
     To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 
 ### Example Usage
@@ -55,8 +55,8 @@ func main() {
         Actor: v3.Pointer(components.CreateActorStr(
             "<value>",
         )),
-        Context: map[string]components.Context{
-            "key": components.CreateContextStr(
+        Context: map[string]components.TriggerEventRequestDtoContext{
+            "key": components.CreateTriggerEventRequestDtoContextStr(
                 "org-acme",
             ),
         },
@@ -207,6 +207,11 @@ func main() {
                 SubscriberID: "<id>",
             },
         )),
+        Context: map[string]components.TriggerEventToAllRequestDtoContext{
+            "key": components.CreateTriggerEventToAllRequestDtoContextStr(
+                "org-acme",
+            ),
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)

@@ -20,10 +20,10 @@ const (
 )
 
 type MessagePayloadValidationExceptionDto5 struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type MessagePayloadValidationExceptionDto5Type
 }
@@ -164,11 +164,11 @@ const (
 
 // PayloadValidationExceptionDtoMessage - Value that failed validation
 type PayloadValidationExceptionDtoMessage struct {
-	Str                                          *string                                  `queryParam:"inline,name=message"`
-	Number                                       *float64                                 `queryParam:"inline,name=message"`
-	Boolean                                      *bool                                    `queryParam:"inline,name=message"`
-	MessagePayloadValidationExceptionDto4        *MessagePayloadValidationExceptionDto4   `queryParam:"inline,name=message"`
-	ArrayOfMessagePayloadValidationExceptionDto5 []*MessagePayloadValidationExceptionDto5 `queryParam:"inline,name=message"`
+	Str                                          *string                                  `queryParam:"inline" union:"member"`
+	Number                                       *float64                                 `queryParam:"inline" union:"member"`
+	Boolean                                      *bool                                    `queryParam:"inline" union:"member"`
+	MessagePayloadValidationExceptionDto4        *MessagePayloadValidationExceptionDto4   `queryParam:"inline" union:"member"`
+	ArrayOfMessagePayloadValidationExceptionDto5 []*MessagePayloadValidationExceptionDto5 `queryParam:"inline" union:"member"`
 
 	Type PayloadValidationExceptionDtoMessageType
 }

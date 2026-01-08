@@ -104,15 +104,15 @@ const (
 )
 
 type WorkflowResponseDtoSteps struct {
-	InAppStepResponseDto    *InAppStepResponseDto    `queryParam:"inline,name=steps"`
-	EmailStepResponseDto    *EmailStepResponseDto    `queryParam:"inline,name=steps"`
-	SmsStepResponseDto      *SmsStepResponseDto      `queryParam:"inline,name=steps"`
-	PushStepResponseDto     *PushStepResponseDto     `queryParam:"inline,name=steps"`
-	ChatStepResponseDto     *ChatStepResponseDto     `queryParam:"inline,name=steps"`
-	DelayStepResponseDto    *DelayStepResponseDto    `queryParam:"inline,name=steps"`
-	DigestStepResponseDto   *DigestStepResponseDto   `queryParam:"inline,name=steps"`
-	CustomStepResponseDto   *CustomStepResponseDto   `queryParam:"inline,name=steps"`
-	ThrottleStepResponseDto *ThrottleStepResponseDto `queryParam:"inline,name=steps"`
+	InAppStepResponseDto    *InAppStepResponseDto    `queryParam:"inline" union:"member"`
+	EmailStepResponseDto    *EmailStepResponseDto    `queryParam:"inline" union:"member"`
+	SmsStepResponseDto      *SmsStepResponseDto      `queryParam:"inline" union:"member"`
+	PushStepResponseDto     *PushStepResponseDto     `queryParam:"inline" union:"member"`
+	ChatStepResponseDto     *ChatStepResponseDto     `queryParam:"inline" union:"member"`
+	DelayStepResponseDto    *DelayStepResponseDto    `queryParam:"inline" union:"member"`
+	DigestStepResponseDto   *DigestStepResponseDto   `queryParam:"inline" union:"member"`
+	CustomStepResponseDto   *CustomStepResponseDto   `queryParam:"inline" union:"member"`
+	ThrottleStepResponseDto *ThrottleStepResponseDto `queryParam:"inline" union:"member"`
 
 	Type WorkflowResponseDtoStepsType
 }
@@ -417,7 +417,7 @@ func (w WorkflowResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (w *WorkflowResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &w, "", false, []string{"name", "_id", "workflowId", "slug", "updatedAt", "createdAt", "steps", "origin", "preferences", "status", "severity"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &w, "", false, nil); err != nil {
 		return err
 	}
 	return nil

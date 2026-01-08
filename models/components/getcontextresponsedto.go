@@ -2,15 +2,17 @@
 
 package components
 
-type GetContextResponseDtoData struct {
-}
-
 type GetContextResponseDto struct {
-	Type      string                    `json:"type"`
-	ID        string                    `json:"id"`
-	Data      GetContextResponseDtoData `json:"data"`
-	CreatedAt string                    `json:"createdAt"`
-	UpdatedAt string                    `json:"updatedAt"`
+	// Context type (e.g., tenant, app, workspace)
+	Type string `json:"type"`
+	// Unique identifier for this context
+	ID string `json:"id"`
+	// Custom data associated with this context
+	Data map[string]any `json:"data"`
+	// Creation timestamp
+	CreatedAt string `json:"createdAt"`
+	// Last update timestamp
+	UpdatedAt string `json:"updatedAt"`
 }
 
 func (g *GetContextResponseDto) GetType() string {
@@ -27,9 +29,9 @@ func (g *GetContextResponseDto) GetID() string {
 	return g.ID
 }
 
-func (g *GetContextResponseDto) GetData() GetContextResponseDtoData {
+func (g *GetContextResponseDto) GetData() map[string]any {
 	if g == nil {
-		return GetContextResponseDtoData{}
+		return map[string]any{}
 	}
 	return g.Data
 }

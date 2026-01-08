@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.11.0 and generator version 2.755.9
+// Generated from OpenAPI doc version 3.11.0 and generator version 2.791.1
 
 import (
 	"bytes"
@@ -82,7 +82,9 @@ type Novu struct {
 	// All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
 	//
 	// https://docs.novu.co/workflows
-	Workflows *Workflows
+	Workflows          *Workflows
+	ChannelConnections *ChannelConnections
+	ChannelEndpoints   *ChannelEndpoints
 	// With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
 	//
 	// https://docs.novu.co/platform/integrations/overview
@@ -168,9 +170,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.11.0",
+		SDKVersion: "3.12.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.11.0 2.755.9 3.11.0 github.com/novuhq/novu-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.12.0 2.791.1 3.11.0 github.com/novuhq/novu-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -206,6 +208,8 @@ func New(opts ...SDKOption) *Novu {
 	sdk.Topics = newTopics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Translations = newTranslations(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Workflows = newWorkflows(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.ChannelConnections = newChannelConnections(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.ChannelEndpoints = newChannelEndpoints(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Integrations = newIntegrations(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Messages = newMessages(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Notifications = newNotifications(sdk, sdk.sdkConfiguration, sdk.hooks)
@@ -215,7 +219,7 @@ func New(opts ...SDKOption) *Novu {
 
 // Trigger event
 //
-//	Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Additional information can be passed according the body interface below.
+//	Trigger event is the main (and only) way to send notifications to subscribers. The trigger identifier is used to match the particular workflow associated with it. Maximum number of recipients can be 100. Additional information can be passed according the body interface below.
 //	To prevent duplicate triggers, you can optionally pass a **transactionId** in the request body. If the same **transactionId** is used again, the trigger will be ignored. The retention period depends on your billing tier.
 func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.TriggerEventRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.EventsControllerTriggerResponse, error) {
 	request := operations.EventsControllerTriggerRequest{

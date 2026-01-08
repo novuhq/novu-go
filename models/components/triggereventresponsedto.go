@@ -49,6 +49,9 @@ func (e *TriggerEventResponseDtoStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type JobData struct {
+}
+
 type TriggerEventResponseDto struct {
 	// Indicates whether the trigger was acknowledged or not
 	Acknowledged bool `json:"acknowledged"`
@@ -57,7 +60,8 @@ type TriggerEventResponseDto struct {
 	// In case of an error, this field will contain the error message(s)
 	Error []string `json:"error,omitempty"`
 	// The returned transaction ID of the trigger
-	TransactionID *string `json:"transactionId,omitempty"`
+	TransactionID *string  `json:"transactionId,omitempty"`
+	JobData       *JobData `json:"jobData,omitempty"`
 }
 
 func (t *TriggerEventResponseDto) GetAcknowledged() bool {
@@ -86,4 +90,11 @@ func (t *TriggerEventResponseDto) GetTransactionID() *string {
 		return nil
 	}
 	return t.TransactionID
+}
+
+func (t *TriggerEventResponseDto) GetJobData() *JobData {
+	if t == nil {
+		return nil
+	}
+	return t.JobData
 }

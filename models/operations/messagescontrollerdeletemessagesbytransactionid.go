@@ -8,21 +8,21 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-// Channel - The channel of the message to be deleted
-type Channel string
+// MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel - The channel of the message to be deleted
+type MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel string
 
 const (
-	ChannelInApp Channel = "in_app"
-	ChannelEmail Channel = "email"
-	ChannelSms   Channel = "sms"
-	ChannelChat  Channel = "chat"
-	ChannelPush  Channel = "push"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelInApp MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "in_app"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelEmail MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "email"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelSms   MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "sms"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelChat  MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "chat"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelPush  MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "push"
 )
 
-func (e Channel) ToPointer() *Channel {
+func (e MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) ToPointer() *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel {
 	return &e
 }
-func (e *Channel) UnmarshalJSON(data []byte) error {
+func (e *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -37,22 +37,22 @@ func (e *Channel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
-		*e = Channel(v)
+		*e = MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Channel: %v", v)
+		return fmt.Errorf("invalid value for MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel: %v", v)
 	}
 }
 
 type MessagesControllerDeleteMessagesByTransactionIDRequest struct {
 	// The channel of the message to be deleted
-	Channel       *Channel `queryParam:"style=form,explode=true,name=channel"`
-	TransactionID string   `pathParam:"style=simple,explode=false,name=transactionId"`
+	Channel       *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel `queryParam:"style=form,explode=true,name=channel"`
+	TransactionID string                                                            `pathParam:"style=simple,explode=false,name=transactionId"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
-func (m *MessagesControllerDeleteMessagesByTransactionIDRequest) GetChannel() *Channel {
+func (m *MessagesControllerDeleteMessagesByTransactionIDRequest) GetChannel() *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel {
 	if m == nil {
 		return nil
 	}

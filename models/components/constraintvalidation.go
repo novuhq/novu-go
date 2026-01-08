@@ -18,10 +18,10 @@ const (
 )
 
 type Five struct {
-	Str      *string        `queryParam:"inline,name=five"`
-	Number   *float64       `queryParam:"inline,name=five"`
-	Boolean  *bool          `queryParam:"inline,name=five"`
-	MapOfAny map[string]any `queryParam:"inline,name=five"`
+	Str      *string        `queryParam:"inline" union:"member"`
+	Number   *float64       `queryParam:"inline" union:"member"`
+	Boolean  *bool          `queryParam:"inline" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
 	Type FiveType
 }
@@ -141,11 +141,11 @@ const (
 
 // Value that failed validation
 type Value struct {
-	Str      *string  `queryParam:"inline,name=value"`
-	Number   *float64 `queryParam:"inline,name=value"`
-	Boolean  *bool    `queryParam:"inline,name=value"`
-	Four     *Four    `queryParam:"inline,name=value"`
-	ArrayOf5 []*Five  `queryParam:"inline,name=value"`
+	Str      *string  `queryParam:"inline" union:"member"`
+	Number   *float64 `queryParam:"inline" union:"member"`
+	Boolean  *bool    `queryParam:"inline" union:"member"`
+	Four     *Four    `queryParam:"inline" union:"member"`
+	ArrayOf5 []*Five  `queryParam:"inline" union:"member"`
 
 	Type ValueType
 }

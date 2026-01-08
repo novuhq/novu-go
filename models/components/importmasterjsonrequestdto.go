@@ -2,15 +2,11 @@
 
 package components
 
-// MasterJSON - Master JSON object containing all translations organized by workflow identifier
-type MasterJSON struct {
-}
-
 type ImportMasterJSONRequestDto struct {
 	// The locale for which translations are being imported
 	Locale string `json:"locale"`
 	// Master JSON object containing all translations organized by workflow identifier
-	MasterJSON MasterJSON `json:"masterJson"`
+	MasterJSON map[string]any `json:"masterJson"`
 }
 
 func (i *ImportMasterJSONRequestDto) GetLocale() string {
@@ -20,9 +16,9 @@ func (i *ImportMasterJSONRequestDto) GetLocale() string {
 	return i.Locale
 }
 
-func (i *ImportMasterJSONRequestDto) GetMasterJSON() MasterJSON {
+func (i *ImportMasterJSONRequestDto) GetMasterJSON() map[string]any {
 	if i == nil {
-		return MasterJSON{}
+		return map[string]any{}
 	}
 	return i.MasterJSON
 }
