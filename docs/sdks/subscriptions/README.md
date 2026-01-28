@@ -38,6 +38,10 @@ func main() {
     res, err := s.Topics.Subscriptions.List(ctx, operations.TopicsControllerListTopicSubscriptionsRequest{
         TopicKey: "<value>",
         Limit: v3.Pointer[float64](10),
+        ContextKeys: []string{
+            "tenant:org-123",
+            "region:us-east-1",
+        },
     })
     if err != nil {
         log.Fatal(err)
@@ -111,6 +115,11 @@ func main() {
             ),
         },
         Name: v3.Pointer("My Topic"),
+        Context: map[string]components.CreateTopicSubscriptionsRequestDtoContext{
+            "key": components.CreateCreateTopicSubscriptionsRequestDtoContextStr(
+                "org-acme",
+            ),
+        },
         Preferences: []components.Preferences{
             components.CreatePreferencesWorkflowPreferenceRequestDto(
                 components.WorkflowPreferenceRequestDto{
@@ -264,7 +273,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.SubscriptionResponseDto != nil {
+    if res.SubscriptionDetailsResponseDto != nil {
         // handle response
     }
 }

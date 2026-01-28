@@ -13,6 +13,8 @@ type TopicSubscriptionResponseDto struct {
 	Topic TopicResponseDto `json:"topic"`
 	// Subscriber information
 	Subscriber SubscriberDto `json:"subscriber"`
+	// Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)
+	ContextKeys []string `json:"contextKeys,omitempty"`
 }
 
 func (t *TopicSubscriptionResponseDto) GetID() string {
@@ -48,4 +50,11 @@ func (t *TopicSubscriptionResponseDto) GetSubscriber() SubscriberDto {
 		return SubscriberDto{}
 	}
 	return t.Subscriber
+}
+
+func (t *TopicSubscriptionResponseDto) GetContextKeys() []string {
+	if t == nil {
+		return nil
+	}
+	return t.ContextKeys
 }

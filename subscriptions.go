@@ -1263,12 +1263,12 @@ func (s *Subscriptions) GetSubscription(ctx context.Context, topicKey string, id
 				return nil, err
 			}
 
-			var out components.SubscriptionResponseDto
+			var out components.SubscriptionDetailsResponseDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			res.SubscriptionResponseDto = &out
+			res.SubscriptionDetailsResponseDto = &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {

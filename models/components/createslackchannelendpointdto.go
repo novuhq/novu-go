@@ -9,32 +9,32 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// Context2 - Rich context object with id and optional data
-type Context2 struct {
+// CreateSlackChannelEndpointDtoContext2 - Rich context object with id and optional data
+type CreateSlackChannelEndpointDtoContext2 struct {
 	ID string `json:"id"`
 	// Optional additional context data
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (c Context2) MarshalJSON() ([]byte, error) {
+func (c CreateSlackChannelEndpointDtoContext2) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *Context2) UnmarshalJSON(data []byte) error {
+func (c *CreateSlackChannelEndpointDtoContext2) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (c *Context2) GetID() string {
+func (c *CreateSlackChannelEndpointDtoContext2) GetID() string {
 	if c == nil {
 		return ""
 	}
 	return c.ID
 }
 
-func (c *Context2) GetData() map[string]any {
+func (c *CreateSlackChannelEndpointDtoContext2) GetData() map[string]any {
 	if c == nil {
 		return nil
 	}
@@ -44,13 +44,13 @@ func (c *Context2) GetData() map[string]any {
 type CreateSlackChannelEndpointDtoContextType string
 
 const (
-	CreateSlackChannelEndpointDtoContextTypeStr      CreateSlackChannelEndpointDtoContextType = "str"
-	CreateSlackChannelEndpointDtoContextTypeContext2 CreateSlackChannelEndpointDtoContextType = "context_2"
+	CreateSlackChannelEndpointDtoContextTypeStr                                   CreateSlackChannelEndpointDtoContextType = "str"
+	CreateSlackChannelEndpointDtoContextTypeCreateSlackChannelEndpointDtoContext2 CreateSlackChannelEndpointDtoContextType = "CreateSlackChannelEndpointDto_context_2"
 )
 
 type CreateSlackChannelEndpointDtoContext struct {
-	Str      *string   `queryParam:"inline" union:"member"`
-	Context2 *Context2 `queryParam:"inline" union:"member"`
+	Str                                   *string                                `queryParam:"inline" union:"member"`
+	CreateSlackChannelEndpointDtoContext2 *CreateSlackChannelEndpointDtoContext2 `queryParam:"inline" union:"member"`
 
 	Type CreateSlackChannelEndpointDtoContextType
 }
@@ -64,21 +64,21 @@ func CreateCreateSlackChannelEndpointDtoContextStr(str string) CreateSlackChanne
 	}
 }
 
-func CreateCreateSlackChannelEndpointDtoContextContext2(context2 Context2) CreateSlackChannelEndpointDtoContext {
-	typ := CreateSlackChannelEndpointDtoContextTypeContext2
+func CreateCreateSlackChannelEndpointDtoContextCreateSlackChannelEndpointDtoContext2(createSlackChannelEndpointDtoContext2 CreateSlackChannelEndpointDtoContext2) CreateSlackChannelEndpointDtoContext {
+	typ := CreateSlackChannelEndpointDtoContextTypeCreateSlackChannelEndpointDtoContext2
 
 	return CreateSlackChannelEndpointDtoContext{
-		Context2: &context2,
-		Type:     typ,
+		CreateSlackChannelEndpointDtoContext2: &createSlackChannelEndpointDtoContext2,
+		Type:                                  typ,
 	}
 }
 
 func (u *CreateSlackChannelEndpointDtoContext) UnmarshalJSON(data []byte) error {
 
-	var context2 Context2 = Context2{}
-	if err := utils.UnmarshalJSON(data, &context2, "", true, nil); err == nil {
-		u.Context2 = &context2
-		u.Type = CreateSlackChannelEndpointDtoContextTypeContext2
+	var createSlackChannelEndpointDtoContext2 CreateSlackChannelEndpointDtoContext2 = CreateSlackChannelEndpointDtoContext2{}
+	if err := utils.UnmarshalJSON(data, &createSlackChannelEndpointDtoContext2, "", true, nil); err == nil {
+		u.CreateSlackChannelEndpointDtoContext2 = &createSlackChannelEndpointDtoContext2
+		u.Type = CreateSlackChannelEndpointDtoContextTypeCreateSlackChannelEndpointDtoContext2
 		return nil
 	}
 
@@ -97,8 +97,8 @@ func (u CreateSlackChannelEndpointDtoContext) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.Context2 != nil {
-		return utils.MarshalJSON(u.Context2, "", true)
+	if u.CreateSlackChannelEndpointDtoContext2 != nil {
+		return utils.MarshalJSON(u.CreateSlackChannelEndpointDtoContext2, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type CreateSlackChannelEndpointDtoContext: all fields are null")

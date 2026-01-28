@@ -33,7 +33,9 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Preferences.List(ctx, "<id>", operations.CriticalityNonCritical.ToPointer(), nil)
+    res, err := s.Subscribers.Preferences.List(ctx, "<id>", operations.CriticalityNonCritical.ToPointer(), []string{
+        "tenant:acme",
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -45,13 +47,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       |
-| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
-| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |
-| `subscriberID`                                                    | *string*                                                          | :heavy_check_mark:                                                | N/A                                                               |
-| `criticality`                                                     | [*operations.Criticality](../../models/operations/criticality.md) | :heavy_minus_sign:                                                | N/A                                                               |
-| `idempotencyKey`                                                  | **string*                                                         | :heavy_minus_sign:                                                | A header for idempotency purposes                                 |
-| `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |
+| Parameter                                                         | Type                                                              | Required                                                          | Description                                                       | Example                                                           |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `ctx`                                                             | [context.Context](https://pkg.go.dev/context#Context)             | :heavy_check_mark:                                                | The context to use for the request.                               |                                                                   |
+| `subscriberID`                                                    | *string*                                                          | :heavy_check_mark:                                                | N/A                                                               |                                                                   |
+| `criticality`                                                     | [*operations.Criticality](../../models/operations/criticality.md) | :heavy_minus_sign:                                                | N/A                                                               |                                                                   |
+| `contextKeys`                                                     | []*string*                                                        | :heavy_minus_sign:                                                | Context keys for filtering preferences (e.g., ["tenant:acme"])    | [<br/>"tenant:acme"<br/>]                                         |
+| `idempotencyKey`                                                  | **string*                                                         | :heavy_minus_sign:                                                | A header for idempotency purposes                                 |                                                                   |
+| `opts`                                                            | [][operations.Option](../../models/operations/option.md)          | :heavy_minus_sign:                                                | The options for this request.                                     |                                                                   |
 
 ### Response
 
@@ -162,6 +165,11 @@ func main() {
                 },
             },
         },
+        Context: map[string]components.Context{
+            "key": components.CreateContextStr(
+                "org-acme",
+            ),
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -223,6 +231,11 @@ func main() {
 
     res, err := s.Subscribers.Preferences.BulkUpdate(ctx, "<id>", components.BulkUpdateSubscriberPreferencesDto{
         Preferences: []components.BulkUpdateSubscriberPreferenceItemDto{},
+        Context: map[string]components.BulkUpdateSubscriberPreferencesDtoContext{
+            "key": components.CreateBulkUpdateSubscriberPreferencesDtoContextStr(
+                "org-acme",
+            ),
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)
