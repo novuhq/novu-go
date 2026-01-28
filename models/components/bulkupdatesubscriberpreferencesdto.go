@@ -2,9 +2,111 @@
 
 package components
 
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+)
+
+// Context2 - Rich context object with id and optional data
+type Context2 struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (c Context2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *Context2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *Context2) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *Context2) GetData() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Data
+}
+
+type BulkUpdateSubscriberPreferencesDtoContextType string
+
+const (
+	BulkUpdateSubscriberPreferencesDtoContextTypeStr      BulkUpdateSubscriberPreferencesDtoContextType = "str"
+	BulkUpdateSubscriberPreferencesDtoContextTypeContext2 BulkUpdateSubscriberPreferencesDtoContextType = "context_2"
+)
+
+type BulkUpdateSubscriberPreferencesDtoContext struct {
+	Str      *string   `queryParam:"inline" union:"member"`
+	Context2 *Context2 `queryParam:"inline" union:"member"`
+
+	Type BulkUpdateSubscriberPreferencesDtoContextType
+}
+
+func CreateBulkUpdateSubscriberPreferencesDtoContextStr(str string) BulkUpdateSubscriberPreferencesDtoContext {
+	typ := BulkUpdateSubscriberPreferencesDtoContextTypeStr
+
+	return BulkUpdateSubscriberPreferencesDtoContext{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateBulkUpdateSubscriberPreferencesDtoContextContext2(context2 Context2) BulkUpdateSubscriberPreferencesDtoContext {
+	typ := BulkUpdateSubscriberPreferencesDtoContextTypeContext2
+
+	return BulkUpdateSubscriberPreferencesDtoContext{
+		Context2: &context2,
+		Type:     typ,
+	}
+}
+
+func (u *BulkUpdateSubscriberPreferencesDtoContext) UnmarshalJSON(data []byte) error {
+
+	var context2 Context2 = Context2{}
+	if err := utils.UnmarshalJSON(data, &context2, "", true, nil); err == nil {
+		u.Context2 = &context2
+		u.Type = BulkUpdateSubscriberPreferencesDtoContextTypeContext2
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = BulkUpdateSubscriberPreferencesDtoContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for BulkUpdateSubscriberPreferencesDtoContext", string(data))
+}
+
+func (u BulkUpdateSubscriberPreferencesDtoContext) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Context2 != nil {
+		return utils.MarshalJSON(u.Context2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type BulkUpdateSubscriberPreferencesDtoContext: all fields are null")
+}
+
 type BulkUpdateSubscriberPreferencesDto struct {
 	// Array of workflow preferences to update (maximum 100 items)
-	Preferences []BulkUpdateSubscriberPreferenceItemDto `json:"preferences"`
+	Preferences []BulkUpdateSubscriberPreferenceItemDto              `json:"preferences"`
+	Context     map[string]BulkUpdateSubscriberPreferencesDtoContext `json:"context,omitempty"`
 }
 
 func (b *BulkUpdateSubscriberPreferencesDto) GetPreferences() []BulkUpdateSubscriberPreferenceItemDto {
@@ -12,4 +114,11 @@ func (b *BulkUpdateSubscriberPreferencesDto) GetPreferences() []BulkUpdateSubscr
 		return []BulkUpdateSubscriberPreferenceItemDto{}
 	}
 	return b.Preferences
+}
+
+func (b *BulkUpdateSubscriberPreferencesDto) GetContext() map[string]BulkUpdateSubscriberPreferencesDtoContext {
+	if b == nil {
+		return nil
+	}
+	return b.Context
 }

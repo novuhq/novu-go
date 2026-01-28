@@ -104,8 +104,8 @@ func main() {
     res, err := s.ChannelConnections.Create(ctx, components.CreateChannelConnectionRequestDto{
         Identifier: v3.Pointer("slack-prod-user123-abc4"),
         SubscriberID: v3.Pointer("subscriber-123"),
-        Context: map[string]components.Context{
-            "key": components.CreateContextStr(
+        Context: map[string]components.CreateChannelConnectionRequestDtoContext{
+            "key": components.CreateCreateChannelConnectionRequestDtoContextStr(
                 "org-acme",
             ),
         },

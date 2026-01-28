@@ -71,6 +71,101 @@ func (u Subscriptions) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Subscriptions: all fields are null")
 }
 
+// CreateTopicSubscriptionsRequestDtoContext2 - Rich context object with id and optional data
+type CreateTopicSubscriptionsRequestDtoContext2 struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (c CreateTopicSubscriptionsRequestDtoContext2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CreateTopicSubscriptionsRequestDtoContext2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *CreateTopicSubscriptionsRequestDtoContext2) GetID() string {
+	if c == nil {
+		return ""
+	}
+	return c.ID
+}
+
+func (c *CreateTopicSubscriptionsRequestDtoContext2) GetData() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Data
+}
+
+type CreateTopicSubscriptionsRequestDtoContextType string
+
+const (
+	CreateTopicSubscriptionsRequestDtoContextTypeStr                                        CreateTopicSubscriptionsRequestDtoContextType = "str"
+	CreateTopicSubscriptionsRequestDtoContextTypeCreateTopicSubscriptionsRequestDtoContext2 CreateTopicSubscriptionsRequestDtoContextType = "CreateTopicSubscriptionsRequestDto_context_2"
+)
+
+type CreateTopicSubscriptionsRequestDtoContext struct {
+	Str                                        *string                                     `queryParam:"inline" union:"member"`
+	CreateTopicSubscriptionsRequestDtoContext2 *CreateTopicSubscriptionsRequestDtoContext2 `queryParam:"inline" union:"member"`
+
+	Type CreateTopicSubscriptionsRequestDtoContextType
+}
+
+func CreateCreateTopicSubscriptionsRequestDtoContextStr(str string) CreateTopicSubscriptionsRequestDtoContext {
+	typ := CreateTopicSubscriptionsRequestDtoContextTypeStr
+
+	return CreateTopicSubscriptionsRequestDtoContext{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateCreateTopicSubscriptionsRequestDtoContextCreateTopicSubscriptionsRequestDtoContext2(createTopicSubscriptionsRequestDtoContext2 CreateTopicSubscriptionsRequestDtoContext2) CreateTopicSubscriptionsRequestDtoContext {
+	typ := CreateTopicSubscriptionsRequestDtoContextTypeCreateTopicSubscriptionsRequestDtoContext2
+
+	return CreateTopicSubscriptionsRequestDtoContext{
+		CreateTopicSubscriptionsRequestDtoContext2: &createTopicSubscriptionsRequestDtoContext2,
+		Type: typ,
+	}
+}
+
+func (u *CreateTopicSubscriptionsRequestDtoContext) UnmarshalJSON(data []byte) error {
+
+	var createTopicSubscriptionsRequestDtoContext2 CreateTopicSubscriptionsRequestDtoContext2 = CreateTopicSubscriptionsRequestDtoContext2{}
+	if err := utils.UnmarshalJSON(data, &createTopicSubscriptionsRequestDtoContext2, "", true, nil); err == nil {
+		u.CreateTopicSubscriptionsRequestDtoContext2 = &createTopicSubscriptionsRequestDtoContext2
+		u.Type = CreateTopicSubscriptionsRequestDtoContextTypeCreateTopicSubscriptionsRequestDtoContext2
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = CreateTopicSubscriptionsRequestDtoContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateTopicSubscriptionsRequestDtoContext", string(data))
+}
+
+func (u CreateTopicSubscriptionsRequestDtoContext) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.CreateTopicSubscriptionsRequestDtoContext2 != nil {
+		return utils.MarshalJSON(u.CreateTopicSubscriptionsRequestDtoContext2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type CreateTopicSubscriptionsRequestDtoContext: all fields are null")
+}
+
 type PreferencesType string
 
 const (
@@ -164,7 +259,8 @@ type CreateTopicSubscriptionsRequestDto struct {
 	// List of subscriptions to subscribe to the topic (max: 100). Can be either a string array of subscriber IDs or an array of objects with identifier and subscriberId
 	Subscriptions []Subscriptions `json:"subscriptions,omitempty"`
 	// The name of the topic
-	Name *string `json:"name,omitempty"`
+	Name    *string                                              `json:"name,omitempty"`
+	Context map[string]CreateTopicSubscriptionsRequestDtoContext `json:"context,omitempty"`
 	// The preferences of the topic. Can be a simple workflow ID string, workflow preference object, or group filter object
 	Preferences []Preferences `json:"preferences,omitempty"`
 }
@@ -188,6 +284,13 @@ func (c *CreateTopicSubscriptionsRequestDto) GetName() *string {
 		return nil
 	}
 	return c.Name
+}
+
+func (c *CreateTopicSubscriptionsRequestDto) GetContext() map[string]CreateTopicSubscriptionsRequestDtoContext {
+	if c == nil {
+		return nil
+	}
+	return c.Context
 }
 
 func (c *CreateTopicSubscriptionsRequestDto) GetPreferences() []Preferences {

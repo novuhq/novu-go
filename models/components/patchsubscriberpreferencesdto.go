@@ -2,13 +2,115 @@
 
 package components
 
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+)
+
+// Two - Rich context object with id and optional data
+type Two struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (t Two) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Two) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *Two) GetID() string {
+	if t == nil {
+		return ""
+	}
+	return t.ID
+}
+
+func (t *Two) GetData() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Data
+}
+
+type ContextType string
+
+const (
+	ContextTypeStr ContextType = "str"
+	ContextTypeTwo ContextType = "2"
+)
+
+type Context struct {
+	Str *string `queryParam:"inline" union:"member"`
+	Two *Two    `queryParam:"inline" union:"member"`
+
+	Type ContextType
+}
+
+func CreateContextStr(str string) Context {
+	typ := ContextTypeStr
+
+	return Context{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateContextTwo(two Two) Context {
+	typ := ContextTypeTwo
+
+	return Context{
+		Two:  &two,
+		Type: typ,
+	}
+}
+
+func (u *Context) UnmarshalJSON(data []byte) error {
+
+	var two Two = Two{}
+	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
+		u.Two = &two
+		u.Type = ContextTypeTwo
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = ContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Context", string(data))
+}
+
+func (u Context) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Two != nil {
+		return utils.MarshalJSON(u.Two, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Context: all fields are null")
+}
+
 type PatchSubscriberPreferencesDto struct {
 	// Channel-specific preference settings
 	Channels *PatchPreferenceChannelsDto `json:"channels,omitempty"`
 	// Workflow internal _id, identifier or slug. If provided, update workflow specific preferences, otherwise update global preferences
 	WorkflowID *string `json:"workflowId,omitempty"`
 	// Subscriber schedule
-	Schedule *ScheduleDto `json:"schedule,omitempty"`
+	Schedule *ScheduleDto       `json:"schedule,omitempty"`
+	Context  map[string]Context `json:"context,omitempty"`
 }
 
 func (p *PatchSubscriberPreferencesDto) GetChannels() *PatchPreferenceChannelsDto {
@@ -30,4 +132,11 @@ func (p *PatchSubscriberPreferencesDto) GetSchedule() *ScheduleDto {
 		return nil
 	}
 	return p.Schedule
+}
+
+func (p *PatchSubscriberPreferencesDto) GetContext() map[string]Context {
+	if p == nil {
+		return nil
+	}
+	return p.Context
 }

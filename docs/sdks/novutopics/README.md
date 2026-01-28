@@ -34,6 +34,10 @@ func main() {
     res, err := s.Subscribers.Topics.List(ctx, operations.SubscribersControllerListSubscriberTopicsRequest{
         SubscriberID: "<id>",
         Limit: v3.Pointer[float64](10),
+        ContextKeys: []string{
+            "tenant:org-123",
+            "region:us-east-1",
+        },
     })
     if err != nil {
         log.Fatal(err)

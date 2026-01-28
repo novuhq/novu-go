@@ -11,6 +11,8 @@ type SubscriberWorkflowPreferenceDto struct {
 	Overrides []SubscriberPreferenceOverrideDto `json:"overrides"`
 	// Workflow information
 	Workflow SubscriberPreferencesWorkflowInfoDto `json:"workflow"`
+	// Timestamp when the subscriber last updated their preference. Only present if subscriber explicitly set preferences.
+	UpdatedAt *string `json:"updatedAt,omitempty"`
 }
 
 func (s *SubscriberWorkflowPreferenceDto) GetEnabled() bool {
@@ -39,4 +41,11 @@ func (s *SubscriberWorkflowPreferenceDto) GetWorkflow() SubscriberPreferencesWor
 		return SubscriberPreferencesWorkflowInfoDto{}
 	}
 	return s.Workflow
+}
+
+func (s *SubscriberWorkflowPreferenceDto) GetUpdatedAt() *string {
+	if s == nil {
+		return nil
+	}
+	return s.UpdatedAt
 }

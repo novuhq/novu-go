@@ -52,6 +52,8 @@ type TopicsControllerListTopicSubscriptionsRequest struct {
 	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
 	// Filter by subscriber ID
 	SubscriberID *string `queryParam:"style=form,explode=true,name=subscriberId"`
+	// Filter by exact context keys, order insensitive (format: "type:id")
+	ContextKeys []string `queryParam:"style=form,explode=true,name=contextKeys"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
@@ -110,6 +112,13 @@ func (t *TopicsControllerListTopicSubscriptionsRequest) GetSubscriberID() *strin
 		return nil
 	}
 	return t.SubscriberID
+}
+
+func (t *TopicsControllerListTopicSubscriptionsRequest) GetContextKeys() []string {
+	if t == nil {
+		return nil
+	}
+	return t.ContextKeys
 }
 
 func (t *TopicsControllerListTopicSubscriptionsRequest) GetIdempotencyKey() *string {

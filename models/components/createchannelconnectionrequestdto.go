@@ -8,107 +8,107 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// Two - Rich context object with id and optional data
-type Two struct {
+// CreateChannelConnectionRequestDtoContext2 - Rich context object with id and optional data
+type CreateChannelConnectionRequestDtoContext2 struct {
 	ID string `json:"id"`
 	// Optional additional context data
 	Data map[string]any `json:"data,omitempty"`
 }
 
-func (t Two) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
+func (c CreateChannelConnectionRequestDtoContext2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
 }
 
-func (t *Two) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id"}); err != nil {
+func (c *CreateChannelConnectionRequestDtoContext2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *Two) GetID() string {
-	if t == nil {
+func (c *CreateChannelConnectionRequestDtoContext2) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return t.ID
+	return c.ID
 }
 
-func (t *Two) GetData() map[string]any {
-	if t == nil {
+func (c *CreateChannelConnectionRequestDtoContext2) GetData() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return t.Data
+	return c.Data
 }
 
-type ContextType string
+type CreateChannelConnectionRequestDtoContextType string
 
 const (
-	ContextTypeStr ContextType = "str"
-	ContextTypeTwo ContextType = "2"
+	CreateChannelConnectionRequestDtoContextTypeStr                                       CreateChannelConnectionRequestDtoContextType = "str"
+	CreateChannelConnectionRequestDtoContextTypeCreateChannelConnectionRequestDtoContext2 CreateChannelConnectionRequestDtoContextType = "CreateChannelConnectionRequestDto_context_2"
 )
 
-type Context struct {
-	Str *string `queryParam:"inline" union:"member"`
-	Two *Two    `queryParam:"inline" union:"member"`
+type CreateChannelConnectionRequestDtoContext struct {
+	Str                                       *string                                    `queryParam:"inline" union:"member"`
+	CreateChannelConnectionRequestDtoContext2 *CreateChannelConnectionRequestDtoContext2 `queryParam:"inline" union:"member"`
 
-	Type ContextType
+	Type CreateChannelConnectionRequestDtoContextType
 }
 
-func CreateContextStr(str string) Context {
-	typ := ContextTypeStr
+func CreateCreateChannelConnectionRequestDtoContextStr(str string) CreateChannelConnectionRequestDtoContext {
+	typ := CreateChannelConnectionRequestDtoContextTypeStr
 
-	return Context{
+	return CreateChannelConnectionRequestDtoContext{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateContextTwo(two Two) Context {
-	typ := ContextTypeTwo
+func CreateCreateChannelConnectionRequestDtoContextCreateChannelConnectionRequestDtoContext2(createChannelConnectionRequestDtoContext2 CreateChannelConnectionRequestDtoContext2) CreateChannelConnectionRequestDtoContext {
+	typ := CreateChannelConnectionRequestDtoContextTypeCreateChannelConnectionRequestDtoContext2
 
-	return Context{
-		Two:  &two,
+	return CreateChannelConnectionRequestDtoContext{
+		CreateChannelConnectionRequestDtoContext2: &createChannelConnectionRequestDtoContext2,
 		Type: typ,
 	}
 }
 
-func (u *Context) UnmarshalJSON(data []byte) error {
+func (u *CreateChannelConnectionRequestDtoContext) UnmarshalJSON(data []byte) error {
 
-	var two Two = Two{}
-	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
-		u.Two = &two
-		u.Type = ContextTypeTwo
+	var createChannelConnectionRequestDtoContext2 CreateChannelConnectionRequestDtoContext2 = CreateChannelConnectionRequestDtoContext2{}
+	if err := utils.UnmarshalJSON(data, &createChannelConnectionRequestDtoContext2, "", true, nil); err == nil {
+		u.CreateChannelConnectionRequestDtoContext2 = &createChannelConnectionRequestDtoContext2
+		u.Type = CreateChannelConnectionRequestDtoContextTypeCreateChannelConnectionRequestDtoContext2
 		return nil
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ContextTypeStr
+		u.Type = CreateChannelConnectionRequestDtoContextTypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Context", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateChannelConnectionRequestDtoContext", string(data))
 }
 
-func (u Context) MarshalJSON() ([]byte, error) {
+func (u CreateChannelConnectionRequestDtoContext) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	if u.Two != nil {
-		return utils.MarshalJSON(u.Two, "", true)
+	if u.CreateChannelConnectionRequestDtoContext2 != nil {
+		return utils.MarshalJSON(u.CreateChannelConnectionRequestDtoContext2, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Context: all fields are null")
+	return nil, errors.New("could not marshal union type CreateChannelConnectionRequestDtoContext: all fields are null")
 }
 
 type CreateChannelConnectionRequestDto struct {
 	// The unique identifier for the channel connection. If not provided, one will be generated automatically.
 	Identifier *string `json:"identifier,omitempty"`
 	// The subscriber ID to link the channel connection to
-	SubscriberID *string            `json:"subscriberId,omitempty"`
-	Context      map[string]Context `json:"context,omitempty"`
+	SubscriberID *string                                             `json:"subscriberId,omitempty"`
+	Context      map[string]CreateChannelConnectionRequestDtoContext `json:"context,omitempty"`
 	// The identifier of the integration to use for this channel connection.
 	IntegrationIdentifier string       `json:"integrationIdentifier"`
 	Workspace             WorkspaceDto `json:"workspace"`
@@ -129,7 +129,7 @@ func (c *CreateChannelConnectionRequestDto) GetSubscriberID() *string {
 	return c.SubscriberID
 }
 
-func (c *CreateChannelConnectionRequestDto) GetContext() map[string]Context {
+func (c *CreateChannelConnectionRequestDto) GetContext() map[string]CreateChannelConnectionRequestDtoContext {
 	if c == nil {
 		return nil
 	}

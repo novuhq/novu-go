@@ -73,6 +73,8 @@ type SubscriptionResponseDto struct {
 	Subscriber *Subscriber `json:"subscriber"`
 	// The preferences for workflows in this subscription
 	Preferences []SubscriptionPreferenceDto `json:"preferences,omitempty"`
+	// Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)
+	ContextKeys []string `json:"contextKeys,omitempty"`
 	// The creation date of the subscription
 	CreatedAt string `json:"createdAt"`
 	// The last update date of the subscription
@@ -119,6 +121,13 @@ func (s *SubscriptionResponseDto) GetPreferences() []SubscriptionPreferenceDto {
 		return nil
 	}
 	return s.Preferences
+}
+
+func (s *SubscriptionResponseDto) GetContextKeys() []string {
+	if s == nil {
+		return nil
+	}
+	return s.ContextKeys
 }
 
 func (s *SubscriptionResponseDto) GetCreatedAt() string {

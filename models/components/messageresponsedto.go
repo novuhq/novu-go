@@ -72,14 +72,6 @@ func (u Content) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Content: all fields are null")
 }
 
-// MessageResponseDtoPayload - The payload that was used to send the notification trigger
-type MessageResponseDtoPayload struct {
-}
-
-// MessageResponseDtoOverrides - Provider specific overrides used when triggering the notification
-type MessageResponseDtoOverrides struct {
-}
-
 type MessageResponseDto struct {
 	// Unique identifier for the message
 	ID *string `json:"_id,omitempty"`
@@ -146,9 +138,9 @@ type MessageResponseDto struct {
 	// Error text if the message has an error
 	ErrorText *string `json:"errorText,omitempty"`
 	// The payload that was used to send the notification trigger
-	Payload *MessageResponseDtoPayload `json:"payload,omitempty"`
+	Payload map[string]any `json:"payload,omitempty"`
 	// Provider specific overrides used when triggering the notification
-	Overrides *MessageResponseDtoOverrides `json:"overrides,omitempty"`
+	Overrides map[string]any `json:"overrides,omitempty"`
 	// Context (single or multi) in which the message was sent
 	ContextKeys []string `json:"contextKeys,omitempty"`
 }
@@ -377,14 +369,14 @@ func (m *MessageResponseDto) GetErrorText() *string {
 	return m.ErrorText
 }
 
-func (m *MessageResponseDto) GetPayload() *MessageResponseDtoPayload {
+func (m *MessageResponseDto) GetPayload() map[string]any {
 	if m == nil {
 		return nil
 	}
 	return m.Payload
 }
 
-func (m *MessageResponseDto) GetOverrides() *MessageResponseDtoOverrides {
+func (m *MessageResponseDto) GetOverrides() map[string]any {
 	if m == nil {
 		return nil
 	}

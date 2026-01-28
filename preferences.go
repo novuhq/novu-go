@@ -34,10 +34,11 @@ func newPreferences(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hoo
 // Retrieve subscriber channel preferences by its unique key identifier **subscriberId**.
 //
 //	This API returns all five channels preferences for all workflows and global preferences.
-func (s *Preferences) List(ctx context.Context, subscriberID string, criticality *operations.Criticality, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerGetSubscriberPreferencesResponse, error) {
+func (s *Preferences) List(ctx context.Context, subscriberID string, criticality *operations.Criticality, contextKeys []string, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersControllerGetSubscriberPreferencesResponse, error) {
 	request := operations.SubscribersControllerGetSubscriberPreferencesRequest{
 		SubscriberID:   subscriberID,
 		Criticality:    criticality,
+		ContextKeys:    contextKeys,
 		IdempotencyKey: idempotencyKey,
 	}
 

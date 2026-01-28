@@ -2,18 +2,14 @@
 
 package components
 
-// Payload of the action result
-type Payload struct {
-}
-
 type MessageActionResult struct {
 	// Payload of the action result
-	Payload *Payload `json:"payload,omitempty"`
+	Payload map[string]any `json:"payload,omitempty"`
 	// Type of button for the action result
 	Type *ButtonTypeEnum `json:"type,omitempty"`
 }
 
-func (m *MessageActionResult) GetPayload() *Payload {
+func (m *MessageActionResult) GetPayload() map[string]any {
 	if m == nil {
 		return nil
 	}

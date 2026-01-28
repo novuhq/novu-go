@@ -9,9 +9,9 @@
 createSlackChannelEndpointDtoContext := components.CreateCreateSlackChannelEndpointDtoContextStr(string{/* values here */})
 ```
 
-### Context2
+### CreateSlackChannelEndpointDtoContext2
 
 ```go
-createSlackChannelEndpointDtoContext := components.CreateCreateSlackChannelEndpointDtoContextContext2(components.Context2{/* values here */})
+createSlackChannelEndpointDtoContext := components.CreateCreateSlackChannelEndpointDtoContextCreateSlackChannelEndpointDtoContext2(components.CreateSlackChannelEndpointDtoContext2{/* values here */})
 ```
 

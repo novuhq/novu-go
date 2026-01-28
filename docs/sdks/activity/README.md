@@ -29,7 +29,9 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Activity.Track(ctx, "<id>", "<id>", "<value>", nil)
+    res, err := s.Activity.Track(ctx, "<id>", "<id>", map[string]any{
+
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -46,7 +48,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `environmentID`                                          | *string*                                                 | :heavy_check_mark:                                       | The environment identifier                               |
 | `integrationID`                                          | *string*                                                 | :heavy_check_mark:                                       | The integration identifier for the delivery provider     |
-| `requestBody`                                            | *any*                                                    | :heavy_check_mark:                                       | Webhook event payload from the delivery provider         |
+| `requestBody`                                            | map[string]*any*                                         | :heavy_check_mark:                                       | Webhook event payload from the delivery provider         |
 | `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 

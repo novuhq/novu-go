@@ -41,6 +41,8 @@ func (e *Criticality) UnmarshalJSON(data []byte) error {
 type SubscribersControllerGetSubscriberPreferencesRequest struct {
 	SubscriberID string       `pathParam:"style=simple,explode=false,name=subscriberId"`
 	Criticality  *Criticality `default:"nonCritical" queryParam:"style=form,explode=true,name=criticality"`
+	// Context keys for filtering preferences (e.g., ["tenant:acme"])
+	ContextKeys []string `queryParam:"style=form,explode=true,name=contextKeys"`
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
@@ -68,6 +70,13 @@ func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetCriticality() 
 		return nil
 	}
 	return s.Criticality
+}
+
+func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetContextKeys() []string {
+	if s == nil {
+		return nil
+	}
+	return s.ContextKeys
 }
 
 func (s *SubscribersControllerGetSubscriberPreferencesRequest) GetIdempotencyKey() *string {

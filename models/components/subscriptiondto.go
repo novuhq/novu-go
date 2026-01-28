@@ -69,6 +69,8 @@ type SubscriptionDto struct {
 	Topic TopicDto `json:"topic"`
 	// The subscriber information
 	Subscriber *SubscriptionDtoSubscriber `json:"subscriber"`
+	// Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)
+	ContextKeys []string `json:"contextKeys,omitempty"`
 	// The creation date of the subscription
 	CreatedAt string `json:"createdAt"`
 	// The last update date of the subscription
@@ -101,6 +103,13 @@ func (s *SubscriptionDto) GetSubscriber() *SubscriptionDtoSubscriber {
 		return nil
 	}
 	return s.Subscriber
+}
+
+func (s *SubscriptionDto) GetContextKeys() []string {
+	if s == nil {
+		return nil
+	}
+	return s.ContextKeys
 }
 
 func (s *SubscriptionDto) GetCreatedAt() string {

@@ -39,8 +39,8 @@ func (t *TopicsControllerGetTopicSubscriptionRequest) GetIdempotencyKey() *strin
 type TopicsControllerGetTopicSubscriptionResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
-	SubscriptionResponseDto *components.SubscriptionResponseDto
-	Headers                 map[string][]string
+	SubscriptionDetailsResponseDto *components.SubscriptionDetailsResponseDto
+	Headers                        map[string][]string
 }
 
 func (t *TopicsControllerGetTopicSubscriptionResponse) GetHTTPMeta() components.HTTPMetadata {
@@ -50,11 +50,11 @@ func (t *TopicsControllerGetTopicSubscriptionResponse) GetHTTPMeta() components.
 	return t.HTTPMeta
 }
 
-func (t *TopicsControllerGetTopicSubscriptionResponse) GetSubscriptionResponseDto() *components.SubscriptionResponseDto {
+func (t *TopicsControllerGetTopicSubscriptionResponse) GetSubscriptionDetailsResponseDto() *components.SubscriptionDetailsResponseDto {
 	if t == nil {
 		return nil
 	}
-	return t.SubscriptionResponseDto
+	return t.SubscriptionDetailsResponseDto
 }
 
 func (t *TopicsControllerGetTopicSubscriptionResponse) GetHeaders() map[string][]string {

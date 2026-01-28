@@ -14,7 +14,7 @@ type InboundWebhooksControllerHandleWebhookRequest struct {
 	// A header for idempotency purposes
 	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 	// Webhook event payload from the delivery provider
-	RequestBody any `request:"mediaType=application/json"`
+	RequestBody map[string]any `request:"mediaType=application/json"`
 }
 
 func (i *InboundWebhooksControllerHandleWebhookRequest) GetEnvironmentID() string {
@@ -38,9 +38,9 @@ func (i *InboundWebhooksControllerHandleWebhookRequest) GetIdempotencyKey() *str
 	return i.IdempotencyKey
 }
 
-func (i *InboundWebhooksControllerHandleWebhookRequest) GetRequestBody() any {
+func (i *InboundWebhooksControllerHandleWebhookRequest) GetRequestBody() map[string]any {
 	if i == nil {
-		return nil
+		return map[string]any{}
 	}
 	return i.RequestBody
 }
