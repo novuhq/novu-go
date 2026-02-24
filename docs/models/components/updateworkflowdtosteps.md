@@ -51,3 +51,27 @@ updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsDigest(componen
 updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsCustom(components.CustomStepUpsertDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch updateWorkflowDtoSteps.Type {
+	case components.UpdateWorkflowDtoStepsTypeInApp:
+		// updateWorkflowDtoSteps.InAppStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeEmail:
+		// updateWorkflowDtoSteps.EmailStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeSms:
+		// updateWorkflowDtoSteps.SmsStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypePush:
+		// updateWorkflowDtoSteps.PushStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeChat:
+		// updateWorkflowDtoSteps.ChatStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeDelay:
+		// updateWorkflowDtoSteps.DelayStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeDigest:
+		// updateWorkflowDtoSteps.DigestStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeCustom:
+		// updateWorkflowDtoSteps.CustomStepUpsertDto is populated
+}
+```

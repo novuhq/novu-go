@@ -421,7 +421,11 @@ func main() {
         log.Fatal(err)
     }
     if res.GenerateLayoutPreviewResponseDto != nil {
-        // handle response
+        switch res.GenerateLayoutPreviewResponseDto.Result.Type {
+            case components.ResultUnionTypeOne:
+                // res.GenerateLayoutPreviewResponseDto.Result.One is populated
+        }
+
     }
 }
 ```

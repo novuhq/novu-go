@@ -1075,8 +1075,8 @@ func (s *Subscriptions) Delete(ctx context.Context, topicKey string, deleteTopic
 
 }
 
-// GetSubscription - Get a topic subscription
-// Get a subscription by its unique identifier for a topic.
+// GetSubscription - Retrieve a topic subscription
+// Retrieve a subscription by its unique identifier for a topic.
 func (s *Subscriptions) GetSubscription(ctx context.Context, topicKey string, identifier string, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerGetTopicSubscriptionResponse, error) {
 	request := operations.TopicsControllerGetTopicSubscriptionRequest{
 		TopicKey:       topicKey,

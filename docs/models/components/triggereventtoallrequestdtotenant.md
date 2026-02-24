@@ -19,3 +19,15 @@ triggerEventToAllRequestDtoTenant := components.CreateTriggerEventToAllRequestDt
 triggerEventToAllRequestDtoTenant := components.CreateTriggerEventToAllRequestDtoTenantTenantPayloadDto(components.TenantPayloadDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch triggerEventToAllRequestDtoTenant.Type {
+	case components.TriggerEventToAllRequestDtoTenantTypeStr:
+		// triggerEventToAllRequestDtoTenant.Str is populated
+	case components.TriggerEventToAllRequestDtoTenantTypeTenantPayloadDto:
+		// triggerEventToAllRequestDtoTenant.TenantPayloadDto is populated
+}
+```

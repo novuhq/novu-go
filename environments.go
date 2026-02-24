@@ -34,7 +34,7 @@ func newEnvironments(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *ho
 	}
 }
 
-// GetTags - Get environment tags
+// GetTags - List environment tags
 // Retrieve all unique tags used in workflows within the specified environment. These tags can be used for filtering workflows.
 func (s *Environments) GetTags(ctx context.Context, environmentID string, idempotencyKey *string, opts ...operations.Option) (*operations.EnvironmentsControllerGetEnvironmentTagsResponse, error) {
 	request := operations.EnvironmentsControllerGetEnvironmentTagsRequest{
@@ -1605,6 +1605,7 @@ func (s *Environments) Delete(ctx context.Context, environmentID string, idempot
 
 	switch {
 	case httpRes.StatusCode == 200:
+		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

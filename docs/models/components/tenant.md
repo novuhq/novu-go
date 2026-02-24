@@ -18,3 +18,15 @@ tenant := components.CreateTenantStr(string{/* values here */})
 tenant := components.CreateTenantTenantPayloadDto(components.TenantPayloadDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch tenant.Type {
+	case components.TenantTypeStr:
+		// tenant.Str is populated
+	case components.TenantTypeTenantPayloadDto:
+		// tenant.TenantPayloadDto is populated
+}
+```

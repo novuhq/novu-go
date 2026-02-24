@@ -41,3 +41,23 @@ channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateC
 channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyMsTeamsUser(components.CreateMsTeamsUserEndpointDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch channelEndpointsControllerCreateChannelEndpointRequestBody.Type {
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackChannel:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateSlackChannelEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackUser:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateSlackUserEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebhook:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateWebhookEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePhone:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreatePhoneEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsChannel:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateMsTeamsChannelEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateMsTeamsUserEndpointDto is populated
+}
+```

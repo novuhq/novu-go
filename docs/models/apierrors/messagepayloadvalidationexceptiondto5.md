@@ -27,3 +27,19 @@ messagePayloadValidationExceptionDto5 := apierrors.CreateMessagePayloadValidatio
 messagePayloadValidationExceptionDto5 := apierrors.CreateMessagePayloadValidationExceptionDto5MapOfAny(map[string]any{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch messagePayloadValidationExceptionDto5.Type {
+	case apierrors.MessagePayloadValidationExceptionDto5TypeStr:
+		// messagePayloadValidationExceptionDto5.Str is populated
+	case apierrors.MessagePayloadValidationExceptionDto5TypeNumber:
+		// messagePayloadValidationExceptionDto5.Number is populated
+	case apierrors.MessagePayloadValidationExceptionDto5TypeBoolean:
+		// messagePayloadValidationExceptionDto5.Boolean is populated
+	case apierrors.MessagePayloadValidationExceptionDto5TypeMapOfAny:
+		// messagePayloadValidationExceptionDto5.MapOfAny is populated
+}
+```

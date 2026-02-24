@@ -46,7 +46,13 @@ func main() {
         log.Fatal(err)
     }
     if res.MessageResponseDto != nil {
-        // handle response
+        switch res.MessageResponseDto.Content.Type {
+            case components.ContentTypeArrayOfEmailBlock:
+                // res.MessageResponseDto.Content.ArrayOfEmailBlock is populated
+            case components.ContentTypeStr:
+                // res.MessageResponseDto.Content.Str is populated
+        }
+
     }
 }
 ```

@@ -17,3 +17,15 @@ content := components.CreateContentArrayOfEmailBlock([]components.EmailBlock{/* 
 content := components.CreateContentStr(string{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch content.Type {
+	case components.ContentTypeArrayOfEmailBlock:
+		// content.ArrayOfEmailBlock is populated
+	case components.ContentTypeStr:
+		// content.Str is populated
+}
+```

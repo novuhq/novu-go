@@ -29,3 +29,19 @@ updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpoin
 updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpointRequestDtoEndpointPhoneEndpointDto(components.PhoneEndpointDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch updateChannelEndpointRequestDtoEndpoint.Type {
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeSlackChannelEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.SlackChannelEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeSlackUserEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.SlackUserEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeWebhookEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.WebhookEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypePhoneEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.PhoneEndpointDto is populated
+}
+```

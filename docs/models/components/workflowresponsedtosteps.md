@@ -57,3 +57,29 @@ workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsCustom(comp
 workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsThrottle(components.ThrottleStepResponseDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch workflowResponseDtoSteps.Type {
+	case components.WorkflowResponseDtoStepsTypeInApp:
+		// workflowResponseDtoSteps.InAppStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeEmail:
+		// workflowResponseDtoSteps.EmailStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeSms:
+		// workflowResponseDtoSteps.SmsStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypePush:
+		// workflowResponseDtoSteps.PushStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeChat:
+		// workflowResponseDtoSteps.ChatStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeDelay:
+		// workflowResponseDtoSteps.DelayStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeDigest:
+		// workflowResponseDtoSteps.DigestStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeCustom:
+		// workflowResponseDtoSteps.CustomStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeThrottle:
+		// workflowResponseDtoSteps.ThrottleStepResponseDto is populated
+}
+```

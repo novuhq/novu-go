@@ -29,3 +29,19 @@ notificationStepDataMetadata := components.CreateNotificationStepDataMetadataDel
 notificationStepDataMetadata := components.CreateNotificationStepDataMetadataDelayScheduledMetadata(components.DelayScheduledMetadata{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch notificationStepDataMetadata.Type {
+	case components.NotificationStepDataMetadataTypeDigestRegularMetadata:
+		// notificationStepDataMetadata.DigestRegularMetadata is populated
+	case components.NotificationStepDataMetadataTypeDigestTimedMetadata:
+		// notificationStepDataMetadata.DigestTimedMetadata is populated
+	case components.NotificationStepDataMetadataTypeDelayRegularMetadata:
+		// notificationStepDataMetadata.DelayRegularMetadata is populated
+	case components.NotificationStepDataMetadataTypeDelayScheduledMetadata:
+		// notificationStepDataMetadata.DelayScheduledMetadata is populated
+}
+```

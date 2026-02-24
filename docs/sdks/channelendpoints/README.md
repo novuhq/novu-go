@@ -116,7 +116,17 @@ func main() {
         log.Fatal(err)
     }
     if res.GetChannelEndpointResponseDto != nil {
-        // handle response
+        switch res.GetChannelEndpointResponseDto.Endpoint.Type {
+            case components.EndpointTypeSlackChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackChannelEndpointDto is populated
+            case components.EndpointTypeSlackUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackUserEndpointDto is populated
+            case components.EndpointTypeWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
+            case components.EndpointTypePhoneEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+        }
+
     }
 }
 ```
@@ -158,6 +168,7 @@ import(
 	"context"
 	"github.com/novuhq/novu-go/v3"
 	"log"
+	"github.com/novuhq/novu-go/v3/models/components"
 )
 
 func main() {
@@ -172,7 +183,17 @@ func main() {
         log.Fatal(err)
     }
     if res.GetChannelEndpointResponseDto != nil {
-        // handle response
+        switch res.GetChannelEndpointResponseDto.Endpoint.Type {
+            case components.EndpointTypeSlackChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackChannelEndpointDto is populated
+            case components.EndpointTypeSlackUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackUserEndpointDto is populated
+            case components.EndpointTypeWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
+            case components.EndpointTypePhoneEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+        }
+
     }
 }
 ```
@@ -235,7 +256,17 @@ func main() {
         log.Fatal(err)
     }
     if res.GetChannelEndpointResponseDto != nil {
-        // handle response
+        switch res.GetChannelEndpointResponseDto.Endpoint.Type {
+            case components.EndpointTypeSlackChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackChannelEndpointDto is populated
+            case components.EndpointTypeSlackUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.SlackUserEndpointDto is populated
+            case components.EndpointTypeWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
+            case components.EndpointTypePhoneEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+        }
+
     }
 }
 ```

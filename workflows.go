@@ -1602,6 +1602,7 @@ func (s *Workflows) Delete(ctx context.Context, workflowID string, idempotencyKe
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

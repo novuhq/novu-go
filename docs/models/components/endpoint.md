@@ -29,3 +29,19 @@ endpoint := components.CreateEndpointWebhookEndpointDto(components.WebhookEndpoi
 endpoint := components.CreateEndpointPhoneEndpointDto(components.PhoneEndpointDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch endpoint.Type {
+	case components.EndpointTypeSlackChannelEndpointDto:
+		// endpoint.SlackChannelEndpointDto is populated
+	case components.EndpointTypeSlackUserEndpointDto:
+		// endpoint.SlackUserEndpointDto is populated
+	case components.EndpointTypeWebhookEndpointDto:
+		// endpoint.WebhookEndpointDto is populated
+	case components.EndpointTypePhoneEndpointDto:
+		// endpoint.PhoneEndpointDto is populated
+}
+```
