@@ -17,3 +17,15 @@ inAppStepUpsertDtoControlValues := components.CreateInAppStepUpsertDtoControlVal
 inAppStepUpsertDtoControlValues := components.CreateInAppStepUpsertDtoControlValuesMapOfAny(map[string]any{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch inAppStepUpsertDtoControlValues.Type {
+	case components.InAppStepUpsertDtoControlValuesTypeInAppControlDto:
+		// inAppStepUpsertDtoControlValues.InAppControlDto is populated
+	case components.InAppStepUpsertDtoControlValuesTypeMapOfAny:
+		// inAppStepUpsertDtoControlValues.MapOfAny is populated
+}
+```

@@ -674,6 +674,7 @@ func (s *Translations) Delete(ctx context.Context, resourceType operations.Trans
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 404:
 		fallthrough
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:

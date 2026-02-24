@@ -29,3 +29,19 @@ to := components.CreateToSubscriberPayloadDto(components.SubscriberPayloadDto{/*
 to := components.CreateToTopicPayloadDto(components.TopicPayloadDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch to.Type {
+	case components.ToTypeArrayOfTo1:
+		// to.ArrayOfTo1 is populated
+	case components.ToTypeStr:
+		// to.Str is populated
+	case components.ToTypeSubscriberPayloadDto:
+		// to.SubscriberPayloadDto is populated
+	case components.ToTypeTopicPayloadDto:
+		// to.TopicPayloadDto is populated
+}
+```

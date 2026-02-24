@@ -29,3 +29,19 @@ metadata := components.CreateMetadataDelayRegularMetadata(components.DelayRegula
 metadata := components.CreateMetadataDelayScheduledMetadata(components.DelayScheduledMetadata{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch metadata.Type {
+	case components.MetadataTypeDigestRegularMetadata:
+		// metadata.DigestRegularMetadata is populated
+	case components.MetadataTypeDigestTimedMetadata:
+		// metadata.DigestTimedMetadata is populated
+	case components.MetadataTypeDelayRegularMetadata:
+		// metadata.DelayRegularMetadata is populated
+	case components.MetadataTypeDelayScheduledMetadata:
+		// metadata.DelayScheduledMetadata is populated
+}
+```

@@ -19,3 +19,15 @@ triggerEventToAllRequestDtoActor := components.CreateTriggerEventToAllRequestDto
 triggerEventToAllRequestDtoActor := components.CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(components.SubscriberPayloadDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch triggerEventToAllRequestDtoActor.Type {
+	case components.TriggerEventToAllRequestDtoActorTypeStr:
+		// triggerEventToAllRequestDtoActor.Str is populated
+	case components.TriggerEventToAllRequestDtoActorTypeSubscriberPayloadDto:
+		// triggerEventToAllRequestDtoActor.SubscriberPayloadDto is populated
+}
+```

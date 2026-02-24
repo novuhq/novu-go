@@ -1591,6 +1591,7 @@ func (s *ChannelEndpoints) Delete(ctx context.Context, identifier string, idempo
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):

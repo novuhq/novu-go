@@ -18,3 +18,15 @@ actor := components.CreateActorStr(string{/* values here */})
 actor := components.CreateActorSubscriberPayloadDto(components.SubscriberPayloadDto{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch actor.Type {
+	case components.ActorTypeStr:
+		// actor.Str is populated
+	case components.ActorTypeSubscriberPayloadDto:
+		// actor.SubscriberPayloadDto is populated
+}
+```

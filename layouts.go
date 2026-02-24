@@ -1594,6 +1594,7 @@ func (s *Layouts) Delete(ctx context.Context, layoutID string, idempotencyKey *s
 
 	switch {
 	case httpRes.StatusCode == 204:
+		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
