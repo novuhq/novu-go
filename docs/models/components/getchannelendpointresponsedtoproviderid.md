@@ -2,6 +2,16 @@
 
 The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
+```
+
 
 ## Values
 

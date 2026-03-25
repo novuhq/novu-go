@@ -33,7 +33,7 @@ func main() {
 
     res, err := s.Subscribers.Notifications.Feed(ctx, operations.SubscribersV1ControllerGetNotificationsFeedRequest{
         SubscriberID: "<id>",
-        Page: v3.Pointer[float64](0),
+        Page: v3.Pointer[float64](0.0),
         Payload: v3.Pointer("btoa(JSON.stringify({ foo: 123 })) results in base64 encoded string like eyJmb28iOjEyM30="),
     })
     if err != nil {
@@ -90,7 +90,7 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", v3.Pointer(false), v3.Pointer[float64](100), nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", v3.Pointer(false), v3.Pointer[float64](100.0), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -105,10 +105,10 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `seen`                                                   | **bool*                                                  | :heavy_minus_sign:                                       | Indicates whether to count seen notifications.           |
-| `limit`                                                  | **float64*                                               | :heavy_minus_sign:                                       | The maximum number of notifications to return.           |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `subscriberID`                                           | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `seen`                                                   | `*bool`                                                  | :heavy_minus_sign:                                       | Indicates whether to count seen notifications.           |
+| `limit`                                                  | `*float64`                                               | :heavy_minus_sign:                                       | The maximum number of notifications to return.           |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response

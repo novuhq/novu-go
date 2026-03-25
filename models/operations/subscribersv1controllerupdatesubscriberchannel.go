@@ -34,6 +34,9 @@ func (s *SubscribersV1ControllerUpdateSubscriberChannelRequest) GetUpdateSubscri
 	return s.UpdateSubscriberChannelRequestDto
 }
 
+// #region class-body-subscribersv1controllerupdatesubscriberchannelrequest
+// #endregion class-body-subscribersv1controllerupdatesubscriberchannelrequest
+
 type SubscribersV1ControllerUpdateSubscriberChannelResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -61,3 +64,6 @@ func (s *SubscribersV1ControllerUpdateSubscriberChannelResponse) GetHeaders() ma
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllerupdatesubscriberchannelresponse
+// #endregion class-body-subscribersv1controllerupdatesubscriberchannelresponse

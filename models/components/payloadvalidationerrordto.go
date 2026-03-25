@@ -129,6 +129,9 @@ func (v *Value4) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// #region class-body-value4
+// #endregion class-body-value4
+
 type PayloadValidationErrorDtoValueType string
 
 const (

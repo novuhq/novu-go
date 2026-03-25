@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// IntegrationResponseDtoChannel - The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
+// IntegrationResponseDtoChannel - The channel type for the integration, which defines how it communicates (e.g., email, SMS).
 type IntegrationResponseDtoChannel string
 
 const (
@@ -56,12 +56,12 @@ type IntegrationResponseDto struct {
 	Identifier string `json:"identifier"`
 	// The identifier for the provider of the integration (e.g., "mailgun", "twilio").
 	ProviderID string `json:"providerId"`
-	// The channel type for the integration, which defines how the integration communicates (e.g., email, SMS).
+	// The channel type for the integration, which defines how it communicates (e.g., email, SMS).
 	Channel IntegrationResponseDtoChannel `json:"channel"`
 	// The credentials required for the integration to function, including API keys and other sensitive information.
 	Credentials CredentialsDto `json:"credentials"`
 	// The configurations required for enabling the additional configurations of the integration.
-	Configurations *ConfigurationsDto `json:"configurations,omitempty"`
+	Configurations ConfigurationsDto `json:"configurations"`
 	// Indicates whether the integration is currently active. An active integration will process events and messages.
 	Active bool `json:"active"`
 	// Indicates whether the integration has been marked as deleted (soft delete).
@@ -132,9 +132,9 @@ func (i *IntegrationResponseDto) GetCredentials() CredentialsDto {
 	return i.Credentials
 }
 
-func (i *IntegrationResponseDto) GetConfigurations() *ConfigurationsDto {
+func (i *IntegrationResponseDto) GetConfigurations() ConfigurationsDto {
 	if i == nil {
-		return nil
+		return ConfigurationsDto{}
 	}
 	return i.Configurations
 }

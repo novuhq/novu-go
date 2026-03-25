@@ -1,0 +1,11 @@
+# DiffEnvironmentResponseDto
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `SourceEnvironmentID`                                                                        | `string`                                                                                     | :heavy_check_mark:                                                                           | Source environment ID                                                                        |
+| `TargetEnvironmentID`                                                                        | `string`                                                                                     | :heavy_check_mark:                                                                           | Target environment ID                                                                        |
+| `Resources`                                                                                  | [][components.ResourceDiffResultDto](../../models/components/resourcediffresultdto.md)       | :heavy_check_mark:                                                                           | Diff resources by resource type                                                              |
+| `Summary`                                                                                    | [components.EnvironmentDiffSummaryDto](../../models/components/environmentdiffsummarydto.md) | :heavy_check_mark:                                                                           | Overall summary                                                                              |

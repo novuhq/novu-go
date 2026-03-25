@@ -103,6 +103,9 @@ func (c *CreateTopicSubscriptionsRequestDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createtopicsubscriptionsrequestdtocontext2
+// #endregion class-body-createtopicsubscriptionsrequestdtocontext2
+
 type CreateTopicSubscriptionsRequestDtoContextType string
 
 const (

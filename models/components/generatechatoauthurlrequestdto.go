@@ -40,6 +40,9 @@ func (g *GenerateChatOauthURLRequestDtoContext2) GetData() map[string]any {
 	return g.Data
 }
 
+// #region class-body-generatechatoauthurlrequestdtocontext2
+// #endregion class-body-generatechatoauthurlrequestdtocontext2
+
 type GenerateChatOauthURLRequestDtoContextType string
 
 const (

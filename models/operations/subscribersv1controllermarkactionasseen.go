@@ -50,6 +50,9 @@ func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetMarkMessageActionAsS
 	return s.MarkMessageActionAsSeenDto
 }
 
+// #region class-body-subscribersv1controllermarkactionasseenrequest
+// #endregion class-body-subscribersv1controllermarkactionasseenrequest
+
 type SubscribersV1ControllerMarkActionAsSeenResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
@@ -77,3 +80,6 @@ func (s *SubscribersV1ControllerMarkActionAsSeenResponse) GetHeaders() map[strin
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllermarkactionasseenresponse
+// #endregion class-body-subscribersv1controllermarkactionasseenresponse

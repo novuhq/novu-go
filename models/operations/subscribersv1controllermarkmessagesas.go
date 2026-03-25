@@ -34,6 +34,9 @@ func (s *SubscribersV1ControllerMarkMessagesAsRequest) GetMessageMarkAsRequestDt
 	return s.MessageMarkAsRequestDto
 }
 
+// #region class-body-subscribersv1controllermarkmessagesasrequest
+// #endregion class-body-subscribersv1controllermarkmessagesasrequest
+
 type SubscribersV1ControllerMarkMessagesAsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
@@ -61,3 +64,6 @@ func (s *SubscribersV1ControllerMarkMessagesAsResponse) GetHeaders() map[string]
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllermarkmessagesasresponse
+// #endregion class-body-subscribersv1controllermarkmessagesasresponse

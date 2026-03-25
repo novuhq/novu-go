@@ -26,6 +26,9 @@ func (e *EnvironmentsControllerV1CreateEnvironmentRequest) GetCreateEnvironmentR
 	return e.CreateEnvironmentRequestDto
 }
 
+// #region class-body-environmentscontrollerv1createenvironmentrequest
+// #endregion class-body-environmentscontrollerv1createenvironmentrequest
+
 type EnvironmentsControllerV1CreateEnvironmentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
@@ -53,3 +56,6 @@ func (e *EnvironmentsControllerV1CreateEnvironmentResponse) GetHeaders() map[str
 	}
 	return e.Headers
 }
+
+// #region class-body-environmentscontrollerv1createenvironmentresponse
+// #endregion class-body-environmentscontrollerv1createenvironmentresponse

@@ -2,6 +2,16 @@
 
 The ID of the chat or push provider.
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.SubscriberChannelDtoProviderIDSlack
+```
+
 
 ## Values
 

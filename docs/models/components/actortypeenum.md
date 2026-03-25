@@ -2,6 +2,16 @@
 
 The type of the actor, indicating the role in the notification process.
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.ActorTypeEnumNone
+```
+
 
 ## Values
 

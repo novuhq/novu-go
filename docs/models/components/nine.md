@@ -1,0 +1,9 @@
+# Nine
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                                | [*components.GeneratePreviewResponseDtoResult9Type](../../models/components/generatepreviewresponsedtoresult9type.md) | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |
+| `Preview`                                                                                                             | [*components.DigestRegularOutput](../../models/components/digestregularoutput.md)                                     | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |

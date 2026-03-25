@@ -36,6 +36,9 @@ func (t *TopicsV1ControllerGetTopicSubscriberRequest) GetIdempotencyKey() *strin
 	return t.IdempotencyKey
 }
 
+// #region class-body-topicsv1controllergettopicsubscriberrequest
+// #endregion class-body-topicsv1controllergettopicsubscriberrequest
+
 type TopicsV1ControllerGetTopicSubscriberResponse struct {
 	HTTPMeta           components.HTTPMetadata `json:"-"`
 	TopicSubscriberDto *components.TopicSubscriberDto
@@ -62,3 +65,6 @@ func (t *TopicsV1ControllerGetTopicSubscriberResponse) GetHeaders() map[string][
 	}
 	return t.Headers
 }
+
+// #region class-body-topicsv1controllergettopicsubscriberresponse
+// #endregion class-body-topicsv1controllergettopicsubscriberresponse

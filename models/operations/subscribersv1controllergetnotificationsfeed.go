@@ -79,6 +79,9 @@ func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetIdempotencyKey()
 	return s.IdempotencyKey
 }
 
+// #region class-body-subscribersv1controllergetnotificationsfeedrequest
+// #endregion class-body-subscribersv1controllergetnotificationsfeedrequest
+
 type SubscribersV1ControllerGetNotificationsFeedResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -106,3 +109,6 @@ func (s *SubscribersV1ControllerGetNotificationsFeedResponse) GetHeaders() map[s
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllergetnotificationsfeedresponse
+// #endregion class-body-subscribersv1controllergetnotificationsfeedresponse

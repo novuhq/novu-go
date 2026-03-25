@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.13.0 and generator version 2.836.5
+// Generated from OpenAPI doc version 3.14.0 and generator version 2.869.23
 
 import (
 	"bytes"
@@ -77,7 +77,7 @@ type Novu struct {
 	Topics *Topics
 	// Used to localize your notifications to different languages.
 	//
-	// https://docs.novu.co/platform/workflow/translations
+	// https://docs.novu.co/platform/workflow/advanced-features/translations
 	Translations *Translations
 	// All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
 	//
@@ -101,7 +101,7 @@ type Novu struct {
 
 type SDKOption func(*Novu)
 
-// WithServerURL allows the overriding of the default server URL
+// WithServerURL allows providing an alternative server URL
 func WithServerURL(serverURL string) SDKOption {
 	return func(sdk *Novu) {
 		sdk.sdkConfiguration.ServerURL = serverURL
@@ -170,9 +170,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.14.0",
+		SDKVersion: "3.15.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.14.0 2.836.5 3.13.0 github.com/novuhq/novu-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.15.0 2.869.23 3.14.0 github.com/novuhq/novu-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

@@ -6,7 +6,7 @@ type ChannelSettingsDto struct {
 	// The provider identifier for the credentials
 	ProviderID ChatOrPushProviderEnum `json:"providerId"`
 	// The integration identifier
-	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
+	IntegrationIdentifier string `json:"integrationIdentifier"`
 	// Credentials payload for the specified provider
 	Credentials ChannelCredentials `json:"credentials"`
 	// The unique identifier of the integration associated with this channel.
@@ -20,9 +20,9 @@ func (c *ChannelSettingsDto) GetProviderID() ChatOrPushProviderEnum {
 	return c.ProviderID
 }
 
-func (c *ChannelSettingsDto) GetIntegrationIdentifier() *string {
+func (c *ChannelSettingsDto) GetIntegrationIdentifier() string {
 	if c == nil {
-		return nil
+		return ""
 	}
 	return c.IntegrationIdentifier
 }

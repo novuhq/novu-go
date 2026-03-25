@@ -6,7 +6,7 @@ type UpdateSubscriberChannelRequestDto struct {
 	// The provider identifier for the credentials
 	ProviderID ChatOrPushProviderEnum `json:"providerId"`
 	// The integration identifier
-	IntegrationIdentifier *string `json:"integrationIdentifier,omitempty"`
+	IntegrationIdentifier string `json:"integrationIdentifier"`
 	// Credentials payload for the specified provider
 	Credentials ChannelCredentials `json:"credentials"`
 }
@@ -18,9 +18,9 @@ func (u *UpdateSubscriberChannelRequestDto) GetProviderID() ChatOrPushProviderEn
 	return u.ProviderID
 }
 
-func (u *UpdateSubscriberChannelRequestDto) GetIntegrationIdentifier() *string {
+func (u *UpdateSubscriberChannelRequestDto) GetIntegrationIdentifier() string {
 	if u == nil {
-		return nil
+		return ""
 	}
 	return u.IntegrationIdentifier
 }

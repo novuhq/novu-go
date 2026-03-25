@@ -2,6 +2,16 @@
 
 Source of workflow creation
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.WorkflowCreationSourceEnumTemplateStore
+```
+
 
 ## Values
 
@@ -17,3 +27,4 @@ Source of workflow creation
 | `WorkflowCreationSourceEnumOnboardingGetStarted`  | onboarding_get_started                            |
 | `WorkflowCreationSourceEnumBridge`                | bridge                                            |
 | `WorkflowCreationSourceEnumDashboard`             | dashboard                                         |
+| `WorkflowCreationSourceEnumAi`                    | ai                                                |

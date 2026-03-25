@@ -2,6 +2,16 @@
 
 Status of the event
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.StatusOpened
+```
+
 
 ## Values
 

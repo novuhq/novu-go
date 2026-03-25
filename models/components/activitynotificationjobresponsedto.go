@@ -11,16 +11,17 @@ import (
 type ActivityNotificationJobResponseDtoType string
 
 const (
-	ActivityNotificationJobResponseDtoTypeInApp    ActivityNotificationJobResponseDtoType = "in_app"
-	ActivityNotificationJobResponseDtoTypeEmail    ActivityNotificationJobResponseDtoType = "email"
-	ActivityNotificationJobResponseDtoTypeSms      ActivityNotificationJobResponseDtoType = "sms"
-	ActivityNotificationJobResponseDtoTypeChat     ActivityNotificationJobResponseDtoType = "chat"
-	ActivityNotificationJobResponseDtoTypePush     ActivityNotificationJobResponseDtoType = "push"
-	ActivityNotificationJobResponseDtoTypeDigest   ActivityNotificationJobResponseDtoType = "digest"
-	ActivityNotificationJobResponseDtoTypeTrigger  ActivityNotificationJobResponseDtoType = "trigger"
-	ActivityNotificationJobResponseDtoTypeDelay    ActivityNotificationJobResponseDtoType = "delay"
-	ActivityNotificationJobResponseDtoTypeThrottle ActivityNotificationJobResponseDtoType = "throttle"
-	ActivityNotificationJobResponseDtoTypeCustom   ActivityNotificationJobResponseDtoType = "custom"
+	ActivityNotificationJobResponseDtoTypeInApp       ActivityNotificationJobResponseDtoType = "in_app"
+	ActivityNotificationJobResponseDtoTypeEmail       ActivityNotificationJobResponseDtoType = "email"
+	ActivityNotificationJobResponseDtoTypeSms         ActivityNotificationJobResponseDtoType = "sms"
+	ActivityNotificationJobResponseDtoTypeChat        ActivityNotificationJobResponseDtoType = "chat"
+	ActivityNotificationJobResponseDtoTypePush        ActivityNotificationJobResponseDtoType = "push"
+	ActivityNotificationJobResponseDtoTypeDigest      ActivityNotificationJobResponseDtoType = "digest"
+	ActivityNotificationJobResponseDtoTypeTrigger     ActivityNotificationJobResponseDtoType = "trigger"
+	ActivityNotificationJobResponseDtoTypeDelay       ActivityNotificationJobResponseDtoType = "delay"
+	ActivityNotificationJobResponseDtoTypeThrottle    ActivityNotificationJobResponseDtoType = "throttle"
+	ActivityNotificationJobResponseDtoTypeCustom      ActivityNotificationJobResponseDtoType = "custom"
+	ActivityNotificationJobResponseDtoTypeHTTPRequest ActivityNotificationJobResponseDtoType = "http_request"
 )
 
 func (e ActivityNotificationJobResponseDtoType) ToPointer() *ActivityNotificationJobResponseDtoType {
@@ -51,6 +52,8 @@ func (e *ActivityNotificationJobResponseDtoType) UnmarshalJSON(data []byte) erro
 	case "throttle":
 		fallthrough
 	case "custom":
+		fallthrough
+	case "http_request":
 		*e = ActivityNotificationJobResponseDtoType(v)
 		return nil
 	default:

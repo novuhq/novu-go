@@ -8,59 +8,59 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-type InAppStepUpsertDtoControlValuesType string
+type ControlValuesType string
 
 const (
-	InAppStepUpsertDtoControlValuesTypeInAppControlDto InAppStepUpsertDtoControlValuesType = "InAppControlDto"
-	InAppStepUpsertDtoControlValuesTypeMapOfAny        InAppStepUpsertDtoControlValuesType = "mapOfAny"
+	ControlValuesTypeInAppControlDto ControlValuesType = "InAppControlDto"
+	ControlValuesTypeMapOfAny        ControlValuesType = "mapOfAny"
 )
 
-// InAppStepUpsertDtoControlValues - Control values for the In-App step.
-type InAppStepUpsertDtoControlValues struct {
+// ControlValues - Control values for the In-App step.
+type ControlValues struct {
 	InAppControlDto *InAppControlDto `queryParam:"inline" union:"member"`
 	MapOfAny        map[string]any   `queryParam:"inline" union:"member"`
 
-	Type InAppStepUpsertDtoControlValuesType
+	Type ControlValuesType
 }
 
-func CreateInAppStepUpsertDtoControlValuesInAppControlDto(inAppControlDto InAppControlDto) InAppStepUpsertDtoControlValues {
-	typ := InAppStepUpsertDtoControlValuesTypeInAppControlDto
+func CreateControlValuesInAppControlDto(inAppControlDto InAppControlDto) ControlValues {
+	typ := ControlValuesTypeInAppControlDto
 
-	return InAppStepUpsertDtoControlValues{
+	return ControlValues{
 		InAppControlDto: &inAppControlDto,
 		Type:            typ,
 	}
 }
 
-func CreateInAppStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) InAppStepUpsertDtoControlValues {
-	typ := InAppStepUpsertDtoControlValuesTypeMapOfAny
+func CreateControlValuesMapOfAny(mapOfAny map[string]any) ControlValues {
+	typ := ControlValuesTypeMapOfAny
 
-	return InAppStepUpsertDtoControlValues{
+	return ControlValues{
 		MapOfAny: mapOfAny,
 		Type:     typ,
 	}
 }
 
-func (u *InAppStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *ControlValues) UnmarshalJSON(data []byte) error {
 
 	var inAppControlDto InAppControlDto = InAppControlDto{}
 	if err := utils.UnmarshalJSON(data, &inAppControlDto, "", true, nil); err == nil {
 		u.InAppControlDto = &inAppControlDto
-		u.Type = InAppStepUpsertDtoControlValuesTypeInAppControlDto
+		u.Type = ControlValuesTypeInAppControlDto
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = InAppStepUpsertDtoControlValuesTypeMapOfAny
+		u.Type = ControlValuesTypeMapOfAny
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for InAppStepUpsertDtoControlValues", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ControlValues", string(data))
 }
 
-func (u InAppStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
+func (u ControlValues) MarshalJSON() ([]byte, error) {
 	if u.InAppControlDto != nil {
 		return utils.MarshalJSON(u.InAppControlDto, "", true)
 	}
@@ -69,7 +69,7 @@ func (u InAppStepUpsertDtoControlValues) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type InAppStepUpsertDtoControlValues: all fields are null")
+	return nil, errors.New("could not marshal union type ControlValues: all fields are null")
 }
 
 type InAppStepUpsertDto struct {
@@ -82,7 +82,7 @@ type InAppStepUpsertDto struct {
 	// Type of the step
 	Type StepTypeEnum `json:"type"`
 	// Control values for the In-App step.
-	ControlValues *InAppStepUpsertDtoControlValues `json:"controlValues,omitempty"`
+	ControlValues *ControlValues `json:"controlValues,omitempty"`
 }
 
 func (i InAppStepUpsertDto) MarshalJSON() ([]byte, error) {
@@ -124,7 +124,7 @@ func (i *InAppStepUpsertDto) GetType() StepTypeEnum {
 	return i.Type
 }
 
-func (i *InAppStepUpsertDto) GetControlValues() *InAppStepUpsertDtoControlValues {
+func (i *InAppStepUpsertDto) GetControlValues() *ControlValues {
 	if i == nil {
 		return nil
 	}

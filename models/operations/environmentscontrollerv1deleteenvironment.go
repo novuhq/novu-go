@@ -27,6 +27,9 @@ func (e *EnvironmentsControllerV1DeleteEnvironmentRequest) GetIdempotencyKey() *
 	return e.IdempotencyKey
 }
 
+// #region class-body-environmentscontrollerv1deleteenvironmentrequest
+// #endregion class-body-environmentscontrollerv1deleteenvironmentrequest
+
 type EnvironmentsControllerV1DeleteEnvironmentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Headers  map[string][]string
@@ -45,3 +48,6 @@ func (e *EnvironmentsControllerV1DeleteEnvironmentResponse) GetHeaders() map[str
 	}
 	return e.Headers
 }
+
+// #region class-body-environmentscontrollerv1deleteenvironmentresponse
+// #endregion class-body-environmentscontrollerv1deleteenvironmentresponse

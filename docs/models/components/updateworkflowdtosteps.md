@@ -51,6 +51,12 @@ updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsDigest(componen
 updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsCustom(components.CustomStepUpsertDto{/* values here */})
 ```
 
+### HTTPRequestStepUpsertDto
+
+```go
+updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsHTTPRequest(components.HTTPRequestStepUpsertDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -73,5 +79,7 @@ switch updateWorkflowDtoSteps.Type {
 		// updateWorkflowDtoSteps.DigestStepUpsertDto is populated
 	case components.UpdateWorkflowDtoStepsTypeCustom:
 		// updateWorkflowDtoSteps.CustomStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeHTTPRequest:
+		// updateWorkflowDtoSteps.HTTPRequestStepUpsertDto is populated
 }
 ```

@@ -4,12 +4,12 @@ package components
 
 type LayoutControlValuesDto struct {
 	// Email layout controls
-	Email *EmailControlsDto `json:"email,omitempty"`
+	Email EmailControlsDto `json:"email"`
 }
 
-func (l *LayoutControlValuesDto) GetEmail() *EmailControlsDto {
+func (l *LayoutControlValuesDto) GetEmail() EmailControlsDto {
 	if l == nil {
-		return nil
+		return EmailControlsDto{}
 	}
 	return l.Email
 }

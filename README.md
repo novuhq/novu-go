@@ -404,6 +404,8 @@ func main() {
 ### [Environments](docs/sdks/environments/README.md)
 
 * [GetTags](docs/sdks/environments/README.md#gettags) - List environment tags
+* [Diff](docs/sdks/environments/README.md#diff) - Compare resources between environments
+* [Publish](docs/sdks/environments/README.md#publish) - Publish resources to target environment
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -532,6 +534,7 @@ func main() {
 
 #### [Workflows.Steps](docs/sdks/steps/README.md)
 
+* [GeneratePreview](docs/sdks/steps/README.md#generatepreview) - Generate step preview
 * [Retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>

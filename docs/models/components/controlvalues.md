@@ -1,10 +1,31 @@
 # ControlValues
 
-Control values for the layout
+Control values for the In-App step.
 
 
-## Fields
+## Supported Types
 
-| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 |
-| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| `Email`                                                                     | [*components.EmailControlsDto](../../models/components/emailcontrolsdto.md) | :heavy_minus_sign:                                                          | Email layout controls                                                       |
+### InAppControlDto
+
+```go
+controlValues := components.CreateControlValuesInAppControlDto(components.InAppControlDto{/* values here */})
+```
+
+### 
+
+```go
+controlValues := components.CreateControlValuesMapOfAny(map[string]any{/* values here */})
+```
+
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch controlValues.Type {
+	case components.ControlValuesTypeInAppControlDto:
+		// controlValues.InAppControlDto is populated
+	case components.ControlValuesTypeMapOfAny:
+		// controlValues.MapOfAny is populated
+}
+```

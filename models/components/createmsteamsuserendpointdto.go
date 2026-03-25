@@ -41,6 +41,9 @@ func (c *CreateMsTeamsUserEndpointDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createmsteamsuserendpointdtocontext2
+// #endregion class-body-createmsteamsuserendpointdtocontext2
+
 type CreateMsTeamsUserEndpointDtoContextType string
 
 const (
