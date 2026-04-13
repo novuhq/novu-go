@@ -39,6 +39,7 @@ func (e *Criticality) UnmarshalJSON(data []byte) error {
 }
 
 type SubscribersControllerGetSubscriberPreferencesRequest struct {
+	// The identifier of the subscriber
 	SubscriberID string       `pathParam:"style=simple,explode=false,name=subscriberId"`
 	Criticality  *Criticality `default:"nonCritical" queryParam:"style=form,explode=true,name=criticality"`
 	// Context keys for filtering preferences (e.g., ["tenant:acme"])

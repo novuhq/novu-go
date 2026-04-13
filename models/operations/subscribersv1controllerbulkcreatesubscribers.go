@@ -26,6 +26,9 @@ func (s *SubscribersV1ControllerBulkCreateSubscribersRequest) GetBulkSubscriberC
 	return s.BulkSubscriberCreateDto
 }
 
+// #region class-body-subscribersv1controllerbulkcreatesubscribersrequest
+// #endregion class-body-subscribersv1controllerbulkcreatesubscribersrequest
+
 type SubscribersV1ControllerBulkCreateSubscribersResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// Created
@@ -53,3 +56,6 @@ func (s *SubscribersV1ControllerBulkCreateSubscribersResponse) GetHeaders() map[
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllerbulkcreatesubscribersresponse
+// #endregion class-body-subscribersv1controllerbulkcreatesubscribersresponse

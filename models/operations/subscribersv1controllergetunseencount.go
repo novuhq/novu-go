@@ -56,6 +56,9 @@ func (s *SubscribersV1ControllerGetUnseenCountRequest) GetIdempotencyKey() *stri
 	return s.IdempotencyKey
 }
 
+// #region class-body-subscribersv1controllergetunseencountrequest
+// #endregion class-body-subscribersv1controllergetunseencountrequest
+
 type SubscribersV1ControllerGetUnseenCountResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -83,3 +86,6 @@ func (s *SubscribersV1ControllerGetUnseenCountResponse) GetHeaders() map[string]
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllergetunseencountresponse
+// #endregion class-body-subscribersv1controllergetunseencountresponse

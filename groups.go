@@ -32,6 +32,8 @@ func newGroups(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 
 // Delete a translation group
 // Delete an entire translation group and all its translations
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Groups) Delete(ctx context.Context, resourceType operations.TranslationControllerDeleteTranslationGroupEndpointPathParamResourceType, resourceID string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerDeleteTranslationGroupEndpointResponse, error) {
 	request := operations.TranslationControllerDeleteTranslationGroupEndpointRequest{
 		ResourceType:   resourceType,
@@ -92,7 +94,7 @@ func (s *Groups) Delete(ctx context.Context, resourceType operations.Translation
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -238,6 +240,8 @@ func (s *Groups) Delete(ctx context.Context, resourceType operations.Translation
 
 // Retrieve a translation group
 // Retrieves a single translation group by resource type (workflow, layout) and resource ID (workflowId, layoutId)
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Groups) Retrieve(ctx context.Context, resourceType operations.TranslationControllerGetTranslationGroupEndpointPathParamResourceType, resourceID string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerGetTranslationGroupEndpointResponse, error) {
 	request := operations.TranslationControllerGetTranslationGroupEndpointRequest{
 		ResourceType:   resourceType,
@@ -298,7 +302,7 @@ func (s *Groups) Retrieve(ctx context.Context, resourceType operations.Translati
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 

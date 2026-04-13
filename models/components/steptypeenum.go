@@ -11,16 +11,17 @@ import (
 type StepTypeEnum string
 
 const (
-	StepTypeEnumInApp    StepTypeEnum = "in_app"
-	StepTypeEnumEmail    StepTypeEnum = "email"
-	StepTypeEnumSms      StepTypeEnum = "sms"
-	StepTypeEnumChat     StepTypeEnum = "chat"
-	StepTypeEnumPush     StepTypeEnum = "push"
-	StepTypeEnumDigest   StepTypeEnum = "digest"
-	StepTypeEnumTrigger  StepTypeEnum = "trigger"
-	StepTypeEnumDelay    StepTypeEnum = "delay"
-	StepTypeEnumThrottle StepTypeEnum = "throttle"
-	StepTypeEnumCustom   StepTypeEnum = "custom"
+	StepTypeEnumInApp       StepTypeEnum = "in_app"
+	StepTypeEnumEmail       StepTypeEnum = "email"
+	StepTypeEnumSms         StepTypeEnum = "sms"
+	StepTypeEnumChat        StepTypeEnum = "chat"
+	StepTypeEnumPush        StepTypeEnum = "push"
+	StepTypeEnumDigest      StepTypeEnum = "digest"
+	StepTypeEnumTrigger     StepTypeEnum = "trigger"
+	StepTypeEnumDelay       StepTypeEnum = "delay"
+	StepTypeEnumThrottle    StepTypeEnum = "throttle"
+	StepTypeEnumCustom      StepTypeEnum = "custom"
+	StepTypeEnumHTTPRequest StepTypeEnum = "http_request"
 )
 
 func (e StepTypeEnum) ToPointer() *StepTypeEnum {
@@ -51,6 +52,8 @@ func (e *StepTypeEnum) UnmarshalJSON(data []byte) error {
 	case "throttle":
 		fallthrough
 	case "custom":
+		fallthrough
+	case "http_request":
 		*e = StepTypeEnum(v)
 		return nil
 	default:

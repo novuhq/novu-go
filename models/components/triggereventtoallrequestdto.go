@@ -299,6 +299,9 @@ func (t *TriggerEventToAllRequestDtoContext2) GetData() map[string]any {
 	return t.Data
 }
 
+// #region class-body-triggereventtoallrequestdtocontext2
+// #endregion class-body-triggereventtoallrequestdtocontext2
+
 type TriggerEventToAllRequestDtoContextType string
 
 const (

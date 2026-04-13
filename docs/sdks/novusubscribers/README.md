@@ -44,9 +44,9 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `externalSubscriberID`                                   | *string*                                                 | :heavy_check_mark:                                       | The external subscriber id                               |
-| `topicKey`                                               | *string*                                                 | :heavy_check_mark:                                       | The topic key                                            |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `externalSubscriberID`                                   | `string`                                                 | :heavy_check_mark:                                       | The external subscriber id                               |
+| `topicKey`                                               | `string`                                                 | :heavy_check_mark:                                       | The topic key                                            |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response

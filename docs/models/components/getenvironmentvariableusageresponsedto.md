@@ -1,0 +1,8 @@
+# GetEnvironmentVariableUsageResponseDto
+
+
+## Fields
+
+| Field                                                                                                            | Type                                                                                                             | Required                                                                                                         | Description                                                                                                      |
+| ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `Workflows`                                                                                                      | [][components.EnvironmentVariableWorkflowInfoDto](../../models/components/environmentvariableworkflowinfodto.md) | :heavy_check_mark:                                                                                               | Array of workflows that reference this environment variable                                                      |

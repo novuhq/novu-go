@@ -2,6 +2,16 @@
 
 Provider ID of the job
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.ProvidersIDEnumEmailjs
+```
+
 
 ## Values
 
@@ -64,6 +74,7 @@ Provider ID of the job
 | `ProvidersIDEnumImedia`           | imedia                            |
 | `ProvidersIDEnumSinch`            | sinch                             |
 | `ProvidersIDEnumIsendproSms`      | isendpro-sms                      |
+| `ProvidersIDEnumCmTelecom`        | cm-telecom                        |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |

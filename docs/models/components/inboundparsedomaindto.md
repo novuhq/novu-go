@@ -5,4 +5,4 @@
 
 | Field                | Type                 | Required             | Description          |
 | -------------------- | -------------------- | -------------------- | -------------------- |
-| `InboundParseDomain` | **string*            | :heavy_minus_sign:   | N/A                  |
+| `InboundParseDomain` | `*string`            | :heavy_minus_sign:   | N/A                  |

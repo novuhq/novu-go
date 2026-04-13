@@ -61,7 +61,7 @@ func main() {
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `createContextRequestDto`                                                                | [components.CreateContextRequestDto](../../models/components/createcontextrequestdto.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `idempotencyKey`                                                                         | **string*                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
+| `idempotencyKey`                                                                         | `*string`                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
 | `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
@@ -106,7 +106,7 @@ func main() {
     )
 
     res, err := s.Contexts.List(ctx, operations.ContextsControllerListContextsRequest{
-        Limit: v3.Pointer[float64](10),
+        Limit: v3.Pointer[float64](10.0),
         ID: v3.Pointer("tenant-prod-123"),
         Search: v3.Pointer("tenant"),
     })
@@ -190,10 +190,10 @@ func main() {
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `id`                                                                                     | *string*                                                                                 | :heavy_check_mark:                                                                       | Context ID                                                                               |
-| `type_`                                                                                  | *string*                                                                                 | :heavy_check_mark:                                                                       | Context type                                                                             |
+| `id`                                                                                     | `string`                                                                                 | :heavy_check_mark:                                                                       | Context ID                                                                               |
+| `type_`                                                                                  | `string`                                                                                 | :heavy_check_mark:                                                                       | Context type                                                                             |
 | `updateContextRequestDto`                                                                | [components.UpdateContextRequestDto](../../models/components/updatecontextrequestdto.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `idempotencyKey`                                                                         | **string*                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
+| `idempotencyKey`                                                                         | `*string`                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
 | `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
@@ -249,9 +249,9 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | Context ID                                               |
-| `type_`                                                  | *string*                                                 | :heavy_check_mark:                                       | Context type                                             |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `id`                                                     | `string`                                                 | :heavy_check_mark:                                       | Context ID                                               |
+| `type_`                                                  | `string`                                                 | :heavy_check_mark:                                       | Context type                                             |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -307,9 +307,9 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `id`                                                     | *string*                                                 | :heavy_check_mark:                                       | Context ID                                               |
-| `type_`                                                  | *string*                                                 | :heavy_check_mark:                                       | Context type                                             |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `id`                                                     | `string`                                                 | :heavy_check_mark:                                       | Context ID                                               |
+| `type_`                                                  | `string`                                                 | :heavy_check_mark:                                       | Context type                                             |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response

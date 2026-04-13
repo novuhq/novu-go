@@ -21,6 +21,7 @@ const (
 	WorkflowCreationSourceEnumOnboardingGetStarted  WorkflowCreationSourceEnum = "onboarding_get_started"
 	WorkflowCreationSourceEnumBridge                WorkflowCreationSourceEnum = "bridge"
 	WorkflowCreationSourceEnumDashboard             WorkflowCreationSourceEnum = "dashboard"
+	WorkflowCreationSourceEnumAi                    WorkflowCreationSourceEnum = "ai"
 )
 
 func (e WorkflowCreationSourceEnum) ToPointer() *WorkflowCreationSourceEnum {
@@ -51,6 +52,8 @@ func (e *WorkflowCreationSourceEnum) UnmarshalJSON(data []byte) error {
 	case "bridge":
 		fallthrough
 	case "dashboard":
+		fallthrough
+	case "ai":
 		*e = WorkflowCreationSourceEnum(v)
 		return nil
 	default:

@@ -35,6 +35,9 @@ func (e *EnvironmentsControllerV1UpdateMyEnvironmentRequest) GetUpdateEnvironmen
 	return e.UpdateEnvironmentRequestDto
 }
 
+// #region class-body-environmentscontrollerv1updatemyenvironmentrequest
+// #endregion class-body-environmentscontrollerv1updatemyenvironmentrequest
+
 type EnvironmentsControllerV1UpdateMyEnvironmentResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -62,3 +65,6 @@ func (e *EnvironmentsControllerV1UpdateMyEnvironmentResponse) GetHeaders() map[s
 	}
 	return e.Headers
 }
+
+// #region class-body-environmentscontrollerv1updatemyenvironmentresponse
+// #endregion class-body-environmentscontrollerv1updatemyenvironmentresponse

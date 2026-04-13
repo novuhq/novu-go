@@ -106,6 +106,7 @@ const (
 	GetChannelEndpointResponseDtoProviderIDImedia           GetChannelEndpointResponseDtoProviderID = "imedia"
 	GetChannelEndpointResponseDtoProviderIDSinch            GetChannelEndpointResponseDtoProviderID = "sinch"
 	GetChannelEndpointResponseDtoProviderIDIsendproSms      GetChannelEndpointResponseDtoProviderID = "isendpro-sms"
+	GetChannelEndpointResponseDtoProviderIDCmTelecom        GetChannelEndpointResponseDtoProviderID = "cm-telecom"
 	GetChannelEndpointResponseDtoProviderIDFcm              GetChannelEndpointResponseDtoProviderID = "fcm"
 	GetChannelEndpointResponseDtoProviderIDApns             GetChannelEndpointResponseDtoProviderID = "apns"
 	GetChannelEndpointResponseDtoProviderIDExpo             GetChannelEndpointResponseDtoProviderID = "expo"
@@ -251,6 +252,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 	case "sinch":
 		fallthrough
 	case "isendpro-sms":
+		fallthrough
+	case "cm-telecom":
 		fallthrough
 	case "fcm":
 		fallthrough

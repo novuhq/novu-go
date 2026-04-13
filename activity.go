@@ -30,7 +30,7 @@ func newActivity(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hooks.
 	}
 }
 
-// Track activity and engagement events
+// Track provider activity and engagement events
 // Track activity and engagement events for a specific delivery provider
 func (s *Activity) Track(ctx context.Context, environmentID string, integrationID string, requestBody map[string]any, idempotencyKey *string, opts ...operations.Option) (*operations.InboundWebhooksControllerHandleWebhookResponse, error) {
 	request := operations.InboundWebhooksControllerHandleWebhookRequest{

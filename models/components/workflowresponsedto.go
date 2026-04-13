@@ -92,27 +92,29 @@ func (l *LastPublishedBy) GetExternalID() *string {
 type WorkflowResponseDtoStepsType string
 
 const (
-	WorkflowResponseDtoStepsTypeInApp    WorkflowResponseDtoStepsType = "in_app"
-	WorkflowResponseDtoStepsTypeEmail    WorkflowResponseDtoStepsType = "email"
-	WorkflowResponseDtoStepsTypeSms      WorkflowResponseDtoStepsType = "sms"
-	WorkflowResponseDtoStepsTypePush     WorkflowResponseDtoStepsType = "push"
-	WorkflowResponseDtoStepsTypeChat     WorkflowResponseDtoStepsType = "chat"
-	WorkflowResponseDtoStepsTypeDelay    WorkflowResponseDtoStepsType = "delay"
-	WorkflowResponseDtoStepsTypeDigest   WorkflowResponseDtoStepsType = "digest"
-	WorkflowResponseDtoStepsTypeCustom   WorkflowResponseDtoStepsType = "custom"
-	WorkflowResponseDtoStepsTypeThrottle WorkflowResponseDtoStepsType = "throttle"
+	WorkflowResponseDtoStepsTypeInApp       WorkflowResponseDtoStepsType = "in_app"
+	WorkflowResponseDtoStepsTypeEmail       WorkflowResponseDtoStepsType = "email"
+	WorkflowResponseDtoStepsTypeSms         WorkflowResponseDtoStepsType = "sms"
+	WorkflowResponseDtoStepsTypePush        WorkflowResponseDtoStepsType = "push"
+	WorkflowResponseDtoStepsTypeChat        WorkflowResponseDtoStepsType = "chat"
+	WorkflowResponseDtoStepsTypeDelay       WorkflowResponseDtoStepsType = "delay"
+	WorkflowResponseDtoStepsTypeDigest      WorkflowResponseDtoStepsType = "digest"
+	WorkflowResponseDtoStepsTypeCustom      WorkflowResponseDtoStepsType = "custom"
+	WorkflowResponseDtoStepsTypeThrottle    WorkflowResponseDtoStepsType = "throttle"
+	WorkflowResponseDtoStepsTypeHTTPRequest WorkflowResponseDtoStepsType = "http_request"
 )
 
 type WorkflowResponseDtoSteps struct {
-	InAppStepResponseDto    *InAppStepResponseDto    `queryParam:"inline" union:"member"`
-	EmailStepResponseDto    *EmailStepResponseDto    `queryParam:"inline" union:"member"`
-	SmsStepResponseDto      *SmsStepResponseDto      `queryParam:"inline" union:"member"`
-	PushStepResponseDto     *PushStepResponseDto     `queryParam:"inline" union:"member"`
-	ChatStepResponseDto     *ChatStepResponseDto     `queryParam:"inline" union:"member"`
-	DelayStepResponseDto    *DelayStepResponseDto    `queryParam:"inline" union:"member"`
-	DigestStepResponseDto   *DigestStepResponseDto   `queryParam:"inline" union:"member"`
-	CustomStepResponseDto   *CustomStepResponseDto   `queryParam:"inline" union:"member"`
-	ThrottleStepResponseDto *ThrottleStepResponseDto `queryParam:"inline" union:"member"`
+	InAppStepResponseDto       *InAppStepResponseDto       `queryParam:"inline" union:"member"`
+	EmailStepResponseDto       *EmailStepResponseDto       `queryParam:"inline" union:"member"`
+	SmsStepResponseDto         *SmsStepResponseDto         `queryParam:"inline" union:"member"`
+	PushStepResponseDto        *PushStepResponseDto        `queryParam:"inline" union:"member"`
+	ChatStepResponseDto        *ChatStepResponseDto        `queryParam:"inline" union:"member"`
+	DelayStepResponseDto       *DelayStepResponseDto       `queryParam:"inline" union:"member"`
+	DigestStepResponseDto      *DigestStepResponseDto      `queryParam:"inline" union:"member"`
+	CustomStepResponseDto      *CustomStepResponseDto      `queryParam:"inline" union:"member"`
+	ThrottleStepResponseDto    *ThrottleStepResponseDto    `queryParam:"inline" union:"member"`
+	HTTPRequestStepResponseDto *HTTPRequestStepResponseDto `queryParam:"inline" union:"member"`
 
 	Type WorkflowResponseDtoStepsType
 }
@@ -225,6 +227,18 @@ func CreateWorkflowResponseDtoStepsThrottle(throttle ThrottleStepResponseDto) Wo
 	}
 }
 
+func CreateWorkflowResponseDtoStepsHTTPRequest(httpRequest HTTPRequestStepResponseDto) WorkflowResponseDtoSteps {
+	typ := WorkflowResponseDtoStepsTypeHTTPRequest
+
+	typStr := StepTypeEnum(typ)
+	httpRequest.Type = typStr
+
+	return WorkflowResponseDtoSteps{
+		HTTPRequestStepResponseDto: &httpRequest,
+		Type:                       typ,
+	}
+}
+
 func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -318,6 +332,15 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		u.ThrottleStepResponseDto = throttleStepResponseDto
 		u.Type = WorkflowResponseDtoStepsTypeThrottle
 		return nil
+	case "http_request":
+		httpRequestStepResponseDto := new(HTTPRequestStepResponseDto)
+		if err := utils.UnmarshalJSON(data, &httpRequestStepResponseDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == http_request) type HTTPRequestStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
+		}
+
+		u.HTTPRequestStepResponseDto = httpRequestStepResponseDto
+		u.Type = WorkflowResponseDtoStepsTypeHTTPRequest
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowResponseDtoSteps", string(data))
@@ -358,6 +381,10 @@ func (u WorkflowResponseDtoSteps) MarshalJSON() ([]byte, error) {
 
 	if u.ThrottleStepResponseDto != nil {
 		return utils.MarshalJSON(u.ThrottleStepResponseDto, "", true)
+	}
+
+	if u.HTTPRequestStepResponseDto != nil {
+		return utils.MarshalJSON(u.HTTPRequestStepResponseDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type WorkflowResponseDtoSteps: all fields are null")

@@ -41,6 +41,9 @@ func (c *CreateWebhookEndpointDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createwebhookendpointdtocontext2
+// #endregion class-body-createwebhookendpointdtocontext2
+
 type CreateWebhookEndpointDtoContextType string
 
 const (

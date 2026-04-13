@@ -375,7 +375,7 @@ func main() {
 
 ### [Activity](docs/sdks/activity/README.md)
 
-* [Track](docs/sdks/activity/README.md#track) - Track activity and engagement events
+* [Track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
 
 ### [ChannelConnections](docs/sdks/channelconnections/README.md)
 
@@ -401,9 +401,20 @@ func main() {
 * [Retrieve](docs/sdks/contexts/README.md#retrieve) - Retrieve a context
 * [Delete](docs/sdks/contexts/README.md#delete) - Delete a context
 
+### [EnvironmentVariables](docs/sdks/environmentvariables/README.md)
+
+* [List](docs/sdks/environmentvariables/README.md#list) - List all variables
+* [Create](docs/sdks/environmentvariables/README.md#create) - Create a variable
+* [Retrieve](docs/sdks/environmentvariables/README.md#retrieve) - Get environment variable
+* [Update](docs/sdks/environmentvariables/README.md#update) - Update a variable
+* [Delete](docs/sdks/environmentvariables/README.md#delete) - Delete environment variable
+* [Usage](docs/sdks/environmentvariables/README.md#usage) - Retrieve a variable usage
+
 ### [Environments](docs/sdks/environments/README.md)
 
 * [GetTags](docs/sdks/environments/README.md#gettags) - List environment tags
+* [Diff](docs/sdks/environments/README.md#diff) - Compare resources between environments
+* [Publish](docs/sdks/environments/README.md#publish) - Publish resources to target environment
 * [Create](docs/sdks/environments/README.md#create) - Create an environment
 * [List](docs/sdks/environments/README.md#list) - List all environments
 * [Update](docs/sdks/environments/README.md#update) - Update an environment
@@ -465,6 +476,22 @@ func main() {
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
+* [List](docs/sdks/novunotifications/README.md#list) - Retrieve subscriber notifications
+* [Delete](docs/sdks/novunotifications/README.md#delete) - Delete a notification
+* [CompleteAction](docs/sdks/novunotifications/README.md#completeaction) - Complete a notification action
+* [RevertAction](docs/sdks/novunotifications/README.md#revertaction) - Revert a notification action
+* [Archive](docs/sdks/novunotifications/README.md#archive) - Archive a notification
+* [MarkAsRead](docs/sdks/novunotifications/README.md#markasread) - Mark a notification as read
+* [Snooze](docs/sdks/novunotifications/README.md#snooze) - Snooze a notification
+* [Unarchive](docs/sdks/novunotifications/README.md#unarchive) - Unarchive a notification
+* [MarkAsUnread](docs/sdks/novunotifications/README.md#markasunread) - Mark a notification as unread
+* [Unsnooze](docs/sdks/novunotifications/README.md#unsnooze) - Unsnooze a notification
+* [ArchiveAll](docs/sdks/novunotifications/README.md#archiveall) - Archive all notifications
+* [Count](docs/sdks/novunotifications/README.md#count) - Retrieve subscriber notifications count
+* [DeleteAll](docs/sdks/novunotifications/README.md#deleteall) - Delete all notifications
+* [MarkAllAsRead](docs/sdks/novunotifications/README.md#markallasread) - Mark all notifications as read
+* [ArchiveAllRead](docs/sdks/novunotifications/README.md#archiveallread) - Archive all read notifications
+* [MarkAsSeen](docs/sdks/novunotifications/README.md#markasseen) - Mark notifications as seen
 * [Feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
 * [UnseenCount](docs/sdks/novunotifications/README.md#unseencount) - Retrieve unseen notifications count
 
@@ -532,6 +559,7 @@ func main() {
 
 #### [Workflows.Steps](docs/sdks/steps/README.md)
 
+* [GeneratePreview](docs/sdks/steps/README.md#generatepreview) - Generate a step preview
 * [Retrieve](docs/sdks/steps/README.md#retrieve) - Retrieve workflow step
 
 </details>

@@ -57,6 +57,12 @@ workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsCustom(comp
 workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsThrottle(components.ThrottleStepResponseDto{/* values here */})
 ```
 
+### HTTPRequestStepResponseDto
+
+```go
+workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsHTTPRequest(components.HTTPRequestStepResponseDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -81,5 +87,7 @@ switch workflowResponseDtoSteps.Type {
 		// workflowResponseDtoSteps.CustomStepResponseDto is populated
 	case components.WorkflowResponseDtoStepsTypeThrottle:
 		// workflowResponseDtoSteps.ThrottleStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeHTTPRequest:
+		// workflowResponseDtoSteps.HTTPRequestStepResponseDto is populated
 }
 ```

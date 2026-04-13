@@ -1,0 +1,12 @@
+# SyncResultDto
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ResourceType`                                                                   | [components.ResourceTypeEnum](../../models/components/resourcetypeenum.md)       | :heavy_check_mark:                                                               | Type of the layout                                                               |
+| `Successful`                                                                     | [][components.SyncedWorkflowDto](../../models/components/syncedworkflowdto.md)   | :heavy_check_mark:                                                               | Successfully synced resources                                                    |
+| `Failed`                                                                         | [][components.FailedWorkflowDto](../../models/components/failedworkflowdto.md)   | :heavy_check_mark:                                                               | Failed resource syncs                                                            |
+| `Skipped`                                                                        | [][components.SkippedWorkflowDto](../../models/components/skippedworkflowdto.md) | :heavy_check_mark:                                                               | Skipped resources                                                                |
+| `TotalProcessed`                                                                 | `float64`                                                                        | :heavy_check_mark:                                                               | Total number of resources processed                                              |

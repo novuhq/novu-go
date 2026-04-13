@@ -18,6 +18,9 @@ func (e *EnvironmentsControllerV1ListMyEnvironmentsRequest) GetIdempotencyKey() 
 	return e.IdempotencyKey
 }
 
+// #region class-body-environmentscontrollerv1listmyenvironmentsrequest
+// #endregion class-body-environmentscontrollerv1listmyenvironmentsrequest
+
 type EnvironmentsControllerV1ListMyEnvironmentsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -45,3 +48,6 @@ func (e *EnvironmentsControllerV1ListMyEnvironmentsResponse) GetHeaders() map[st
 	}
 	return e.Headers
 }
+
+// #region class-body-environmentscontrollerv1listmyenvironmentsresponse
+// #endregion class-body-environmentscontrollerv1listmyenvironmentsresponse

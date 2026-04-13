@@ -916,6 +916,7 @@ func (s *Credentials) Delete(ctx context.Context, subscriberID string, providerI
 	switch {
 	case httpRes.StatusCode == 204:
 		res.Headers = httpRes.Header
+
 		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {

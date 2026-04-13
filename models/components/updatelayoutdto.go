@@ -6,7 +6,7 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// ControlValues - Control values for the layout
+// ControlValues - Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values.
 type ControlValues struct {
 	// Email layout controls
 	Email *EmailControlsDto `json:"email,omitempty"`
@@ -24,7 +24,7 @@ type UpdateLayoutDto struct {
 	Name string `json:"name"`
 	// Enable or disable translations for this layout
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
-	// Control values for the layout
+	// Control values for the layout. Omit to leave unchanged, or set to null to clear stored control values.
 	ControlValues *ControlValues `json:"controlValues,omitempty"`
 }
 

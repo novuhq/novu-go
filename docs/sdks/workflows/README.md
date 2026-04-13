@@ -85,7 +85,7 @@ func main() {
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
 | `createWorkflowDto`                                                          | [components.CreateWorkflowDto](../../models/components/createworkflowdto.md) | :heavy_check_mark:                                                           | Workflow creation details                                                    |
-| `idempotencyKey`                                                             | **string*                                                                    | :heavy_minus_sign:                                                           | A header for idempotency purposes                                            |
+| `idempotencyKey`                                                             | `*string`                                                                    | :heavy_minus_sign:                                                           | A header for idempotency purposes                                            |
 | `opts`                                                                       | [][operations.Option](../../models/operations/option.md)                     | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
 ### Response
@@ -127,8 +127,8 @@ func main() {
     )
 
     res, err := s.Workflows.List(ctx, operations.WorkflowControllerSearchWorkflowsRequest{
-        Limit: v3.Pointer[float64](10),
-        Offset: v3.Pointer[float64](0),
+        Limit: v3.Pointer[float64](10.0),
+        Offset: v3.Pointer[float64](0.0),
     })
     if err != nil {
         log.Fatal(err)
@@ -230,9 +230,9 @@ func main() {
 | Parameter                                                                    | Type                                                                         | Required                                                                     | Description                                                                  |
 | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | `ctx`                                                                        | [context.Context](https://pkg.go.dev/context#Context)                        | :heavy_check_mark:                                                           | The context to use for the request.                                          |
-| `workflowID`                                                                 | *string*                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
+| `workflowID`                                                                 | `string`                                                                     | :heavy_check_mark:                                                           | N/A                                                                          |
 | `updateWorkflowDto`                                                          | [components.UpdateWorkflowDto](../../models/components/updateworkflowdto.md) | :heavy_check_mark:                                                           | Workflow update details                                                      |
-| `idempotencyKey`                                                             | **string*                                                                    | :heavy_minus_sign:                                                           | A header for idempotency purposes                                            |
+| `idempotencyKey`                                                             | `*string`                                                                    | :heavy_minus_sign:                                                           | A header for idempotency purposes                                            |
 | `opts`                                                                       | [][operations.Option](../../models/operations/option.md)                     | :heavy_minus_sign:                                                           | The options for this request.                                                |
 
 ### Response
@@ -287,9 +287,9 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `workflowID`                                             | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `environmentID`                                          | **string*                                                | :heavy_minus_sign:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `workflowID`                                             | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `environmentID`                                          | `*string`                                                | :heavy_minus_sign:                                       | N/A                                                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -344,8 +344,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `workflowID`                                             | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `workflowID`                                             | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -401,9 +401,9 @@ func main() {
 | Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                |
 | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |
-| `workflowID`                                                               | *string*                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
+| `workflowID`                                                               | `string`                                                                   | :heavy_check_mark:                                                         | N/A                                                                        |
 | `patchWorkflowDto`                                                         | [components.PatchWorkflowDto](../../models/components/patchworkflowdto.md) | :heavy_check_mark:                                                         | Workflow patch details                                                     |
-| `idempotencyKey`                                                           | **string*                                                                  | :heavy_minus_sign:                                                         | A header for idempotency purposes                                          |
+| `idempotencyKey`                                                           | `*string`                                                                  | :heavy_minus_sign:                                                         | A header for idempotency purposes                                          |
 | `opts`                                                                     | [][operations.Option](../../models/operations/option.md)                   | :heavy_minus_sign:                                                         | The options for this request.                                              |
 
 ### Response
@@ -461,9 +461,9 @@ func main() {
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `workflowID`                                                             | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `workflowID`                                                             | `string`                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
 | `syncWorkflowDto`                                                        | [components.SyncWorkflowDto](../../models/components/syncworkflowdto.md) | :heavy_check_mark:                                                       | Sync workflow details                                                    |
-| `idempotencyKey`                                                         | **string*                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
+| `idempotencyKey`                                                         | `*string`                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
 | `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response

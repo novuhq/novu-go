@@ -59,7 +59,7 @@ func main() {
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
 | `createLayoutDto`                                                        | [components.CreateLayoutDto](../../models/components/createlayoutdto.md) | :heavy_check_mark:                                                       | Layout creation details                                                  |
-| `idempotencyKey`                                                         | **string*                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
+| `idempotencyKey`                                                         | `*string`                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
 | `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response
@@ -101,8 +101,8 @@ func main() {
     )
 
     res, err := s.Layouts.List(ctx, operations.LayoutsControllerListRequest{
-        Limit: v3.Pointer[float64](10),
-        Offset: v3.Pointer[float64](0),
+        Limit: v3.Pointer[float64](10.0),
+        Offset: v3.Pointer[float64](0.0),
     })
     if err != nil {
         log.Fatal(err)
@@ -176,9 +176,9 @@ func main() {
 | Parameter                                                                | Type                                                                     | Required                                                                 | Description                                                              |
 | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
 | `ctx`                                                                    | [context.Context](https://pkg.go.dev/context#Context)                    | :heavy_check_mark:                                                       | The context to use for the request.                                      |
-| `layoutID`                                                               | *string*                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
+| `layoutID`                                                               | `string`                                                                 | :heavy_check_mark:                                                       | N/A                                                                      |
 | `updateLayoutDto`                                                        | [components.UpdateLayoutDto](../../models/components/updatelayoutdto.md) | :heavy_check_mark:                                                       | Layout update details                                                    |
-| `idempotencyKey`                                                         | **string*                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
+| `idempotencyKey`                                                         | `*string`                                                                | :heavy_minus_sign:                                                       | A header for idempotency purposes                                        |
 | `opts`                                                                   | [][operations.Option](../../models/operations/option.md)                 | :heavy_minus_sign:                                                       | The options for this request.                                            |
 
 ### Response
@@ -233,8 +233,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `layoutID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `layoutID`                                               | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -289,8 +289,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `layoutID`                                               | *string*                                                 | :heavy_check_mark:                                       | The unique identifier of the layout                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `layoutID`                                               | `string`                                                 | :heavy_check_mark:                                       | The unique identifier of the layout                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -348,9 +348,9 @@ func main() {
 | Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
 | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `layoutID`                                                                     | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
+| `layoutID`                                                                     | `string`                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
 | `duplicateLayoutDto`                                                           | [components.DuplicateLayoutDto](../../models/components/duplicatelayoutdto.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `idempotencyKey`                                                               | **string*                                                                      | :heavy_minus_sign:                                                             | A header for idempotency purposes                                              |
+| `idempotencyKey`                                                               | `*string`                                                                      | :heavy_minus_sign:                                                             | A header for idempotency purposes                                              |
 | `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
 ### Response
@@ -435,9 +435,9 @@ func main() {
 | Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `layoutID`                                                                               | *string*                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `layoutID`                                                                               | `string`                                                                                 | :heavy_check_mark:                                                                       | N/A                                                                                      |
 | `layoutPreviewRequestDto`                                                                | [components.LayoutPreviewRequestDto](../../models/components/layoutpreviewrequestdto.md) | :heavy_check_mark:                                                                       | Layout preview generation details                                                        |
-| `idempotencyKey`                                                                         | **string*                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
+| `idempotencyKey`                                                                         | `*string`                                                                                | :heavy_minus_sign:                                                                       | A header for idempotency purposes                                                        |
 | `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
@@ -492,8 +492,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `layoutID`                                               | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `layoutID`                                               | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response

@@ -13,6 +13,7 @@ type ContentIssueEnum string
 const (
 	ContentIssueEnumIllegalVariableInControlValue ContentIssueEnum = "ILLEGAL_VARIABLE_IN_CONTROL_VALUE"
 	ContentIssueEnumInvalidFilterArgInVariable    ContentIssueEnum = "INVALID_FILTER_ARG_IN_VARIABLE"
+	ContentIssueEnumInvalidURL                    ContentIssueEnum = "INVALID_URL"
 	ContentIssueEnumMissingValue                  ContentIssueEnum = "MISSING_VALUE"
 	ContentIssueEnumTierLimitExceeded             ContentIssueEnum = "TIER_LIMIT_EXCEEDED"
 )
@@ -29,6 +30,8 @@ func (e *ContentIssueEnum) UnmarshalJSON(data []byte) error {
 	case "ILLEGAL_VARIABLE_IN_CONTROL_VALUE":
 		fallthrough
 	case "INVALID_FILTER_ARG_IN_VARIABLE":
+		fallthrough
+	case "INVALID_URL":
 		fallthrough
 	case "MISSING_VALUE":
 		fallthrough

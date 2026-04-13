@@ -68,6 +68,7 @@ const (
 	ProvidersIDEnumImedia           ProvidersIDEnum = "imedia"
 	ProvidersIDEnumSinch            ProvidersIDEnum = "sinch"
 	ProvidersIDEnumIsendproSms      ProvidersIDEnum = "isendpro-sms"
+	ProvidersIDEnumCmTelecom        ProvidersIDEnum = "cm-telecom"
 	ProvidersIDEnumFcm              ProvidersIDEnum = "fcm"
 	ProvidersIDEnumApns             ProvidersIDEnum = "apns"
 	ProvidersIDEnumExpo             ProvidersIDEnum = "expo"
@@ -213,6 +214,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "sinch":
 		fallthrough
 	case "isendpro-sms":
+		fallthrough
+	case "cm-telecom":
 		fallthrough
 	case "fcm":
 		fallthrough

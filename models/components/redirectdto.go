@@ -8,7 +8,7 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// Target window for the redirection.
+// Target attribute for the redirect link
 type Target string
 
 const (
@@ -45,10 +45,10 @@ func (e *Target) UnmarshalJSON(data []byte) error {
 }
 
 type RedirectDto struct {
-	// URL for redirection. Must be a valid URL or start with / or {{ variable }}.
-	URL *string `json:"url,omitempty"`
-	// Target window for the redirection.
-	Target *Target `default:"_self" json:"target"`
+	// URL to redirect to
+	URL string `json:"url"`
+	// Target attribute for the redirect link
+	Target *Target `json:"target,omitempty"`
 }
 
 func (r RedirectDto) MarshalJSON() ([]byte, error) {
@@ -56,15 +56,15 @@ func (r RedirectDto) MarshalJSON() ([]byte, error) {
 }
 
 func (r *RedirectDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"url"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (r *RedirectDto) GetURL() *string {
+func (r *RedirectDto) GetURL() string {
 	if r == nil {
-		return nil
+		return ""
 	}
 	return r.URL
 }

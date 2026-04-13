@@ -2,6 +2,16 @@
 
 The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.ProviderIDEmailjs
+```
+
 
 ## Values
 
@@ -64,6 +74,7 @@ The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 | `ProviderIDImedia`           | imedia                       |
 | `ProviderIDSinch`            | sinch                        |
 | `ProviderIDIsendproSms`      | isendpro-sms                 |
+| `ProviderIDCmTelecom`        | cm-telecom                   |
 | `ProviderIDFcm`              | fcm                          |
 | `ProviderIDApns`             | apns                         |
 | `ProviderIDExpo`             | expo                         |
