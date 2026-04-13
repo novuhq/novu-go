@@ -33,6 +33,8 @@ func newChannelEndpoints(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks
 
 // List all channel endpoints
 // List all channel endpoints for a resource based on query filters.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *ChannelEndpoints) List(ctx context.Context, request operations.ChannelEndpointsControllerListChannelEndpointsRequest, opts ...operations.Option) (*operations.ChannelEndpointsControllerListChannelEndpointsResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -91,7 +93,7 @@ func (s *ChannelEndpoints) List(ctx context.Context, request operations.ChannelE
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -374,6 +376,8 @@ func (s *ChannelEndpoints) List(ctx context.Context, request operations.ChannelE
 
 // Create a channel endpoint
 // Create a new channel endpoint for a resource.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *ChannelEndpoints) Create(ctx context.Context, requestBody operations.ChannelEndpointsControllerCreateChannelEndpointRequestBody, idempotencyKey *string, opts ...operations.Option) (*operations.ChannelEndpointsControllerCreateChannelEndpointResponse, error) {
 	request := operations.ChannelEndpointsControllerCreateChannelEndpointRequest{
 		IdempotencyKey: idempotencyKey,
@@ -440,7 +444,7 @@ func (s *ChannelEndpoints) Create(ctx context.Context, requestBody operations.Ch
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -723,6 +727,8 @@ func (s *ChannelEndpoints) Create(ctx context.Context, requestBody operations.Ch
 
 // Retrieve a channel endpoint
 // Retrieve a specific channel endpoint by its unique identifier.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *ChannelEndpoints) Retrieve(ctx context.Context, identifier string, idempotencyKey *string, opts ...operations.Option) (*operations.ChannelEndpointsControllerGetChannelEndpointResponse, error) {
 	request := operations.ChannelEndpointsControllerGetChannelEndpointRequest{
 		Identifier:     identifier,
@@ -782,7 +788,7 @@ func (s *ChannelEndpoints) Retrieve(ctx context.Context, identifier string, idem
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -1065,6 +1071,8 @@ func (s *ChannelEndpoints) Retrieve(ctx context.Context, identifier string, idem
 
 // Update a channel endpoint
 // Update an existing channel endpoint by its unique identifier.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *ChannelEndpoints) Update(ctx context.Context, identifier string, updateChannelEndpointRequestDto components.UpdateChannelEndpointRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.ChannelEndpointsControllerUpdateChannelEndpointResponse, error) {
 	request := operations.ChannelEndpointsControllerUpdateChannelEndpointRequest{
 		Identifier:                      identifier,
@@ -1132,7 +1140,7 @@ func (s *ChannelEndpoints) Update(ctx context.Context, identifier string, update
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -1415,6 +1423,8 @@ func (s *ChannelEndpoints) Update(ctx context.Context, identifier string, update
 
 // Delete a channel endpoint
 // Delete a specific channel endpoint by its unique identifier.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *ChannelEndpoints) Delete(ctx context.Context, identifier string, idempotencyKey *string, opts ...operations.Option) (*operations.ChannelEndpointsControllerDeleteChannelEndpointResponse, error) {
 	request := operations.ChannelEndpointsControllerDeleteChannelEndpointRequest{
 		Identifier:     identifier,
@@ -1474,7 +1484,7 @@ func (s *ChannelEndpoints) Delete(ctx context.Context, identifier string, idempo
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 

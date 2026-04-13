@@ -1,0 +1,12 @@
+# SubscribersControllerCompleteNotificationActionRequest
+
+
+## Fields
+
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `SubscriberID`                                                 | `string`                                                       | :heavy_check_mark:                                             | The identifier of the subscriber                               |
+| `NotificationID`                                               | `string`                                                       | :heavy_check_mark:                                             | The identifier of the notification                             |
+| `ActionType`                                                   | [operations.ActionType](../../models/operations/actiontype.md) | :heavy_check_mark:                                             | The type of action (primary or secondary)                      |
+| `ContextKeys`                                                  | []`string`                                                     | :heavy_minus_sign:                                             | Context keys for filtering                                     |
+| `IdempotencyKey`                                               | `*string`                                                      | :heavy_minus_sign:                                             | A header for idempotency purposes                              |

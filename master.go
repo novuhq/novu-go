@@ -33,6 +33,8 @@ func newMaster(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hooks.Ho
 
 // Retrieve master translations JSON
 // Retrieve all translations for a locale in master JSON format organized by resourceId (workflowId)
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Master) Retrieve(ctx context.Context, locale *string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerGetMasterJSONEndpointResponse, error) {
 	request := operations.TranslationControllerGetMasterJSONEndpointRequest{
 		Locale:         locale,
@@ -96,7 +98,7 @@ func (s *Master) Retrieve(ctx context.Context, locale *string, idempotencyKey *s
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -259,6 +261,8 @@ func (s *Master) Retrieve(ctx context.Context, locale *string, idempotencyKey *s
 
 // Import master translations JSON
 // Import translations for multiple workflows from master JSON format for a specific locale
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Master) Import(ctx context.Context, importMasterJSONRequestDto components.ImportMasterJSONRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerImportMasterJSONEndpointResponse, error) {
 	request := operations.TranslationControllerImportMasterJSONEndpointRequest{
 		IdempotencyKey:             idempotencyKey,
@@ -325,7 +329,7 @@ func (s *Master) Import(ctx context.Context, importMasterJSONRequestDto componen
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -488,6 +492,8 @@ func (s *Master) Import(ctx context.Context, importMasterJSONRequestDto componen
 
 // Upload master translations JSON file
 // Upload a master JSON file containing translations for multiple workflows. Locale is automatically detected from filename (e.g., en_US.json)
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Master) Upload(ctx context.Context, requestBody operations.TranslationControllerUploadMasterJSONEndpointRequestBody, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadMasterJSONEndpointResponse, error) {
 	request := operations.TranslationControllerUploadMasterJSONEndpointRequest{
 		IdempotencyKey: idempotencyKey,
@@ -554,7 +560,7 @@ func (s *Master) Upload(ctx context.Context, requestBody operations.TranslationC
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 

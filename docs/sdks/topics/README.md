@@ -40,7 +40,7 @@ func main() {
     )
 
     res, err := s.Topics.List(ctx, operations.TopicsControllerListTopicsRequest{
-        Limit: v3.Pointer[float64](10),
+        Limit: v3.Pointer[float64](10.0),
     })
     if err != nil {
         log.Fatal(err)
@@ -116,8 +116,8 @@ func main() {
 | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------ |
 | `ctx`                                                                                            | [context.Context](https://pkg.go.dev/context#Context)                                            | :heavy_check_mark:                                                                               | The context to use for the request.                                                              |
 | `createUpdateTopicRequestDto`                                                                    | [components.CreateUpdateTopicRequestDto](../../models/components/createupdatetopicrequestdto.md) | :heavy_check_mark:                                                                               | N/A                                                                                              |
-| `failIfExists`                                                                                   | **bool*                                                                                          | :heavy_minus_sign:                                                                               | If true, the request will fail if a topic with the same key already exists                       |
-| `idempotencyKey`                                                                                 | **string*                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
+| `failIfExists`                                                                                   | `*bool`                                                                                          | :heavy_minus_sign:                                                                               | If true, the request will fail if a topic with the same key already exists                       |
+| `idempotencyKey`                                                                                 | `*string`                                                                                        | :heavy_minus_sign:                                                                               | A header for idempotency purposes                                                                |
 | `opts`                                                                                           | [][operations.Option](../../models/operations/option.md)                                         | :heavy_minus_sign:                                                                               | The options for this request.                                                                    |
 
 ### Response
@@ -173,8 +173,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `topicKey`                                               | *string*                                                 | :heavy_check_mark:                                       | The key identifier of the topic                          |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `topicKey`                                               | `string`                                                 | :heavy_check_mark:                                       | The key identifier of the topic                          |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
@@ -232,9 +232,9 @@ func main() {
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `topicKey`                                                                           | *string*                                                                             | :heavy_check_mark:                                                                   | The key identifier of the topic                                                      |
+| `topicKey`                                                                           | `string`                                                                             | :heavy_check_mark:                                                                   | The key identifier of the topic                                                      |
 | `updateTopicRequestDto`                                                              | [components.UpdateTopicRequestDto](../../models/components/updatetopicrequestdto.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `idempotencyKey`                                                                     | **string*                                                                            | :heavy_minus_sign:                                                                   | A header for idempotency purposes                                                    |
+| `idempotencyKey`                                                                     | `*string`                                                                            | :heavy_minus_sign:                                                                   | A header for idempotency purposes                                                    |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -290,8 +290,8 @@ func main() {
 | Parameter                                                | Type                                                     | Required                                                 | Description                                              |
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `topicKey`                                               | *string*                                                 | :heavy_check_mark:                                       | The key identifier of the topic                          |
-| `idempotencyKey`                                         | **string*                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `topicKey`                                               | `string`                                                 | :heavy_check_mark:                                       | The key identifier of the topic                          |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response

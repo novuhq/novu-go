@@ -2,6 +2,16 @@
 
 The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
+```
+
 
 ## Values
 
@@ -64,6 +74,7 @@ The provider identifier (e.g., sendgrid, twilio, slack, etc.).
 | `GetChannelEndpointResponseDtoProviderIDImedia`           | imedia                                                    |
 | `GetChannelEndpointResponseDtoProviderIDSinch`            | sinch                                                     |
 | `GetChannelEndpointResponseDtoProviderIDIsendproSms`      | isendpro-sms                                              |
+| `GetChannelEndpointResponseDtoProviderIDCmTelecom`        | cm-telecom                                                |
 | `GetChannelEndpointResponseDtoProviderIDFcm`              | fcm                                                       |
 | `GetChannelEndpointResponseDtoProviderIDApns`             | apns                                                      |
 | `GetChannelEndpointResponseDtoProviderIDExpo`             | expo                                                      |

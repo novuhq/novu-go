@@ -12,25 +12,27 @@ import (
 type UpdateWorkflowDtoStepsType string
 
 const (
-	UpdateWorkflowDtoStepsTypeInApp  UpdateWorkflowDtoStepsType = "in_app"
-	UpdateWorkflowDtoStepsTypeEmail  UpdateWorkflowDtoStepsType = "email"
-	UpdateWorkflowDtoStepsTypeSms    UpdateWorkflowDtoStepsType = "sms"
-	UpdateWorkflowDtoStepsTypePush   UpdateWorkflowDtoStepsType = "push"
-	UpdateWorkflowDtoStepsTypeChat   UpdateWorkflowDtoStepsType = "chat"
-	UpdateWorkflowDtoStepsTypeDelay  UpdateWorkflowDtoStepsType = "delay"
-	UpdateWorkflowDtoStepsTypeDigest UpdateWorkflowDtoStepsType = "digest"
-	UpdateWorkflowDtoStepsTypeCustom UpdateWorkflowDtoStepsType = "custom"
+	UpdateWorkflowDtoStepsTypeInApp       UpdateWorkflowDtoStepsType = "in_app"
+	UpdateWorkflowDtoStepsTypeEmail       UpdateWorkflowDtoStepsType = "email"
+	UpdateWorkflowDtoStepsTypeSms         UpdateWorkflowDtoStepsType = "sms"
+	UpdateWorkflowDtoStepsTypePush        UpdateWorkflowDtoStepsType = "push"
+	UpdateWorkflowDtoStepsTypeChat        UpdateWorkflowDtoStepsType = "chat"
+	UpdateWorkflowDtoStepsTypeDelay       UpdateWorkflowDtoStepsType = "delay"
+	UpdateWorkflowDtoStepsTypeDigest      UpdateWorkflowDtoStepsType = "digest"
+	UpdateWorkflowDtoStepsTypeCustom      UpdateWorkflowDtoStepsType = "custom"
+	UpdateWorkflowDtoStepsTypeHTTPRequest UpdateWorkflowDtoStepsType = "http_request"
 )
 
 type UpdateWorkflowDtoSteps struct {
-	InAppStepUpsertDto  *InAppStepUpsertDto  `queryParam:"inline" union:"member"`
-	EmailStepUpsertDto  *EmailStepUpsertDto  `queryParam:"inline" union:"member"`
-	SmsStepUpsertDto    *SmsStepUpsertDto    `queryParam:"inline" union:"member"`
-	PushStepUpsertDto   *PushStepUpsertDto   `queryParam:"inline" union:"member"`
-	ChatStepUpsertDto   *ChatStepUpsertDto   `queryParam:"inline" union:"member"`
-	DelayStepUpsertDto  *DelayStepUpsertDto  `queryParam:"inline" union:"member"`
-	DigestStepUpsertDto *DigestStepUpsertDto `queryParam:"inline" union:"member"`
-	CustomStepUpsertDto *CustomStepUpsertDto `queryParam:"inline" union:"member"`
+	InAppStepUpsertDto       *InAppStepUpsertDto       `queryParam:"inline" union:"member"`
+	EmailStepUpsertDto       *EmailStepUpsertDto       `queryParam:"inline" union:"member"`
+	SmsStepUpsertDto         *SmsStepUpsertDto         `queryParam:"inline" union:"member"`
+	PushStepUpsertDto        *PushStepUpsertDto        `queryParam:"inline" union:"member"`
+	ChatStepUpsertDto        *ChatStepUpsertDto        `queryParam:"inline" union:"member"`
+	DelayStepUpsertDto       *DelayStepUpsertDto       `queryParam:"inline" union:"member"`
+	DigestStepUpsertDto      *DigestStepUpsertDto      `queryParam:"inline" union:"member"`
+	CustomStepUpsertDto      *CustomStepUpsertDto      `queryParam:"inline" union:"member"`
+	HTTPRequestStepUpsertDto *HTTPRequestStepUpsertDto `queryParam:"inline" union:"member"`
 
 	Type UpdateWorkflowDtoStepsType
 }
@@ -131,6 +133,18 @@ func CreateUpdateWorkflowDtoStepsCustom(custom CustomStepUpsertDto) UpdateWorkfl
 	}
 }
 
+func CreateUpdateWorkflowDtoStepsHTTPRequest(httpRequest HTTPRequestStepUpsertDto) UpdateWorkflowDtoSteps {
+	typ := UpdateWorkflowDtoStepsTypeHTTPRequest
+
+	typStr := StepTypeEnum(typ)
+	httpRequest.Type = typStr
+
+	return UpdateWorkflowDtoSteps{
+		HTTPRequestStepUpsertDto: &httpRequest,
+		Type:                     typ,
+	}
+}
+
 func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -215,6 +229,15 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		u.CustomStepUpsertDto = customStepUpsertDto
 		u.Type = UpdateWorkflowDtoStepsTypeCustom
 		return nil
+	case "http_request":
+		httpRequestStepUpsertDto := new(HTTPRequestStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &httpRequestStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == http_request) type HTTPRequestStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
+		}
+
+		u.HTTPRequestStepUpsertDto = httpRequestStepUpsertDto
+		u.Type = UpdateWorkflowDtoStepsTypeHTTPRequest
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UpdateWorkflowDtoSteps", string(data))
@@ -251,6 +274,10 @@ func (u UpdateWorkflowDtoSteps) MarshalJSON() ([]byte, error) {
 
 	if u.CustomStepUpsertDto != nil {
 		return utils.MarshalJSON(u.CustomStepUpsertDto, "", true)
+	}
+
+	if u.HTTPRequestStepUpsertDto != nil {
+		return utils.MarshalJSON(u.HTTPRequestStepUpsertDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type UpdateWorkflowDtoSteps: all fields are null")

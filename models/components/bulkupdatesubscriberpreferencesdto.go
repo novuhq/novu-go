@@ -40,6 +40,9 @@ func (c *Context2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-context2
+// #endregion class-body-context2
+
 type BulkUpdateSubscriberPreferencesDtoContextType string
 
 const (

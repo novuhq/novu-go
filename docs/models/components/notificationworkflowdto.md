@@ -1,0 +1,14 @@
+# NotificationWorkflowDto
+
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `ID`                                                                         | `string`                                                                     | :heavy_check_mark:                                                           | Unique identifier of the workflow                                            |
+| `Identifier`                                                                 | `string`                                                                     | :heavy_check_mark:                                                           | Workflow identifier used for triggering                                      |
+| `Name`                                                                       | `string`                                                                     | :heavy_check_mark:                                                           | Human-readable name of the workflow                                          |
+| `Critical`                                                                   | `bool`                                                                       | :heavy_check_mark:                                                           | Whether this workflow is marked as critical                                  |
+| `Tags`                                                                       | []`string`                                                                   | :heavy_minus_sign:                                                           | Tags associated with the workflow                                            |
+| `Data`                                                                       | map[string]`any`                                                             | :heavy_minus_sign:                                                           | Custom data associated with the workflow                                     |
+| `Severity`                                                                   | [components.SeverityLevelEnum](../../models/components/severitylevelenum.md) | :heavy_check_mark:                                                           | Severity of the workflow                                                     |

@@ -34,6 +34,9 @@ func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagRequest) GetUpdateSubs
 	return s.UpdateSubscriberOnlineFlagRequestDto
 }
 
+// #region class-body-subscribersv1controllerupdatesubscriberonlineflagrequest
+// #endregion class-body-subscribersv1controllerupdatesubscriberonlineflagrequest
+
 type SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	// OK
@@ -61,3 +64,6 @@ func (s *SubscribersV1ControllerUpdateSubscriberOnlineFlagResponse) GetHeaders()
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllerupdatesubscriberonlineflagresponse
+// #endregion class-body-subscribersv1controllerupdatesubscriberonlineflagresponse

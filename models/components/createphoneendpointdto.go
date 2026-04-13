@@ -41,6 +41,9 @@ func (c *CreatePhoneEndpointDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createphoneendpointdtocontext2
+// #endregion class-body-createphoneendpointdtocontext2
+
 type CreatePhoneEndpointDtoContextType string
 
 const (

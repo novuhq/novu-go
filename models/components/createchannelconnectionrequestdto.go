@@ -40,6 +40,9 @@ func (c *CreateChannelConnectionRequestDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createchannelconnectionrequestdtocontext2
+// #endregion class-body-createchannelconnectionrequestdtocontext2
+
 type CreateChannelConnectionRequestDtoContextType string
 
 const (

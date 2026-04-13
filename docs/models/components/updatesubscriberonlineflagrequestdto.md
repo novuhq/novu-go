@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        |
 | ------------------ | ------------------ | ------------------ | ------------------ |
-| `IsOnline`         | *bool*             | :heavy_check_mark: | N/A                |
+| `IsOnline`         | `bool`             | :heavy_check_mark: | N/A                |

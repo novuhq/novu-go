@@ -5,4 +5,4 @@
 
 | Field              | Type               | Required           | Description        | Example            |
 | ------------------ | ------------------ | ------------------ | ------------------ | ------------------ |
-| `ChannelID`        | *string*           | :heavy_check_mark: | Slack channel ID   | C123456789         |
+| `ChannelID`        | `string`           | :heavy_check_mark: | Slack channel ID   | C123456789         |

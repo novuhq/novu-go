@@ -41,6 +41,9 @@ func (c *CreateSlackChannelEndpointDtoContext2) GetData() map[string]any {
 	return c.Data
 }
 
+// #region class-body-createslackchannelendpointdtocontext2
+// #endregion class-body-createslackchannelendpointdtocontext2
+
 type CreateSlackChannelEndpointDtoContextType string
 
 const (

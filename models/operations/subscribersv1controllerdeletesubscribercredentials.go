@@ -34,6 +34,9 @@ func (s *SubscribersV1ControllerDeleteSubscriberCredentialsRequest) GetIdempoten
 	return s.IdempotencyKey
 }
 
+// #region class-body-subscribersv1controllerdeletesubscribercredentialsrequest
+// #endregion class-body-subscribersv1controllerdeletesubscribercredentialsrequest
+
 type SubscribersV1ControllerDeleteSubscriberCredentialsResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Headers  map[string][]string
@@ -52,3 +55,6 @@ func (s *SubscribersV1ControllerDeleteSubscriberCredentialsResponse) GetHeaders(
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllerdeletesubscribercredentialsresponse
+// #endregion class-body-subscribersv1controllerdeletesubscribercredentialsresponse

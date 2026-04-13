@@ -12,27 +12,29 @@ import (
 type StepsType string
 
 const (
-	StepsTypeInApp    StepsType = "in_app"
-	StepsTypeEmail    StepsType = "email"
-	StepsTypeSms      StepsType = "sms"
-	StepsTypePush     StepsType = "push"
-	StepsTypeChat     StepsType = "chat"
-	StepsTypeDelay    StepsType = "delay"
-	StepsTypeDigest   StepsType = "digest"
-	StepsTypeThrottle StepsType = "throttle"
-	StepsTypeCustom   StepsType = "custom"
+	StepsTypeInApp       StepsType = "in_app"
+	StepsTypeEmail       StepsType = "email"
+	StepsTypeSms         StepsType = "sms"
+	StepsTypePush        StepsType = "push"
+	StepsTypeChat        StepsType = "chat"
+	StepsTypeDelay       StepsType = "delay"
+	StepsTypeDigest      StepsType = "digest"
+	StepsTypeThrottle    StepsType = "throttle"
+	StepsTypeCustom      StepsType = "custom"
+	StepsTypeHTTPRequest StepsType = "http_request"
 )
 
 type Steps struct {
-	InAppStepUpsertDto    *InAppStepUpsertDto    `queryParam:"inline" union:"member"`
-	EmailStepUpsertDto    *EmailStepUpsertDto    `queryParam:"inline" union:"member"`
-	SmsStepUpsertDto      *SmsStepUpsertDto      `queryParam:"inline" union:"member"`
-	PushStepUpsertDto     *PushStepUpsertDto     `queryParam:"inline" union:"member"`
-	ChatStepUpsertDto     *ChatStepUpsertDto     `queryParam:"inline" union:"member"`
-	DelayStepUpsertDto    *DelayStepUpsertDto    `queryParam:"inline" union:"member"`
-	DigestStepUpsertDto   *DigestStepUpsertDto   `queryParam:"inline" union:"member"`
-	ThrottleStepUpsertDto *ThrottleStepUpsertDto `queryParam:"inline" union:"member"`
-	CustomStepUpsertDto   *CustomStepUpsertDto   `queryParam:"inline" union:"member"`
+	InAppStepUpsertDto       *InAppStepUpsertDto       `queryParam:"inline" union:"member"`
+	EmailStepUpsertDto       *EmailStepUpsertDto       `queryParam:"inline" union:"member"`
+	SmsStepUpsertDto         *SmsStepUpsertDto         `queryParam:"inline" union:"member"`
+	PushStepUpsertDto        *PushStepUpsertDto        `queryParam:"inline" union:"member"`
+	ChatStepUpsertDto        *ChatStepUpsertDto        `queryParam:"inline" union:"member"`
+	DelayStepUpsertDto       *DelayStepUpsertDto       `queryParam:"inline" union:"member"`
+	DigestStepUpsertDto      *DigestStepUpsertDto      `queryParam:"inline" union:"member"`
+	ThrottleStepUpsertDto    *ThrottleStepUpsertDto    `queryParam:"inline" union:"member"`
+	CustomStepUpsertDto      *CustomStepUpsertDto      `queryParam:"inline" union:"member"`
+	HTTPRequestStepUpsertDto *HTTPRequestStepUpsertDto `queryParam:"inline" union:"member"`
 
 	Type StepsType
 }
@@ -145,6 +147,18 @@ func CreateStepsCustom(custom CustomStepUpsertDto) Steps {
 	}
 }
 
+func CreateStepsHTTPRequest(httpRequest HTTPRequestStepUpsertDto) Steps {
+	typ := StepsTypeHTTPRequest
+
+	typStr := StepTypeEnum(typ)
+	httpRequest.Type = typStr
+
+	return Steps{
+		HTTPRequestStepUpsertDto: &httpRequest,
+		Type:                     typ,
+	}
+}
+
 func (u *Steps) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -238,6 +252,15 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		u.CustomStepUpsertDto = customStepUpsertDto
 		u.Type = StepsTypeCustom
 		return nil
+	case "http_request":
+		httpRequestStepUpsertDto := new(HTTPRequestStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &httpRequestStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == http_request) type HTTPRequestStepUpsertDto within Steps: %w", string(data), err)
+		}
+
+		u.HTTPRequestStepUpsertDto = httpRequestStepUpsertDto
+		u.Type = StepsTypeHTTPRequest
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Steps", string(data))
@@ -278,6 +301,10 @@ func (u Steps) MarshalJSON() ([]byte, error) {
 
 	if u.CustomStepUpsertDto != nil {
 		return utils.MarshalJSON(u.CustomStepUpsertDto, "", true)
+	}
+
+	if u.HTTPRequestStepUpsertDto != nil {
+		return utils.MarshalJSON(u.HTTPRequestStepUpsertDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Steps: all fields are null")

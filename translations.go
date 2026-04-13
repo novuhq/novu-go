@@ -19,7 +19,7 @@ import (
 
 // Translations - Used to localize your notifications to different languages.
 //
-// https://docs.novu.co/platform/workflow/translations
+// https://docs.novu.co/platform/workflow/advanced-features/translations
 type Translations struct {
 	Groups *Groups
 	Master *Master
@@ -41,6 +41,8 @@ func newTranslations(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *ho
 
 // Create a translation
 // Create a translation for a specific workflow and locale, if the translation already exists, it will be updated
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Translations) Create(ctx context.Context, createTranslationRequestDto components.CreateTranslationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerCreateTranslationEndpointResponse, error) {
 	request := operations.TranslationControllerCreateTranslationEndpointRequest{
 		IdempotencyKey:              idempotencyKey,
@@ -107,7 +109,7 @@ func (s *Translations) Create(ctx context.Context, createTranslationRequestDto c
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -270,6 +272,8 @@ func (s *Translations) Create(ctx context.Context, createTranslationRequestDto c
 
 // Retrieve a translation
 // Retrieve a specific translation by resource type, resource ID and locale
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Translations) Retrieve(ctx context.Context, resourceType operations.PathParamResourceType, resourceID string, locale string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerGetSingleTranslationResponse, error) {
 	request := operations.TranslationControllerGetSingleTranslationRequest{
 		ResourceType:   resourceType,
@@ -331,7 +335,7 @@ func (s *Translations) Retrieve(ctx context.Context, resourceType operations.Pat
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -496,6 +500,8 @@ func (s *Translations) Retrieve(ctx context.Context, resourceType operations.Pat
 
 // Delete a translation
 // Delete a specific translation by resource type, resource ID and locale
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Translations) Delete(ctx context.Context, resourceType operations.TranslationControllerDeleteTranslationEndpointPathParamResourceType, resourceID string, locale string, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerDeleteTranslationEndpointResponse, error) {
 	request := operations.TranslationControllerDeleteTranslationEndpointRequest{
 		ResourceType:   resourceType,
@@ -557,7 +563,7 @@ func (s *Translations) Delete(ctx context.Context, resourceType operations.Trans
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 
@@ -703,6 +709,8 @@ func (s *Translations) Delete(ctx context.Context, resourceType operations.Trans
 
 // Upload translation files
 // Upload one or more JSON translation files for a specific workflow. Files name must match the locale, e.g. en_US.json. Supports both "files" and "files[]" field names for backwards compatibility.
+//
+// If set, this operation will use either [Security.SecretKey] or [Security.SecretKey] from the global security.
 func (s *Translations) Upload(ctx context.Context, requestBody operations.TranslationControllerUploadTranslationFilesRequestBody, idempotencyKey *string, opts ...operations.Option) (*operations.TranslationControllerUploadTranslationFilesResponse, error) {
 	request := operations.TranslationControllerUploadTranslationFilesRequest{
 		IdempotencyKey: idempotencyKey,
@@ -769,7 +777,7 @@ func (s *Translations) Upload(ctx context.Context, requestBody operations.Transl
 
 	utils.PopulateHeaders(ctx, req, request, nil)
 
-	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
+	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security, "SecretKey", "SecretKey"); err != nil {
 		return nil, err
 	}
 

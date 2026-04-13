@@ -7,6 +7,7 @@ import (
 )
 
 type SubscribersControllerUpdateSubscriberPreferencesRequest struct {
+	// The identifier of the subscriber
 	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
 	// A header for idempotency purposes
 	IdempotencyKey                *string                                  `header:"style=simple,explode=false,name=idempotency-key"`

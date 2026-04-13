@@ -11,16 +11,17 @@ import (
 type UISchemaGroupEnum string
 
 const (
-	UISchemaGroupEnumInApp    UISchemaGroupEnum = "IN_APP"
-	UISchemaGroupEnumEmail    UISchemaGroupEnum = "EMAIL"
-	UISchemaGroupEnumDigest   UISchemaGroupEnum = "DIGEST"
-	UISchemaGroupEnumDelay    UISchemaGroupEnum = "DELAY"
-	UISchemaGroupEnumThrottle UISchemaGroupEnum = "THROTTLE"
-	UISchemaGroupEnumSms      UISchemaGroupEnum = "SMS"
-	UISchemaGroupEnumChat     UISchemaGroupEnum = "CHAT"
-	UISchemaGroupEnumPush     UISchemaGroupEnum = "PUSH"
-	UISchemaGroupEnumSkip     UISchemaGroupEnum = "SKIP"
-	UISchemaGroupEnumLayout   UISchemaGroupEnum = "LAYOUT"
+	UISchemaGroupEnumInApp       UISchemaGroupEnum = "IN_APP"
+	UISchemaGroupEnumEmail       UISchemaGroupEnum = "EMAIL"
+	UISchemaGroupEnumDigest      UISchemaGroupEnum = "DIGEST"
+	UISchemaGroupEnumDelay       UISchemaGroupEnum = "DELAY"
+	UISchemaGroupEnumThrottle    UISchemaGroupEnum = "THROTTLE"
+	UISchemaGroupEnumSms         UISchemaGroupEnum = "SMS"
+	UISchemaGroupEnumChat        UISchemaGroupEnum = "CHAT"
+	UISchemaGroupEnumPush        UISchemaGroupEnum = "PUSH"
+	UISchemaGroupEnumSkip        UISchemaGroupEnum = "SKIP"
+	UISchemaGroupEnumLayout      UISchemaGroupEnum = "LAYOUT"
+	UISchemaGroupEnumHTTPRequest UISchemaGroupEnum = "HTTP_REQUEST"
 )
 
 func (e UISchemaGroupEnum) ToPointer() *UISchemaGroupEnum {
@@ -51,6 +52,8 @@ func (e *UISchemaGroupEnum) UnmarshalJSON(data []byte) error {
 	case "SKIP":
 		fallthrough
 	case "LAYOUT":
+		fallthrough
+	case "HTTP_REQUEST":
 		*e = UISchemaGroupEnum(v)
 		return nil
 	default:

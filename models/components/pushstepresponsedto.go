@@ -81,6 +81,8 @@ type PushStepResponseDto struct {
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+	// Hash identifying the deployed Cloudflare Worker for this step
+	StepResolverHash *string `json:"stepResolverHash,omitempty"`
 }
 
 func (p PushStepResponseDto) MarshalJSON() ([]byte, error) {
@@ -176,4 +178,11 @@ func (p *PushStepResponseDto) GetIssues() *StepIssuesDto {
 		return nil
 	}
 	return p.Issues
+}
+
+func (p *PushStepResponseDto) GetStepResolverHash() *string {
+	if p == nil {
+		return nil
+	}
+	return p.StepResolverHash
 }

@@ -2,139 +2,68 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // UIComponentEnum - Component type for the UI Schema Property
 type UIComponentEnum string
 
 const (
-	UIComponentEnumEmailEditorSelect              UIComponentEnum = "EMAIL_EDITOR_SELECT"
-	UIComponentEnumLayoutSelect                   UIComponentEnum = "LAYOUT_SELECT"
-	UIComponentEnumBlockEditor                    UIComponentEnum = "BLOCK_EDITOR"
-	UIComponentEnumEmailBody                      UIComponentEnum = "EMAIL_BODY"
-	UIComponentEnumTextFullLine                   UIComponentEnum = "TEXT_FULL_LINE"
-	UIComponentEnumTextInlineLabel                UIComponentEnum = "TEXT_INLINE_LABEL"
-	UIComponentEnumInAppBody                      UIComponentEnum = "IN_APP_BODY"
-	UIComponentEnumInAppAvatar                    UIComponentEnum = "IN_APP_AVATAR"
-	UIComponentEnumInAppPrimarySubject            UIComponentEnum = "IN_APP_PRIMARY_SUBJECT"
-	UIComponentEnumInAppButtonDropdown            UIComponentEnum = "IN_APP_BUTTON_DROPDOWN"
-	UIComponentEnumInAppDisableSanitizationSwitch UIComponentEnum = "IN_APP_DISABLE_SANITIZATION_SWITCH"
-	UIComponentEnumDisableSanitizationSwitch      UIComponentEnum = "DISABLE_SANITIZATION_SWITCH"
-	UIComponentEnumURLTextBox                     UIComponentEnum = "URL_TEXT_BOX"
-	UIComponentEnumDigestAmount                   UIComponentEnum = "DIGEST_AMOUNT"
-	UIComponentEnumDigestUnit                     UIComponentEnum = "DIGEST_UNIT"
-	UIComponentEnumDigestType                     UIComponentEnum = "DIGEST_TYPE"
-	UIComponentEnumDigestKey                      UIComponentEnum = "DIGEST_KEY"
-	UIComponentEnumDigestCron                     UIComponentEnum = "DIGEST_CRON"
-	UIComponentEnumDelayAmount                    UIComponentEnum = "DELAY_AMOUNT"
-	UIComponentEnumDelayUnit                      UIComponentEnum = "DELAY_UNIT"
-	UIComponentEnumDelayType                      UIComponentEnum = "DELAY_TYPE"
-	UIComponentEnumDelayCron                      UIComponentEnum = "DELAY_CRON"
-	UIComponentEnumDelayDynamicKey                UIComponentEnum = "DELAY_DYNAMIC_KEY"
-	UIComponentEnumThrottleType                   UIComponentEnum = "THROTTLE_TYPE"
-	UIComponentEnumThrottleWindow                 UIComponentEnum = "THROTTLE_WINDOW"
-	UIComponentEnumThrottleUnit                   UIComponentEnum = "THROTTLE_UNIT"
-	UIComponentEnumThrottleDynamicKey             UIComponentEnum = "THROTTLE_DYNAMIC_KEY"
-	UIComponentEnumThrottleThreshold              UIComponentEnum = "THROTTLE_THRESHOLD"
-	UIComponentEnumThrottleKey                    UIComponentEnum = "THROTTLE_KEY"
-	UIComponentEnumExtendToSchedule               UIComponentEnum = "EXTEND_TO_SCHEDULE"
-	UIComponentEnumSmsBody                        UIComponentEnum = "SMS_BODY"
-	UIComponentEnumChatBody                       UIComponentEnum = "CHAT_BODY"
-	UIComponentEnumPushBody                       UIComponentEnum = "PUSH_BODY"
-	UIComponentEnumPushSubject                    UIComponentEnum = "PUSH_SUBJECT"
-	UIComponentEnumQueryEditor                    UIComponentEnum = "QUERY_EDITOR"
-	UIComponentEnumData                           UIComponentEnum = "DATA"
-	UIComponentEnumLayoutEmail                    UIComponentEnum = "LAYOUT_EMAIL"
+	UIComponentEnumEmailEditorSelect                  UIComponentEnum = "EMAIL_EDITOR_SELECT"
+	UIComponentEnumLayoutSelect                       UIComponentEnum = "LAYOUT_SELECT"
+	UIComponentEnumBlockEditor                        UIComponentEnum = "BLOCK_EDITOR"
+	UIComponentEnumEmailBody                          UIComponentEnum = "EMAIL_BODY"
+	UIComponentEnumTextFullLine                       UIComponentEnum = "TEXT_FULL_LINE"
+	UIComponentEnumTextInlineLabel                    UIComponentEnum = "TEXT_INLINE_LABEL"
+	UIComponentEnumInAppBody                          UIComponentEnum = "IN_APP_BODY"
+	UIComponentEnumInAppAvatar                        UIComponentEnum = "IN_APP_AVATAR"
+	UIComponentEnumInAppPrimarySubject                UIComponentEnum = "IN_APP_PRIMARY_SUBJECT"
+	UIComponentEnumInAppButtonDropdown                UIComponentEnum = "IN_APP_BUTTON_DROPDOWN"
+	UIComponentEnumInAppDisableSanitizationSwitch     UIComponentEnum = "IN_APP_DISABLE_SANITIZATION_SWITCH"
+	UIComponentEnumDisableSanitizationSwitch          UIComponentEnum = "DISABLE_SANITIZATION_SWITCH"
+	UIComponentEnumURLTextBox                         UIComponentEnum = "URL_TEXT_BOX"
+	UIComponentEnumDigestAmount                       UIComponentEnum = "DIGEST_AMOUNT"
+	UIComponentEnumDigestUnit                         UIComponentEnum = "DIGEST_UNIT"
+	UIComponentEnumDigestType                         UIComponentEnum = "DIGEST_TYPE"
+	UIComponentEnumDigestKey                          UIComponentEnum = "DIGEST_KEY"
+	UIComponentEnumDigestCron                         UIComponentEnum = "DIGEST_CRON"
+	UIComponentEnumDelayAmount                        UIComponentEnum = "DELAY_AMOUNT"
+	UIComponentEnumDelayUnit                          UIComponentEnum = "DELAY_UNIT"
+	UIComponentEnumDelayType                          UIComponentEnum = "DELAY_TYPE"
+	UIComponentEnumDelayCron                          UIComponentEnum = "DELAY_CRON"
+	UIComponentEnumDelayDynamicKey                    UIComponentEnum = "DELAY_DYNAMIC_KEY"
+	UIComponentEnumThrottleType                       UIComponentEnum = "THROTTLE_TYPE"
+	UIComponentEnumThrottleWindow                     UIComponentEnum = "THROTTLE_WINDOW"
+	UIComponentEnumThrottleUnit                       UIComponentEnum = "THROTTLE_UNIT"
+	UIComponentEnumThrottleDynamicKey                 UIComponentEnum = "THROTTLE_DYNAMIC_KEY"
+	UIComponentEnumThrottleThreshold                  UIComponentEnum = "THROTTLE_THRESHOLD"
+	UIComponentEnumThrottleKey                        UIComponentEnum = "THROTTLE_KEY"
+	UIComponentEnumExtendToSchedule                   UIComponentEnum = "EXTEND_TO_SCHEDULE"
+	UIComponentEnumSmsBody                            UIComponentEnum = "SMS_BODY"
+	UIComponentEnumChatBody                           UIComponentEnum = "CHAT_BODY"
+	UIComponentEnumPushBody                           UIComponentEnum = "PUSH_BODY"
+	UIComponentEnumPushSubject                        UIComponentEnum = "PUSH_SUBJECT"
+	UIComponentEnumQueryEditor                        UIComponentEnum = "QUERY_EDITOR"
+	UIComponentEnumData                               UIComponentEnum = "DATA"
+	UIComponentEnumLayoutEmail                        UIComponentEnum = "LAYOUT_EMAIL"
+	UIComponentEnumDestinationMethod                  UIComponentEnum = "DESTINATION_METHOD"
+	UIComponentEnumDestinationURL                     UIComponentEnum = "DESTINATION_URL"
+	UIComponentEnumDestinationHeaders                 UIComponentEnum = "DESTINATION_HEADERS"
+	UIComponentEnumDestinationBody                    UIComponentEnum = "DESTINATION_BODY"
+	UIComponentEnumDestinationResponseBodySchema      UIComponentEnum = "DESTINATION_RESPONSE_BODY_SCHEMA"
+	UIComponentEnumDestinationEnforceSchemaValidation UIComponentEnum = "DESTINATION_ENFORCE_SCHEMA_VALIDATION"
+	UIComponentEnumDestinationContinueOnFailure       UIComponentEnum = "DESTINATION_CONTINUE_ON_FAILURE"
+	UIComponentEnumDestinationTimeout                 UIComponentEnum = "DESTINATION_TIMEOUT"
 )
 
 func (e UIComponentEnum) ToPointer() *UIComponentEnum {
 	return &e
 }
-func (e *UIComponentEnum) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *UIComponentEnum) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "EMAIL_EDITOR_SELECT", "LAYOUT_SELECT", "BLOCK_EDITOR", "EMAIL_BODY", "TEXT_FULL_LINE", "TEXT_INLINE_LABEL", "IN_APP_BODY", "IN_APP_AVATAR", "IN_APP_PRIMARY_SUBJECT", "IN_APP_BUTTON_DROPDOWN", "IN_APP_DISABLE_SANITIZATION_SWITCH", "DISABLE_SANITIZATION_SWITCH", "URL_TEXT_BOX", "DIGEST_AMOUNT", "DIGEST_UNIT", "DIGEST_TYPE", "DIGEST_KEY", "DIGEST_CRON", "DELAY_AMOUNT", "DELAY_UNIT", "DELAY_TYPE", "DELAY_CRON", "DELAY_DYNAMIC_KEY", "THROTTLE_TYPE", "THROTTLE_WINDOW", "THROTTLE_UNIT", "THROTTLE_DYNAMIC_KEY", "THROTTLE_THRESHOLD", "THROTTLE_KEY", "EXTEND_TO_SCHEDULE", "SMS_BODY", "CHAT_BODY", "PUSH_BODY", "PUSH_SUBJECT", "QUERY_EDITOR", "DATA", "LAYOUT_EMAIL", "DESTINATION_METHOD", "DESTINATION_URL", "DESTINATION_HEADERS", "DESTINATION_BODY", "DESTINATION_RESPONSE_BODY_SCHEMA", "DESTINATION_ENFORCE_SCHEMA_VALIDATION", "DESTINATION_CONTINUE_ON_FAILURE", "DESTINATION_TIMEOUT":
+			return true
+		}
 	}
-	switch v {
-	case "EMAIL_EDITOR_SELECT":
-		fallthrough
-	case "LAYOUT_SELECT":
-		fallthrough
-	case "BLOCK_EDITOR":
-		fallthrough
-	case "EMAIL_BODY":
-		fallthrough
-	case "TEXT_FULL_LINE":
-		fallthrough
-	case "TEXT_INLINE_LABEL":
-		fallthrough
-	case "IN_APP_BODY":
-		fallthrough
-	case "IN_APP_AVATAR":
-		fallthrough
-	case "IN_APP_PRIMARY_SUBJECT":
-		fallthrough
-	case "IN_APP_BUTTON_DROPDOWN":
-		fallthrough
-	case "IN_APP_DISABLE_SANITIZATION_SWITCH":
-		fallthrough
-	case "DISABLE_SANITIZATION_SWITCH":
-		fallthrough
-	case "URL_TEXT_BOX":
-		fallthrough
-	case "DIGEST_AMOUNT":
-		fallthrough
-	case "DIGEST_UNIT":
-		fallthrough
-	case "DIGEST_TYPE":
-		fallthrough
-	case "DIGEST_KEY":
-		fallthrough
-	case "DIGEST_CRON":
-		fallthrough
-	case "DELAY_AMOUNT":
-		fallthrough
-	case "DELAY_UNIT":
-		fallthrough
-	case "DELAY_TYPE":
-		fallthrough
-	case "DELAY_CRON":
-		fallthrough
-	case "DELAY_DYNAMIC_KEY":
-		fallthrough
-	case "THROTTLE_TYPE":
-		fallthrough
-	case "THROTTLE_WINDOW":
-		fallthrough
-	case "THROTTLE_UNIT":
-		fallthrough
-	case "THROTTLE_DYNAMIC_KEY":
-		fallthrough
-	case "THROTTLE_THRESHOLD":
-		fallthrough
-	case "THROTTLE_KEY":
-		fallthrough
-	case "EXTEND_TO_SCHEDULE":
-		fallthrough
-	case "SMS_BODY":
-		fallthrough
-	case "CHAT_BODY":
-		fallthrough
-	case "PUSH_BODY":
-		fallthrough
-	case "PUSH_SUBJECT":
-		fallthrough
-	case "QUERY_EDITOR":
-		fallthrough
-	case "DATA":
-		fallthrough
-	case "LAYOUT_EMAIL":
-		*e = UIComponentEnum(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UIComponentEnum: %v", v)
-	}
+	return false
 }

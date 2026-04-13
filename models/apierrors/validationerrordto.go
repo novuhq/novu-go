@@ -152,6 +152,9 @@ func (m *Message4) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
+// #region class-body-message4
+// #endregion class-body-message4
+
 type ValidationErrorDtoMessageType string
 
 const (

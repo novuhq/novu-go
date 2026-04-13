@@ -2,6 +2,16 @@
 
 Channel type through which the message is sent
 
+## Example Usage
+
+```go
+import (
+	"github.com/novuhq/novu-go/v3/models/components"
+)
+
+value := components.ChannelTypeEnumInApp
+```
+
 
 ## Values
 

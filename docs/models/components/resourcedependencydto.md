@@ -1,0 +1,12 @@
+# ResourceDependencyDto
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `ResourceType`                                                                     | [components.ResourceTypeEnum](../../models/components/resourcetypeenum.md)         | :heavy_check_mark:                                                                 | Type of the layout                                                                 |
+| `ResourceID`                                                                       | `string`                                                                           | :heavy_check_mark:                                                                 | ID of the dependent resource                                                       |
+| `ResourceName`                                                                     | `string`                                                                           | :heavy_check_mark:                                                                 | Name of the dependent resource                                                     |
+| `IsBlocking`                                                                       | `bool`                                                                             | :heavy_check_mark:                                                                 | Whether this dependency blocks the operation                                       |
+| `Reason`                                                                           | [components.DependencyReasonEnum](../../models/components/dependencyreasonenum.md) | :heavy_check_mark:                                                                 | Reason for the dependency                                                          |

@@ -1,0 +1,9 @@
+# Eight
+
+
+## Fields
+
+| Field                                                                                                                 | Type                                                                                                                  | Required                                                                                                              | Description                                                                                                           |
+| --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                                                | [*components.GeneratePreviewResponseDtoResult8Type](../../models/components/generatepreviewresponsedtoresult8type.md) | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |
+| `Preview`                                                                                                             | [*components.DigestRegularOutput](../../models/components/digestregularoutput.md)                                     | :heavy_minus_sign:                                                                                                    | N/A                                                                                                                   |

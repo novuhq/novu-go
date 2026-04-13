@@ -57,6 +57,12 @@ steps := components.CreateStepsThrottle(components.ThrottleStepUpsertDto{/* valu
 steps := components.CreateStepsCustom(components.CustomStepUpsertDto{/* values here */})
 ```
 
+### HTTPRequestStepUpsertDto
+
+```go
+steps := components.CreateStepsHTTPRequest(components.HTTPRequestStepUpsertDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -81,5 +87,7 @@ switch steps.Type {
 		// steps.ThrottleStepUpsertDto is populated
 	case components.StepsTypeCustom:
 		// steps.CustomStepUpsertDto is populated
+	case components.StepsTypeHTTPRequest:
+		// steps.HTTPRequestStepUpsertDto is populated
 }
 ```

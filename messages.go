@@ -908,6 +908,7 @@ func (s *Messages) DeleteByTransactionID(ctx context.Context, transactionID stri
 	switch {
 	case httpRes.StatusCode == 204:
 		res.Headers = httpRes.Header
+
 		utils.DrainBody(httpRes)
 	case httpRes.StatusCode == 414:
 		switch {

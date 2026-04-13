@@ -60,8 +60,10 @@ type TriggerEventResponseDto struct {
 	// In case of an error, this field will contain the error message(s)
 	Error []string `json:"error,omitempty"`
 	// The returned transaction ID of the trigger
-	TransactionID *string  `json:"transactionId,omitempty"`
-	JobData       *JobData `json:"jobData,omitempty"`
+	TransactionID *string `json:"transactionId,omitempty"`
+	// Link to the activity feed for this trigger event
+	ActivityFeedLink *string  `json:"activityFeedLink,omitempty"`
+	JobData          *JobData `json:"jobData,omitempty"`
 }
 
 func (t *TriggerEventResponseDto) GetAcknowledged() bool {
@@ -90,6 +92,13 @@ func (t *TriggerEventResponseDto) GetTransactionID() *string {
 		return nil
 	}
 	return t.TransactionID
+}
+
+func (t *TriggerEventResponseDto) GetActivityFeedLink() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ActivityFeedLink
 }
 
 func (t *TriggerEventResponseDto) GetJobData() *JobData {

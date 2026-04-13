@@ -27,6 +27,8 @@ type StepResponseDto struct {
 	WorkflowDatabaseID string `json:"workflowDatabaseId"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`
+	// Hash identifying the deployed Cloudflare Worker for this step
+	StepResolverHash *string `json:"stepResolverHash,omitempty"`
 }
 
 func (s *StepResponseDto) GetControls() ControlsMetadataDto {
@@ -111,4 +113,11 @@ func (s *StepResponseDto) GetIssues() *StepIssuesDto {
 		return nil
 	}
 	return s.Issues
+}
+
+func (s *StepResponseDto) GetStepResolverHash() *string {
+	if s == nil {
+		return nil
+	}
+	return s.StepResolverHash
 }

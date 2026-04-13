@@ -21,11 +21,11 @@ import (
 //
 // https://docs.novu.co/subscribers/subscribers
 type Subscribers struct {
+	Notifications *NovuNotifications
 	Preferences   *Preferences
 	Topics        *NovuTopics
 	Credentials   *Credentials
 	Messages      *NovuMessages
-	Notifications *NovuNotifications
 	Properties    *Properties
 
 	rootSDK          *Novu
@@ -38,11 +38,11 @@ func newSubscribers(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hoo
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
+		Notifications:    newNovuNotifications(rootSDK, sdkConfig, hooks),
 		Preferences:      newPreferences(rootSDK, sdkConfig, hooks),
 		Topics:           newNovuTopics(rootSDK, sdkConfig, hooks),
 		Credentials:      newCredentials(rootSDK, sdkConfig, hooks),
 		Messages:         newNovuMessages(rootSDK, sdkConfig, hooks),
-		Notifications:    newNovuNotifications(rootSDK, sdkConfig, hooks),
 		Properties:       newProperties(rootSDK, sdkConfig, hooks),
 	}
 }

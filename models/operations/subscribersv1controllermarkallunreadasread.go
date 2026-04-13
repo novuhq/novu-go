@@ -34,6 +34,9 @@ func (s *SubscribersV1ControllerMarkAllUnreadAsReadRequest) GetMarkAllMessageAsR
 	return s.MarkAllMessageAsRequestDto
 }
 
+// #region class-body-subscribersv1controllermarkallunreadasreadrequest
+// #endregion class-body-subscribersv1controllermarkallunreadasreadrequest
+
 type SubscribersV1ControllerMarkAllUnreadAsReadResponse struct {
 	HTTPMeta components.HTTPMetadata `json:"-"`
 	Number   *float64
@@ -60,3 +63,6 @@ func (s *SubscribersV1ControllerMarkAllUnreadAsReadResponse) GetHeaders() map[st
 	}
 	return s.Headers
 }
+
+// #region class-body-subscribersv1controllermarkallunreadasreadresponse
+// #endregion class-body-subscribersv1controllermarkallunreadasreadresponse
