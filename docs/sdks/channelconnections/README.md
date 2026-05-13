@@ -109,6 +109,7 @@ func main() {
                 "org-acme",
             ),
         },
+        ConnectionMode: components.ConnectionModeShared.ToPointer(),
         IntegrationIdentifier: "slack-prod",
         Workspace: components.WorkspaceDto{
             ID: "T123456",

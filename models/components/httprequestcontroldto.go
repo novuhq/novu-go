@@ -3,8 +3,74 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+type BodyType string
+
+const (
+	BodyTypeStr                               BodyType = "str"
+	BodyTypeArrayOfHTTPRequestKeyValuePairDto BodyType = "arrayOfHTTPRequestKeyValuePairDto"
+)
+
+// Body - Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+type Body struct {
+	Str                               *string                      `queryParam:"inline" union:"member"`
+	ArrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto `queryParam:"inline" union:"member"`
+
+	Type BodyType
+}
+
+func CreateBodyStr(str string) Body {
+	typ := BodyTypeStr
+
+	return Body{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateBodyArrayOfHTTPRequestKeyValuePairDto(arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto) Body {
+	typ := BodyTypeArrayOfHTTPRequestKeyValuePairDto
+
+	return Body{
+		ArrayOfHTTPRequestKeyValuePairDto: arrayOfHTTPRequestKeyValuePairDto,
+		Type:                              typ,
+	}
+}
+
+func (u *Body) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = BodyTypeStr
+		return nil
+	}
+
+	var arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto = []HTTPRequestKeyValuePairDto{}
+	if err := utils.UnmarshalJSON(data, &arrayOfHTTPRequestKeyValuePairDto, "", true, nil); err == nil {
+		u.ArrayOfHTTPRequestKeyValuePairDto = arrayOfHTTPRequestKeyValuePairDto
+		u.Type = BodyTypeArrayOfHTTPRequestKeyValuePairDto
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Body", string(data))
+}
+
+func (u Body) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ArrayOfHTTPRequestKeyValuePairDto != nil {
+		return utils.MarshalJSON(u.ArrayOfHTTPRequestKeyValuePairDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type Body: all fields are null")
+}
 
 type HTTPRequestControlDto struct {
 	// HTTP method
@@ -13,8 +79,8 @@ type HTTPRequestControlDto struct {
 	URL string `json:"url"`
 	// Request headers as key-value pairs
 	Headers []HTTPRequestKeyValuePairDto `json:"headers,omitempty"`
-	// Request body as key-value pairs
-	Body []HTTPRequestKeyValuePairDto `json:"body,omitempty"`
+	// Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+	Body *Body `json:"body,omitempty"`
 	// JSON schema to validate response body against
 	ResponseBodySchema map[string]any `json:"responseBodySchema,omitempty"`
 	// Whether to enforce response body schema validation
@@ -55,7 +121,7 @@ func (h *HTTPRequestControlDto) GetHeaders() []HTTPRequestKeyValuePairDto {
 	return h.Headers
 }
 
-func (h *HTTPRequestControlDto) GetBody() []HTTPRequestKeyValuePairDto {
+func (h *HTTPRequestControlDto) GetBody() *Body {
 	if h == nil {
 		return nil
 	}

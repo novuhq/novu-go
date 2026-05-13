@@ -1,0 +1,11 @@
+# DiagnoseDomainResponseDto
+
+
+## Fields
+
+| Field                                                                                        | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `Ok`                                                                                         | `bool`                                                                                       | :heavy_check_mark:                                                                           | True when there are no error-severity issues                                                 |
+| `RunAt`                                                                                      | `string`                                                                                     | :heavy_check_mark:                                                                           | ISO timestamp when the diagnostic run finished                                               |
+| `Checks`                                                                                     | [][components.DomainDiagnosticCheckDto](../../models/components/domaindiagnosticcheckdto.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |
+| `Issues`                                                                                     | [][components.DomainDiagnosticIssueDto](../../models/components/domaindiagnosticissuedto.md) | :heavy_check_mark:                                                                           | N/A                                                                                          |

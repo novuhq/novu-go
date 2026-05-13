@@ -1,0 +1,9 @@
+# IntegrationsControllerGenerateLinkUserOAuthURLRequest
+
+
+## Fields
+
+| Field                                                                                                          | Type                                                                                                           | Required                                                                                                       | Description                                                                                                    |
+| -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                                               | `*string`                                                                                                      | :heavy_minus_sign:                                                                                             | A header for idempotency purposes                                                                              |
+| `GenerateLinkUserOauthURLRequestDto`                                                                           | [components.GenerateLinkUserOauthURLRequestDto](../../models/components/generatelinkuseroauthurlrequestdto.md) | :heavy_check_mark:                                                                                             | N/A                                                                                                            |

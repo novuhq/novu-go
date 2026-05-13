@@ -38,6 +38,7 @@ value := components.ProviderIDEmailjs
 | `ProviderIDSparkpost`        | sparkpost                    |
 | `ProviderIDEmailWebhook`     | email-webhook                |
 | `ProviderIDBraze`            | braze                        |
+| `ProviderIDNovuEmailAgent`   | novu-email-agent             |
 | `ProviderIDNexmo`            | nexmo                        |
 | `ProviderIDPlivo`            | plivo                        |
 | `ProviderIDSms77`            | sms77                        |
@@ -96,3 +97,4 @@ value := components.ProviderIDEmailjs
 | `ProviderIDWhatsappBusiness` | whatsapp-business            |
 | `ProviderIDChatWebhook`      | chat-webhook                 |
 | `ProviderIDNovuSlack`        | novu-slack                   |
+| `ProviderIDAnthropic`        | anthropic                    |

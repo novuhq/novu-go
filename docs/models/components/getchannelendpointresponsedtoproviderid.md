@@ -38,6 +38,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDSparkpost`        | sparkpost                                                 |
 | `GetChannelEndpointResponseDtoProviderIDEmailWebhook`     | email-webhook                                             |
 | `GetChannelEndpointResponseDtoProviderIDBraze`            | braze                                                     |
+| `GetChannelEndpointResponseDtoProviderIDNovuEmailAgent`   | novu-email-agent                                          |
 | `GetChannelEndpointResponseDtoProviderIDNexmo`            | nexmo                                                     |
 | `GetChannelEndpointResponseDtoProviderIDPlivo`            | plivo                                                     |
 | `GetChannelEndpointResponseDtoProviderIDSms77`            | sms77                                                     |
@@ -96,3 +97,4 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDWhatsappBusiness` | whatsapp-business                                         |
 | `GetChannelEndpointResponseDtoProviderIDChatWebhook`      | chat-webhook                                              |
 | `GetChannelEndpointResponseDtoProviderIDNovuSlack`        | novu-slack                                                |
+| `GetChannelEndpointResponseDtoProviderIDAnthropic`        | anthropic                                                 |

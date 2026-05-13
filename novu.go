@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.15.0 and generator version 2.879.11
+// Generated from OpenAPI doc version 3.15.0 and generator version 2.884.0
 
 import (
 	"bytes"
@@ -82,9 +82,13 @@ type Novu struct {
 	// All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
 	//
 	// https://docs.novu.co/workflows
-	Workflows            *Workflows
-	ChannelConnections   *ChannelConnections
-	ChannelEndpoints     *ChannelEndpoints
+	Workflows          *Workflows
+	ChannelConnections *ChannelConnections
+	ChannelEndpoints   *ChannelEndpoints
+	// Used to manage your inbound email domains.
+	//
+	// https://docs.novu.co/platform/domains
+	Domains              *Domains
 	EnvironmentVariables *EnvironmentVariables
 	// With the help of the Integration Store, you can easily integrate your favorite delivery provider. During the runtime of the API, the Integrations Store is responsible for storing the configurations of all the providers.
 	//
@@ -171,9 +175,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.15.0",
+		SDKVersion: "3.16.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.15.0 2.879.11 3.15.0 github.com/novuhq/novu-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.16.0 2.884.0 3.15.0 github.com/novuhq/novu-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -211,6 +215,7 @@ func New(opts ...SDKOption) *Novu {
 	sdk.Workflows = newWorkflows(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ChannelConnections = newChannelConnections(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ChannelEndpoints = newChannelEndpoints(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Domains = newDomains(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.EnvironmentVariables = newEnvironmentVariables(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Integrations = newIntegrations(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Messages = newMessages(sdk, sdk.sdkConfiguration, sdk.hooks)
@@ -382,7 +387,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -747,7 +752,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1098,7 +1103,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err
@@ -1472,7 +1477,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
 			return nil, err
-		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "413", "414", "415", "422", "429", "4XX", "500", "503", "5XX"}, httpRes.StatusCode) {
+		} else if utils.MatchStatusCodes([]string{"4XX", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
 				return nil, err

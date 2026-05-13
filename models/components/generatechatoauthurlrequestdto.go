@@ -3,6 +3,7 @@
 package components
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
@@ -106,6 +107,60 @@ func (u GenerateChatOauthURLRequestDtoContext) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type GenerateChatOauthURLRequestDtoContext: all fields are null")
 }
 
+// Mode - OAuth flow mode. Use "connect" (default) to create a workspace channel connection, or "link_user" to identify the subscriber's Slack user ID without creating a connection.
+type Mode string
+
+const (
+	ModeConnect  Mode = "connect"
+	ModeLinkUser Mode = "link_user"
+)
+
+func (e Mode) ToPointer() *Mode {
+	return &e
+}
+func (e *Mode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "connect":
+		fallthrough
+	case "link_user":
+		*e = Mode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Mode: %v", v)
+	}
+}
+
+// GenerateChatOauthURLRequestDtoConnectionMode - Connection mode that determines how the channel connection is scoped. Use "subscriber" (default) to associate the connection with a specific subscriber. Use "shared" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection.
+type GenerateChatOauthURLRequestDtoConnectionMode string
+
+const (
+	GenerateChatOauthURLRequestDtoConnectionModeSubscriber GenerateChatOauthURLRequestDtoConnectionMode = "subscriber"
+	GenerateChatOauthURLRequestDtoConnectionModeShared     GenerateChatOauthURLRequestDtoConnectionMode = "shared"
+)
+
+func (e GenerateChatOauthURLRequestDtoConnectionMode) ToPointer() *GenerateChatOauthURLRequestDtoConnectionMode {
+	return &e
+}
+func (e *GenerateChatOauthURLRequestDtoConnectionMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "subscriber":
+		fallthrough
+	case "shared":
+		*e = GenerateChatOauthURLRequestDtoConnectionMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GenerateChatOauthURLRequestDtoConnectionMode: %v", v)
+	}
+}
+
 type GenerateChatOauthURLRequestDto struct {
 	// The subscriber ID to link the channel connection to. For Slack: Required for incoming webhook endpoints, optional for workspace connections. For MS Teams: Optional. Admin consent is tenant-wide and can be associated with a subscriber for organizational purposes.
 	SubscriberID *string `json:"subscriberId,omitempty"`
@@ -116,6 +171,14 @@ type GenerateChatOauthURLRequestDto struct {
 	Context              map[string]GenerateChatOauthURLRequestDtoContext `json:"context,omitempty"`
 	// **Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes.
 	Scope []string `json:"scope,omitempty"`
+	// **Slack only, link_user mode**: User-level OAuth scopes to request during authorization. Used when mode is "link_user" to identify the Slack user via "Sign in with Slack". If not specified, defaults to: identity.basic.
+	UserScope []string `json:"userScope,omitempty"`
+	// OAuth flow mode. Use "connect" (default) to create a workspace channel connection, or "link_user" to identify the subscriber's Slack user ID without creating a connection.
+	Mode *Mode `json:"mode,omitempty"`
+	// Connection mode that determines how the channel connection is scoped. Use "subscriber" (default) to associate the connection with a specific subscriber. Use "shared" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection.
+	ConnectionMode *GenerateChatOauthURLRequestDtoConnectionMode `json:"connectionMode,omitempty"`
+	// When true, after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked "Connect" as a personal endpoint. For Slack, this uses the authed_user.id already returned by oauth.v2.access — no extra redirect. For MS Teams, this triggers a second OAuth redirect for delegated user-identity consent. Defaults to false when omitted; the SlackConnectButton and MsTeamsConnectButton SDK components default this to true.
+	AutoLinkUser *bool `json:"autoLinkUser,omitempty"`
 }
 
 func (g *GenerateChatOauthURLRequestDto) GetSubscriberID() *string {
@@ -151,4 +214,32 @@ func (g *GenerateChatOauthURLRequestDto) GetScope() []string {
 		return nil
 	}
 	return g.Scope
+}
+
+func (g *GenerateChatOauthURLRequestDto) GetUserScope() []string {
+	if g == nil {
+		return nil
+	}
+	return g.UserScope
+}
+
+func (g *GenerateChatOauthURLRequestDto) GetMode() *Mode {
+	if g == nil {
+		return nil
+	}
+	return g.Mode
+}
+
+func (g *GenerateChatOauthURLRequestDto) GetConnectionMode() *GenerateChatOauthURLRequestDtoConnectionMode {
+	if g == nil {
+		return nil
+	}
+	return g.ConnectionMode
+}
+
+func (g *GenerateChatOauthURLRequestDto) GetAutoLinkUser() *bool {
+	if g == nil {
+		return nil
+	}
+	return g.AutoLinkUser
 }

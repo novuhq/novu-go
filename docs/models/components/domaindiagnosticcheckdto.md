@@ -1,0 +1,10 @@
+# DomainDiagnosticCheckDto
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Code`                                                                                                 | [components.Code](../../models/components/code.md)                                                     | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `Status`                                                                                               | [components.DomainDiagnosticCheckDtoStatus](../../models/components/domaindiagnosticcheckdtostatus.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `LatencyMs`                                                                                            | `float64`                                                                                              | :heavy_check_mark:                                                                                     | Round-trip time for this check in milliseconds                                                         |

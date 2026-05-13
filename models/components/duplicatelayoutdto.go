@@ -9,6 +9,8 @@ import (
 type DuplicateLayoutDto struct {
 	// Name of the layout
 	Name string `json:"name"`
+	// Identifier for the duplicated layout. When omitted, it is derived from the name.
+	LayoutID *string `json:"layoutId,omitempty"`
 	// Enable or disable translations for this layout
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
 }
@@ -29,6 +31,13 @@ func (d *DuplicateLayoutDto) GetName() string {
 		return ""
 	}
 	return d.Name
+}
+
+func (d *DuplicateLayoutDto) GetLayoutID() *string {
+	if d == nil {
+		return nil
+	}
+	return d.LayoutID
 }
 
 func (d *DuplicateLayoutDto) GetIsTranslationEnabled() *bool {

@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// IntegrationResponseDtoChannel - The channel type for the integration, which defines how it communicates (e.g., email, SMS).
+// IntegrationResponseDtoChannel - The channel type for the integration, which defines how it communicates (e.g., email, SMS). Not set for agent-kind integrations.
 type IntegrationResponseDtoChannel string
 
 const (
@@ -43,6 +43,33 @@ func (e *IntegrationResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// Kind - Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
+type Kind string
+
+const (
+	KindDelivery Kind = "delivery"
+	KindAgent    Kind = "agent"
+)
+
+func (e Kind) ToPointer() *Kind {
+	return &e
+}
+func (e *Kind) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "delivery":
+		fallthrough
+	case "agent":
+		*e = Kind(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Kind: %v", v)
+	}
+}
+
 type IntegrationResponseDto struct {
 	// The unique identifier of the integration record in the database. This is automatically generated.
 	ID *string `json:"_id,omitempty"`
@@ -56,10 +83,12 @@ type IntegrationResponseDto struct {
 	Identifier string `json:"identifier"`
 	// The identifier for the provider of the integration (e.g., "mailgun", "twilio").
 	ProviderID string `json:"providerId"`
-	// The channel type for the integration, which defines how it communicates (e.g., email, SMS).
-	Channel IntegrationResponseDtoChannel `json:"channel"`
-	// The credentials required for the integration to function, including API keys and other sensitive information.
-	Credentials CredentialsDto `json:"credentials"`
+	// The channel type for the integration, which defines how it communicates (e.g., email, SMS). Not set for agent-kind integrations.
+	Channel *IntegrationResponseDtoChannel `json:"channel,omitempty"`
+	// Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
+	Kind *Kind `json:"kind,omitempty"`
+	// The decrypted credentials required for the integration to function (e.g. provider API keys, signing secrets). Only returned to dashboard/session-token callers; API-key authenticated callers receive the integration metadata without this field to avoid amplifying API-key leaks into provider-credential leaks.
+	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	// The configurations required for enabling the additional configurations of the integration.
 	Configurations *ConfigurationsDto `json:"configurations,omitempty"`
 	// Indicates whether the integration is currently active. An active integration will process events and messages.
@@ -118,16 +147,23 @@ func (i *IntegrationResponseDto) GetProviderID() string {
 	return i.ProviderID
 }
 
-func (i *IntegrationResponseDto) GetChannel() IntegrationResponseDtoChannel {
+func (i *IntegrationResponseDto) GetChannel() *IntegrationResponseDtoChannel {
 	if i == nil {
-		return IntegrationResponseDtoChannel("")
+		return nil
 	}
 	return i.Channel
 }
 
-func (i *IntegrationResponseDto) GetCredentials() CredentialsDto {
+func (i *IntegrationResponseDto) GetKind() *Kind {
 	if i == nil {
-		return CredentialsDto{}
+		return nil
+	}
+	return i.Kind
+}
+
+func (i *IntegrationResponseDto) GetCredentials() *CredentialsDto {
+	if i == nil {
+		return nil
 	}
 	return i.Credentials
 }
