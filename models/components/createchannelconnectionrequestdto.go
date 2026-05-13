@@ -3,6 +3,7 @@
 package components
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
@@ -106,12 +107,41 @@ func (u CreateChannelConnectionRequestDtoContext) MarshalJSON() ([]byte, error) 
 	return nil, errors.New("could not marshal union type CreateChannelConnectionRequestDtoContext: all fields are null")
 }
 
+// ConnectionMode - Connection mode that determines how the channel connection is scoped. Use "subscriber" (default) to associate the connection with a specific subscriber. Use "shared" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection.
+type ConnectionMode string
+
+const (
+	ConnectionModeSubscriber ConnectionMode = "subscriber"
+	ConnectionModeShared     ConnectionMode = "shared"
+)
+
+func (e ConnectionMode) ToPointer() *ConnectionMode {
+	return &e
+}
+func (e *ConnectionMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "subscriber":
+		fallthrough
+	case "shared":
+		*e = ConnectionMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ConnectionMode: %v", v)
+	}
+}
+
 type CreateChannelConnectionRequestDto struct {
 	// The unique identifier for the channel connection. If not provided, one will be generated automatically.
 	Identifier *string `json:"identifier,omitempty"`
 	// The subscriber ID to link the channel connection to
 	SubscriberID *string                                             `json:"subscriberId,omitempty"`
 	Context      map[string]CreateChannelConnectionRequestDtoContext `json:"context,omitempty"`
+	// Connection mode that determines how the channel connection is scoped. Use "subscriber" (default) to associate the connection with a specific subscriber. Use "shared" to associate the connection with a context instead of a subscriber — subscriberId will not be stored on the connection.
+	ConnectionMode *ConnectionMode `json:"connectionMode,omitempty"`
 	// The identifier of the integration to use for this channel connection.
 	IntegrationIdentifier string       `json:"integrationIdentifier"`
 	Workspace             WorkspaceDto `json:"workspace"`
@@ -137,6 +167,13 @@ func (c *CreateChannelConnectionRequestDto) GetContext() map[string]CreateChanne
 		return nil
 	}
 	return c.Context
+}
+
+func (c *CreateChannelConnectionRequestDto) GetConnectionMode() *ConnectionMode {
+	if c == nil {
+		return nil
+	}
+	return c.ConnectionMode
 }
 
 func (c *CreateChannelConnectionRequestDto) GetIntegrationIdentifier() string {

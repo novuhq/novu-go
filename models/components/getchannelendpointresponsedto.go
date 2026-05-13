@@ -70,6 +70,7 @@ const (
 	GetChannelEndpointResponseDtoProviderIDSparkpost        GetChannelEndpointResponseDtoProviderID = "sparkpost"
 	GetChannelEndpointResponseDtoProviderIDEmailWebhook     GetChannelEndpointResponseDtoProviderID = "email-webhook"
 	GetChannelEndpointResponseDtoProviderIDBraze            GetChannelEndpointResponseDtoProviderID = "braze"
+	GetChannelEndpointResponseDtoProviderIDNovuEmailAgent   GetChannelEndpointResponseDtoProviderID = "novu-email-agent"
 	GetChannelEndpointResponseDtoProviderIDNexmo            GetChannelEndpointResponseDtoProviderID = "nexmo"
 	GetChannelEndpointResponseDtoProviderIDPlivo            GetChannelEndpointResponseDtoProviderID = "plivo"
 	GetChannelEndpointResponseDtoProviderIDSms77            GetChannelEndpointResponseDtoProviderID = "sms77"
@@ -128,6 +129,7 @@ const (
 	GetChannelEndpointResponseDtoProviderIDWhatsappBusiness GetChannelEndpointResponseDtoProviderID = "whatsapp-business"
 	GetChannelEndpointResponseDtoProviderIDChatWebhook      GetChannelEndpointResponseDtoProviderID = "chat-webhook"
 	GetChannelEndpointResponseDtoProviderIDNovuSlack        GetChannelEndpointResponseDtoProviderID = "novu-slack"
+	GetChannelEndpointResponseDtoProviderIDAnthropic        GetChannelEndpointResponseDtoProviderID = "anthropic"
 )
 
 func (e GetChannelEndpointResponseDtoProviderID) ToPointer() *GetChannelEndpointResponseDtoProviderID {
@@ -180,6 +182,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 	case "email-webhook":
 		fallthrough
 	case "braze":
+		fallthrough
+	case "novu-email-agent":
 		fallthrough
 	case "nexmo":
 		fallthrough
@@ -296,6 +300,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
+		fallthrough
+	case "anthropic":
 		*e = GetChannelEndpointResponseDtoProviderID(v)
 		return nil
 	default:

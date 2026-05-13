@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// CreateIntegrationRequestDtoChannel - The channel type for the integration
+// CreateIntegrationRequestDtoChannel - The channel type for the integration. Not required for agent-kind integrations.
 type CreateIntegrationRequestDtoChannel string
 
 const (
@@ -43,6 +43,33 @@ func (e *CreateIntegrationRequestDtoChannel) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// CreateIntegrationRequestDtoKind - Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not require a channel.
+type CreateIntegrationRequestDtoKind string
+
+const (
+	CreateIntegrationRequestDtoKindDelivery CreateIntegrationRequestDtoKind = "delivery"
+	CreateIntegrationRequestDtoKindAgent    CreateIntegrationRequestDtoKind = "agent"
+)
+
+func (e CreateIntegrationRequestDtoKind) ToPointer() *CreateIntegrationRequestDtoKind {
+	return &e
+}
+func (e *CreateIntegrationRequestDtoKind) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "delivery":
+		fallthrough
+	case "agent":
+		*e = CreateIntegrationRequestDtoKind(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for CreateIntegrationRequestDtoKind: %v", v)
+	}
+}
+
 // Configurations for the integration
 type Configurations struct {
 }
@@ -55,9 +82,11 @@ type CreateIntegrationRequestDto struct {
 	// The ID of the associated environment
 	EnvironmentID *string `json:"_environmentId,omitempty"`
 	// The provider ID for the integration
-	ProviderID string `json:"providerId"`
-	// The channel type for the integration
-	Channel CreateIntegrationRequestDtoChannel `json:"channel"`
+	ProviderID *string `json:"providerId,omitempty"`
+	// The channel type for the integration. Not required for agent-kind integrations.
+	Channel *CreateIntegrationRequestDtoChannel `json:"channel,omitempty"`
+	// Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not require a channel.
+	Kind *CreateIntegrationRequestDtoKind `json:"kind,omitempty"`
 	// The credentials for the integration
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	// If the integration is active, the validation on the credentials field will run
@@ -91,18 +120,25 @@ func (c *CreateIntegrationRequestDto) GetEnvironmentID() *string {
 	return c.EnvironmentID
 }
 
-func (c *CreateIntegrationRequestDto) GetProviderID() string {
+func (c *CreateIntegrationRequestDto) GetProviderID() *string {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.ProviderID
 }
 
-func (c *CreateIntegrationRequestDto) GetChannel() CreateIntegrationRequestDtoChannel {
+func (c *CreateIntegrationRequestDto) GetChannel() *CreateIntegrationRequestDtoChannel {
 	if c == nil {
-		return CreateIntegrationRequestDtoChannel("")
+		return nil
 	}
 	return c.Channel
+}
+
+func (c *CreateIntegrationRequestDto) GetKind() *CreateIntegrationRequestDtoKind {
+	if c == nil {
+		return nil
+	}
+	return c.Kind
 }
 
 func (c *CreateIntegrationRequestDto) GetCredentials() *CredentialsDto {

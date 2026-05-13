@@ -68,6 +68,7 @@ const (
 	ProviderIDSparkpost        ProviderID = "sparkpost"
 	ProviderIDEmailWebhook     ProviderID = "email-webhook"
 	ProviderIDBraze            ProviderID = "braze"
+	ProviderIDNovuEmailAgent   ProviderID = "novu-email-agent"
 	ProviderIDNexmo            ProviderID = "nexmo"
 	ProviderIDPlivo            ProviderID = "plivo"
 	ProviderIDSms77            ProviderID = "sms77"
@@ -126,6 +127,7 @@ const (
 	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
 	ProviderIDChatWebhook      ProviderID = "chat-webhook"
 	ProviderIDNovuSlack        ProviderID = "novu-slack"
+	ProviderIDAnthropic        ProviderID = "anthropic"
 )
 
 func (e ProviderID) ToPointer() *ProviderID {
@@ -178,6 +180,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	case "email-webhook":
 		fallthrough
 	case "braze":
+		fallthrough
+	case "novu-email-agent":
 		fallthrough
 	case "nexmo":
 		fallthrough
@@ -294,6 +298,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
+		fallthrough
+	case "anthropic":
 		*e = ProviderID(v)
 		return nil
 	default:

@@ -1,0 +1,11 @@
+# DomainsControllerUpdateDomainRouteRequest
+
+
+## Fields
+
+| Field                                                                              | Type                                                                               | Required                                                                           | Description                                                                        |
+| ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `Domain`                                                                           | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `Address`                                                                          | `string`                                                                           | :heavy_check_mark:                                                                 | N/A                                                                                |
+| `IdempotencyKey`                                                                   | `*string`                                                                          | :heavy_minus_sign:                                                                 | A header for idempotency purposes                                                  |
+| `UpdateDomainRouteDto`                                                             | [components.UpdateDomainRouteDto](../../models/components/updatedomainroutedto.md) | :heavy_check_mark:                                                                 | N/A                                                                                |

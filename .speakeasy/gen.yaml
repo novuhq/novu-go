@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 3.15.0
+  version: 3.16.0
   additionalDependencies:
     github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false

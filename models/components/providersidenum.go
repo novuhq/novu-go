@@ -32,6 +32,7 @@ const (
 	ProvidersIDEnumSparkpost        ProvidersIDEnum = "sparkpost"
 	ProvidersIDEnumEmailWebhook     ProvidersIDEnum = "email-webhook"
 	ProvidersIDEnumBraze            ProvidersIDEnum = "braze"
+	ProvidersIDEnumNovuEmailAgent   ProvidersIDEnum = "novu-email-agent"
 	ProvidersIDEnumNexmo            ProvidersIDEnum = "nexmo"
 	ProvidersIDEnumPlivo            ProvidersIDEnum = "plivo"
 	ProvidersIDEnumSms77            ProvidersIDEnum = "sms77"
@@ -90,6 +91,7 @@ const (
 	ProvidersIDEnumWhatsappBusiness ProvidersIDEnum = "whatsapp-business"
 	ProvidersIDEnumChatWebhook      ProvidersIDEnum = "chat-webhook"
 	ProvidersIDEnumNovuSlack        ProvidersIDEnum = "novu-slack"
+	ProvidersIDEnumAnthropic        ProvidersIDEnum = "anthropic"
 )
 
 func (e ProvidersIDEnum) ToPointer() *ProvidersIDEnum {
@@ -142,6 +144,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "email-webhook":
 		fallthrough
 	case "braze":
+		fallthrough
+	case "novu-email-agent":
 		fallthrough
 	case "nexmo":
 		fallthrough
@@ -258,6 +262,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
+		fallthrough
+	case "anthropic":
 		*e = ProvidersIDEnum(v)
 		return nil
 	default:

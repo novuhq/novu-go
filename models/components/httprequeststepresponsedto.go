@@ -3,8 +3,74 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+type HTTPRequestStepResponseDtoBodyType string
+
+const (
+	HTTPRequestStepResponseDtoBodyTypeStr                               HTTPRequestStepResponseDtoBodyType = "str"
+	HTTPRequestStepResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto HTTPRequestStepResponseDtoBodyType = "arrayOfHTTPRequestKeyValuePairDto"
+)
+
+// HTTPRequestStepResponseDtoBody - Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+type HTTPRequestStepResponseDtoBody struct {
+	Str                               *string                      `queryParam:"inline" union:"member"`
+	ArrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto `queryParam:"inline" union:"member"`
+
+	Type HTTPRequestStepResponseDtoBodyType
+}
+
+func CreateHTTPRequestStepResponseDtoBodyStr(str string) HTTPRequestStepResponseDtoBody {
+	typ := HTTPRequestStepResponseDtoBodyTypeStr
+
+	return HTTPRequestStepResponseDtoBody{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateHTTPRequestStepResponseDtoBodyArrayOfHTTPRequestKeyValuePairDto(arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto) HTTPRequestStepResponseDtoBody {
+	typ := HTTPRequestStepResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto
+
+	return HTTPRequestStepResponseDtoBody{
+		ArrayOfHTTPRequestKeyValuePairDto: arrayOfHTTPRequestKeyValuePairDto,
+		Type:                              typ,
+	}
+}
+
+func (u *HTTPRequestStepResponseDtoBody) UnmarshalJSON(data []byte) error {
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = HTTPRequestStepResponseDtoBodyTypeStr
+		return nil
+	}
+
+	var arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto = []HTTPRequestKeyValuePairDto{}
+	if err := utils.UnmarshalJSON(data, &arrayOfHTTPRequestKeyValuePairDto, "", true, nil); err == nil {
+		u.ArrayOfHTTPRequestKeyValuePairDto = arrayOfHTTPRequestKeyValuePairDto
+		u.Type = HTTPRequestStepResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for HTTPRequestStepResponseDtoBody", string(data))
+}
+
+func (u HTTPRequestStepResponseDtoBody) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ArrayOfHTTPRequestKeyValuePairDto != nil {
+		return utils.MarshalJSON(u.ArrayOfHTTPRequestKeyValuePairDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type HTTPRequestStepResponseDtoBody: all fields are null")
+}
 
 // HTTPRequestStepResponseDtoControlValues - Control values for the HTTP request step
 type HTTPRequestStepResponseDtoControlValues struct {
@@ -14,8 +80,8 @@ type HTTPRequestStepResponseDtoControlValues struct {
 	URL string `json:"url"`
 	// Request headers as key-value pairs
 	Headers []HTTPRequestKeyValuePairDto `json:"headers,omitempty"`
-	// Request body as key-value pairs
-	Body []HTTPRequestKeyValuePairDto `json:"body,omitempty"`
+	// Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+	Body *HTTPRequestStepResponseDtoBody `json:"body,omitempty"`
 	// JSON schema to validate response body against
 	ResponseBodySchema map[string]any `json:"responseBodySchema,omitempty"`
 	// Whether to enforce response body schema validation
@@ -57,7 +123,7 @@ func (h *HTTPRequestStepResponseDtoControlValues) GetHeaders() []HTTPRequestKeyV
 	return h.Headers
 }
 
-func (h *HTTPRequestStepResponseDtoControlValues) GetBody() []HTTPRequestKeyValuePairDto {
+func (h *HTTPRequestStepResponseDtoControlValues) GetBody() *HTTPRequestStepResponseDtoBody {
 	if h == nil {
 		return nil
 	}

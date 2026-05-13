@@ -52,6 +52,10 @@ type CredentialsDto struct {
 	SenderID                  *string     `json:"senderId,omitempty"`
 	TenantID                  *string     `json:"tenantId,omitempty"`
 	AppIOBaseURL              *string     `json:"AppIOBaseUrl,omitempty"`
+	SigningSecret             *string     `json:"signingSecret,omitempty"`
+	OutboundIntegrationID     *string     `json:"outboundIntegrationId,omitempty"`
+	UseFromAddressOverride    *bool       `json:"useFromAddressOverride,omitempty"`
+	FromAddressOverride       *string     `json:"fromAddressOverride,omitempty"`
 }
 
 func (c *CredentialsDto) GetAPIKey() *string {
@@ -374,4 +378,32 @@ func (c *CredentialsDto) GetAppIOBaseURL() *string {
 		return nil
 	}
 	return c.AppIOBaseURL
+}
+
+func (c *CredentialsDto) GetSigningSecret() *string {
+	if c == nil {
+		return nil
+	}
+	return c.SigningSecret
+}
+
+func (c *CredentialsDto) GetOutboundIntegrationID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.OutboundIntegrationID
+}
+
+func (c *CredentialsDto) GetUseFromAddressOverride() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.UseFromAddressOverride
+}
+
+func (c *CredentialsDto) GetFromAddressOverride() *string {
+	if c == nil {
+		return nil
+	}
+	return c.FromAddressOverride
 }

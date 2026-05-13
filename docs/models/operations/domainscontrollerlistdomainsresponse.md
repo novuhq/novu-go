@@ -1,0 +1,10 @@
+# DomainsControllerListDomainsResponse
+
+
+## Fields
+
+| Field                                                                                   | Type                                                                                    | Required                                                                                | Description                                                                             |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                              | [components.HTTPMetadata](../../models/components/httpmetadata.md)                      | :heavy_check_mark:                                                                      | N/A                                                                                     |
+| `ListDomainsResponseDto`                                                                | [*components.ListDomainsResponseDto](../../models/components/listdomainsresponsedto.md) | :heavy_minus_sign:                                                                      | OK                                                                                      |
+| `Headers`                                                                               | map[string][]`string`                                                                   | :heavy_check_mark:                                                                      | N/A                                                                                     |
