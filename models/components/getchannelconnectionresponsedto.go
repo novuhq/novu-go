@@ -127,7 +127,10 @@ const (
 	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
 	ProviderIDChatWebhook      ProviderID = "chat-webhook"
 	ProviderIDNovuSlack        ProviderID = "novu-slack"
+	ProviderIDTelegram         ProviderID = "telegram"
 	ProviderIDAnthropic        ProviderID = "anthropic"
+	ProviderIDNovuAnthropic    ProviderID = "novu-anthropic"
+	ProviderIDAnthropicAws     ProviderID = "anthropic-aws"
 )
 
 func (e ProviderID) ToPointer() *ProviderID {
@@ -299,7 +302,13 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "novu-slack":
 		fallthrough
+	case "telegram":
+		fallthrough
 	case "anthropic":
+		fallthrough
+	case "novu-anthropic":
+		fallthrough
+	case "anthropic-aws":
 		*e = ProviderID(v)
 		return nil
 	default:

@@ -23,3 +23,4 @@ value := components.GetChannelEndpointResponseDtoTypeSlackChannel
 | `GetChannelEndpointResponseDtoTypePhone`          | phone                                             |
 | `GetChannelEndpointResponseDtoTypeMsTeamsChannel` | ms_teams_channel                                  |
 | `GetChannelEndpointResponseDtoTypeMsTeamsUser`    | ms_teams_user                                     |
+| `GetChannelEndpointResponseDtoTypeTelegramChat`   | telegram_chat                                     |

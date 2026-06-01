@@ -29,6 +29,7 @@ value := components.ChatOrPushProviderEnumSlack
 | `ChatOrPushProviderEnumWhatsappBusiness` | whatsapp-business                        |
 | `ChatOrPushProviderEnumChatWebhook`      | chat-webhook                             |
 | `ChatOrPushProviderEnumNovuSlack`        | novu-slack                               |
+| `ChatOrPushProviderEnumTelegram`         | telegram                                 |
 | `ChatOrPushProviderEnumFcm`              | fcm                                      |
 | `ChatOrPushProviderEnumApns`             | apns                                     |
 | `ChatOrPushProviderEnumExpo`             | expo                                     |

@@ -97,4 +97,7 @@ value := components.ProviderIDEmailjs
 | `ProviderIDWhatsappBusiness` | whatsapp-business            |
 | `ProviderIDChatWebhook`      | chat-webhook                 |
 | `ProviderIDNovuSlack`        | novu-slack                   |
+| `ProviderIDTelegram`         | telegram                     |
 | `ProviderIDAnthropic`        | anthropic                    |
+| `ProviderIDNovuAnthropic`    | novu-anthropic               |
+| `ProviderIDAnthropicAws`     | anthropic-aws                |
