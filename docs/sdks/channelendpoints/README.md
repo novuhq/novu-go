@@ -125,6 +125,12 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
             case components.EndpointTypePhoneEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+            case components.EndpointTypeMsTeamsChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsChannelEndpointDto is populated
+            case components.EndpointTypeMsTeamsUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
+            case components.EndpointTypeTelegramChatEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
         }
 
     }
@@ -192,6 +198,12 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
             case components.EndpointTypePhoneEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+            case components.EndpointTypeMsTeamsChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsChannelEndpointDto is populated
+            case components.EndpointTypeMsTeamsUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
+            case components.EndpointTypeTelegramChatEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
         }
 
     }
@@ -265,6 +277,12 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.WebhookEndpointDto is populated
             case components.EndpointTypePhoneEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.PhoneEndpointDto is populated
+            case components.EndpointTypeMsTeamsChannelEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsChannelEndpointDto is populated
+            case components.EndpointTypeMsTeamsUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
+            case components.EndpointTypeTelegramChatEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
         }
 
     }

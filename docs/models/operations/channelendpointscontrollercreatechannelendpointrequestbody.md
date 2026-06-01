@@ -41,6 +41,12 @@ channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateC
 channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyMsTeamsUser(components.CreateMsTeamsUserEndpointDto{/* values here */})
 ```
 
+### CreateTelegramChatEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyTelegramChat(components.CreateTelegramChatEndpointDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -59,5 +65,7 @@ switch channelEndpointsControllerCreateChannelEndpointRequestBody.Type {
 		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateMsTeamsChannelEndpointDto is populated
 	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser:
 		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateMsTeamsUserEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateTelegramChatEndpointDto is populated
 }
 ```

@@ -29,6 +29,7 @@ value := components.SubscriberChannelDtoProviderIDSlack
 | `SubscriberChannelDtoProviderIDWhatsappBusiness` | whatsapp-business                                |
 | `SubscriberChannelDtoProviderIDChatWebhook`      | chat-webhook                                     |
 | `SubscriberChannelDtoProviderIDNovuSlack`        | novu-slack                                       |
+| `SubscriberChannelDtoProviderIDTelegram`         | telegram                                         |
 | `SubscriberChannelDtoProviderIDFcm`              | fcm                                              |
 | `SubscriberChannelDtoProviderIDApns`             | apns                                             |
 | `SubscriberChannelDtoProviderIDExpo`             | expo                                             |

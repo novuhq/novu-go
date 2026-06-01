@@ -19,6 +19,7 @@ const (
 	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePhone          ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "phone"
 	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsChannel ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_channel"
 	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser    ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_user"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat   ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "telegram_chat"
 )
 
 // ChannelEndpointsControllerCreateChannelEndpointRequestBody - Channel endpoint creation request. The structure varies based on the type field.
@@ -29,6 +30,7 @@ type ChannelEndpointsControllerCreateChannelEndpointRequestBody struct {
 	CreatePhoneEndpointDto          *components.CreatePhoneEndpointDto          `queryParam:"inline" union:"member"`
 	CreateMsTeamsChannelEndpointDto *components.CreateMsTeamsChannelEndpointDto `queryParam:"inline" union:"member"`
 	CreateMsTeamsUserEndpointDto    *components.CreateMsTeamsUserEndpointDto    `queryParam:"inline" union:"member"`
+	CreateTelegramChatEndpointDto   *components.CreateTelegramChatEndpointDto   `queryParam:"inline" union:"member"`
 
 	Type ChannelEndpointsControllerCreateChannelEndpointRequestBodyType
 }
@@ -105,6 +107,18 @@ func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyMsTeamsUser
 	}
 }
 
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyTelegramChat(telegramChat components.CreateTelegramChatEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat
+
+	typStr := components.CreateTelegramChatEndpointDtoType(typ)
+	telegramChat.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateTelegramChatEndpointDto: &telegramChat,
+		Type:                          typ,
+	}
+}
+
 func (u *ChannelEndpointsControllerCreateChannelEndpointRequestBody) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -171,6 +185,15 @@ func (u *ChannelEndpointsControllerCreateChannelEndpointRequestBody) UnmarshalJS
 		u.CreateMsTeamsUserEndpointDto = createMsTeamsUserEndpointDto
 		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser
 		return nil
+	case "telegram_chat":
+		createTelegramChatEndpointDto := new(components.CreateTelegramChatEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createTelegramChatEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == telegram_chat) type components.CreateTelegramChatEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateTelegramChatEndpointDto = createTelegramChatEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ChannelEndpointsControllerCreateChannelEndpointRequestBody", string(data))
@@ -199,6 +222,10 @@ func (u ChannelEndpointsControllerCreateChannelEndpointRequestBody) MarshalJSON(
 
 	if u.CreateMsTeamsUserEndpointDto != nil {
 		return utils.MarshalJSON(u.CreateMsTeamsUserEndpointDto, "", true)
+	}
+
+	if u.CreateTelegramChatEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateTelegramChatEndpointDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ChannelEndpointsControllerCreateChannelEndpointRequestBody: all fields are null")
@@ -247,6 +274,10 @@ func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyM
 
 func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyMsTeamsUser() *components.CreateMsTeamsUserEndpointDto {
 	return c.GetRequestBody().CreateMsTeamsUserEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyTelegramChat() *components.CreateTelegramChatEndpointDto {
+	return c.GetRequestBody().CreateTelegramChatEndpointDto
 }
 
 type ChannelEndpointsControllerCreateChannelEndpointResponse struct {

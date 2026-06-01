@@ -97,4 +97,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDWhatsappBusiness` | whatsapp-business                                         |
 | `GetChannelEndpointResponseDtoProviderIDChatWebhook`      | chat-webhook                                              |
 | `GetChannelEndpointResponseDtoProviderIDNovuSlack`        | novu-slack                                                |
+| `GetChannelEndpointResponseDtoProviderIDTelegram`         | telegram                                                  |
 | `GetChannelEndpointResponseDtoProviderIDAnthropic`        | anthropic                                                 |
+| `GetChannelEndpointResponseDtoProviderIDNovuAnthropic`    | novu-anthropic                                            |
+| `GetChannelEndpointResponseDtoProviderIDAnthropicAws`     | anthropic-aws                                             |

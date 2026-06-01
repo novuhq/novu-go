@@ -29,6 +29,24 @@ endpoint := components.CreateEndpointWebhookEndpointDto(components.WebhookEndpoi
 endpoint := components.CreateEndpointPhoneEndpointDto(components.PhoneEndpointDto{/* values here */})
 ```
 
+### MsTeamsChannelEndpointDto
+
+```go
+endpoint := components.CreateEndpointMsTeamsChannelEndpointDto(components.MsTeamsChannelEndpointDto{/* values here */})
+```
+
+### MsTeamsUserEndpointDto
+
+```go
+endpoint := components.CreateEndpointMsTeamsUserEndpointDto(components.MsTeamsUserEndpointDto{/* values here */})
+```
+
+### TelegramChatEndpointDto
+
+```go
+endpoint := components.CreateEndpointTelegramChatEndpointDto(components.TelegramChatEndpointDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -43,5 +61,11 @@ switch endpoint.Type {
 		// endpoint.WebhookEndpointDto is populated
 	case components.EndpointTypePhoneEndpointDto:
 		// endpoint.PhoneEndpointDto is populated
+	case components.EndpointTypeMsTeamsChannelEndpointDto:
+		// endpoint.MsTeamsChannelEndpointDto is populated
+	case components.EndpointTypeMsTeamsUserEndpointDto:
+		// endpoint.MsTeamsUserEndpointDto is populated
+	case components.EndpointTypeTelegramChatEndpointDto:
+		// endpoint.TelegramChatEndpointDto is populated
 }
 ```

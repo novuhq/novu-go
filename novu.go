@@ -175,9 +175,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.16.0",
+		SDKVersion: "3.17.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.16.0 2.884.0 3.15.0 github.com/novuhq/novu-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.17.0 2.884.0 3.15.0 github.com/novuhq/novu-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),

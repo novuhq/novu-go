@@ -24,6 +24,7 @@ const (
 	SubscriberChannelDtoProviderIDWhatsappBusiness SubscriberChannelDtoProviderID = "whatsapp-business"
 	SubscriberChannelDtoProviderIDChatWebhook      SubscriberChannelDtoProviderID = "chat-webhook"
 	SubscriberChannelDtoProviderIDNovuSlack        SubscriberChannelDtoProviderID = "novu-slack"
+	SubscriberChannelDtoProviderIDTelegram         SubscriberChannelDtoProviderID = "telegram"
 	SubscriberChannelDtoProviderIDFcm              SubscriberChannelDtoProviderID = "fcm"
 	SubscriberChannelDtoProviderIDApns             SubscriberChannelDtoProviderID = "apns"
 	SubscriberChannelDtoProviderIDExpo             SubscriberChannelDtoProviderID = "expo"
@@ -66,6 +67,8 @@ func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
+		fallthrough
+	case "telegram":
 		fallthrough
 	case "fcm":
 		fallthrough

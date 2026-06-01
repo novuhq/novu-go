@@ -129,7 +129,10 @@ const (
 	GetChannelEndpointResponseDtoProviderIDWhatsappBusiness GetChannelEndpointResponseDtoProviderID = "whatsapp-business"
 	GetChannelEndpointResponseDtoProviderIDChatWebhook      GetChannelEndpointResponseDtoProviderID = "chat-webhook"
 	GetChannelEndpointResponseDtoProviderIDNovuSlack        GetChannelEndpointResponseDtoProviderID = "novu-slack"
+	GetChannelEndpointResponseDtoProviderIDTelegram         GetChannelEndpointResponseDtoProviderID = "telegram"
 	GetChannelEndpointResponseDtoProviderIDAnthropic        GetChannelEndpointResponseDtoProviderID = "anthropic"
+	GetChannelEndpointResponseDtoProviderIDNovuAnthropic    GetChannelEndpointResponseDtoProviderID = "novu-anthropic"
+	GetChannelEndpointResponseDtoProviderIDAnthropicAws     GetChannelEndpointResponseDtoProviderID = "anthropic-aws"
 )
 
 func (e GetChannelEndpointResponseDtoProviderID) ToPointer() *GetChannelEndpointResponseDtoProviderID {
@@ -301,7 +304,13 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 		fallthrough
 	case "novu-slack":
 		fallthrough
+	case "telegram":
+		fallthrough
 	case "anthropic":
+		fallthrough
+	case "novu-anthropic":
+		fallthrough
+	case "anthropic-aws":
 		*e = GetChannelEndpointResponseDtoProviderID(v)
 		return nil
 	default:
@@ -319,6 +328,7 @@ const (
 	GetChannelEndpointResponseDtoTypePhone          GetChannelEndpointResponseDtoType = "phone"
 	GetChannelEndpointResponseDtoTypeMsTeamsChannel GetChannelEndpointResponseDtoType = "ms_teams_channel"
 	GetChannelEndpointResponseDtoTypeMsTeamsUser    GetChannelEndpointResponseDtoType = "ms_teams_user"
+	GetChannelEndpointResponseDtoTypeTelegramChat   GetChannelEndpointResponseDtoType = "telegram_chat"
 )
 
 func (e GetChannelEndpointResponseDtoType) ToPointer() *GetChannelEndpointResponseDtoType {
@@ -341,6 +351,8 @@ func (e *GetChannelEndpointResponseDtoType) UnmarshalJSON(data []byte) error {
 	case "ms_teams_channel":
 		fallthrough
 	case "ms_teams_user":
+		fallthrough
+	case "telegram_chat":
 		*e = GetChannelEndpointResponseDtoType(v)
 		return nil
 	default:
@@ -351,18 +363,24 @@ func (e *GetChannelEndpointResponseDtoType) UnmarshalJSON(data []byte) error {
 type EndpointType string
 
 const (
-	EndpointTypeSlackChannelEndpointDto EndpointType = "SlackChannelEndpointDto"
-	EndpointTypeSlackUserEndpointDto    EndpointType = "SlackUserEndpointDto"
-	EndpointTypeWebhookEndpointDto      EndpointType = "WebhookEndpointDto"
-	EndpointTypePhoneEndpointDto        EndpointType = "PhoneEndpointDto"
+	EndpointTypeSlackChannelEndpointDto   EndpointType = "SlackChannelEndpointDto"
+	EndpointTypeSlackUserEndpointDto      EndpointType = "SlackUserEndpointDto"
+	EndpointTypeWebhookEndpointDto        EndpointType = "WebhookEndpointDto"
+	EndpointTypePhoneEndpointDto          EndpointType = "PhoneEndpointDto"
+	EndpointTypeMsTeamsChannelEndpointDto EndpointType = "MsTeamsChannelEndpointDto"
+	EndpointTypeMsTeamsUserEndpointDto    EndpointType = "MsTeamsUserEndpointDto"
+	EndpointTypeTelegramChatEndpointDto   EndpointType = "TelegramChatEndpointDto"
 )
 
 // Endpoint data specific to the channel type
 type Endpoint struct {
-	SlackChannelEndpointDto *SlackChannelEndpointDto `queryParam:"inline" union:"member"`
-	SlackUserEndpointDto    *SlackUserEndpointDto    `queryParam:"inline" union:"member"`
-	WebhookEndpointDto      *WebhookEndpointDto      `queryParam:"inline" union:"member"`
-	PhoneEndpointDto        *PhoneEndpointDto        `queryParam:"inline" union:"member"`
+	SlackChannelEndpointDto   *SlackChannelEndpointDto   `queryParam:"inline" union:"member"`
+	SlackUserEndpointDto      *SlackUserEndpointDto      `queryParam:"inline" union:"member"`
+	WebhookEndpointDto        *WebhookEndpointDto        `queryParam:"inline" union:"member"`
+	PhoneEndpointDto          *PhoneEndpointDto          `queryParam:"inline" union:"member"`
+	MsTeamsChannelEndpointDto *MsTeamsChannelEndpointDto `queryParam:"inline" union:"member"`
+	MsTeamsUserEndpointDto    *MsTeamsUserEndpointDto    `queryParam:"inline" union:"member"`
+	TelegramChatEndpointDto   *TelegramChatEndpointDto   `queryParam:"inline" union:"member"`
 
 	Type EndpointType
 }
@@ -403,7 +421,41 @@ func CreateEndpointPhoneEndpointDto(phoneEndpointDto PhoneEndpointDto) Endpoint 
 	}
 }
 
+func CreateEndpointMsTeamsChannelEndpointDto(msTeamsChannelEndpointDto MsTeamsChannelEndpointDto) Endpoint {
+	typ := EndpointTypeMsTeamsChannelEndpointDto
+
+	return Endpoint{
+		MsTeamsChannelEndpointDto: &msTeamsChannelEndpointDto,
+		Type:                      typ,
+	}
+}
+
+func CreateEndpointMsTeamsUserEndpointDto(msTeamsUserEndpointDto MsTeamsUserEndpointDto) Endpoint {
+	typ := EndpointTypeMsTeamsUserEndpointDto
+
+	return Endpoint{
+		MsTeamsUserEndpointDto: &msTeamsUserEndpointDto,
+		Type:                   typ,
+	}
+}
+
+func CreateEndpointTelegramChatEndpointDto(telegramChatEndpointDto TelegramChatEndpointDto) Endpoint {
+	typ := EndpointTypeTelegramChatEndpointDto
+
+	return Endpoint{
+		TelegramChatEndpointDto: &telegramChatEndpointDto,
+		Type:                    typ,
+	}
+}
+
 func (u *Endpoint) UnmarshalJSON(data []byte) error {
+
+	var msTeamsChannelEndpointDto MsTeamsChannelEndpointDto = MsTeamsChannelEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &msTeamsChannelEndpointDto, "", true, nil); err == nil {
+		u.MsTeamsChannelEndpointDto = &msTeamsChannelEndpointDto
+		u.Type = EndpointTypeMsTeamsChannelEndpointDto
+		return nil
+	}
 
 	var slackChannelEndpointDto SlackChannelEndpointDto = SlackChannelEndpointDto{}
 	if err := utils.UnmarshalJSON(data, &slackChannelEndpointDto, "", true, nil); err == nil {
@@ -433,6 +485,20 @@ func (u *Endpoint) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var msTeamsUserEndpointDto MsTeamsUserEndpointDto = MsTeamsUserEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &msTeamsUserEndpointDto, "", true, nil); err == nil {
+		u.MsTeamsUserEndpointDto = &msTeamsUserEndpointDto
+		u.Type = EndpointTypeMsTeamsUserEndpointDto
+		return nil
+	}
+
+	var telegramChatEndpointDto TelegramChatEndpointDto = TelegramChatEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &telegramChatEndpointDto, "", true, nil); err == nil {
+		u.TelegramChatEndpointDto = &telegramChatEndpointDto
+		u.Type = EndpointTypeTelegramChatEndpointDto
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Endpoint", string(data))
 }
 
@@ -451,6 +517,18 @@ func (u Endpoint) MarshalJSON() ([]byte, error) {
 
 	if u.PhoneEndpointDto != nil {
 		return utils.MarshalJSON(u.PhoneEndpointDto, "", true)
+	}
+
+	if u.MsTeamsChannelEndpointDto != nil {
+		return utils.MarshalJSON(u.MsTeamsChannelEndpointDto, "", true)
+	}
+
+	if u.MsTeamsUserEndpointDto != nil {
+		return utils.MarshalJSON(u.MsTeamsUserEndpointDto, "", true)
+	}
+
+	if u.TelegramChatEndpointDto != nil {
+		return utils.MarshalJSON(u.TelegramChatEndpointDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Endpoint: all fields are null")

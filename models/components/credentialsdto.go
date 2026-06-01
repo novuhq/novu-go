@@ -56,6 +56,14 @@ type CredentialsDto struct {
 	OutboundIntegrationID     *string     `json:"outboundIntegrationId,omitempty"`
 	UseFromAddressOverride    *bool       `json:"useFromAddressOverride,omitempty"`
 	FromAddressOverride       *string     `json:"fromAddressOverride,omitempty"`
+	// Agent default shared inbox slug prefix used in `{emailSlugPrefix}-{agentId}@<shared-domain>`. Only meaningful on the NovuAgent email integration.
+	EmailSlugPrefix *string `json:"emailSlugPrefix,omitempty"`
+	// Claude Managed Agents: ID of the Anthropic environment tied to this integration. Hydrated by the API at integration provisioning time.
+	ExternalEnvironmentID *string `json:"externalEnvironmentId,omitempty"`
+	// Claude Managed Agents: ID of the Anthropic vault (`vlt_…`) tied to this integration. Hydrated by the API at integration provisioning time and used to push OAuth-completed MCP credentials to the per-vault credentials API.
+	ExternalVaultID *string `json:"externalVaultId,omitempty"`
+	// Claude Managed Agents: id of the Anthropic workspace used in console deep links. Defaults to `'default'` (the Default Workspace). Set this when the API key is scoped to a custom workspace (e.g. `wrkspc_…`).
+	ExternalWorkspaceID *string `json:"externalWorkspaceId,omitempty"`
 }
 
 func (c *CredentialsDto) GetAPIKey() *string {
@@ -406,4 +414,32 @@ func (c *CredentialsDto) GetFromAddressOverride() *string {
 		return nil
 	}
 	return c.FromAddressOverride
+}
+
+func (c *CredentialsDto) GetEmailSlugPrefix() *string {
+	if c == nil {
+		return nil
+	}
+	return c.EmailSlugPrefix
+}
+
+func (c *CredentialsDto) GetExternalEnvironmentID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ExternalEnvironmentID
+}
+
+func (c *CredentialsDto) GetExternalVaultID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ExternalVaultID
+}
+
+func (c *CredentialsDto) GetExternalWorkspaceID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ExternalWorkspaceID
 }
