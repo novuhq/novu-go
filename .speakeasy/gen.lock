@@ -1,29 +1,29 @@
 lockVersion: 2.0.0
 id: 9bfe35dd-87f6-4b74-8789-134b7aa9c364
 management:
-  docChecksum: f32b5d4ec70e2d41ecbe262aa1ea5b78
-  docVersion: 3.15.0
-  speakeasyVersion: 1.763.0
-  generationVersion: 2.884.0
-  releaseVersion: 3.17.0
-  configChecksum: b27da4403963272913b05804ee08826b
+  docChecksum: 1247e7f0f8404831022bf81a43689ed1
+  docVersion: 3.17.1
+  speakeasyVersion: 1.786.1
+  generationVersion: 2.913.3
+  releaseVersion: 3.18.0
+  configChecksum: 2cab0ac81fdae075d8dfbda251a06fe7
   repoURL: https://github.com/novuhq/novu-go.git
   installationURL: https://github.com/novuhq/novu-go
 persistentEdits:
-  generation_id: d6758dde-b2ca-497a-8c13-b386cc8e5f16
-  pristine_commit_hash: 1b8587d9993132cb03470c3c66ee1bff3009b278
-  pristine_tree_hash: b1fd5577dd7ba5a104fa4cf8e9cf7b8bbe46b451
+  generation_id: 22f46d0d-e139-46e9-8291-4a7f6adf41a2
+  pristine_commit_hash: b8097adbeba6eb80eacb1a459e1f4a0b51f79476
+  pristine_tree_hash: e1bb741e0dfb9d9c4f9e4c0395a85ba3f8af5fcf
 features:
   go:
     additionalDependencies: 0.1.0
     additionalProperties: 0.1.2
     constsAndDefaults: 0.1.14
-    core: 3.13.40
+    core: 3.13.46
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
-    examples: 2.81.6
+    examples: 2.81.7
     flattening: 2.81.2
     globalSecurity: 2.82.15
     globalSecurityCallbacks: 0.1.0
@@ -35,7 +35,7 @@ features:
     nullables: 0.2.1
     openEnums: 0.1.0
     responseFormat: 0.1.2
-    retries: 2.84.2
+    retries: 2.84.3
     sdkHooks: 0.3.0
     unions: 2.87.7
     uploadStreams: 0.1.0
@@ -46,8 +46,8 @@ trackedFiles:
     pristine_git_object: 8d3ebcd79425a81a2863a3658b8bd4384dcfdc06
   .devcontainer/devcontainer.json:
     id: b34062a34eb1
-    last_write_checksum: sha1:a518b2fc2f92e998593a1dcb935db4ca1eb2e2f1
-    pristine_git_object: 92f5ba5b54156225322fb4b09d2acf4abde9abc9
+    last_write_checksum: sha1:00c39389eee01217e51057762bde7339d9e56114
+    pristine_git_object: 8f01e56e2f8476fb2a7c79ec6326b3b0d5be8123
   .devcontainer/setup.sh:
     id: 5f1dfbfeb8eb
     last_write_checksum: sha1:0321311318be8342a3be4bd39236eeb3e2d596c2
@@ -198,8 +198,8 @@ trackedFiles:
     pristine_git_object: 0419d18aedd70d2dbe3d02ca0bb56aab1442cd70
   docs/models/components/actorfeeditemdto.md:
     id: 16bdf7a901af
-    last_write_checksum: sha1:83de663985e5e97b7b66587473effe38647656ca
-    pristine_git_object: d0fbe4984fd5caca6159f7af2235a4135dd6c085
+    last_write_checksum: sha1:348f08f6837425850171c5a396932aecd96cb2ff
+    pristine_git_object: fd4f021d323504e930a270257cf56472abcc3bb8
   docs/models/components/actortypeenum.md:
     id: c882db642e1f
     last_write_checksum: sha1:a333108795ff8262f6aa21129e29646fe327448f
@@ -2394,8 +2394,8 @@ trackedFiles:
     pristine_git_object: fa202c87c2fbd29d2c9d7e68140e6b5da9957546
   docs/models/components/updateworkflowdtosteps.md:
     id: 5db2744049e3
-    last_write_checksum: sha1:528391d8cfa768fd5572126c573f7ebcbb7372be
-    pristine_git_object: 9d2f9838837f941e6a1697e3783a7def96593833
+    last_write_checksum: sha1:d91e3a72a4c1cc2d06ecc8232a96e67a7bc4d64e
+    pristine_git_object: ae14e595f771f8342fa83b7d70f8931274a178d0
   docs/models/components/uploadtranslationsresponsedto.md:
     id: f569985baca7
     last_write_checksum: sha1:93421f302f826bbbe2db2302eb940a695d4b54ba
@@ -3758,8 +3758,8 @@ trackedFiles:
     pristine_git_object: 2e9b738c00c580164f638b84629024e3babfb78a
   docs/sdks/integrations/README.md:
     id: 7b29664808c0
-    last_write_checksum: sha1:65d60c51c8ce26d9f91cb78018a57b7c0614c79b
-    pristine_git_object: a5cf5c4d692ae89dd461fea6a7eb3a39691591bf
+    last_write_checksum: sha1:0d5f0b213c77b786f5b2afcd2e6d712de7fc5a43
+    pristine_git_object: 4f3c18afb317c17eb230b56a66cfaaa6d258072b
   docs/sdks/layouts/README.md:
     id: 9cae4f89dc39
     last_write_checksum: sha1:29ae6c3c75f8268c1efde84c5fb3b9cd82b78104
@@ -3782,12 +3782,12 @@ trackedFiles:
     pristine_git_object: a74ee0162ef432f209bd44355c1e21581cfd6b64
   docs/sdks/novumessages/README.md:
     id: 0ed543e2b6a6
-    last_write_checksum: sha1:190e5dbace0b35c58cd73f4c25ac65a9416df75d
-    pristine_git_object: 400e9642a2ea3bb21ab5bc3c5a723d5badadb917
+    last_write_checksum: sha1:4ee083a9e88e13df16f01263f7224868605a732a
+    pristine_git_object: 24efa6b44671d2858514d93725805d760723bedb
   docs/sdks/novunotifications/README.md:
     id: 9d94ce44af2e
-    last_write_checksum: sha1:e0ad9b3faa2661f30652861449bdfda82eba3f9c
-    pristine_git_object: dd661df49aca0487c9955d7cd6eb86650bd0c7d4
+    last_write_checksum: sha1:9c9902273c63a6d09a52376df4d56e5facbbe665
+    pristine_git_object: d81595b81c38090a1c05870c2efaae79d0755469
   docs/sdks/novusubscribers/README.md:
     id: 943e16bb1f3b
     last_write_checksum: sha1:1bde0470980f68c95bc3711c51e6625a7d3b2121
@@ -3846,16 +3846,16 @@ trackedFiles:
     pristine_git_object: 3a52e5a44033d1d09982e32739b04191030ccc6c
   go.mod:
     id: c47645c391ad
-    last_write_checksum: sha1:3b62030de4d2ede6652450144ae331d049dcdab4
-    pristine_git_object: b0ce39ad8e3cefd1765410524180583a062e61a6
+    last_write_checksum: sha1:4ad7b54b12843107585b188018cba9facbcee118
+    pristine_git_object: b431d711e64ee1503d0d08eebf8de629504bbc5e
   groups.go:
     id: 68f5d1c57296
     last_write_checksum: sha1:d44f6ea06e2f0baebd6ae8fe56c64cc6b9c89980
     pristine_git_object: a6ce00a229c18d4cc9d9290272972e2be3cafaaa
   integrations.go:
     id: a4c798ef8218
-    last_write_checksum: sha1:668f9df6bc1b618e7f116cf4c7b346d6c9ec6435
-    pristine_git_object: 64e0b4d7d03151190805f1c962ea66a43c25082d
+    last_write_checksum: sha1:da04cd148ec6470814163a062d616bcda59abf40
+    pristine_git_object: 3b833aa3410a4f9a8a7edf6086a92ce87a292023
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:9fb0c7bc97f853d38e7779d73031ffb80fd78772
@@ -3882,8 +3882,8 @@ trackedFiles:
     pristine_git_object: bc101ceb791e13d697daf5b6ff26c7a14132565e
   internal/utils/json.go:
     id: ad03e3c502d8
-    last_write_checksum: sha1:978ce2240ac360b100a3254d5d7d1c6d873fa5bd
-    pristine_git_object: bf64e015432c62675cb5a7dc6b4670420ac161a8
+    last_write_checksum: sha1:bcc3c8628f8f1cabba4bfa24d6e3aa3a7379c04a
+    pristine_git_object: e2729c2145595ed043499d252d099cae9982071a
   internal/utils/pathparams.go:
     id: 1f3e0c30fd90
     last_write_checksum: sha1:a9b7b68c9680d85eb47f1125a0484497cf90e908
@@ -5282,8 +5282,8 @@ trackedFiles:
     pristine_git_object: 83c2e18dfedc95bfe0d8683dfded4942dd05949d
   models/components/updateworkflowdto.go:
     id: 4866c1ff1669
-    last_write_checksum: sha1:1c7432817aa65f6ad01ce3bd4b2ae453cdcd4771
-    pristine_git_object: 920bb36ecfbe1ce174df6e4c14fab4d8761dc780
+    last_write_checksum: sha1:3d2fc0b9ea7b9a45f3a0949d18fb5f77e14d08c5
+    pristine_git_object: 281a9938a27b3f264ff34433db85f1d90712289a
   models/components/uploadtranslationsresponsedto.go:
     id: e232013af5a4
     last_write_checksum: sha1:13b919ad3c9a3f899eb756abc958cda7771c9fe0
@@ -5894,16 +5894,16 @@ trackedFiles:
     pristine_git_object: 9b9ae202db5753539baca900788ba84ef192f362
   novu.go:
     id: 097e263895ae
-    last_write_checksum: sha1:e86c1fdd2710778a6cad330c03dd30416ec25515
-    pristine_git_object: 8fbc30db6a1f3b9138d2fd44c42468c3794de8c1
+    last_write_checksum: sha1:bbbb49d49193bbd4ae4cf728737d6cea122f43e1
+    pristine_git_object: 258fda62c83cf271b99bcb1f7af2fa6c1af29b95
   novumessages.go:
     id: 8da556edc8a7
-    last_write_checksum: sha1:5970b5e7f8d6425b6009665e01b097902a26cd55
-    pristine_git_object: 867d453a3423dfb7e4e5e089cd6c96e5c95bfce4
+    last_write_checksum: sha1:279c64fd0d738d2363d141bea14e6bc52ad2166e
+    pristine_git_object: 7b6225807022ee9a510fdfeb83d85d6e5f6736ef
   novunotifications.go:
     id: 75dc9ef89e9d
-    last_write_checksum: sha1:e94e6729b6b2ac91e5aef80876a5c58f7a38d69f
-    pristine_git_object: 11a57be87160a4d6ea7e7ed0ed0b697202d56c99
+    last_write_checksum: sha1:2d4fbf9061035743895cca74b5e84d661706be9f
+    pristine_git_object: 682586fca8480d2d55ec8297ce74713542e395ae
   novusubscribers.go:
     id: 9922c68e0bce
     last_write_checksum: sha1:dddcca2ba1d4efbcb31120226a02198b1aefc49e
@@ -5930,8 +5930,8 @@ trackedFiles:
     pristine_git_object: 8f658f9b51e06525bd34a9a3c72b8c8f594a4520
   retry/config.go:
     id: 82d673cb0389
-    last_write_checksum: sha1:7f7d96b59a18e95bac847ae09c63bbd911ee8432
-    pristine_git_object: 5b3dc7c122d8ab08905485342d7474f8f163888d
+    last_write_checksum: sha1:102d1953fbd7e9f312c4442c71ccca2eaaeaa27d
+    pristine_git_object: 767002c7898128324d8741ce9c534bd466492169
   routes.go:
     id: 08b7908864ba
     last_write_checksum: sha1:1a0544cbbef05eb7fd75175690d8b7b7ebef90ca
@@ -8196,7 +8196,7 @@ examples:
           application/json: {"statusCode": 404, "timestamp": "2024-12-12T13:00:00Z", "path": "/api/v1/resource", "message": "xx xx xx ", "ctx": {"workflowId": "some_wf_id", "stepId": "some_wf_id"}, "errorId": "abc123"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Novu.ChannelConnections.List()`: \n  *  `request.Request.ProviderId` **Changed**\n  *  `response.Data[].ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.ChannelConnections.Retrieve()`:  `response.ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.Notifications.Retrieve()`:  `response.Jobs[].ExecutionDetails[].ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.Layouts.GeneratePreview()`: \n  *  `request.LayoutPreviewRequestDto.PreviewPayload.Subscriber.Channels[].ProviderId.Enum(telegram)` **Added**\n  *  `response.PreviewPayloadExample.Subscriber.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Search()`:  `response.Data[].Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Create()`: \n  *  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n  *  `error.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Retrieve()`:  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Patch()`:  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Credentials.Update()`: \n  *  `request.UpdateSubscriberChannelRequestDto.ProviderId.Enum(telegram)` **Added**\n  *  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Credentials.Append()`: \n  *  `request.UpdateSubscriberChannelRequestDto.ProviderId.Enum(telegram)` **Added**\n  *  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Messages.UpdateAsSeen()`:  `response.Subscriber.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Messages.MarkAllAs()`:  `response.[].Subscriber.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Subscribers.Properties.UpdateOnlineFlag()`:  `response.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Workflows.Steps.GeneratePreview()`: \n  *  `request.GeneratePreviewRequestDto.PreviewPayload.Subscriber.Channels[].ProviderId.Enum(telegram)` **Added**\n  *  `response.PreviewPayloadExample.Subscriber.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.Notifications.List()`:  `response.Data[].Jobs[].ExecutionDetails[].ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.Messages.Retrieve()`:  `response.Data[].Subscriber.Channels[].ProviderId.Enum(telegram)` **Added** (Breaking ⚠️)\n* `Novu.ChannelEndpoints.List()`: \n  *  `request.Request.ProviderId` **Changed**\n  *  `response.Data[]` **Changed** (Breaking ⚠️)\n* `Novu.ChannelConnections.Update()`:  `response.ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.ChannelConnections.Create()`:  `response.ProviderId` **Changed** (Breaking ⚠️)\n* `Novu.ChannelEndpoints.Create()`: \n  *  `request.RequestBody.union(telegram_chat)` **Added**\n  *  `response` **Changed** (Breaking ⚠️)\n* `Novu.ChannelEndpoints.Retrieve()`:  `response` **Changed** (Breaking ⚠️)\n* `Novu.ChannelEndpoints.Update()`:  `response` **Changed** (Breaking ⚠️)\n* `Novu.Integrations.List()`:  `response.[].Credentials` **Changed**\n* `Novu.Integrations.Create()`: \n  *  `request.CreateIntegrationRequestDto.Credentials` **Changed**\n  *  `response.Credentials` **Changed**\n* `Novu.Integrations.Update()`: \n  *  `request.UpdateIntegrationRequestDto.Credentials` **Changed**\n  *  `response.Credentials` **Changed**\n* `Novu.Integrations.Delete()`:  `response.[].Credentials` **Changed**\n* `Novu.Integrations.SetAsPrimary()`:  `response.Credentials` **Changed**\n* `Novu.Integrations.ListActive()`:  `response.[].Credentials` **Changed**\n* `Novu.Trigger()`: \n  *  `request.TriggerEventRequestDto.To.union(Array<1>)[].union(SubscriberPayloadDto).Channels[].ProviderId.Enum(telegram)` **Added**\n* `Novu.TriggerBroadcast()`: \n  *  `request.TriggerEventToAllRequestDto.Actor.union(SubscriberPayloadDto).Channels[].ProviderId.Enum(telegram)` **Added**\n* `Novu.TriggerBulk()`: \n  *  `request.BulkTriggerEventDto.Events[].To.union(SubscriberPayloadDto).Channels[].ProviderId.Enum(telegram)` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Novu.Subscribers.Notifications.Feed()`: **Deprecated**\n* `Novu.Subscribers.Notifications.UnseenCount()`: **Deprecated**\n* `Novu.Subscribers.Messages.UpdateAsSeen()`: **Deprecated**\n* `Novu.Subscribers.Messages.MarkAll()`: **Deprecated**\n* `Novu.Subscribers.Messages.MarkAllAs()`: **Deprecated**\n* `Novu.Workflows.Update()`: \n  *  `request.UpdateWorkflowDto.Steps[].union(throttle)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

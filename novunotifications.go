@@ -5465,7 +5465,9 @@ func (s *NovuNotifications) MarkAsSeen(ctx context.Context, subscriberID string,
 }
 
 // Feed - Retrieve subscriber notifications
-// Retrieve subscriber in-app (inbox) notifications by its unique key identifier **subscriberId**.
+// This API is deprecated, use v2 API instead. Retrieve subscriber in-app notifications by its unique key identifier **subscriberId**.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *NovuNotifications) Feed(ctx context.Context, request operations.SubscribersV1ControllerGetNotificationsFeedRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerGetNotificationsFeedResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -5806,7 +5808,9 @@ func (s *NovuNotifications) Feed(ctx context.Context, request operations.Subscri
 }
 
 // UnseenCount - Retrieve unseen notifications count
-// Retrieve unseen in-app (inbox) notifications count for a subscriber by its unique key identifier **subscriberId**.
+// This API is deprecated, use v2 API instead. Retrieve unseen in-app notifications count for a subscriber by its unique key identifier **subscriberId**.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *NovuNotifications) UnseenCount(ctx context.Context, subscriberID string, seen *bool, limit *float64, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerGetUnseenCountResponse, error) {
 	request := operations.SubscribersV1ControllerGetUnseenCountRequest{
 		SubscriberID:   subscriberID,

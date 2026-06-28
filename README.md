@@ -494,11 +494,11 @@ func main() {
 * [Append](docs/sdks/credentials/README.md#append) - Upsert provider credentials
 * [Delete](docs/sdks/credentials/README.md#delete) - Delete provider credentials
 
-#### [Subscribers.Messages](docs/sdks/novumessages/README.md)
+#### [~~Subscribers.Messages~~](docs/sdks/novumessages/README.md)
 
-* [UpdateAsSeen](docs/sdks/novumessages/README.md#updateasseen) - Update notification action status
-* [MarkAll](docs/sdks/novumessages/README.md#markall) - Update all notifications state
-* [MarkAllAs](docs/sdks/novumessages/README.md#markallas) - Update notifications state
+* [~~UpdateAsSeen~~](docs/sdks/novumessages/README.md#updateasseen) - Update notification action status :warning: **Deprecated**
+* [~~MarkAll~~](docs/sdks/novumessages/README.md#markall) - Update all notifications state :warning: **Deprecated**
+* [~~MarkAllAs~~](docs/sdks/novumessages/README.md#markallas) - Update notifications state :warning: **Deprecated**
 
 #### [Subscribers.Notifications](docs/sdks/novunotifications/README.md)
 
@@ -518,8 +518,8 @@ func main() {
 * [MarkAllAsRead](docs/sdks/novunotifications/README.md#markallasread) - Mark all notifications as read
 * [ArchiveAllRead](docs/sdks/novunotifications/README.md#archiveallread) - Archive all read notifications
 * [MarkAsSeen](docs/sdks/novunotifications/README.md#markasseen) - Mark notifications as seen
-* [Feed](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications
-* [UnseenCount](docs/sdks/novunotifications/README.md#unseencount) - Retrieve unseen notifications count
+* [~~Feed~~](docs/sdks/novunotifications/README.md#feed) - Retrieve subscriber notifications :warning: **Deprecated**
+* [~~UnseenCount~~](docs/sdks/novunotifications/README.md#unseencount) - Retrieve unseen notifications count :warning: **Deprecated**
 
 #### [Subscribers.Preferences](docs/sdks/preferences/README.md)
 

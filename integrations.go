@@ -35,7 +35,7 @@ func newIntegrations(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *ho
 }
 
 // List all integrations
-// List all the channels integrations created in the organization
+// List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerListIntegrationsResponse, error) {
 	request := operations.IntegrationsControllerListIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,
@@ -378,7 +378,7 @@ func (s *Integrations) List(ctx context.Context, idempotencyKey *string, opts ..
 // Create an integration
 // Create an integration for the current environment the user is based on the API key provided.
 //
-//	Each provider supports different credentials, check the provider documentation for more details.
+//	Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto components.CreateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerCreateIntegrationResponse, error) {
 	request := operations.IntegrationsControllerCreateIntegrationRequest{
 		IdempotencyKey:              idempotencyKey,
@@ -729,7 +729,7 @@ func (s *Integrations) Create(ctx context.Context, createIntegrationRequestDto c
 // Update an integration
 // Update an integration by its unique key identifier **integrationId**.
 //
-//	Each provider supports different credentials, check the provider documentation for more details.
+//	Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) Update(ctx context.Context, integrationID string, updateIntegrationRequestDto components.UpdateIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerUpdateIntegrationByIDResponse, error) {
 	request := operations.IntegrationsControllerUpdateIntegrationByIDRequest{
 		IntegrationID:               integrationID,
@@ -1081,7 +1081,7 @@ func (s *Integrations) Update(ctx context.Context, integrationID string, updateI
 // Delete an integration
 // Delete an integration by its unique key identifier **integrationId**.
 //
-//	This action is irreversible.
+//	This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 func (s *Integrations) Delete(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerRemoveIntegrationResponse, error) {
 	request := operations.IntegrationsControllerRemoveIntegrationRequest{
 		IntegrationID:  integrationID,
@@ -1425,7 +1425,7 @@ func (s *Integrations) Delete(ctx context.Context, integrationID string, idempot
 // IntegrationsControllerAutoConfigureIntegration - Auto-configure an integration for inbound webhooks
 // Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support.
 //
-//	This will automatically generate required webhook signing keys and configure webhook endpoints.
+//	This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) IntegrationsControllerAutoConfigureIntegration(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerAutoConfigureIntegrationResponse, error) {
 	request := operations.IntegrationsControllerAutoConfigureIntegrationRequest{
 		IntegrationID:  integrationID,
@@ -1771,6 +1771,7 @@ func (s *Integrations) IntegrationsControllerAutoConfigureIntegration(ctx contex
 //
 //	This API will set the integration as primary for that channel in the current environment.
 //	Primary integration is used to deliver notification for sms and email channels in the workflow.
+//	Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerSetIntegrationAsPrimaryResponse, error) {
 	request := operations.IntegrationsControllerSetIntegrationAsPrimaryRequest{
 		IntegrationID:  integrationID,
@@ -2112,7 +2113,7 @@ func (s *Integrations) SetAsPrimary(ctx context.Context, integrationID string, i
 }
 
 // ListActive - List active integrations
-// List all the active integrations created in the organization
+// List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGetActiveIntegrationsResponse, error) {
 	request := operations.IntegrationsControllerGetActiveIntegrationsRequest{
 		IdempotencyKey: idempotencyKey,

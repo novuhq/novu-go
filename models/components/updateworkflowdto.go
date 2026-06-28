@@ -19,6 +19,7 @@ const (
 	UpdateWorkflowDtoStepsTypeChat        UpdateWorkflowDtoStepsType = "chat"
 	UpdateWorkflowDtoStepsTypeDelay       UpdateWorkflowDtoStepsType = "delay"
 	UpdateWorkflowDtoStepsTypeDigest      UpdateWorkflowDtoStepsType = "digest"
+	UpdateWorkflowDtoStepsTypeThrottle    UpdateWorkflowDtoStepsType = "throttle"
 	UpdateWorkflowDtoStepsTypeCustom      UpdateWorkflowDtoStepsType = "custom"
 	UpdateWorkflowDtoStepsTypeHTTPRequest UpdateWorkflowDtoStepsType = "http_request"
 )
@@ -31,6 +32,7 @@ type UpdateWorkflowDtoSteps struct {
 	ChatStepUpsertDto        *ChatStepUpsertDto        `queryParam:"inline" union:"member"`
 	DelayStepUpsertDto       *DelayStepUpsertDto       `queryParam:"inline" union:"member"`
 	DigestStepUpsertDto      *DigestStepUpsertDto      `queryParam:"inline" union:"member"`
+	ThrottleStepUpsertDto    *ThrottleStepUpsertDto    `queryParam:"inline" union:"member"`
 	CustomStepUpsertDto      *CustomStepUpsertDto      `queryParam:"inline" union:"member"`
 	HTTPRequestStepUpsertDto *HTTPRequestStepUpsertDto `queryParam:"inline" union:"member"`
 
@@ -118,6 +120,18 @@ func CreateUpdateWorkflowDtoStepsDigest(digest DigestStepUpsertDto) UpdateWorkfl
 	return UpdateWorkflowDtoSteps{
 		DigestStepUpsertDto: &digest,
 		Type:                typ,
+	}
+}
+
+func CreateUpdateWorkflowDtoStepsThrottle(throttle ThrottleStepUpsertDto) UpdateWorkflowDtoSteps {
+	typ := UpdateWorkflowDtoStepsTypeThrottle
+
+	typStr := StepTypeEnum(typ)
+	throttle.Type = typStr
+
+	return UpdateWorkflowDtoSteps{
+		ThrottleStepUpsertDto: &throttle,
+		Type:                  typ,
 	}
 }
 
@@ -220,6 +234,15 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		u.DigestStepUpsertDto = digestStepUpsertDto
 		u.Type = UpdateWorkflowDtoStepsTypeDigest
 		return nil
+	case "throttle":
+		throttleStepUpsertDto := new(ThrottleStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &throttleStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == throttle) type ThrottleStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
+		}
+
+		u.ThrottleStepUpsertDto = throttleStepUpsertDto
+		u.Type = UpdateWorkflowDtoStepsTypeThrottle
+		return nil
 	case "custom":
 		customStepUpsertDto := new(CustomStepUpsertDto)
 		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, nil); err != nil {
@@ -270,6 +293,10 @@ func (u UpdateWorkflowDtoSteps) MarshalJSON() ([]byte, error) {
 
 	if u.DigestStepUpsertDto != nil {
 		return utils.MarshalJSON(u.DigestStepUpsertDto, "", true)
+	}
+
+	if u.ThrottleStepUpsertDto != nil {
+		return utils.MarshalJSON(u.ThrottleStepUpsertDto, "", true)
 	}
 
 	if u.CustomStepUpsertDto != nil {
