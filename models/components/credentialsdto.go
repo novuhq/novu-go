@@ -54,6 +54,7 @@ type CredentialsDto struct {
 	AppIOBaseURL              *string     `json:"AppIOBaseUrl,omitempty"`
 	SigningSecret             *string     `json:"signingSecret,omitempty"`
 	OutboundIntegrationID     *string     `json:"outboundIntegrationId,omitempty"`
+	OutboundConnectedAt       *string     `json:"outboundConnectedAt,omitempty"`
 	UseFromAddressOverride    *bool       `json:"useFromAddressOverride,omitempty"`
 	FromAddressOverride       *string     `json:"fromAddressOverride,omitempty"`
 	// Agent default shared inbox slug prefix used in `{emailSlugPrefix}-{agentId}@<shared-domain>`. Only meaningful on the NovuAgent email integration.
@@ -400,6 +401,13 @@ func (c *CredentialsDto) GetOutboundIntegrationID() *string {
 		return nil
 	}
 	return c.OutboundIntegrationID
+}
+
+func (c *CredentialsDto) GetOutboundConnectedAt() *string {
+	if c == nil {
+		return nil
+	}
+	return c.OutboundConnectedAt
 }
 
 func (c *CredentialsDto) GetUseFromAddressOverride() *bool {

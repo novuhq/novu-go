@@ -31,9 +31,11 @@ func newNovuMessages(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *ho
 }
 
 // UpdateAsSeen - Update notification action status
-// Update in-app (inbox) notification's action status by its unique key identifier **messageId** and type field **type**.
+// This API is deprecated, use v2 API instead. Update in-app notification's action status by its unique key identifier **messageId** and type field **type**.
 //
 //	**type** field can be **primary** or **secondary**
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.SubscribersV1ControllerMarkActionAsSeenRequest, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkActionAsSeenResponse, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
@@ -377,7 +379,9 @@ func (s *NovuMessages) UpdateAsSeen(ctx context.Context, request operations.Subs
 }
 
 // MarkAll - Update all notifications state
-// Update all subscriber in-app (inbox) notifications state such as read, unread, seen or unseen by **subscriberId**.
+// This API is deprecated, use v2 API instead. Update all subscriber in-app notifications state such as read, unread, seen or unseen by **subscriberId**.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAllMessageAsRequestDto components.MarkAllMessageAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkAllUnreadAsReadResponse, error) {
 	request := operations.SubscribersV1ControllerMarkAllUnreadAsReadRequest{
 		SubscriberID:               subscriberID,
@@ -727,9 +731,11 @@ func (s *NovuMessages) MarkAll(ctx context.Context, subscriberID string, markAll
 }
 
 // MarkAllAs - Update notifications state
-// Update subscriber's multiple in-app (inbox) notifications state such as seen, read, unseen or unread by **subscriberId**.
+// This API is deprecated, use v2 API instead. Update subscriber's multiple in-app notifications state such as seen, read, unseen or unread by **subscriberId**.
 //
-//	**messageId** is of type mongodbId of notifications
+//	**messageId** is of type mongodbId of notifications.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *NovuMessages) MarkAllAs(ctx context.Context, subscriberID string, messageMarkAsRequestDto components.MessageMarkAsRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.SubscribersV1ControllerMarkMessagesAsResponse, error) {
 	request := operations.SubscribersV1ControllerMarkMessagesAsRequest{
 		SubscriberID:            subscriberID,

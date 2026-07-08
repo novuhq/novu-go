@@ -13,14 +13,17 @@ With the help of the Integration Store, you can easily integrate your favorite d
 * [Delete](#delete) - Delete an integration
 * [IntegrationsControllerAutoConfigureIntegration](#integrationscontrollerautoconfigureintegration) - Auto-configure an integration for inbound webhooks
 * [SetAsPrimary](#setasprimary) - Update integration as primary
+* [CreateMobileLink](#createmobilelink) - Issue a short-lived mobile setup link for an existing integration
+* [IntegrationsControllerConfigureIntegrationWebhook](#integrationscontrollerconfigureintegrationwebhook) - Configure a chat integration webhook
 * [ListActive](#listactive) - List active integrations
 * [GenerateConnectOAuthURL](#generateconnectoauthurl) - Generate OAuth URL for a workspace/tenant connection
+* [LinkChannelEndpoint](#linkchannelendpoint) - Issue a URL to link a subscriber chat identity
 * [GenerateLinkUserOAuthURL](#generatelinkuseroauthurl) - Generate OAuth URL to link a subscriber user identity
 * [~~GenerateChatOAuthURL~~](#generatechatoauthurl) - Generate chat OAuth URL :warning: **Deprecated**
 
 ## List
 
-List all the channels integrations created in the organization
+List all the channels integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -76,7 +79,7 @@ func main() {
 ## Create
 
 Create an integration for the current environment the user is based on the API key provided. 
-    Each provider supports different credentials, check the provider documentation for more details.
+    Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -134,7 +137,7 @@ func main() {
 ## Update
 
 Update an integration by its unique key identifier **integrationId**. 
-    Each provider supports different credentials, check the provider documentation for more details.
+    Each provider supports different credentials, check the provider documentation for more details. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -193,7 +196,7 @@ func main() {
 ## Delete
 
 Delete an integration by its unique key identifier **integrationId**. 
-    This action is irreversible.
+    This action is irreversible. Only integration metadata is returned, credentials field is returned as empty object.
 
 ### Example Usage
 
@@ -250,7 +253,7 @@ func main() {
 ## IntegrationsControllerAutoConfigureIntegration
 
 Auto-configure an integration by its unique key identifier **integrationId** for inbound webhook support. 
-    This will automatically generate required webhook signing keys and configure webhook endpoints.
+    This will automatically generate required webhook signing keys and configure webhook endpoints. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -308,7 +311,8 @@ func main() {
 
 Update an integration as **primary** by its unique key identifier **integrationId**. 
     This API will set the integration as primary for that channel in the current environment. 
-    Primary integration is used to deliver notification for sms and email channels in the workflow.
+    Primary integration is used to deliver notification for sms and email channels in the workflow. 
+    Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -362,9 +366,125 @@ func main() {
 | apierrors.ErrorDto                | 500                               | application/json                  |
 | apierrors.APIError                | 4XX, 5XX                          | \*/\*                             |
 
+## CreateMobileLink
+
+Returns an opaque, single-use setup token plus a mobile URL for configuring an existing chat integration. Telegram is the only supported provider initially.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IntegrationsController_createIntegrationMobileLink" method="post" path="/v1/integrations/{integrationIdentifier}/mobile-link" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Integrations.CreateMobileLink(ctx, "<value>", components.IssueIntegrationMobileLinkRequestDto{
+        SubscriberID: v3.Pointer("subscriber-123"),
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.IssueTelegramMobileLinkResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                                          | Type                                                                                                               | Required                                                                                                           | Description                                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `ctx`                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                              | :heavy_check_mark:                                                                                                 | The context to use for the request.                                                                                |
+| `integrationIdentifier`                                                                                            | `string`                                                                                                           | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `issueIntegrationMobileLinkRequestDto`                                                                             | [components.IssueIntegrationMobileLinkRequestDto](../../models/components/issueintegrationmobilelinkrequestdto.md) | :heavy_check_mark:                                                                                                 | N/A                                                                                                                |
+| `idempotencyKey`                                                                                                   | `*string`                                                                                                          | :heavy_minus_sign:                                                                                                 | A header for idempotency purposes                                                                                  |
+| `opts`                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                           | :heavy_minus_sign:                                                                                                 | The options for this request.                                                                                      |
+
+### Response
+
+**[*operations.IntegrationsControllerCreateIntegrationMobileLinkResponse](../../models/operations/integrationscontrollercreateintegrationmobilelinkresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## IntegrationsControllerConfigureIntegrationWebhook
+
+Registers the Novu webhook URL with the chat provider for the specified integration. Telegram is the only supported provider initially.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IntegrationsController_configureIntegrationWebhook" method="post" path="/v1/integrations/{integrationIdentifier}/webhook/configure" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/novuhq/novu-go/v3"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Integrations.IntegrationsControllerConfigureIntegrationWebhook(ctx, "<value>", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.ConfigureTelegramWebhookResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `integrationIdentifier`                                  | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
+| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+
+### Response
+
+**[*operations.IntegrationsControllerConfigureIntegrationWebhookResponse](../../models/operations/integrationscontrollerconfigureintegrationwebhookresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
 ## ListActive
 
-List all the active integrations created in the organization
+List all the active integrations created in the organization. Only integration metadata is returned, credentials field is returned as an empty object.
 
 ### Example Usage
 
@@ -480,6 +600,66 @@ func main() {
 ### Response
 
 **[*operations.IntegrationsControllerGenerateConnectOAuthURLResponse](../../models/operations/integrationscontrollergenerateconnectoauthurlresponse.md), error**
+
+### Errors
+
+| Error Type                             | Status Code                            | Content Type                           |
+| -------------------------------------- | -------------------------------------- | -------------------------------------- |
+| apierrors.ErrorDto                     | 414                                    | application/json                       |
+| apierrors.ErrorDto                     | 400, 401, 403, 404, 405, 409, 413, 415 | application/json                       |
+| apierrors.ValidationErrorDto           | 422                                    | application/json                       |
+| apierrors.ErrorDto                     | 500                                    | application/json                       |
+| apierrors.APIError                     | 4XX, 5XX                               | \*/\*                                  |
+
+## LinkChannelEndpoint
+
+Returns a provider-specific URL the subscriber opens to link their chat identity. The integration provider is resolved from integrationIdentifier; Telegram returns a deep link.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="IntegrationsController_linkChannelEndpoint" method="post" path="/v1/integrations/channel-endpoints/link" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Integrations.LinkChannelEndpoint(ctx, components.LinkChannelEndpointRequestDto{
+        IntegrationIdentifier: "telegram-bot",
+        SubscriberID: "subscriber-123",
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.LinkChannelEndpointResponseDto != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                            | Type                                                                                                 | Required                                                                                             | Description                                                                                          |
+| ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
+| `linkChannelEndpointRequestDto`                                                                      | [components.LinkChannelEndpointRequestDto](../../models/components/linkchannelendpointrequestdto.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `idempotencyKey`                                                                                     | `*string`                                                                                            | :heavy_minus_sign:                                                                                   | A header for idempotency purposes                                                                    |
+| `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |
+
+### Response
+
+**[*operations.IntegrationsControllerLinkChannelEndpointResponse](../../models/operations/integrationscontrollerlinkchannelendpointresponse.md), error**
 
 ### Errors
 

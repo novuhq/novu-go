@@ -45,6 +45,12 @@ updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsDelay(component
 updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsDigest(components.DigestStepUpsertDto{/* values here */})
 ```
 
+### ThrottleStepUpsertDto
+
+```go
+updateWorkflowDtoSteps := components.CreateUpdateWorkflowDtoStepsThrottle(components.ThrottleStepUpsertDto{/* values here */})
+```
+
 ### CustomStepUpsertDto
 
 ```go
@@ -77,6 +83,8 @@ switch updateWorkflowDtoSteps.Type {
 		// updateWorkflowDtoSteps.DelayStepUpsertDto is populated
 	case components.UpdateWorkflowDtoStepsTypeDigest:
 		// updateWorkflowDtoSteps.DigestStepUpsertDto is populated
+	case components.UpdateWorkflowDtoStepsTypeThrottle:
+		// updateWorkflowDtoSteps.ThrottleStepUpsertDto is populated
 	case components.UpdateWorkflowDtoStepsTypeCustom:
 		// updateWorkflowDtoSteps.CustomStepUpsertDto is populated
 	case components.UpdateWorkflowDtoStepsTypeHTTPRequest:

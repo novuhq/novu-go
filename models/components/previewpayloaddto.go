@@ -109,6 +109,8 @@ func (u PreviewPayloadDtoContext) MarshalJSON() ([]byte, error) {
 type PreviewPayloadDto struct {
 	// Partial subscriber information
 	Subscriber *SubscriberResponseDtoOptional `json:"subscriber,omitempty"`
+	// Partial actor information
+	Actor *SubscriberResponseDtoOptional `json:"actor,omitempty"`
 	// Payload data
 	Payload map[string]any `json:"payload,omitempty"`
 	// Steps data
@@ -123,6 +125,13 @@ func (p *PreviewPayloadDto) GetSubscriber() *SubscriberResponseDtoOptional {
 		return nil
 	}
 	return p.Subscriber
+}
+
+func (p *PreviewPayloadDto) GetActor() *SubscriberResponseDtoOptional {
+	if p == nil {
+		return nil
+	}
+	return p.Actor
 }
 
 func (p *PreviewPayloadDto) GetPayload() map[string]any {

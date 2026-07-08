@@ -55,6 +55,28 @@ func main() {
                     },
                 },
             },
+            Actor: &components.SubscriberResponseDtoOptional{
+                Channels: []components.ChannelSettingsDto{
+                    components.ChannelSettingsDto{
+                        ProviderID: components.ChatOrPushProviderEnumTelegram,
+                        Credentials: components.ChannelCredentials{
+                            WebhookURL: v3.Pointer("https://example.com/webhook"),
+                            Channel: v3.Pointer("general"),
+                            DeviceTokens: []string{
+                                "token1",
+                                "token2",
+                                "token3",
+                            },
+                            AlertUID: v3.Pointer("12345-abcde"),
+                            Title: v3.Pointer("Critical Alert"),
+                            ImageURL: v3.Pointer("https://example.com/image.png"),
+                            State: v3.Pointer("resolved"),
+                            ExternalURL: v3.Pointer("https://example.com/details"),
+                        },
+                        IntegrationID: "<id>",
+                    },
+                },
+            },
             Context: map[string]components.PreviewPayloadDtoContext{
                 "key": components.CreatePreviewPayloadDtoContextStr(
                     "org-acme",
