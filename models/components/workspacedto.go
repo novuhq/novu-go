@@ -3,8 +3,9 @@
 package components
 
 type WorkspaceDto struct {
-	ID   string  `json:"id"`
-	Name *string `json:"name,omitempty"`
+	ID        string  `json:"id"`
+	Name      *string `json:"name,omitempty"`
+	BotUserID *string `json:"botUserId,omitempty"`
 }
 
 func (w *WorkspaceDto) GetID() string {
@@ -19,4 +20,11 @@ func (w *WorkspaceDto) GetName() *string {
 		return nil
 	}
 	return w.Name
+}
+
+func (w *WorkspaceDto) GetBotUserID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.BotUserID
 }

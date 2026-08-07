@@ -9,7 +9,7 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-value := components.ProvidersIDEnumEmailjs
+value := components.ProvidersIDEnumAnypost
 ```
 
 
@@ -17,6 +17,7 @@ value := components.ProvidersIDEnumEmailjs
 
 | Name                              | Value                             |
 | --------------------------------- | --------------------------------- |
+| `ProvidersIDEnumAnypost`          | anypost                           |
 | `ProvidersIDEnumEmailjs`          | emailjs                           |
 | `ProvidersIDEnumMailgun`          | mailgun                           |
 | `ProvidersIDEnumMailjet`          | mailjet                           |
@@ -76,6 +77,7 @@ value := components.ProvidersIDEnumEmailjs
 | `ProvidersIDEnumSinch`            | sinch                             |
 | `ProvidersIDEnumIsendproSms`      | isendpro-sms                      |
 | `ProvidersIDEnumCmTelecom`        | cm-telecom                        |
+| `ProvidersIDEnumRuachSms`         | ruach-sms                         |
 | `ProvidersIDEnumFcm`              | fcm                               |
 | `ProvidersIDEnumApns`             | apns                              |
 | `ProvidersIDEnumExpo`             | expo                              |
@@ -88,6 +90,7 @@ value := components.ProvidersIDEnumEmailjs
 | `ProvidersIDEnumSlack`            | slack                             |
 | `ProvidersIDEnumDiscord`          | discord                           |
 | `ProvidersIDEnumMsteams`          | msteams                           |
+| `ProvidersIDEnumWebexMessaging`   | webex-messaging                   |
 | `ProvidersIDEnumMattermost`       | mattermost                        |
 | `ProvidersIDEnumRyver`            | ryver                             |
 | `ProvidersIDEnumZulip`            | zulip                             |
@@ -95,9 +98,16 @@ value := components.ProvidersIDEnumEmailjs
 | `ProvidersIDEnumGetstream`        | getstream                         |
 | `ProvidersIDEnumRocketChat`       | rocket-chat                       |
 | `ProvidersIDEnumWhatsappBusiness` | whatsapp-business                 |
+| `ProvidersIDEnumLine`             | line                              |
 | `ProvidersIDEnumChatWebhook`      | chat-webhook                      |
 | `ProvidersIDEnumNovuSlack`        | novu-slack                        |
 | `ProvidersIDEnumTelegram`         | telegram                          |
+| `ProvidersIDEnumSendblue`         | sendblue                          |
+| `ProvidersIDEnumNovuWebChat`      | novu-web-chat                     |
 | `ProvidersIDEnumAnthropic`        | anthropic                         |
 | `ProvidersIDEnumNovuAnthropic`    | novu-anthropic                    |
 | `ProvidersIDEnumAnthropicAws`     | anthropic-aws                     |
+| `ProvidersIDEnumPagerduty`        | pagerduty                         |
+| `ProvidersIDEnumOpsgenie`         | opsgenie                          |
+| `ProvidersIDEnumGrafana`          | grafana                           |
+| `ProvidersIDEnumToolWebhook`      | tool-webhook                      |

@@ -201,95 +201,95 @@ func (u To1) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type To1: all fields are null")
 }
 
-type ToType string
+type TriggerEventRequestDtoToType string
 
 const (
-	ToTypeArrayOfTo1           ToType = "arrayOfTo1"
-	ToTypeStr                  ToType = "str"
-	ToTypeSubscriberPayloadDto ToType = "SubscriberPayloadDto"
-	ToTypeTopicPayloadDto      ToType = "TopicPayloadDto"
+	TriggerEventRequestDtoToTypeArrayOfTo1           TriggerEventRequestDtoToType = "arrayOfTo1"
+	TriggerEventRequestDtoToTypeStr                  TriggerEventRequestDtoToType = "str"
+	TriggerEventRequestDtoToTypeSubscriberPayloadDto TriggerEventRequestDtoToType = "SubscriberPayloadDto"
+	TriggerEventRequestDtoToTypeTopicPayloadDto      TriggerEventRequestDtoToType = "TopicPayloadDto"
 )
 
-// To - The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
-type To struct {
+// TriggerEventRequestDtoTo - The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
+type TriggerEventRequestDtoTo struct {
 	ArrayOfTo1           []To1                 `queryParam:"inline" union:"member"`
 	Str                  *string               `queryParam:"inline" union:"member"`
 	SubscriberPayloadDto *SubscriberPayloadDto `queryParam:"inline" union:"member"`
 	TopicPayloadDto      *TopicPayloadDto      `queryParam:"inline" union:"member"`
 
-	Type ToType
+	Type TriggerEventRequestDtoToType
 }
 
-func CreateToArrayOfTo1(arrayOfTo1 []To1) To {
-	typ := ToTypeArrayOfTo1
+func CreateTriggerEventRequestDtoToArrayOfTo1(arrayOfTo1 []To1) TriggerEventRequestDtoTo {
+	typ := TriggerEventRequestDtoToTypeArrayOfTo1
 
-	return To{
+	return TriggerEventRequestDtoTo{
 		ArrayOfTo1: arrayOfTo1,
 		Type:       typ,
 	}
 }
 
-func CreateToStr(str string) To {
-	typ := ToTypeStr
+func CreateTriggerEventRequestDtoToStr(str string) TriggerEventRequestDtoTo {
+	typ := TriggerEventRequestDtoToTypeStr
 
-	return To{
+	return TriggerEventRequestDtoTo{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateToSubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) To {
-	typ := ToTypeSubscriberPayloadDto
+func CreateTriggerEventRequestDtoToSubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) TriggerEventRequestDtoTo {
+	typ := TriggerEventRequestDtoToTypeSubscriberPayloadDto
 
-	return To{
+	return TriggerEventRequestDtoTo{
 		SubscriberPayloadDto: &subscriberPayloadDto,
 		Type:                 typ,
 	}
 }
 
-func CreateToTopicPayloadDto(topicPayloadDto TopicPayloadDto) To {
-	typ := ToTypeTopicPayloadDto
+func CreateTriggerEventRequestDtoToTopicPayloadDto(topicPayloadDto TopicPayloadDto) TriggerEventRequestDtoTo {
+	typ := TriggerEventRequestDtoToTypeTopicPayloadDto
 
-	return To{
+	return TriggerEventRequestDtoTo{
 		TopicPayloadDto: &topicPayloadDto,
 		Type:            typ,
 	}
 }
 
-func (u *To) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventRequestDtoTo) UnmarshalJSON(data []byte) error {
 
 	var topicPayloadDto TopicPayloadDto = TopicPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, nil); err == nil {
 		u.TopicPayloadDto = &topicPayloadDto
-		u.Type = ToTypeTopicPayloadDto
+		u.Type = TriggerEventRequestDtoToTypeTopicPayloadDto
 		return nil
 	}
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
 		u.SubscriberPayloadDto = &subscriberPayloadDto
-		u.Type = ToTypeSubscriberPayloadDto
+		u.Type = TriggerEventRequestDtoToTypeSubscriberPayloadDto
 		return nil
 	}
 
 	var arrayOfTo1 []To1 = []To1{}
 	if err := utils.UnmarshalJSON(data, &arrayOfTo1, "", true, nil); err == nil {
 		u.ArrayOfTo1 = arrayOfTo1
-		u.Type = ToTypeArrayOfTo1
+		u.Type = TriggerEventRequestDtoToTypeArrayOfTo1
 		return nil
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ToTypeStr
+		u.Type = TriggerEventRequestDtoToTypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for To", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TriggerEventRequestDtoTo", string(data))
 }
 
-func (u To) MarshalJSON() ([]byte, error) {
+func (u TriggerEventRequestDtoTo) MarshalJSON() ([]byte, error) {
 	if u.ArrayOfTo1 != nil {
 		return utils.MarshalJSON(u.ArrayOfTo1, "", true)
 	}
@@ -306,7 +306,7 @@ func (u To) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.TopicPayloadDto, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type To: all fields are null")
+	return nil, errors.New("could not marshal union type TriggerEventRequestDtoTo: all fields are null")
 }
 
 type ActorType string
@@ -546,10 +546,14 @@ type TriggerEventRequestDto struct {
 	//     used to render the workflow, or perform routing rules based on it.
 	//       This data will also be available when fetching the notifications feed from the API to display certain parts of the UI.
 	Payload map[string]any `json:"payload,omitempty"`
+	// Optional Bridge Endpoint URL used to route this trigger to a specific Bridge application. Useful during local development when multiple engineers share an organization: set this to your personal tunnel URL from `npx novu@latest dev` (for example via NOVU_BRIDGE_URL) so app-fired triggers hit your machine instead of the environment's synced Bridge URL. Must be a publicly reachable https URL — private or localhost addresses are rejected.
+	BridgeURL *string `json:"bridgeUrl,omitempty"`
 	// This could be used to override provider specific configurations
 	Overrides *Overrides `json:"overrides,omitempty"`
+	// Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution.
+	AgentID *string `json:"agentId,omitempty"`
 	// The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
-	To To `json:"to"`
+	To TriggerEventRequestDtoTo `json:"to"`
 	// A unique identifier for deduplication. If the same **transactionId** is sent again,
 	//       the trigger is ignored. Useful to prevent duplicate notifications. The retention period depends on your billing tier.
 	TransactionID *string `json:"transactionId,omitempty"`
@@ -576,6 +580,13 @@ func (t *TriggerEventRequestDto) GetPayload() map[string]any {
 	return t.Payload
 }
 
+func (t *TriggerEventRequestDto) GetBridgeURL() *string {
+	if t == nil {
+		return nil
+	}
+	return t.BridgeURL
+}
+
 func (t *TriggerEventRequestDto) GetOverrides() *Overrides {
 	if t == nil {
 		return nil
@@ -583,9 +594,16 @@ func (t *TriggerEventRequestDto) GetOverrides() *Overrides {
 	return t.Overrides
 }
 
-func (t *TriggerEventRequestDto) GetTo() To {
+func (t *TriggerEventRequestDto) GetAgentID() *string {
 	if t == nil {
-		return To{}
+		return nil
+	}
+	return t.AgentID
+}
+
+func (t *TriggerEventRequestDto) GetTo() TriggerEventRequestDtoTo {
+	if t == nil {
+		return TriggerEventRequestDtoTo{}
 	}
 	return t.To
 }

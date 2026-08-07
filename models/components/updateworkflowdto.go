@@ -9,6 +9,39 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+type UpdateWorkflowDtoProviders struct {
+	ReplyTo *string `json:"replyTo,omitempty"`
+}
+
+func (u *UpdateWorkflowDtoProviders) GetReplyTo() *string {
+	if u == nil {
+		return nil
+	}
+	return u.ReplyTo
+}
+
+// UpdateWorkflowDtoAgent - Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+type UpdateWorkflowDtoAgent struct {
+	// Public agent identifier used to route this workflow through an agent's connected channels.
+	Identifier string `json:"identifier"`
+	// Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported.
+	Providers map[string]UpdateWorkflowDtoProviders `json:"providers,omitempty"`
+}
+
+func (u *UpdateWorkflowDtoAgent) GetIdentifier() string {
+	if u == nil {
+		return ""
+	}
+	return u.Identifier
+}
+
+func (u *UpdateWorkflowDtoAgent) GetProviders() map[string]UpdateWorkflowDtoProviders {
+	if u == nil {
+		return nil
+	}
+	return u.Providers
+}
+
 type UpdateWorkflowDtoStepsType string
 
 const (
@@ -20,6 +53,7 @@ const (
 	UpdateWorkflowDtoStepsTypeDelay       UpdateWorkflowDtoStepsType = "delay"
 	UpdateWorkflowDtoStepsTypeDigest      UpdateWorkflowDtoStepsType = "digest"
 	UpdateWorkflowDtoStepsTypeThrottle    UpdateWorkflowDtoStepsType = "throttle"
+	UpdateWorkflowDtoStepsTypeTool        UpdateWorkflowDtoStepsType = "tool"
 	UpdateWorkflowDtoStepsTypeCustom      UpdateWorkflowDtoStepsType = "custom"
 	UpdateWorkflowDtoStepsTypeHTTPRequest UpdateWorkflowDtoStepsType = "http_request"
 )
@@ -33,6 +67,7 @@ type UpdateWorkflowDtoSteps struct {
 	DelayStepUpsertDto       *DelayStepUpsertDto       `queryParam:"inline" union:"member"`
 	DigestStepUpsertDto      *DigestStepUpsertDto      `queryParam:"inline" union:"member"`
 	ThrottleStepUpsertDto    *ThrottleStepUpsertDto    `queryParam:"inline" union:"member"`
+	ToolStepUpsertDto        *ToolStepUpsertDto        `queryParam:"inline" union:"member"`
 	CustomStepUpsertDto      *CustomStepUpsertDto      `queryParam:"inline" union:"member"`
 	HTTPRequestStepUpsertDto *HTTPRequestStepUpsertDto `queryParam:"inline" union:"member"`
 
@@ -132,6 +167,18 @@ func CreateUpdateWorkflowDtoStepsThrottle(throttle ThrottleStepUpsertDto) Update
 	return UpdateWorkflowDtoSteps{
 		ThrottleStepUpsertDto: &throttle,
 		Type:                  typ,
+	}
+}
+
+func CreateUpdateWorkflowDtoStepsTool(tool ToolStepUpsertDto) UpdateWorkflowDtoSteps {
+	typ := UpdateWorkflowDtoStepsTypeTool
+
+	typStr := StepTypeEnum(typ)
+	tool.Type = typStr
+
+	return UpdateWorkflowDtoSteps{
+		ToolStepUpsertDto: &tool,
+		Type:              typ,
 	}
 }
 
@@ -243,6 +290,15 @@ func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
 		u.ThrottleStepUpsertDto = throttleStepUpsertDto
 		u.Type = UpdateWorkflowDtoStepsTypeThrottle
 		return nil
+	case "tool":
+		toolStepUpsertDto := new(ToolStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &toolStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == tool) type ToolStepUpsertDto within UpdateWorkflowDtoSteps: %w", string(data), err)
+		}
+
+		u.ToolStepUpsertDto = toolStepUpsertDto
+		u.Type = UpdateWorkflowDtoStepsTypeTool
+		return nil
 	case "custom":
 		customStepUpsertDto := new(CustomStepUpsertDto)
 		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, nil); err != nil {
@@ -299,6 +355,10 @@ func (u UpdateWorkflowDtoSteps) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ThrottleStepUpsertDto, "", true)
 	}
 
+	if u.ToolStepUpsertDto != nil {
+		return utils.MarshalJSON(u.ToolStepUpsertDto, "", true)
+	}
+
 	if u.CustomStepUpsertDto != nil {
 		return utils.MarshalJSON(u.CustomStepUpsertDto, "", true)
 	}
@@ -325,6 +385,8 @@ type UpdateWorkflowDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable translations for this workflow
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
+	// Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+	Agent *UpdateWorkflowDtoAgent `json:"agent,omitempty"`
 	// Workflow ID (allowed only for code-first workflows)
 	WorkflowID *string `json:"workflowId,omitempty"`
 	// Steps of the workflow
@@ -332,7 +394,7 @@ type UpdateWorkflowDto struct {
 	// Workflow preferences
 	Preferences PreferencesRequestDto `json:"preferences"`
 	// Origin of the layout
-	Origin ResourceOriginEnum `json:"origin"`
+	Origin *ResourceOriginEnum `json:"origin,omitempty"`
 	// Severity of the workflow
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
@@ -397,6 +459,13 @@ func (u *UpdateWorkflowDto) GetIsTranslationEnabled() *bool {
 	return u.IsTranslationEnabled
 }
 
+func (u *UpdateWorkflowDto) GetAgent() *UpdateWorkflowDtoAgent {
+	if u == nil {
+		return nil
+	}
+	return u.Agent
+}
+
 func (u *UpdateWorkflowDto) GetWorkflowID() *string {
 	if u == nil {
 		return nil
@@ -418,9 +487,9 @@ func (u *UpdateWorkflowDto) GetPreferences() PreferencesRequestDto {
 	return u.Preferences
 }
 
-func (u *UpdateWorkflowDto) GetOrigin() ResourceOriginEnum {
+func (u *UpdateWorkflowDto) GetOrigin() *ResourceOriginEnum {
 	if u == nil {
-		return ResourceOriginEnum("")
+		return nil
 	}
 	return u.Origin
 }

@@ -16,6 +16,7 @@ const (
 	IntegrationResponseDtoChannelSms   IntegrationResponseDtoChannel = "sms"
 	IntegrationResponseDtoChannelChat  IntegrationResponseDtoChannel = "chat"
 	IntegrationResponseDtoChannelPush  IntegrationResponseDtoChannel = "push"
+	IntegrationResponseDtoChannelTool  IntegrationResponseDtoChannel = "tool"
 )
 
 func (e IntegrationResponseDtoChannel) ToPointer() *IntegrationResponseDtoChannel {
@@ -36,6 +37,8 @@ func (e *IntegrationResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = IntegrationResponseDtoChannel(v)
 		return nil
 	default:

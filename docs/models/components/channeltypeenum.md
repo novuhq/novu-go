@@ -22,3 +22,4 @@ value := components.ChannelTypeEnumInApp
 | `ChannelTypeEnumSms`   | sms                    |
 | `ChannelTypeEnumChat`  | chat                   |
 | `ChannelTypeEnumPush`  | push                   |
+| `ChannelTypeEnumTool`  | tool                   |

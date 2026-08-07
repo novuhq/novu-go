@@ -10,3 +10,4 @@
 | `InApp`                              | `*bool`                              | :heavy_minus_sign:                   | In-app channel preference            | true                                 |
 | `Chat`                               | `*bool`                              | :heavy_minus_sign:                   | Chat channel preference              | false                                |
 | `Push`                               | `*bool`                              | :heavy_minus_sign:                   | Push notification channel preference | true                                 |
+| `Tool`                               | `*bool`                              | :heavy_minus_sign:                   | Tool channel preference              | true                                 |

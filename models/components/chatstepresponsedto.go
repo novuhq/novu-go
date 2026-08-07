@@ -52,6 +52,8 @@ type ChatStepResponseDto struct {
 	Controls ChatControlsMetadataResponseDto `json:"controls"`
 	// Control values for the chat step
 	ControlValues *ChatStepResponseDtoControlValues `json:"controlValues,omitempty"`
+	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`).
+	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
 	// JSON Schema for variables, follows the JSON Schema standard
 	Variables map[string]any `json:"variables"`
 	// Unique identifier of the step
@@ -99,6 +101,13 @@ func (c *ChatStepResponseDto) GetControlValues() *ChatStepResponseDtoControlValu
 		return nil
 	}
 	return c.ControlValues
+}
+
+func (c *ChatStepResponseDto) GetProviderOverrides() map[string]map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.ProviderOverrides
 }
 
 func (c *ChatStepResponseDto) GetVariables() map[string]any {

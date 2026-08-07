@@ -44,6 +44,7 @@ const (
 	QueryParamChannelSms   QueryParamChannel = "sms"
 	QueryParamChannelChat  QueryParamChannel = "chat"
 	QueryParamChannelPush  QueryParamChannel = "push"
+	QueryParamChannelTool  QueryParamChannel = "tool"
 )
 
 func (e QueryParamChannel) ToPointer() *QueryParamChannel {
@@ -64,6 +65,8 @@ func (e *QueryParamChannel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = QueryParamChannel(v)
 		return nil
 	default:

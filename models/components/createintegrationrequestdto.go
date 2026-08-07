@@ -16,6 +16,7 @@ const (
 	CreateIntegrationRequestDtoChannelSms   CreateIntegrationRequestDtoChannel = "sms"
 	CreateIntegrationRequestDtoChannelChat  CreateIntegrationRequestDtoChannel = "chat"
 	CreateIntegrationRequestDtoChannelPush  CreateIntegrationRequestDtoChannel = "push"
+	CreateIntegrationRequestDtoChannelTool  CreateIntegrationRequestDtoChannel = "tool"
 )
 
 func (e CreateIntegrationRequestDtoChannel) ToPointer() *CreateIntegrationRequestDtoChannel {
@@ -36,6 +37,8 @@ func (e *CreateIntegrationRequestDtoChannel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = CreateIntegrationRequestDtoChannel(v)
 		return nil
 	default:

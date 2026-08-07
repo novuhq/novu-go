@@ -13,6 +13,8 @@ type PatchPreferenceChannelsDto struct {
 	Push *bool `json:"push,omitempty"`
 	// Chat channel preference
 	Chat *bool `json:"chat,omitempty"`
+	// Tool channel preference
+	Tool *bool `json:"tool,omitempty"`
 }
 
 func (p *PatchPreferenceChannelsDto) GetEmail() *bool {
@@ -48,4 +50,11 @@ func (p *PatchPreferenceChannelsDto) GetChat() *bool {
 		return nil
 	}
 	return p.Chat
+}
+
+func (p *PatchPreferenceChannelsDto) GetTool() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.Tool
 }

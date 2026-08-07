@@ -1,0 +1,10 @@
+# AgentSkillInputDto
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Type`                                                                                 | [components.AgentSkillInputDtoType](../../models/components/agentskillinputdtotype.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
+| `SkillID`                                                                              | `string`                                                                               | :heavy_check_mark:                                                                     | Skill identifier, e.g. "xlsx" or "skill_01XJ5..."                                      |
+| `Version`                                                                              | [*components.Version](../../models/components/version.md)                              | :heavy_minus_sign:                                                                     | Version to pin. Omit for latest.                                                       |

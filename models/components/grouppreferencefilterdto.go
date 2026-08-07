@@ -9,7 +9,7 @@ import (
 type GroupPreferenceFilterDto struct {
 	// Whether the preference is enabled. Used when condition is not provided.
 	Enabled *bool `json:"enabled,omitempty"`
-	// Optional condition using JSON Logic rules
+	// Optional JSON Logic condition evaluated at fan-out time against trigger payload, subscriber profile, actor, and context (for example, `{ "var": "payload.tier" }`, `{ "var": "subscriber.data.plan" }`, or `{ "var": "actor.data.role" }`)
 	Condition map[string]any `json:"condition,omitempty"`
 	// Filter criteria for workflow IDs and tags
 	Filter GroupPreferenceFilterDetailsDto `json:"filter"`

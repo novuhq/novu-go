@@ -59,6 +59,12 @@ generatePreviewResponseDtoResult := components.CreateGeneratePreviewResponseDtoR
 generatePreviewResponseDtoResult := components.CreateGeneratePreviewResponseDtoResultNine(components.Nine{/* values here */})
 ```
 
+### Ten
+
+```go
+generatePreviewResponseDtoResult := components.CreateGeneratePreviewResponseDtoResultTen(components.Ten{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -83,5 +89,7 @@ switch generatePreviewResponseDtoResult.Type {
 		// generatePreviewResponseDtoResult.Eight is populated
 	case components.GeneratePreviewResponseDtoResultUnionTypeNine:
 		// generatePreviewResponseDtoResult.Nine is populated
+	case components.GeneratePreviewResponseDtoResultUnionTypeTen:
+		// generatePreviewResponseDtoResult.Ten is populated
 }
 ```

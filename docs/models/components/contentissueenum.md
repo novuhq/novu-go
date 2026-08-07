@@ -22,3 +22,4 @@ value := components.ContentIssueEnumIllegalVariableInControlValue
 | `ContentIssueEnumInvalidURL`                    | INVALID_URL                                     |
 | `ContentIssueEnumMissingValue`                  | MISSING_VALUE                                   |
 | `ContentIssueEnumTierLimitExceeded`             | TIER_LIMIT_EXCEEDED                             |
+| `ContentIssueEnumUnsupportedProperty`           | UNSUPPORTED_PROPERTY                            |

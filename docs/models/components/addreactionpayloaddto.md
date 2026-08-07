@@ -1,0 +1,9 @@
+# AddReactionPayloadDto
+
+
+## Fields
+
+| Field                                                                       | Type                                                                        | Required                                                                    | Description                                                                 | Example                                                                     |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `MessageID`                                                                 | `string`                                                                    | :heavy_check_mark:                                                          | Platform message id to react to.                                            | 1712345678.123456                                                           |
+| `EmojiName`                                                                 | `string`                                                                    | :heavy_check_mark:                                                          | Well-known cross-platform emoji name (e.g. `white_check_mark`, `thumbsup`). | white_check_mark                                                            |

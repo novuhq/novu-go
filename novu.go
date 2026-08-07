@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.17.1 and generator version 2.916.2
+// Generated from OpenAPI doc version 3.18.1 and generator version 2.926.8
 
 import (
 	"bytes"
@@ -82,7 +82,11 @@ type Novu struct {
 	// All notifications are sent via a workflow. Each workflow acts as a container for the logic and blueprint that are associated with a type of notification in your system.
 	//
 	// https://docs.novu.co/workflows
-	Workflows          *Workflows
+	Workflows *Workflows
+	// Agents are conversational assistants that receive inbound messages from connected channels and respond through a custom code bridge or a managed runtime provider.
+	//
+	// https://docs.novu.co/agents
+	Agents             *Agents
 	ChannelConnections *ChannelConnections
 	ChannelEndpoints   *ChannelEndpoints
 	// Used to manage your inbound email domains.
@@ -175,9 +179,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.18.0",
+		SDKVersion: "3.19.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.18.0 2.916.2 3.17.1 github.com/novuhq/novu-go/v3",
+			UserAgent:  "speakeasy-sdk/go 3.19.0 2.926.8 3.18.1 github.com/novuhq/novu-go/v3",
 			ServerList: ServerList,
 		},
 		hooks: hooks.New(),
@@ -213,6 +217,7 @@ func New(opts ...SDKOption) *Novu {
 	sdk.Topics = newTopics(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Translations = newTranslations(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Workflows = newWorkflows(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Agents = newAgents(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ChannelConnections = newChannelConnections(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.ChannelEndpoints = newChannelEndpoints(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Domains = newDomains(sdk, sdk.sdkConfiguration, sdk.hooks)

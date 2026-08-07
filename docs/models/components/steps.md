@@ -51,6 +51,12 @@ steps := components.CreateStepsDigest(components.DigestStepUpsertDto{/* values h
 steps := components.CreateStepsThrottle(components.ThrottleStepUpsertDto{/* values here */})
 ```
 
+### ToolStepUpsertDto
+
+```go
+steps := components.CreateStepsTool(components.ToolStepUpsertDto{/* values here */})
+```
+
 ### CustomStepUpsertDto
 
 ```go
@@ -85,6 +91,8 @@ switch steps.Type {
 		// steps.DigestStepUpsertDto is populated
 	case components.StepsTypeThrottle:
 		// steps.ThrottleStepUpsertDto is populated
+	case components.StepsTypeTool:
+		// steps.ToolStepUpsertDto is populated
 	case components.StepsTypeCustom:
 		// steps.CustomStepUpsertDto is populated
 	case components.StepsTypeHTTPRequest:

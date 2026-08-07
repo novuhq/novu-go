@@ -16,6 +16,7 @@ const (
 	ChannelTypeEnumSms   ChannelTypeEnum = "sms"
 	ChannelTypeEnumChat  ChannelTypeEnum = "chat"
 	ChannelTypeEnumPush  ChannelTypeEnum = "push"
+	ChannelTypeEnumTool  ChannelTypeEnum = "tool"
 )
 
 func (e ChannelTypeEnum) ToPointer() *ChannelTypeEnum {
@@ -36,6 +37,8 @@ func (e *ChannelTypeEnum) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = ChannelTypeEnum(v)
 		return nil
 	default:

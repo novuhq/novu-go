@@ -35,6 +35,33 @@ func (e *ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirect
 	}
 }
 
+// ConnectionMode - Scope results relative to the subscriber. `subscriber` returns only the subscriber-owned connections, `shared` returns only shared (workspace-level) connections. Omit to return both.
+type ConnectionMode string
+
+const (
+	ConnectionModeSubscriber ConnectionMode = "subscriber"
+	ConnectionModeShared     ConnectionMode = "shared"
+)
+
+func (e ConnectionMode) ToPointer() *ConnectionMode {
+	return &e
+}
+func (e *ConnectionMode) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "subscriber":
+		fallthrough
+	case "shared":
+		*e = ConnectionMode(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ConnectionMode: %v", v)
+	}
+}
+
 // Channel - Filter by channel type (email, sms, push, chat, etc.).
 type Channel string
 
@@ -44,6 +71,7 @@ const (
 	ChannelSms   Channel = "sms"
 	ChannelChat  Channel = "chat"
 	ChannelPush  Channel = "push"
+	ChannelTool  Channel = "tool"
 )
 
 func (e Channel) ToPointer() *Channel {
@@ -64,6 +92,8 @@ func (e *Channel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = Channel(v)
 		return nil
 	default:
@@ -86,6 +116,8 @@ type ChannelConnectionsControllerListChannelConnectionsRequest struct {
 	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
 	// The subscriber ID to filter results by
 	SubscriberID *string `queryParam:"style=form,explode=true,name=subscriberId"`
+	// Scope results relative to the subscriber. `subscriber` returns only the subscriber-owned connections, `shared` returns only shared (workspace-level) connections. Omit to return both.
+	ConnectionMode *ConnectionMode `queryParam:"style=form,explode=true,name=connectionMode"`
 	// Filter by channel type (email, sms, push, chat, etc.).
 	Channel *Channel `queryParam:"style=form,explode=true,name=channel"`
 	// Filter by provider identifier (e.g., sendgrid, twilio, slack, etc.).
@@ -145,6 +177,13 @@ func (c *ChannelConnectionsControllerListChannelConnectionsRequest) GetSubscribe
 		return nil
 	}
 	return c.SubscriberID
+}
+
+func (c *ChannelConnectionsControllerListChannelConnectionsRequest) GetConnectionMode() *ConnectionMode {
+	if c == nil {
+		return nil
+	}
+	return c.ConnectionMode
 }
 
 func (c *ChannelConnectionsControllerListChannelConnectionsRequest) GetChannel() *Channel {

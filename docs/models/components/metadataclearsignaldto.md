@@ -1,0 +1,9 @@
+# MetadataClearSignalDto
+
+
+## Fields
+
+| Field                                                                                              | Type                                                                                               | Required                                                                                           | Description                                                                                        |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `Type`                                                                                             | [components.MetadataClearSignalDtoType](../../models/components/metadataclearsignaldtotype.md)     | :heavy_check_mark:                                                                                 | N/A                                                                                                |
+| `Action`                                                                                           | [components.MetadataClearSignalDtoAction](../../models/components/metadataclearsignaldtoaction.md) | :heavy_check_mark:                                                                                 | N/A                                                                                                |

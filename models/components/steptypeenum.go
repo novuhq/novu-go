@@ -16,6 +16,7 @@ const (
 	StepTypeEnumSms         StepTypeEnum = "sms"
 	StepTypeEnumChat        StepTypeEnum = "chat"
 	StepTypeEnumPush        StepTypeEnum = "push"
+	StepTypeEnumTool        StepTypeEnum = "tool"
 	StepTypeEnumDigest      StepTypeEnum = "digest"
 	StepTypeEnumTrigger     StepTypeEnum = "trigger"
 	StepTypeEnumDelay       StepTypeEnum = "delay"
@@ -42,6 +43,8 @@ func (e *StepTypeEnum) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		fallthrough
 	case "digest":
 		fallthrough

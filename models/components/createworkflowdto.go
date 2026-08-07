@@ -9,6 +9,39 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+type Providers struct {
+	ReplyTo *string `json:"replyTo,omitempty"`
+}
+
+func (p *Providers) GetReplyTo() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ReplyTo
+}
+
+// Agent - Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+type Agent struct {
+	// Public agent identifier used to route this workflow through an agent's connected channels.
+	Identifier string `json:"identifier"`
+	// Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported.
+	Providers map[string]Providers `json:"providers,omitempty"`
+}
+
+func (a *Agent) GetIdentifier() string {
+	if a == nil {
+		return ""
+	}
+	return a.Identifier
+}
+
+func (a *Agent) GetProviders() map[string]Providers {
+	if a == nil {
+		return nil
+	}
+	return a.Providers
+}
+
 type StepsType string
 
 const (
@@ -20,6 +53,7 @@ const (
 	StepsTypeDelay       StepsType = "delay"
 	StepsTypeDigest      StepsType = "digest"
 	StepsTypeThrottle    StepsType = "throttle"
+	StepsTypeTool        StepsType = "tool"
 	StepsTypeCustom      StepsType = "custom"
 	StepsTypeHTTPRequest StepsType = "http_request"
 )
@@ -33,6 +67,7 @@ type Steps struct {
 	DelayStepUpsertDto       *DelayStepUpsertDto       `queryParam:"inline" union:"member"`
 	DigestStepUpsertDto      *DigestStepUpsertDto      `queryParam:"inline" union:"member"`
 	ThrottleStepUpsertDto    *ThrottleStepUpsertDto    `queryParam:"inline" union:"member"`
+	ToolStepUpsertDto        *ToolStepUpsertDto        `queryParam:"inline" union:"member"`
 	CustomStepUpsertDto      *CustomStepUpsertDto      `queryParam:"inline" union:"member"`
 	HTTPRequestStepUpsertDto *HTTPRequestStepUpsertDto `queryParam:"inline" union:"member"`
 
@@ -132,6 +167,18 @@ func CreateStepsThrottle(throttle ThrottleStepUpsertDto) Steps {
 	return Steps{
 		ThrottleStepUpsertDto: &throttle,
 		Type:                  typ,
+	}
+}
+
+func CreateStepsTool(tool ToolStepUpsertDto) Steps {
+	typ := StepsTypeTool
+
+	typStr := StepTypeEnum(typ)
+	tool.Type = typStr
+
+	return Steps{
+		ToolStepUpsertDto: &tool,
+		Type:              typ,
 	}
 }
 
@@ -243,6 +290,15 @@ func (u *Steps) UnmarshalJSON(data []byte) error {
 		u.ThrottleStepUpsertDto = throttleStepUpsertDto
 		u.Type = StepsTypeThrottle
 		return nil
+	case "tool":
+		toolStepUpsertDto := new(ToolStepUpsertDto)
+		if err := utils.UnmarshalJSON(data, &toolStepUpsertDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == tool) type ToolStepUpsertDto within Steps: %w", string(data), err)
+		}
+
+		u.ToolStepUpsertDto = toolStepUpsertDto
+		u.Type = StepsTypeTool
+		return nil
 	case "custom":
 		customStepUpsertDto := new(CustomStepUpsertDto)
 		if err := utils.UnmarshalJSON(data, &customStepUpsertDto, "", true, nil); err != nil {
@@ -299,6 +355,10 @@ func (u Steps) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ThrottleStepUpsertDto, "", true)
 	}
 
+	if u.ToolStepUpsertDto != nil {
+		return utils.MarshalJSON(u.ToolStepUpsertDto, "", true)
+	}
+
 	if u.CustomStepUpsertDto != nil {
 		return utils.MarshalJSON(u.CustomStepUpsertDto, "", true)
 	}
@@ -325,6 +385,8 @@ type CreateWorkflowDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable translations for this workflow
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
+	// Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+	Agent *Agent `json:"agent,omitempty"`
 	// Unique identifier for the workflow
 	WorkflowID string `json:"workflowId"`
 	// Steps of the workflow
@@ -395,6 +457,13 @@ func (c *CreateWorkflowDto) GetIsTranslationEnabled() *bool {
 		return nil
 	}
 	return c.IsTranslationEnabled
+}
+
+func (c *CreateWorkflowDto) GetAgent() *Agent {
+	if c == nil {
+		return nil
+	}
+	return c.Agent
 }
 
 func (c *CreateWorkflowDto) GetWorkflowID() string {

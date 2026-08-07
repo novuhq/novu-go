@@ -9,10 +9,63 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+type GeneratePreviewResponseDtoResult10Type string
+
+const (
+	GeneratePreviewResponseDtoResult10TypeDigest GeneratePreviewResponseDtoResult10Type = "digest"
+)
+
+func (e GeneratePreviewResponseDtoResult10Type) ToPointer() *GeneratePreviewResponseDtoResult10Type {
+	return &e
+}
+func (e *GeneratePreviewResponseDtoResult10Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "digest":
+		*e = GeneratePreviewResponseDtoResult10Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for GeneratePreviewResponseDtoResult10Type: %v", v)
+	}
+}
+
+type Ten struct {
+	Type    *GeneratePreviewResponseDtoResult10Type `json:"type,omitempty"`
+	Preview *DigestRegularOutput                    `json:"preview,omitempty"`
+}
+
+func (t Ten) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Ten) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *Ten) GetType() *GeneratePreviewResponseDtoResult10Type {
+	if t == nil {
+		return nil
+	}
+	return t.Type
+}
+
+func (t *Ten) GetPreview() *DigestRegularOutput {
+	if t == nil {
+		return nil
+	}
+	return t.Preview
+}
+
 type GeneratePreviewResponseDtoResult9Type string
 
 const (
-	GeneratePreviewResponseDtoResult9TypeDigest GeneratePreviewResponseDtoResult9Type = "digest"
+	GeneratePreviewResponseDtoResult9TypeDelay GeneratePreviewResponseDtoResult9Type = "delay"
 )
 
 func (e GeneratePreviewResponseDtoResult9Type) ToPointer() *GeneratePreviewResponseDtoResult9Type {
@@ -24,7 +77,7 @@ func (e *GeneratePreviewResponseDtoResult9Type) UnmarshalJSON(data []byte) error
 		return err
 	}
 	switch v {
-	case "digest":
+	case "delay":
 		*e = GeneratePreviewResponseDtoResult9Type(v)
 		return nil
 	default:
@@ -65,7 +118,7 @@ func (n *Nine) GetPreview() *DigestRegularOutput {
 type GeneratePreviewResponseDtoResult8Type string
 
 const (
-	GeneratePreviewResponseDtoResult8TypeDelay GeneratePreviewResponseDtoResult8Type = "delay"
+	GeneratePreviewResponseDtoResult8TypeTool GeneratePreviewResponseDtoResult8Type = "tool"
 )
 
 func (e GeneratePreviewResponseDtoResult8Type) ToPointer() *GeneratePreviewResponseDtoResult8Type {
@@ -77,7 +130,7 @@ func (e *GeneratePreviewResponseDtoResult8Type) UnmarshalJSON(data []byte) error
 		return err
 	}
 	switch v {
-	case "delay":
+	case "tool":
 		*e = GeneratePreviewResponseDtoResult8Type(v)
 		return nil
 	default:
@@ -87,7 +140,8 @@ func (e *GeneratePreviewResponseDtoResult8Type) UnmarshalJSON(data []byte) error
 
 type Eight struct {
 	Type    *GeneratePreviewResponseDtoResult8Type `json:"type,omitempty"`
-	Preview *DigestRegularOutput                   `json:"preview,omitempty"`
+	Preview map[string]any                         `json:"preview,omitempty"`
+	Error   *PreviewErrorDto                       `json:"error,omitempty"`
 }
 
 func (e Eight) MarshalJSON() ([]byte, error) {
@@ -108,11 +162,18 @@ func (e *Eight) GetType() *GeneratePreviewResponseDtoResult8Type {
 	return e.Type
 }
 
-func (e *Eight) GetPreview() *DigestRegularOutput {
+func (e *Eight) GetPreview() map[string]any {
 	if e == nil {
 		return nil
 	}
 	return e.Preview
+}
+
+func (e *Eight) GetError() *PreviewErrorDto {
+	if e == nil {
+		return nil
+	}
+	return e.Error
 }
 
 type GeneratePreviewResponseDtoResult7Type string
@@ -502,6 +563,7 @@ const (
 	GeneratePreviewResponseDtoResultUnionTypeSeven    GeneratePreviewResponseDtoResultUnionType = "7"
 	GeneratePreviewResponseDtoResultUnionTypeEight    GeneratePreviewResponseDtoResultUnionType = "8"
 	GeneratePreviewResponseDtoResultUnionTypeNine     GeneratePreviewResponseDtoResultUnionType = "9"
+	GeneratePreviewResponseDtoResultUnionTypeTen      GeneratePreviewResponseDtoResultUnionType = "10"
 )
 
 // GeneratePreviewResponseDtoResult - Preview result
@@ -515,6 +577,7 @@ type GeneratePreviewResponseDtoResult struct {
 	Seven    *Seven         `queryParam:"inline" union:"member"`
 	Eight    *Eight         `queryParam:"inline" union:"member"`
 	Nine     *Nine          `queryParam:"inline" union:"member"`
+	Ten      *Ten           `queryParam:"inline" union:"member"`
 
 	Type GeneratePreviewResponseDtoResultUnionType
 }
@@ -600,6 +663,15 @@ func CreateGeneratePreviewResponseDtoResultNine(nine Nine) GeneratePreviewRespon
 	}
 }
 
+func CreateGeneratePreviewResponseDtoResultTen(ten Ten) GeneratePreviewResponseDtoResult {
+	typ := GeneratePreviewResponseDtoResultUnionTypeTen
+
+	return GeneratePreviewResponseDtoResult{
+		Ten:  &ten,
+		Type: typ,
+	}
+}
+
 func (u *GeneratePreviewResponseDtoResult) UnmarshalJSON(data []byte) error {
 
 	var mapOfAny map[string]any = map[string]any{}
@@ -665,6 +737,13 @@ func (u *GeneratePreviewResponseDtoResult) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var ten Ten = Ten{}
+	if err := utils.UnmarshalJSON(data, &ten, "", true, nil); err == nil {
+		u.Ten = &ten
+		u.Type = GeneratePreviewResponseDtoResultUnionTypeTen
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GeneratePreviewResponseDtoResult", string(data))
 }
 
@@ -703,6 +782,10 @@ func (u GeneratePreviewResponseDtoResult) MarshalJSON() ([]byte, error) {
 
 	if u.Nine != nil {
 		return utils.MarshalJSON(u.Nine, "", true)
+	}
+
+	if u.Ten != nil {
+		return utils.MarshalJSON(u.Ten, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type GeneratePreviewResponseDtoResult: all fields are null")

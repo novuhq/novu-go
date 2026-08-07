@@ -15,6 +15,9 @@ const (
 	UpdateChannelEndpointRequestDtoEndpointTypeSlackUserEndpointDto    UpdateChannelEndpointRequestDtoEndpointType = "SlackUserEndpointDto"
 	UpdateChannelEndpointRequestDtoEndpointTypeWebhookEndpointDto      UpdateChannelEndpointRequestDtoEndpointType = "WebhookEndpointDto"
 	UpdateChannelEndpointRequestDtoEndpointTypePhoneEndpointDto        UpdateChannelEndpointRequestDtoEndpointType = "PhoneEndpointDto"
+	UpdateChannelEndpointRequestDtoEndpointTypeWebexRoomEndpointDto    UpdateChannelEndpointRequestDtoEndpointType = "WebexRoomEndpointDto"
+	UpdateChannelEndpointRequestDtoEndpointTypeWebexPersonEndpointDto  UpdateChannelEndpointRequestDtoEndpointType = "WebexPersonEndpointDto"
+	UpdateChannelEndpointRequestDtoEndpointTypeToolWebhookEndpointDto  UpdateChannelEndpointRequestDtoEndpointType = "ToolWebhookEndpointDto"
 )
 
 // UpdateChannelEndpointRequestDtoEndpoint - Updated endpoint data. The structure must match the existing channel endpoint type.
@@ -23,6 +26,9 @@ type UpdateChannelEndpointRequestDtoEndpoint struct {
 	SlackUserEndpointDto    *SlackUserEndpointDto    `queryParam:"inline" union:"member"`
 	WebhookEndpointDto      *WebhookEndpointDto      `queryParam:"inline" union:"member"`
 	PhoneEndpointDto        *PhoneEndpointDto        `queryParam:"inline" union:"member"`
+	WebexRoomEndpointDto    *WebexRoomEndpointDto    `queryParam:"inline" union:"member"`
+	WebexPersonEndpointDto  *WebexPersonEndpointDto  `queryParam:"inline" union:"member"`
+	ToolWebhookEndpointDto  *ToolWebhookEndpointDto  `queryParam:"inline" union:"member"`
 
 	Type UpdateChannelEndpointRequestDtoEndpointType
 }
@@ -63,6 +69,33 @@ func CreateUpdateChannelEndpointRequestDtoEndpointPhoneEndpointDto(phoneEndpoint
 	}
 }
 
+func CreateUpdateChannelEndpointRequestDtoEndpointWebexRoomEndpointDto(webexRoomEndpointDto WebexRoomEndpointDto) UpdateChannelEndpointRequestDtoEndpoint {
+	typ := UpdateChannelEndpointRequestDtoEndpointTypeWebexRoomEndpointDto
+
+	return UpdateChannelEndpointRequestDtoEndpoint{
+		WebexRoomEndpointDto: &webexRoomEndpointDto,
+		Type:                 typ,
+	}
+}
+
+func CreateUpdateChannelEndpointRequestDtoEndpointWebexPersonEndpointDto(webexPersonEndpointDto WebexPersonEndpointDto) UpdateChannelEndpointRequestDtoEndpoint {
+	typ := UpdateChannelEndpointRequestDtoEndpointTypeWebexPersonEndpointDto
+
+	return UpdateChannelEndpointRequestDtoEndpoint{
+		WebexPersonEndpointDto: &webexPersonEndpointDto,
+		Type:                   typ,
+	}
+}
+
+func CreateUpdateChannelEndpointRequestDtoEndpointToolWebhookEndpointDto(toolWebhookEndpointDto ToolWebhookEndpointDto) UpdateChannelEndpointRequestDtoEndpoint {
+	typ := UpdateChannelEndpointRequestDtoEndpointTypeToolWebhookEndpointDto
+
+	return UpdateChannelEndpointRequestDtoEndpoint{
+		ToolWebhookEndpointDto: &toolWebhookEndpointDto,
+		Type:                   typ,
+	}
+}
+
 func (u *UpdateChannelEndpointRequestDtoEndpoint) UnmarshalJSON(data []byte) error {
 
 	var slackChannelEndpointDto SlackChannelEndpointDto = SlackChannelEndpointDto{}
@@ -93,6 +126,27 @@ func (u *UpdateChannelEndpointRequestDtoEndpoint) UnmarshalJSON(data []byte) err
 		return nil
 	}
 
+	var webexRoomEndpointDto WebexRoomEndpointDto = WebexRoomEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &webexRoomEndpointDto, "", true, nil); err == nil {
+		u.WebexRoomEndpointDto = &webexRoomEndpointDto
+		u.Type = UpdateChannelEndpointRequestDtoEndpointTypeWebexRoomEndpointDto
+		return nil
+	}
+
+	var toolWebhookEndpointDto ToolWebhookEndpointDto = ToolWebhookEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &toolWebhookEndpointDto, "", true, nil); err == nil {
+		u.ToolWebhookEndpointDto = &toolWebhookEndpointDto
+		u.Type = UpdateChannelEndpointRequestDtoEndpointTypeToolWebhookEndpointDto
+		return nil
+	}
+
+	var webexPersonEndpointDto WebexPersonEndpointDto = WebexPersonEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &webexPersonEndpointDto, "", true, nil); err == nil {
+		u.WebexPersonEndpointDto = &webexPersonEndpointDto
+		u.Type = UpdateChannelEndpointRequestDtoEndpointTypeWebexPersonEndpointDto
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for UpdateChannelEndpointRequestDtoEndpoint", string(data))
 }
 
@@ -111,6 +165,18 @@ func (u UpdateChannelEndpointRequestDtoEndpoint) MarshalJSON() ([]byte, error) {
 
 	if u.PhoneEndpointDto != nil {
 		return utils.MarshalJSON(u.PhoneEndpointDto, "", true)
+	}
+
+	if u.WebexRoomEndpointDto != nil {
+		return utils.MarshalJSON(u.WebexRoomEndpointDto, "", true)
+	}
+
+	if u.WebexPersonEndpointDto != nil {
+		return utils.MarshalJSON(u.WebexPersonEndpointDto, "", true)
+	}
+
+	if u.ToolWebhookEndpointDto != nil {
+		return utils.MarshalJSON(u.ToolWebhookEndpointDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type UpdateChannelEndpointRequestDtoEndpoint: all fields are null")

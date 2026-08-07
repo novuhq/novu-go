@@ -135,18 +135,20 @@ func (e *GenerateConnectOauthURLRequestDtoConnectionMode) UnmarshalJSON(data []b
 }
 
 type GenerateConnectOauthURLRequestDto struct {
-	// The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For MS Teams: optional. Admin consent is tenant-wide.
+	// The subscriber ID to associate with the channel connection. For Slack: optional for workspace connections (required only for incoming-webhook scope). For Webex: optional for workspace connections. For MS Teams: optional. Admin consent is tenant-wide.
 	SubscriberID *string `json:"subscriberId,omitempty"`
 	// Integration identifier
 	IntegrationIdentifier string `json:"integrationIdentifier"`
 	// Identifier of the channel connection that will be created. Generated automatically if not provided.
 	ConnectionIdentifier *string                                             `json:"connectionIdentifier,omitempty"`
 	Context              map[string]GenerateConnectOauthURLRequestDtoContext `json:"context,omitempty"`
-	// **Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions.
+	// HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context. Establishes that the context/tenant binding was minted by an authenticated backend rather than forged in the browser.
+	ContextHash *string `json:"contextHash,omitempty"`
+	// **Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions.
 	Scope []string `json:"scope,omitempty"`
 	// Connection mode that determines how the channel connection is scoped. "subscriber" (default) associates the connection with a specific subscriber. "shared" associates the connection with a context instead of a subscriber.
 	ConnectionMode *GenerateConnectOauthURLRequestDtoConnectionMode `json:"connectionMode,omitempty"`
-	// When true (default when connectionMode is "subscriber"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked "Connect" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user.
+	// When true (default when connectionMode is "subscriber"), after the workspace/tenant connection is created the OAuth flow also links the subscriber who clicked "Connect" as a personal endpoint. For Slack, uses the authed_user.id returned by oauth.v2.access — no extra redirect. For Webex, uses the authenticated Webex person returned by people/me — no extra redirect. For MS Teams, triggers a second OAuth redirect for delegated user-identity consent. Set to false to only create the workspace connection without linking the individual user.
 	AutoLinkUser *bool `json:"autoLinkUser,omitempty"`
 }
 
@@ -176,6 +178,13 @@ func (g *GenerateConnectOauthURLRequestDto) GetContext() map[string]GenerateConn
 		return nil
 	}
 	return g.Context
+}
+
+func (g *GenerateConnectOauthURLRequestDto) GetContextHash() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ContextHash
 }
 
 func (g *GenerateConnectOauthURLRequestDto) GetScope() []string {

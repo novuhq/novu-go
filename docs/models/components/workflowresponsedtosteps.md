@@ -63,6 +63,12 @@ workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsThrottle(co
 workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsHTTPRequest(components.HTTPRequestStepResponseDto{/* values here */})
 ```
 
+### ToolStepResponseDto
+
+```go
+workflowResponseDtoSteps := components.CreateWorkflowResponseDtoStepsTool(components.ToolStepResponseDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -89,5 +95,7 @@ switch workflowResponseDtoSteps.Type {
 		// workflowResponseDtoSteps.ThrottleStepResponseDto is populated
 	case components.WorkflowResponseDtoStepsTypeHTTPRequest:
 		// workflowResponseDtoSteps.HTTPRequestStepResponseDto is populated
+	case components.WorkflowResponseDtoStepsTypeTool:
+		// workflowResponseDtoSteps.ToolStepResponseDto is populated
 }
 ```

@@ -38,6 +38,7 @@ func main() {
     res, err := s.ChannelConnections.List(ctx, operations.ChannelConnectionsControllerListChannelConnectionsRequest{
         Limit: v3.Pointer[float64](10.0),
         SubscriberID: v3.Pointer("subscriber-123"),
+        ConnectionMode: operations.ConnectionModeShared.ToPointer(),
         Channel: operations.ChannelChat.ToPointer(),
         ProviderID: components.ProvidersIDEnumSlack.ToPointer(),
         IntegrationIdentifier: v3.Pointer("slack-prod"),
@@ -114,9 +115,13 @@ func main() {
         Workspace: components.WorkspaceDto{
             ID: "T123456",
             Name: v3.Pointer("Acme HQ"),
+            BotUserID: v3.Pointer("U0123456789"),
         },
         Auth: components.AuthDto{
             AccessToken: "Workspace access token",
+            RefreshToken: v3.Pointer("Workspace refresh token"),
+            ExpiresAt: v3.Pointer("2026-06-15T12:00:00.000Z"),
+            RefreshTokenExpiresAt: v3.Pointer("2026-09-15T12:00:00.000Z"),
         },
     }, nil)
     if err != nil {
@@ -235,9 +240,13 @@ func main() {
         Workspace: components.WorkspaceDto{
             ID: "T123456",
             Name: v3.Pointer("Acme HQ"),
+            BotUserID: v3.Pointer("U0123456789"),
         },
         Auth: components.AuthDto{
             AccessToken: "Workspace access token",
+            RefreshToken: v3.Pointer("Workspace refresh token"),
+            ExpiresAt: v3.Pointer("2026-06-15T12:00:00.000Z"),
+            RefreshTokenExpiresAt: v3.Pointer("2026-09-15T12:00:00.000Z"),
         },
     }, nil)
     if err != nil {

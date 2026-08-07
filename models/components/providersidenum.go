@@ -11,6 +11,7 @@ import (
 type ProvidersIDEnum string
 
 const (
+	ProvidersIDEnumAnypost          ProvidersIDEnum = "anypost"
 	ProvidersIDEnumEmailjs          ProvidersIDEnum = "emailjs"
 	ProvidersIDEnumMailgun          ProvidersIDEnum = "mailgun"
 	ProvidersIDEnumMailjet          ProvidersIDEnum = "mailjet"
@@ -70,6 +71,7 @@ const (
 	ProvidersIDEnumSinch            ProvidersIDEnum = "sinch"
 	ProvidersIDEnumIsendproSms      ProvidersIDEnum = "isendpro-sms"
 	ProvidersIDEnumCmTelecom        ProvidersIDEnum = "cm-telecom"
+	ProvidersIDEnumRuachSms         ProvidersIDEnum = "ruach-sms"
 	ProvidersIDEnumFcm              ProvidersIDEnum = "fcm"
 	ProvidersIDEnumApns             ProvidersIDEnum = "apns"
 	ProvidersIDEnumExpo             ProvidersIDEnum = "expo"
@@ -82,6 +84,7 @@ const (
 	ProvidersIDEnumSlack            ProvidersIDEnum = "slack"
 	ProvidersIDEnumDiscord          ProvidersIDEnum = "discord"
 	ProvidersIDEnumMsteams          ProvidersIDEnum = "msteams"
+	ProvidersIDEnumWebexMessaging   ProvidersIDEnum = "webex-messaging"
 	ProvidersIDEnumMattermost       ProvidersIDEnum = "mattermost"
 	ProvidersIDEnumRyver            ProvidersIDEnum = "ryver"
 	ProvidersIDEnumZulip            ProvidersIDEnum = "zulip"
@@ -89,12 +92,19 @@ const (
 	ProvidersIDEnumGetstream        ProvidersIDEnum = "getstream"
 	ProvidersIDEnumRocketChat       ProvidersIDEnum = "rocket-chat"
 	ProvidersIDEnumWhatsappBusiness ProvidersIDEnum = "whatsapp-business"
+	ProvidersIDEnumLine             ProvidersIDEnum = "line"
 	ProvidersIDEnumChatWebhook      ProvidersIDEnum = "chat-webhook"
 	ProvidersIDEnumNovuSlack        ProvidersIDEnum = "novu-slack"
 	ProvidersIDEnumTelegram         ProvidersIDEnum = "telegram"
+	ProvidersIDEnumSendblue         ProvidersIDEnum = "sendblue"
+	ProvidersIDEnumNovuWebChat      ProvidersIDEnum = "novu-web-chat"
 	ProvidersIDEnumAnthropic        ProvidersIDEnum = "anthropic"
 	ProvidersIDEnumNovuAnthropic    ProvidersIDEnum = "novu-anthropic"
 	ProvidersIDEnumAnthropicAws     ProvidersIDEnum = "anthropic-aws"
+	ProvidersIDEnumPagerduty        ProvidersIDEnum = "pagerduty"
+	ProvidersIDEnumOpsgenie         ProvidersIDEnum = "opsgenie"
+	ProvidersIDEnumGrafana          ProvidersIDEnum = "grafana"
+	ProvidersIDEnumToolWebhook      ProvidersIDEnum = "tool-webhook"
 )
 
 func (e ProvidersIDEnum) ToPointer() *ProvidersIDEnum {
@@ -106,6 +116,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	switch v {
+	case "anypost":
+		fallthrough
 	case "emailjs":
 		fallthrough
 	case "mailgun":
@@ -224,6 +236,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "cm-telecom":
 		fallthrough
+	case "ruach-sms":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -248,6 +262,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "msteams":
 		fallthrough
+	case "webex-messaging":
+		fallthrough
 	case "mattermost":
 		fallthrough
 	case "ryver":
@@ -262,17 +278,31 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "line":
+		fallthrough
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
 		fallthrough
 	case "telegram":
 		fallthrough
+	case "sendblue":
+		fallthrough
+	case "novu-web-chat":
+		fallthrough
 	case "anthropic":
 		fallthrough
 	case "novu-anthropic":
 		fallthrough
 	case "anthropic-aws":
+		fallthrough
+	case "pagerduty":
+		fallthrough
+	case "opsgenie":
+		fallthrough
+	case "grafana":
+		fallthrough
+	case "tool-webhook":
 		*e = ProvidersIDEnum(v)
 		return nil
 	default:

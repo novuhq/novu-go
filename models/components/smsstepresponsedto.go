@@ -52,6 +52,8 @@ type SmsStepResponseDto struct {
 	Controls SmsControlsMetadataResponseDto `json:"controls"`
 	// Control values for the SMS step
 	ControlValues *SmsStepResponseDtoControlValues `json:"controlValues,omitempty"`
+	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`).
+	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
 	// JSON Schema for variables, follows the JSON Schema standard
 	Variables map[string]any `json:"variables"`
 	// Unique identifier of the step
@@ -99,6 +101,13 @@ func (s *SmsStepResponseDto) GetControlValues() *SmsStepResponseDtoControlValues
 		return nil
 	}
 	return s.ControlValues
+}
+
+func (s *SmsStepResponseDto) GetProviderOverrides() map[string]map[string]any {
+	if s == nil {
+		return nil
+	}
+	return s.ProviderOverrides
 }
 
 func (s *SmsStepResponseDto) GetVariables() map[string]any {

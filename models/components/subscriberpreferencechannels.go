@@ -13,6 +13,8 @@ type SubscriberPreferenceChannels struct {
 	Chat *bool `json:"chat,omitempty"`
 	// Push notification channel preference
 	Push *bool `json:"push,omitempty"`
+	// Tool channel preference
+	Tool *bool `json:"tool,omitempty"`
 }
 
 func (s *SubscriberPreferenceChannels) GetEmail() *bool {
@@ -48,4 +50,11 @@ func (s *SubscriberPreferenceChannels) GetPush() *bool {
 		return nil
 	}
 	return s.Push
+}
+
+func (s *SubscriberPreferenceChannels) GetTool() *bool {
+	if s == nil {
+		return nil
+	}
+	return s.Tool
 }

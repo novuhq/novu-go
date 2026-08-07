@@ -18,6 +18,7 @@ const (
 	GetChannelEndpointResponseDtoChannelSms   GetChannelEndpointResponseDtoChannel = "sms"
 	GetChannelEndpointResponseDtoChannelChat  GetChannelEndpointResponseDtoChannel = "chat"
 	GetChannelEndpointResponseDtoChannelPush  GetChannelEndpointResponseDtoChannel = "push"
+	GetChannelEndpointResponseDtoChannelTool  GetChannelEndpointResponseDtoChannel = "tool"
 )
 
 func (e GetChannelEndpointResponseDtoChannel) ToPointer() *GetChannelEndpointResponseDtoChannel {
@@ -38,6 +39,8 @@ func (e *GetChannelEndpointResponseDtoChannel) UnmarshalJSON(data []byte) error 
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = GetChannelEndpointResponseDtoChannel(v)
 		return nil
 	default:
@@ -49,6 +52,7 @@ func (e *GetChannelEndpointResponseDtoChannel) UnmarshalJSON(data []byte) error 
 type GetChannelEndpointResponseDtoProviderID string
 
 const (
+	GetChannelEndpointResponseDtoProviderIDAnypost          GetChannelEndpointResponseDtoProviderID = "anypost"
 	GetChannelEndpointResponseDtoProviderIDEmailjs          GetChannelEndpointResponseDtoProviderID = "emailjs"
 	GetChannelEndpointResponseDtoProviderIDMailgun          GetChannelEndpointResponseDtoProviderID = "mailgun"
 	GetChannelEndpointResponseDtoProviderIDMailjet          GetChannelEndpointResponseDtoProviderID = "mailjet"
@@ -108,6 +112,7 @@ const (
 	GetChannelEndpointResponseDtoProviderIDSinch            GetChannelEndpointResponseDtoProviderID = "sinch"
 	GetChannelEndpointResponseDtoProviderIDIsendproSms      GetChannelEndpointResponseDtoProviderID = "isendpro-sms"
 	GetChannelEndpointResponseDtoProviderIDCmTelecom        GetChannelEndpointResponseDtoProviderID = "cm-telecom"
+	GetChannelEndpointResponseDtoProviderIDRuachSms         GetChannelEndpointResponseDtoProviderID = "ruach-sms"
 	GetChannelEndpointResponseDtoProviderIDFcm              GetChannelEndpointResponseDtoProviderID = "fcm"
 	GetChannelEndpointResponseDtoProviderIDApns             GetChannelEndpointResponseDtoProviderID = "apns"
 	GetChannelEndpointResponseDtoProviderIDExpo             GetChannelEndpointResponseDtoProviderID = "expo"
@@ -120,6 +125,7 @@ const (
 	GetChannelEndpointResponseDtoProviderIDSlack            GetChannelEndpointResponseDtoProviderID = "slack"
 	GetChannelEndpointResponseDtoProviderIDDiscord          GetChannelEndpointResponseDtoProviderID = "discord"
 	GetChannelEndpointResponseDtoProviderIDMsteams          GetChannelEndpointResponseDtoProviderID = "msteams"
+	GetChannelEndpointResponseDtoProviderIDWebexMessaging   GetChannelEndpointResponseDtoProviderID = "webex-messaging"
 	GetChannelEndpointResponseDtoProviderIDMattermost       GetChannelEndpointResponseDtoProviderID = "mattermost"
 	GetChannelEndpointResponseDtoProviderIDRyver            GetChannelEndpointResponseDtoProviderID = "ryver"
 	GetChannelEndpointResponseDtoProviderIDZulip            GetChannelEndpointResponseDtoProviderID = "zulip"
@@ -127,12 +133,19 @@ const (
 	GetChannelEndpointResponseDtoProviderIDGetstream        GetChannelEndpointResponseDtoProviderID = "getstream"
 	GetChannelEndpointResponseDtoProviderIDRocketChat       GetChannelEndpointResponseDtoProviderID = "rocket-chat"
 	GetChannelEndpointResponseDtoProviderIDWhatsappBusiness GetChannelEndpointResponseDtoProviderID = "whatsapp-business"
+	GetChannelEndpointResponseDtoProviderIDLine             GetChannelEndpointResponseDtoProviderID = "line"
 	GetChannelEndpointResponseDtoProviderIDChatWebhook      GetChannelEndpointResponseDtoProviderID = "chat-webhook"
 	GetChannelEndpointResponseDtoProviderIDNovuSlack        GetChannelEndpointResponseDtoProviderID = "novu-slack"
 	GetChannelEndpointResponseDtoProviderIDTelegram         GetChannelEndpointResponseDtoProviderID = "telegram"
+	GetChannelEndpointResponseDtoProviderIDSendblue         GetChannelEndpointResponseDtoProviderID = "sendblue"
+	GetChannelEndpointResponseDtoProviderIDNovuWebChat      GetChannelEndpointResponseDtoProviderID = "novu-web-chat"
 	GetChannelEndpointResponseDtoProviderIDAnthropic        GetChannelEndpointResponseDtoProviderID = "anthropic"
 	GetChannelEndpointResponseDtoProviderIDNovuAnthropic    GetChannelEndpointResponseDtoProviderID = "novu-anthropic"
 	GetChannelEndpointResponseDtoProviderIDAnthropicAws     GetChannelEndpointResponseDtoProviderID = "anthropic-aws"
+	GetChannelEndpointResponseDtoProviderIDPagerduty        GetChannelEndpointResponseDtoProviderID = "pagerduty"
+	GetChannelEndpointResponseDtoProviderIDOpsgenie         GetChannelEndpointResponseDtoProviderID = "opsgenie"
+	GetChannelEndpointResponseDtoProviderIDGrafana          GetChannelEndpointResponseDtoProviderID = "grafana"
+	GetChannelEndpointResponseDtoProviderIDToolWebhook      GetChannelEndpointResponseDtoProviderID = "tool-webhook"
 )
 
 func (e GetChannelEndpointResponseDtoProviderID) ToPointer() *GetChannelEndpointResponseDtoProviderID {
@@ -144,6 +157,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 		return err
 	}
 	switch v {
+	case "anypost":
+		fallthrough
 	case "emailjs":
 		fallthrough
 	case "mailgun":
@@ -262,6 +277,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 		fallthrough
 	case "cm-telecom":
 		fallthrough
+	case "ruach-sms":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -286,6 +303,8 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 		fallthrough
 	case "msteams":
 		fallthrough
+	case "webex-messaging":
+		fallthrough
 	case "mattermost":
 		fallthrough
 	case "ryver":
@@ -300,17 +319,31 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "line":
+		fallthrough
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
 		fallthrough
 	case "telegram":
 		fallthrough
+	case "sendblue":
+		fallthrough
+	case "novu-web-chat":
+		fallthrough
 	case "anthropic":
 		fallthrough
 	case "novu-anthropic":
 		fallthrough
 	case "anthropic-aws":
+		fallthrough
+	case "pagerduty":
+		fallthrough
+	case "opsgenie":
+		fallthrough
+	case "grafana":
+		fallthrough
+	case "tool-webhook":
 		*e = GetChannelEndpointResponseDtoProviderID(v)
 		return nil
 	default:
@@ -322,13 +355,20 @@ func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) err
 type GetChannelEndpointResponseDtoType string
 
 const (
-	GetChannelEndpointResponseDtoTypeSlackChannel   GetChannelEndpointResponseDtoType = "slack_channel"
-	GetChannelEndpointResponseDtoTypeSlackUser      GetChannelEndpointResponseDtoType = "slack_user"
-	GetChannelEndpointResponseDtoTypeWebhook        GetChannelEndpointResponseDtoType = "webhook"
-	GetChannelEndpointResponseDtoTypePhone          GetChannelEndpointResponseDtoType = "phone"
-	GetChannelEndpointResponseDtoTypeMsTeamsChannel GetChannelEndpointResponseDtoType = "ms_teams_channel"
-	GetChannelEndpointResponseDtoTypeMsTeamsUser    GetChannelEndpointResponseDtoType = "ms_teams_user"
-	GetChannelEndpointResponseDtoTypeTelegramChat   GetChannelEndpointResponseDtoType = "telegram_chat"
+	GetChannelEndpointResponseDtoTypeSlackChannel             GetChannelEndpointResponseDtoType = "slack_channel"
+	GetChannelEndpointResponseDtoTypeSlackUser                GetChannelEndpointResponseDtoType = "slack_user"
+	GetChannelEndpointResponseDtoTypeWebhook                  GetChannelEndpointResponseDtoType = "webhook"
+	GetChannelEndpointResponseDtoTypePhone                    GetChannelEndpointResponseDtoType = "phone"
+	GetChannelEndpointResponseDtoTypeMsTeamsChannel           GetChannelEndpointResponseDtoType = "ms_teams_channel"
+	GetChannelEndpointResponseDtoTypeMsTeamsUser              GetChannelEndpointResponseDtoType = "ms_teams_user"
+	GetChannelEndpointResponseDtoTypeTelegramChat             GetChannelEndpointResponseDtoType = "telegram_chat"
+	GetChannelEndpointResponseDtoTypeWebexRoom                GetChannelEndpointResponseDtoType = "webex_room"
+	GetChannelEndpointResponseDtoTypeWebexPerson              GetChannelEndpointResponseDtoType = "webex_person"
+	GetChannelEndpointResponseDtoTypeLineUser                 GetChannelEndpointResponseDtoType = "line_user"
+	GetChannelEndpointResponseDtoTypePagerdutyService         GetChannelEndpointResponseDtoType = "pagerduty_service"
+	GetChannelEndpointResponseDtoTypeOpsgenieIntegration      GetChannelEndpointResponseDtoType = "opsgenie_integration"
+	GetChannelEndpointResponseDtoTypeGrafanaOncallIntegration GetChannelEndpointResponseDtoType = "grafana_oncall_integration"
+	GetChannelEndpointResponseDtoTypeToolWebhook              GetChannelEndpointResponseDtoType = "tool_webhook"
 )
 
 func (e GetChannelEndpointResponseDtoType) ToPointer() *GetChannelEndpointResponseDtoType {
@@ -353,6 +393,20 @@ func (e *GetChannelEndpointResponseDtoType) UnmarshalJSON(data []byte) error {
 	case "ms_teams_user":
 		fallthrough
 	case "telegram_chat":
+		fallthrough
+	case "webex_room":
+		fallthrough
+	case "webex_person":
+		fallthrough
+	case "line_user":
+		fallthrough
+	case "pagerduty_service":
+		fallthrough
+	case "opsgenie_integration":
+		fallthrough
+	case "grafana_oncall_integration":
+		fallthrough
+	case "tool_webhook":
 		*e = GetChannelEndpointResponseDtoType(v)
 		return nil
 	default:
@@ -363,24 +417,38 @@ func (e *GetChannelEndpointResponseDtoType) UnmarshalJSON(data []byte) error {
 type EndpointType string
 
 const (
-	EndpointTypeSlackChannelEndpointDto   EndpointType = "SlackChannelEndpointDto"
-	EndpointTypeSlackUserEndpointDto      EndpointType = "SlackUserEndpointDto"
-	EndpointTypeWebhookEndpointDto        EndpointType = "WebhookEndpointDto"
-	EndpointTypePhoneEndpointDto          EndpointType = "PhoneEndpointDto"
-	EndpointTypeMsTeamsChannelEndpointDto EndpointType = "MsTeamsChannelEndpointDto"
-	EndpointTypeMsTeamsUserEndpointDto    EndpointType = "MsTeamsUserEndpointDto"
-	EndpointTypeTelegramChatEndpointDto   EndpointType = "TelegramChatEndpointDto"
+	EndpointTypeSlackChannelEndpointDto             EndpointType = "SlackChannelEndpointDto"
+	EndpointTypeSlackUserEndpointDto                EndpointType = "SlackUserEndpointDto"
+	EndpointTypeWebhookEndpointDto                  EndpointType = "WebhookEndpointDto"
+	EndpointTypePhoneEndpointDto                    EndpointType = "PhoneEndpointDto"
+	EndpointTypeMsTeamsChannelEndpointDto           EndpointType = "MsTeamsChannelEndpointDto"
+	EndpointTypeMsTeamsUserEndpointDto              EndpointType = "MsTeamsUserEndpointDto"
+	EndpointTypeTelegramChatEndpointDto             EndpointType = "TelegramChatEndpointDto"
+	EndpointTypeWebexRoomEndpointDto                EndpointType = "WebexRoomEndpointDto"
+	EndpointTypeWebexPersonEndpointDto              EndpointType = "WebexPersonEndpointDto"
+	EndpointTypeLineUserEndpointDto                 EndpointType = "LineUserEndpointDto"
+	EndpointTypePagerDutyServiceEndpointDto         EndpointType = "PagerDutyServiceEndpointDto"
+	EndpointTypeOpsgenieIntegrationEndpointDto      EndpointType = "OpsgenieIntegrationEndpointDto"
+	EndpointTypeGrafanaOnCallIntegrationEndpointDto EndpointType = "GrafanaOnCallIntegrationEndpointDto"
+	EndpointTypeToolWebhookEndpointDto              EndpointType = "ToolWebhookEndpointDto"
 )
 
 // Endpoint data specific to the channel type
 type Endpoint struct {
-	SlackChannelEndpointDto   *SlackChannelEndpointDto   `queryParam:"inline" union:"member"`
-	SlackUserEndpointDto      *SlackUserEndpointDto      `queryParam:"inline" union:"member"`
-	WebhookEndpointDto        *WebhookEndpointDto        `queryParam:"inline" union:"member"`
-	PhoneEndpointDto          *PhoneEndpointDto          `queryParam:"inline" union:"member"`
-	MsTeamsChannelEndpointDto *MsTeamsChannelEndpointDto `queryParam:"inline" union:"member"`
-	MsTeamsUserEndpointDto    *MsTeamsUserEndpointDto    `queryParam:"inline" union:"member"`
-	TelegramChatEndpointDto   *TelegramChatEndpointDto   `queryParam:"inline" union:"member"`
+	SlackChannelEndpointDto             *SlackChannelEndpointDto             `queryParam:"inline" union:"member"`
+	SlackUserEndpointDto                *SlackUserEndpointDto                `queryParam:"inline" union:"member"`
+	WebhookEndpointDto                  *WebhookEndpointDto                  `queryParam:"inline" union:"member"`
+	PhoneEndpointDto                    *PhoneEndpointDto                    `queryParam:"inline" union:"member"`
+	MsTeamsChannelEndpointDto           *MsTeamsChannelEndpointDto           `queryParam:"inline" union:"member"`
+	MsTeamsUserEndpointDto              *MsTeamsUserEndpointDto              `queryParam:"inline" union:"member"`
+	TelegramChatEndpointDto             *TelegramChatEndpointDto             `queryParam:"inline" union:"member"`
+	WebexRoomEndpointDto                *WebexRoomEndpointDto                `queryParam:"inline" union:"member"`
+	WebexPersonEndpointDto              *WebexPersonEndpointDto              `queryParam:"inline" union:"member"`
+	LineUserEndpointDto                 *LineUserEndpointDto                 `queryParam:"inline" union:"member"`
+	PagerDutyServiceEndpointDto         *PagerDutyServiceEndpointDto         `queryParam:"inline" union:"member"`
+	OpsgenieIntegrationEndpointDto      *OpsgenieIntegrationEndpointDto      `queryParam:"inline" union:"member"`
+	GrafanaOnCallIntegrationEndpointDto *GrafanaOnCallIntegrationEndpointDto `queryParam:"inline" union:"member"`
+	ToolWebhookEndpointDto              *ToolWebhookEndpointDto              `queryParam:"inline" union:"member"`
 
 	Type EndpointType
 }
@@ -448,12 +516,89 @@ func CreateEndpointTelegramChatEndpointDto(telegramChatEndpointDto TelegramChatE
 	}
 }
 
+func CreateEndpointWebexRoomEndpointDto(webexRoomEndpointDto WebexRoomEndpointDto) Endpoint {
+	typ := EndpointTypeWebexRoomEndpointDto
+
+	return Endpoint{
+		WebexRoomEndpointDto: &webexRoomEndpointDto,
+		Type:                 typ,
+	}
+}
+
+func CreateEndpointWebexPersonEndpointDto(webexPersonEndpointDto WebexPersonEndpointDto) Endpoint {
+	typ := EndpointTypeWebexPersonEndpointDto
+
+	return Endpoint{
+		WebexPersonEndpointDto: &webexPersonEndpointDto,
+		Type:                   typ,
+	}
+}
+
+func CreateEndpointLineUserEndpointDto(lineUserEndpointDto LineUserEndpointDto) Endpoint {
+	typ := EndpointTypeLineUserEndpointDto
+
+	return Endpoint{
+		LineUserEndpointDto: &lineUserEndpointDto,
+		Type:                typ,
+	}
+}
+
+func CreateEndpointPagerDutyServiceEndpointDto(pagerDutyServiceEndpointDto PagerDutyServiceEndpointDto) Endpoint {
+	typ := EndpointTypePagerDutyServiceEndpointDto
+
+	return Endpoint{
+		PagerDutyServiceEndpointDto: &pagerDutyServiceEndpointDto,
+		Type:                        typ,
+	}
+}
+
+func CreateEndpointOpsgenieIntegrationEndpointDto(opsgenieIntegrationEndpointDto OpsgenieIntegrationEndpointDto) Endpoint {
+	typ := EndpointTypeOpsgenieIntegrationEndpointDto
+
+	return Endpoint{
+		OpsgenieIntegrationEndpointDto: &opsgenieIntegrationEndpointDto,
+		Type:                           typ,
+	}
+}
+
+func CreateEndpointGrafanaOnCallIntegrationEndpointDto(grafanaOnCallIntegrationEndpointDto GrafanaOnCallIntegrationEndpointDto) Endpoint {
+	typ := EndpointTypeGrafanaOnCallIntegrationEndpointDto
+
+	return Endpoint{
+		GrafanaOnCallIntegrationEndpointDto: &grafanaOnCallIntegrationEndpointDto,
+		Type:                                typ,
+	}
+}
+
+func CreateEndpointToolWebhookEndpointDto(toolWebhookEndpointDto ToolWebhookEndpointDto) Endpoint {
+	typ := EndpointTypeToolWebhookEndpointDto
+
+	return Endpoint{
+		ToolWebhookEndpointDto: &toolWebhookEndpointDto,
+		Type:                   typ,
+	}
+}
+
 func (u *Endpoint) UnmarshalJSON(data []byte) error {
 
 	var msTeamsChannelEndpointDto MsTeamsChannelEndpointDto = MsTeamsChannelEndpointDto{}
 	if err := utils.UnmarshalJSON(data, &msTeamsChannelEndpointDto, "", true, nil); err == nil {
 		u.MsTeamsChannelEndpointDto = &msTeamsChannelEndpointDto
 		u.Type = EndpointTypeMsTeamsChannelEndpointDto
+		return nil
+	}
+
+	var pagerDutyServiceEndpointDto PagerDutyServiceEndpointDto = PagerDutyServiceEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &pagerDutyServiceEndpointDto, "", true, nil); err == nil {
+		u.PagerDutyServiceEndpointDto = &pagerDutyServiceEndpointDto
+		u.Type = EndpointTypePagerDutyServiceEndpointDto
+		return nil
+	}
+
+	var opsgenieIntegrationEndpointDto OpsgenieIntegrationEndpointDto = OpsgenieIntegrationEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &opsgenieIntegrationEndpointDto, "", true, nil); err == nil {
+		u.OpsgenieIntegrationEndpointDto = &opsgenieIntegrationEndpointDto
+		u.Type = EndpointTypeOpsgenieIntegrationEndpointDto
 		return nil
 	}
 
@@ -499,6 +644,41 @@ func (u *Endpoint) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var webexRoomEndpointDto WebexRoomEndpointDto = WebexRoomEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &webexRoomEndpointDto, "", true, nil); err == nil {
+		u.WebexRoomEndpointDto = &webexRoomEndpointDto
+		u.Type = EndpointTypeWebexRoomEndpointDto
+		return nil
+	}
+
+	var lineUserEndpointDto LineUserEndpointDto = LineUserEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &lineUserEndpointDto, "", true, nil); err == nil {
+		u.LineUserEndpointDto = &lineUserEndpointDto
+		u.Type = EndpointTypeLineUserEndpointDto
+		return nil
+	}
+
+	var grafanaOnCallIntegrationEndpointDto GrafanaOnCallIntegrationEndpointDto = GrafanaOnCallIntegrationEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &grafanaOnCallIntegrationEndpointDto, "", true, nil); err == nil {
+		u.GrafanaOnCallIntegrationEndpointDto = &grafanaOnCallIntegrationEndpointDto
+		u.Type = EndpointTypeGrafanaOnCallIntegrationEndpointDto
+		return nil
+	}
+
+	var toolWebhookEndpointDto ToolWebhookEndpointDto = ToolWebhookEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &toolWebhookEndpointDto, "", true, nil); err == nil {
+		u.ToolWebhookEndpointDto = &toolWebhookEndpointDto
+		u.Type = EndpointTypeToolWebhookEndpointDto
+		return nil
+	}
+
+	var webexPersonEndpointDto WebexPersonEndpointDto = WebexPersonEndpointDto{}
+	if err := utils.UnmarshalJSON(data, &webexPersonEndpointDto, "", true, nil); err == nil {
+		u.WebexPersonEndpointDto = &webexPersonEndpointDto
+		u.Type = EndpointTypeWebexPersonEndpointDto
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Endpoint", string(data))
 }
 
@@ -529,6 +709,34 @@ func (u Endpoint) MarshalJSON() ([]byte, error) {
 
 	if u.TelegramChatEndpointDto != nil {
 		return utils.MarshalJSON(u.TelegramChatEndpointDto, "", true)
+	}
+
+	if u.WebexRoomEndpointDto != nil {
+		return utils.MarshalJSON(u.WebexRoomEndpointDto, "", true)
+	}
+
+	if u.WebexPersonEndpointDto != nil {
+		return utils.MarshalJSON(u.WebexPersonEndpointDto, "", true)
+	}
+
+	if u.LineUserEndpointDto != nil {
+		return utils.MarshalJSON(u.LineUserEndpointDto, "", true)
+	}
+
+	if u.PagerDutyServiceEndpointDto != nil {
+		return utils.MarshalJSON(u.PagerDutyServiceEndpointDto, "", true)
+	}
+
+	if u.OpsgenieIntegrationEndpointDto != nil {
+		return utils.MarshalJSON(u.OpsgenieIntegrationEndpointDto, "", true)
+	}
+
+	if u.GrafanaOnCallIntegrationEndpointDto != nil {
+		return utils.MarshalJSON(u.GrafanaOnCallIntegrationEndpointDto, "", true)
+	}
+
+	if u.ToolWebhookEndpointDto != nil {
+		return utils.MarshalJSON(u.ToolWebhookEndpointDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Endpoint: all fields are null")

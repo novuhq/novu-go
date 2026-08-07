@@ -110,8 +110,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -198,6 +200,7 @@ func main() {
 				},
 			},
 		},
+		AgentID: v3.Pointer("support-agent"),
 		Actor: v3.Pointer(components.CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(
 			components.SubscriberPayloadDto{
 				FirstName:    v3.Pointer("John"),
@@ -256,7 +259,7 @@ func main() {
 					},
 				},
 				Overrides: &components.Overrides{},
-				To: components.CreateToStr(
+				To: components.CreateTriggerEventRequestDtoToStr(
 					"SUBSCRIBER_ID",
 				),
 			},
@@ -269,7 +272,7 @@ func main() {
 					},
 				},
 				Overrides: &components.Overrides{},
-				To: components.CreateToStr(
+				To: components.CreateTriggerEventRequestDtoToStr(
 					"SUBSCRIBER_ID",
 				),
 			},
@@ -282,7 +285,7 @@ func main() {
 					},
 				},
 				Overrides: &components.Overrides{},
-				To: components.CreateToStr(
+				To: components.CreateTriggerEventRequestDtoToStr(
 					"SUBSCRIBER_ID",
 				),
 			},
@@ -292,6 +295,44 @@ func main() {
 		log.Fatal(err)
 	}
 	if res.TriggerEventResponseDtos != nil {
+		// handle response
+	}
+}
+
+```
+
+### Send an agent reply
+
+```go
+package main
+
+import (
+	"context"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"log"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := v3.New(
+		v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
+	)
+
+	res, err := s.Agents.SendReply(ctx, "support-agent", components.AgentReplyPayloadDto{
+		ConversationID:        "64f5a1c2e8b7a3d9f0c1b2a3",
+		IntegrationIdentifier: "slack-support",
+		Reply: v3.Pointer(components.CreateReplyMarkdownReplyContentDto(
+			components.MarkdownReplyContentDto{
+				Markdown: "**Report ready.** Your weekly summary is attached.",
+			},
+		)),
+	}, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.Object != nil {
 		// handle response
 	}
 }
@@ -336,8 +377,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -376,6 +419,23 @@ func main() {
 ### [Activity](docs/sdks/activity/README.md)
 
 * [Track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
+
+### [Agents](docs/sdks/agents/README.md)
+
+* [Create](docs/sdks/agents/README.md#create) - Create an agent
+* [List](docs/sdks/agents/README.md#list) - List all agents
+* [SendReply](docs/sdks/agents/README.md#sendreply) - Send an agent reply
+* [Retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve an agent
+* [Update](docs/sdks/agents/README.md#update) - Update an agent
+* [Delete](docs/sdks/agents/README.md#delete) - Delete an agent
+* [UpdateBridge](docs/sdks/agents/README.md#updatebridge) - Update an agent bridge
+
+#### [Agents.Integrations](docs/sdks/novuintegrations/README.md)
+
+* [Create](docs/sdks/novuintegrations/README.md#create) - Create an agent integration
+* [List](docs/sdks/novuintegrations/README.md#list) - List agent integrations
+* [Update](docs/sdks/novuintegrations/README.md#update) - Update an agent integration
+* [Delete](docs/sdks/novuintegrations/README.md#delete) - Delete an agent integration
 
 ### [ChannelConnections](docs/sdks/channelconnections/README.md)
 
@@ -627,8 +687,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -698,8 +760,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -769,8 +833,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -865,8 +931,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(
@@ -917,8 +985,10 @@ func main() {
 				"text": "string",
 			},
 		},
+		BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
 		Overrides: &components.Overrides{},
-		To: components.CreateToStr(
+		AgentID:   v3.Pointer("support-agent"),
+		To: components.CreateTriggerEventRequestDtoToStr(
 			"SUBSCRIBER_ID",
 		),
 		Actor: v3.Pointer(components.CreateActorStr(

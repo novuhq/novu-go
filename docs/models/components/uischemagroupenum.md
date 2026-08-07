@@ -25,6 +25,7 @@ value := components.UISchemaGroupEnumInApp
 | `UISchemaGroupEnumSms`         | SMS                            |
 | `UISchemaGroupEnumChat`        | CHAT                           |
 | `UISchemaGroupEnumPush`        | PUSH                           |
+| `UISchemaGroupEnumTool`        | TOOL                           |
 | `UISchemaGroupEnumSkip`        | SKIP                           |
 | `UISchemaGroupEnumLayout`      | LAYOUT                         |
 | `UISchemaGroupEnumHTTPRequest` | HTTP_REQUEST                   |

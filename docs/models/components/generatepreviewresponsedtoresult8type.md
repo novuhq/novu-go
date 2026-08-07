@@ -7,12 +7,12 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-value := components.GeneratePreviewResponseDtoResult8TypeDelay
+value := components.GeneratePreviewResponseDtoResult8TypeTool
 ```
 
 
 ## Values
 
-| Name                                         | Value                                        |
-| -------------------------------------------- | -------------------------------------------- |
-| `GeneratePreviewResponseDtoResult8TypeDelay` | delay                                        |
+| Name                                        | Value                                       |
+| ------------------------------------------- | ------------------------------------------- |
+| `GeneratePreviewResponseDtoResult8TypeTool` | tool                                        |

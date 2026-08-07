@@ -3146,7 +3146,7 @@ func (s *Integrations) ListActive(ctx context.Context, idempotencyKey *string, o
 }
 
 // GenerateConnectOAuthURL - Generate OAuth URL for a workspace/tenant connection
-// Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace install or MS Teams admin consent).
+// Generate an OAuth URL that creates a workspace or tenant-level channel connection (Slack workspace install, MS Teams admin consent, or Webex integration authorization).
 //
 //	The generated URL expires after 5 minutes.
 func (s *Integrations) GenerateConnectOAuthURL(ctx context.Context, generateConnectOauthURLRequestDto components.GenerateConnectOauthURLRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGenerateConnectOAuthURLResponse, error) {
@@ -3846,7 +3846,7 @@ func (s *Integrations) LinkChannelEndpoint(ctx context.Context, linkChannelEndpo
 }
 
 // GenerateLinkUserOAuthURL - Generate OAuth URL to link a subscriber user identity
-// Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID or MS Teams user OID).
+// Generate an OAuth URL that links a specific subscriber to their chat identity (Slack user ID, MS Teams user OID, or Webex person).
 //
 //	The generated URL expires after 5 minutes.
 func (s *Integrations) GenerateLinkUserOAuthURL(ctx context.Context, generateLinkUserOauthURLRequestDto components.GenerateLinkUserOauthURLRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.IntegrationsControllerGenerateLinkUserOAuthURLResponse, error) {
@@ -4199,7 +4199,7 @@ func (s *Integrations) GenerateLinkUserOAuthURL(ctx context.Context, generateLin
 // GenerateChatOAuthURL - Generate chat OAuth URL
 // **Deprecated** — use `POST /integrations/channel-connections/oauth` (connect) or `POST /integrations/channel-endpoints/oauth` (link_user) instead.
 //
-//	Generate an OAuth URL for chat integrations like Slack and MS Teams.
+//	Generate an OAuth URL for chat integrations like Slack, MS Teams, and Webex.
 //	This URL allows subscribers to authorize the integration, enabling the system to send messages
 //	through their chat workspace. The generated URL expires after 5 minutes.
 //

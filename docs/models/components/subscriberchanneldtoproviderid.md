@@ -20,6 +20,7 @@ value := components.SubscriberChannelDtoProviderIDSlack
 | `SubscriberChannelDtoProviderIDSlack`            | slack                                            |
 | `SubscriberChannelDtoProviderIDDiscord`          | discord                                          |
 | `SubscriberChannelDtoProviderIDMsteams`          | msteams                                          |
+| `SubscriberChannelDtoProviderIDWebexMessaging`   | webex-messaging                                  |
 | `SubscriberChannelDtoProviderIDMattermost`       | mattermost                                       |
 | `SubscriberChannelDtoProviderIDRyver`            | ryver                                            |
 | `SubscriberChannelDtoProviderIDZulip`            | zulip                                            |
@@ -27,9 +28,12 @@ value := components.SubscriberChannelDtoProviderIDSlack
 | `SubscriberChannelDtoProviderIDGetstream`        | getstream                                        |
 | `SubscriberChannelDtoProviderIDRocketChat`       | rocket-chat                                      |
 | `SubscriberChannelDtoProviderIDWhatsappBusiness` | whatsapp-business                                |
+| `SubscriberChannelDtoProviderIDLine`             | line                                             |
 | `SubscriberChannelDtoProviderIDChatWebhook`      | chat-webhook                                     |
 | `SubscriberChannelDtoProviderIDNovuSlack`        | novu-slack                                       |
 | `SubscriberChannelDtoProviderIDTelegram`         | telegram                                         |
+| `SubscriberChannelDtoProviderIDSendblue`         | sendblue                                         |
+| `SubscriberChannelDtoProviderIDNovuWebChat`      | novu-web-chat                                    |
 | `SubscriberChannelDtoProviderIDFcm`              | fcm                                              |
 | `SubscriberChannelDtoProviderIDApns`             | apns                                             |
 | `SubscriberChannelDtoProviderIDExpo`             | expo                                             |

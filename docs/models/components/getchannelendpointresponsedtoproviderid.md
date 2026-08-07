@@ -9,7 +9,7 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
+value := components.GetChannelEndpointResponseDtoProviderIDAnypost
 ```
 
 
@@ -17,6 +17,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 
 | Name                                                      | Value                                                     |
 | --------------------------------------------------------- | --------------------------------------------------------- |
+| `GetChannelEndpointResponseDtoProviderIDAnypost`          | anypost                                                   |
 | `GetChannelEndpointResponseDtoProviderIDEmailjs`          | emailjs                                                   |
 | `GetChannelEndpointResponseDtoProviderIDMailgun`          | mailgun                                                   |
 | `GetChannelEndpointResponseDtoProviderIDMailjet`          | mailjet                                                   |
@@ -76,6 +77,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDSinch`            | sinch                                                     |
 | `GetChannelEndpointResponseDtoProviderIDIsendproSms`      | isendpro-sms                                              |
 | `GetChannelEndpointResponseDtoProviderIDCmTelecom`        | cm-telecom                                                |
+| `GetChannelEndpointResponseDtoProviderIDRuachSms`         | ruach-sms                                                 |
 | `GetChannelEndpointResponseDtoProviderIDFcm`              | fcm                                                       |
 | `GetChannelEndpointResponseDtoProviderIDApns`             | apns                                                      |
 | `GetChannelEndpointResponseDtoProviderIDExpo`             | expo                                                      |
@@ -88,6 +90,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDSlack`            | slack                                                     |
 | `GetChannelEndpointResponseDtoProviderIDDiscord`          | discord                                                   |
 | `GetChannelEndpointResponseDtoProviderIDMsteams`          | msteams                                                   |
+| `GetChannelEndpointResponseDtoProviderIDWebexMessaging`   | webex-messaging                                           |
 | `GetChannelEndpointResponseDtoProviderIDMattermost`       | mattermost                                                |
 | `GetChannelEndpointResponseDtoProviderIDRyver`            | ryver                                                     |
 | `GetChannelEndpointResponseDtoProviderIDZulip`            | zulip                                                     |
@@ -95,9 +98,16 @@ value := components.GetChannelEndpointResponseDtoProviderIDEmailjs
 | `GetChannelEndpointResponseDtoProviderIDGetstream`        | getstream                                                 |
 | `GetChannelEndpointResponseDtoProviderIDRocketChat`       | rocket-chat                                               |
 | `GetChannelEndpointResponseDtoProviderIDWhatsappBusiness` | whatsapp-business                                         |
+| `GetChannelEndpointResponseDtoProviderIDLine`             | line                                                      |
 | `GetChannelEndpointResponseDtoProviderIDChatWebhook`      | chat-webhook                                              |
 | `GetChannelEndpointResponseDtoProviderIDNovuSlack`        | novu-slack                                                |
 | `GetChannelEndpointResponseDtoProviderIDTelegram`         | telegram                                                  |
+| `GetChannelEndpointResponseDtoProviderIDSendblue`         | sendblue                                                  |
+| `GetChannelEndpointResponseDtoProviderIDNovuWebChat`      | novu-web-chat                                             |
 | `GetChannelEndpointResponseDtoProviderIDAnthropic`        | anthropic                                                 |
 | `GetChannelEndpointResponseDtoProviderIDNovuAnthropic`    | novu-anthropic                                            |
 | `GetChannelEndpointResponseDtoProviderIDAnthropicAws`     | anthropic-aws                                             |
+| `GetChannelEndpointResponseDtoProviderIDPagerduty`        | pagerduty                                                 |
+| `GetChannelEndpointResponseDtoProviderIDOpsgenie`         | opsgenie                                                  |
+| `GetChannelEndpointResponseDtoProviderIDGrafana`          | grafana                                                   |
+| `GetChannelEndpointResponseDtoProviderIDToolWebhook`      | tool-webhook                                              |

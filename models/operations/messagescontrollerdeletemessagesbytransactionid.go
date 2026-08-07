@@ -17,6 +17,7 @@ const (
 	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelSms   MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "sms"
 	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelChat  MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "chat"
 	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelPush  MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "push"
+	MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelTool  MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel = "tool"
 )
 
 func (e MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) ToPointer() *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel {
@@ -37,6 +38,8 @@ func (e *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) Unmar
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel(v)
 		return nil
 	default:

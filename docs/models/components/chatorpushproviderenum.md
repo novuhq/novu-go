@@ -20,6 +20,7 @@ value := components.ChatOrPushProviderEnumSlack
 | `ChatOrPushProviderEnumSlack`            | slack                                    |
 | `ChatOrPushProviderEnumDiscord`          | discord                                  |
 | `ChatOrPushProviderEnumMsteams`          | msteams                                  |
+| `ChatOrPushProviderEnumWebexMessaging`   | webex-messaging                          |
 | `ChatOrPushProviderEnumMattermost`       | mattermost                               |
 | `ChatOrPushProviderEnumRyver`            | ryver                                    |
 | `ChatOrPushProviderEnumZulip`            | zulip                                    |
@@ -27,9 +28,12 @@ value := components.ChatOrPushProviderEnumSlack
 | `ChatOrPushProviderEnumGetstream`        | getstream                                |
 | `ChatOrPushProviderEnumRocketChat`       | rocket-chat                              |
 | `ChatOrPushProviderEnumWhatsappBusiness` | whatsapp-business                        |
+| `ChatOrPushProviderEnumLine`             | line                                     |
 | `ChatOrPushProviderEnumChatWebhook`      | chat-webhook                             |
 | `ChatOrPushProviderEnumNovuSlack`        | novu-slack                               |
 | `ChatOrPushProviderEnumTelegram`         | telegram                                 |
+| `ChatOrPushProviderEnumSendblue`         | sendblue                                 |
+| `ChatOrPushProviderEnumNovuWebChat`      | novu-web-chat                            |
 | `ChatOrPushProviderEnumFcm`              | fcm                                      |
 | `ChatOrPushProviderEnumApns`             | apns                                     |
 | `ChatOrPushProviderEnumExpo`             | expo                                     |

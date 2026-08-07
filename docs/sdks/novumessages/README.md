@@ -52,9 +52,9 @@ func main() {
     }
     if res.MessageResponseDto != nil {
         switch res.MessageResponseDto.Content.Type {
-            case components.ContentTypeArrayOfEmailBlock:
+            case components.MessageResponseDtoContentTypeArrayOfEmailBlock:
                 // res.MessageResponseDto.Content.ArrayOfEmailBlock is populated
-            case components.ContentTypeStr:
+            case components.MessageResponseDtoContentTypeStr:
                 // res.MessageResponseDto.Content.Str is populated
         }
 
