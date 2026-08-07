@@ -29,6 +29,24 @@ updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpoin
 updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpointRequestDtoEndpointPhoneEndpointDto(components.PhoneEndpointDto{/* values here */})
 ```
 
+### WebexRoomEndpointDto
+
+```go
+updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpointRequestDtoEndpointWebexRoomEndpointDto(components.WebexRoomEndpointDto{/* values here */})
+```
+
+### WebexPersonEndpointDto
+
+```go
+updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpointRequestDtoEndpointWebexPersonEndpointDto(components.WebexPersonEndpointDto{/* values here */})
+```
+
+### ToolWebhookEndpointDto
+
+```go
+updateChannelEndpointRequestDtoEndpoint := components.CreateUpdateChannelEndpointRequestDtoEndpointToolWebhookEndpointDto(components.ToolWebhookEndpointDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -43,5 +61,11 @@ switch updateChannelEndpointRequestDtoEndpoint.Type {
 		// updateChannelEndpointRequestDtoEndpoint.WebhookEndpointDto is populated
 	case components.UpdateChannelEndpointRequestDtoEndpointTypePhoneEndpointDto:
 		// updateChannelEndpointRequestDtoEndpoint.PhoneEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeWebexRoomEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.WebexRoomEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeWebexPersonEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.WebexPersonEndpointDto is populated
+	case components.UpdateChannelEndpointRequestDtoEndpointTypeToolWebhookEndpointDto:
+		// updateChannelEndpointRequestDtoEndpoint.ToolWebhookEndpointDto is populated
 }
 ```

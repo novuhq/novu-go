@@ -22,3 +22,4 @@ value := operations.QueryParamChannelInApp
 | `QueryParamChannelSms`   | sms                      |
 | `QueryParamChannelChat`  | chat                     |
 | `QueryParamChannelPush`  | push                     |
+| `QueryParamChannelTool`  | tool                     |

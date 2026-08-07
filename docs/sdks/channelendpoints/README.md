@@ -131,6 +131,20 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
             case components.EndpointTypeTelegramChatEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
+            case components.EndpointTypeWebexRoomEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexRoomEndpointDto is populated
+            case components.EndpointTypeWebexPersonEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexPersonEndpointDto is populated
+            case components.EndpointTypeLineUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.LineUserEndpointDto is populated
+            case components.EndpointTypePagerDutyServiceEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PagerDutyServiceEndpointDto is populated
+            case components.EndpointTypeOpsgenieIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.OpsgenieIntegrationEndpointDto is populated
+            case components.EndpointTypeGrafanaOnCallIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.GrafanaOnCallIntegrationEndpointDto is populated
+            case components.EndpointTypeToolWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.ToolWebhookEndpointDto is populated
         }
 
     }
@@ -204,6 +218,20 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
             case components.EndpointTypeTelegramChatEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
+            case components.EndpointTypeWebexRoomEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexRoomEndpointDto is populated
+            case components.EndpointTypeWebexPersonEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexPersonEndpointDto is populated
+            case components.EndpointTypeLineUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.LineUserEndpointDto is populated
+            case components.EndpointTypePagerDutyServiceEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PagerDutyServiceEndpointDto is populated
+            case components.EndpointTypeOpsgenieIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.OpsgenieIntegrationEndpointDto is populated
+            case components.EndpointTypeGrafanaOnCallIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.GrafanaOnCallIntegrationEndpointDto is populated
+            case components.EndpointTypeToolWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.ToolWebhookEndpointDto is populated
         }
 
     }
@@ -283,6 +311,20 @@ func main() {
                 // res.GetChannelEndpointResponseDto.Endpoint.MsTeamsUserEndpointDto is populated
             case components.EndpointTypeTelegramChatEndpointDto:
                 // res.GetChannelEndpointResponseDto.Endpoint.TelegramChatEndpointDto is populated
+            case components.EndpointTypeWebexRoomEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexRoomEndpointDto is populated
+            case components.EndpointTypeWebexPersonEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.WebexPersonEndpointDto is populated
+            case components.EndpointTypeLineUserEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.LineUserEndpointDto is populated
+            case components.EndpointTypePagerDutyServiceEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.PagerDutyServiceEndpointDto is populated
+            case components.EndpointTypeOpsgenieIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.OpsgenieIntegrationEndpointDto is populated
+            case components.EndpointTypeGrafanaOnCallIntegrationEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.GrafanaOnCallIntegrationEndpointDto is populated
+            case components.EndpointTypeToolWebhookEndpointDto:
+                // res.GetChannelEndpointResponseDto.Endpoint.ToolWebhookEndpointDto is populated
         }
 
     }

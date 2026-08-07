@@ -48,7 +48,15 @@ type EmailStepResponseDtoControlValues struct {
 	// Disable sanitization of the output.
 	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
 	// Layout ID to use for the email. Null means no layout, undefined means default layout.
-	LayoutID             *string        `json:"layoutId,omitempty"`
+	LayoutID *string `json:"layoutId,omitempty"`
+	// Sender name and email overrides for this step.
+	From *EmailFromControlDto `json:"from,omitempty"`
+	// When true, sender name/email use the primary email integration defaults and skip workflow agent defaults.
+	UseProviderDefaults *bool `json:"useProviderDefaults,omitempty"`
+	// Step-level Reply-To override. When unset, inherits the workflow agent reply-to.
+	ReplyTo *string `json:"replyTo,omitempty"`
+	// One-line inbox preview text shown next to the subject.
+	Preheader            *string        `json:"preheader,omitempty"`
 	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
 }
 
@@ -105,6 +113,34 @@ func (e *EmailStepResponseDtoControlValues) GetLayoutID() *string {
 	return e.LayoutID
 }
 
+func (e *EmailStepResponseDtoControlValues) GetFrom() *EmailFromControlDto {
+	if e == nil {
+		return nil
+	}
+	return e.From
+}
+
+func (e *EmailStepResponseDtoControlValues) GetUseProviderDefaults() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.UseProviderDefaults
+}
+
+func (e *EmailStepResponseDtoControlValues) GetReplyTo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ReplyTo
+}
+
+func (e *EmailStepResponseDtoControlValues) GetPreheader() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Preheader
+}
+
 func (e *EmailStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {
 	if e == nil {
 		return nil
@@ -117,6 +153,8 @@ type EmailStepResponseDto struct {
 	Controls EmailControlsMetadataResponseDto `json:"controls"`
 	// Control values for the email step
 	ControlValues *EmailStepResponseDtoControlValues `json:"controlValues,omitempty"`
+	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`).
+	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
 	// JSON Schema for variables, follows the JSON Schema standard
 	Variables map[string]any `json:"variables"`
 	// Unique identifier of the step
@@ -164,6 +202,13 @@ func (e *EmailStepResponseDto) GetControlValues() *EmailStepResponseDtoControlVa
 		return nil
 	}
 	return e.ControlValues
+}
+
+func (e *EmailStepResponseDto) GetProviderOverrides() map[string]map[string]any {
+	if e == nil {
+		return nil
+	}
+	return e.ProviderOverrides
 }
 
 func (e *EmailStepResponseDto) GetVariables() map[string]any {

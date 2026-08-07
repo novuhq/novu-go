@@ -16,6 +16,7 @@ const (
 	ChannelSms   Channel = "sms"
 	ChannelChat  Channel = "chat"
 	ChannelPush  Channel = "push"
+	ChannelTool  Channel = "tool"
 )
 
 func (e Channel) ToPointer() *Channel {
@@ -36,6 +37,8 @@ func (e *Channel) UnmarshalJSON(data []byte) error {
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		*e = Channel(v)
 		return nil
 	default:
@@ -43,105 +46,117 @@ func (e *Channel) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// ProviderID - The provider identifier (e.g., sendgrid, twilio, slack, etc.).
-type ProviderID string
+// GetChannelConnectionResponseDtoProviderID - The provider identifier (e.g., sendgrid, twilio, slack, etc.).
+type GetChannelConnectionResponseDtoProviderID string
 
 const (
-	ProviderIDEmailjs          ProviderID = "emailjs"
-	ProviderIDMailgun          ProviderID = "mailgun"
-	ProviderIDMailjet          ProviderID = "mailjet"
-	ProviderIDMandrill         ProviderID = "mandrill"
-	ProviderIDNodemailer       ProviderID = "nodemailer"
-	ProviderIDPostmark         ProviderID = "postmark"
-	ProviderIDSendgrid         ProviderID = "sendgrid"
-	ProviderIDSendinblue       ProviderID = "sendinblue"
-	ProviderIDSes              ProviderID = "ses"
-	ProviderIDNetcore          ProviderID = "netcore"
-	ProviderIDInfobipEmail     ProviderID = "infobip-email"
-	ProviderIDResend           ProviderID = "resend"
-	ProviderIDPlunk            ProviderID = "plunk"
-	ProviderIDMailersend       ProviderID = "mailersend"
-	ProviderIDMailtrap         ProviderID = "mailtrap"
-	ProviderIDClickatell       ProviderID = "clickatell"
-	ProviderIDOutlook365       ProviderID = "outlook365"
-	ProviderIDNovuEmail        ProviderID = "novu-email"
-	ProviderIDSparkpost        ProviderID = "sparkpost"
-	ProviderIDEmailWebhook     ProviderID = "email-webhook"
-	ProviderIDBraze            ProviderID = "braze"
-	ProviderIDNovuEmailAgent   ProviderID = "novu-email-agent"
-	ProviderIDNexmo            ProviderID = "nexmo"
-	ProviderIDPlivo            ProviderID = "plivo"
-	ProviderIDSms77            ProviderID = "sms77"
-	ProviderIDSmsCentral       ProviderID = "sms-central"
-	ProviderIDSns              ProviderID = "sns"
-	ProviderIDTelnyx           ProviderID = "telnyx"
-	ProviderIDTwilio           ProviderID = "twilio"
-	ProviderIDGupshup          ProviderID = "gupshup"
-	ProviderIDFiretext         ProviderID = "firetext"
-	ProviderIDInfobipSms       ProviderID = "infobip-sms"
-	ProviderIDBurstSms         ProviderID = "burst-sms"
-	ProviderIDBulkSms          ProviderID = "bulk-sms"
-	ProviderIDIsendSms         ProviderID = "isend-sms"
-	ProviderIDFortySixElks     ProviderID = "forty-six-elks"
-	ProviderIDKannel           ProviderID = "kannel"
-	ProviderIDMaqsam           ProviderID = "maqsam"
-	ProviderIDTermii           ProviderID = "termii"
-	ProviderIDAfricasTalking   ProviderID = "africas-talking"
-	ProviderIDNovuSms          ProviderID = "novu-sms"
-	ProviderIDSendchamp        ProviderID = "sendchamp"
-	ProviderIDGenericSms       ProviderID = "generic-sms"
-	ProviderIDClicksend        ProviderID = "clicksend"
-	ProviderIDBandwidth        ProviderID = "bandwidth"
-	ProviderIDMessagebird      ProviderID = "messagebird"
-	ProviderIDSimpletexting    ProviderID = "simpletexting"
-	ProviderIDAzureSms         ProviderID = "azure-sms"
-	ProviderIDRingCentral      ProviderID = "ring-central"
-	ProviderIDBrevoSms         ProviderID = "brevo-sms"
-	ProviderIDEazySms          ProviderID = "eazy-sms"
-	ProviderIDMobishastra      ProviderID = "mobishastra"
-	ProviderIDAfroMessage      ProviderID = "afro-message"
-	ProviderIDUnifonic         ProviderID = "unifonic"
-	ProviderIDSmsmode          ProviderID = "smsmode"
-	ProviderIDImedia           ProviderID = "imedia"
-	ProviderIDSinch            ProviderID = "sinch"
-	ProviderIDIsendproSms      ProviderID = "isendpro-sms"
-	ProviderIDCmTelecom        ProviderID = "cm-telecom"
-	ProviderIDFcm              ProviderID = "fcm"
-	ProviderIDApns             ProviderID = "apns"
-	ProviderIDExpo             ProviderID = "expo"
-	ProviderIDOneSignal        ProviderID = "one-signal"
-	ProviderIDPushpad          ProviderID = "pushpad"
-	ProviderIDPushWebhook      ProviderID = "push-webhook"
-	ProviderIDPusherBeams      ProviderID = "pusher-beams"
-	ProviderIDAppio            ProviderID = "appio"
-	ProviderIDNovu             ProviderID = "novu"
-	ProviderIDSlack            ProviderID = "slack"
-	ProviderIDDiscord          ProviderID = "discord"
-	ProviderIDMsteams          ProviderID = "msteams"
-	ProviderIDMattermost       ProviderID = "mattermost"
-	ProviderIDRyver            ProviderID = "ryver"
-	ProviderIDZulip            ProviderID = "zulip"
-	ProviderIDGrafanaOnCall    ProviderID = "grafana-on-call"
-	ProviderIDGetstream        ProviderID = "getstream"
-	ProviderIDRocketChat       ProviderID = "rocket-chat"
-	ProviderIDWhatsappBusiness ProviderID = "whatsapp-business"
-	ProviderIDChatWebhook      ProviderID = "chat-webhook"
-	ProviderIDNovuSlack        ProviderID = "novu-slack"
-	ProviderIDTelegram         ProviderID = "telegram"
-	ProviderIDAnthropic        ProviderID = "anthropic"
-	ProviderIDNovuAnthropic    ProviderID = "novu-anthropic"
-	ProviderIDAnthropicAws     ProviderID = "anthropic-aws"
+	GetChannelConnectionResponseDtoProviderIDAnypost          GetChannelConnectionResponseDtoProviderID = "anypost"
+	GetChannelConnectionResponseDtoProviderIDEmailjs          GetChannelConnectionResponseDtoProviderID = "emailjs"
+	GetChannelConnectionResponseDtoProviderIDMailgun          GetChannelConnectionResponseDtoProviderID = "mailgun"
+	GetChannelConnectionResponseDtoProviderIDMailjet          GetChannelConnectionResponseDtoProviderID = "mailjet"
+	GetChannelConnectionResponseDtoProviderIDMandrill         GetChannelConnectionResponseDtoProviderID = "mandrill"
+	GetChannelConnectionResponseDtoProviderIDNodemailer       GetChannelConnectionResponseDtoProviderID = "nodemailer"
+	GetChannelConnectionResponseDtoProviderIDPostmark         GetChannelConnectionResponseDtoProviderID = "postmark"
+	GetChannelConnectionResponseDtoProviderIDSendgrid         GetChannelConnectionResponseDtoProviderID = "sendgrid"
+	GetChannelConnectionResponseDtoProviderIDSendinblue       GetChannelConnectionResponseDtoProviderID = "sendinblue"
+	GetChannelConnectionResponseDtoProviderIDSes              GetChannelConnectionResponseDtoProviderID = "ses"
+	GetChannelConnectionResponseDtoProviderIDNetcore          GetChannelConnectionResponseDtoProviderID = "netcore"
+	GetChannelConnectionResponseDtoProviderIDInfobipEmail     GetChannelConnectionResponseDtoProviderID = "infobip-email"
+	GetChannelConnectionResponseDtoProviderIDResend           GetChannelConnectionResponseDtoProviderID = "resend"
+	GetChannelConnectionResponseDtoProviderIDPlunk            GetChannelConnectionResponseDtoProviderID = "plunk"
+	GetChannelConnectionResponseDtoProviderIDMailersend       GetChannelConnectionResponseDtoProviderID = "mailersend"
+	GetChannelConnectionResponseDtoProviderIDMailtrap         GetChannelConnectionResponseDtoProviderID = "mailtrap"
+	GetChannelConnectionResponseDtoProviderIDClickatell       GetChannelConnectionResponseDtoProviderID = "clickatell"
+	GetChannelConnectionResponseDtoProviderIDOutlook365       GetChannelConnectionResponseDtoProviderID = "outlook365"
+	GetChannelConnectionResponseDtoProviderIDNovuEmail        GetChannelConnectionResponseDtoProviderID = "novu-email"
+	GetChannelConnectionResponseDtoProviderIDSparkpost        GetChannelConnectionResponseDtoProviderID = "sparkpost"
+	GetChannelConnectionResponseDtoProviderIDEmailWebhook     GetChannelConnectionResponseDtoProviderID = "email-webhook"
+	GetChannelConnectionResponseDtoProviderIDBraze            GetChannelConnectionResponseDtoProviderID = "braze"
+	GetChannelConnectionResponseDtoProviderIDNovuEmailAgent   GetChannelConnectionResponseDtoProviderID = "novu-email-agent"
+	GetChannelConnectionResponseDtoProviderIDNexmo            GetChannelConnectionResponseDtoProviderID = "nexmo"
+	GetChannelConnectionResponseDtoProviderIDPlivo            GetChannelConnectionResponseDtoProviderID = "plivo"
+	GetChannelConnectionResponseDtoProviderIDSms77            GetChannelConnectionResponseDtoProviderID = "sms77"
+	GetChannelConnectionResponseDtoProviderIDSmsCentral       GetChannelConnectionResponseDtoProviderID = "sms-central"
+	GetChannelConnectionResponseDtoProviderIDSns              GetChannelConnectionResponseDtoProviderID = "sns"
+	GetChannelConnectionResponseDtoProviderIDTelnyx           GetChannelConnectionResponseDtoProviderID = "telnyx"
+	GetChannelConnectionResponseDtoProviderIDTwilio           GetChannelConnectionResponseDtoProviderID = "twilio"
+	GetChannelConnectionResponseDtoProviderIDGupshup          GetChannelConnectionResponseDtoProviderID = "gupshup"
+	GetChannelConnectionResponseDtoProviderIDFiretext         GetChannelConnectionResponseDtoProviderID = "firetext"
+	GetChannelConnectionResponseDtoProviderIDInfobipSms       GetChannelConnectionResponseDtoProviderID = "infobip-sms"
+	GetChannelConnectionResponseDtoProviderIDBurstSms         GetChannelConnectionResponseDtoProviderID = "burst-sms"
+	GetChannelConnectionResponseDtoProviderIDBulkSms          GetChannelConnectionResponseDtoProviderID = "bulk-sms"
+	GetChannelConnectionResponseDtoProviderIDIsendSms         GetChannelConnectionResponseDtoProviderID = "isend-sms"
+	GetChannelConnectionResponseDtoProviderIDFortySixElks     GetChannelConnectionResponseDtoProviderID = "forty-six-elks"
+	GetChannelConnectionResponseDtoProviderIDKannel           GetChannelConnectionResponseDtoProviderID = "kannel"
+	GetChannelConnectionResponseDtoProviderIDMaqsam           GetChannelConnectionResponseDtoProviderID = "maqsam"
+	GetChannelConnectionResponseDtoProviderIDTermii           GetChannelConnectionResponseDtoProviderID = "termii"
+	GetChannelConnectionResponseDtoProviderIDAfricasTalking   GetChannelConnectionResponseDtoProviderID = "africas-talking"
+	GetChannelConnectionResponseDtoProviderIDNovuSms          GetChannelConnectionResponseDtoProviderID = "novu-sms"
+	GetChannelConnectionResponseDtoProviderIDSendchamp        GetChannelConnectionResponseDtoProviderID = "sendchamp"
+	GetChannelConnectionResponseDtoProviderIDGenericSms       GetChannelConnectionResponseDtoProviderID = "generic-sms"
+	GetChannelConnectionResponseDtoProviderIDClicksend        GetChannelConnectionResponseDtoProviderID = "clicksend"
+	GetChannelConnectionResponseDtoProviderIDBandwidth        GetChannelConnectionResponseDtoProviderID = "bandwidth"
+	GetChannelConnectionResponseDtoProviderIDMessagebird      GetChannelConnectionResponseDtoProviderID = "messagebird"
+	GetChannelConnectionResponseDtoProviderIDSimpletexting    GetChannelConnectionResponseDtoProviderID = "simpletexting"
+	GetChannelConnectionResponseDtoProviderIDAzureSms         GetChannelConnectionResponseDtoProviderID = "azure-sms"
+	GetChannelConnectionResponseDtoProviderIDRingCentral      GetChannelConnectionResponseDtoProviderID = "ring-central"
+	GetChannelConnectionResponseDtoProviderIDBrevoSms         GetChannelConnectionResponseDtoProviderID = "brevo-sms"
+	GetChannelConnectionResponseDtoProviderIDEazySms          GetChannelConnectionResponseDtoProviderID = "eazy-sms"
+	GetChannelConnectionResponseDtoProviderIDMobishastra      GetChannelConnectionResponseDtoProviderID = "mobishastra"
+	GetChannelConnectionResponseDtoProviderIDAfroMessage      GetChannelConnectionResponseDtoProviderID = "afro-message"
+	GetChannelConnectionResponseDtoProviderIDUnifonic         GetChannelConnectionResponseDtoProviderID = "unifonic"
+	GetChannelConnectionResponseDtoProviderIDSmsmode          GetChannelConnectionResponseDtoProviderID = "smsmode"
+	GetChannelConnectionResponseDtoProviderIDImedia           GetChannelConnectionResponseDtoProviderID = "imedia"
+	GetChannelConnectionResponseDtoProviderIDSinch            GetChannelConnectionResponseDtoProviderID = "sinch"
+	GetChannelConnectionResponseDtoProviderIDIsendproSms      GetChannelConnectionResponseDtoProviderID = "isendpro-sms"
+	GetChannelConnectionResponseDtoProviderIDCmTelecom        GetChannelConnectionResponseDtoProviderID = "cm-telecom"
+	GetChannelConnectionResponseDtoProviderIDRuachSms         GetChannelConnectionResponseDtoProviderID = "ruach-sms"
+	GetChannelConnectionResponseDtoProviderIDFcm              GetChannelConnectionResponseDtoProviderID = "fcm"
+	GetChannelConnectionResponseDtoProviderIDApns             GetChannelConnectionResponseDtoProviderID = "apns"
+	GetChannelConnectionResponseDtoProviderIDExpo             GetChannelConnectionResponseDtoProviderID = "expo"
+	GetChannelConnectionResponseDtoProviderIDOneSignal        GetChannelConnectionResponseDtoProviderID = "one-signal"
+	GetChannelConnectionResponseDtoProviderIDPushpad          GetChannelConnectionResponseDtoProviderID = "pushpad"
+	GetChannelConnectionResponseDtoProviderIDPushWebhook      GetChannelConnectionResponseDtoProviderID = "push-webhook"
+	GetChannelConnectionResponseDtoProviderIDPusherBeams      GetChannelConnectionResponseDtoProviderID = "pusher-beams"
+	GetChannelConnectionResponseDtoProviderIDAppio            GetChannelConnectionResponseDtoProviderID = "appio"
+	GetChannelConnectionResponseDtoProviderIDNovu             GetChannelConnectionResponseDtoProviderID = "novu"
+	GetChannelConnectionResponseDtoProviderIDSlack            GetChannelConnectionResponseDtoProviderID = "slack"
+	GetChannelConnectionResponseDtoProviderIDDiscord          GetChannelConnectionResponseDtoProviderID = "discord"
+	GetChannelConnectionResponseDtoProviderIDMsteams          GetChannelConnectionResponseDtoProviderID = "msteams"
+	GetChannelConnectionResponseDtoProviderIDWebexMessaging   GetChannelConnectionResponseDtoProviderID = "webex-messaging"
+	GetChannelConnectionResponseDtoProviderIDMattermost       GetChannelConnectionResponseDtoProviderID = "mattermost"
+	GetChannelConnectionResponseDtoProviderIDRyver            GetChannelConnectionResponseDtoProviderID = "ryver"
+	GetChannelConnectionResponseDtoProviderIDZulip            GetChannelConnectionResponseDtoProviderID = "zulip"
+	GetChannelConnectionResponseDtoProviderIDGrafanaOnCall    GetChannelConnectionResponseDtoProviderID = "grafana-on-call"
+	GetChannelConnectionResponseDtoProviderIDGetstream        GetChannelConnectionResponseDtoProviderID = "getstream"
+	GetChannelConnectionResponseDtoProviderIDRocketChat       GetChannelConnectionResponseDtoProviderID = "rocket-chat"
+	GetChannelConnectionResponseDtoProviderIDWhatsappBusiness GetChannelConnectionResponseDtoProviderID = "whatsapp-business"
+	GetChannelConnectionResponseDtoProviderIDLine             GetChannelConnectionResponseDtoProviderID = "line"
+	GetChannelConnectionResponseDtoProviderIDChatWebhook      GetChannelConnectionResponseDtoProviderID = "chat-webhook"
+	GetChannelConnectionResponseDtoProviderIDNovuSlack        GetChannelConnectionResponseDtoProviderID = "novu-slack"
+	GetChannelConnectionResponseDtoProviderIDTelegram         GetChannelConnectionResponseDtoProviderID = "telegram"
+	GetChannelConnectionResponseDtoProviderIDSendblue         GetChannelConnectionResponseDtoProviderID = "sendblue"
+	GetChannelConnectionResponseDtoProviderIDNovuWebChat      GetChannelConnectionResponseDtoProviderID = "novu-web-chat"
+	GetChannelConnectionResponseDtoProviderIDAnthropic        GetChannelConnectionResponseDtoProviderID = "anthropic"
+	GetChannelConnectionResponseDtoProviderIDNovuAnthropic    GetChannelConnectionResponseDtoProviderID = "novu-anthropic"
+	GetChannelConnectionResponseDtoProviderIDAnthropicAws     GetChannelConnectionResponseDtoProviderID = "anthropic-aws"
+	GetChannelConnectionResponseDtoProviderIDPagerduty        GetChannelConnectionResponseDtoProviderID = "pagerduty"
+	GetChannelConnectionResponseDtoProviderIDOpsgenie         GetChannelConnectionResponseDtoProviderID = "opsgenie"
+	GetChannelConnectionResponseDtoProviderIDGrafana          GetChannelConnectionResponseDtoProviderID = "grafana"
+	GetChannelConnectionResponseDtoProviderIDToolWebhook      GetChannelConnectionResponseDtoProviderID = "tool-webhook"
 )
 
-func (e ProviderID) ToPointer() *ProviderID {
+func (e GetChannelConnectionResponseDtoProviderID) ToPointer() *GetChannelConnectionResponseDtoProviderID {
 	return &e
 }
-func (e *ProviderID) UnmarshalJSON(data []byte) error {
+func (e *GetChannelConnectionResponseDtoProviderID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
 	}
 	switch v {
+	case "anypost":
+		fallthrough
 	case "emailjs":
 		fallthrough
 	case "mailgun":
@@ -260,6 +275,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "cm-telecom":
 		fallthrough
+	case "ruach-sms":
+		fallthrough
 	case "fcm":
 		fallthrough
 	case "apns":
@@ -284,6 +301,8 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "msteams":
 		fallthrough
+	case "webex-messaging":
+		fallthrough
 	case "mattermost":
 		fallthrough
 	case "ryver":
@@ -298,21 +317,35 @@ func (e *ProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "line":
+		fallthrough
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
 		fallthrough
 	case "telegram":
 		fallthrough
+	case "sendblue":
+		fallthrough
+	case "novu-web-chat":
+		fallthrough
 	case "anthropic":
 		fallthrough
 	case "novu-anthropic":
 		fallthrough
 	case "anthropic-aws":
-		*e = ProviderID(v)
+		fallthrough
+	case "pagerduty":
+		fallthrough
+	case "opsgenie":
+		fallthrough
+	case "grafana":
+		fallthrough
+	case "tool-webhook":
+		*e = GetChannelConnectionResponseDtoProviderID(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for ProviderID: %v", v)
+		return fmt.Errorf("invalid value for GetChannelConnectionResponseDtoProviderID: %v", v)
 	}
 }
 
@@ -322,7 +355,7 @@ type GetChannelConnectionResponseDto struct {
 	// The channel type (email, sms, push, chat, etc.).
 	Channel *Channel `json:"channel"`
 	// The provider identifier (e.g., sendgrid, twilio, slack, etc.).
-	ProviderID *ProviderID `json:"providerId"`
+	ProviderID *GetChannelConnectionResponseDtoProviderID `json:"providerId"`
 	// The identifier of the integration to use for this channel endpoint.
 	IntegrationIdentifier *string `json:"integrationIdentifier"`
 	// The subscriber ID to which the channel connection is linked
@@ -351,7 +384,7 @@ func (g *GetChannelConnectionResponseDto) GetChannel() *Channel {
 	return g.Channel
 }
 
-func (g *GetChannelConnectionResponseDto) GetProviderID() *ProviderID {
+func (g *GetChannelConnectionResponseDto) GetProviderID() *GetChannelConnectionResponseDtoProviderID {
 	if g == nil {
 		return nil
 	}

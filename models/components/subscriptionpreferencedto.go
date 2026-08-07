@@ -80,7 +80,7 @@ type SubscriptionPreferenceDto struct {
 	Workflow *SubscriptionPreferenceDtoWorkflow `json:"workflow,omitempty"`
 	// Whether the preference is enabled
 	Enabled bool `json:"enabled"`
-	// Optional condition using JSON Logic rules
+	// Optional JSON Logic condition evaluated against the trigger payload at fan-out time (for example, `{ "var": "payload.tier" }`)
 	Condition map[string]any `json:"condition,omitempty"`
 }
 

@@ -22,3 +22,4 @@ value := components.ChannelInApp
 | `ChannelSms`   | sms            |
 | `ChannelChat`  | chat           |
 | `ChannelPush`  | push           |
+| `ChannelTool`  | tool           |

@@ -19,3 +19,5 @@ value := components.DependencyReasonEnumLayoutRequiredForWorkflow
 | ----------------------------------------------- | ----------------------------------------------- |
 | `DependencyReasonEnumLayoutRequiredForWorkflow` | LAYOUT_REQUIRED_FOR_WORKFLOW                    |
 | `DependencyReasonEnumLayoutExistsInTarget`      | LAYOUT_EXISTS_IN_TARGET                         |
+| `DependencyReasonEnumAgentRequiredForWorkflow`  | AGENT_REQUIRED_FOR_WORKFLOW                     |
+| `DependencyReasonEnumAgentExistsInTarget`       | AGENT_EXISTS_IN_TARGET                          |

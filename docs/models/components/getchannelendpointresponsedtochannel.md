@@ -22,3 +22,4 @@ value := components.GetChannelEndpointResponseDtoChannelInApp
 | `GetChannelEndpointResponseDtoChannelSms`   | sms                                         |
 | `GetChannelEndpointResponseDtoChannelChat`  | chat                                        |
 | `GetChannelEndpointResponseDtoChannelPush`  | push                                        |
+| `GetChannelEndpointResponseDtoChannelTool`  | tool                                        |

@@ -83,6 +83,8 @@ type ChatStepUpsertDto struct {
 	Type StepTypeEnum `json:"type"`
 	// Control values for the Chat step.
 	ControlValues *ChatStepUpsertDtoControlValues `json:"controlValues,omitempty"`
+	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`). Omit to leave unchanged; pass null to delete all provider overrides; pass an object to replace the full set.
+	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
 }
 
 func (c ChatStepUpsertDto) MarshalJSON() ([]byte, error) {
@@ -129,4 +131,11 @@ func (c *ChatStepUpsertDto) GetControlValues() *ChatStepUpsertDtoControlValues {
 		return nil
 	}
 	return c.ControlValues
+}
+
+func (c *ChatStepUpsertDto) GetProviderOverrides() map[string]map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.ProviderOverrides
 }

@@ -15,6 +15,8 @@ type TopicSubscriptionResponseDto struct {
 	Subscriber SubscriberDto `json:"subscriber"`
 	// Context keys that scope this subscription (e.g., tenant:org-a, project:proj-123)
 	ContextKeys []string `json:"contextKeys,omitempty"`
+	// The preferences for workflows in this subscription
+	Preferences []SubscriptionPreferenceDto `json:"preferences,omitempty"`
 }
 
 func (t *TopicSubscriptionResponseDto) GetID() string {
@@ -57,4 +59,11 @@ func (t *TopicSubscriptionResponseDto) GetContextKeys() []string {
 		return nil
 	}
 	return t.ContextKeys
+}
+
+func (t *TopicSubscriptionResponseDto) GetPreferences() []SubscriptionPreferenceDto {
+	if t == nil {
+		return nil
+	}
+	return t.Preferences
 }

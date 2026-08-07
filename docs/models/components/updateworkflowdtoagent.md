@@ -1,0 +1,11 @@
+# UpdateWorkflowDtoAgent
+
+Optional agent assignment used to route this workflow through an agent's connected channels. Pass null to clear.
+
+
+## Fields
+
+| Field                                                                                                                    | Type                                                                                                                     | Required                                                                                                                 | Description                                                                                                              |
+| ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `Identifier`                                                                                                             | `string`                                                                                                                 | :heavy_check_mark:                                                                                                       | Public agent identifier used to route this workflow through an agent's connected channels.                               |
+| `Providers`                                                                                                              | map[string][components.UpdateWorkflowDtoProviders](../../models/components/updateworkflowdtoproviders.md)                | :heavy_minus_sign:                                                                                                       | Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported. |

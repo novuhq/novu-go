@@ -1,6 +1,6 @@
 # To
 
-The recipients list of people who will receive the notification. Maximum number of recipients can be 100.
+Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber.
 
 
 ## Supported Types
@@ -8,25 +8,19 @@ The recipients list of people who will receive the notification. Maximum number 
 ### 
 
 ```go
-to := components.CreateToArrayOfTo1([]components.To1{/* values here */})
+to := components.CreateToStr(string{/* values here */})
 ```
 
 ### 
 
 ```go
-to := components.CreateToStr(string{/* values here */})
+to := components.CreateToMapOfAny(map[string]any{/* values here */})
 ```
 
-### SubscriberPayloadDto
+### 
 
 ```go
-to := components.CreateToSubscriberPayloadDto(components.SubscriberPayloadDto{/* values here */})
-```
-
-### TopicPayloadDto
-
-```go
-to := components.CreateToTopicPayloadDto(components.TopicPayloadDto{/* values here */})
+to := components.CreateToArrayOfTo3([]components.To3{/* values here */})
 ```
 
 ## Union Discrimination
@@ -35,13 +29,11 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch to.Type {
-	case components.ToTypeArrayOfTo1:
-		// to.ArrayOfTo1 is populated
 	case components.ToTypeStr:
 		// to.Str is populated
-	case components.ToTypeSubscriberPayloadDto:
-		// to.SubscriberPayloadDto is populated
-	case components.ToTypeTopicPayloadDto:
-		// to.TopicPayloadDto is populated
+	case components.ToTypeMapOfAny:
+		// to.MapOfAny is populated
+	case components.ToTypeArrayOfTo3:
+		// to.ArrayOfTo3 is populated
 }
 ```

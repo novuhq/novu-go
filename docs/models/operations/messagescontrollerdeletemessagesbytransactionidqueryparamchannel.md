@@ -22,3 +22,4 @@ value := operations.MessagesControllerDeleteMessagesByTransactionIDQueryParamCha
 | `MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelSms`   | sms                                                                     |
 | `MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelChat`  | chat                                                                    |
 | `MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelPush`  | push                                                                    |
+| `MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelTool`  | tool                                                                    |

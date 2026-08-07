@@ -22,3 +22,4 @@ value := components.CreateIntegrationRequestDtoChannelInApp
 | `CreateIntegrationRequestDtoChannelSms`   | sms                                       |
 | `CreateIntegrationRequestDtoChannelChat`  | chat                                      |
 | `CreateIntegrationRequestDtoChannelPush`  | push                                      |
+| `CreateIntegrationRequestDtoChannelTool`  | tool                                      |

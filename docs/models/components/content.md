@@ -1,20 +1,26 @@
 # Content
 
-Content of the message, can be an email block or a string
+Replacement content. Exactly one of markdown, card, or toolApprovalCard.
 
 
 ## Supported Types
 
-### 
+### MarkdownReplyContentDto
 
 ```go
-content := components.CreateContentArrayOfEmailBlock([]components.EmailBlock{/* values here */})
+content := components.CreateContentMarkdownReplyContentDto(components.MarkdownReplyContentDto{/* values here */})
 ```
 
-### 
+### CardReplyContentDto
 
 ```go
-content := components.CreateContentStr(string{/* values here */})
+content := components.CreateContentCardReplyContentDto(components.CardReplyContentDto{/* values here */})
+```
+
+### ToolApprovalCardReplyContentDto
+
+```go
+content := components.CreateContentToolApprovalCardReplyContentDto(components.ToolApprovalCardReplyContentDto{/* values here */})
 ```
 
 ## Union Discrimination
@@ -23,9 +29,11 @@ Use the `Type` field to determine which variant is active, then access the corre
 
 ```go
 switch content.Type {
-	case components.ContentTypeArrayOfEmailBlock:
-		// content.ArrayOfEmailBlock is populated
-	case components.ContentTypeStr:
-		// content.Str is populated
+	case components.ContentTypeMarkdownReplyContentDto:
+		// content.MarkdownReplyContentDto is populated
+	case components.ContentTypeCardReplyContentDto:
+		// content.CardReplyContentDto is populated
+	case components.ContentTypeToolApprovalCardReplyContentDto:
+		// content.ToolApprovalCardReplyContentDto is populated
 }
 ```

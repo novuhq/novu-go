@@ -48,6 +48,14 @@ type EmailControlDto struct {
 	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
 	// Layout ID to use for the email. Null means no layout, undefined means default layout.
 	LayoutID *string `json:"layoutId,omitempty"`
+	// Sender name and email overrides for this step.
+	From *EmailFromControlDto `json:"from,omitempty"`
+	// When true, sender name/email use the primary email integration defaults and skip workflow agent defaults.
+	UseProviderDefaults *bool `json:"useProviderDefaults,omitempty"`
+	// Step-level Reply-To override. When unset, inherits the workflow agent reply-to.
+	ReplyTo *string `json:"replyTo,omitempty"`
+	// One-line inbox preview text shown next to the subject.
+	Preheader *string `json:"preheader,omitempty"`
 }
 
 func (e EmailControlDto) MarshalJSON() ([]byte, error) {
@@ -101,4 +109,32 @@ func (e *EmailControlDto) GetLayoutID() *string {
 		return nil
 	}
 	return e.LayoutID
+}
+
+func (e *EmailControlDto) GetFrom() *EmailFromControlDto {
+	if e == nil {
+		return nil
+	}
+	return e.From
+}
+
+func (e *EmailControlDto) GetUseProviderDefaults() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.UseProviderDefaults
+}
+
+func (e *EmailControlDto) GetReplyTo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ReplyTo
+}
+
+func (e *EmailControlDto) GetPreheader() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Preheader
 }

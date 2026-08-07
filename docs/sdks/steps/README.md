@@ -107,6 +107,8 @@ func main() {
                 // res.GeneratePreviewResponseDto.Result.Eight is populated
             case components.GeneratePreviewResponseDtoResultUnionTypeNine:
                 // res.GeneratePreviewResponseDto.Result.Nine is populated
+            case components.GeneratePreviewResponseDtoResultUnionTypeTen:
+                // res.GeneratePreviewResponseDto.Result.Ten is populated
         }
 
     }

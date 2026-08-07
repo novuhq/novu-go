@@ -2,11 +2,118 @@
 
 package components
 
+import (
+	"errors"
+	"fmt"
+	"github.com/novuhq/novu-go/v3/internal/utils"
+)
+
+// LinkChannelEndpointRequestDtoContext2 - Rich context object with id and optional data
+type LinkChannelEndpointRequestDtoContext2 struct {
+	ID string `json:"id"`
+	// Optional additional context data
+	Data map[string]any `json:"data,omitempty"`
+}
+
+func (l LinkChannelEndpointRequestDtoContext2) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *LinkChannelEndpointRequestDtoContext2) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"id"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (l *LinkChannelEndpointRequestDtoContext2) GetID() string {
+	if l == nil {
+		return ""
+	}
+	return l.ID
+}
+
+func (l *LinkChannelEndpointRequestDtoContext2) GetData() map[string]any {
+	if l == nil {
+		return nil
+	}
+	return l.Data
+}
+
+// #region class-body-linkchannelendpointrequestdtocontext2
+// #endregion class-body-linkchannelendpointrequestdtocontext2
+
+type LinkChannelEndpointRequestDtoContextType string
+
+const (
+	LinkChannelEndpointRequestDtoContextTypeStr                                   LinkChannelEndpointRequestDtoContextType = "str"
+	LinkChannelEndpointRequestDtoContextTypeLinkChannelEndpointRequestDtoContext2 LinkChannelEndpointRequestDtoContextType = "LinkChannelEndpointRequestDto_context_2"
+)
+
+type LinkChannelEndpointRequestDtoContext struct {
+	Str                                   *string                                `queryParam:"inline" union:"member"`
+	LinkChannelEndpointRequestDtoContext2 *LinkChannelEndpointRequestDtoContext2 `queryParam:"inline" union:"member"`
+
+	Type LinkChannelEndpointRequestDtoContextType
+}
+
+func CreateLinkChannelEndpointRequestDtoContextStr(str string) LinkChannelEndpointRequestDtoContext {
+	typ := LinkChannelEndpointRequestDtoContextTypeStr
+
+	return LinkChannelEndpointRequestDtoContext{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateLinkChannelEndpointRequestDtoContextLinkChannelEndpointRequestDtoContext2(linkChannelEndpointRequestDtoContext2 LinkChannelEndpointRequestDtoContext2) LinkChannelEndpointRequestDtoContext {
+	typ := LinkChannelEndpointRequestDtoContextTypeLinkChannelEndpointRequestDtoContext2
+
+	return LinkChannelEndpointRequestDtoContext{
+		LinkChannelEndpointRequestDtoContext2: &linkChannelEndpointRequestDtoContext2,
+		Type:                                  typ,
+	}
+}
+
+func (u *LinkChannelEndpointRequestDtoContext) UnmarshalJSON(data []byte) error {
+
+	var linkChannelEndpointRequestDtoContext2 LinkChannelEndpointRequestDtoContext2 = LinkChannelEndpointRequestDtoContext2{}
+	if err := utils.UnmarshalJSON(data, &linkChannelEndpointRequestDtoContext2, "", true, nil); err == nil {
+		u.LinkChannelEndpointRequestDtoContext2 = &linkChannelEndpointRequestDtoContext2
+		u.Type = LinkChannelEndpointRequestDtoContextTypeLinkChannelEndpointRequestDtoContext2
+		return nil
+	}
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = LinkChannelEndpointRequestDtoContextTypeStr
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for LinkChannelEndpointRequestDtoContext", string(data))
+}
+
+func (u LinkChannelEndpointRequestDtoContext) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.LinkChannelEndpointRequestDtoContext2 != nil {
+		return utils.MarshalJSON(u.LinkChannelEndpointRequestDtoContext2, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type LinkChannelEndpointRequestDtoContext: all fields are null")
+}
+
 type LinkChannelEndpointRequestDto struct {
 	// Integration identifier for the chat provider integration
 	IntegrationIdentifier string `json:"integrationIdentifier"`
 	// External subscriber identifier to link to their chat identity
-	SubscriberID string `json:"subscriberId"`
+	SubscriberID string                                          `json:"subscriberId"`
+	Context      map[string]LinkChannelEndpointRequestDtoContext `json:"context,omitempty"`
+	// HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation enabled.
+	ContextHash *string `json:"contextHash,omitempty"`
 }
 
 func (l *LinkChannelEndpointRequestDto) GetIntegrationIdentifier() string {
@@ -21,4 +128,18 @@ func (l *LinkChannelEndpointRequestDto) GetSubscriberID() string {
 		return ""
 	}
 	return l.SubscriberID
+}
+
+func (l *LinkChannelEndpointRequestDto) GetContext() map[string]LinkChannelEndpointRequestDtoContext {
+	if l == nil {
+		return nil
+	}
+	return l.Context
+}
+
+func (l *LinkChannelEndpointRequestDto) GetContextHash() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ContextHash
 }

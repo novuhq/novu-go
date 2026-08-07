@@ -22,6 +22,7 @@ value := components.ActivityNotificationJobResponseDtoTypeInApp
 | `ActivityNotificationJobResponseDtoTypeSms`         | sms                                                 |
 | `ActivityNotificationJobResponseDtoTypeChat`        | chat                                                |
 | `ActivityNotificationJobResponseDtoTypePush`        | push                                                |
+| `ActivityNotificationJobResponseDtoTypeTool`        | tool                                                |
 | `ActivityNotificationJobResponseDtoTypeDigest`      | digest                                              |
 | `ActivityNotificationJobResponseDtoTypeTrigger`     | trigger                                             |
 | `ActivityNotificationJobResponseDtoTypeDelay`       | delay                                               |

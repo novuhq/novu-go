@@ -9,6 +9,39 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+type WorkflowResponseDtoProviders struct {
+	ReplyTo *string `json:"replyTo,omitempty"`
+}
+
+func (w *WorkflowResponseDtoProviders) GetReplyTo() *string {
+	if w == nil {
+		return nil
+	}
+	return w.ReplyTo
+}
+
+// WorkflowResponseDtoAgent - Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned.
+type WorkflowResponseDtoAgent struct {
+	// Public agent identifier used to route this workflow through an agent's connected channels.
+	Identifier string `json:"identifier"`
+	// Optional per-provider overrides keyed by providerId (e.g. novu-email-agent). Today only Novu Email replyTo is supported.
+	Providers map[string]WorkflowResponseDtoProviders `json:"providers,omitempty"`
+}
+
+func (w *WorkflowResponseDtoAgent) GetIdentifier() string {
+	if w == nil {
+		return ""
+	}
+	return w.Identifier
+}
+
+func (w *WorkflowResponseDtoAgent) GetProviders() map[string]WorkflowResponseDtoProviders {
+	if w == nil {
+		return nil
+	}
+	return w.Providers
+}
+
 // WorkflowResponseDtoUpdatedBy - User who last updated the workflow
 type WorkflowResponseDtoUpdatedBy struct {
 	// User ID
@@ -102,6 +135,7 @@ const (
 	WorkflowResponseDtoStepsTypeCustom      WorkflowResponseDtoStepsType = "custom"
 	WorkflowResponseDtoStepsTypeThrottle    WorkflowResponseDtoStepsType = "throttle"
 	WorkflowResponseDtoStepsTypeHTTPRequest WorkflowResponseDtoStepsType = "http_request"
+	WorkflowResponseDtoStepsTypeTool        WorkflowResponseDtoStepsType = "tool"
 )
 
 type WorkflowResponseDtoSteps struct {
@@ -115,6 +149,7 @@ type WorkflowResponseDtoSteps struct {
 	CustomStepResponseDto      *CustomStepResponseDto      `queryParam:"inline" union:"member"`
 	ThrottleStepResponseDto    *ThrottleStepResponseDto    `queryParam:"inline" union:"member"`
 	HTTPRequestStepResponseDto *HTTPRequestStepResponseDto `queryParam:"inline" union:"member"`
+	ToolStepResponseDto        *ToolStepResponseDto        `queryParam:"inline" union:"member"`
 
 	Type WorkflowResponseDtoStepsType
 }
@@ -239,6 +274,18 @@ func CreateWorkflowResponseDtoStepsHTTPRequest(httpRequest HTTPRequestStepRespon
 	}
 }
 
+func CreateWorkflowResponseDtoStepsTool(tool ToolStepResponseDto) WorkflowResponseDtoSteps {
+	typ := WorkflowResponseDtoStepsTypeTool
+
+	typStr := StepTypeEnum(typ)
+	tool.Type = typStr
+
+	return WorkflowResponseDtoSteps{
+		ToolStepResponseDto: &tool,
+		Type:                typ,
+	}
+}
+
 func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -341,6 +388,15 @@ func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
 		u.HTTPRequestStepResponseDto = httpRequestStepResponseDto
 		u.Type = WorkflowResponseDtoStepsTypeHTTPRequest
 		return nil
+	case "tool":
+		toolStepResponseDto := new(ToolStepResponseDto)
+		if err := utils.UnmarshalJSON(data, &toolStepResponseDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == tool) type ToolStepResponseDto within WorkflowResponseDtoSteps: %w", string(data), err)
+		}
+
+		u.ToolStepResponseDto = toolStepResponseDto
+		u.Type = WorkflowResponseDtoStepsTypeTool
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for WorkflowResponseDtoSteps", string(data))
@@ -387,6 +443,10 @@ func (u WorkflowResponseDtoSteps) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.HTTPRequestStepResponseDto, "", true)
 	}
 
+	if u.ToolStepResponseDto != nil {
+		return utils.MarshalJSON(u.ToolStepResponseDto, "", true)
+	}
+
 	return nil, errors.New("could not marshal union type WorkflowResponseDtoSteps: all fields are null")
 }
 
@@ -405,6 +465,8 @@ type WorkflowResponseDto struct {
 	PayloadSchema map[string]any `json:"payloadSchema,omitempty"`
 	// Enable or disable translations for this workflow
 	IsTranslationEnabled *bool `default:"false" json:"isTranslationEnabled"`
+	// Optional agent assignment used to route this workflow through an agent's connected channels. Null when unassigned.
+	Agent *WorkflowResponseDtoAgent `json:"agent,omitempty"`
 	// Database identifier of the workflow
 	ID string `json:"_id"`
 	// Workflow identifier
@@ -497,6 +559,13 @@ func (w *WorkflowResponseDto) GetIsTranslationEnabled() *bool {
 		return nil
 	}
 	return w.IsTranslationEnabled
+}
+
+func (w *WorkflowResponseDto) GetAgent() *WorkflowResponseDtoAgent {
+	if w == nil {
+		return nil
+	}
+	return w.Agent
 }
 
 func (w *WorkflowResponseDto) GetID() string {

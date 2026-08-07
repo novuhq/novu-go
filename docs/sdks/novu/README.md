@@ -48,8 +48,10 @@ func main() {
                 "text": "string",
             },
         },
+        BridgeURL: v3.Pointer("https://your-tunnel.novu.co/api/novu"),
         Overrides: &components.Overrides{},
-        To: components.CreateToStr(
+        AgentID: v3.Pointer("support-agent"),
+        To: components.CreateTriggerEventRequestDtoToStr(
             "SUBSCRIBER_ID",
         ),
         Actor: v3.Pointer(components.CreateActorStr(
@@ -195,6 +197,7 @@ func main() {
                 },
             },
         },
+        AgentID: v3.Pointer("support-agent"),
         Actor: v3.Pointer(components.CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(
             components.SubscriberPayloadDto{
                 FirstName: v3.Pointer("John"),
@@ -284,7 +287,7 @@ func main() {
                     },
                 },
                 Overrides: &components.Overrides{},
-                To: components.CreateToStr(
+                To: components.CreateTriggerEventRequestDtoToStr(
                     "SUBSCRIBER_ID",
                 ),
             },
@@ -297,7 +300,7 @@ func main() {
                     },
                 },
                 Overrides: &components.Overrides{},
-                To: components.CreateToStr(
+                To: components.CreateTriggerEventRequestDtoToStr(
                     "SUBSCRIBER_ID",
                 ),
             },
@@ -310,7 +313,7 @@ func main() {
                     },
                 },
                 Overrides: &components.Overrides{},
-                To: components.CreateToStr(
+                To: components.CreateTriggerEventRequestDtoToStr(
                     "SUBSCRIBER_ID",
                 ),
             },

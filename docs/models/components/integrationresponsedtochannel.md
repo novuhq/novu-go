@@ -22,3 +22,4 @@ value := components.IntegrationResponseDtoChannelInApp
 | `IntegrationResponseDtoChannelSms`   | sms                                  |
 | `IntegrationResponseDtoChannelChat`  | chat                                 |
 | `IntegrationResponseDtoChannelPush`  | push                                 |
+| `IntegrationResponseDtoChannelTool`  | tool                                 |

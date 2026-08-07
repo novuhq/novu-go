@@ -22,3 +22,4 @@ value := operations.ChannelInApp
 | `ChannelSms`   | sms            |
 | `ChannelChat`  | chat           |
 | `ChannelPush`  | push           |
+| `ChannelTool`  | tool           |

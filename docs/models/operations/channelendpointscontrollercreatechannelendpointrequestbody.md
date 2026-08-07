@@ -47,6 +47,48 @@ channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateC
 channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyTelegramChat(components.CreateTelegramChatEndpointDto{/* values here */})
 ```
 
+### CreateWebexRoomEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyWebexRoom(components.CreateWebexRoomEndpointDto{/* values here */})
+```
+
+### CreateWebexPersonEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyWebexPerson(components.CreateWebexPersonEndpointDto{/* values here */})
+```
+
+### CreateLineUserEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyLineUser(components.CreateLineUserEndpointDto{/* values here */})
+```
+
+### CreatePagerDutyServiceEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyPagerdutyService(components.CreatePagerDutyServiceEndpointDto{/* values here */})
+```
+
+### CreateOpsgenieIntegrationEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyOpsgenieIntegration(components.CreateOpsgenieIntegrationEndpointDto{/* values here */})
+```
+
+### CreateGrafanaOnCallIntegrationEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyGrafanaOncallIntegration(components.CreateGrafanaOnCallIntegrationEndpointDto{/* values here */})
+```
+
+### CreateToolWebhookEndpointDto
+
+```go
+channelEndpointsControllerCreateChannelEndpointRequestBody := operations.CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyToolWebhook(components.CreateToolWebhookEndpointDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -67,5 +109,19 @@ switch channelEndpointsControllerCreateChannelEndpointRequestBody.Type {
 		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateMsTeamsUserEndpointDto is populated
 	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat:
 		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateTelegramChatEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexRoom:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateWebexRoomEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexPerson:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateWebexPersonEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeLineUser:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateLineUserEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePagerdutyService:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreatePagerDutyServiceEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeOpsgenieIntegration:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateOpsgenieIntegrationEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeGrafanaOncallIntegration:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateGrafanaOnCallIntegrationEndpointDto is populated
+	case operations.ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeToolWebhook:
+		// channelEndpointsControllerCreateChannelEndpointRequestBody.CreateToolWebhookEndpointDto is populated
 }
 ```

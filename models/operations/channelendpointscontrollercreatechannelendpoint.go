@@ -13,24 +13,38 @@ import (
 type ChannelEndpointsControllerCreateChannelEndpointRequestBodyType string
 
 const (
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackChannel   ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "slack_channel"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackUser      ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "slack_user"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebhook        ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "webhook"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePhone          ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "phone"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsChannel ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_channel"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser    ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_user"
-	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat   ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "telegram_chat"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackChannel             ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "slack_channel"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeSlackUser                ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "slack_user"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebhook                  ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "webhook"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePhone                    ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "phone"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsChannel           ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_channel"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeMsTeamsUser              ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "ms_teams_user"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat             ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "telegram_chat"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexRoom                ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "webex_room"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexPerson              ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "webex_person"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeLineUser                 ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "line_user"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePagerdutyService         ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "pagerduty_service"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeOpsgenieIntegration      ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "opsgenie_integration"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeGrafanaOncallIntegration ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "grafana_oncall_integration"
+	ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeToolWebhook              ChannelEndpointsControllerCreateChannelEndpointRequestBodyType = "tool_webhook"
 )
 
 // ChannelEndpointsControllerCreateChannelEndpointRequestBody - Channel endpoint creation request. The structure varies based on the type field.
 type ChannelEndpointsControllerCreateChannelEndpointRequestBody struct {
-	CreateSlackChannelEndpointDto   *components.CreateSlackChannelEndpointDto   `queryParam:"inline" union:"member"`
-	CreateSlackUserEndpointDto      *components.CreateSlackUserEndpointDto      `queryParam:"inline" union:"member"`
-	CreateWebhookEndpointDto        *components.CreateWebhookEndpointDto        `queryParam:"inline" union:"member"`
-	CreatePhoneEndpointDto          *components.CreatePhoneEndpointDto          `queryParam:"inline" union:"member"`
-	CreateMsTeamsChannelEndpointDto *components.CreateMsTeamsChannelEndpointDto `queryParam:"inline" union:"member"`
-	CreateMsTeamsUserEndpointDto    *components.CreateMsTeamsUserEndpointDto    `queryParam:"inline" union:"member"`
-	CreateTelegramChatEndpointDto   *components.CreateTelegramChatEndpointDto   `queryParam:"inline" union:"member"`
+	CreateSlackChannelEndpointDto             *components.CreateSlackChannelEndpointDto             `queryParam:"inline" union:"member"`
+	CreateSlackUserEndpointDto                *components.CreateSlackUserEndpointDto                `queryParam:"inline" union:"member"`
+	CreateWebhookEndpointDto                  *components.CreateWebhookEndpointDto                  `queryParam:"inline" union:"member"`
+	CreatePhoneEndpointDto                    *components.CreatePhoneEndpointDto                    `queryParam:"inline" union:"member"`
+	CreateMsTeamsChannelEndpointDto           *components.CreateMsTeamsChannelEndpointDto           `queryParam:"inline" union:"member"`
+	CreateMsTeamsUserEndpointDto              *components.CreateMsTeamsUserEndpointDto              `queryParam:"inline" union:"member"`
+	CreateTelegramChatEndpointDto             *components.CreateTelegramChatEndpointDto             `queryParam:"inline" union:"member"`
+	CreateWebexRoomEndpointDto                *components.CreateWebexRoomEndpointDto                `queryParam:"inline" union:"member"`
+	CreateWebexPersonEndpointDto              *components.CreateWebexPersonEndpointDto              `queryParam:"inline" union:"member"`
+	CreateLineUserEndpointDto                 *components.CreateLineUserEndpointDto                 `queryParam:"inline" union:"member"`
+	CreatePagerDutyServiceEndpointDto         *components.CreatePagerDutyServiceEndpointDto         `queryParam:"inline" union:"member"`
+	CreateOpsgenieIntegrationEndpointDto      *components.CreateOpsgenieIntegrationEndpointDto      `queryParam:"inline" union:"member"`
+	CreateGrafanaOnCallIntegrationEndpointDto *components.CreateGrafanaOnCallIntegrationEndpointDto `queryParam:"inline" union:"member"`
+	CreateToolWebhookEndpointDto              *components.CreateToolWebhookEndpointDto              `queryParam:"inline" union:"member"`
 
 	Type ChannelEndpointsControllerCreateChannelEndpointRequestBodyType
 }
@@ -119,6 +133,90 @@ func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyTelegramCha
 	}
 }
 
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyWebexRoom(webexRoom components.CreateWebexRoomEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexRoom
+
+	typStr := components.CreateWebexRoomEndpointDtoType(typ)
+	webexRoom.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateWebexRoomEndpointDto: &webexRoom,
+		Type:                       typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyWebexPerson(webexPerson components.CreateWebexPersonEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexPerson
+
+	typStr := components.CreateWebexPersonEndpointDtoType(typ)
+	webexPerson.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateWebexPersonEndpointDto: &webexPerson,
+		Type:                         typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyLineUser(lineUser components.CreateLineUserEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeLineUser
+
+	typStr := components.CreateLineUserEndpointDtoType(typ)
+	lineUser.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateLineUserEndpointDto: &lineUser,
+		Type:                      typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyPagerdutyService(pagerdutyService components.CreatePagerDutyServiceEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePagerdutyService
+
+	typStr := components.CreatePagerDutyServiceEndpointDtoType(typ)
+	pagerdutyService.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreatePagerDutyServiceEndpointDto: &pagerdutyService,
+		Type:                              typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyOpsgenieIntegration(opsgenieIntegration components.CreateOpsgenieIntegrationEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeOpsgenieIntegration
+
+	typStr := components.CreateOpsgenieIntegrationEndpointDtoType(typ)
+	opsgenieIntegration.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateOpsgenieIntegrationEndpointDto: &opsgenieIntegration,
+		Type:                                 typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyGrafanaOncallIntegration(grafanaOncallIntegration components.CreateGrafanaOnCallIntegrationEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeGrafanaOncallIntegration
+
+	typStr := components.CreateGrafanaOnCallIntegrationEndpointDtoType(typ)
+	grafanaOncallIntegration.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateGrafanaOnCallIntegrationEndpointDto: &grafanaOncallIntegration,
+		Type: typ,
+	}
+}
+
+func CreateChannelEndpointsControllerCreateChannelEndpointRequestBodyToolWebhook(toolWebhook components.CreateToolWebhookEndpointDto) ChannelEndpointsControllerCreateChannelEndpointRequestBody {
+	typ := ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeToolWebhook
+
+	typStr := components.CreateToolWebhookEndpointDtoType(typ)
+	toolWebhook.Type = typStr
+
+	return ChannelEndpointsControllerCreateChannelEndpointRequestBody{
+		CreateToolWebhookEndpointDto: &toolWebhook,
+		Type:                         typ,
+	}
+}
+
 func (u *ChannelEndpointsControllerCreateChannelEndpointRequestBody) UnmarshalJSON(data []byte) error {
 
 	type discriminator struct {
@@ -194,6 +292,69 @@ func (u *ChannelEndpointsControllerCreateChannelEndpointRequestBody) UnmarshalJS
 		u.CreateTelegramChatEndpointDto = createTelegramChatEndpointDto
 		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeTelegramChat
 		return nil
+	case "webex_room":
+		createWebexRoomEndpointDto := new(components.CreateWebexRoomEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createWebexRoomEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == webex_room) type components.CreateWebexRoomEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateWebexRoomEndpointDto = createWebexRoomEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexRoom
+		return nil
+	case "webex_person":
+		createWebexPersonEndpointDto := new(components.CreateWebexPersonEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createWebexPersonEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == webex_person) type components.CreateWebexPersonEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateWebexPersonEndpointDto = createWebexPersonEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeWebexPerson
+		return nil
+	case "line_user":
+		createLineUserEndpointDto := new(components.CreateLineUserEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createLineUserEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == line_user) type components.CreateLineUserEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateLineUserEndpointDto = createLineUserEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeLineUser
+		return nil
+	case "pagerduty_service":
+		createPagerDutyServiceEndpointDto := new(components.CreatePagerDutyServiceEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createPagerDutyServiceEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == pagerduty_service) type components.CreatePagerDutyServiceEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreatePagerDutyServiceEndpointDto = createPagerDutyServiceEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypePagerdutyService
+		return nil
+	case "opsgenie_integration":
+		createOpsgenieIntegrationEndpointDto := new(components.CreateOpsgenieIntegrationEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createOpsgenieIntegrationEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == opsgenie_integration) type components.CreateOpsgenieIntegrationEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateOpsgenieIntegrationEndpointDto = createOpsgenieIntegrationEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeOpsgenieIntegration
+		return nil
+	case "grafana_oncall_integration":
+		createGrafanaOnCallIntegrationEndpointDto := new(components.CreateGrafanaOnCallIntegrationEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createGrafanaOnCallIntegrationEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == grafana_oncall_integration) type components.CreateGrafanaOnCallIntegrationEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateGrafanaOnCallIntegrationEndpointDto = createGrafanaOnCallIntegrationEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeGrafanaOncallIntegration
+		return nil
+	case "tool_webhook":
+		createToolWebhookEndpointDto := new(components.CreateToolWebhookEndpointDto)
+		if err := utils.UnmarshalJSON(data, &createToolWebhookEndpointDto, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Type == tool_webhook) type components.CreateToolWebhookEndpointDto within ChannelEndpointsControllerCreateChannelEndpointRequestBody: %w", string(data), err)
+		}
+
+		u.CreateToolWebhookEndpointDto = createToolWebhookEndpointDto
+		u.Type = ChannelEndpointsControllerCreateChannelEndpointRequestBodyTypeToolWebhook
+		return nil
 	}
 
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ChannelEndpointsControllerCreateChannelEndpointRequestBody", string(data))
@@ -226,6 +387,34 @@ func (u ChannelEndpointsControllerCreateChannelEndpointRequestBody) MarshalJSON(
 
 	if u.CreateTelegramChatEndpointDto != nil {
 		return utils.MarshalJSON(u.CreateTelegramChatEndpointDto, "", true)
+	}
+
+	if u.CreateWebexRoomEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateWebexRoomEndpointDto, "", true)
+	}
+
+	if u.CreateWebexPersonEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateWebexPersonEndpointDto, "", true)
+	}
+
+	if u.CreateLineUserEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateLineUserEndpointDto, "", true)
+	}
+
+	if u.CreatePagerDutyServiceEndpointDto != nil {
+		return utils.MarshalJSON(u.CreatePagerDutyServiceEndpointDto, "", true)
+	}
+
+	if u.CreateOpsgenieIntegrationEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateOpsgenieIntegrationEndpointDto, "", true)
+	}
+
+	if u.CreateGrafanaOnCallIntegrationEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateGrafanaOnCallIntegrationEndpointDto, "", true)
+	}
+
+	if u.CreateToolWebhookEndpointDto != nil {
+		return utils.MarshalJSON(u.CreateToolWebhookEndpointDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ChannelEndpointsControllerCreateChannelEndpointRequestBody: all fields are null")
@@ -278,6 +467,34 @@ func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyM
 
 func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyTelegramChat() *components.CreateTelegramChatEndpointDto {
 	return c.GetRequestBody().CreateTelegramChatEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyWebexRoom() *components.CreateWebexRoomEndpointDto {
+	return c.GetRequestBody().CreateWebexRoomEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyWebexPerson() *components.CreateWebexPersonEndpointDto {
+	return c.GetRequestBody().CreateWebexPersonEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyLineUser() *components.CreateLineUserEndpointDto {
+	return c.GetRequestBody().CreateLineUserEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyPagerdutyService() *components.CreatePagerDutyServiceEndpointDto {
+	return c.GetRequestBody().CreatePagerDutyServiceEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyOpsgenieIntegration() *components.CreateOpsgenieIntegrationEndpointDto {
+	return c.GetRequestBody().CreateOpsgenieIntegrationEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyGrafanaOncallIntegration() *components.CreateGrafanaOnCallIntegrationEndpointDto {
+	return c.GetRequestBody().CreateGrafanaOnCallIntegrationEndpointDto
+}
+
+func (c *ChannelEndpointsControllerCreateChannelEndpointRequest) GetRequestBodyToolWebhook() *components.CreateToolWebhookEndpointDto {
+	return c.GetRequestBody().CreateToolWebhookEndpointDto
 }
 
 type ChannelEndpointsControllerCreateChannelEndpointResponse struct {

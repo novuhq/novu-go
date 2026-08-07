@@ -135,8 +135,10 @@ type CreateSlackUserEndpointDto struct {
 	// The unique identifier for the channel endpoint. If not provided, one will be generated automatically.
 	Identifier *string `json:"identifier,omitempty"`
 	// The subscriber ID to which the channel endpoint is linked
-	SubscriberID string                                       `json:"subscriberId"`
-	Context      map[string]CreateSlackUserEndpointDtoContext `json:"context,omitempty"`
+	SubscriberID string `json:"subscriberId"`
+	// When true, the subscriber is created if it does not exist yet (existing subscribers are never modified). When false or omitted, an unknown subscriberId returns 404.
+	CreateSubscriberIfMissing *bool                                        `default:"false" json:"createSubscriberIfMissing"`
+	Context                   map[string]CreateSlackUserEndpointDtoContext `json:"context,omitempty"`
 	// The identifier of the integration to use for this channel endpoint.
 	IntegrationIdentifier string `json:"integrationIdentifier"`
 	// The identifier of the channel connection to use for this channel endpoint.
@@ -170,6 +172,13 @@ func (c *CreateSlackUserEndpointDto) GetSubscriberID() string {
 		return ""
 	}
 	return c.SubscriberID
+}
+
+func (c *CreateSlackUserEndpointDto) GetCreateSubscriberIfMissing() *bool {
+	if c == nil {
+		return nil
+	}
+	return c.CreateSubscriberIfMissing
 }
 
 func (c *CreateSlackUserEndpointDto) GetContext() map[string]CreateSlackUserEndpointDtoContext {

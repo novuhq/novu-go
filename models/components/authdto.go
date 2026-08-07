@@ -3,7 +3,10 @@
 package components
 
 type AuthDto struct {
-	AccessToken string `json:"accessToken"`
+	AccessToken           string  `json:"accessToken"`
+	RefreshToken          *string `json:"refreshToken,omitempty"`
+	ExpiresAt             *string `json:"expiresAt,omitempty"`
+	RefreshTokenExpiresAt *string `json:"refreshTokenExpiresAt,omitempty"`
 }
 
 func (a *AuthDto) GetAccessToken() string {
@@ -11,4 +14,25 @@ func (a *AuthDto) GetAccessToken() string {
 		return ""
 	}
 	return a.AccessToken
+}
+
+func (a *AuthDto) GetRefreshToken() *string {
+	if a == nil {
+		return nil
+	}
+	return a.RefreshToken
+}
+
+func (a *AuthDto) GetExpiresAt() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ExpiresAt
+}
+
+func (a *AuthDto) GetRefreshTokenExpiresAt() *string {
+	if a == nil {
+		return nil
+	}
+	return a.RefreshTokenExpiresAt
 }

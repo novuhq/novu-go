@@ -165,6 +165,8 @@ type DigestStepResponseDto struct {
 	Controls DigestControlsMetadataResponseDto `json:"controls"`
 	// Control values for the digest step
 	ControlValues *DigestStepResponseDtoControlValues `json:"controlValues,omitempty"`
+	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`).
+	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
 	// JSON Schema for variables, follows the JSON Schema standard
 	Variables map[string]any `json:"variables"`
 	// Unique identifier of the step
@@ -212,6 +214,13 @@ func (d *DigestStepResponseDto) GetControlValues() *DigestStepResponseDtoControl
 		return nil
 	}
 	return d.ControlValues
+}
+
+func (d *DigestStepResponseDto) GetProviderOverrides() map[string]map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.ProviderOverrides
 }
 
 func (d *DigestStepResponseDto) GetVariables() map[string]any {

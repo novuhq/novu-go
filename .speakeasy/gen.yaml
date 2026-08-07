@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 3.18.0
+  version: 3.19.0
   additionalDependencies:
     github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false
@@ -45,6 +45,7 @@ go:
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: false
   forwardCompatibleUnionsByDefault: "false"
+  idiomaticMethodCollisionNames: false
   imports:
     option: openapi
     paths:
@@ -61,10 +62,12 @@ go:
   modulePath: ""
   multipartArrayFormat: legacy
   nullableOptionalWrapper: false
+  optionalMethodArguments: pointers
   outputModelSuffix: output
   packageName: github.com/novuhq/novu-go
   respectRequiredFields: false
   respectTitlesForPrimitiveUnionMembers: false
   responseFormat: envelope-http
   sdkPackageName: ""
+  unionGenerics: false
   unionStrategy: left-to-right

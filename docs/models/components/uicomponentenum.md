@@ -53,6 +53,7 @@ custom := components.UIComponentEnum("custom_value")
 | `UIComponentEnumSmsBody`                            | SMS_BODY                                            |
 | `UIComponentEnumChatBody`                           | CHAT_BODY                                           |
 | `UIComponentEnumPushBody`                           | PUSH_BODY                                           |
+| `UIComponentEnumToolBody`                           | TOOL_BODY                                           |
 | `UIComponentEnumPushSubject`                        | PUSH_SUBJECT                                        |
 | `UIComponentEnumQueryEditor`                        | QUERY_EDITOR                                        |
 | `UIComponentEnumData`                               | DATA                                                |

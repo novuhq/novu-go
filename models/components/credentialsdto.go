@@ -55,8 +55,10 @@ type CredentialsDto struct {
 	SigningSecret             *string     `json:"signingSecret,omitempty"`
 	OutboundIntegrationID     *string     `json:"outboundIntegrationId,omitempty"`
 	OutboundConnectedAt       *string     `json:"outboundConnectedAt,omitempty"`
-	UseFromAddressOverride    *bool       `json:"useFromAddressOverride,omitempty"`
-	FromAddressOverride       *string     `json:"fromAddressOverride,omitempty"`
+	// ISO timestamp marking Layer-2 What's next completion (Connected badge + guide hide). WhatsApp Business: stamped on post-connect Access Token rotation or manual confirm.
+	WhatsNextCompletedAt   *string `json:"whatsNextCompletedAt,omitempty"`
+	UseFromAddressOverride *bool   `json:"useFromAddressOverride,omitempty"`
+	FromAddressOverride    *string `json:"fromAddressOverride,omitempty"`
 	// Agent default shared inbox slug prefix used in `{emailSlugPrefix}-{agentId}@<shared-domain>`. Only meaningful on the NovuAgent email integration.
 	EmailSlugPrefix *string `json:"emailSlugPrefix,omitempty"`
 	// Claude Managed Agents: ID of the Anthropic environment tied to this integration. Hydrated by the API at integration provisioning time.
@@ -408,6 +410,13 @@ func (c *CredentialsDto) GetOutboundConnectedAt() *string {
 		return nil
 	}
 	return c.OutboundConnectedAt
+}
+
+func (c *CredentialsDto) GetWhatsNextCompletedAt() *string {
+	if c == nil {
+		return nil
+	}
+	return c.WhatsNextCompletedAt
 }
 
 func (c *CredentialsDto) GetUseFromAddressOverride() *bool {

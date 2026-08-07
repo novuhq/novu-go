@@ -5,6 +5,8 @@ package components
 type ConfigurationsDto struct {
 	InboundWebhookEnabled    *bool   `json:"inboundWebhookEnabled,omitempty"`
 	InboundWebhookSigningKey *string `json:"inboundWebhookSigningKey,omitempty"`
+	// JSON Schema describing the payload accepted by this integration.
+	PayloadSchema *string `json:"payloadSchema,omitempty"`
 }
 
 func (c *ConfigurationsDto) GetInboundWebhookEnabled() *bool {
@@ -19,4 +21,11 @@ func (c *ConfigurationsDto) GetInboundWebhookSigningKey() *string {
 		return nil
 	}
 	return c.InboundWebhookSigningKey
+}
+
+func (c *ConfigurationsDto) GetPayloadSchema() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PayloadSchema
 }

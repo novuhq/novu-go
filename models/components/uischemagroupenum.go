@@ -19,6 +19,7 @@ const (
 	UISchemaGroupEnumSms         UISchemaGroupEnum = "SMS"
 	UISchemaGroupEnumChat        UISchemaGroupEnum = "CHAT"
 	UISchemaGroupEnumPush        UISchemaGroupEnum = "PUSH"
+	UISchemaGroupEnumTool        UISchemaGroupEnum = "TOOL"
 	UISchemaGroupEnumSkip        UISchemaGroupEnum = "SKIP"
 	UISchemaGroupEnumLayout      UISchemaGroupEnum = "LAYOUT"
 	UISchemaGroupEnumHTTPRequest UISchemaGroupEnum = "HTTP_REQUEST"
@@ -48,6 +49,8 @@ func (e *UISchemaGroupEnum) UnmarshalJSON(data []byte) error {
 	case "CHAT":
 		fallthrough
 	case "PUSH":
+		fallthrough
+	case "TOOL":
 		fallthrough
 	case "SKIP":
 		fallthrough

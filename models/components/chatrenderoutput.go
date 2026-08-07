@@ -7,8 +7,10 @@ import (
 )
 
 type ChatRenderOutput struct {
-	// Body of the chat message
-	Body string `json:"body"`
+	// Body of the chat message. Mutually exclusive with `card`.
+	Body *string `json:"body,omitempty"`
+	// Rich Chat: compiled provider-agnostic card DSL. Mutually exclusive with `body`.
+	Card map[string]any `json:"card,omitempty"`
 }
 
 func (c ChatRenderOutput) MarshalJSON() ([]byte, error) {
@@ -16,15 +18,22 @@ func (c ChatRenderOutput) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ChatRenderOutput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"body"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (c *ChatRenderOutput) GetBody() string {
+func (c *ChatRenderOutput) GetBody() *string {
 	if c == nil {
-		return ""
+		return nil
 	}
 	return c.Body
+}
+
+func (c *ChatRenderOutput) GetCard() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Card
 }

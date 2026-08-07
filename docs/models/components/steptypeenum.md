@@ -22,6 +22,7 @@ value := components.StepTypeEnumInApp
 | `StepTypeEnumSms`         | sms                       |
 | `StepTypeEnumChat`        | chat                      |
 | `StepTypeEnumPush`        | push                      |
+| `StepTypeEnumTool`        | tool                      |
 | `StepTypeEnumDigest`      | digest                    |
 | `StepTypeEnumTrigger`     | trigger                   |
 | `StepTypeEnumDelay`       | delay                     |

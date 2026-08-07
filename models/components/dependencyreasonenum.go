@@ -13,6 +13,8 @@ type DependencyReasonEnum string
 const (
 	DependencyReasonEnumLayoutRequiredForWorkflow DependencyReasonEnum = "LAYOUT_REQUIRED_FOR_WORKFLOW"
 	DependencyReasonEnumLayoutExistsInTarget      DependencyReasonEnum = "LAYOUT_EXISTS_IN_TARGET"
+	DependencyReasonEnumAgentRequiredForWorkflow  DependencyReasonEnum = "AGENT_REQUIRED_FOR_WORKFLOW"
+	DependencyReasonEnumAgentExistsInTarget       DependencyReasonEnum = "AGENT_EXISTS_IN_TARGET"
 )
 
 func (e DependencyReasonEnum) ToPointer() *DependencyReasonEnum {
@@ -27,6 +29,10 @@ func (e *DependencyReasonEnum) UnmarshalJSON(data []byte) error {
 	case "LAYOUT_REQUIRED_FOR_WORKFLOW":
 		fallthrough
 	case "LAYOUT_EXISTS_IN_TARGET":
+		fallthrough
+	case "AGENT_REQUIRED_FOR_WORKFLOW":
+		fallthrough
+	case "AGENT_EXISTS_IN_TARGET":
 		*e = DependencyReasonEnum(v)
 		return nil
 	default:

@@ -15,6 +15,7 @@ const (
 	SubscriberChannelDtoProviderIDSlack            SubscriberChannelDtoProviderID = "slack"
 	SubscriberChannelDtoProviderIDDiscord          SubscriberChannelDtoProviderID = "discord"
 	SubscriberChannelDtoProviderIDMsteams          SubscriberChannelDtoProviderID = "msteams"
+	SubscriberChannelDtoProviderIDWebexMessaging   SubscriberChannelDtoProviderID = "webex-messaging"
 	SubscriberChannelDtoProviderIDMattermost       SubscriberChannelDtoProviderID = "mattermost"
 	SubscriberChannelDtoProviderIDRyver            SubscriberChannelDtoProviderID = "ryver"
 	SubscriberChannelDtoProviderIDZulip            SubscriberChannelDtoProviderID = "zulip"
@@ -22,9 +23,12 @@ const (
 	SubscriberChannelDtoProviderIDGetstream        SubscriberChannelDtoProviderID = "getstream"
 	SubscriberChannelDtoProviderIDRocketChat       SubscriberChannelDtoProviderID = "rocket-chat"
 	SubscriberChannelDtoProviderIDWhatsappBusiness SubscriberChannelDtoProviderID = "whatsapp-business"
+	SubscriberChannelDtoProviderIDLine             SubscriberChannelDtoProviderID = "line"
 	SubscriberChannelDtoProviderIDChatWebhook      SubscriberChannelDtoProviderID = "chat-webhook"
 	SubscriberChannelDtoProviderIDNovuSlack        SubscriberChannelDtoProviderID = "novu-slack"
 	SubscriberChannelDtoProviderIDTelegram         SubscriberChannelDtoProviderID = "telegram"
+	SubscriberChannelDtoProviderIDSendblue         SubscriberChannelDtoProviderID = "sendblue"
+	SubscriberChannelDtoProviderIDNovuWebChat      SubscriberChannelDtoProviderID = "novu-web-chat"
 	SubscriberChannelDtoProviderIDFcm              SubscriberChannelDtoProviderID = "fcm"
 	SubscriberChannelDtoProviderIDApns             SubscriberChannelDtoProviderID = "apns"
 	SubscriberChannelDtoProviderIDExpo             SubscriberChannelDtoProviderID = "expo"
@@ -50,6 +54,8 @@ func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "msteams":
 		fallthrough
+	case "webex-messaging":
+		fallthrough
 	case "mattermost":
 		fallthrough
 	case "ryver":
@@ -64,11 +70,17 @@ func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "line":
+		fallthrough
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
 		fallthrough
 	case "telegram":
+		fallthrough
+	case "sendblue":
+		fallthrough
+	case "novu-web-chat":
 		fallthrough
 	case "fcm":
 		fallthrough

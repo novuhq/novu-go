@@ -16,6 +16,7 @@ const (
 	ActivityNotificationJobResponseDtoTypeSms         ActivityNotificationJobResponseDtoType = "sms"
 	ActivityNotificationJobResponseDtoTypeChat        ActivityNotificationJobResponseDtoType = "chat"
 	ActivityNotificationJobResponseDtoTypePush        ActivityNotificationJobResponseDtoType = "push"
+	ActivityNotificationJobResponseDtoTypeTool        ActivityNotificationJobResponseDtoType = "tool"
 	ActivityNotificationJobResponseDtoTypeDigest      ActivityNotificationJobResponseDtoType = "digest"
 	ActivityNotificationJobResponseDtoTypeTrigger     ActivityNotificationJobResponseDtoType = "trigger"
 	ActivityNotificationJobResponseDtoTypeDelay       ActivityNotificationJobResponseDtoType = "delay"
@@ -42,6 +43,8 @@ func (e *ActivityNotificationJobResponseDtoType) UnmarshalJSON(data []byte) erro
 	case "chat":
 		fallthrough
 	case "push":
+		fallthrough
+	case "tool":
 		fallthrough
 	case "digest":
 		fallthrough

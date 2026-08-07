@@ -8,59 +8,59 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-type ContentType string
+type MessageResponseDtoContentType string
 
 const (
-	ContentTypeArrayOfEmailBlock ContentType = "arrayOfEmailBlock"
-	ContentTypeStr               ContentType = "str"
+	MessageResponseDtoContentTypeArrayOfEmailBlock MessageResponseDtoContentType = "arrayOfEmailBlock"
+	MessageResponseDtoContentTypeStr               MessageResponseDtoContentType = "str"
 )
 
-// Content of the message, can be an email block or a string
-type Content struct {
+// MessageResponseDtoContent - Content of the message, can be an email block or a string
+type MessageResponseDtoContent struct {
 	ArrayOfEmailBlock []EmailBlock `queryParam:"inline" union:"member"`
 	Str               *string      `queryParam:"inline" union:"member"`
 
-	Type ContentType
+	Type MessageResponseDtoContentType
 }
 
-func CreateContentArrayOfEmailBlock(arrayOfEmailBlock []EmailBlock) Content {
-	typ := ContentTypeArrayOfEmailBlock
+func CreateMessageResponseDtoContentArrayOfEmailBlock(arrayOfEmailBlock []EmailBlock) MessageResponseDtoContent {
+	typ := MessageResponseDtoContentTypeArrayOfEmailBlock
 
-	return Content{
+	return MessageResponseDtoContent{
 		ArrayOfEmailBlock: arrayOfEmailBlock,
 		Type:              typ,
 	}
 }
 
-func CreateContentStr(str string) Content {
-	typ := ContentTypeStr
+func CreateMessageResponseDtoContentStr(str string) MessageResponseDtoContent {
+	typ := MessageResponseDtoContentTypeStr
 
-	return Content{
+	return MessageResponseDtoContent{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func (u *Content) UnmarshalJSON(data []byte) error {
+func (u *MessageResponseDtoContent) UnmarshalJSON(data []byte) error {
 
 	var arrayOfEmailBlock []EmailBlock = []EmailBlock{}
 	if err := utils.UnmarshalJSON(data, &arrayOfEmailBlock, "", true, nil); err == nil {
 		u.ArrayOfEmailBlock = arrayOfEmailBlock
-		u.Type = ContentTypeArrayOfEmailBlock
+		u.Type = MessageResponseDtoContentTypeArrayOfEmailBlock
 		return nil
 	}
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ContentTypeStr
+		u.Type = MessageResponseDtoContentTypeStr
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Content", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MessageResponseDtoContent", string(data))
 }
 
-func (u Content) MarshalJSON() ([]byte, error) {
+func (u MessageResponseDtoContent) MarshalJSON() ([]byte, error) {
 	if u.ArrayOfEmailBlock != nil {
 		return utils.MarshalJSON(u.ArrayOfEmailBlock, "", true)
 	}
@@ -69,7 +69,7 @@ func (u Content) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type Content: all fields are null")
+	return nil, errors.New("could not marshal union type MessageResponseDtoContent: all fields are null")
 }
 
 type MessageResponseDto struct {
@@ -102,7 +102,7 @@ type MessageResponseDto struct {
 	// Last read date of the message, if available
 	LastReadDate *string `json:"lastReadDate,omitempty"`
 	// Content of the message, can be an email block or a string
-	Content *Content `json:"content,omitempty"`
+	Content *MessageResponseDtoContent `json:"content,omitempty"`
 	// Transaction ID associated with the message
 	TransactionID string `json:"transactionId"`
 	// Subject of the message, if applicable
@@ -243,7 +243,7 @@ func (m *MessageResponseDto) GetLastReadDate() *string {
 	return m.LastReadDate
 }
 
-func (m *MessageResponseDto) GetContent() *Content {
+func (m *MessageResponseDto) GetContent() *MessageResponseDtoContent {
 	if m == nil {
 		return nil
 	}

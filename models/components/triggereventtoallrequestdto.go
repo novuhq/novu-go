@@ -374,6 +374,8 @@ type TriggerEventToAllRequestDto struct {
 	Payload map[string]any `json:"payload"`
 	// This could be used to override provider specific configurations
 	Overrides *TriggerEventToAllRequestDtoOverrides `json:"overrides,omitempty"`
+	// Override the workflow-assigned agent for this trigger using the public agent identifier. Omit to use the workflow default; pass null to disable agent routing for this execution.
+	AgentID *string `json:"agentId,omitempty"`
 	// A unique identifier for this transaction, we will generated a UUID if not provided.
 	TransactionID *string `json:"transactionId,omitempty"`
 	// It is used to display the Avatar of the provided actor's subscriber id or actor object.
@@ -406,6 +408,13 @@ func (t *TriggerEventToAllRequestDto) GetOverrides() *TriggerEventToAllRequestDt
 		return nil
 	}
 	return t.Overrides
+}
+
+func (t *TriggerEventToAllRequestDto) GetAgentID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.AgentID
 }
 
 func (t *TriggerEventToAllRequestDto) GetTransactionID() *string {

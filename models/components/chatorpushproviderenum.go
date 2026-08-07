@@ -14,6 +14,7 @@ const (
 	ChatOrPushProviderEnumSlack            ChatOrPushProviderEnum = "slack"
 	ChatOrPushProviderEnumDiscord          ChatOrPushProviderEnum = "discord"
 	ChatOrPushProviderEnumMsteams          ChatOrPushProviderEnum = "msteams"
+	ChatOrPushProviderEnumWebexMessaging   ChatOrPushProviderEnum = "webex-messaging"
 	ChatOrPushProviderEnumMattermost       ChatOrPushProviderEnum = "mattermost"
 	ChatOrPushProviderEnumRyver            ChatOrPushProviderEnum = "ryver"
 	ChatOrPushProviderEnumZulip            ChatOrPushProviderEnum = "zulip"
@@ -21,9 +22,12 @@ const (
 	ChatOrPushProviderEnumGetstream        ChatOrPushProviderEnum = "getstream"
 	ChatOrPushProviderEnumRocketChat       ChatOrPushProviderEnum = "rocket-chat"
 	ChatOrPushProviderEnumWhatsappBusiness ChatOrPushProviderEnum = "whatsapp-business"
+	ChatOrPushProviderEnumLine             ChatOrPushProviderEnum = "line"
 	ChatOrPushProviderEnumChatWebhook      ChatOrPushProviderEnum = "chat-webhook"
 	ChatOrPushProviderEnumNovuSlack        ChatOrPushProviderEnum = "novu-slack"
 	ChatOrPushProviderEnumTelegram         ChatOrPushProviderEnum = "telegram"
+	ChatOrPushProviderEnumSendblue         ChatOrPushProviderEnum = "sendblue"
+	ChatOrPushProviderEnumNovuWebChat      ChatOrPushProviderEnum = "novu-web-chat"
 	ChatOrPushProviderEnumFcm              ChatOrPushProviderEnum = "fcm"
 	ChatOrPushProviderEnumApns             ChatOrPushProviderEnum = "apns"
 	ChatOrPushProviderEnumExpo             ChatOrPushProviderEnum = "expo"
@@ -49,6 +53,8 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "msteams":
 		fallthrough
+	case "webex-messaging":
+		fallthrough
 	case "mattermost":
 		fallthrough
 	case "ryver":
@@ -63,11 +69,17 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "whatsapp-business":
 		fallthrough
+	case "line":
+		fallthrough
 	case "chat-webhook":
 		fallthrough
 	case "novu-slack":
 		fallthrough
 	case "telegram":
+		fallthrough
+	case "sendblue":
+		fallthrough
+	case "novu-web-chat":
 		fallthrough
 	case "fcm":
 		fallthrough

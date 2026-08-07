@@ -111,10 +111,12 @@ type GenerateLinkUserOauthURLRequestDto struct {
 	SubscriberID string `json:"subscriberId"`
 	// Integration identifier
 	IntegrationIdentifier string `json:"integrationIdentifier"`
-	// Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided.
+	// Identifier of the existing channel connection to associate this user endpoint with. Generated automatically if not provided for providers that support standalone user linking. Required for Webex.
 	ConnectionIdentifier *string                                              `json:"connectionIdentifier,omitempty"`
 	Context              map[string]GenerateLinkUserOauthURLRequestDtoContext `json:"context,omitempty"`
-	// **Slack only**: User-level OAuth scopes for "Sign in with Slack". Defaults to: identity.basic. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read).
+	// HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context, so the per-user link carries a trustworthy subscriber/tenant binding.
+	ContextHash *string `json:"contextHash,omitempty"`
+	// **Slack only**: User-level OAuth scopes for "Sign in with Slack". Defaults to: identity.basic. **Webex**: Optional Webex scopes for people/me; defaults to spark:people_read. **MS Teams**: ignored — uses delegated OpenID scopes (openid, profile, User.Read).
 	UserScope []string `json:"userScope,omitempty"`
 }
 
@@ -144,6 +146,13 @@ func (g *GenerateLinkUserOauthURLRequestDto) GetContext() map[string]GenerateLin
 		return nil
 	}
 	return g.Context
+}
+
+func (g *GenerateLinkUserOauthURLRequestDto) GetContextHash() *string {
+	if g == nil {
+		return nil
+	}
+	return g.ContextHash
 }
 
 func (g *GenerateLinkUserOauthURLRequestDto) GetUserScope() []string {
