@@ -21,6 +21,7 @@ custom := components.UIComponentEnum("custom_value")
 | Name                                                | Value                                               |
 | --------------------------------------------------- | --------------------------------------------------- |
 | `UIComponentEnumEmailEditorSelect`                  | EMAIL_EDITOR_SELECT                                 |
+| `UIComponentEnumChatEditorSelect`                   | CHAT_EDITOR_SELECT                                  |
 | `UIComponentEnumLayoutSelect`                       | LAYOUT_SELECT                                       |
 | `UIComponentEnumBlockEditor`                        | BLOCK_EDITOR                                        |
 | `UIComponentEnumEmailBody`                          | EMAIL_BODY                                          |

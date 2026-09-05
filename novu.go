@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.18.1 and generator version 2.926.8
+// Generated from OpenAPI doc version 3.19.1 and generator version 2.935.1
 
 import (
 	"bytes"
@@ -179,10 +179,13 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.19.0",
+		SDKVersion: "3.20.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 3.19.0 2.926.8 3.18.1 github.com/novuhq/novu-go/v3",
-			ServerList: ServerList,
+			UserAgent:         "speakeasy-sdk/go 3.20.0 2.935.1 3.19.1 github.com/novuhq/novu-go/v3",
+			SDKVersion:        "3.20.0",
+			GenVersion:        "2.935.1",
+			OpenAPIDocVersion: "3.19.1",
+			ServerList:        ServerList,
 		},
 		hooks: hooks.New(),
 	}

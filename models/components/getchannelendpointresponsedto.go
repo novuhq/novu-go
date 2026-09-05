@@ -579,7 +579,14 @@ func CreateEndpointToolWebhookEndpointDto(toolWebhookEndpointDto ToolWebhookEndp
 	}
 }
 
-func (u *Endpoint) UnmarshalJSON(data []byte) error {
+func (u *Endpoint) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Endpoint{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var msTeamsChannelEndpointDto MsTeamsChannelEndpointDto = MsTeamsChannelEndpointDto{}
 	if err := utils.UnmarshalJSON(data, &msTeamsChannelEndpointDto, "", true, nil); err == nil {

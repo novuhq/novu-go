@@ -45,6 +45,7 @@ func main() {
                 "theme": "dark",
             },
         },
+        BridgeURL: v3.Pointer("https://tenant-acme.example.com/api/novu"),
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -175,6 +176,7 @@ func main() {
                 "theme": "dark",
             },
         },
+        BridgeURL: v3.Pointer("https://tenant-acme.example.com/api/novu"),
     }, nil)
     if err != nil {
         log.Fatal(err)

@@ -84,7 +84,14 @@ func CreateResultOne(one One) Result {
 	}
 }
 
-func (u *Result) UnmarshalJSON(data []byte) error {
+func (u *Result) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Result{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var one One = One{}
 	if err := utils.UnmarshalJSON(data, &one, "", true, nil); err == nil {

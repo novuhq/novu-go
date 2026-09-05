@@ -1,6 +1,6 @@
 # Kind
 
-Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
+Interaction verb queued by `ctx.ask` / `ctx.approve` / `ctx.choose` / `ctx.tell`.
 
 ## Example Usage
 
@@ -9,13 +9,15 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-value := components.KindDelivery
+value := components.KindAsk
 ```
 
 
 ## Values
 
-| Name           | Value          |
-| -------------- | -------------- |
-| `KindDelivery` | delivery       |
-| `KindAgent`    | agent          |
+| Name          | Value         |
+| ------------- | ------------- |
+| `KindAsk`     | ask           |
+| `KindApprove` | approve       |
+| `KindChoose`  | choose        |
+| `KindTell`    | tell          |

@@ -76,7 +76,14 @@ func CreateCreateLineUserEndpointDtoContextCreateLineUserEndpointDtoContext2(cre
 	}
 }
 
-func (u *CreateLineUserEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateLineUserEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateLineUserEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createLineUserEndpointDtoContext2 CreateLineUserEndpointDtoContext2 = CreateLineUserEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createLineUserEndpointDtoContext2, "", true, nil); err == nil {

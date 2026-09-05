@@ -27,6 +27,12 @@ signals := components.CreateSignalsMetadataClearSignalDto(components.MetadataCle
 signals := components.CreateSignalsTriggerSignalDto(components.TriggerSignalDto{/* values here */})
 ```
 
+### HumanSignalDto
+
+```go
+signals := components.CreateSignalsHumanSignalDto(components.HumanSignalDto{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -41,5 +47,7 @@ switch signals.Type {
 		// signals.MetadataClearSignalDto is populated
 	case components.SignalsTypeTriggerSignalDto:
 		// signals.TriggerSignalDto is populated
+	case components.SignalsTypeHumanSignalDto:
+		// signals.HumanSignalDto is populated
 }
 ```

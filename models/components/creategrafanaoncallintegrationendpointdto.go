@@ -76,7 +76,14 @@ func CreateCreateGrafanaOnCallIntegrationEndpointDtoContextCreateGrafanaOnCallIn
 	}
 }
 
-func (u *CreateGrafanaOnCallIntegrationEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateGrafanaOnCallIntegrationEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateGrafanaOnCallIntegrationEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createGrafanaOnCallIntegrationEndpointDtoContext2 CreateGrafanaOnCallIntegrationEndpointDtoContext2 = CreateGrafanaOnCallIntegrationEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createGrafanaOnCallIntegrationEndpointDtoContext2, "", true, nil); err == nil {

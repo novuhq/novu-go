@@ -76,7 +76,14 @@ func CreateGenerateChatOauthURLRequestDtoContextGenerateChatOauthURLRequestDtoCo
 	}
 }
 
-func (u *GenerateChatOauthURLRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *GenerateChatOauthURLRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GenerateChatOauthURLRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var generateChatOauthURLRequestDtoContext2 GenerateChatOauthURLRequestDtoContext2 = GenerateChatOauthURLRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &generateChatOauthURLRequestDtoContext2, "", true, nil); err == nil {

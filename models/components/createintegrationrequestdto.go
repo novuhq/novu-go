@@ -96,8 +96,12 @@ type CreateIntegrationRequestDto struct {
 	Active *bool `json:"active,omitempty"`
 	// Flag to check the integration status
 	Check *bool `json:"check,omitempty"`
-	// Conditions for the integration
+	// Legacy StepFilter conditions. Ignored when `rules` is also set.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Conditions []StepFilterDto `json:"conditions,omitempty"`
+	// JSONLogic used at send time to select this integration. Takes precedence over `conditions`.
+	Rules map[string]any `json:"rules,omitempty"`
 	// Configurations for the integration
 	Configurations *Configurations `json:"configurations,omitempty"`
 }
@@ -170,6 +174,13 @@ func (c *CreateIntegrationRequestDto) GetConditions() []StepFilterDto {
 		return nil
 	}
 	return c.Conditions
+}
+
+func (c *CreateIntegrationRequestDto) GetRules() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Rules
 }
 
 func (c *CreateIntegrationRequestDto) GetConfigurations() *Configurations {

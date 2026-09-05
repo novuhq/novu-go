@@ -672,7 +672,14 @@ func CreateGeneratePreviewResponseDtoResultTen(ten Ten) GeneratePreviewResponseD
 	}
 }
 
-func (u *GeneratePreviewResponseDtoResult) UnmarshalJSON(data []byte) error {
+func (u *GeneratePreviewResponseDtoResult) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GeneratePreviewResponseDtoResult{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {

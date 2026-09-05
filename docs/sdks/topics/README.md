@@ -100,6 +100,10 @@ func main() {
     res, err := s.Topics.Create(ctx, components.CreateUpdateTopicRequestDto{
         Key: "task:12345",
         Name: v3.Pointer("Task Title"),
+        Data: map[string]any{
+            "category": "product",
+            "priority": 1,
+        },
     }, nil, nil)
     if err != nil {
         log.Fatal(err)
@@ -193,7 +197,7 @@ func main() {
 
 ## Update
 
-Update a topic name by its unique key identifier **topicKey**
+Update a topic name or data by its unique key identifier **topicKey**
 
 ### Example Usage
 
@@ -216,7 +220,11 @@ func main() {
     )
 
     res, err := s.Topics.Update(ctx, "<value>", components.UpdateTopicRequestDto{
-        Name: "Updated Topic Name",
+        Name: v3.Pointer("Updated Topic Name"),
+        Data: map[string]any{
+            "category": "product",
+            "priority": 1,
+        },
     }, nil)
     if err != nil {
         log.Fatal(err)

@@ -75,7 +75,14 @@ func CreateLinkChannelEndpointRequestDtoContextLinkChannelEndpointRequestDtoCont
 	}
 }
 
-func (u *LinkChannelEndpointRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *LinkChannelEndpointRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = LinkChannelEndpointRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var linkChannelEndpointRequestDtoContext2 LinkChannelEndpointRequestDtoContext2 = LinkChannelEndpointRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &linkChannelEndpointRequestDtoContext2, "", true, nil); err == nil {
