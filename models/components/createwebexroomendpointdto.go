@@ -76,7 +76,14 @@ func CreateCreateWebexRoomEndpointDtoContextCreateWebexRoomEndpointDtoContext2(c
 	}
 }
 
-func (u *CreateWebexRoomEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateWebexRoomEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateWebexRoomEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createWebexRoomEndpointDtoContext2 CreateWebexRoomEndpointDtoContext2 = CreateWebexRoomEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createWebexRoomEndpointDtoContext2, "", true, nil); err == nil {

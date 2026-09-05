@@ -64,7 +64,14 @@ func CreateTo3MapOfAny(mapOfAny map[string]any) To3 {
 	}
 }
 
-func (u *To3) UnmarshalJSON(data []byte) error {
+func (u *To3) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = To3{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -139,7 +146,14 @@ func CreateToArrayOfTo3(arrayOfTo3 []To3) To {
 	}
 }
 
-func (u *To) UnmarshalJSON(data []byte) error {
+func (u *To) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = To{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

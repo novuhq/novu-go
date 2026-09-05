@@ -101,7 +101,16 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Integrations.Create(ctx, components.CreateIntegrationRequestDto{}, nil)
+    res, err := s.Integrations.Create(ctx, components.CreateIntegrationRequestDto{
+        Rules: map[string]any{
+            "==": []any{
+                map[string]any{
+                    "var": "context.tenant.id",
+                },
+                "acme",
+            },
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -159,7 +168,16 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Integrations.Update(ctx, "<id>", components.UpdateIntegrationRequestDto{}, nil)
+    res, err := s.Integrations.Update(ctx, "<id>", components.UpdateIntegrationRequestDto{
+        Rules: map[string]any{
+            "==": []any{
+                map[string]any{
+                    "var": "context.tenant.id",
+                },
+                "acme",
+            },
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

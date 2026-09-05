@@ -41,7 +41,14 @@ func CreateHTTPRequestStepResponseDtoBodyArrayOfHTTPRequestKeyValuePairDto(array
 	}
 }
 
-func (u *HTTPRequestStepResponseDtoBody) UnmarshalJSON(data []byte) error {
+func (u *HTTPRequestStepResponseDtoBody) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = HTTPRequestStepResponseDtoBody{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

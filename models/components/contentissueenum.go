@@ -17,6 +17,8 @@ const (
 	ContentIssueEnumMissingValue                  ContentIssueEnum = "MISSING_VALUE"
 	ContentIssueEnumTierLimitExceeded             ContentIssueEnum = "TIER_LIMIT_EXCEEDED"
 	ContentIssueEnumUnsupportedProperty           ContentIssueEnum = "UNSUPPORTED_PROPERTY"
+	ContentIssueEnumChatCardLimitExceeded         ContentIssueEnum = "CHAT_CARD_LIMIT_EXCEEDED"
+	ContentIssueEnumChatCardInvalidButton         ContentIssueEnum = "CHAT_CARD_INVALID_BUTTON"
 )
 
 func (e ContentIssueEnum) ToPointer() *ContentIssueEnum {
@@ -39,6 +41,10 @@ func (e *ContentIssueEnum) UnmarshalJSON(data []byte) error {
 	case "TIER_LIMIT_EXCEEDED":
 		fallthrough
 	case "UNSUPPORTED_PROPERTY":
+		fallthrough
+	case "CHAT_CARD_LIMIT_EXCEEDED":
+		fallthrough
+	case "CHAT_CARD_INVALID_BUTTON":
 		*e = ContentIssueEnum(v)
 		return nil
 	default:

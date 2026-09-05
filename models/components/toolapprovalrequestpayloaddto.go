@@ -11,6 +11,12 @@ type ToolApprovalRequestPayloadDto struct {
 	Name string `json:"name"`
 	// Tool input the model proposed.
 	Input map[string]any `json:"input,omitempty"`
+	// Server-minted approve action id. When omitted, self-hosted tool-approval:* is minted at persist.
+	ApproveActionID *string `json:"approveActionId,omitempty"`
+	// Server-minted deny action id. When omitted, self-hosted tool-approval:* is minted at persist.
+	DenyActionID *string `json:"denyActionId,omitempty"`
+	// MCP server name when the gated tool is from an MCP server (for UI labels).
+	McpServerName *string `json:"mcpServerName,omitempty"`
 }
 
 func (t *ToolApprovalRequestPayloadDto) GetApprovalID() string {
@@ -39,4 +45,25 @@ func (t *ToolApprovalRequestPayloadDto) GetInput() map[string]any {
 		return nil
 	}
 	return t.Input
+}
+
+func (t *ToolApprovalRequestPayloadDto) GetApproveActionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ApproveActionID
+}
+
+func (t *ToolApprovalRequestPayloadDto) GetDenyActionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.DenyActionID
+}
+
+func (t *ToolApprovalRequestPayloadDto) GetMcpServerName() *string {
+	if t == nil {
+		return nil
+	}
+	return t.McpServerName
 }

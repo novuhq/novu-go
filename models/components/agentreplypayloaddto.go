@@ -53,7 +53,14 @@ func CreateReplyToolApprovalCardReplyContentDto(toolApprovalCardReplyContentDto 
 	}
 }
 
-func (u *Reply) UnmarshalJSON(data []byte) error {
+func (u *Reply) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Reply{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var markdownReplyContentDto MarkdownReplyContentDto = MarkdownReplyContentDto{}
 	if err := utils.UnmarshalJSON(data, &markdownReplyContentDto, "", true, nil); err == nil {
@@ -102,6 +109,7 @@ const (
 	SignalsTypeMetadataDeleteSignalDto SignalsType = "MetadataDeleteSignalDto"
 	SignalsTypeMetadataClearSignalDto  SignalsType = "MetadataClearSignalDto"
 	SignalsTypeTriggerSignalDto        SignalsType = "TriggerSignalDto"
+	SignalsTypeHumanSignalDto          SignalsType = "HumanSignalDto"
 )
 
 type Signals struct {
@@ -109,6 +117,7 @@ type Signals struct {
 	MetadataDeleteSignalDto *MetadataDeleteSignalDto `queryParam:"inline" union:"member"`
 	MetadataClearSignalDto  *MetadataClearSignalDto  `queryParam:"inline" union:"member"`
 	TriggerSignalDto        *TriggerSignalDto        `queryParam:"inline" union:"member"`
+	HumanSignalDto          *HumanSignalDto          `queryParam:"inline" union:"member"`
 
 	Type SignalsType
 }
@@ -149,7 +158,30 @@ func CreateSignalsTriggerSignalDto(triggerSignalDto TriggerSignalDto) Signals {
 	}
 }
 
-func (u *Signals) UnmarshalJSON(data []byte) error {
+func CreateSignalsHumanSignalDto(humanSignalDto HumanSignalDto) Signals {
+	typ := SignalsTypeHumanSignalDto
+
+	return Signals{
+		HumanSignalDto: &humanSignalDto,
+		Type:           typ,
+	}
+}
+
+func (u *Signals) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Signals{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	var humanSignalDto HumanSignalDto = HumanSignalDto{}
+	if err := utils.UnmarshalJSON(data, &humanSignalDto, "", true, nil); err == nil {
+		u.HumanSignalDto = &humanSignalDto
+		u.Type = SignalsTypeHumanSignalDto
+		return nil
+	}
 
 	var metadataSetSignalDto MetadataSetSignalDto = MetadataSetSignalDto{}
 	if err := utils.UnmarshalJSON(data, &metadataSetSignalDto, "", true, nil); err == nil {
@@ -197,6 +229,10 @@ func (u Signals) MarshalJSON() ([]byte, error) {
 
 	if u.TriggerSignalDto != nil {
 		return utils.MarshalJSON(u.TriggerSignalDto, "", true)
+	}
+
+	if u.HumanSignalDto != nil {
+		return utils.MarshalJSON(u.HumanSignalDto, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Signals: all fields are null")
@@ -259,7 +295,14 @@ func CreateTypingTypingStatusDto(typingStatusDto TypingStatusDto) Typing {
 	}
 }
 
-func (u *Typing) UnmarshalJSON(data []byte) error {
+func (u *Typing) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Typing{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var typing1 Typing1 = Typing1("")
 	if err := utils.UnmarshalJSON(data, &typing1, "", true, nil); err == nil {
@@ -303,7 +346,7 @@ type AgentReplyPayloadDto struct {
 	Edit *EditPayloadDto `json:"edit,omitempty"`
 	// Mark the conversation resolved. May be combined with a final `reply`.
 	Resolve *ResolveDto `json:"resolve,omitempty"`
-	// Side-effect signals executed during this turn: conversation metadata mutations or Novu workflow triggers.
+	// Side-effect signals executed during this turn: conversation metadata mutations, Novu workflow triggers, or human-in-the-loop interactions.
 	Signals []Signals `json:"signals,omitempty"`
 	// Tool-call outcomes to persist in conversation history (typically before the assistant reply).
 	ToolResults []ToolResultDto `json:"toolResults,omitempty"`

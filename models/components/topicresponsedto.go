@@ -9,6 +9,8 @@ type TopicResponseDto struct {
 	Key string `json:"key"`
 	// The name of the topic
 	Name *string `json:"name,omitempty"`
+	// Additional custom data associated with the topic
+	Data map[string]any `json:"data,omitempty"`
 	// The date the topic was created
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The date the topic was last updated
@@ -34,6 +36,13 @@ func (t *TopicResponseDto) GetName() *string {
 		return nil
 	}
 	return t.Name
+}
+
+func (t *TopicResponseDto) GetData() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Data
 }
 
 func (t *TopicResponseDto) GetCreatedAt() *string {

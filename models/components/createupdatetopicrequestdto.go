@@ -7,6 +7,8 @@ type CreateUpdateTopicRequestDto struct {
 	Key string `json:"key"`
 	// The display name for the topic
 	Name *string `json:"name,omitempty"`
+	// Additional custom data associated with the topic. Flat key-value pairs of scalars (string, number, boolean, string[]). Maximum size: 64KB.
+	Data map[string]any `json:"data,omitempty"`
 }
 
 func (c *CreateUpdateTopicRequestDto) GetKey() string {
@@ -21,4 +23,11 @@ func (c *CreateUpdateTopicRequestDto) GetName() *string {
 		return nil
 	}
 	return c.Name
+}
+
+func (c *CreateUpdateTopicRequestDto) GetData() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Data
 }

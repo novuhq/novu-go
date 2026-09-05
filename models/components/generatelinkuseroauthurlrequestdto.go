@@ -75,7 +75,14 @@ func CreateGenerateLinkUserOauthURLRequestDtoContextGenerateLinkUserOauthURLRequ
 	}
 }
 
-func (u *GenerateLinkUserOauthURLRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *GenerateLinkUserOauthURLRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GenerateLinkUserOauthURLRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var generateLinkUserOauthURLRequestDtoContext2 GenerateLinkUserOauthURLRequestDtoContext2 = GenerateLinkUserOauthURLRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &generateLinkUserOauthURLRequestDtoContext2, "", true, nil); err == nil {

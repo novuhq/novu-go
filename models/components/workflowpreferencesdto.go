@@ -30,7 +30,14 @@ func CreateAllWorkflowPreferenceDto(workflowPreferenceDto WorkflowPreferenceDto)
 	}
 }
 
-func (u *All) UnmarshalJSON(data []byte) error {
+func (u *All) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = All{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
 	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {

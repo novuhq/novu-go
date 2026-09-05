@@ -75,7 +75,14 @@ func CreateBulkUpdateSubscriberPreferencesDtoContextContext2(context2 Context2) 
 	}
 }
 
-func (u *BulkUpdateSubscriberPreferencesDtoContext) UnmarshalJSON(data []byte) error {
+func (u *BulkUpdateSubscriberPreferencesDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = BulkUpdateSubscriberPreferencesDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var context2 Context2 = Context2{}
 	if err := utils.UnmarshalJSON(data, &context2, "", true, nil); err == nil {
