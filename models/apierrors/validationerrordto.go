@@ -66,7 +66,14 @@ func CreateMessage5MapOfAny(mapOfAny map[string]any) Message5 {
 	}
 }
 
-func (u *Message5) UnmarshalJSON(data []byte) error {
+func (u *Message5) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Message5{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -223,7 +230,14 @@ func CreateValidationErrorDtoMessageArrayOfMessage5(arrayOfMessage5 []*Message5)
 	}
 }
 
-func (u *ValidationErrorDtoMessage) UnmarshalJSON(data []byte) error {
+func (u *ValidationErrorDtoMessage) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ValidationErrorDtoMessage{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

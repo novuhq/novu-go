@@ -13,6 +13,8 @@ type TopicResponseDto struct {
 	Key string `json:"key"`
 	// The name of the topic
 	Name *string `json:"name,omitempty"`
+	// Additional custom data associated with the topic
+	Data map[string]any `json:"data,omitempty"`
 	// The date the topic was created
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// The date the topic was last updated

@@ -65,7 +65,14 @@ func CreateFiveMapOfAny(mapOfAny map[string]any) Five {
 	}
 }
 
-func (u *Five) UnmarshalJSON(data []byte) error {
+func (u *Five) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Five{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -219,7 +226,14 @@ func CreateMessageArrayOf5(arrayOf5 []*Five) Message {
 	}
 }
 
-func (u *Message) UnmarshalJSON(data []byte) error {
+func (u *Message) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Message{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

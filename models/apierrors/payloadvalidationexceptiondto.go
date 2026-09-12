@@ -66,7 +66,14 @@ func CreateMessagePayloadValidationExceptionDto5MapOfAny(mapOfAny map[string]any
 	}
 }
 
-func (u *MessagePayloadValidationExceptionDto5) UnmarshalJSON(data []byte) error {
+func (u *MessagePayloadValidationExceptionDto5) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = MessagePayloadValidationExceptionDto5{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -223,7 +230,14 @@ func CreatePayloadValidationExceptionDtoMessageArrayOfMessagePayloadValidationEx
 	}
 }
 
-func (u *PayloadValidationExceptionDtoMessage) UnmarshalJSON(data []byte) error {
+func (u *PayloadValidationExceptionDtoMessage) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = PayloadValidationExceptionDtoMessage{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

@@ -9,6 +9,8 @@ type GetContextResponseDto struct {
 	ID string `json:"id"`
 	// Custom data associated with this context
 	Data map[string]any `json:"data"`
+	// Bridge URL override for agent connect, if configured on this context
+	BridgeURL *string `json:"bridgeUrl,omitempty"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
 	// Last update timestamp
@@ -34,6 +36,13 @@ func (g *GetContextResponseDto) GetData() map[string]any {
 		return map[string]any{}
 	}
 	return g.Data
+}
+
+func (g *GetContextResponseDto) GetBridgeURL() *string {
+	if g == nil {
+		return nil
+	}
+	return g.BridgeURL
 }
 
 func (g *GetContextResponseDto) GetCreatedAt() string {

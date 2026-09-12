@@ -159,7 +159,14 @@ func CreateTo1Str(str string) To1 {
 	}
 }
 
-func (u *To1) UnmarshalJSON(data []byte) error {
+func (u *To1) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = To1{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var topicPayloadDto TopicPayloadDto = TopicPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, nil); err == nil {
@@ -256,7 +263,14 @@ func CreateTriggerEventRequestDtoToTopicPayloadDto(topicPayloadDto TopicPayloadD
 	}
 }
 
-func (u *TriggerEventRequestDtoTo) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventRequestDtoTo) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerEventRequestDtoTo{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var topicPayloadDto TopicPayloadDto = TopicPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &topicPayloadDto, "", true, nil); err == nil {
@@ -344,7 +358,14 @@ func CreateActorSubscriberPayloadDto(subscriberPayloadDto SubscriberPayloadDto) 
 	}
 }
 
-func (u *Actor) UnmarshalJSON(data []byte) error {
+func (u *Actor) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Actor{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
@@ -410,7 +431,14 @@ func CreateTenantTenantPayloadDto(tenantPayloadDto TenantPayloadDto) Tenant {
 	}
 }
 
-func (u *Tenant) UnmarshalJSON(data []byte) error {
+func (u *Tenant) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Tenant{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -508,7 +536,14 @@ func CreateTriggerEventRequestDtoContextTriggerEventRequestDtoContext2(triggerEv
 	}
 }
 
-func (u *TriggerEventRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerEventRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var triggerEventRequestDtoContext2 TriggerEventRequestDtoContext2 = TriggerEventRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &triggerEventRequestDtoContext2, "", true, nil); err == nil {

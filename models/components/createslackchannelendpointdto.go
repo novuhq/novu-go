@@ -76,7 +76,14 @@ func CreateCreateSlackChannelEndpointDtoContextCreateSlackChannelEndpointDtoCont
 	}
 }
 
-func (u *CreateSlackChannelEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateSlackChannelEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateSlackChannelEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createSlackChannelEndpointDtoContext2 CreateSlackChannelEndpointDtoContext2 = CreateSlackChannelEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createSlackChannelEndpointDtoContext2, "", true, nil); err == nil {

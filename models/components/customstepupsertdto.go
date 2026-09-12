@@ -41,7 +41,14 @@ func CreateCustomStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) Cus
 	}
 }
 
-func (u *CustomStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *CustomStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CustomStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var customControlDto CustomControlDto = CustomControlDto{}
 	if err := utils.UnmarshalJSON(data, &customControlDto, "", true, nil); err == nil {

@@ -41,7 +41,14 @@ func CreatePushStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) PushS
 	}
 }
 
-func (u *PushStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *PushStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = PushStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var pushControlDto PushControlDto = PushControlDto{}
 	if err := utils.UnmarshalJSON(data, &pushControlDto, "", true, nil); err == nil {

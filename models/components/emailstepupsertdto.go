@@ -41,7 +41,14 @@ func CreateEmailStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) Emai
 	}
 }
 
-func (u *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *EmailStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = EmailStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var emailControlDto EmailControlDto = EmailControlDto{}
 	if err := utils.UnmarshalJSON(data, &emailControlDto, "", true, nil); err == nil {

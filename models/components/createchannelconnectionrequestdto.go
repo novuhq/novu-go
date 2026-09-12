@@ -76,7 +76,14 @@ func CreateCreateChannelConnectionRequestDtoContextCreateChannelConnectionReques
 	}
 }
 
-func (u *CreateChannelConnectionRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateChannelConnectionRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateChannelConnectionRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createChannelConnectionRequestDtoContext2 CreateChannelConnectionRequestDtoContext2 = CreateChannelConnectionRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createChannelConnectionRequestDtoContext2, "", true, nil); err == nil {

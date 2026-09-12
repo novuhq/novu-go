@@ -206,7 +206,14 @@ func CreateStepsHTTPRequest(httpRequest HTTPRequestStepUpsertDto) Steps {
 	}
 }
 
-func (u *Steps) UnmarshalJSON(data []byte) error {
+func (u *Steps) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Steps{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	type discriminator struct {
 		Type string `json:"type"`

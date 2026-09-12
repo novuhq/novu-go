@@ -41,7 +41,14 @@ func CreateSmsStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) SmsSte
 	}
 }
 
-func (u *SmsStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *SmsStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = SmsStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var smsControlDto SmsControlDto = SmsControlDto{}
 	if err := utils.UnmarshalJSON(data, &smsControlDto, "", true, nil); err == nil {

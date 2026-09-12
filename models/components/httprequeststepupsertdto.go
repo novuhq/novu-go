@@ -41,7 +41,14 @@ func CreateHTTPRequestStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any
 	}
 }
 
-func (u *HTTPRequestStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *HTTPRequestStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = HTTPRequestStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var httpRequestControlDto HTTPRequestControlDto = HTTPRequestControlDto{}
 	if err := utils.UnmarshalJSON(data, &httpRequestControlDto, "", true, nil); err == nil {

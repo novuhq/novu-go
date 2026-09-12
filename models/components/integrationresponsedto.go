@@ -46,18 +46,18 @@ func (e *IntegrationResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Kind - Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
-type Kind string
+// IntegrationResponseDtoKind - Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
+type IntegrationResponseDtoKind string
 
 const (
-	KindDelivery Kind = "delivery"
-	KindAgent    Kind = "agent"
+	IntegrationResponseDtoKindDelivery IntegrationResponseDtoKind = "delivery"
+	IntegrationResponseDtoKindAgent    IntegrationResponseDtoKind = "agent"
 )
 
-func (e Kind) ToPointer() *Kind {
+func (e IntegrationResponseDtoKind) ToPointer() *IntegrationResponseDtoKind {
 	return &e
 }
-func (e *Kind) UnmarshalJSON(data []byte) error {
+func (e *IntegrationResponseDtoKind) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -66,10 +66,10 @@ func (e *Kind) UnmarshalJSON(data []byte) error {
 	case "delivery":
 		fallthrough
 	case "agent":
-		*e = Kind(v)
+		*e = IntegrationResponseDtoKind(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Kind: %v", v)
+		return fmt.Errorf("invalid value for IntegrationResponseDtoKind: %v", v)
 	}
 }
 
@@ -89,7 +89,7 @@ type IntegrationResponseDto struct {
 	// The channel type for the integration, which defines how it communicates (e.g., email, SMS). Not set for agent-kind integrations.
 	Channel *IntegrationResponseDtoChannel `json:"channel,omitempty"`
 	// Distinguishes delivery integrations from agent-runtime integrations. Defaults to "delivery". Agent integrations do not have a channel.
-	Kind *Kind `json:"kind,omitempty"`
+	Kind *IntegrationResponseDtoKind `json:"kind,omitempty"`
 	// The decrypted credentials required for the integration to function (e.g. provider API keys, signing secrets). Only returned to dashboard/session-token callers; API-key authenticated callers receive the integration metadata without this field to avoid amplifying API-key leaks into provider-credential leaks.
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	// The configurations required for enabling the additional configurations of the integration.
@@ -104,8 +104,12 @@ type IntegrationResponseDto struct {
 	DeletedBy *string `json:"deletedBy,omitempty"`
 	// Indicates whether this integration is marked as primary. A primary integration is often the default choice for processing.
 	Primary bool `json:"primary"`
-	// An array of conditions associated with the integration that may influence its behavior or processing logic.
+	// Legacy StepFilter conditions. Ignored when `rules` is also set.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	Conditions []StepFilterDto `json:"conditions,omitempty"`
+	// JSONLogic used at send time to select this integration. Takes precedence over `conditions`.
+	Rules map[string]any `json:"rules,omitempty"`
 }
 
 func (i *IntegrationResponseDto) GetID() *string {
@@ -157,7 +161,7 @@ func (i *IntegrationResponseDto) GetChannel() *IntegrationResponseDtoChannel {
 	return i.Channel
 }
 
-func (i *IntegrationResponseDto) GetKind() *Kind {
+func (i *IntegrationResponseDto) GetKind() *IntegrationResponseDtoKind {
 	if i == nil {
 		return nil
 	}
@@ -218,4 +222,11 @@ func (i *IntegrationResponseDto) GetConditions() []StepFilterDto {
 		return nil
 	}
 	return i.Conditions
+}
+
+func (i *IntegrationResponseDto) GetRules() map[string]any {
+	if i == nil {
+		return nil
+	}
+	return i.Rules
 }
