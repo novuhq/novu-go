@@ -3,16 +3,47 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// ChatStepResponseDtoEditorType - Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is "block", otherwise "text".
+type ChatStepResponseDtoEditorType string
+
+const (
+	ChatStepResponseDtoEditorTypeBlock ChatStepResponseDtoEditorType = "block"
+	ChatStepResponseDtoEditorTypeText  ChatStepResponseDtoEditorType = "text"
+)
+
+func (e ChatStepResponseDtoEditorType) ToPointer() *ChatStepResponseDtoEditorType {
+	return &e
+}
+func (e *ChatStepResponseDtoEditorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "block":
+		fallthrough
+	case "text":
+		*e = ChatStepResponseDtoEditorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ChatStepResponseDtoEditorType: %v", v)
+	}
+}
 
 // ChatStepResponseDtoControlValues - Control values for the chat step
 type ChatStepResponseDtoControlValues struct {
 	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
 	Skip map[string]any `json:"skip,omitempty"`
 	// Content of the chat message.
-	Body                 *string        `json:"body,omitempty"`
-	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+	Body *string `json:"body,omitempty"`
+	// Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is "block", otherwise "text".
+	EditorType           *ChatStepResponseDtoEditorType `json:"editorType,omitempty"`
+	AdditionalProperties map[string]any                 `additionalProperties:"true" json:"-"`
 }
 
 func (c ChatStepResponseDtoControlValues) MarshalJSON() ([]byte, error) {
@@ -38,6 +69,13 @@ func (c *ChatStepResponseDtoControlValues) GetBody() *string {
 		return nil
 	}
 	return c.Body
+}
+
+func (c *ChatStepResponseDtoControlValues) GetEditorType() *ChatStepResponseDtoEditorType {
+	if c == nil {
+		return nil
+	}
+	return c.EditorType
 }
 
 func (c *ChatStepResponseDtoControlValues) GetAdditionalProperties() map[string]any {

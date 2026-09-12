@@ -23,3 +23,5 @@ value := components.ContentIssueEnumIllegalVariableInControlValue
 | `ContentIssueEnumMissingValue`                  | MISSING_VALUE                                   |
 | `ContentIssueEnumTierLimitExceeded`             | TIER_LIMIT_EXCEEDED                             |
 | `ContentIssueEnumUnsupportedProperty`           | UNSUPPORTED_PROPERTY                            |
+| `ContentIssueEnumChatCardLimitExceeded`         | CHAT_CARD_LIMIT_EXCEEDED                        |
+| `ContentIssueEnumChatCardInvalidButton`         | CHAT_CARD_INVALID_BUTTON                        |

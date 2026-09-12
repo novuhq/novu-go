@@ -42,7 +42,14 @@ func CreateFeedIdentifierArrayOfStr(arrayOfStr []string) FeedIdentifier {
 	}
 }
 
-func (u *FeedIdentifier) UnmarshalJSON(data []byte) error {
+func (u *FeedIdentifier) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = FeedIdentifier{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

@@ -286,7 +286,14 @@ func CreateWorkflowResponseDtoStepsTool(tool ToolStepResponseDto) WorkflowRespon
 	}
 }
 
-func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) error {
+func (u *WorkflowResponseDtoSteps) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = WorkflowResponseDtoSteps{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	type discriminator struct {
 		Type string `json:"type"`

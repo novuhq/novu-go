@@ -5,6 +5,8 @@ package components
 type UpdateContextRequestDto struct {
 	// Custom data to associate with this context. Replaces existing data.
 	Data map[string]any `json:"data"`
+	// Optional bridge URL override for agent connect. When an inbound agent turn resolves this context, its bridge call is routed here instead of the agent default bridge URL. Must be a publicly reachable URL. Pass null to clear an existing override.
+	BridgeURL *string `json:"bridgeUrl,omitempty"`
 }
 
 func (u *UpdateContextRequestDto) GetData() map[string]any {
@@ -12,4 +14,11 @@ func (u *UpdateContextRequestDto) GetData() map[string]any {
 		return map[string]any{}
 	}
 	return u.Data
+}
+
+func (u *UpdateContextRequestDto) GetBridgeURL() *string {
+	if u == nil {
+		return nil
+	}
+	return u.BridgeURL
 }

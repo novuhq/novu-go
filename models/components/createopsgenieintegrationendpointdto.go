@@ -76,7 +76,14 @@ func CreateCreateOpsgenieIntegrationEndpointDtoContextCreateOpsgenieIntegrationE
 	}
 }
 
-func (u *CreateOpsgenieIntegrationEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateOpsgenieIntegrationEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateOpsgenieIntegrationEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createOpsgenieIntegrationEndpointDtoContext2 CreateOpsgenieIntegrationEndpointDtoContext2 = CreateOpsgenieIntegrationEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createOpsgenieIntegrationEndpointDtoContext2, "", true, nil); err == nil {

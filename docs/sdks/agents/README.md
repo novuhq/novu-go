@@ -327,6 +327,48 @@ func main() {
     }
 }
 ```
+### Example Usage: humanApprove
+
+<!-- UsageSnippet language="go" operationID="AgentReplyController_handleAgentReplyHandler" method="post" path="/v1/agents/{agentId}/reply" example="humanApprove" -->
+```go
+package main
+
+import(
+	"context"
+	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := v3.New(
+        v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
+    )
+
+    res, err := s.Agents.SendReply(ctx, "support-agent", components.AgentReplyPayloadDto{
+        ConversationID: "64f5a1c2e8b7a3d9f0c1b2a3",
+        IntegrationIdentifier: "slack-support",
+        Signals: []components.Signals{
+            components.CreateSignalsHumanSignalDto(
+                components.HumanSignalDto{
+                    Type: components.HumanSignalDtoTypeHuman,
+                    Kind: components.KindApprove,
+                    Prompt: "Deploy v2.4.1 to production?",
+                    RequestID: "hr_7c2e1a3b-4d5f-6789-abcd-ef0123456789",
+                },
+            ),
+        },
+    }, nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res.Object != nil {
+        // handle response
+    }
+}
+```
 ### Example Usage: markdownReply
 
 <!-- UsageSnippet language="go" operationID="AgentReplyController_handleAgentReplyHandler" method="post" path="/v1/agents/{agentId}/reply" example="markdownReply" -->

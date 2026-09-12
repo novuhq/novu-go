@@ -62,7 +62,14 @@ func CreatePlaceholder5MapOfAny(mapOfAny map[string]any) Placeholder5 {
 	}
 }
 
-func (u *Placeholder5) UnmarshalJSON(data []byte) error {
+func (u *Placeholder5) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Placeholder5{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -181,7 +188,14 @@ func CreatePlaceholderArrayOfPlaceholder5(arrayOfPlaceholder5 []Placeholder5) Pl
 	}
 }
 
-func (u *Placeholder) UnmarshalJSON(data []byte) error {
+func (u *Placeholder) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Placeholder{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

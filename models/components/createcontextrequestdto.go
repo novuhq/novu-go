@@ -9,6 +9,8 @@ type CreateContextRequestDto struct {
 	ID string `json:"id"`
 	// Optional custom data to associate with this context.
 	Data map[string]any `json:"data,omitempty"`
+	// Optional bridge URL override for agent connect. When an inbound agent turn resolves this context, its bridge call is routed here instead of the agent default bridge URL. Must be a publicly reachable URL.
+	BridgeURL *string `json:"bridgeUrl,omitempty"`
 }
 
 func (c *CreateContextRequestDto) GetType() string {
@@ -30,4 +32,11 @@ func (c *CreateContextRequestDto) GetData() map[string]any {
 		return nil
 	}
 	return c.Data
+}
+
+func (c *CreateContextRequestDto) GetBridgeURL() *string {
+	if c == nil {
+		return nil
+	}
+	return c.BridgeURL
 }

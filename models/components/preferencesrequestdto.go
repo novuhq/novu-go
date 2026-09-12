@@ -30,7 +30,14 @@ func CreateUserAllWorkflowPreferenceDto(workflowPreferenceDto WorkflowPreference
 	}
 }
 
-func (u *UserAll) UnmarshalJSON(data []byte) error {
+func (u *UserAll) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = UserAll{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
 	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {
@@ -104,7 +111,14 @@ func CreateUserUserWorkflowPreferencesDto(userWorkflowPreferencesDto UserWorkflo
 	}
 }
 
-func (u *User) UnmarshalJSON(data []byte) error {
+func (u *User) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = User{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var userWorkflowPreferencesDto UserWorkflowPreferencesDto = UserWorkflowPreferencesDto{}
 	if err := utils.UnmarshalJSON(data, &userWorkflowPreferencesDto, "", true, nil); err == nil {
@@ -146,7 +160,14 @@ func CreatePreferencesRequestDtoAllWorkflowPreferenceDto(workflowPreferenceDto W
 	}
 }
 
-func (u *PreferencesRequestDtoAll) UnmarshalJSON(data []byte) error {
+func (u *PreferencesRequestDtoAll) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = PreferencesRequestDtoAll{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var workflowPreferenceDto WorkflowPreferenceDto = WorkflowPreferenceDto{}
 	if err := utils.UnmarshalJSON(data, &workflowPreferenceDto, "", true, nil); err == nil {

@@ -41,7 +41,14 @@ func CreateDelayStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) Dela
 	}
 }
 
-func (u *DelayStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *DelayStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = DelayStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var delayControlDto DelayControlDto = DelayControlDto{}
 	if err := utils.UnmarshalJSON(data, &delayControlDto, "", true, nil); err == nil {

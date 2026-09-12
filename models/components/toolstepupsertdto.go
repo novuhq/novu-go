@@ -41,7 +41,14 @@ func CreateToolStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) ToolS
 	}
 }
 
-func (u *ToolStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *ToolStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ToolStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var toolControlDto ToolControlDto = ToolControlDto{}
 	if err := utils.UnmarshalJSON(data, &toolControlDto, "", true, nil); err == nil {

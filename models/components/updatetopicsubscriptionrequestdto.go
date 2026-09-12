@@ -51,7 +51,14 @@ func CreateUpdateTopicSubscriptionRequestDtoPreferencesGroupPreferenceFilterDto(
 	}
 }
 
-func (u *UpdateTopicSubscriptionRequestDtoPreferences) UnmarshalJSON(data []byte) error {
+func (u *UpdateTopicSubscriptionRequestDtoPreferences) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = UpdateTopicSubscriptionRequestDtoPreferences{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var workflowPreferenceRequestDto WorkflowPreferenceRequestDto = WorkflowPreferenceRequestDto{}
 	if err := utils.UnmarshalJSON(data, &workflowPreferenceRequestDto, "", true, nil); err == nil {

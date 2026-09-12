@@ -170,7 +170,14 @@ func CreateTriggerEventToAllRequestDtoActorSubscriberPayloadDto(subscriberPayloa
 	}
 }
 
-func (u *TriggerEventToAllRequestDtoActor) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventToAllRequestDtoActor) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerEventToAllRequestDtoActor{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var subscriberPayloadDto SubscriberPayloadDto = SubscriberPayloadDto{}
 	if err := utils.UnmarshalJSON(data, &subscriberPayloadDto, "", true, nil); err == nil {
@@ -236,7 +243,14 @@ func CreateTriggerEventToAllRequestDtoTenantTenantPayloadDto(tenantPayloadDto Te
 	}
 }
 
-func (u *TriggerEventToAllRequestDtoTenant) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventToAllRequestDtoTenant) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerEventToAllRequestDtoTenant{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -334,7 +348,14 @@ func CreateTriggerEventToAllRequestDtoContextTriggerEventToAllRequestDtoContext2
 	}
 }
 
-func (u *TriggerEventToAllRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *TriggerEventToAllRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerEventToAllRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var triggerEventToAllRequestDtoContext2 TriggerEventToAllRequestDtoContext2 = TriggerEventToAllRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &triggerEventToAllRequestDtoContext2, "", true, nil); err == nil {

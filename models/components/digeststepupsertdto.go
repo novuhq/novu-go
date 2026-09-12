@@ -41,7 +41,14 @@ func CreateDigestStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) Dig
 	}
 }
 
-func (u *DigestStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *DigestStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = DigestStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var digestControlDto DigestControlDto = DigestControlDto{}
 	if err := utils.UnmarshalJSON(data, &digestControlDto, "", true, nil); err == nil {

@@ -41,7 +41,14 @@ func CreateInAppStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) InAp
 	}
 }
 
-func (u *InAppStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *InAppStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = InAppStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var inAppControlDto InAppControlDto = InAppControlDto{}
 	if err := utils.UnmarshalJSON(data, &inAppControlDto, "", true, nil); err == nil {
