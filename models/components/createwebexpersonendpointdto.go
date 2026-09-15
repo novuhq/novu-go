@@ -76,7 +76,14 @@ func CreateCreateWebexPersonEndpointDtoContextCreateWebexPersonEndpointDtoContex
 	}
 }
 
-func (u *CreateWebexPersonEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateWebexPersonEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateWebexPersonEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createWebexPersonEndpointDtoContext2 CreateWebexPersonEndpointDtoContext2 = CreateWebexPersonEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createWebexPersonEndpointDtoContext2, "", true, nil); err == nil {

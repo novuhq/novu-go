@@ -13,6 +13,8 @@ type StepIntegrationIssue struct {
 	VariableName *string `json:"variableName,omitempty"`
 	// Detailed message describing the issue
 	Message string `json:"message"`
+	// Blocking severity of the issue. `error` (default when omitted) blocks save; `warning` is a non-blocking notice.
+	Severity *StepIssueSeverityEnum `json:"severity,omitempty"`
 }
 
 func (s StepIntegrationIssue) MarshalJSON() ([]byte, error) {
@@ -45,4 +47,11 @@ func (s *StepIntegrationIssue) GetMessage() string {
 		return ""
 	}
 	return s.Message
+}
+
+func (s *StepIntegrationIssue) GetSeverity() *StepIssueSeverityEnum {
+	if s == nil {
+		return nil
+	}
+	return s.Severity
 }

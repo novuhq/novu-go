@@ -64,7 +64,14 @@ func CreateTo3MapOfAny(mapOfAny map[string]any) To3 {
 	}
 }
 
-func (u *To3) UnmarshalJSON(data []byte) error {
+func (u *To3) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = To3{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
@@ -95,77 +102,84 @@ func (u To3) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type To3: all fields are null")
 }
 
-type ToType string
+type TriggerSignalDtoToType string
 
 const (
-	ToTypeStr        ToType = "str"
-	ToTypeMapOfAny   ToType = "mapOfAny"
-	ToTypeArrayOfTo3 ToType = "arrayOfTo3"
+	TriggerSignalDtoToTypeStr        TriggerSignalDtoToType = "str"
+	TriggerSignalDtoToTypeMapOfAny   TriggerSignalDtoToType = "mapOfAny"
+	TriggerSignalDtoToTypeArrayOfTo3 TriggerSignalDtoToType = "arrayOfTo3"
 )
 
-// To - Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber.
-type To struct {
+// TriggerSignalDtoTo - Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber.
+type TriggerSignalDtoTo struct {
 	Str        *string        `queryParam:"inline" union:"member"`
 	MapOfAny   map[string]any `queryParam:"inline" union:"member"`
 	ArrayOfTo3 []To3          `queryParam:"inline" union:"member"`
 
-	Type ToType
+	Type TriggerSignalDtoToType
 }
 
-func CreateToStr(str string) To {
-	typ := ToTypeStr
+func CreateTriggerSignalDtoToStr(str string) TriggerSignalDtoTo {
+	typ := TriggerSignalDtoToTypeStr
 
-	return To{
+	return TriggerSignalDtoTo{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateToMapOfAny(mapOfAny map[string]any) To {
-	typ := ToTypeMapOfAny
+func CreateTriggerSignalDtoToMapOfAny(mapOfAny map[string]any) TriggerSignalDtoTo {
+	typ := TriggerSignalDtoToTypeMapOfAny
 
-	return To{
+	return TriggerSignalDtoTo{
 		MapOfAny: mapOfAny,
 		Type:     typ,
 	}
 }
 
-func CreateToArrayOfTo3(arrayOfTo3 []To3) To {
-	typ := ToTypeArrayOfTo3
+func CreateTriggerSignalDtoToArrayOfTo3(arrayOfTo3 []To3) TriggerSignalDtoTo {
+	typ := TriggerSignalDtoToTypeArrayOfTo3
 
-	return To{
+	return TriggerSignalDtoTo{
 		ArrayOfTo3: arrayOfTo3,
 		Type:       typ,
 	}
 }
 
-func (u *To) UnmarshalJSON(data []byte) error {
+func (u *TriggerSignalDtoTo) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TriggerSignalDtoTo{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = ToTypeStr
+		u.Type = TriggerSignalDtoToTypeStr
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = ToTypeMapOfAny
+		u.Type = TriggerSignalDtoToTypeMapOfAny
 		return nil
 	}
 
 	var arrayOfTo3 []To3 = []To3{}
 	if err := utils.UnmarshalJSON(data, &arrayOfTo3, "", true, nil); err == nil {
 		u.ArrayOfTo3 = arrayOfTo3
-		u.Type = ToTypeArrayOfTo3
+		u.Type = TriggerSignalDtoToTypeArrayOfTo3
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for To", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for TriggerSignalDtoTo", string(data))
 }
 
-func (u To) MarshalJSON() ([]byte, error) {
+func (u TriggerSignalDtoTo) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -178,7 +192,7 @@ func (u To) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.ArrayOfTo3, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type To: all fields are null")
+	return nil, errors.New("could not marshal union type TriggerSignalDtoTo: all fields are null")
 }
 
 type TriggerSignalDto struct {
@@ -186,7 +200,7 @@ type TriggerSignalDto struct {
 	// Workflow identifier (same string used with `events.trigger`).
 	WorkflowID string `json:"workflowId"`
 	// Recipient(s). Accepts a subscriberId string, subscriber object, topic object, or an array of those. When omitted, Novu falls back to the conversation subscriber.
-	To *To `json:"to,omitempty"`
+	To *TriggerSignalDtoTo `json:"to,omitempty"`
 	// Arbitrary payload forwarded to the workflow.
 	Payload map[string]any `json:"payload,omitempty"`
 }
@@ -216,7 +230,7 @@ func (t *TriggerSignalDto) GetWorkflowID() string {
 	return t.WorkflowID
 }
 
-func (t *TriggerSignalDto) GetTo() *To {
+func (t *TriggerSignalDto) GetTo() *TriggerSignalDtoTo {
 	if t == nil {
 		return nil
 	}

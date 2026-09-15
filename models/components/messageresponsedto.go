@@ -41,7 +41,14 @@ func CreateMessageResponseDtoContentStr(str string) MessageResponseDtoContent {
 	}
 }
 
-func (u *MessageResponseDtoContent) UnmarshalJSON(data []byte) error {
+func (u *MessageResponseDtoContent) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = MessageResponseDtoContent{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var arrayOfEmailBlock []EmailBlock = []EmailBlock{}
 	if err := utils.UnmarshalJSON(data, &arrayOfEmailBlock, "", true, nil); err == nil {

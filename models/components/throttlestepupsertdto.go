@@ -41,7 +41,14 @@ func CreateThrottleStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) T
 	}
 }
 
-func (u *ThrottleStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *ThrottleStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ThrottleStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var throttleControlDto ThrottleControlDto = ThrottleControlDto{}
 	if err := utils.UnmarshalJSON(data, &throttleControlDto, "", true, nil); err == nil {

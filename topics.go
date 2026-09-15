@@ -1103,7 +1103,7 @@ func (s *Topics) Get(ctx context.Context, topicKey string, idempotencyKey *strin
 }
 
 // Update a topic
-// Update a topic name by its unique key identifier **topicKey**
+// Update a topic name or data by its unique key identifier **topicKey**
 func (s *Topics) Update(ctx context.Context, topicKey string, updateTopicRequestDto components.UpdateTopicRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.TopicsControllerUpdateTopicResponse, error) {
 	request := operations.TopicsControllerUpdateTopicRequest{
 		TopicKey:              topicKey,

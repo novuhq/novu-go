@@ -4,12 +4,21 @@ package components
 
 type UpdateTopicRequestDto struct {
 	// The display name for the topic
-	Name string `json:"name"`
+	Name *string `json:"name,omitempty"`
+	// Additional custom data associated with the topic. Flat key-value pairs of scalars (string, number, boolean, string[]). Maximum size: 64KB. Pass null to clear.
+	Data map[string]any `json:"data,omitempty"`
 }
 
-func (u *UpdateTopicRequestDto) GetName() string {
+func (u *UpdateTopicRequestDto) GetName() *string {
 	if u == nil {
-		return ""
+		return nil
 	}
 	return u.Name
+}
+
+func (u *UpdateTopicRequestDto) GetData() map[string]any {
+	if u == nil {
+		return nil
+	}
+	return u.Data
 }
