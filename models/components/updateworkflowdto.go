@@ -206,7 +206,14 @@ func CreateUpdateWorkflowDtoStepsHTTPRequest(httpRequest HTTPRequestStepUpsertDt
 	}
 }
 
-func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) error {
+func (u *UpdateWorkflowDtoSteps) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = UpdateWorkflowDtoSteps{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	type discriminator struct {
 		Type string `json:"type"`

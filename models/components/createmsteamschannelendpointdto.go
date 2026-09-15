@@ -76,7 +76,14 @@ func CreateCreateMsTeamsChannelEndpointDtoContextCreateMsTeamsChannelEndpointDto
 	}
 }
 
-func (u *CreateMsTeamsChannelEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateMsTeamsChannelEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateMsTeamsChannelEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createMsTeamsChannelEndpointDtoContext2 CreateMsTeamsChannelEndpointDtoContext2 = CreateMsTeamsChannelEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createMsTeamsChannelEndpointDtoContext2, "", true, nil); err == nil {

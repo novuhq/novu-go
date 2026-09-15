@@ -63,7 +63,14 @@ func CreateNotificationStepDataMetadataDelayScheduledMetadata(delayScheduledMeta
 	}
 }
 
-func (u *NotificationStepDataMetadata) UnmarshalJSON(data []byte) error {
+func (u *NotificationStepDataMetadata) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = NotificationStepDataMetadata{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var delayScheduledMetadata DelayScheduledMetadata = DelayScheduledMetadata{}
 	if err := utils.UnmarshalJSON(data, &delayScheduledMetadata, "", true, nil); err == nil {

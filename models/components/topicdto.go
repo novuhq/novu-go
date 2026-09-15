@@ -9,6 +9,8 @@ type TopicDto struct {
 	Key string `json:"key"`
 	// The name of the topic
 	Name *string `json:"name,omitempty"`
+	// Additional custom data associated with the topic
+	Data map[string]any `json:"data,omitempty"`
 }
 
 func (t *TopicDto) GetID() string {
@@ -30,4 +32,11 @@ func (t *TopicDto) GetName() *string {
 		return nil
 	}
 	return t.Name
+}
+
+func (t *TopicDto) GetData() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Data
 }
