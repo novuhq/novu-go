@@ -76,7 +76,14 @@ func CreateCreateWebhookEndpointDtoContextCreateWebhookEndpointDtoContext2(creat
 	}
 }
 
-func (u *CreateWebhookEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateWebhookEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateWebhookEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createWebhookEndpointDtoContext2 CreateWebhookEndpointDtoContext2 = CreateWebhookEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createWebhookEndpointDtoContext2, "", true, nil); err == nil {

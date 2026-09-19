@@ -96,7 +96,14 @@ func CreateUpdateChannelEndpointRequestDtoEndpointToolWebhookEndpointDto(toolWeb
 	}
 }
 
-func (u *UpdateChannelEndpointRequestDtoEndpoint) UnmarshalJSON(data []byte) error {
+func (u *UpdateChannelEndpointRequestDtoEndpoint) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = UpdateChannelEndpointRequestDtoEndpoint{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var slackChannelEndpointDto SlackChannelEndpointDto = SlackChannelEndpointDto{}
 	if err := utils.UnmarshalJSON(data, &slackChannelEndpointDto, "", true, nil); err == nil {

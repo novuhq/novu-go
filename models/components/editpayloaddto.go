@@ -52,7 +52,14 @@ func CreateContentToolApprovalCardReplyContentDto(toolApprovalCardReplyContentDt
 	}
 }
 
-func (u *Content) UnmarshalJSON(data []byte) error {
+func (u *Content) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Content{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var markdownReplyContentDto MarkdownReplyContentDto = MarkdownReplyContentDto{}
 	if err := utils.UnmarshalJSON(data, &markdownReplyContentDto, "", true, nil); err == nil {
