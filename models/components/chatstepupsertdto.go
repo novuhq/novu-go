@@ -41,7 +41,14 @@ func CreateChatStepUpsertDtoControlValuesMapOfAny(mapOfAny map[string]any) ChatS
 	}
 }
 
-func (u *ChatStepUpsertDtoControlValues) UnmarshalJSON(data []byte) error {
+func (u *ChatStepUpsertDtoControlValues) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ChatStepUpsertDtoControlValues{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var chatControlDto ChatControlDto = ChatControlDto{}
 	if err := utils.UnmarshalJSON(data, &chatControlDto, "", true, nil); err == nil {

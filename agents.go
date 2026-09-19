@@ -729,10 +729,9 @@ func (s *Agents) List(ctx context.Context, request operations.AgentsControllerLi
 }
 
 // SendReply - Send an agent reply
-// Send a message or side-effect into an existing agent conversation from your backend.
-//
-// Use this endpoint when you are not using `@novu/framework` (for example Python, Go, PHP, .NET, or Java SDKs),
-// or when a server process outside the bridge needs to post into a live conversation.
+// **Deprecated** — use `POST /v1/agents/events/ingest` (AgentEvent protocol).
+// This route stays live for old `@novu/framework` and existing OpenAPI `sendReply` clients.
+// Do not use it for new integrations.
 //
 // **Message actions**
 // - `reply` — markdown, interactive card, or tool-approval card (optional `files`)
@@ -752,6 +751,8 @@ func (s *Agents) List(ctx context.Context, request operations.AgentsControllerLi
 //
 // Returns `{ data: { messageId, platformThreadId } }` when a reply or edit is delivered;
 // otherwise `{ data: null }`.
+//
+// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 func (s *Agents) SendReply(ctx context.Context, agentID string, agentReplyPayloadDto components.AgentReplyPayloadDto, idempotencyKey *string, opts ...operations.Option) (*operations.AgentReplyControllerHandleAgentReplyHandlerResponse, error) {
 	request := operations.AgentReplyControllerHandleAgentReplyHandlerRequest{
 		AgentID:              agentID,

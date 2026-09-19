@@ -40,7 +40,14 @@ func CreateSubscriptionsTopicSubscriberIdentifierDto(topicSubscriberIdentifierDt
 	}
 }
 
-func (u *Subscriptions) UnmarshalJSON(data []byte) error {
+func (u *Subscriptions) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Subscriptions{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var topicSubscriberIdentifierDto TopicSubscriberIdentifierDto = TopicSubscriberIdentifierDto{}
 	if err := utils.UnmarshalJSON(data, &topicSubscriberIdentifierDto, "", true, nil); err == nil {
@@ -138,7 +145,14 @@ func CreateCreateTopicSubscriptionsRequestDtoContextCreateTopicSubscriptionsRequ
 	}
 }
 
-func (u *CreateTopicSubscriptionsRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateTopicSubscriptionsRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateTopicSubscriptionsRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createTopicSubscriptionsRequestDtoContext2 CreateTopicSubscriptionsRequestDtoContext2 = CreateTopicSubscriptionsRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createTopicSubscriptionsRequestDtoContext2, "", true, nil); err == nil {
@@ -212,7 +226,14 @@ func CreatePreferencesGroupPreferenceFilterDto(groupPreferenceFilterDto GroupPre
 	}
 }
 
-func (u *Preferences) UnmarshalJSON(data []byte) error {
+func (u *Preferences) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Preferences{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var workflowPreferenceRequestDto WorkflowPreferenceRequestDto = WorkflowPreferenceRequestDto{}
 	if err := utils.UnmarshalJSON(data, &workflowPreferenceRequestDto, "", true, nil); err == nil {

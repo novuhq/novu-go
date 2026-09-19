@@ -72,7 +72,14 @@ func CreateContextTwo(two Two) Context {
 	}
 }
 
-func (u *Context) UnmarshalJSON(data []byte) error {
+func (u *Context) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Context{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var two Two = Two{}
 	if err := utils.UnmarshalJSON(data, &two, "", true, nil); err == nil {
