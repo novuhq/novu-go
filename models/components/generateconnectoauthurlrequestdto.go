@@ -76,7 +76,14 @@ func CreateGenerateConnectOauthURLRequestDtoContextGenerateConnectOauthURLReques
 	}
 }
 
-func (u *GenerateConnectOauthURLRequestDtoContext) UnmarshalJSON(data []byte) error {
+func (u *GenerateConnectOauthURLRequestDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GenerateConnectOauthURLRequestDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var generateConnectOauthURLRequestDtoContext2 GenerateConnectOauthURLRequestDtoContext2 = GenerateConnectOauthURLRequestDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &generateConnectOauthURLRequestDtoContext2, "", true, nil); err == nil {

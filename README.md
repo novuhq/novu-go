@@ -424,7 +424,7 @@ func main() {
 
 * [Create](docs/sdks/agents/README.md#create) - Create an agent
 * [List](docs/sdks/agents/README.md#list) - List all agents
-* [SendReply](docs/sdks/agents/README.md#sendreply) - Send an agent reply
+* [~~SendReply~~](docs/sdks/agents/README.md#sendreply) - Send an agent reply :warning: **Deprecated**
 * [Retrieve](docs/sdks/agents/README.md#retrieve) - Retrieve an agent
 * [Update](docs/sdks/agents/README.md#update) - Update an agent
 * [Delete](docs/sdks/agents/README.md#delete) - Delete an agent

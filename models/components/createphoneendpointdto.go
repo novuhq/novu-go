@@ -76,7 +76,14 @@ func CreateCreatePhoneEndpointDtoContextCreatePhoneEndpointDtoContext2(createPho
 	}
 }
 
-func (u *CreatePhoneEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreatePhoneEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreatePhoneEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createPhoneEndpointDtoContext2 CreatePhoneEndpointDtoContext2 = CreatePhoneEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createPhoneEndpointDtoContext2, "", true, nil); err == nil {

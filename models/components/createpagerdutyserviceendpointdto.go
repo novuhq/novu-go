@@ -76,7 +76,14 @@ func CreateCreatePagerDutyServiceEndpointDtoContextCreatePagerDutyServiceEndpoin
 	}
 }
 
-func (u *CreatePagerDutyServiceEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreatePagerDutyServiceEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreatePagerDutyServiceEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createPagerDutyServiceEndpointDtoContext2 CreatePagerDutyServiceEndpointDtoContext2 = CreatePagerDutyServiceEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createPagerDutyServiceEndpointDtoContext2, "", true, nil); err == nil {

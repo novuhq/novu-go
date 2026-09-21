@@ -75,7 +75,14 @@ func CreatePreviewPayloadDtoContextPreviewPayloadDtoContext2(previewPayloadDtoCo
 	}
 }
 
-func (u *PreviewPayloadDtoContext) UnmarshalJSON(data []byte) error {
+func (u *PreviewPayloadDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = PreviewPayloadDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var previewPayloadDtoContext2 PreviewPayloadDtoContext2 = PreviewPayloadDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &previewPayloadDtoContext2, "", true, nil); err == nil {

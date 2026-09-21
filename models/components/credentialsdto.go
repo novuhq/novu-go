@@ -2,59 +2,97 @@
 
 package components
 
+import (
+	"encoding/json"
+	"fmt"
+)
+
+// HmacSecretKeyEncoding - Email webhook: how `secretKey` is interpreted when signing webhook calls. `text` signs with the raw UTF-8 bytes; `base64`/`hex` decode it to binary first (e.g. for AWS KMS).
+type HmacSecretKeyEncoding string
+
+const (
+	HmacSecretKeyEncodingText   HmacSecretKeyEncoding = "text"
+	HmacSecretKeyEncodingBase64 HmacSecretKeyEncoding = "base64"
+	HmacSecretKeyEncodingHex    HmacSecretKeyEncoding = "hex"
+)
+
+func (e HmacSecretKeyEncoding) ToPointer() *HmacSecretKeyEncoding {
+	return &e
+}
+func (e *HmacSecretKeyEncoding) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "text":
+		fallthrough
+	case "base64":
+		fallthrough
+	case "hex":
+		*e = HmacSecretKeyEncoding(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for HmacSecretKeyEncoding: %v", v)
+	}
+}
+
 type TLSOptions struct {
 }
 
 type CredentialsDto struct {
-	APIKey                    *string     `json:"apiKey,omitempty"`
-	User                      *string     `json:"user,omitempty"`
-	SecretKey                 *string     `json:"secretKey,omitempty"`
-	Domain                    *string     `json:"domain,omitempty"`
-	Password                  *string     `json:"password,omitempty"`
-	Host                      *string     `json:"host,omitempty"`
-	Port                      *string     `json:"port,omitempty"`
-	Secure                    *bool       `json:"secure,omitempty"`
-	Region                    *string     `json:"region,omitempty"`
-	AccountSid                *string     `json:"accountSid,omitempty"`
-	MessageProfileID          *string     `json:"messageProfileId,omitempty"`
-	Token                     *string     `json:"token,omitempty"`
-	From                      *string     `json:"from,omitempty"`
-	SenderName                *string     `json:"senderName,omitempty"`
-	ProjectName               *string     `json:"projectName,omitempty"`
-	ApplicationID             *string     `json:"applicationId,omitempty"`
-	ClientID                  *string     `json:"clientId,omitempty"`
-	RequireTLS                *bool       `json:"requireTls,omitempty"`
-	IgnoreTLS                 *bool       `json:"ignoreTls,omitempty"`
-	TLSOptions                *TLSOptions `json:"tlsOptions,omitempty"`
-	BaseURL                   *string     `json:"baseUrl,omitempty"`
-	WebhookURL                *string     `json:"webhookUrl,omitempty"`
-	RedirectURL               *string     `json:"redirectUrl,omitempty"`
-	Hmac                      *bool       `json:"hmac,omitempty"`
-	ServiceAccount            *string     `json:"serviceAccount,omitempty"`
-	IPPoolName                *string     `json:"ipPoolName,omitempty"`
-	APIKeyRequestHeader       *string     `json:"apiKeyRequestHeader,omitempty"`
-	SecretKeyRequestHeader    *string     `json:"secretKeyRequestHeader,omitempty"`
-	IDPath                    *string     `json:"idPath,omitempty"`
-	DatePath                  *string     `json:"datePath,omitempty"`
-	APIToken                  *string     `json:"apiToken,omitempty"`
-	AuthenticateByToken       *bool       `json:"authenticateByToken,omitempty"`
-	AuthenticationTokenKey    *string     `json:"authenticationTokenKey,omitempty"`
-	InstanceID                *string     `json:"instanceId,omitempty"`
-	AlertUID                  *string     `json:"alertUid,omitempty"`
-	Title                     *string     `json:"title,omitempty"`
-	ImageURL                  *string     `json:"imageUrl,omitempty"`
-	State                     *string     `json:"state,omitempty"`
-	ExternalLink              *string     `json:"externalLink,omitempty"`
-	ChannelID                 *string     `json:"channelId,omitempty"`
-	PhoneNumberIdentification *string     `json:"phoneNumberIdentification,omitempty"`
-	AccessKey                 *string     `json:"accessKey,omitempty"`
-	AppSid                    *string     `json:"appSid,omitempty"`
-	SenderID                  *string     `json:"senderId,omitempty"`
-	TenantID                  *string     `json:"tenantId,omitempty"`
-	AppIOBaseURL              *string     `json:"AppIOBaseUrl,omitempty"`
-	SigningSecret             *string     `json:"signingSecret,omitempty"`
-	OutboundIntegrationID     *string     `json:"outboundIntegrationId,omitempty"`
-	OutboundConnectedAt       *string     `json:"outboundConnectedAt,omitempty"`
+	APIKey    *string `json:"apiKey,omitempty"`
+	User      *string `json:"user,omitempty"`
+	SecretKey *string `json:"secretKey,omitempty"`
+	// Email webhook: how `secretKey` is interpreted when signing webhook calls. `text` signs with the raw UTF-8 bytes; `base64`/`hex` decode it to binary first (e.g. for AWS KMS).
+	HmacSecretKeyEncoding     *HmacSecretKeyEncoding `json:"hmacSecretKeyEncoding,omitempty"`
+	Domain                    *string                `json:"domain,omitempty"`
+	Password                  *string                `json:"password,omitempty"`
+	Host                      *string                `json:"host,omitempty"`
+	Port                      *string                `json:"port,omitempty"`
+	Secure                    *bool                  `json:"secure,omitempty"`
+	Region                    *string                `json:"region,omitempty"`
+	AccountSid                *string                `json:"accountSid,omitempty"`
+	MessageProfileID          *string                `json:"messageProfileId,omitempty"`
+	Token                     *string                `json:"token,omitempty"`
+	From                      *string                `json:"from,omitempty"`
+	SenderName                *string                `json:"senderName,omitempty"`
+	ProjectName               *string                `json:"projectName,omitempty"`
+	ApplicationID             *string                `json:"applicationId,omitempty"`
+	ClientID                  *string                `json:"clientId,omitempty"`
+	RequireTLS                *bool                  `json:"requireTls,omitempty"`
+	IgnoreTLS                 *bool                  `json:"ignoreTls,omitempty"`
+	TLSOptions                *TLSOptions            `json:"tlsOptions,omitempty"`
+	BaseURL                   *string                `json:"baseUrl,omitempty"`
+	WebhookURL                *string                `json:"webhookUrl,omitempty"`
+	RedirectURL               *string                `json:"redirectUrl,omitempty"`
+	Hmac                      *bool                  `json:"hmac,omitempty"`
+	ServiceAccount            *string                `json:"serviceAccount,omitempty"`
+	IPPoolName                *string                `json:"ipPoolName,omitempty"`
+	ConfigurationSetName      *string                `json:"configurationSetName,omitempty"`
+	APIKeyRequestHeader       *string                `json:"apiKeyRequestHeader,omitempty"`
+	SecretKeyRequestHeader    *string                `json:"secretKeyRequestHeader,omitempty"`
+	IDPath                    *string                `json:"idPath,omitempty"`
+	DatePath                  *string                `json:"datePath,omitempty"`
+	APIToken                  *string                `json:"apiToken,omitempty"`
+	AuthenticateByToken       *bool                  `json:"authenticateByToken,omitempty"`
+	AuthenticationTokenKey    *string                `json:"authenticationTokenKey,omitempty"`
+	InstanceID                *string                `json:"instanceId,omitempty"`
+	AlertUID                  *string                `json:"alertUid,omitempty"`
+	Title                     *string                `json:"title,omitempty"`
+	ImageURL                  *string                `json:"imageUrl,omitempty"`
+	State                     *string                `json:"state,omitempty"`
+	ExternalLink              *string                `json:"externalLink,omitempty"`
+	ChannelID                 *string                `json:"channelId,omitempty"`
+	PhoneNumberIdentification *string                `json:"phoneNumberIdentification,omitempty"`
+	AccessKey                 *string                `json:"accessKey,omitempty"`
+	AppSid                    *string                `json:"appSid,omitempty"`
+	SenderID                  *string                `json:"senderId,omitempty"`
+	TenantID                  *string                `json:"tenantId,omitempty"`
+	AppIOBaseURL              *string                `json:"AppIOBaseUrl,omitempty"`
+	SigningSecret             *string                `json:"signingSecret,omitempty"`
+	OutboundIntegrationID     *string                `json:"outboundIntegrationId,omitempty"`
+	OutboundConnectedAt       *string                `json:"outboundConnectedAt,omitempty"`
 	// ISO timestamp marking Layer-2 What's next completion (Connected badge + guide hide). WhatsApp Business: stamped on post-connect Access Token rotation or manual confirm.
 	WhatsNextCompletedAt   *string `json:"whatsNextCompletedAt,omitempty"`
 	UseFromAddressOverride *bool   `json:"useFromAddressOverride,omitempty"`
@@ -88,6 +126,13 @@ func (c *CredentialsDto) GetSecretKey() *string {
 		return nil
 	}
 	return c.SecretKey
+}
+
+func (c *CredentialsDto) GetHmacSecretKeyEncoding() *HmacSecretKeyEncoding {
+	if c == nil {
+		return nil
+	}
+	return c.HmacSecretKeyEncoding
 }
 
 func (c *CredentialsDto) GetDomain() *string {
@@ -249,6 +294,13 @@ func (c *CredentialsDto) GetIPPoolName() *string {
 		return nil
 	}
 	return c.IPPoolName
+}
+
+func (c *CredentialsDto) GetConfigurationSetName() *string {
+	if c == nil {
+		return nil
+	}
+	return c.ConfigurationSetName
 }
 
 func (c *CredentialsDto) GetAPIKeyRequestHeader() *string {
