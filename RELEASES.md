@@ -239,3 +239,13 @@ Based on:
 - [go v3.19.0] .
 ### Releases
 - [Go v3.19.0] https://github.com/novuhq/novu-go/releases/tag/v3.19.0 - .
+
+## 2026-09-21 06:49:34
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.798.0 (2.938.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v3.19.1] .
+### Releases
+- [Go v3.19.1] https://github.com/novuhq/novu-go/releases/tag/v3.19.1 - .

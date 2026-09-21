@@ -14,7 +14,12 @@ type UpdateIntegrationRequestDto struct {
 	Active      *bool           `json:"active,omitempty"`
 	Credentials *CredentialsDto `json:"credentials,omitempty"`
 	Check       *bool           `json:"check,omitempty"`
-	Conditions  []StepFilterDto `json:"conditions,omitempty"`
+	// Legacy StepFilter conditions. Ignored when `rules` is also set.
+	//
+	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
+	Conditions []StepFilterDto `json:"conditions,omitempty"`
+	// JSONLogic used at send time to select this integration. Takes precedence over `conditions`.
+	Rules map[string]any `json:"rules,omitempty"`
 	// Configurations for the integration
 	Configurations *UpdateIntegrationRequestDtoConfigurations `json:"configurations,omitempty"`
 }
@@ -66,6 +71,13 @@ func (u *UpdateIntegrationRequestDto) GetConditions() []StepFilterDto {
 		return nil
 	}
 	return u.Conditions
+}
+
+func (u *UpdateIntegrationRequestDto) GetRules() map[string]any {
+	if u == nil {
+		return nil
+	}
+	return u.Rules
 }
 
 func (u *UpdateIntegrationRequestDto) GetConfigurations() *UpdateIntegrationRequestDtoConfigurations {

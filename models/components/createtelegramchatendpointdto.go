@@ -76,7 +76,14 @@ func CreateCreateTelegramChatEndpointDtoContextCreateTelegramChatEndpointDtoCont
 	}
 }
 
-func (u *CreateTelegramChatEndpointDtoContext) UnmarshalJSON(data []byte) error {
+func (u *CreateTelegramChatEndpointDtoContext) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = CreateTelegramChatEndpointDtoContext{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var createTelegramChatEndpointDtoContext2 CreateTelegramChatEndpointDtoContext2 = CreateTelegramChatEndpointDtoContext2{}
 	if err := utils.UnmarshalJSON(data, &createTelegramChatEndpointDtoContext2, "", true, nil); err == nil {
