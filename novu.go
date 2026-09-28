@@ -2,7 +2,7 @@
 
 package v3
 
-// Generated from OpenAPI doc version 3.19.2 and generator version 2.938.0
+// Generated from OpenAPI doc version 3.19.2 and generator version 2.941.0
 
 import (
 	"bytes"
@@ -179,11 +179,11 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Novu {
 	sdk := &Novu{
-		SDKVersion: "3.19.1",
+		SDKVersion: "3.20.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 3.19.1 2.938.0 3.19.2 github.com/novuhq/novu-go/v3",
-			SDKVersion:        "3.19.1",
-			GenVersion:        "2.938.0",
+			UserAgent:         "speakeasy-sdk/go 3.20.0 2.941.0 3.19.2 github.com/novuhq/novu-go/v3",
+			SDKVersion:        "3.20.0",
+			GenVersion:        "2.941.0",
 			OpenAPIDocVersion: "3.19.2",
 			ServerList:        ServerList,
 		},
@@ -453,7 +453,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			var out apierrors.PayloadValidationExceptionDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -474,7 +474,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -509,7 +509,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -532,7 +532,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -562,7 +562,7 @@ func (s *Novu) Trigger(ctx context.Context, triggerEventRequestDto components.Tr
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -816,7 +816,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -853,7 +853,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -876,7 +876,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -906,7 +906,7 @@ func (s *Novu) Cancel(ctx context.Context, transactionID string, idempotencyKey 
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1171,7 +1171,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			var out apierrors.PayloadValidationExceptionDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1192,7 +1192,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1227,7 +1227,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1250,7 +1250,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1280,7 +1280,7 @@ func (s *Novu) TriggerBroadcast(ctx context.Context, triggerEventToAllRequestDto
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1543,7 +1543,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			var out apierrors.PayloadValidationExceptionDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1564,7 +1564,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1599,7 +1599,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1622,7 +1622,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1652,7 +1652,7 @@ func (s *Novu) TriggerBulk(ctx context.Context, bulkTriggerEventDto components.B
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

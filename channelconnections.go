@@ -240,7 +240,7 @@ func (s *ChannelConnections) List(ctx context.Context, request operations.Channe
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -277,7 +277,7 @@ func (s *ChannelConnections) List(ctx context.Context, request operations.Channe
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -300,7 +300,7 @@ func (s *ChannelConnections) List(ctx context.Context, request operations.Channe
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -330,7 +330,7 @@ func (s *ChannelConnections) List(ctx context.Context, request operations.Channe
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -589,7 +589,7 @@ func (s *ChannelConnections) Create(ctx context.Context, createChannelConnection
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -626,7 +626,7 @@ func (s *ChannelConnections) Create(ctx context.Context, createChannelConnection
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -649,7 +649,7 @@ func (s *ChannelConnections) Create(ctx context.Context, createChannelConnection
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -679,7 +679,7 @@ func (s *ChannelConnections) Create(ctx context.Context, createChannelConnection
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -931,7 +931,7 @@ func (s *ChannelConnections) Retrieve(ctx context.Context, identifier string, id
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -968,7 +968,7 @@ func (s *ChannelConnections) Retrieve(ctx context.Context, identifier string, id
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -991,7 +991,7 @@ func (s *ChannelConnections) Retrieve(ctx context.Context, identifier string, id
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1021,7 +1021,7 @@ func (s *ChannelConnections) Retrieve(ctx context.Context, identifier string, id
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1281,7 +1281,7 @@ func (s *ChannelConnections) Update(ctx context.Context, identifier string, upda
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1318,7 +1318,7 @@ func (s *ChannelConnections) Update(ctx context.Context, identifier string, upda
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1341,7 +1341,7 @@ func (s *ChannelConnections) Update(ctx context.Context, identifier string, upda
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1371,7 +1371,7 @@ func (s *ChannelConnections) Update(ctx context.Context, identifier string, upda
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1602,7 +1602,7 @@ func (s *ChannelConnections) Delete(ctx context.Context, identifier string, idem
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1639,7 +1639,7 @@ func (s *ChannelConnections) Delete(ctx context.Context, identifier string, idem
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1662,7 +1662,7 @@ func (s *ChannelConnections) Delete(ctx context.Context, identifier string, idem
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1692,7 +1692,7 @@ func (s *ChannelConnections) Delete(ctx context.Context, identifier string, idem
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
