@@ -6,10 +6,6 @@ package components
 type ActivityNotificationStepResponseDtoReplyCallback struct {
 }
 
-// ControlVariables - Control variables
-type ControlVariables struct {
-}
-
 // ActivityNotificationStepResponseDtoMetadata - Metadata for the workflow step
 type ActivityNotificationStepResponseDtoMetadata struct {
 }
@@ -26,7 +22,7 @@ type ActivityNotificationStepResponseDto struct {
 	// Reply callback settings
 	ReplyCallback *ActivityNotificationStepResponseDtoReplyCallback `json:"replyCallback,omitempty"`
 	// Control variables
-	ControlVariables *ControlVariables `json:"controlVariables,omitempty"`
+	ControlVariables map[string]any `json:"controlVariables,omitempty"`
 	// Metadata for the workflow step
 	Metadata *ActivityNotificationStepResponseDtoMetadata `json:"metadata,omitempty"`
 	// Step issues
@@ -66,7 +62,7 @@ func (a *ActivityNotificationStepResponseDto) GetReplyCallback() *ActivityNotifi
 	return a.ReplyCallback
 }
 
-func (a *ActivityNotificationStepResponseDto) GetControlVariables() *ControlVariables {
+func (a *ActivityNotificationStepResponseDto) GetControlVariables() map[string]any {
 	if a == nil {
 		return nil
 	}

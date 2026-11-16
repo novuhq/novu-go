@@ -47,6 +47,8 @@ type SubscribersControllerGetSubscriberNotificationsRequest struct {
 	Limit        *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
 	After        *string  `queryParam:"style=form,explode=true,name=after"`
 	Offset       *float64 `queryParam:"style=form,explode=true,name=offset"`
+	// Filter by workflow tags. Returns notifications that have any of the given tags.
+	Tags []string `queryParam:"style=form,explode=true,name=tags"`
 	// Filter by read/unread state
 	Read *bool `queryParam:"style=form,explode=true,name=read"`
 	// Filter by archived state
@@ -106,6 +108,13 @@ func (s *SubscribersControllerGetSubscriberNotificationsRequest) GetOffset() *fl
 		return nil
 	}
 	return s.Offset
+}
+
+func (s *SubscribersControllerGetSubscriberNotificationsRequest) GetTags() []string {
+	if s == nil {
+		return nil
+	}
+	return s.Tags
 }
 
 func (s *SubscribersControllerGetSubscriberNotificationsRequest) GetRead() *bool {

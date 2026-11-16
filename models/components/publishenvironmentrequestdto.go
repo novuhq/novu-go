@@ -7,7 +7,7 @@ import (
 )
 
 type PublishEnvironmentRequestDto struct {
-	// Source environment ID to sync from. Defaults to the Development environment if not provided.
+	// Source environment ID. Only the Development environment is currently supported; defaults to Development if omitted.
 	SourceEnvironmentID *string `json:"sourceEnvironmentId,omitempty"`
 	// Perform a dry run without making actual changes
 	DryRun *bool `default:"false" json:"dryRun"`

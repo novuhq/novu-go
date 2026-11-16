@@ -6,12 +6,11 @@ type AgentIntegrationResponseIntegrationDto struct {
 	// Integration document _id.
 	ID string `json:"_id"`
 	// The integration identifier (matches the integration store), not the internal MongoDB _id.
-	Identifier string `json:"identifier"`
-	Name       string `json:"name"`
-	ProviderID string `json:"providerId"`
-	// Channel type through which the message is sent
-	Channel *ChannelTypeEnum `json:"channel,omitempty"`
-	Active  bool             `json:"active"`
+	Identifier string           `json:"identifier"`
+	Name       string           `json:"name"`
+	ProviderID string           `json:"providerId"`
+	Channel    *ChannelTypeEnum `json:"channel,omitempty"`
+	Active     bool             `json:"active"`
 	// The Novu shared inbox address for this agent. Set whenever the cloud shared-inbox feature is enabled. The dashboard uses this as the headline inbound address and to render the shared inbox row in the inbox list.
 	SharedInboundAddress *string `json:"sharedInboundAddress,omitempty"`
 	// Default email From display name for this agent (NovuAgent integrations only). Falls back to the agent name when not explicitly stored on the integration credentials.

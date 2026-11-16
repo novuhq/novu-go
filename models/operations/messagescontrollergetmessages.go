@@ -8,7 +8,6 @@ import (
 )
 
 type MessagesControllerGetMessagesRequest struct {
-	// Channel type through which the message is sent
 	Channel       *components.ChannelTypeEnum `queryParam:"style=form,explode=true,name=channel"`
 	SubscriberID  *string                     `queryParam:"style=form,explode=true,name=subscriberId"`
 	TransactionID []string                    `queryParam:"style=form,explode=true,name=transactionId"`

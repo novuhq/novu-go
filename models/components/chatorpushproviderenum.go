@@ -13,6 +13,7 @@ type ChatOrPushProviderEnum string
 const (
 	ChatOrPushProviderEnumSlack            ChatOrPushProviderEnum = "slack"
 	ChatOrPushProviderEnumDiscord          ChatOrPushProviderEnum = "discord"
+	ChatOrPushProviderEnumGoogleChat       ChatOrPushProviderEnum = "google-chat"
 	ChatOrPushProviderEnumMsteams          ChatOrPushProviderEnum = "msteams"
 	ChatOrPushProviderEnumWebexMessaging   ChatOrPushProviderEnum = "webex-messaging"
 	ChatOrPushProviderEnumMattermost       ChatOrPushProviderEnum = "mattermost"
@@ -27,6 +28,7 @@ const (
 	ChatOrPushProviderEnumNovuSlack        ChatOrPushProviderEnum = "novu-slack"
 	ChatOrPushProviderEnumTelegram         ChatOrPushProviderEnum = "telegram"
 	ChatOrPushProviderEnumSendblue         ChatOrPushProviderEnum = "sendblue"
+	ChatOrPushProviderEnumPhotonImessage   ChatOrPushProviderEnum = "photon-imessage"
 	ChatOrPushProviderEnumNovuWebChat      ChatOrPushProviderEnum = "novu-web-chat"
 	ChatOrPushProviderEnumFcm              ChatOrPushProviderEnum = "fcm"
 	ChatOrPushProviderEnumApns             ChatOrPushProviderEnum = "apns"
@@ -50,6 +52,8 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 	case "slack":
 		fallthrough
 	case "discord":
+		fallthrough
+	case "google-chat":
 		fallthrough
 	case "msteams":
 		fallthrough
@@ -78,6 +82,8 @@ func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 	case "telegram":
 		fallthrough
 	case "sendblue":
+		fallthrough
+	case "photon-imessage":
 		fallthrough
 	case "novu-web-chat":
 		fallthrough

@@ -2,10 +2,6 @@
 
 package components
 
-// GetPreferencesResponseDtoData - Custom data associated with the workflow
-type GetPreferencesResponseDtoData struct {
-}
-
 // Workflow information if this is a template-level preference
 type Workflow struct {
 	// Unique identifier of the workflow
@@ -19,8 +15,8 @@ type Workflow struct {
 	// Tags associated with the workflow
 	Tags []string `json:"tags,omitempty"`
 	// Custom data associated with the workflow
-	Data *GetPreferencesResponseDtoData `json:"data,omitempty"`
-	// Severity of the workflow
+	Data map[string]any `json:"data,omitempty"`
+	// Override the severity of the workflow
 	Severity SeverityLevelEnum `json:"severity"`
 }
 
@@ -59,7 +55,7 @@ func (w *Workflow) GetTags() []string {
 	return w.Tags
 }
 
-func (w *Workflow) GetData() *GetPreferencesResponseDtoData {
+func (w *Workflow) GetData() map[string]any {
 	if w == nil {
 		return nil
 	}

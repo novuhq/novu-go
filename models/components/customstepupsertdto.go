@@ -86,7 +86,7 @@ type CustomStepUpsertDto struct {
 	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
-	// Type of the step
+	// Channels of the notification
 	Type StepTypeEnum `json:"type"`
 	// Control values for the Custom step.
 	ControlValues *CustomStepUpsertDtoControlValues `json:"controlValues,omitempty"`

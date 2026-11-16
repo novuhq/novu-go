@@ -34,15 +34,11 @@ func (e *MarkMessageActionAsSeenDtoStatus) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// MarkMessageActionAsSeenDtoPayload - Message action payload
-type MarkMessageActionAsSeenDtoPayload struct {
-}
-
 type MarkMessageActionAsSeenDto struct {
 	// Message action status
 	Status MarkMessageActionAsSeenDtoStatus `json:"status"`
 	// Message action payload
-	Payload *MarkMessageActionAsSeenDtoPayload `json:"payload,omitempty"`
+	Payload map[string]any `json:"payload,omitempty"`
 }
 
 func (m *MarkMessageActionAsSeenDto) GetStatus() MarkMessageActionAsSeenDtoStatus {
@@ -52,7 +48,7 @@ func (m *MarkMessageActionAsSeenDto) GetStatus() MarkMessageActionAsSeenDtoStatu
 	return m.Status
 }
 
-func (m *MarkMessageActionAsSeenDto) GetPayload() *MarkMessageActionAsSeenDtoPayload {
+func (m *MarkMessageActionAsSeenDto) GetPayload() map[string]any {
 	if m == nil {
 		return nil
 	}

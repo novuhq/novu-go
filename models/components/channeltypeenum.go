@@ -7,7 +7,6 @@ import (
 	"fmt"
 )
 
-// ChannelTypeEnum - Channel type through which the message is sent
 type ChannelTypeEnum string
 
 const (

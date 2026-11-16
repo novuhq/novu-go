@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// ProvidersIDEnum - Provider ID of the job
+// ProvidersIDEnum - Provider ID of the execution
 type ProvidersIDEnum string
 
 const (
@@ -34,6 +34,7 @@ const (
 	ProvidersIDEnumEmailWebhook     ProvidersIDEnum = "email-webhook"
 	ProvidersIDEnumBraze            ProvidersIDEnum = "braze"
 	ProvidersIDEnumNovuEmailAgent   ProvidersIDEnum = "novu-email-agent"
+	ProvidersIDEnumAgentEmailInbox  ProvidersIDEnum = "agent-email-inbox"
 	ProvidersIDEnumNexmo            ProvidersIDEnum = "nexmo"
 	ProvidersIDEnumPlivo            ProvidersIDEnum = "plivo"
 	ProvidersIDEnumSms77            ProvidersIDEnum = "sms77"
@@ -83,6 +84,7 @@ const (
 	ProvidersIDEnumNovu             ProvidersIDEnum = "novu"
 	ProvidersIDEnumSlack            ProvidersIDEnum = "slack"
 	ProvidersIDEnumDiscord          ProvidersIDEnum = "discord"
+	ProvidersIDEnumGoogleChat       ProvidersIDEnum = "google-chat"
 	ProvidersIDEnumMsteams          ProvidersIDEnum = "msteams"
 	ProvidersIDEnumWebexMessaging   ProvidersIDEnum = "webex-messaging"
 	ProvidersIDEnumMattermost       ProvidersIDEnum = "mattermost"
@@ -97,6 +99,7 @@ const (
 	ProvidersIDEnumNovuSlack        ProvidersIDEnum = "novu-slack"
 	ProvidersIDEnumTelegram         ProvidersIDEnum = "telegram"
 	ProvidersIDEnumSendblue         ProvidersIDEnum = "sendblue"
+	ProvidersIDEnumPhotonImessage   ProvidersIDEnum = "photon-imessage"
 	ProvidersIDEnumNovuWebChat      ProvidersIDEnum = "novu-web-chat"
 	ProvidersIDEnumAnthropic        ProvidersIDEnum = "anthropic"
 	ProvidersIDEnumNovuAnthropic    ProvidersIDEnum = "novu-anthropic"
@@ -161,6 +164,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "braze":
 		fallthrough
 	case "novu-email-agent":
+		fallthrough
+	case "agent-email-inbox":
 		fallthrough
 	case "nexmo":
 		fallthrough
@@ -260,6 +265,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 		fallthrough
 	case "discord":
 		fallthrough
+	case "google-chat":
+		fallthrough
 	case "msteams":
 		fallthrough
 	case "webex-messaging":
@@ -287,6 +294,8 @@ func (e *ProvidersIDEnum) UnmarshalJSON(data []byte) error {
 	case "telegram":
 		fallthrough
 	case "sendblue":
+		fallthrough
+	case "photon-imessage":
 		fallthrough
 	case "novu-web-chat":
 		fallthrough

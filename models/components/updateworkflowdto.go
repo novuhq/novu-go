@@ -400,9 +400,9 @@ type UpdateWorkflowDto struct {
 	Steps []UpdateWorkflowDtoSteps `json:"steps"`
 	// Workflow preferences
 	Preferences PreferencesRequestDto `json:"preferences"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin *ResourceOriginEnum `json:"origin,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 

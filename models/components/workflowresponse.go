@@ -2,9 +2,6 @@
 
 package components
 
-type WorkflowResponseData struct {
-}
-
 type WorkflowIntegrationStatus struct {
 }
 
@@ -28,7 +25,7 @@ type WorkflowResponse struct {
 	DeletedAt                 string                       `json:"deletedAt"`
 	DeletedBy                 string                       `json:"deletedBy"`
 	NotificationGroup         *NotificationGroup           `json:"notificationGroup,omitempty"`
-	Data                      *WorkflowResponseData        `json:"data,omitempty"`
+	Data                      map[string]any               `json:"data,omitempty"`
 	WorkflowIntegrationStatus *WorkflowIntegrationStatus   `json:"workflowIntegrationStatus,omitempty"`
 }
 
@@ -165,7 +162,7 @@ func (w *WorkflowResponse) GetNotificationGroup() *NotificationGroup {
 	return w.NotificationGroup
 }
 
-func (w *WorkflowResponse) GetData() *WorkflowResponseData {
+func (w *WorkflowResponse) GetData() map[string]any {
 	if w == nil {
 		return nil
 	}

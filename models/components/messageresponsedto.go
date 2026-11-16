@@ -113,8 +113,7 @@ type MessageResponseDto struct {
 	// Transaction ID associated with the message
 	TransactionID string `json:"transactionId"`
 	// Subject of the message, if applicable
-	Subject *string `json:"subject,omitempty"`
-	// Channel type through which the message is sent
+	Subject *string         `json:"subject,omitempty"`
 	Channel ChannelTypeEnum `json:"channel"`
 	// Indicates if the message has been read
 	Read bool `json:"read"`

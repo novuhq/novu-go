@@ -8,11 +8,12 @@ import (
 )
 
 type SubscribersV1ControllerGetNotificationsFeedRequest struct {
-	SubscriberID string   `pathParam:"style=simple,explode=false,name=subscriberId"`
-	Page         *float64 `queryParam:"style=form,explode=true,name=page"`
-	Limit        *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
-	Read         *bool    `queryParam:"style=form,explode=true,name=read"`
-	Seen         *bool    `queryParam:"style=form,explode=true,name=seen"`
+	SubscriberID   string   `pathParam:"style=simple,explode=false,name=subscriberId"`
+	Page           *float64 `queryParam:"style=form,explode=true,name=page"`
+	Limit          *float64 `default:"10" queryParam:"style=form,explode=true,name=limit"`
+	FeedIdentifier []string `queryParam:"style=form,explode=true,name=feedIdentifier"`
+	Read           *bool    `queryParam:"style=form,explode=true,name=read"`
+	Seen           *bool    `queryParam:"style=form,explode=true,name=seen"`
 	// Base64 encoded string of the partial payload JSON object
 	Payload *string `queryParam:"style=form,explode=true,name=payload"`
 	// A header for idempotency purposes
@@ -49,6 +50,13 @@ func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetLimit() *float64
 		return nil
 	}
 	return s.Limit
+}
+
+func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetFeedIdentifier() []string {
+	if s == nil {
+		return nil
+	}
+	return s.FeedIdentifier
 }
 
 func (s *SubscribersV1ControllerGetNotificationsFeedRequest) GetRead() *bool {

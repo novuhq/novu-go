@@ -11,6 +11,8 @@ type WorkflowPreferenceDto struct {
 	Enabled *bool `default:"true" json:"enabled"`
 	// A flag specifying if the preference is read-only. If true, the preference cannot be changed by the Subscriber.
 	ReadOnly *bool `default:"false" json:"readOnly"`
+	// JsonLogic condition controlling whether this preference applies
+	Condition map[string]any `json:"condition,omitempty"`
 }
 
 func (w WorkflowPreferenceDto) MarshalJSON() ([]byte, error) {
@@ -36,4 +38,11 @@ func (w *WorkflowPreferenceDto) GetReadOnly() *bool {
 		return nil
 	}
 	return w.ReadOnly
+}
+
+func (w *WorkflowPreferenceDto) GetCondition() map[string]any {
+	if w == nil {
+		return nil
+	}
+	return w.Condition
 }

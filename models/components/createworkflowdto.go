@@ -402,7 +402,7 @@ type CreateWorkflowDto struct {
 	Source *WorkflowCreationSourceEnum `default:"editor" json:"__source"`
 	// Workflow preferences
 	Preferences *PreferencesRequestDto `json:"preferences,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 

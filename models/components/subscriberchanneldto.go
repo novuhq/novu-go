@@ -14,6 +14,7 @@ type SubscriberChannelDtoProviderID string
 const (
 	SubscriberChannelDtoProviderIDSlack            SubscriberChannelDtoProviderID = "slack"
 	SubscriberChannelDtoProviderIDDiscord          SubscriberChannelDtoProviderID = "discord"
+	SubscriberChannelDtoProviderIDGoogleChat       SubscriberChannelDtoProviderID = "google-chat"
 	SubscriberChannelDtoProviderIDMsteams          SubscriberChannelDtoProviderID = "msteams"
 	SubscriberChannelDtoProviderIDWebexMessaging   SubscriberChannelDtoProviderID = "webex-messaging"
 	SubscriberChannelDtoProviderIDMattermost       SubscriberChannelDtoProviderID = "mattermost"
@@ -28,6 +29,7 @@ const (
 	SubscriberChannelDtoProviderIDNovuSlack        SubscriberChannelDtoProviderID = "novu-slack"
 	SubscriberChannelDtoProviderIDTelegram         SubscriberChannelDtoProviderID = "telegram"
 	SubscriberChannelDtoProviderIDSendblue         SubscriberChannelDtoProviderID = "sendblue"
+	SubscriberChannelDtoProviderIDPhotonImessage   SubscriberChannelDtoProviderID = "photon-imessage"
 	SubscriberChannelDtoProviderIDNovuWebChat      SubscriberChannelDtoProviderID = "novu-web-chat"
 	SubscriberChannelDtoProviderIDFcm              SubscriberChannelDtoProviderID = "fcm"
 	SubscriberChannelDtoProviderIDApns             SubscriberChannelDtoProviderID = "apns"
@@ -51,6 +53,8 @@ func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 	case "slack":
 		fallthrough
 	case "discord":
+		fallthrough
+	case "google-chat":
 		fallthrough
 	case "msteams":
 		fallthrough
@@ -79,6 +83,8 @@ func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 	case "telegram":
 		fallthrough
 	case "sendblue":
+		fallthrough
+	case "photon-imessage":
 		fallthrough
 	case "novu-web-chat":
 		fallthrough

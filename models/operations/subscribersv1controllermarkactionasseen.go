@@ -3,12 +3,40 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
+type Type string
+
+const (
+	TypePrimary   Type = "primary"
+	TypeSecondary Type = "secondary"
+)
+
+func (e Type) ToPointer() *Type {
+	return &e
+}
+func (e *Type) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "primary":
+		fallthrough
+	case "secondary":
+		*e = Type(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for Type: %v", v)
+	}
+}
+
 type SubscribersV1ControllerMarkActionAsSeenRequest struct {
 	MessageID    string `pathParam:"style=simple,explode=false,name=messageId"`
-	Type         any    `pathParam:"style=simple,explode=false,name=type"`
+	Type         Type   `pathParam:"style=simple,explode=false,name=type"`
 	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
 	// A header for idempotency purposes
 	IdempotencyKey             *string                               `header:"style=simple,explode=false,name=idempotency-key"`
@@ -22,9 +50,9 @@ func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetMessageID() string {
 	return s.MessageID
 }
 
-func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetType() any {
+func (s *SubscribersV1ControllerMarkActionAsSeenRequest) GetType() Type {
 	if s == nil {
-		return nil
+		return Type("")
 	}
 	return s.Type
 }

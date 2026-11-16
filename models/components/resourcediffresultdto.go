@@ -17,6 +17,8 @@ type ResourceDiffResultDtoSourceResourceUpdatedBy struct {
 	LastName *string `json:"lastName,omitempty"`
 	// User external ID
 	ExternalID *string `json:"externalId,omitempty"`
+	// User email, used when the user has no name
+	Email *string `json:"email,omitempty"`
 }
 
 func (r *ResourceDiffResultDtoSourceResourceUpdatedBy) GetID() string {
@@ -45,6 +47,13 @@ func (r *ResourceDiffResultDtoSourceResourceUpdatedBy) GetExternalID() *string {
 		return nil
 	}
 	return r.ExternalID
+}
+
+func (r *ResourceDiffResultDtoSourceResourceUpdatedBy) GetEmail() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Email
 }
 
 // SourceResource - Source resource information
@@ -108,6 +117,8 @@ type ResourceDiffResultDtoUpdatedBy struct {
 	LastName *string `json:"lastName,omitempty"`
 	// User external ID
 	ExternalID *string `json:"externalId,omitempty"`
+	// User email, used when the user has no name
+	Email *string `json:"email,omitempty"`
 }
 
 func (r *ResourceDiffResultDtoUpdatedBy) GetID() string {
@@ -136,6 +147,13 @@ func (r *ResourceDiffResultDtoUpdatedBy) GetExternalID() *string {
 		return nil
 	}
 	return r.ExternalID
+}
+
+func (r *ResourceDiffResultDtoUpdatedBy) GetEmail() *string {
+	if r == nil {
+		return nil
+	}
+	return r.Email
 }
 
 // TargetResource - Target resource information

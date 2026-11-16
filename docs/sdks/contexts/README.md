@@ -108,6 +108,7 @@ func main() {
 
     res, err := s.Contexts.List(ctx, operations.ContextsControllerListContextsRequest{
         Limit: v3.Pointer[float64](10.0),
+        Type: v3.Pointer("tenant"),
         ID: v3.Pointer("tenant-prod-123"),
         Search: v3.Pointer("tenant"),
     })

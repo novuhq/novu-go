@@ -3,7 +3,7 @@
 package components
 
 type MessageButton struct {
-	// Type of button for the action result
+	// Type of the button
 	Type ButtonTypeEnum `json:"type"`
 	// Content of the button
 	Content string `json:"content"`

@@ -7,7 +7,7 @@ type ActivityNotificationTemplateResponseDto struct {
 	ID *string `json:"_id,omitempty"`
 	// Name of the template
 	Name string `json:"name"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin *ResourceOriginEnum `json:"origin,omitempty"`
 	// Triggers of the template
 	Triggers []NotificationTriggerDto `json:"triggers"`

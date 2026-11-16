@@ -3,8 +3,87 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// ChatControlsMetadataResponseDtoEditorType - Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is "block", otherwise "text".
+type ChatControlsMetadataResponseDtoEditorType string
+
+const (
+	ChatControlsMetadataResponseDtoEditorTypeBlock ChatControlsMetadataResponseDtoEditorType = "block"
+	ChatControlsMetadataResponseDtoEditorTypeText  ChatControlsMetadataResponseDtoEditorType = "text"
+)
+
+func (e ChatControlsMetadataResponseDtoEditorType) ToPointer() *ChatControlsMetadataResponseDtoEditorType {
+	return &e
+}
+func (e *ChatControlsMetadataResponseDtoEditorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "block":
+		fallthrough
+	case "text":
+		*e = ChatControlsMetadataResponseDtoEditorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ChatControlsMetadataResponseDtoEditorType: %v", v)
+	}
+}
+
+// ChatControlsMetadataResponseDtoValues - Control values specific to Chat
+type ChatControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Content of the chat message.
+	Body *string `json:"body,omitempty"`
+	// Type of editor to use for the body. When omitted, inferred from the body: Maily JSON is "block", otherwise "text".
+	EditorType           *ChatControlsMetadataResponseDtoEditorType `json:"editorType,omitempty"`
+	AdditionalProperties map[string]any                             `additionalProperties:"true" json:"-"`
+}
+
+func (c ChatControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *ChatControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *ChatControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Skip
+}
+
+func (c *ChatControlsMetadataResponseDtoValues) GetBody() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Body
+}
+
+func (c *ChatControlsMetadataResponseDtoValues) GetEditorType() *ChatControlsMetadataResponseDtoEditorType {
+	if c == nil {
+		return nil
+	}
+	return c.EditorType
+}
+
+func (c *ChatControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.AdditionalProperties
+}
 
 type ChatControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +91,7 @@ type ChatControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Chat
-	Values ChatControlDto `json:"values"`
+	Values *ChatControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (c ChatControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +99,7 @@ func (c ChatControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ChatControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +119,9 @@ func (c *ChatControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return c.UISchema
 }
 
-func (c *ChatControlsMetadataResponseDto) GetValues() ChatControlDto {
+func (c *ChatControlsMetadataResponseDto) GetValues() *ChatControlsMetadataResponseDtoValues {
 	if c == nil {
-		return ChatControlDto{}
+		return nil
 	}
 	return c.Values
 }

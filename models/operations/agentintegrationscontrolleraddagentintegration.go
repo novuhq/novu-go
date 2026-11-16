@@ -7,7 +7,8 @@ import (
 )
 
 type AgentIntegrationsControllerAddAgentIntegrationRequest struct {
-	Identifier string `pathParam:"style=simple,explode=false,name=identifier"`
+	Identifier          string `pathParam:"style=simple,explode=false,name=identifier"`
+	NovuAnalyticsSource string `header:"style=simple,explode=false,name=Novu-Analytics-Source"`
 	// A header for idempotency purposes
 	IdempotencyKey                *string                                  `header:"style=simple,explode=false,name=idempotency-key"`
 	AddAgentIntegrationRequestDto components.AddAgentIntegrationRequestDto `request:"mediaType=application/json"`
@@ -18,6 +19,13 @@ func (a *AgentIntegrationsControllerAddAgentIntegrationRequest) GetIdentifier() 
 		return ""
 	}
 	return a.Identifier
+}
+
+func (a *AgentIntegrationsControllerAddAgentIntegrationRequest) GetNovuAnalyticsSource() string {
+	if a == nil {
+		return ""
+	}
+	return a.NovuAnalyticsSource
 }
 
 func (a *AgentIntegrationsControllerAddAgentIntegrationRequest) GetIdempotencyKey() *string {

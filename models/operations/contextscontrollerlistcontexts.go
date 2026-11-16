@@ -48,6 +48,8 @@ type ContextsControllerListContextsRequest struct {
 	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
 	// Include cursor item in response
 	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
+	// Filter contexts by type
+	Type *string `queryParam:"style=form,explode=true,name=type"`
 	// Filter contexts by id
 	ID *string `queryParam:"style=form,explode=true,name=id"`
 	// Search contexts by type or id (supports partial matching across both fields)
@@ -96,6 +98,13 @@ func (c *ContextsControllerListContextsRequest) GetIncludeCursor() *bool {
 		return nil
 	}
 	return c.IncludeCursor
+}
+
+func (c *ContextsControllerListContextsRequest) GetType() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Type
 }
 
 func (c *ContextsControllerListContextsRequest) GetID() *string {

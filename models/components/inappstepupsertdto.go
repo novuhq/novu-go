@@ -86,7 +86,7 @@ type InAppStepUpsertDto struct {
 	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
-	// Type of the step
+	// Channels of the notification
 	Type StepTypeEnum `json:"type"`
 	// Control values for the In-App step.
 	ControlValues *InAppStepUpsertDtoControlValues `json:"controlValues,omitempty"`

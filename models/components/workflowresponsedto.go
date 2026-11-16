@@ -492,19 +492,19 @@ type WorkflowResponseDto struct {
 	LastPublishedBy *LastPublishedBy `json:"lastPublishedBy,omitempty"`
 	// Steps of the workflow
 	Steps []WorkflowResponseDtoSteps `json:"steps"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin ResourceOriginEnum `json:"origin"`
 	// Preferences for the workflow
 	Preferences WorkflowPreferencesResponseDto `json:"preferences"`
 	// Status of the workflow
 	Status WorkflowStatusEnum `json:"status"`
 	// Runtime issues for workflow creation and update
-	Issues map[string]RuntimeIssueDto `json:"issues,omitempty"`
+	Issues map[string][]RuntimeIssueDto `json:"issues,omitempty"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`
 	// Generated payload example based on the payload schema
 	PayloadExample map[string]any `json:"payloadExample,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity SeverityLevelEnum `json:"severity"`
 }
 
@@ -659,7 +659,7 @@ func (w *WorkflowResponseDto) GetStatus() WorkflowStatusEnum {
 	return w.Status
 }
 
-func (w *WorkflowResponseDto) GetIssues() map[string]RuntimeIssueDto {
+func (w *WorkflowResponseDto) GetIssues() map[string][]RuntimeIssueDto {
 	if w == nil {
 		return nil
 	}

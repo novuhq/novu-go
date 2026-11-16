@@ -3,4 +3,30 @@
 package components
 
 type RuntimeIssueDto struct {
+	IssueType WorkflowIssueTypeEnum `json:"issueType"`
+	// Variable associated with the issue
+	VariableName *string `json:"variableName,omitempty"`
+	// Human-readable issue message
+	Message string `json:"message"`
+}
+
+func (r *RuntimeIssueDto) GetIssueType() WorkflowIssueTypeEnum {
+	if r == nil {
+		return WorkflowIssueTypeEnum("")
+	}
+	return r.IssueType
+}
+
+func (r *RuntimeIssueDto) GetVariableName() *string {
+	if r == nil {
+		return nil
+	}
+	return r.VariableName
+}
+
+func (r *RuntimeIssueDto) GetMessage() string {
+	if r == nil {
+		return ""
+	}
+	return r.Message
 }

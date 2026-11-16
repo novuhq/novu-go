@@ -48,11 +48,11 @@ type SubscribersControllerSearchSubscribersRequest struct {
 	OrderBy *string `queryParam:"style=form,explode=true,name=orderBy"`
 	// Include cursor item in response
 	IncludeCursor *bool `queryParam:"style=form,explode=true,name=includeCursor"`
-	// Email address of the subscriber to filter results.
+	// Exact email address of the subscriber. The value must match the stored email field.
 	Email *string `queryParam:"style=form,explode=true,name=email"`
 	// Name of the subscriber to filter results.
 	Name *string `queryParam:"style=form,explode=true,name=name"`
-	// Phone number of the subscriber to filter results.
+	// Exact phone number of the subscriber. The value must match the stored phone field.
 	Phone *string `queryParam:"style=form,explode=true,name=phone"`
 	// Unique identifier of the subscriber to filter results.
 	SubscriberID *string `queryParam:"style=form,explode=true,name=subscriberId"`

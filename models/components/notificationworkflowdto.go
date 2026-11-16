@@ -15,7 +15,7 @@ type NotificationWorkflowDto struct {
 	Tags []string `json:"tags,omitempty"`
 	// Custom data associated with the workflow
 	Data map[string]any `json:"data,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity SeverityLevelEnum `json:"severity"`
 }
 

@@ -3,8 +3,144 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// DelayControlsMetadataResponseDtoType - Type of the delay. Currently only 'regular' is supported by the schema.
+type DelayControlsMetadataResponseDtoType string
+
+const (
+	DelayControlsMetadataResponseDtoTypeRegular DelayControlsMetadataResponseDtoType = "regular"
+	DelayControlsMetadataResponseDtoTypeTimed   DelayControlsMetadataResponseDtoType = "timed"
+)
+
+func (e DelayControlsMetadataResponseDtoType) ToPointer() *DelayControlsMetadataResponseDtoType {
+	return &e
+}
+func (e *DelayControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "regular":
+		fallthrough
+	case "timed":
+		*e = DelayControlsMetadataResponseDtoType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DelayControlsMetadataResponseDtoType: %v", v)
+	}
+}
+
+// DelayControlsMetadataResponseDtoUnit - Unit of time for the delay amount.
+type DelayControlsMetadataResponseDtoUnit string
+
+const (
+	DelayControlsMetadataResponseDtoUnitSeconds DelayControlsMetadataResponseDtoUnit = "seconds"
+	DelayControlsMetadataResponseDtoUnitMinutes DelayControlsMetadataResponseDtoUnit = "minutes"
+	DelayControlsMetadataResponseDtoUnitHours   DelayControlsMetadataResponseDtoUnit = "hours"
+	DelayControlsMetadataResponseDtoUnitDays    DelayControlsMetadataResponseDtoUnit = "days"
+	DelayControlsMetadataResponseDtoUnitWeeks   DelayControlsMetadataResponseDtoUnit = "weeks"
+	DelayControlsMetadataResponseDtoUnitMonths  DelayControlsMetadataResponseDtoUnit = "months"
+)
+
+func (e DelayControlsMetadataResponseDtoUnit) ToPointer() *DelayControlsMetadataResponseDtoUnit {
+	return &e
+}
+func (e *DelayControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "seconds":
+		fallthrough
+	case "minutes":
+		fallthrough
+	case "hours":
+		fallthrough
+	case "days":
+		fallthrough
+	case "weeks":
+		fallthrough
+	case "months":
+		*e = DelayControlsMetadataResponseDtoUnit(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DelayControlsMetadataResponseDtoUnit: %v", v)
+	}
+}
+
+// DelayControlsMetadataResponseDtoValues - Control values specific to Delay
+type DelayControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Type of the delay. Currently only 'regular' is supported by the schema.
+	Type *DelayControlsMetadataResponseDtoType `default:"regular" json:"type"`
+	// Amount of time to delay.
+	Amount *float64 `json:"amount,omitempty"`
+	// Unit of time for the delay amount.
+	Unit *DelayControlsMetadataResponseDtoUnit `json:"unit,omitempty"`
+	// Cron expression for the delay. Min length 1.
+	Cron                 *string        `json:"cron,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (d DelayControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.Skip
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetType() *DelayControlsMetadataResponseDtoType {
+	if d == nil {
+		return nil
+	}
+	return d.Type
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetAmount() *float64 {
+	if d == nil {
+		return nil
+	}
+	return d.Amount
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetUnit() *DelayControlsMetadataResponseDtoUnit {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetCron() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Cron
+}
+
+func (d *DelayControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.AdditionalProperties
+}
 
 type DelayControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +148,7 @@ type DelayControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Delay
-	Values DelayControlDto `json:"values"`
+	Values *DelayControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (d DelayControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +156,7 @@ func (d DelayControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DelayControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +176,9 @@ func (d *DelayControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return d.UISchema
 }
 
-func (d *DelayControlsMetadataResponseDto) GetValues() DelayControlDto {
+func (d *DelayControlsMetadataResponseDto) GetValues() *DelayControlsMetadataResponseDtoValues {
 	if d == nil {
-		return DelayControlDto{}
+		return nil
 	}
 	return d.Values
 }

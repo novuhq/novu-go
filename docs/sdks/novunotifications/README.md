@@ -1042,6 +1042,7 @@ package main
 import(
 	"context"
 	"github.com/novuhq/novu-go/v3"
+	"github.com/novuhq/novu-go/v3/models/operations"
 	"log"
 )
 
@@ -1052,7 +1053,9 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Subscribers.Notifications.UnseenCount(ctx, "<id>", v3.Pointer(false), v3.Pointer[float64](100.0), nil)
+    res, err := s.Subscribers.Notifications.UnseenCount(ctx, operations.SubscribersV1ControllerGetUnseenCountRequest{
+        SubscriberID: "<id>",
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -1064,14 +1067,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `subscriberID`                                           | `string`                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `seen`                                                   | `*bool`                                                  | :heavy_minus_sign:                                       | Indicates whether to count seen notifications.           |
-| `limit`                                                  | `*float64`                                               | :heavy_minus_sign:                                       | The maximum number of notifications to return.           |
-| `idempotencyKey`                                         | `*string`                                                | :heavy_minus_sign:                                       | A header for idempotency purposes                        |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                                                                                          | Type                                                                                                                               | Required                                                                                                                           | Description                                                                                                                        |
+| ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                              | [context.Context](https://pkg.go.dev/context#Context)                                                                              | :heavy_check_mark:                                                                                                                 | The context to use for the request.                                                                                                |
+| `request`                                                                                                                          | [operations.SubscribersV1ControllerGetUnseenCountRequest](../../models/operations/subscribersv1controllergetunseencountrequest.md) | :heavy_check_mark:                                                                                                                 | The request object to use for the request.                                                                                         |
+| `opts`                                                                                                                             | [][operations.Option](../../models/operations/option.md)                                                                           | :heavy_minus_sign:                                                                                                                 | The options for this request.                                                                                                      |
 
 ### Response
 

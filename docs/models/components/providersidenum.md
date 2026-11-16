@@ -1,6 +1,6 @@
 # ProvidersIDEnum
 
-Provider ID of the job
+Provider ID of the execution
 
 ## Example Usage
 
@@ -40,6 +40,7 @@ value := components.ProvidersIDEnumAnypost
 | `ProvidersIDEnumEmailWebhook`     | email-webhook                     |
 | `ProvidersIDEnumBraze`            | braze                             |
 | `ProvidersIDEnumNovuEmailAgent`   | novu-email-agent                  |
+| `ProvidersIDEnumAgentEmailInbox`  | agent-email-inbox                 |
 | `ProvidersIDEnumNexmo`            | nexmo                             |
 | `ProvidersIDEnumPlivo`            | plivo                             |
 | `ProvidersIDEnumSms77`            | sms77                             |
@@ -89,6 +90,7 @@ value := components.ProvidersIDEnumAnypost
 | `ProvidersIDEnumNovu`             | novu                              |
 | `ProvidersIDEnumSlack`            | slack                             |
 | `ProvidersIDEnumDiscord`          | discord                           |
+| `ProvidersIDEnumGoogleChat`       | google-chat                       |
 | `ProvidersIDEnumMsteams`          | msteams                           |
 | `ProvidersIDEnumWebexMessaging`   | webex-messaging                   |
 | `ProvidersIDEnumMattermost`       | mattermost                        |
@@ -103,6 +105,7 @@ value := components.ProvidersIDEnumAnypost
 | `ProvidersIDEnumNovuSlack`        | novu-slack                        |
 | `ProvidersIDEnumTelegram`         | telegram                          |
 | `ProvidersIDEnumSendblue`         | sendblue                          |
+| `ProvidersIDEnumPhotonImessage`   | photon-imessage                   |
 | `ProvidersIDEnumNovuWebChat`      | novu-web-chat                     |
 | `ProvidersIDEnumAnthropic`        | anthropic                         |
 | `ProvidersIDEnumNovuAnthropic`    | novu-anthropic                    |

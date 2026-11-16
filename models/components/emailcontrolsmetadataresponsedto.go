@@ -3,8 +3,150 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// EmailControlsMetadataResponseDtoEditorType - Type of editor to use for the body.
+type EmailControlsMetadataResponseDtoEditorType string
+
+const (
+	EmailControlsMetadataResponseDtoEditorTypeBlock EmailControlsMetadataResponseDtoEditorType = "block"
+	EmailControlsMetadataResponseDtoEditorTypeHTML  EmailControlsMetadataResponseDtoEditorType = "html"
+)
+
+func (e EmailControlsMetadataResponseDtoEditorType) ToPointer() *EmailControlsMetadataResponseDtoEditorType {
+	return &e
+}
+func (e *EmailControlsMetadataResponseDtoEditorType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "block":
+		fallthrough
+	case "html":
+		*e = EmailControlsMetadataResponseDtoEditorType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for EmailControlsMetadataResponseDtoEditorType: %v", v)
+	}
+}
+
+// EmailControlsMetadataResponseDtoValues - Control values specific to Email
+type EmailControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Subject of the email.
+	Subject string `json:"subject"`
+	// Body content of the email, either a valid Maily JSON object, or html string.
+	Body *string `default:"" json:"body"`
+	// Type of editor to use for the body.
+	EditorType *EmailControlsMetadataResponseDtoEditorType `default:"block" json:"editorType"`
+	// Disable sanitization of the output.
+	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Layout ID to use for the email. Null means no layout, undefined means default layout.
+	LayoutID *string `json:"layoutId,omitempty"`
+	// Sender name and email overrides for this step.
+	From *EmailFromControlDto `json:"from,omitempty"`
+	// When true, sender name/email use the primary email integration defaults and skip workflow agent defaults.
+	UseProviderDefaults *bool `json:"useProviderDefaults,omitempty"`
+	// Step-level Reply-To override. When unset, inherits the workflow agent reply-to.
+	ReplyTo *string `json:"replyTo,omitempty"`
+	// One-line inbox preview text shown next to the subject.
+	Preheader            *string        `json:"preheader,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (e EmailControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(e, "", false)
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"subject"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if e == nil {
+		return nil
+	}
+	return e.Skip
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetSubject() string {
+	if e == nil {
+		return ""
+	}
+	return e.Subject
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetBody() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Body
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetEditorType() *EmailControlsMetadataResponseDtoEditorType {
+	if e == nil {
+		return nil
+	}
+	return e.EditorType
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetDisableOutputSanitization() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.DisableOutputSanitization
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetLayoutID() *string {
+	if e == nil {
+		return nil
+	}
+	return e.LayoutID
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetFrom() *EmailFromControlDto {
+	if e == nil {
+		return nil
+	}
+	return e.From
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetUseProviderDefaults() *bool {
+	if e == nil {
+		return nil
+	}
+	return e.UseProviderDefaults
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetReplyTo() *string {
+	if e == nil {
+		return nil
+	}
+	return e.ReplyTo
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetPreheader() *string {
+	if e == nil {
+		return nil
+	}
+	return e.Preheader
+}
+
+func (e *EmailControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if e == nil {
+		return nil
+	}
+	return e.AdditionalProperties
+}
 
 type EmailControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +154,7 @@ type EmailControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Email
-	Values EmailControlDto `json:"values"`
+	Values *EmailControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (e EmailControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +162,7 @@ func (e EmailControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (e *EmailControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &e, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &e, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +182,9 @@ func (e *EmailControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return e.UISchema
 }
 
-func (e *EmailControlsMetadataResponseDto) GetValues() EmailControlDto {
+func (e *EmailControlsMetadataResponseDto) GetValues() *EmailControlsMetadataResponseDtoValues {
 	if e == nil {
-		return EmailControlDto{}
+		return nil
 	}
 	return e.Values
 }

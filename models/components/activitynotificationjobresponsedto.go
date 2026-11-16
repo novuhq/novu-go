@@ -64,10 +64,6 @@ func (e *ActivityNotificationJobResponseDtoType) UnmarshalJSON(data []byte) erro
 	}
 }
 
-// Payload - Optional payload for the job
-type Payload struct {
-}
-
 type ActivityNotificationJobResponseDto struct {
 	// Unique identifier of the job
 	ID string `json:"_id"`
@@ -82,8 +78,8 @@ type ActivityNotificationJobResponseDto struct {
 	// Optional context object for additional error details.
 	Overrides map[string]any `json:"overrides,omitempty"`
 	// Optional payload for the job
-	Payload *Payload `json:"payload,omitempty"`
-	// Provider ID of the job
+	Payload map[string]any `json:"payload,omitempty"`
+	// Provider ID of the execution
 	ProviderID ProvidersIDEnum `json:"providerId"`
 	// Status of the job
 	Status string `json:"status"`
@@ -135,7 +131,7 @@ func (a *ActivityNotificationJobResponseDto) GetOverrides() map[string]any {
 	return a.Overrides
 }
 
-func (a *ActivityNotificationJobResponseDto) GetPayload() *Payload {
+func (a *ActivityNotificationJobResponseDto) GetPayload() map[string]any {
 	if a == nil {
 		return nil
 	}

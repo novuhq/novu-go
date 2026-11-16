@@ -4,6 +4,7 @@ package components
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
@@ -55,19 +56,141 @@ func (e *Action) UnmarshalJSON(data []byte) error {
 	}
 }
 
+type MetadataSetSignalDtoValueType string
+
+const (
+	MetadataSetSignalDtoValueTypeStr        MetadataSetSignalDtoValueType = "str"
+	MetadataSetSignalDtoValueTypeNumber     MetadataSetSignalDtoValueType = "number"
+	MetadataSetSignalDtoValueTypeBoolean    MetadataSetSignalDtoValueType = "boolean"
+	MetadataSetSignalDtoValueTypeMapOfAny   MetadataSetSignalDtoValueType = "mapOfAny"
+	MetadataSetSignalDtoValueTypeArrayOfAny MetadataSetSignalDtoValueType = "arrayOfAny"
+)
+
 // MetadataSetSignalDtoValue - JSON-serializable value to store.
 type MetadataSetSignalDtoValue struct {
+	Str        *string        `queryParam:"inline" union:"member"`
+	Number     *float64       `queryParam:"inline" union:"member"`
+	Boolean    *bool          `queryParam:"inline" union:"member"`
+	MapOfAny   map[string]any `queryParam:"inline" union:"member"`
+	ArrayOfAny []any          `queryParam:"inline" union:"member"`
+
+	Type MetadataSetSignalDtoValueType
 }
 
-func (m MetadataSetSignalDtoValue) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(m, "", false)
-}
+func CreateMetadataSetSignalDtoValueStr(str string) MetadataSetSignalDtoValue {
+	typ := MetadataSetSignalDtoValueTypeStr
 
-func (m *MetadataSetSignalDtoValue) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
-		return err
+	return MetadataSetSignalDtoValue{
+		Str:  &str,
+		Type: typ,
 	}
-	return nil
+}
+
+func CreateMetadataSetSignalDtoValueNumber(number float64) MetadataSetSignalDtoValue {
+	typ := MetadataSetSignalDtoValueTypeNumber
+
+	return MetadataSetSignalDtoValue{
+		Number: &number,
+		Type:   typ,
+	}
+}
+
+func CreateMetadataSetSignalDtoValueBoolean(boolean bool) MetadataSetSignalDtoValue {
+	typ := MetadataSetSignalDtoValueTypeBoolean
+
+	return MetadataSetSignalDtoValue{
+		Boolean: &boolean,
+		Type:    typ,
+	}
+}
+
+func CreateMetadataSetSignalDtoValueMapOfAny(mapOfAny map[string]any) MetadataSetSignalDtoValue {
+	typ := MetadataSetSignalDtoValueTypeMapOfAny
+
+	return MetadataSetSignalDtoValue{
+		MapOfAny: mapOfAny,
+		Type:     typ,
+	}
+}
+
+func CreateMetadataSetSignalDtoValueArrayOfAny(arrayOfAny []any) MetadataSetSignalDtoValue {
+	typ := MetadataSetSignalDtoValueTypeArrayOfAny
+
+	return MetadataSetSignalDtoValue{
+		ArrayOfAny: arrayOfAny,
+		Type:       typ,
+	}
+}
+
+func (u *MetadataSetSignalDtoValue) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = MetadataSetSignalDtoValue{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = MetadataSetSignalDtoValueTypeStr
+		return nil
+	}
+
+	var number float64 = float64(0)
+	if err := utils.UnmarshalJSON(data, &number, "", true, nil); err == nil {
+		u.Number = &number
+		u.Type = MetadataSetSignalDtoValueTypeNumber
+		return nil
+	}
+
+	var boolean bool = false
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
+		u.Boolean = &boolean
+		u.Type = MetadataSetSignalDtoValueTypeBoolean
+		return nil
+	}
+
+	var mapOfAny map[string]any = map[string]any{}
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
+		u.MapOfAny = mapOfAny
+		u.Type = MetadataSetSignalDtoValueTypeMapOfAny
+		return nil
+	}
+
+	var arrayOfAny []any = []any{}
+	if err := utils.UnmarshalJSON(data, &arrayOfAny, "", true, nil); err == nil {
+		u.ArrayOfAny = arrayOfAny
+		u.Type = MetadataSetSignalDtoValueTypeArrayOfAny
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for MetadataSetSignalDtoValue", string(data))
+}
+
+func (u MetadataSetSignalDtoValue) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.Number != nil {
+		return utils.MarshalJSON(u.Number, "", true)
+	}
+
+	if u.Boolean != nil {
+		return utils.MarshalJSON(u.Boolean, "", true)
+	}
+
+	if u.MapOfAny != nil {
+		return utils.MarshalJSON(u.MapOfAny, "", true)
+	}
+
+	if u.ArrayOfAny != nil {
+		return utils.MarshalJSON(u.ArrayOfAny, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type MetadataSetSignalDtoValue: all fields are null")
 }
 
 type MetadataSetSignalDto struct {

@@ -3,8 +3,153 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// ThrottleControlsMetadataResponseDtoType - The type of throttle window.
+type ThrottleControlsMetadataResponseDtoType string
+
+const (
+	ThrottleControlsMetadataResponseDtoTypeFixed   ThrottleControlsMetadataResponseDtoType = "fixed"
+	ThrottleControlsMetadataResponseDtoTypeDynamic ThrottleControlsMetadataResponseDtoType = "dynamic"
+)
+
+func (e ThrottleControlsMetadataResponseDtoType) ToPointer() *ThrottleControlsMetadataResponseDtoType {
+	return &e
+}
+func (e *ThrottleControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "fixed":
+		fallthrough
+	case "dynamic":
+		*e = ThrottleControlsMetadataResponseDtoType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ThrottleControlsMetadataResponseDtoType: %v", v)
+	}
+}
+
+// ThrottleControlsMetadataResponseDtoUnit - The unit of time for the throttle window (required for fixed type).
+type ThrottleControlsMetadataResponseDtoUnit string
+
+const (
+	ThrottleControlsMetadataResponseDtoUnitMinutes ThrottleControlsMetadataResponseDtoUnit = "minutes"
+	ThrottleControlsMetadataResponseDtoUnitHours   ThrottleControlsMetadataResponseDtoUnit = "hours"
+	ThrottleControlsMetadataResponseDtoUnitDays    ThrottleControlsMetadataResponseDtoUnit = "days"
+)
+
+func (e ThrottleControlsMetadataResponseDtoUnit) ToPointer() *ThrottleControlsMetadataResponseDtoUnit {
+	return &e
+}
+func (e *ThrottleControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "minutes":
+		fallthrough
+	case "hours":
+		fallthrough
+	case "days":
+		*e = ThrottleControlsMetadataResponseDtoUnit(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ThrottleControlsMetadataResponseDtoUnit: %v", v)
+	}
+}
+
+// ThrottleControlsMetadataResponseDtoValues - Control values specific to Throttle
+type ThrottleControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// The type of throttle window.
+	Type *ThrottleControlsMetadataResponseDtoType `default:"fixed" json:"type"`
+	// The amount of time for the throttle window (required for fixed type).
+	Amount *float64 `json:"amount,omitempty"`
+	// The unit of time for the throttle window (required for fixed type).
+	Unit *ThrottleControlsMetadataResponseDtoUnit `json:"unit,omitempty"`
+	// Key path to retrieve dynamic window value (required for dynamic type).
+	DynamicKey *string `json:"dynamicKey,omitempty"`
+	// The maximum number of executions allowed within the window. Defaults to 1.
+	Threshold *float64 `default:"1" json:"threshold"`
+	// Optional key for grouping throttle rules. If not provided, defaults to workflow and subscriber combination.
+	ThrottleKey          *string        `json:"throttleKey,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (t ThrottleControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Skip
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetType() *ThrottleControlsMetadataResponseDtoType {
+	if t == nil {
+		return nil
+	}
+	return t.Type
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetAmount() *float64 {
+	if t == nil {
+		return nil
+	}
+	return t.Amount
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetUnit() *ThrottleControlsMetadataResponseDtoUnit {
+	if t == nil {
+		return nil
+	}
+	return t.Unit
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetDynamicKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.DynamicKey
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetThreshold() *float64 {
+	if t == nil {
+		return nil
+	}
+	return t.Threshold
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetThrottleKey() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ThrottleKey
+}
+
+func (t *ThrottleControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.AdditionalProperties
+}
 
 type ThrottleControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +157,7 @@ type ThrottleControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Throttle
-	Values ThrottleControlDto `json:"values"`
+	Values *ThrottleControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (t ThrottleControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +165,7 @@ func (t ThrottleControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (t *ThrottleControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +185,9 @@ func (t *ThrottleControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return t.UISchema
 }
 
-func (t *ThrottleControlsMetadataResponseDto) GetValues() ThrottleControlDto {
+func (t *ThrottleControlsMetadataResponseDto) GetValues() *ThrottleControlsMetadataResponseDtoValues {
 	if t == nil {
-		return ThrottleControlDto{}
+		return nil
 	}
 	return t.Values
 }

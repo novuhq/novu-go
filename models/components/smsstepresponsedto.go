@@ -54,6 +54,8 @@ type SmsStepResponseDto struct {
 	ControlValues *SmsStepResponseDtoControlValues `json:"controlValues,omitempty"`
 	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`).
 	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
+	// Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied.
+	IntegrationOverrides map[string]map[string]map[string]any `json:"integrationOverrides,omitempty"`
 	// JSON Schema for variables, follows the JSON Schema standard
 	Variables map[string]any `json:"variables"`
 	// Unique identifier of the step
@@ -64,9 +66,9 @@ type SmsStepResponseDto struct {
 	Name string `json:"name"`
 	// Slug of the step
 	Slug string `json:"slug"`
-	// Type of the step
+	// Channels of the notification
 	Type StepTypeEnum `json:"type"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin ResourceOriginEnum `json:"origin"`
 	// Workflow identifier
 	WorkflowID string `json:"workflowId"`
@@ -108,6 +110,13 @@ func (s *SmsStepResponseDto) GetProviderOverrides() map[string]map[string]any {
 		return nil
 	}
 	return s.ProviderOverrides
+}
+
+func (s *SmsStepResponseDto) GetIntegrationOverrides() map[string]map[string]map[string]any {
+	if s == nil {
+		return nil
+	}
+	return s.IntegrationOverrides
 }
 
 func (s *SmsStepResponseDto) GetVariables() map[string]any {

@@ -2,10 +2,6 @@
 
 package components
 
-// SubscriptionPreferenceDtoData - Custom data associated with the workflow
-type SubscriptionPreferenceDtoData struct {
-}
-
 // SubscriptionPreferenceDtoWorkflow - Workflow information if this is a template-level preference
 type SubscriptionPreferenceDtoWorkflow struct {
 	// Unique identifier of the workflow
@@ -19,8 +15,8 @@ type SubscriptionPreferenceDtoWorkflow struct {
 	// Tags associated with the workflow
 	Tags []string `json:"tags,omitempty"`
 	// Custom data associated with the workflow
-	Data *SubscriptionPreferenceDtoData `json:"data,omitempty"`
-	// Severity of the workflow
+	Data map[string]any `json:"data,omitempty"`
+	// Override the severity of the workflow
 	Severity SeverityLevelEnum `json:"severity"`
 }
 
@@ -59,7 +55,7 @@ func (s *SubscriptionPreferenceDtoWorkflow) GetTags() []string {
 	return s.Tags
 }
 
-func (s *SubscriptionPreferenceDtoWorkflow) GetData() *SubscriptionPreferenceDtoData {
+func (s *SubscriptionPreferenceDtoWorkflow) GetData() map[string]any {
 	if s == nil {
 		return nil
 	}
