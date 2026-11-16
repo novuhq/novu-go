@@ -3,7 +3,6 @@
 package components
 
 type SubscriberPreferenceOverrideDto struct {
-	// Channel type through which the message is sent
 	Channel ChannelTypeEnum `json:"channel"`
 	// The source of overrides
 	Source PreferenceOverrideSourceEnum `json:"source"`

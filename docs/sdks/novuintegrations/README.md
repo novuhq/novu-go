@@ -33,7 +33,7 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Agents.Integrations.Create(ctx, "<value>", components.AddAgentIntegrationRequestDto{}, nil)
+    res, err := s.Agents.Integrations.Create(ctx, "<value>", "<value>", components.AddAgentIntegrationRequestDto{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -49,6 +49,7 @@ func main() {
 | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                                | :heavy_check_mark:                                                                                   | The context to use for the request.                                                                  |
 | `identifier`                                                                                         | `string`                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
+| `novuAnalyticsSource`                                                                                | `string`                                                                                             | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `addAgentIntegrationRequestDto`                                                                      | [components.AddAgentIntegrationRequestDto](../../models/components/addagentintegrationrequestdto.md) | :heavy_check_mark:                                                                                   | N/A                                                                                                  |
 | `idempotencyKey`                                                                                     | `*string`                                                                                            | :heavy_minus_sign:                                                                                   | A header for idempotency purposes                                                                    |
 | `opts`                                                                                               | [][operations.Option](../../models/operations/option.md)                                             | :heavy_minus_sign:                                                                                   | The options for this request.                                                                        |

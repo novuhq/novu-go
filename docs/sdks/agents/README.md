@@ -433,16 +433,13 @@ func main() {
         ConversationID: "64f5a1c2e8b7a3d9f0c1b2a3",
         IntegrationIdentifier: "slack-support",
         Signals: []components.Signals{
-            components.CreateSignalsTriggerSignalDto(
-                components.TriggerSignalDto{
-                    Type: components.TriggerSignalDtoTypeTrigger,
-                    WorkflowID: "order-shipped",
-                    To: v3.Pointer(components.CreateTriggerSignalDtoToStr(
-                        "subscriber-123",
-                    )),
-                    Payload: map[string]any{
-                        "orderId": "ORD-42",
-                    },
+            components.CreateSignalsMetadataSetSignalDto(
+                components.MetadataSetSignalDto{
+                    Type: components.MetadataSetSignalDtoTypeMetadata,
+                    Key: "crm:ticketId",
+                    Value: components.CreateMetadataSetSignalDtoValueStr(
+                        "TCK-1001",
+                    ),
                 },
             ),
         },

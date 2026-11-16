@@ -6,13 +6,54 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+// SmsControlsMetadataResponseDtoValues - Control values specific to SMS
+type SmsControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Content of the SMS message.
+	Body                 *string        `json:"body,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (s SmsControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *SmsControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (s *SmsControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if s == nil {
+		return nil
+	}
+	return s.Skip
+}
+
+func (s *SmsControlsMetadataResponseDtoValues) GetBody() *string {
+	if s == nil {
+		return nil
+	}
+	return s.Body
+}
+
+func (s *SmsControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if s == nil {
+		return nil
+	}
+	return s.AdditionalProperties
+}
+
 type SmsControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to SMS
-	Values SmsControlDto `json:"values"`
+	Values *SmsControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (s SmsControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +61,7 @@ func (s SmsControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (s *SmsControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +81,9 @@ func (s *SmsControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return s.UISchema
 }
 
-func (s *SmsControlsMetadataResponseDto) GetValues() SmsControlDto {
+func (s *SmsControlsMetadataResponseDto) GetValues() *SmsControlsMetadataResponseDtoValues {
 	if s == nil {
-		return SmsControlDto{}
+		return nil
 	}
 	return s.Values
 }

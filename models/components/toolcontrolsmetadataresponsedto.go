@@ -6,13 +6,54 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+// ToolControlsMetadataResponseDtoValues - Control values specific to Tool
+type ToolControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Content of the tool payload.
+	Body                 *string        `json:"body,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (t ToolControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ToolControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (t *ToolControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.Skip
+}
+
+func (t *ToolControlsMetadataResponseDtoValues) GetBody() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Body
+}
+
+func (t *ToolControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if t == nil {
+		return nil
+	}
+	return t.AdditionalProperties
+}
+
 type ToolControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Tool
-	Values ToolControlDto `json:"values"`
+	Values *ToolControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (t ToolControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +61,7 @@ func (t ToolControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (t *ToolControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +81,9 @@ func (t *ToolControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return t.UISchema
 }
 
-func (t *ToolControlsMetadataResponseDto) GetValues() ToolControlDto {
+func (t *ToolControlsMetadataResponseDto) GetValues() *ToolControlsMetadataResponseDtoValues {
 	if t == nil {
-		return ToolControlDto{}
+		return nil
 	}
 	return t.Values
 }

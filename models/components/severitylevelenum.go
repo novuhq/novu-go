@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// SeverityLevelEnum - Severity of the workflow
+// SeverityLevelEnum - Override the severity of the workflow
 type SeverityLevelEnum string
 
 const (

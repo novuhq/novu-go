@@ -8,10 +8,6 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// ReactionOnResolved - Cross-platform emoji name for resolved conversations (e.g. "check", "star"). Set to null to disable. Default: "check"
-type ReactionOnResolved struct {
-}
-
 // SubscriberAccess - Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. "open" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. "restricted" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to "open"; self-hosted create defaults to "restricted".
 type SubscriberAccess string
 
@@ -39,13 +35,45 @@ func (e *SubscriberAccess) UnmarshalJSON(data []byte) error {
 	}
 }
 
+// ReplyPolicy - How the agent replies in shared rooms. "mention_only" requires an @mention in every shared room. "auto_reply" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. "smart" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists "smart". An omitted field on existing agents still means "auto_reply". DMs always reply without a mention. Optional on update (partial PATCH).
+type ReplyPolicy string
+
+const (
+	ReplyPolicyMentionOnly ReplyPolicy = "mention_only"
+	ReplyPolicyAutoReply   ReplyPolicy = "auto_reply"
+	ReplyPolicySmart       ReplyPolicy = "smart"
+)
+
+func (e ReplyPolicy) ToPointer() *ReplyPolicy {
+	return &e
+}
+func (e *ReplyPolicy) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "mention_only":
+		fallthrough
+	case "auto_reply":
+		fallthrough
+	case "smart":
+		*e = ReplyPolicy(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ReplyPolicy: %v", v)
+	}
+}
+
 type AgentBehaviorDto struct {
 	// Acknowledge incoming messages. On platforms that support a native typing indicator (e.g. Slack, WhatsApp, Microsoft Teams, Telegram), shows a "Typing…" indicator while the agent processes the message. On platforms that do not (e.g. Email), reacts with an "eyes" emoji to the first inbound message in a thread. Default: true
 	AcknowledgeOnReceived *bool `default:"true" json:"acknowledgeOnReceived"`
 	// Cross-platform emoji name for resolved conversations (e.g. "check", "star"). Set to null to disable. Default: "check"
-	ReactionOnResolved *ReactionOnResolved `json:"reactionOnResolved,omitempty"`
+	ReactionOnResolved *string `default:"check" json:"reactionOnResolved"`
 	// Controls whether the agent accepts inbound messages from senders not yet linked to a subscriber, across all channels. "open" on managed agents auto-creates a lightweight subscriber so the agent can reply; on custom-code / self-hosted agents, the turn is forwarded to the bridge with a null subscriber. "restricted" rejects unknown senders with a managed denial reply (any runtime). Optional on update (partial PATCH). Persisted agents always have a value — managed create defaults to "open"; self-hosted create defaults to "restricted".
 	SubscriberAccess *SubscriberAccess `json:"subscriberAccess,omitempty"`
+	// How the agent replies in shared rooms. "mention_only" requires an @mention in every shared room. "auto_reply" replies to unmentioned follow-ups in a nested Slack or Teams thread after the agent has joined. "smart" behaves like auto_reply while one person is talking to the agent in a thread, then requires an @mention there once someone else or another agent joins, or the incumbent @mentions another teammate. Create persists "smart". An omitted field on existing agents still means "auto_reply". DMs always reply without a mention. Optional on update (partial PATCH).
+	ReplyPolicy *ReplyPolicy `default:"auto_reply" json:"replyPolicy"`
 }
 
 func (a AgentBehaviorDto) MarshalJSON() ([]byte, error) {
@@ -66,7 +94,7 @@ func (a *AgentBehaviorDto) GetAcknowledgeOnReceived() *bool {
 	return a.AcknowledgeOnReceived
 }
 
-func (a *AgentBehaviorDto) GetReactionOnResolved() *ReactionOnResolved {
+func (a *AgentBehaviorDto) GetReactionOnResolved() *string {
 	if a == nil {
 		return nil
 	}
@@ -78,4 +106,11 @@ func (a *AgentBehaviorDto) GetSubscriberAccess() *SubscriberAccess {
 		return nil
 	}
 	return a.SubscriberAccess
+}
+
+func (a *AgentBehaviorDto) GetReplyPolicy() *ReplyPolicy {
+	if a == nil {
+		return nil
+	}
+	return a.ReplyPolicy
 }

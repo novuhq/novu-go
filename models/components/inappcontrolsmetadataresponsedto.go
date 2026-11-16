@@ -6,13 +6,117 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+// Values - Control values specific to In-App
+type Values struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Content/body of the in-app message. Required if subject is empty.
+	Body *string `json:"body,omitempty"`
+	// Subject/title of the in-app message. Required if body is empty.
+	Subject *string `json:"subject,omitempty"`
+	// URL for an avatar image. Must be a valid URL or start with / or {{ variable }}.
+	Avatar *string `json:"avatar,omitempty"`
+	// Primary action button details.
+	PrimaryAction *ActionDto `json:"primaryAction,omitempty"`
+	// Secondary action button details.
+	SecondaryAction *ActionDto `json:"secondaryAction,omitempty"`
+	// Redirection URL configuration for the main content click (if no actions defined/clicked)..
+	Redirect *RedirectDto `json:"redirect,omitempty"`
+	// Disable sanitization of the output.
+	DisableOutputSanitization *bool `default:"false" json:"disableOutputSanitization"`
+	// Additional data payload for the step.
+	Data                 map[string]any `json:"data,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (v Values) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(v, "", false)
+}
+
+func (v *Values) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &v, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (v *Values) GetSkip() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Skip
+}
+
+func (v *Values) GetBody() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Body
+}
+
+func (v *Values) GetSubject() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Subject
+}
+
+func (v *Values) GetAvatar() *string {
+	if v == nil {
+		return nil
+	}
+	return v.Avatar
+}
+
+func (v *Values) GetPrimaryAction() *ActionDto {
+	if v == nil {
+		return nil
+	}
+	return v.PrimaryAction
+}
+
+func (v *Values) GetSecondaryAction() *ActionDto {
+	if v == nil {
+		return nil
+	}
+	return v.SecondaryAction
+}
+
+func (v *Values) GetRedirect() *RedirectDto {
+	if v == nil {
+		return nil
+	}
+	return v.Redirect
+}
+
+func (v *Values) GetDisableOutputSanitization() *bool {
+	if v == nil {
+		return nil
+	}
+	return v.DisableOutputSanitization
+}
+
+func (v *Values) GetData() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.Data
+}
+
+func (v *Values) GetAdditionalProperties() map[string]any {
+	if v == nil {
+		return nil
+	}
+	return v.AdditionalProperties
+}
+
 type InAppControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to In-App
-	Values InAppControlDto `json:"values"`
+	Values *Values `json:"values,omitempty"`
 }
 
 func (i InAppControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +124,7 @@ func (i InAppControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (i *InAppControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &i, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &i, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +144,9 @@ func (i *InAppControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return i.UISchema
 }
 
-func (i *InAppControlsMetadataResponseDto) GetValues() InAppControlDto {
+func (i *InAppControlsMetadataResponseDto) GetValues() *Values {
 	if i == nil {
-		return InAppControlDto{}
+		return nil
 	}
 	return i.Values
 }

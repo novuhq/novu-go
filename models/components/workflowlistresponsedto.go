@@ -105,7 +105,7 @@ type WorkflowListResponseDto struct {
 	Slug string `json:"slug"`
 	// Status of the workflow
 	Status WorkflowStatusEnum `json:"status"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin ResourceOriginEnum `json:"origin"`
 	// Timestamp of the last workflow trigger
 	LastTriggeredAt *string `json:"lastTriggeredAt,omitempty"`

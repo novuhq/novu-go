@@ -75,8 +75,7 @@ type NotificationFeedItemDto struct {
 	// The main content of the notification.
 	Content string `json:"content"`
 	// The subject line for email notifications, if applicable.
-	Subject *string `json:"subject,omitempty"`
-	// Channel type through which the message is sent
+	Subject *string         `json:"subject,omitempty"`
 	Channel ChannelTypeEnum `json:"channel"`
 	// Indicates whether the notification has been read by the subscriber.
 	Read bool `json:"read"`

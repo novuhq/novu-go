@@ -86,12 +86,14 @@ type ChatStepUpsertDto struct {
 	StepID *string `json:"stepId,omitempty"`
 	// Name of the step
 	Name string `json:"name"`
-	// Type of the step
+	// Channels of the notification
 	Type StepTypeEnum `json:"type"`
 	// Control values for the Chat step.
 	ControlValues *ChatStepUpsertDtoControlValues `json:"controlValues,omitempty"`
 	// Per-provider content overrides keyed by providerId. Stored separately from controlValues and merged over the default body at send time. Keys are ChatProviderIdEnum / ToolProviderIdEnum values (e.g. `slack`, `whatsapp-business`, `pagerduty`). Omit to leave unchanged; pass null to delete all provider overrides; pass an object to replace the full set.
 	ProviderOverrides map[string]map[string]any `json:"providerOverrides,omitempty"`
+	// Per-integration content overrides keyed by providerId, then by integration identifier. Each entry is merged over the matching providerOverrides entry, only for sends through that integration. Trigger-time overrides still take precedence. Entries whose integration does not exist in the environment are kept but not applied. Omit to leave unchanged; pass null to delete all integration overrides; pass an object to replace the full set.
+	IntegrationOverrides map[string]map[string]map[string]any `json:"integrationOverrides,omitempty"`
 }
 
 func (c ChatStepUpsertDto) MarshalJSON() ([]byte, error) {
@@ -145,4 +147,11 @@ func (c *ChatStepUpsertDto) GetProviderOverrides() map[string]map[string]any {
 		return nil
 	}
 	return c.ProviderOverrides
+}
+
+func (c *ChatStepUpsertDto) GetIntegrationOverrides() map[string]map[string]map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.IntegrationOverrides
 }

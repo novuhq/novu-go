@@ -40,6 +40,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDAnypost
 | `GetChannelEndpointResponseDtoProviderIDEmailWebhook`     | email-webhook                                             |
 | `GetChannelEndpointResponseDtoProviderIDBraze`            | braze                                                     |
 | `GetChannelEndpointResponseDtoProviderIDNovuEmailAgent`   | novu-email-agent                                          |
+| `GetChannelEndpointResponseDtoProviderIDAgentEmailInbox`  | agent-email-inbox                                         |
 | `GetChannelEndpointResponseDtoProviderIDNexmo`            | nexmo                                                     |
 | `GetChannelEndpointResponseDtoProviderIDPlivo`            | plivo                                                     |
 | `GetChannelEndpointResponseDtoProviderIDSms77`            | sms77                                                     |
@@ -89,6 +90,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDAnypost
 | `GetChannelEndpointResponseDtoProviderIDNovu`             | novu                                                      |
 | `GetChannelEndpointResponseDtoProviderIDSlack`            | slack                                                     |
 | `GetChannelEndpointResponseDtoProviderIDDiscord`          | discord                                                   |
+| `GetChannelEndpointResponseDtoProviderIDGoogleChat`       | google-chat                                               |
 | `GetChannelEndpointResponseDtoProviderIDMsteams`          | msteams                                                   |
 | `GetChannelEndpointResponseDtoProviderIDWebexMessaging`   | webex-messaging                                           |
 | `GetChannelEndpointResponseDtoProviderIDMattermost`       | mattermost                                                |
@@ -103,6 +105,7 @@ value := components.GetChannelEndpointResponseDtoProviderIDAnypost
 | `GetChannelEndpointResponseDtoProviderIDNovuSlack`        | novu-slack                                                |
 | `GetChannelEndpointResponseDtoProviderIDTelegram`         | telegram                                                  |
 | `GetChannelEndpointResponseDtoProviderIDSendblue`         | sendblue                                                  |
+| `GetChannelEndpointResponseDtoProviderIDPhotonImessage`   | photon-imessage                                           |
 | `GetChannelEndpointResponseDtoProviderIDNovuWebChat`      | novu-web-chat                                             |
 | `GetChannelEndpointResponseDtoProviderIDAnthropic`        | anthropic                                                 |
 | `GetChannelEndpointResponseDtoProviderIDNovuAnthropic`    | novu-anthropic                                            |

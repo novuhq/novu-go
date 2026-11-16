@@ -4,13 +4,12 @@ package components
 
 type AgentIntegrationSummaryDto struct {
 	// Integration document id.
-	IntegrationID string `json:"integrationId"`
-	ProviderID    string `json:"providerId"`
-	Name          string `json:"name"`
-	Identifier    string `json:"identifier"`
-	// Channel type through which the message is sent
-	Channel *ChannelTypeEnum `json:"channel,omitempty"`
-	Active  bool             `json:"active"`
+	IntegrationID string           `json:"integrationId"`
+	ProviderID    string           `json:"providerId"`
+	Name          string           `json:"name"`
+	Identifier    string           `json:"identifier"`
+	Channel       *ChannelTypeEnum `json:"channel,omitempty"`
+	Active        bool             `json:"active"`
 }
 
 func (a *AgentIntegrationSummaryDto) GetIntegrationID() string {

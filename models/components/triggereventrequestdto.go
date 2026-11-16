@@ -49,7 +49,7 @@ type Overrides struct {
 	//
 	// Deprecated: This will be removed in a future release, please migrate away from it as soon as possible.
 	LayoutIdentifier *string `json:"layoutIdentifier,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 }
 

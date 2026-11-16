@@ -39,8 +39,7 @@ type InboxNotificationDto struct {
 	PrimaryAction *InboxActionDto `json:"primaryAction,omitempty"`
 	// Secondary action button for the notification
 	SecondaryAction *InboxActionDto `json:"secondaryAction,omitempty"`
-	// Channel type through which the message is sent
-	ChannelType ChannelTypeEnum `json:"channelType"`
+	ChannelType     ChannelTypeEnum `json:"channelType"`
 	// Tags associated with the notification
 	Tags []string `json:"tags,omitempty"`
 	// Custom data payload of the notification
@@ -49,7 +48,7 @@ type InboxNotificationDto struct {
 	Redirect *RedirectDto `json:"redirect,omitempty"`
 	// Workflow associated with the notification
 	Workflow *NotificationWorkflowDto `json:"workflow,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity SeverityLevelEnum `json:"severity"`
 }
 

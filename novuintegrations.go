@@ -32,9 +32,10 @@ func newNovuIntegrations(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks
 
 // Create an agent integration
 // Create a link between an agent (by identifier) and an integration (by integration **identifier**, not the internal _id).
-func (s *NovuIntegrations) Create(ctx context.Context, identifier string, addAgentIntegrationRequestDto components.AddAgentIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.AgentIntegrationsControllerAddAgentIntegrationResponse, error) {
+func (s *NovuIntegrations) Create(ctx context.Context, identifier string, novuAnalyticsSource string, addAgentIntegrationRequestDto components.AddAgentIntegrationRequestDto, idempotencyKey *string, opts ...operations.Option) (*operations.AgentIntegrationsControllerAddAgentIntegrationResponse, error) {
 	request := operations.AgentIntegrationsControllerAddAgentIntegrationRequest{
 		Identifier:                    identifier,
+		NovuAnalyticsSource:           novuAnalyticsSource,
 		IdempotencyKey:                idempotencyKey,
 		AddAgentIntegrationRequestDto: addAgentIntegrationRequestDto,
 	}
@@ -248,7 +249,7 @@ func (s *NovuIntegrations) Create(ctx context.Context, identifier string, addAge
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -283,7 +284,7 @@ func (s *NovuIntegrations) Create(ctx context.Context, identifier string, addAge
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -306,7 +307,7 @@ func (s *NovuIntegrations) Create(ctx context.Context, identifier string, addAge
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -338,7 +339,7 @@ func (s *NovuIntegrations) Create(ctx context.Context, identifier string, addAge
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -589,7 +590,7 @@ func (s *NovuIntegrations) List(ctx context.Context, request operations.AgentInt
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -624,7 +625,7 @@ func (s *NovuIntegrations) List(ctx context.Context, request operations.AgentInt
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -647,7 +648,7 @@ func (s *NovuIntegrations) List(ctx context.Context, request operations.AgentInt
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -679,7 +680,7 @@ func (s *NovuIntegrations) List(ctx context.Context, request operations.AgentInt
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -940,7 +941,7 @@ func (s *NovuIntegrations) Update(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -975,7 +976,7 @@ func (s *NovuIntegrations) Update(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -998,7 +999,7 @@ func (s *NovuIntegrations) Update(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1030,7 +1031,7 @@ func (s *NovuIntegrations) Update(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1264,7 +1265,7 @@ func (s *NovuIntegrations) Delete(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1299,7 +1300,7 @@ func (s *NovuIntegrations) Delete(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1322,7 +1323,7 @@ func (s *NovuIntegrations) Delete(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ValidationErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1354,7 +1355,7 @@ func (s *NovuIntegrations) Delete(ctx context.Context, identifier string, agentI
 
 			var out apierrors.ErrorDto
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

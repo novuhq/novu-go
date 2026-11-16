@@ -7,6 +7,8 @@ type ControlsMetadataDto struct {
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
+	// Resolved control values for the step
+	Values map[string]any `json:"values,omitempty"`
 }
 
 func (c *ControlsMetadataDto) GetDataSchema() map[string]any {
@@ -21,4 +23,11 @@ func (c *ControlsMetadataDto) GetUISchema() *UISchema {
 		return nil
 	}
 	return c.UISchema
+}
+
+func (c *ControlsMetadataDto) GetValues() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Values
 }

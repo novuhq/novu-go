@@ -2,10 +2,6 @@
 
 package components
 
-// UpdateIntegrationRequestDtoConfigurations - Configurations for the integration
-type UpdateIntegrationRequestDtoConfigurations struct {
-}
-
 type UpdateIntegrationRequestDto struct {
 	Name          *string `json:"name,omitempty"`
 	Identifier    *string `json:"identifier,omitempty"`
@@ -21,7 +17,7 @@ type UpdateIntegrationRequestDto struct {
 	// JSONLogic used at send time to select this integration. Takes precedence over `conditions`.
 	Rules map[string]any `json:"rules,omitempty"`
 	// Configurations for the integration
-	Configurations *UpdateIntegrationRequestDtoConfigurations `json:"configurations,omitempty"`
+	Configurations map[string]string `json:"configurations,omitempty"`
 }
 
 func (u *UpdateIntegrationRequestDto) GetName() *string {
@@ -80,7 +76,7 @@ func (u *UpdateIntegrationRequestDto) GetRules() map[string]any {
 	return u.Rules
 }
 
-func (u *UpdateIntegrationRequestDto) GetConfigurations() *UpdateIntegrationRequestDtoConfigurations {
+func (u *UpdateIntegrationRequestDto) GetConfigurations() map[string]string {
 	if u == nil {
 		return nil
 	}

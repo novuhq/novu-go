@@ -27,8 +27,8 @@ package main
 import(
 	"context"
 	"github.com/novuhq/novu-go/v3"
-	"github.com/novuhq/novu-go/v3/models/components"
 	"github.com/novuhq/novu-go/v3/models/operations"
+	"github.com/novuhq/novu-go/v3/models/components"
 	"log"
 )
 
@@ -41,7 +41,7 @@ func main() {
 
     res, err := s.Subscribers.Messages.UpdateAsSeen(ctx, operations.SubscribersV1ControllerMarkActionAsSeenRequest{
         MessageID: "<id>",
-        Type: "<value>",
+        Type: operations.TypePrimary,
         SubscriberID: "<id>",
         MarkMessageActionAsSeenDto: components.MarkMessageActionAsSeenDto{
             Status: components.MarkMessageActionAsSeenDtoStatusPending,

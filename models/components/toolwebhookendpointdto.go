@@ -8,21 +8,6 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-// Headers - Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field).
-type Headers struct {
-}
-
-func (h Headers) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(h, "", false)
-}
-
-func (h *Headers) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &h, "", false, nil); err != nil {
-		return err
-	}
-	return nil
-}
-
 // Method - Optional HTTP method override for this webhook. Defaults to the integration-level method.
 type Method string
 
@@ -57,7 +42,7 @@ type ToolWebhookEndpointDto struct {
 	// Destination webhook URL (often a per-subscriber capability URL). Encrypted at rest on the channel endpoint (`endpoint` field).
 	URL string `json:"url"`
 	// Optional headers (e.g. auth tokens) sent with every request to this webhook. Header values are encrypted at rest on the channel endpoint (`endpoint` field).
-	Headers *Headers `json:"headers,omitempty"`
+	Headers map[string]string `json:"headers,omitempty"`
 	// Optional HTTP method override for this webhook. Defaults to the integration-level method.
 	Method *Method `json:"method,omitempty"`
 }
@@ -80,7 +65,7 @@ func (t *ToolWebhookEndpointDto) GetURL() string {
 	return t.URL
 }
 
-func (t *ToolWebhookEndpointDto) GetHeaders() *Headers {
+func (t *ToolWebhookEndpointDto) GetHeaders() map[string]string {
 	if t == nil {
 		return nil
 	}

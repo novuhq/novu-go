@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// StepTypeEnum - Type of the step
+// StepTypeEnum - Channels of the notification
 type StepTypeEnum string
 
 const (

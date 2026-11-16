@@ -6,13 +6,45 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+// CustomControlsMetadataResponseDtoValues - Control values specific to Custom step
+type CustomControlsMetadataResponseDtoValues struct {
+	// Custom control values for the step.
+	Custom               map[string]any `json:"custom,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (c CustomControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(c, "", false)
+}
+
+func (c *CustomControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (c *CustomControlsMetadataResponseDtoValues) GetCustom() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.Custom
+}
+
+func (c *CustomControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if c == nil {
+		return nil
+	}
+	return c.AdditionalProperties
+}
+
 type CustomControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Custom step
-	Values CustomControlDto `json:"values"`
+	Values *CustomControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (c CustomControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +52,7 @@ func (c CustomControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CustomControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +72,9 @@ func (c *CustomControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return c.UISchema
 }
 
-func (c *CustomControlsMetadataResponseDto) GetValues() CustomControlDto {
+func (c *CustomControlsMetadataResponseDto) GetValues() *CustomControlsMetadataResponseDtoValues {
 	if c == nil {
-		return CustomControlDto{}
+		return nil
 	}
 	return c.Values
 }

@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// ButtonTypeEnum - Type of button for the action result
+// ButtonTypeEnum - Type of the button
 type ButtonTypeEnum string
 
 const (

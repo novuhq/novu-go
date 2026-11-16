@@ -19,6 +19,8 @@ type AgentIntegrationResponseDto struct {
 	UpdatedAt   string       `json:"updatedAt"`
 	// Cloud only. `true` when this channel type (provider) falls outside the organization plan active-channel limit (by connection order). Active channels are counted per channel type, so multiple integrations of the same provider (e.g. several Slack workspaces) count as a single active channel. Over-limit channels keep their configuration but the agent will not respond on them until the plan is upgraded or older channel types are disconnected.
 	ExceedsPlanLimit *bool `json:"exceedsPlanLimit,omitempty"`
+	// `true` when at least one person has linked their chat on this integration (it has a channel endpoint), so the agent has someone to reach there. Only returned by the list, and only when true. Email has no channel endpoints, so it never carries the flag.
+	HasChannelEndpoints *bool `json:"hasChannelEndpoints,omitempty"`
 }
 
 func (a *AgentIntegrationResponseDto) GetID() string {
@@ -82,4 +84,11 @@ func (a *AgentIntegrationResponseDto) GetExceedsPlanLimit() *bool {
 		return nil
 	}
 	return a.ExceedsPlanLimit
+}
+
+func (a *AgentIntegrationResponseDto) GetHasChannelEndpoints() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.HasChannelEndpoints
 }

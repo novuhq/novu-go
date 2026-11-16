@@ -9,6 +9,8 @@ import (
 
 type SubscribersV1ControllerGetUnseenCountRequest struct {
 	SubscriberID string `pathParam:"style=simple,explode=false,name=subscriberId"`
+	// Identifier for the feed. Can be a single string or an array of strings.
+	FeedID []string `queryParam:"style=form,explode=true,name=feedId"`
 	// Indicates whether to count seen notifications.
 	Seen *bool `default:"false" queryParam:"style=form,explode=true,name=seen"`
 	// The maximum number of notifications to return.
@@ -33,6 +35,13 @@ func (s *SubscribersV1ControllerGetUnseenCountRequest) GetSubscriberID() string 
 		return ""
 	}
 	return s.SubscriberID
+}
+
+func (s *SubscribersV1ControllerGetUnseenCountRequest) GetFeedID() []string {
+	if s == nil {
+		return nil
+	}
+	return s.FeedID
 }
 
 func (s *SubscribersV1ControllerGetUnseenCountRequest) GetSeen() *bool {

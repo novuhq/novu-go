@@ -257,7 +257,7 @@ Removes a specific layout by its unique identifier **layoutId**
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="LayoutsController__delete" method="delete" path="/v2/layouts/{layoutId}" -->
+<!-- UsageSnippet language="go" operationID="LayoutsController_delete" method="delete" path="/v2/layouts/{layoutId}" -->
 ```go
 package main
 

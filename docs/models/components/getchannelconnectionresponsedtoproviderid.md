@@ -40,6 +40,7 @@ value := components.GetChannelConnectionResponseDtoProviderIDAnypost
 | `GetChannelConnectionResponseDtoProviderIDEmailWebhook`     | email-webhook                                               |
 | `GetChannelConnectionResponseDtoProviderIDBraze`            | braze                                                       |
 | `GetChannelConnectionResponseDtoProviderIDNovuEmailAgent`   | novu-email-agent                                            |
+| `GetChannelConnectionResponseDtoProviderIDAgentEmailInbox`  | agent-email-inbox                                           |
 | `GetChannelConnectionResponseDtoProviderIDNexmo`            | nexmo                                                       |
 | `GetChannelConnectionResponseDtoProviderIDPlivo`            | plivo                                                       |
 | `GetChannelConnectionResponseDtoProviderIDSms77`            | sms77                                                       |
@@ -89,6 +90,7 @@ value := components.GetChannelConnectionResponseDtoProviderIDAnypost
 | `GetChannelConnectionResponseDtoProviderIDNovu`             | novu                                                        |
 | `GetChannelConnectionResponseDtoProviderIDSlack`            | slack                                                       |
 | `GetChannelConnectionResponseDtoProviderIDDiscord`          | discord                                                     |
+| `GetChannelConnectionResponseDtoProviderIDGoogleChat`       | google-chat                                                 |
 | `GetChannelConnectionResponseDtoProviderIDMsteams`          | msteams                                                     |
 | `GetChannelConnectionResponseDtoProviderIDWebexMessaging`   | webex-messaging                                             |
 | `GetChannelConnectionResponseDtoProviderIDMattermost`       | mattermost                                                  |
@@ -103,6 +105,7 @@ value := components.GetChannelConnectionResponseDtoProviderIDAnypost
 | `GetChannelConnectionResponseDtoProviderIDNovuSlack`        | novu-slack                                                  |
 | `GetChannelConnectionResponseDtoProviderIDTelegram`         | telegram                                                    |
 | `GetChannelConnectionResponseDtoProviderIDSendblue`         | sendblue                                                    |
+| `GetChannelConnectionResponseDtoProviderIDPhotonImessage`   | photon-imessage                                             |
 | `GetChannelConnectionResponseDtoProviderIDNovuWebChat`      | novu-web-chat                                               |
 | `GetChannelConnectionResponseDtoProviderIDAnthropic`        | anthropic                                                   |
 | `GetChannelConnectionResponseDtoProviderIDNovuAnthropic`    | novu-anthropic                                              |

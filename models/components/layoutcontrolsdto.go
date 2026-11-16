@@ -8,7 +8,7 @@ type LayoutControlsDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Email layout controls
-	Values LayoutControlValuesDto `json:"values"`
+	Values map[string]any `json:"values,omitempty"`
 }
 
 func (l *LayoutControlsDto) GetDataSchema() map[string]any {
@@ -25,9 +25,9 @@ func (l *LayoutControlsDto) GetUISchema() *UISchema {
 	return l.UISchema
 }
 
-func (l *LayoutControlsDto) GetValues() LayoutControlValuesDto {
+func (l *LayoutControlsDto) GetValues() map[string]any {
 	if l == nil {
-		return LayoutControlValuesDto{}
+		return nil
 	}
 	return l.Values
 }

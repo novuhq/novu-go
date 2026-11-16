@@ -3,8 +3,162 @@
 package components
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+// DigestControlsMetadataResponseDtoType - The type of digest strategy. Determines which fields are applicable.
+type DigestControlsMetadataResponseDtoType string
+
+const (
+	DigestControlsMetadataResponseDtoTypeRegular DigestControlsMetadataResponseDtoType = "regular"
+	DigestControlsMetadataResponseDtoTypeTimed   DigestControlsMetadataResponseDtoType = "timed"
+)
+
+func (e DigestControlsMetadataResponseDtoType) ToPointer() *DigestControlsMetadataResponseDtoType {
+	return &e
+}
+func (e *DigestControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "regular":
+		fallthrough
+	case "timed":
+		*e = DigestControlsMetadataResponseDtoType(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DigestControlsMetadataResponseDtoType: %v", v)
+	}
+}
+
+// DigestControlsMetadataResponseDtoUnit - The unit of time for the digest interval (for REGULAR type).
+type DigestControlsMetadataResponseDtoUnit string
+
+const (
+	DigestControlsMetadataResponseDtoUnitSeconds DigestControlsMetadataResponseDtoUnit = "seconds"
+	DigestControlsMetadataResponseDtoUnitMinutes DigestControlsMetadataResponseDtoUnit = "minutes"
+	DigestControlsMetadataResponseDtoUnitHours   DigestControlsMetadataResponseDtoUnit = "hours"
+	DigestControlsMetadataResponseDtoUnitDays    DigestControlsMetadataResponseDtoUnit = "days"
+	DigestControlsMetadataResponseDtoUnitWeeks   DigestControlsMetadataResponseDtoUnit = "weeks"
+	DigestControlsMetadataResponseDtoUnitMonths  DigestControlsMetadataResponseDtoUnit = "months"
+)
+
+func (e DigestControlsMetadataResponseDtoUnit) ToPointer() *DigestControlsMetadataResponseDtoUnit {
+	return &e
+}
+func (e *DigestControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "seconds":
+		fallthrough
+	case "minutes":
+		fallthrough
+	case "hours":
+		fallthrough
+	case "days":
+		fallthrough
+	case "weeks":
+		fallthrough
+	case "months":
+		*e = DigestControlsMetadataResponseDtoUnit(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for DigestControlsMetadataResponseDtoUnit: %v", v)
+	}
+}
+
+// DigestControlsMetadataResponseDtoValues - Control values specific to Digest
+type DigestControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// The type of digest strategy. Determines which fields are applicable.
+	Type *DigestControlsMetadataResponseDtoType `json:"type,omitempty"`
+	// The amount of time for the digest interval (for REGULAR type). Min 1.
+	Amount *float64 `json:"amount,omitempty"`
+	// The unit of time for the digest interval (for REGULAR type).
+	Unit *DigestControlsMetadataResponseDtoUnit `json:"unit,omitempty"`
+	// Configuration for look-back window (for REGULAR type).
+	LookBackWindow *LookBackWindowDto `json:"lookBackWindow,omitempty"`
+	// Cron expression for TIMED digest. Min length 1.
+	Cron *string `json:"cron,omitempty"`
+	// Specify a custom key for digesting events instead of the default event key.
+	DigestKey            *string        `json:"digestKey,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (d DigestControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(d, "", false)
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.Skip
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetType() *DigestControlsMetadataResponseDtoType {
+	if d == nil {
+		return nil
+	}
+	return d.Type
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetAmount() *float64 {
+	if d == nil {
+		return nil
+	}
+	return d.Amount
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetUnit() *DigestControlsMetadataResponseDtoUnit {
+	if d == nil {
+		return nil
+	}
+	return d.Unit
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetLookBackWindow() *LookBackWindowDto {
+	if d == nil {
+		return nil
+	}
+	return d.LookBackWindow
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetCron() *string {
+	if d == nil {
+		return nil
+	}
+	return d.Cron
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetDigestKey() *string {
+	if d == nil {
+		return nil
+	}
+	return d.DigestKey
+}
+
+func (d *DigestControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.AdditionalProperties
+}
 
 type DigestControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +166,7 @@ type DigestControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Digest
-	Values DigestControlDto `json:"values"`
+	Values *DigestControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (d DigestControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +174,7 @@ func (d DigestControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DigestControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +194,9 @@ func (d *DigestControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return d.UISchema
 }
 
-func (d *DigestControlsMetadataResponseDto) GetValues() DigestControlDto {
+func (d *DigestControlsMetadataResponseDto) GetValues() *DigestControlsMetadataResponseDtoValues {
 	if d == nil {
-		return DigestControlDto{}
+		return nil
 	}
 	return d.Values
 }

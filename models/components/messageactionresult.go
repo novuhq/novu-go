@@ -5,7 +5,7 @@ package components
 type MessageActionResult struct {
 	// Payload of the action result
 	Payload map[string]any `json:"payload,omitempty"`
-	// Type of button for the action result
+	// Type of the button
 	Type *ButtonTypeEnum `json:"type,omitempty"`
 }
 

@@ -3,8 +3,167 @@
 package components
 
 import (
+	"errors"
+	"fmt"
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
+
+type HTTPRequestControlsMetadataResponseDtoBodyType string
+
+const (
+	HTTPRequestControlsMetadataResponseDtoBodyTypeStr                               HTTPRequestControlsMetadataResponseDtoBodyType = "str"
+	HTTPRequestControlsMetadataResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto HTTPRequestControlsMetadataResponseDtoBodyType = "arrayOfHTTPRequestKeyValuePairDto"
+)
+
+// HTTPRequestControlsMetadataResponseDtoBody - Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+type HTTPRequestControlsMetadataResponseDtoBody struct {
+	Str                               *string                      `queryParam:"inline" union:"member"`
+	ArrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto `queryParam:"inline" union:"member"`
+
+	Type HTTPRequestControlsMetadataResponseDtoBodyType
+}
+
+func CreateHTTPRequestControlsMetadataResponseDtoBodyStr(str string) HTTPRequestControlsMetadataResponseDtoBody {
+	typ := HTTPRequestControlsMetadataResponseDtoBodyTypeStr
+
+	return HTTPRequestControlsMetadataResponseDtoBody{
+		Str:  &str,
+		Type: typ,
+	}
+}
+
+func CreateHTTPRequestControlsMetadataResponseDtoBodyArrayOfHTTPRequestKeyValuePairDto(arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto) HTTPRequestControlsMetadataResponseDtoBody {
+	typ := HTTPRequestControlsMetadataResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto
+
+	return HTTPRequestControlsMetadataResponseDtoBody{
+		ArrayOfHTTPRequestKeyValuePairDto: arrayOfHTTPRequestKeyValuePairDto,
+		Type:                              typ,
+	}
+}
+
+func (u *HTTPRequestControlsMetadataResponseDtoBody) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = HTTPRequestControlsMetadataResponseDtoBody{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
+
+	var str string = ""
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
+		u.Str = &str
+		u.Type = HTTPRequestControlsMetadataResponseDtoBodyTypeStr
+		return nil
+	}
+
+	var arrayOfHTTPRequestKeyValuePairDto []HTTPRequestKeyValuePairDto = []HTTPRequestKeyValuePairDto{}
+	if err := utils.UnmarshalJSON(data, &arrayOfHTTPRequestKeyValuePairDto, "", true, nil); err == nil {
+		u.ArrayOfHTTPRequestKeyValuePairDto = arrayOfHTTPRequestKeyValuePairDto
+		u.Type = HTTPRequestControlsMetadataResponseDtoBodyTypeArrayOfHTTPRequestKeyValuePairDto
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for HTTPRequestControlsMetadataResponseDtoBody", string(data))
+}
+
+func (u HTTPRequestControlsMetadataResponseDtoBody) MarshalJSON() ([]byte, error) {
+	if u.Str != nil {
+		return utils.MarshalJSON(u.Str, "", true)
+	}
+
+	if u.ArrayOfHTTPRequestKeyValuePairDto != nil {
+		return utils.MarshalJSON(u.ArrayOfHTTPRequestKeyValuePairDto, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type HTTPRequestControlsMetadataResponseDtoBody: all fields are null")
+}
+
+// HTTPRequestControlsMetadataResponseDtoValues - Control values specific to HTTP Request step
+type HTTPRequestControlsMetadataResponseDtoValues struct {
+	// HTTP method
+	Method HTTPMethodEnum `json:"method"`
+	// Target URL for the HTTP request
+	URL string `json:"url"`
+	// Request headers as key-value pairs
+	Headers []HTTPRequestKeyValuePairDto `json:"headers,omitempty"`
+	// Request body as a raw JSON string. Key-value arrays are supported for legacy workflows.
+	Body *HTTPRequestControlsMetadataResponseDtoBody `json:"body,omitempty"`
+	// JSON schema to validate response body against
+	ResponseBodySchema map[string]any `json:"responseBodySchema,omitempty"`
+	// Whether to enforce response body schema validation
+	EnforceSchemaValidation *bool `json:"enforceSchemaValidation,omitempty"`
+	// Whether to continue workflow execution on failure
+	ContinueOnFailure    *bool          `json:"continueOnFailure,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (h HTTPRequestControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(h, "", false)
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &h, "", false, []string{"method", "url"}); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetMethod() HTTPMethodEnum {
+	if h == nil {
+		return HTTPMethodEnum("")
+	}
+	return h.Method
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetURL() string {
+	if h == nil {
+		return ""
+	}
+	return h.URL
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetHeaders() []HTTPRequestKeyValuePairDto {
+	if h == nil {
+		return nil
+	}
+	return h.Headers
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetBody() *HTTPRequestControlsMetadataResponseDtoBody {
+	if h == nil {
+		return nil
+	}
+	return h.Body
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetResponseBodySchema() map[string]any {
+	if h == nil {
+		return nil
+	}
+	return h.ResponseBodySchema
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetEnforceSchemaValidation() *bool {
+	if h == nil {
+		return nil
+	}
+	return h.EnforceSchemaValidation
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetContinueOnFailure() *bool {
+	if h == nil {
+		return nil
+	}
+	return h.ContinueOnFailure
+}
+
+func (h *HTTPRequestControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if h == nil {
+		return nil
+	}
+	return h.AdditionalProperties
+}
 
 type HTTPRequestControlsMetadataResponseDto struct {
 	// JSON Schema for data
@@ -12,7 +171,7 @@ type HTTPRequestControlsMetadataResponseDto struct {
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to HTTP Request step
-	Values HTTPRequestControlDto `json:"values"`
+	Values *HTTPRequestControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (h HTTPRequestControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +179,7 @@ func (h HTTPRequestControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (h *HTTPRequestControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &h, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &h, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +199,9 @@ func (h *HTTPRequestControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return h.UISchema
 }
 
-func (h *HTTPRequestControlsMetadataResponseDto) GetValues() HTTPRequestControlDto {
+func (h *HTTPRequestControlsMetadataResponseDto) GetValues() *HTTPRequestControlsMetadataResponseDtoValues {
 	if h == nil {
-		return HTTPRequestControlDto{}
+		return nil
 	}
 	return h.Values
 }

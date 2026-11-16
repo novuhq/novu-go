@@ -7,7 +7,7 @@ import (
 	"fmt"
 )
 
-// ResourceOriginEnum - Origin of the layout
+// ResourceOriginEnum - Origin of the workflow
 type ResourceOriginEnum string
 
 const (

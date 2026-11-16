@@ -6,13 +6,63 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
+// PushControlsMetadataResponseDtoValues - Control values specific to Push
+type PushControlsMetadataResponseDtoValues struct {
+	// JSONLogic filter conditions for conditionally skipping the step execution. Supports complex logical operations with AND, OR, and comparison operators. See https://jsonlogic.com/ for full typing reference.
+	Skip map[string]any `json:"skip,omitempty"`
+	// Subject/title of the push notification.
+	Subject *string `json:"subject,omitempty"`
+	// Body content of the push notification.
+	Body                 *string        `json:"body,omitempty"`
+	AdditionalProperties map[string]any `additionalProperties:"true" json:"-"`
+}
+
+func (p PushControlsMetadataResponseDtoValues) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PushControlsMetadataResponseDtoValues) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p *PushControlsMetadataResponseDtoValues) GetSkip() map[string]any {
+	if p == nil {
+		return nil
+	}
+	return p.Skip
+}
+
+func (p *PushControlsMetadataResponseDtoValues) GetSubject() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Subject
+}
+
+func (p *PushControlsMetadataResponseDtoValues) GetBody() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Body
+}
+
+func (p *PushControlsMetadataResponseDtoValues) GetAdditionalProperties() map[string]any {
+	if p == nil {
+		return nil
+	}
+	return p.AdditionalProperties
+}
+
 type PushControlsMetadataResponseDto struct {
 	// JSON Schema for data
 	DataSchema map[string]any `json:"dataSchema,omitempty"`
 	// UI Schema for rendering
 	UISchema *UISchema `json:"uiSchema,omitempty"`
 	// Control values specific to Push
-	Values PushControlDto `json:"values"`
+	Values *PushControlsMetadataResponseDtoValues `json:"values,omitempty"`
 }
 
 func (p PushControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
@@ -20,7 +70,7 @@ func (p PushControlsMetadataResponseDto) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PushControlsMetadataResponseDto) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"values"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil
@@ -40,9 +90,9 @@ func (p *PushControlsMetadataResponseDto) GetUISchema() *UISchema {
 	return p.UISchema
 }
 
-func (p *PushControlsMetadataResponseDto) GetValues() PushControlDto {
+func (p *PushControlsMetadataResponseDto) GetValues() *PushControlsMetadataResponseDtoValues {
 	if p == nil {
-		return PushControlDto{}
+		return nil
 	}
 	return p.Values
 }

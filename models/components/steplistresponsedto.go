@@ -5,7 +5,7 @@ package components
 type StepListResponseDto struct {
 	// Slug of the step
 	Slug string `json:"slug"`
-	// Type of the step
+	// Channels of the notification
 	Type StepTypeEnum `json:"type"`
 	// Issues associated with the step
 	Issues *StepIssuesDto `json:"issues,omitempty"`

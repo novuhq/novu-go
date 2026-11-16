@@ -19,6 +19,7 @@ value := components.SubscriberChannelDtoProviderIDSlack
 | ------------------------------------------------ | ------------------------------------------------ |
 | `SubscriberChannelDtoProviderIDSlack`            | slack                                            |
 | `SubscriberChannelDtoProviderIDDiscord`          | discord                                          |
+| `SubscriberChannelDtoProviderIDGoogleChat`       | google-chat                                      |
 | `SubscriberChannelDtoProviderIDMsteams`          | msteams                                          |
 | `SubscriberChannelDtoProviderIDWebexMessaging`   | webex-messaging                                  |
 | `SubscriberChannelDtoProviderIDMattermost`       | mattermost                                       |
@@ -33,6 +34,7 @@ value := components.SubscriberChannelDtoProviderIDSlack
 | `SubscriberChannelDtoProviderIDNovuSlack`        | novu-slack                                       |
 | `SubscriberChannelDtoProviderIDTelegram`         | telegram                                         |
 | `SubscriberChannelDtoProviderIDSendblue`         | sendblue                                         |
+| `SubscriberChannelDtoProviderIDPhotonImessage`   | photon-imessage                                  |
 | `SubscriberChannelDtoProviderIDNovuWebChat`      | novu-web-chat                                    |
 | `SubscriberChannelDtoProviderIDFcm`              | fcm                                              |
 | `SubscriberChannelDtoProviderIDApns`             | apns                                             |

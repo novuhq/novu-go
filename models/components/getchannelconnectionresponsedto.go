@@ -73,6 +73,7 @@ const (
 	GetChannelConnectionResponseDtoProviderIDEmailWebhook     GetChannelConnectionResponseDtoProviderID = "email-webhook"
 	GetChannelConnectionResponseDtoProviderIDBraze            GetChannelConnectionResponseDtoProviderID = "braze"
 	GetChannelConnectionResponseDtoProviderIDNovuEmailAgent   GetChannelConnectionResponseDtoProviderID = "novu-email-agent"
+	GetChannelConnectionResponseDtoProviderIDAgentEmailInbox  GetChannelConnectionResponseDtoProviderID = "agent-email-inbox"
 	GetChannelConnectionResponseDtoProviderIDNexmo            GetChannelConnectionResponseDtoProviderID = "nexmo"
 	GetChannelConnectionResponseDtoProviderIDPlivo            GetChannelConnectionResponseDtoProviderID = "plivo"
 	GetChannelConnectionResponseDtoProviderIDSms77            GetChannelConnectionResponseDtoProviderID = "sms77"
@@ -122,6 +123,7 @@ const (
 	GetChannelConnectionResponseDtoProviderIDNovu             GetChannelConnectionResponseDtoProviderID = "novu"
 	GetChannelConnectionResponseDtoProviderIDSlack            GetChannelConnectionResponseDtoProviderID = "slack"
 	GetChannelConnectionResponseDtoProviderIDDiscord          GetChannelConnectionResponseDtoProviderID = "discord"
+	GetChannelConnectionResponseDtoProviderIDGoogleChat       GetChannelConnectionResponseDtoProviderID = "google-chat"
 	GetChannelConnectionResponseDtoProviderIDMsteams          GetChannelConnectionResponseDtoProviderID = "msteams"
 	GetChannelConnectionResponseDtoProviderIDWebexMessaging   GetChannelConnectionResponseDtoProviderID = "webex-messaging"
 	GetChannelConnectionResponseDtoProviderIDMattermost       GetChannelConnectionResponseDtoProviderID = "mattermost"
@@ -136,6 +138,7 @@ const (
 	GetChannelConnectionResponseDtoProviderIDNovuSlack        GetChannelConnectionResponseDtoProviderID = "novu-slack"
 	GetChannelConnectionResponseDtoProviderIDTelegram         GetChannelConnectionResponseDtoProviderID = "telegram"
 	GetChannelConnectionResponseDtoProviderIDSendblue         GetChannelConnectionResponseDtoProviderID = "sendblue"
+	GetChannelConnectionResponseDtoProviderIDPhotonImessage   GetChannelConnectionResponseDtoProviderID = "photon-imessage"
 	GetChannelConnectionResponseDtoProviderIDNovuWebChat      GetChannelConnectionResponseDtoProviderID = "novu-web-chat"
 	GetChannelConnectionResponseDtoProviderIDAnthropic        GetChannelConnectionResponseDtoProviderID = "anthropic"
 	GetChannelConnectionResponseDtoProviderIDNovuAnthropic    GetChannelConnectionResponseDtoProviderID = "novu-anthropic"
@@ -200,6 +203,8 @@ func (e *GetChannelConnectionResponseDtoProviderID) UnmarshalJSON(data []byte) e
 	case "braze":
 		fallthrough
 	case "novu-email-agent":
+		fallthrough
+	case "agent-email-inbox":
 		fallthrough
 	case "nexmo":
 		fallthrough
@@ -299,6 +304,8 @@ func (e *GetChannelConnectionResponseDtoProviderID) UnmarshalJSON(data []byte) e
 		fallthrough
 	case "discord":
 		fallthrough
+	case "google-chat":
+		fallthrough
 	case "msteams":
 		fallthrough
 	case "webex-messaging":
@@ -326,6 +333,8 @@ func (e *GetChannelConnectionResponseDtoProviderID) UnmarshalJSON(data []byte) e
 	case "telegram":
 		fallthrough
 	case "sendblue":
+		fallthrough
+	case "photon-imessage":
 		fallthrough
 	case "novu-web-chat":
 		fallthrough

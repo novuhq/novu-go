@@ -15,7 +15,7 @@ type ActivityNotificationExecutionDetailResponseDto struct {
 	IsRetry bool `json:"isRetry"`
 	// Whether the execution is a test or not
 	IsTest bool `json:"isTest"`
-	// Provider ID of the job
+	// Provider ID of the execution
 	ProviderID *ProvidersIDEnum `json:"providerId,omitempty"`
 	// Raw data of the execution
 	Raw *string `json:"raw,omitempty"`

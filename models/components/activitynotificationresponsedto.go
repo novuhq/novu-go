@@ -20,8 +20,9 @@ type ActivityNotificationResponseDto struct {
 	// Creation time of the notification
 	CreatedAt *string `json:"createdAt,omitempty"`
 	// Last updated time of the notification
-	UpdatedAt *string        `json:"updatedAt,omitempty"`
-	Channels  []StepTypeEnum `json:"channels,omitempty"`
+	UpdatedAt *string `json:"updatedAt,omitempty"`
+	// Channels of the notification
+	Channels []StepTypeEnum `json:"channels,omitempty"`
 	// Subscriber of the notification
 	Subscriber *ActivityNotificationSubscriberResponseDto `json:"subscriber,omitempty"`
 	// Template of the notification
@@ -38,7 +39,7 @@ type ActivityNotificationResponseDto struct {
 	To map[string]any `json:"to,omitempty"`
 	// Topics of the notification
 	Topics []ActivityTopicDto `json:"topics,omitempty"`
-	// Severity of the workflow
+	// Override the severity of the workflow
 	Severity *SeverityLevelEnum `json:"severity,omitempty"`
 	// Criticality of the notification
 	Critical *bool `json:"critical,omitempty"`

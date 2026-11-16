@@ -73,10 +73,6 @@ func (e *CreateIntegrationRequestDtoKind) UnmarshalJSON(data []byte) error {
 	}
 }
 
-// Configurations for the integration
-type Configurations struct {
-}
-
 type CreateIntegrationRequestDto struct {
 	// The name of the integration
 	Name *string `json:"name,omitempty"`
@@ -103,7 +99,7 @@ type CreateIntegrationRequestDto struct {
 	// JSONLogic used at send time to select this integration. Takes precedence over `conditions`.
 	Rules map[string]any `json:"rules,omitempty"`
 	// Configurations for the integration
-	Configurations *Configurations `json:"configurations,omitempty"`
+	Configurations map[string]string `json:"configurations,omitempty"`
 }
 
 func (c *CreateIntegrationRequestDto) GetName() *string {
@@ -183,7 +179,7 @@ func (c *CreateIntegrationRequestDto) GetRules() map[string]any {
 	return c.Rules
 }
 
-func (c *CreateIntegrationRequestDto) GetConfigurations() *Configurations {
+func (c *CreateIntegrationRequestDto) GetConfigurations() map[string]string {
 	if c == nil {
 		return nil
 	}

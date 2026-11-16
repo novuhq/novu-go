@@ -61,7 +61,7 @@ type LayoutResponseDto struct {
 	UpdatedBy *UpdatedBy `json:"updatedBy,omitempty"`
 	// Creation timestamp
 	CreatedAt string `json:"createdAt"`
-	// Origin of the layout
+	// Origin of the workflow
 	Origin ResourceOriginEnum `json:"origin"`
 	// Type of the layout
 	Type ResourceTypeEnum `json:"type"`
