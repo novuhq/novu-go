@@ -31,6 +31,8 @@ type ActivityNotificationResponseDto struct {
 	Jobs []ActivityNotificationJobResponseDto `json:"jobs,omitempty"`
 	// Payload of the notification
 	Payload map[string]any `json:"payload,omitempty"`
+	// Trigger overrides of the notification, as passed to the original workflow trigger
+	Overrides map[string]any `json:"overrides,omitempty"`
 	// Tags associated with the notification
 	Tags []string `json:"tags,omitempty"`
 	// Controls associated with the notification
@@ -143,6 +145,13 @@ func (a *ActivityNotificationResponseDto) GetPayload() map[string]any {
 		return nil
 	}
 	return a.Payload
+}
+
+func (a *ActivityNotificationResponseDto) GetOverrides() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.Overrides
 }
 
 func (a *ActivityNotificationResponseDto) GetTags() []string {
