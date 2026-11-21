@@ -594,6 +594,10 @@ func main() {
 
 * [UpdateOnlineFlag](docs/sdks/properties/README.md#updateonlineflag) - Update subscriber online status
 
+#### [Subscribers.Tokens](docs/sdks/tokens/README.md)
+
+* [Create](docs/sdks/tokens/README.md#create) - Create a subscriber login token
+
 #### [Subscribers.Topics](docs/sdks/novutopics/README.md)
 
 * [List](docs/sdks/novutopics/README.md#list) - Retrieve subscriber subscriptions

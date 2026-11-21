@@ -24,6 +24,7 @@ type Subscribers struct {
 	Notifications *NovuNotifications
 	Preferences   *Preferences
 	Topics        *NovuTopics
+	Tokens        *Tokens
 	Credentials   *Credentials
 	Messages      *NovuMessages
 	Properties    *Properties
@@ -41,6 +42,7 @@ func newSubscribers(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hoo
 		Notifications:    newNovuNotifications(rootSDK, sdkConfig, hooks),
 		Preferences:      newPreferences(rootSDK, sdkConfig, hooks),
 		Topics:           newNovuTopics(rootSDK, sdkConfig, hooks),
+		Tokens:           newTokens(rootSDK, sdkConfig, hooks),
 		Credentials:      newCredentials(rootSDK, sdkConfig, hooks),
 		Messages:         newNovuMessages(rootSDK, sdkConfig, hooks),
 		Properties:       newProperties(rootSDK, sdkConfig, hooks),

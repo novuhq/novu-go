@@ -889,7 +889,21 @@ func main() {
         v3.WithSecurity("YOUR_SECRET_KEY_HERE"),
     )
 
-    res, err := s.Agents.Update(ctx, "<value>", components.UpdateAgentRequestDto{}, nil)
+    res, err := s.Agents.Update(ctx, "<value>", components.UpdateAgentRequestDto{
+        Behavior: &components.AgentBehaviorDto{
+            AccessRule: map[string]any{
+                "in": []any{
+                    map[string]any{
+                        "var": "context.tenant.data.plan",
+                    },
+                    []any{
+                        "pro",
+                        "enterprise",
+                    },
+                },
+            },
+        },
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
