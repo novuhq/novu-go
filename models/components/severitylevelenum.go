@@ -20,6 +20,16 @@ const (
 func (e SeverityLevelEnum) ToPointer() *SeverityLevelEnum {
 	return &e
 }
+
+// SeverityLevelEnumValues returns every known SeverityLevelEnum value in schema order.
+func SeverityLevelEnumValues() []SeverityLevelEnum {
+	return []SeverityLevelEnum{
+		SeverityLevelEnumHigh,
+		SeverityLevelEnumMedium,
+		SeverityLevelEnumLow,
+		SeverityLevelEnumNone,
+	}
+}
 func (e *SeverityLevelEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

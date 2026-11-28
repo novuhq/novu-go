@@ -19,6 +19,15 @@ const (
 func (e ResourceTypeEnum) ToPointer() *ResourceTypeEnum {
 	return &e
 }
+
+// ResourceTypeEnumValues returns every known ResourceTypeEnum value in schema order.
+func ResourceTypeEnumValues() []ResourceTypeEnum {
+	return []ResourceTypeEnum{
+		ResourceTypeEnumRegular,
+		ResourceTypeEnumEcho,
+		ResourceTypeEnumBridge,
+	}
+}
 func (e *ResourceTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

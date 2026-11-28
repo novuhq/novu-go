@@ -125,6 +125,14 @@ const (
 func (e Mode) ToPointer() *Mode {
 	return &e
 }
+
+// ModeValues returns every known Mode value in schema order.
+func ModeValues() []Mode {
+	return []Mode{
+		ModeConnect,
+		ModeLinkUser,
+	}
+}
 func (e *Mode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -152,6 +160,14 @@ const (
 func (e GenerateChatOauthURLRequestDtoConnectionMode) ToPointer() *GenerateChatOauthURLRequestDtoConnectionMode {
 	return &e
 }
+
+// GenerateChatOauthURLRequestDtoConnectionModeValues returns every known GenerateChatOauthURLRequestDtoConnectionMode value in schema order.
+func GenerateChatOauthURLRequestDtoConnectionModeValues() []GenerateChatOauthURLRequestDtoConnectionMode {
+	return []GenerateChatOauthURLRequestDtoConnectionMode{
+		GenerateChatOauthURLRequestDtoConnectionModeSubscriber,
+		GenerateChatOauthURLRequestDtoConnectionModeShared,
+	}
+}
 func (e *GenerateChatOauthURLRequestDtoConnectionMode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -176,7 +192,7 @@ type GenerateChatOauthURLRequestDto struct {
 	// Identifier of the channel connection that will be created. It is generated automatically if not provided.
 	ConnectionIdentifier *string                                          `json:"connectionIdentifier,omitempty"`
 	Context              map[string]GenerateChatOauthURLRequestDtoContext `json:"context,omitempty"`
-	// **Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes.
+	// **Slack only**: OAuth scopes to request during authorization. These define the permissions your Slack integration will have. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email, files:write. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: This parameter is ignored. MS Teams uses admin consent with pre-configured permissions in Azure AD. Note: The generated OAuth URL expires after 5 minutes.
 	Scope []string `json:"scope,omitempty"`
 	// **Slack only, link_user mode**: User-level OAuth scopes to request during authorization. Used when mode is "link_user" to identify the Slack user via "Sign in with Slack". If not specified, defaults to: identity.basic.
 	UserScope []string `json:"userScope,omitempty"`

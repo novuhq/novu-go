@@ -28,6 +28,24 @@ const (
 func (e UISchemaGroupEnum) ToPointer() *UISchemaGroupEnum {
 	return &e
 }
+
+// UISchemaGroupEnumValues returns every known UISchemaGroupEnum value in schema order.
+func UISchemaGroupEnumValues() []UISchemaGroupEnum {
+	return []UISchemaGroupEnum{
+		UISchemaGroupEnumInApp,
+		UISchemaGroupEnumEmail,
+		UISchemaGroupEnumDigest,
+		UISchemaGroupEnumDelay,
+		UISchemaGroupEnumThrottle,
+		UISchemaGroupEnumSms,
+		UISchemaGroupEnumChat,
+		UISchemaGroupEnumPush,
+		UISchemaGroupEnumTool,
+		UISchemaGroupEnumSkip,
+		UISchemaGroupEnumLayout,
+		UISchemaGroupEnumHTTPRequest,
+	}
+}
 func (e *UISchemaGroupEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

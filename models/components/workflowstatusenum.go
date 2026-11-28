@@ -19,6 +19,15 @@ const (
 func (e WorkflowStatusEnum) ToPointer() *WorkflowStatusEnum {
 	return &e
 }
+
+// WorkflowStatusEnumValues returns every known WorkflowStatusEnum value in schema order.
+func WorkflowStatusEnumValues() []WorkflowStatusEnum {
+	return []WorkflowStatusEnum{
+		WorkflowStatusEnumActive,
+		WorkflowStatusEnumInactive,
+		WorkflowStatusEnumError,
+	}
+}
 func (e *WorkflowStatusEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

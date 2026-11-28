@@ -43,6 +43,39 @@ const (
 func (e ChatOrPushProviderEnum) ToPointer() *ChatOrPushProviderEnum {
 	return &e
 }
+
+// ChatOrPushProviderEnumValues returns every known ChatOrPushProviderEnum value in schema order.
+func ChatOrPushProviderEnumValues() []ChatOrPushProviderEnum {
+	return []ChatOrPushProviderEnum{
+		ChatOrPushProviderEnumSlack,
+		ChatOrPushProviderEnumDiscord,
+		ChatOrPushProviderEnumGoogleChat,
+		ChatOrPushProviderEnumMsteams,
+		ChatOrPushProviderEnumWebexMessaging,
+		ChatOrPushProviderEnumMattermost,
+		ChatOrPushProviderEnumRyver,
+		ChatOrPushProviderEnumZulip,
+		ChatOrPushProviderEnumGrafanaOnCall,
+		ChatOrPushProviderEnumGetstream,
+		ChatOrPushProviderEnumRocketChat,
+		ChatOrPushProviderEnumWhatsappBusiness,
+		ChatOrPushProviderEnumLine,
+		ChatOrPushProviderEnumChatWebhook,
+		ChatOrPushProviderEnumNovuSlack,
+		ChatOrPushProviderEnumTelegram,
+		ChatOrPushProviderEnumSendblue,
+		ChatOrPushProviderEnumPhotonImessage,
+		ChatOrPushProviderEnumNovuWebChat,
+		ChatOrPushProviderEnumFcm,
+		ChatOrPushProviderEnumApns,
+		ChatOrPushProviderEnumExpo,
+		ChatOrPushProviderEnumOneSignal,
+		ChatOrPushProviderEnumPushpad,
+		ChatOrPushProviderEnumPushWebhook,
+		ChatOrPushProviderEnumPusherBeams,
+		ChatOrPushProviderEnumAppio,
+	}
+}
 func (e *ChatOrPushProviderEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -28,6 +28,24 @@ const (
 func (e StepTypeEnum) ToPointer() *StepTypeEnum {
 	return &e
 }
+
+// StepTypeEnumValues returns every known StepTypeEnum value in schema order.
+func StepTypeEnumValues() []StepTypeEnum {
+	return []StepTypeEnum{
+		StepTypeEnumInApp,
+		StepTypeEnumEmail,
+		StepTypeEnumSms,
+		StepTypeEnumChat,
+		StepTypeEnumPush,
+		StepTypeEnumTool,
+		StepTypeEnumDigest,
+		StepTypeEnumTrigger,
+		StepTypeEnumDelay,
+		StepTypeEnumThrottle,
+		StepTypeEnumCustom,
+		StepTypeEnumHTTPRequest,
+	}
+}
 func (e *StepTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

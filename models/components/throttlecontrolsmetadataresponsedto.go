@@ -19,6 +19,14 @@ const (
 func (e ThrottleControlsMetadataResponseDtoType) ToPointer() *ThrottleControlsMetadataResponseDtoType {
 	return &e
 }
+
+// ThrottleControlsMetadataResponseDtoTypeValues returns every known ThrottleControlsMetadataResponseDtoType value in schema order.
+func ThrottleControlsMetadataResponseDtoTypeValues() []ThrottleControlsMetadataResponseDtoType {
+	return []ThrottleControlsMetadataResponseDtoType{
+		ThrottleControlsMetadataResponseDtoTypeFixed,
+		ThrottleControlsMetadataResponseDtoTypeDynamic,
+	}
+}
 func (e *ThrottleControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -46,6 +54,15 @@ const (
 
 func (e ThrottleControlsMetadataResponseDtoUnit) ToPointer() *ThrottleControlsMetadataResponseDtoUnit {
 	return &e
+}
+
+// ThrottleControlsMetadataResponseDtoUnitValues returns every known ThrottleControlsMetadataResponseDtoUnit value in schema order.
+func ThrottleControlsMetadataResponseDtoUnitValues() []ThrottleControlsMetadataResponseDtoUnit {
+	return []ThrottleControlsMetadataResponseDtoUnit{
+		ThrottleControlsMetadataResponseDtoUnitMinutes,
+		ThrottleControlsMetadataResponseDtoUnitHours,
+		ThrottleControlsMetadataResponseDtoUnitDays,
+	}
 }
 func (e *ThrottleControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

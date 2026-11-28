@@ -19,6 +19,14 @@ const (
 func (e DomainsControllerListDomainsQueryParamOrderDirection) ToPointer() *DomainsControllerListDomainsQueryParamOrderDirection {
 	return &e
 }
+
+// DomainsControllerListDomainsQueryParamOrderDirectionValues returns every known DomainsControllerListDomainsQueryParamOrderDirection value in schema order.
+func DomainsControllerListDomainsQueryParamOrderDirectionValues() []DomainsControllerListDomainsQueryParamOrderDirection {
+	return []DomainsControllerListDomainsQueryParamOrderDirection{
+		DomainsControllerListDomainsQueryParamOrderDirectionAsc,
+		DomainsControllerListDomainsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *DomainsControllerListDomainsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

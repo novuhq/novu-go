@@ -19,6 +19,14 @@ const (
 func (e ActionType) ToPointer() *ActionType {
 	return &e
 }
+
+// ActionTypeValues returns every known ActionType value in schema order.
+func ActionTypeValues() []ActionType {
+	return []ActionType{
+		ActionTypePrimary,
+		ActionTypeSecondary,
+	}
+}
 func (e *ActionType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

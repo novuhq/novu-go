@@ -124,6 +124,13 @@ const (
 func (e CreateMsTeamsChannelEndpointDtoType) ToPointer() *CreateMsTeamsChannelEndpointDtoType {
 	return &e
 }
+
+// CreateMsTeamsChannelEndpointDtoTypeValues returns every known CreateMsTeamsChannelEndpointDtoType value in schema order.
+func CreateMsTeamsChannelEndpointDtoTypeValues() []CreateMsTeamsChannelEndpointDtoType {
+	return []CreateMsTeamsChannelEndpointDtoType{
+		CreateMsTeamsChannelEndpointDtoTypeMsTeamsChannel,
+	}
+}
 func (e *CreateMsTeamsChannelEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

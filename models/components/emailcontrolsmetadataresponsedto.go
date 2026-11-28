@@ -19,6 +19,14 @@ const (
 func (e EmailControlsMetadataResponseDtoEditorType) ToPointer() *EmailControlsMetadataResponseDtoEditorType {
 	return &e
 }
+
+// EmailControlsMetadataResponseDtoEditorTypeValues returns every known EmailControlsMetadataResponseDtoEditorType value in schema order.
+func EmailControlsMetadataResponseDtoEditorTypeValues() []EmailControlsMetadataResponseDtoEditorType {
+	return []EmailControlsMetadataResponseDtoEditorType{
+		EmailControlsMetadataResponseDtoEditorTypeBlock,
+		EmailControlsMetadataResponseDtoEditorTypeHTML,
+	}
+}
 func (e *EmailControlsMetadataResponseDtoEditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -19,6 +19,14 @@ const (
 func (e DigestControlsMetadataResponseDtoType) ToPointer() *DigestControlsMetadataResponseDtoType {
 	return &e
 }
+
+// DigestControlsMetadataResponseDtoTypeValues returns every known DigestControlsMetadataResponseDtoType value in schema order.
+func DigestControlsMetadataResponseDtoTypeValues() []DigestControlsMetadataResponseDtoType {
+	return []DigestControlsMetadataResponseDtoType{
+		DigestControlsMetadataResponseDtoTypeRegular,
+		DigestControlsMetadataResponseDtoTypeTimed,
+	}
+}
 func (e *DigestControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +57,18 @@ const (
 
 func (e DigestControlsMetadataResponseDtoUnit) ToPointer() *DigestControlsMetadataResponseDtoUnit {
 	return &e
+}
+
+// DigestControlsMetadataResponseDtoUnitValues returns every known DigestControlsMetadataResponseDtoUnit value in schema order.
+func DigestControlsMetadataResponseDtoUnitValues() []DigestControlsMetadataResponseDtoUnit {
+	return []DigestControlsMetadataResponseDtoUnit{
+		DigestControlsMetadataResponseDtoUnitSeconds,
+		DigestControlsMetadataResponseDtoUnitMinutes,
+		DigestControlsMetadataResponseDtoUnitHours,
+		DigestControlsMetadataResponseDtoUnitDays,
+		DigestControlsMetadataResponseDtoUnitWeeks,
+		DigestControlsMetadataResponseDtoUnitMonths,
+	}
 }
 func (e *DigestControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

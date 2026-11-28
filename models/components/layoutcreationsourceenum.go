@@ -17,6 +17,13 @@ const (
 func (e LayoutCreationSourceEnum) ToPointer() *LayoutCreationSourceEnum {
 	return &e
 }
+
+// LayoutCreationSourceEnumValues returns every known LayoutCreationSourceEnum value in schema order.
+func LayoutCreationSourceEnumValues() []LayoutCreationSourceEnum {
+	return []LayoutCreationSourceEnum{
+		LayoutCreationSourceEnumDashboard,
+	}
+}
 func (e *LayoutCreationSourceEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

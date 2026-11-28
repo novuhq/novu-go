@@ -18,6 +18,13 @@ const (
 func (e GeneratePreviewResponseDtoResult10Type) ToPointer() *GeneratePreviewResponseDtoResult10Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult10TypeValues returns every known GeneratePreviewResponseDtoResult10Type value in schema order.
+func GeneratePreviewResponseDtoResult10TypeValues() []GeneratePreviewResponseDtoResult10Type {
+	return []GeneratePreviewResponseDtoResult10Type{
+		GeneratePreviewResponseDtoResult10TypeDigest,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult10Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -71,6 +78,13 @@ const (
 func (e GeneratePreviewResponseDtoResult9Type) ToPointer() *GeneratePreviewResponseDtoResult9Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult9TypeValues returns every known GeneratePreviewResponseDtoResult9Type value in schema order.
+func GeneratePreviewResponseDtoResult9TypeValues() []GeneratePreviewResponseDtoResult9Type {
+	return []GeneratePreviewResponseDtoResult9Type{
+		GeneratePreviewResponseDtoResult9TypeDelay,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult9Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -123,6 +137,13 @@ const (
 
 func (e GeneratePreviewResponseDtoResult8Type) ToPointer() *GeneratePreviewResponseDtoResult8Type {
 	return &e
+}
+
+// GeneratePreviewResponseDtoResult8TypeValues returns every known GeneratePreviewResponseDtoResult8Type value in schema order.
+func GeneratePreviewResponseDtoResult8TypeValues() []GeneratePreviewResponseDtoResult8Type {
+	return []GeneratePreviewResponseDtoResult8Type{
+		GeneratePreviewResponseDtoResult8TypeTool,
+	}
 }
 func (e *GeneratePreviewResponseDtoResult8Type) UnmarshalJSON(data []byte) error {
 	var v string
@@ -185,6 +206,13 @@ const (
 func (e GeneratePreviewResponseDtoResult7Type) ToPointer() *GeneratePreviewResponseDtoResult7Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult7TypeValues returns every known GeneratePreviewResponseDtoResult7Type value in schema order.
+func GeneratePreviewResponseDtoResult7TypeValues() []GeneratePreviewResponseDtoResult7Type {
+	return []GeneratePreviewResponseDtoResult7Type{
+		GeneratePreviewResponseDtoResult7TypeChat,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult7Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -246,6 +274,13 @@ const (
 func (e GeneratePreviewResponseDtoResult6Type) ToPointer() *GeneratePreviewResponseDtoResult6Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult6TypeValues returns every known GeneratePreviewResponseDtoResult6Type value in schema order.
+func GeneratePreviewResponseDtoResult6TypeValues() []GeneratePreviewResponseDtoResult6Type {
+	return []GeneratePreviewResponseDtoResult6Type{
+		GeneratePreviewResponseDtoResult6TypePush,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult6Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -306,6 +341,13 @@ const (
 
 func (e GeneratePreviewResponseDtoResult5Type) ToPointer() *GeneratePreviewResponseDtoResult5Type {
 	return &e
+}
+
+// GeneratePreviewResponseDtoResult5TypeValues returns every known GeneratePreviewResponseDtoResult5Type value in schema order.
+func GeneratePreviewResponseDtoResult5TypeValues() []GeneratePreviewResponseDtoResult5Type {
+	return []GeneratePreviewResponseDtoResult5Type{
+		GeneratePreviewResponseDtoResult5TypeSms,
+	}
 }
 func (e *GeneratePreviewResponseDtoResult5Type) UnmarshalJSON(data []byte) error {
 	var v string
@@ -371,6 +413,13 @@ const (
 func (e GeneratePreviewResponseDtoResult4Type) ToPointer() *GeneratePreviewResponseDtoResult4Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult4TypeValues returns every known GeneratePreviewResponseDtoResult4Type value in schema order.
+func GeneratePreviewResponseDtoResult4TypeValues() []GeneratePreviewResponseDtoResult4Type {
+	return []GeneratePreviewResponseDtoResult4Type{
+		GeneratePreviewResponseDtoResult4TypeInApp,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult4Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -435,6 +484,13 @@ const (
 func (e GeneratePreviewResponseDtoResult3Type) ToPointer() *GeneratePreviewResponseDtoResult3Type {
 	return &e
 }
+
+// GeneratePreviewResponseDtoResult3TypeValues returns every known GeneratePreviewResponseDtoResult3Type value in schema order.
+func GeneratePreviewResponseDtoResult3TypeValues() []GeneratePreviewResponseDtoResult3Type {
+	return []GeneratePreviewResponseDtoResult3Type{
+		GeneratePreviewResponseDtoResult3TypeEmail,
+	}
+}
 func (e *GeneratePreviewResponseDtoResult3Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -495,6 +551,13 @@ const (
 
 func (e GeneratePreviewResponseDtoResultType) ToPointer() *GeneratePreviewResponseDtoResultType {
 	return &e
+}
+
+// GeneratePreviewResponseDtoResultTypeValues returns every known GeneratePreviewResponseDtoResultType value in schema order.
+func GeneratePreviewResponseDtoResultTypeValues() []GeneratePreviewResponseDtoResultType {
+	return []GeneratePreviewResponseDtoResultType{
+		GeneratePreviewResponseDtoResultTypeEmail,
+	}
 }
 func (e *GeneratePreviewResponseDtoResultType) UnmarshalJSON(data []byte) error {
 	var v string

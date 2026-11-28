@@ -19,6 +19,14 @@ const (
 func (e ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection) ToPointer() *ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection {
 	return &e
 }
+
+// ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirectionValues returns every known ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection value in schema order.
+func ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirectionValues() []ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection {
+	return []ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection{
+		ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirectionAsc,
+		ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *ChannelEndpointsControllerListChannelEndpointsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +57,18 @@ const (
 
 func (e QueryParamChannel) ToPointer() *QueryParamChannel {
 	return &e
+}
+
+// QueryParamChannelValues returns every known QueryParamChannel value in schema order.
+func QueryParamChannelValues() []QueryParamChannel {
+	return []QueryParamChannel{
+		QueryParamChannelInApp,
+		QueryParamChannelEmail,
+		QueryParamChannelSms,
+		QueryParamChannelChat,
+		QueryParamChannelPush,
+		QueryParamChannelTool,
+	}
 }
 func (e *QueryParamChannel) UnmarshalJSON(data []byte) error {
 	var v string

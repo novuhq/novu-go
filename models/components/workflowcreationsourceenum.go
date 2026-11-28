@@ -27,6 +27,23 @@ const (
 func (e WorkflowCreationSourceEnum) ToPointer() *WorkflowCreationSourceEnum {
 	return &e
 }
+
+// WorkflowCreationSourceEnumValues returns every known WorkflowCreationSourceEnum value in schema order.
+func WorkflowCreationSourceEnumValues() []WorkflowCreationSourceEnum {
+	return []WorkflowCreationSourceEnum{
+		WorkflowCreationSourceEnumTemplateStore,
+		WorkflowCreationSourceEnumEditor,
+		WorkflowCreationSourceEnumNotificationDirectory,
+		WorkflowCreationSourceEnumOnboardingDigestDemo,
+		WorkflowCreationSourceEnumOnboardingInApp,
+		WorkflowCreationSourceEnumEmptyState,
+		WorkflowCreationSourceEnumDropdown,
+		WorkflowCreationSourceEnumOnboardingGetStarted,
+		WorkflowCreationSourceEnumBridge,
+		WorkflowCreationSourceEnumDashboard,
+		WorkflowCreationSourceEnumAi,
+	}
+}
 func (e *WorkflowCreationSourceEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -16,6 +16,13 @@ const (
 func (e EnvironmentVariableResponseDtoType) ToPointer() *EnvironmentVariableResponseDtoType {
 	return &e
 }
+
+// EnvironmentVariableResponseDtoTypeValues returns every known EnvironmentVariableResponseDtoType value in schema order.
+func EnvironmentVariableResponseDtoTypeValues() []EnvironmentVariableResponseDtoType {
+	return []EnvironmentVariableResponseDtoType{
+		EnvironmentVariableResponseDtoTypeString,
+	}
+}
 func (e *EnvironmentVariableResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -17,6 +17,14 @@ const (
 func (e DomainStatus) ToPointer() *DomainStatus {
 	return &e
 }
+
+// DomainStatusValues returns every known DomainStatus value in schema order.
+func DomainStatusValues() []DomainStatus {
+	return []DomainStatus{
+		DomainStatusPending,
+		DomainStatusVerified,
+	}
+}
 func (e *DomainStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -42,6 +50,14 @@ const (
 
 func (e TestDomainRouteResponseDtoType) ToPointer() *TestDomainRouteResponseDtoType {
 	return &e
+}
+
+// TestDomainRouteResponseDtoTypeValues returns every known TestDomainRouteResponseDtoType value in schema order.
+func TestDomainRouteResponseDtoTypeValues() []TestDomainRouteResponseDtoType {
+	return []TestDomainRouteResponseDtoType{
+		TestDomainRouteResponseDtoTypeAgent,
+		TestDomainRouteResponseDtoTypeWebhook,
+	}
 }
 func (e *TestDomainRouteResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string

@@ -124,6 +124,13 @@ const (
 func (e CreateSlackUserEndpointDtoType) ToPointer() *CreateSlackUserEndpointDtoType {
 	return &e
 }
+
+// CreateSlackUserEndpointDtoTypeValues returns every known CreateSlackUserEndpointDtoType value in schema order.
+func CreateSlackUserEndpointDtoTypeValues() []CreateSlackUserEndpointDtoType {
+	return []CreateSlackUserEndpointDtoType{
+		CreateSlackUserEndpointDtoTypeSlackUser,
+	}
+}
 func (e *CreateSlackUserEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

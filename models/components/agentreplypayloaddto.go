@@ -248,6 +248,13 @@ const (
 func (e Typing1) ToPointer() *Typing1 {
 	return &e
 }
+
+// Typing1Values returns every known Typing1 value in schema order.
+func Typing1Values() []Typing1 {
+	return []Typing1{
+		Typing1Stop,
+	}
+}
 func (e *Typing1) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

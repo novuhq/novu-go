@@ -18,6 +18,14 @@ const (
 func (e LimitSource) ToPointer() *LimitSource {
 	return &e
 }
+
+// LimitSourceValues returns every known LimitSource value in schema order.
+func LimitSourceValues() []LimitSource {
+	return []LimitSource{
+		LimitSourcePlan,
+		LimitSourceSystem,
+	}
+}
 func (e *LimitSource) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

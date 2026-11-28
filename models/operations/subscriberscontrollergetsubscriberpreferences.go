@@ -20,6 +20,15 @@ const (
 func (e Criticality) ToPointer() *Criticality {
 	return &e
 }
+
+// CriticalityValues returns every known Criticality value in schema order.
+func CriticalityValues() []Criticality {
+	return []Criticality{
+		CriticalityCritical,
+		CriticalityNonCritical,
+		CriticalityAll,
+	}
+}
 func (e *Criticality) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

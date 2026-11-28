@@ -22,6 +22,19 @@ const (
 func (e ReasonCode) ToPointer() *ReasonCode {
 	return &e
 }
+
+// ReasonCodeValues returns every known ReasonCode value in schema order.
+func ReasonCodeValues() []ReasonCode {
+	return []ReasonCode{
+		ReasonCodeDisabled,
+		ReasonCodeDiscoveryNotConfigured,
+		ReasonCodeUnsupportedProvider,
+		ReasonCodeIncompleteConfiguration,
+		ReasonCodeProviderSettingsUnavailable,
+		ReasonCodeUntrustedProviderFlow,
+		ReasonCodeTemplateNotOnboarded,
+	}
+}
 func (e *ReasonCode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

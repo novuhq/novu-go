@@ -22,6 +22,18 @@ const (
 func (e IntegrationResponseDtoChannel) ToPointer() *IntegrationResponseDtoChannel {
 	return &e
 }
+
+// IntegrationResponseDtoChannelValues returns every known IntegrationResponseDtoChannel value in schema order.
+func IntegrationResponseDtoChannelValues() []IntegrationResponseDtoChannel {
+	return []IntegrationResponseDtoChannel{
+		IntegrationResponseDtoChannelInApp,
+		IntegrationResponseDtoChannelEmail,
+		IntegrationResponseDtoChannelSms,
+		IntegrationResponseDtoChannelChat,
+		IntegrationResponseDtoChannelPush,
+		IntegrationResponseDtoChannelTool,
+	}
+}
 func (e *IntegrationResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -56,6 +68,14 @@ const (
 
 func (e IntegrationResponseDtoKind) ToPointer() *IntegrationResponseDtoKind {
 	return &e
+}
+
+// IntegrationResponseDtoKindValues returns every known IntegrationResponseDtoKind value in schema order.
+func IntegrationResponseDtoKindValues() []IntegrationResponseDtoKind {
+	return []IntegrationResponseDtoKind{
+		IntegrationResponseDtoKindDelivery,
+		IntegrationResponseDtoKindAgent,
+	}
 }
 func (e *IntegrationResponseDtoKind) UnmarshalJSON(data []byte) error {
 	var v string

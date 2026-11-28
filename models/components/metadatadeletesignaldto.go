@@ -17,6 +17,13 @@ const (
 func (e MetadataDeleteSignalDtoType) ToPointer() *MetadataDeleteSignalDtoType {
 	return &e
 }
+
+// MetadataDeleteSignalDtoTypeValues returns every known MetadataDeleteSignalDtoType value in schema order.
+func MetadataDeleteSignalDtoTypeValues() []MetadataDeleteSignalDtoType {
+	return []MetadataDeleteSignalDtoType{
+		MetadataDeleteSignalDtoTypeMetadata,
+	}
+}
 func (e *MetadataDeleteSignalDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -39,6 +46,13 @@ const (
 
 func (e MetadataDeleteSignalDtoAction) ToPointer() *MetadataDeleteSignalDtoAction {
 	return &e
+}
+
+// MetadataDeleteSignalDtoActionValues returns every known MetadataDeleteSignalDtoAction value in schema order.
+func MetadataDeleteSignalDtoActionValues() []MetadataDeleteSignalDtoAction {
+	return []MetadataDeleteSignalDtoAction{
+		MetadataDeleteSignalDtoActionDelete,
+	}
 }
 func (e *MetadataDeleteSignalDtoAction) UnmarshalJSON(data []byte) error {
 	var v string

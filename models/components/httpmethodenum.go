@@ -21,6 +21,17 @@ const (
 func (e HTTPMethodEnum) ToPointer() *HTTPMethodEnum {
 	return &e
 }
+
+// HTTPMethodEnumValues returns every known HTTPMethodEnum value in schema order.
+func HTTPMethodEnumValues() []HTTPMethodEnum {
+	return []HTTPMethodEnum{
+		HTTPMethodEnumGet,
+		HTTPMethodEnumPost,
+		HTTPMethodEnumPut,
+		HTTPMethodEnumDelete,
+		HTTPMethodEnumPatch,
+	}
+}
 func (e *HTTPMethodEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

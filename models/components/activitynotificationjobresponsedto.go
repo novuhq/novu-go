@@ -28,6 +28,24 @@ const (
 func (e ActivityNotificationJobResponseDtoType) ToPointer() *ActivityNotificationJobResponseDtoType {
 	return &e
 }
+
+// ActivityNotificationJobResponseDtoTypeValues returns every known ActivityNotificationJobResponseDtoType value in schema order.
+func ActivityNotificationJobResponseDtoTypeValues() []ActivityNotificationJobResponseDtoType {
+	return []ActivityNotificationJobResponseDtoType{
+		ActivityNotificationJobResponseDtoTypeInApp,
+		ActivityNotificationJobResponseDtoTypeEmail,
+		ActivityNotificationJobResponseDtoTypeSms,
+		ActivityNotificationJobResponseDtoTypeChat,
+		ActivityNotificationJobResponseDtoTypePush,
+		ActivityNotificationJobResponseDtoTypeTool,
+		ActivityNotificationJobResponseDtoTypeDigest,
+		ActivityNotificationJobResponseDtoTypeTrigger,
+		ActivityNotificationJobResponseDtoTypeDelay,
+		ActivityNotificationJobResponseDtoTypeThrottle,
+		ActivityNotificationJobResponseDtoTypeCustom,
+		ActivityNotificationJobResponseDtoTypeHTTPRequest,
+	}
+}
 func (e *ActivityNotificationJobResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

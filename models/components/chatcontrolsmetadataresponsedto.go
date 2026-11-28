@@ -19,6 +19,14 @@ const (
 func (e ChatControlsMetadataResponseDtoEditorType) ToPointer() *ChatControlsMetadataResponseDtoEditorType {
 	return &e
 }
+
+// ChatControlsMetadataResponseDtoEditorTypeValues returns every known ChatControlsMetadataResponseDtoEditorType value in schema order.
+func ChatControlsMetadataResponseDtoEditorTypeValues() []ChatControlsMetadataResponseDtoEditorType {
+	return []ChatControlsMetadataResponseDtoEditorType{
+		ChatControlsMetadataResponseDtoEditorTypeBlock,
+		ChatControlsMetadataResponseDtoEditorTypeText,
+	}
+}
 func (e *ChatControlsMetadataResponseDtoEditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -19,6 +19,14 @@ const (
 func (e AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection) ToPointer() *AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection {
 	return &e
 }
+
+// AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirectionValues returns every known AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection value in schema order.
+func AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirectionValues() []AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection {
+	return []AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection{
+		AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirectionAsc,
+		AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *AgentIntegrationsControllerListAgentIntegrationsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

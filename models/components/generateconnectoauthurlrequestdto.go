@@ -125,6 +125,14 @@ const (
 func (e GenerateConnectOauthURLRequestDtoConnectionMode) ToPointer() *GenerateConnectOauthURLRequestDtoConnectionMode {
 	return &e
 }
+
+// GenerateConnectOauthURLRequestDtoConnectionModeValues returns every known GenerateConnectOauthURLRequestDtoConnectionMode value in schema order.
+func GenerateConnectOauthURLRequestDtoConnectionModeValues() []GenerateConnectOauthURLRequestDtoConnectionMode {
+	return []GenerateConnectOauthURLRequestDtoConnectionMode{
+		GenerateConnectOauthURLRequestDtoConnectionModeSubscriber,
+		GenerateConnectOauthURLRequestDtoConnectionModeShared,
+	}
+}
 func (e *GenerateConnectOauthURLRequestDtoConnectionMode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -151,7 +159,7 @@ type GenerateConnectOauthURLRequestDto struct {
 	Context              map[string]GenerateConnectOauthURLRequestDtoContext `json:"context,omitempty"`
 	// HMAC-SHA256 of the canonicalized `context`, signed with the tenant environment secret key (the same "Inbox with context" signing scheme). Required when the integration has HMAC validation enabled and the session did not already HMAC-verify the context. Establishes that the context/tenant binding was minted by an authenticated backend rather than forged in the browser.
 	ContextHash *string `json:"contextHash,omitempty"`
-	// **Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions.
+	// **Slack only**: OAuth scopes to request during authorization. If not specified, default scopes will be used: chat:write, chat:write.public, channels:read, groups:read, users:read, users:read.email, files:write. **Webex**: OAuth scopes to request during authorization. Defaults to: spark:messages_write, spark:rooms_read, spark:people_read, spark:memberships_read, spark:kms. **MS Teams**: ignored — uses admin consent with pre-configured Azure AD permissions.
 	Scope []string `json:"scope,omitempty"`
 	// Connection mode that determines how the channel connection is scoped. "subscriber" (default) associates the connection with a specific subscriber. "shared" associates the connection with a context instead of a subscriber.
 	ConnectionMode *GenerateConnectOauthURLRequestDtoConnectionMode `json:"connectionMode,omitempty"`

@@ -17,6 +17,13 @@ const (
 func (e MetadataClearSignalDtoType) ToPointer() *MetadataClearSignalDtoType {
 	return &e
 }
+
+// MetadataClearSignalDtoTypeValues returns every known MetadataClearSignalDtoType value in schema order.
+func MetadataClearSignalDtoTypeValues() []MetadataClearSignalDtoType {
+	return []MetadataClearSignalDtoType{
+		MetadataClearSignalDtoTypeMetadata,
+	}
+}
 func (e *MetadataClearSignalDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -39,6 +46,13 @@ const (
 
 func (e MetadataClearSignalDtoAction) ToPointer() *MetadataClearSignalDtoAction {
 	return &e
+}
+
+// MetadataClearSignalDtoActionValues returns every known MetadataClearSignalDtoAction value in schema order.
+func MetadataClearSignalDtoActionValues() []MetadataClearSignalDtoAction {
+	return []MetadataClearSignalDtoAction{
+		MetadataClearSignalDtoActionClear,
+	}
 }
 func (e *MetadataClearSignalDtoAction) UnmarshalJSON(data []byte) error {
 	var v string

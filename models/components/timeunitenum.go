@@ -22,6 +22,18 @@ const (
 func (e TimeUnitEnum) ToPointer() *TimeUnitEnum {
 	return &e
 }
+
+// TimeUnitEnumValues returns every known TimeUnitEnum value in schema order.
+func TimeUnitEnumValues() []TimeUnitEnum {
+	return []TimeUnitEnum{
+		TimeUnitEnumSeconds,
+		TimeUnitEnumMinutes,
+		TimeUnitEnumHours,
+		TimeUnitEnumDays,
+		TimeUnitEnumWeeks,
+		TimeUnitEnumMonths,
+	}
+}
 func (e *TimeUnitEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

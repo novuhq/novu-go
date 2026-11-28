@@ -18,6 +18,13 @@ const (
 func (e TriggerSignalDtoType) ToPointer() *TriggerSignalDtoType {
 	return &e
 }
+
+// TriggerSignalDtoTypeValues returns every known TriggerSignalDtoType value in schema order.
+func TriggerSignalDtoTypeValues() []TriggerSignalDtoType {
+	return []TriggerSignalDtoType{
+		TriggerSignalDtoTypeTrigger,
+	}
+}
 func (e *TriggerSignalDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

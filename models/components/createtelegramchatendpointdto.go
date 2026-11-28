@@ -124,6 +124,13 @@ const (
 func (e CreateTelegramChatEndpointDtoType) ToPointer() *CreateTelegramChatEndpointDtoType {
 	return &e
 }
+
+// CreateTelegramChatEndpointDtoTypeValues returns every known CreateTelegramChatEndpointDtoType value in schema order.
+func CreateTelegramChatEndpointDtoTypeValues() []CreateTelegramChatEndpointDtoType {
+	return []CreateTelegramChatEndpointDtoType{
+		CreateTelegramChatEndpointDtoTypeTelegramChat,
+	}
+}
 func (e *CreateTelegramChatEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

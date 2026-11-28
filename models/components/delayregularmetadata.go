@@ -22,6 +22,18 @@ const (
 func (e DelayRegularMetadataUnit) ToPointer() *DelayRegularMetadataUnit {
 	return &e
 }
+
+// DelayRegularMetadataUnitValues returns every known DelayRegularMetadataUnit value in schema order.
+func DelayRegularMetadataUnitValues() []DelayRegularMetadataUnit {
+	return []DelayRegularMetadataUnit{
+		DelayRegularMetadataUnitSeconds,
+		DelayRegularMetadataUnitMinutes,
+		DelayRegularMetadataUnitHours,
+		DelayRegularMetadataUnitDays,
+		DelayRegularMetadataUnitWeeks,
+		DelayRegularMetadataUnitMonths,
+	}
+}
 func (e *DelayRegularMetadataUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -54,6 +66,13 @@ const (
 
 func (e DelayRegularMetadataType) ToPointer() *DelayRegularMetadataType {
 	return &e
+}
+
+// DelayRegularMetadataTypeValues returns every known DelayRegularMetadataType value in schema order.
+func DelayRegularMetadataTypeValues() []DelayRegularMetadataType {
+	return []DelayRegularMetadataType{
+		DelayRegularMetadataTypeRegular,
+	}
 }
 func (e *DelayRegularMetadataType) UnmarshalJSON(data []byte) error {
 	var v string

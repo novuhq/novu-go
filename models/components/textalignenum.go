@@ -19,6 +19,15 @@ const (
 func (e TextAlignEnum) ToPointer() *TextAlignEnum {
 	return &e
 }
+
+// TextAlignEnumValues returns every known TextAlignEnum value in schema order.
+func TextAlignEnumValues() []TextAlignEnum {
+	return []TextAlignEnum{
+		TextAlignEnumCenter,
+		TextAlignEnumLeft,
+		TextAlignEnumRight,
+	}
+}
 func (e *TextAlignEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

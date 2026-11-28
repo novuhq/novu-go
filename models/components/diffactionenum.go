@@ -21,6 +21,17 @@ const (
 func (e DiffActionEnum) ToPointer() *DiffActionEnum {
 	return &e
 }
+
+// DiffActionEnumValues returns every known DiffActionEnum value in schema order.
+func DiffActionEnumValues() []DiffActionEnum {
+	return []DiffActionEnum{
+		DiffActionEnumAdded,
+		DiffActionEnumModified,
+		DiffActionEnumDeleted,
+		DiffActionEnumUnchanged,
+		DiffActionEnumMoved,
+	}
+}
 func (e *DiffActionEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

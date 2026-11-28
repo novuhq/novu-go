@@ -17,6 +17,9 @@ import (
 )
 
 type Activity struct {
+	Requests     *Requests
+	WorkflowRuns *WorkflowRuns
+
 	rootSDK          *Novu
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -27,6 +30,8 @@ func newActivity(rootSDK *Novu, sdkConfig config.SDKConfiguration, hooks *hooks.
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
+		Requests:         newRequests(rootSDK, sdkConfig, hooks),
+		WorkflowRuns:     newWorkflowRuns(rootSDK, sdkConfig, hooks),
 	}
 }
 

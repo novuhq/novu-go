@@ -21,6 +21,15 @@ const (
 func (e NotificationFeedItemDtoStatus) ToPointer() *NotificationFeedItemDtoStatus {
 	return &e
 }
+
+// NotificationFeedItemDtoStatusValues returns every known NotificationFeedItemDtoStatus value in schema order.
+func NotificationFeedItemDtoStatusValues() []NotificationFeedItemDtoStatus {
+	return []NotificationFeedItemDtoStatus{
+		NotificationFeedItemDtoStatusSent,
+		NotificationFeedItemDtoStatusError,
+		NotificationFeedItemDtoStatusWarning,
+	}
+}
 func (e *NotificationFeedItemDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

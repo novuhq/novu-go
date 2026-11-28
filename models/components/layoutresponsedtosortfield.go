@@ -18,6 +18,15 @@ const (
 func (e LayoutResponseDtoSortField) ToPointer() *LayoutResponseDtoSortField {
 	return &e
 }
+
+// LayoutResponseDtoSortFieldValues returns every known LayoutResponseDtoSortField value in schema order.
+func LayoutResponseDtoSortFieldValues() []LayoutResponseDtoSortField {
+	return []LayoutResponseDtoSortField{
+		LayoutResponseDtoSortFieldCreatedAt,
+		LayoutResponseDtoSortFieldUpdatedAt,
+		LayoutResponseDtoSortFieldName,
+	}
+}
 func (e *LayoutResponseDtoSortField) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

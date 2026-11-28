@@ -19,6 +19,15 @@ const (
 func (e DigestTypeEnum) ToPointer() *DigestTypeEnum {
 	return &e
 }
+
+// DigestTypeEnumValues returns every known DigestTypeEnum value in schema order.
+func DigestTypeEnumValues() []DigestTypeEnum {
+	return []DigestTypeEnum{
+		DigestTypeEnumRegular,
+		DigestTypeEnumBackoff,
+		DigestTypeEnumTimed,
+	}
+}
 func (e *DigestTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

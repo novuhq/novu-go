@@ -19,6 +19,14 @@ const (
 func (e EmailStepResponseDtoEditorType) ToPointer() *EmailStepResponseDtoEditorType {
 	return &e
 }
+
+// EmailStepResponseDtoEditorTypeValues returns every known EmailStepResponseDtoEditorType value in schema order.
+func EmailStepResponseDtoEditorTypeValues() []EmailStepResponseDtoEditorType {
+	return []EmailStepResponseDtoEditorType{
+		EmailStepResponseDtoEditorTypeBlock,
+		EmailStepResponseDtoEditorTypeHTML,
+	}
+}
 func (e *EmailStepResponseDtoEditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

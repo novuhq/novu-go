@@ -17,6 +17,14 @@ const (
 func (e DirectionEnum) ToPointer() *DirectionEnum {
 	return &e
 }
+
+// DirectionEnumValues returns every known DirectionEnum value in schema order.
+func DirectionEnumValues() []DirectionEnum {
+	return []DirectionEnum{
+		DirectionEnumAsc,
+		DirectionEnumDesc,
+	}
+}
 func (e *DirectionEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

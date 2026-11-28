@@ -20,6 +20,16 @@ const (
 func (e DependencyReasonEnum) ToPointer() *DependencyReasonEnum {
 	return &e
 }
+
+// DependencyReasonEnumValues returns every known DependencyReasonEnum value in schema order.
+func DependencyReasonEnumValues() []DependencyReasonEnum {
+	return []DependencyReasonEnum{
+		DependencyReasonEnumLayoutRequiredForWorkflow,
+		DependencyReasonEnumLayoutExistsInTarget,
+		DependencyReasonEnumAgentRequiredForWorkflow,
+		DependencyReasonEnumAgentExistsInTarget,
+	}
+}
 func (e *DependencyReasonEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

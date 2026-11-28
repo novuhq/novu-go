@@ -23,6 +23,18 @@ const (
 func (e LookBackWindowDtoUnit) ToPointer() *LookBackWindowDtoUnit {
 	return &e
 }
+
+// LookBackWindowDtoUnitValues returns every known LookBackWindowDtoUnit value in schema order.
+func LookBackWindowDtoUnitValues() []LookBackWindowDtoUnit {
+	return []LookBackWindowDtoUnit{
+		LookBackWindowDtoUnitSeconds,
+		LookBackWindowDtoUnitMinutes,
+		LookBackWindowDtoUnitHours,
+		LookBackWindowDtoUnitDays,
+		LookBackWindowDtoUnitWeeks,
+		LookBackWindowDtoUnitMonths,
+	}
+}
 func (e *LookBackWindowDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

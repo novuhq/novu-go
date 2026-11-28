@@ -17,6 +17,13 @@ const (
 func (e SubscriberTokenScopeEnum) ToPointer() *SubscriberTokenScopeEnum {
 	return &e
 }
+
+// SubscriberTokenScopeEnumValues returns every known SubscriberTokenScopeEnum value in schema order.
+func SubscriberTokenScopeEnumValues() []SubscriberTokenScopeEnum {
+	return []SubscriberTokenScopeEnum{
+		SubscriberTokenScopeEnumChannelsShared,
+	}
+}
 func (e *SubscriberTokenScopeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

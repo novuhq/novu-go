@@ -22,6 +22,18 @@ const (
 func (e DigestMetadataDtoUnit) ToPointer() *DigestMetadataDtoUnit {
 	return &e
 }
+
+// DigestMetadataDtoUnitValues returns every known DigestMetadataDtoUnit value in schema order.
+func DigestMetadataDtoUnitValues() []DigestMetadataDtoUnit {
+	return []DigestMetadataDtoUnit{
+		DigestMetadataDtoUnitSeconds,
+		DigestMetadataDtoUnitMinutes,
+		DigestMetadataDtoUnitHours,
+		DigestMetadataDtoUnitDays,
+		DigestMetadataDtoUnitWeeks,
+		DigestMetadataDtoUnitMonths,
+	}
+}
 func (e *DigestMetadataDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

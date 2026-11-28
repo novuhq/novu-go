@@ -22,6 +22,18 @@ const (
 func (e OrdinalEnum) ToPointer() *OrdinalEnum {
 	return &e
 }
+
+// OrdinalEnumValues returns every known OrdinalEnum value in schema order.
+func OrdinalEnumValues() []OrdinalEnum {
+	return []OrdinalEnum{
+		OrdinalEnumOne,
+		OrdinalEnumTwo,
+		OrdinalEnumThree,
+		OrdinalEnumFour,
+		OrdinalEnumFive,
+		OrdinalEnumLast,
+	}
+}
 func (e *OrdinalEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

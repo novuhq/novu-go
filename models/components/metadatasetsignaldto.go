@@ -18,6 +18,13 @@ const (
 func (e MetadataSetSignalDtoType) ToPointer() *MetadataSetSignalDtoType {
 	return &e
 }
+
+// MetadataSetSignalDtoTypeValues returns every known MetadataSetSignalDtoType value in schema order.
+func MetadataSetSignalDtoTypeValues() []MetadataSetSignalDtoType {
+	return []MetadataSetSignalDtoType{
+		MetadataSetSignalDtoTypeMetadata,
+	}
+}
 func (e *MetadataSetSignalDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -41,6 +48,13 @@ const (
 
 func (e Action) ToPointer() *Action {
 	return &e
+}
+
+// ActionValues returns every known Action value in schema order.
+func ActionValues() []Action {
+	return []Action{
+		ActionSet,
+	}
 }
 func (e *Action) UnmarshalJSON(data []byte) error {
 	var v string

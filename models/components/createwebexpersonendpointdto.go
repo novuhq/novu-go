@@ -124,6 +124,13 @@ const (
 func (e CreateWebexPersonEndpointDtoType) ToPointer() *CreateWebexPersonEndpointDtoType {
 	return &e
 }
+
+// CreateWebexPersonEndpointDtoTypeValues returns every known CreateWebexPersonEndpointDtoType value in schema order.
+func CreateWebexPersonEndpointDtoTypeValues() []CreateWebexPersonEndpointDtoType {
+	return []CreateWebexPersonEndpointDtoType{
+		CreateWebexPersonEndpointDtoTypeWebexPerson,
+	}
+}
 func (e *CreateWebexPersonEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

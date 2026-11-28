@@ -19,6 +19,15 @@ const (
 func (e PreferenceOverrideSourceEnum) ToPointer() *PreferenceOverrideSourceEnum {
 	return &e
 }
+
+// PreferenceOverrideSourceEnumValues returns every known PreferenceOverrideSourceEnum value in schema order.
+func PreferenceOverrideSourceEnumValues() []PreferenceOverrideSourceEnum {
+	return []PreferenceOverrideSourceEnum{
+		PreferenceOverrideSourceEnumSubscriber,
+		PreferenceOverrideSourceEnumTemplate,
+		PreferenceOverrideSourceEnumWorkflowOverride,
+	}
+}
 func (e *PreferenceOverrideSourceEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

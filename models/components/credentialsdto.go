@@ -19,6 +19,15 @@ const (
 func (e HmacSecretKeyEncoding) ToPointer() *HmacSecretKeyEncoding {
 	return &e
 }
+
+// HmacSecretKeyEncodingValues returns every known HmacSecretKeyEncoding value in schema order.
+func HmacSecretKeyEncodingValues() []HmacSecretKeyEncoding {
+	return []HmacSecretKeyEncoding{
+		HmacSecretKeyEncodingText,
+		HmacSecretKeyEncodingBase64,
+		HmacSecretKeyEncodingHex,
+	}
+}
 func (e *HmacSecretKeyEncoding) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -46,6 +55,13 @@ const (
 
 func (e AuthMethod) ToPointer() *AuthMethod {
 	return &e
+}
+
+// AuthMethodValues returns every known AuthMethod value in schema order.
+func AuthMethodValues() []AuthMethod {
+	return []AuthMethod{
+		AuthMethodAPIKey,
+	}
 }
 func (e *AuthMethod) UnmarshalJSON(data []byte) error {
 	var v string

@@ -17,6 +17,14 @@ const (
 func (e StepFilterDtoValue) ToPointer() *StepFilterDtoValue {
 	return &e
 }
+
+// StepFilterDtoValueValues returns every known StepFilterDtoValue value in schema order.
+func StepFilterDtoValueValues() []StepFilterDtoValue {
+	return []StepFilterDtoValue{
+		StepFilterDtoValueAnd,
+		StepFilterDtoValueOr,
+	}
+}
 func (e *StepFilterDtoValue) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

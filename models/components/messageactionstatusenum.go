@@ -18,6 +18,14 @@ const (
 func (e MessageActionStatusEnum) ToPointer() *MessageActionStatusEnum {
 	return &e
 }
+
+// MessageActionStatusEnumValues returns every known MessageActionStatusEnum value in schema order.
+func MessageActionStatusEnumValues() []MessageActionStatusEnum {
+	return []MessageActionStatusEnum{
+		MessageActionStatusEnumPending,
+		MessageActionStatusEnumDone,
+	}
+}
 func (e *MessageActionStatusEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -18,6 +18,13 @@ const (
 func (e ResultType) ToPointer() *ResultType {
 	return &e
 }
+
+// ResultTypeValues returns every known ResultType value in schema order.
+func ResultTypeValues() []ResultType {
+	return []ResultType{
+		ResultTypeEmail,
+	}
+}
 func (e *ResultType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

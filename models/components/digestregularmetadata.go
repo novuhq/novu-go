@@ -22,6 +22,18 @@ const (
 func (e DigestRegularMetadataUnit) ToPointer() *DigestRegularMetadataUnit {
 	return &e
 }
+
+// DigestRegularMetadataUnitValues returns every known DigestRegularMetadataUnit value in schema order.
+func DigestRegularMetadataUnitValues() []DigestRegularMetadataUnit {
+	return []DigestRegularMetadataUnit{
+		DigestRegularMetadataUnitSeconds,
+		DigestRegularMetadataUnitMinutes,
+		DigestRegularMetadataUnitHours,
+		DigestRegularMetadataUnitDays,
+		DigestRegularMetadataUnitWeeks,
+		DigestRegularMetadataUnitMonths,
+	}
+}
 func (e *DigestRegularMetadataUnit) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -56,6 +68,14 @@ const (
 func (e DigestRegularMetadataType) ToPointer() *DigestRegularMetadataType {
 	return &e
 }
+
+// DigestRegularMetadataTypeValues returns every known DigestRegularMetadataType value in schema order.
+func DigestRegularMetadataTypeValues() []DigestRegularMetadataType {
+	return []DigestRegularMetadataType{
+		DigestRegularMetadataTypeRegular,
+		DigestRegularMetadataTypeBackoff,
+	}
+}
 func (e *DigestRegularMetadataType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -85,6 +105,18 @@ const (
 
 func (e BackoffUnit) ToPointer() *BackoffUnit {
 	return &e
+}
+
+// BackoffUnitValues returns every known BackoffUnit value in schema order.
+func BackoffUnitValues() []BackoffUnit {
+	return []BackoffUnit{
+		BackoffUnitSeconds,
+		BackoffUnitMinutes,
+		BackoffUnitHours,
+		BackoffUnitDays,
+		BackoffUnitWeeks,
+		BackoffUnitMonths,
+	}
 }
 func (e *BackoffUnit) UnmarshalJSON(data []byte) error {
 	var v string

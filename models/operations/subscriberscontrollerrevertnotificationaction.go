@@ -19,6 +19,14 @@ const (
 func (e PathParamActionType) ToPointer() *PathParamActionType {
 	return &e
 }
+
+// PathParamActionTypeValues returns every known PathParamActionType value in schema order.
+func PathParamActionTypeValues() []PathParamActionType {
+	return []PathParamActionType{
+		PathParamActionTypePrimary,
+		PathParamActionTypeSecondary,
+	}
+}
 func (e *PathParamActionType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

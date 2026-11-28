@@ -19,6 +19,14 @@ const (
 func (e DigestStepResponseDtoType) ToPointer() *DigestStepResponseDtoType {
 	return &e
 }
+
+// DigestStepResponseDtoTypeValues returns every known DigestStepResponseDtoType value in schema order.
+func DigestStepResponseDtoTypeValues() []DigestStepResponseDtoType {
+	return []DigestStepResponseDtoType{
+		DigestStepResponseDtoTypeRegular,
+		DigestStepResponseDtoTypeTimed,
+	}
+}
 func (e *DigestStepResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +57,18 @@ const (
 
 func (e DigestStepResponseDtoUnit) ToPointer() *DigestStepResponseDtoUnit {
 	return &e
+}
+
+// DigestStepResponseDtoUnitValues returns every known DigestStepResponseDtoUnit value in schema order.
+func DigestStepResponseDtoUnitValues() []DigestStepResponseDtoUnit {
+	return []DigestStepResponseDtoUnit{
+		DigestStepResponseDtoUnitSeconds,
+		DigestStepResponseDtoUnitMinutes,
+		DigestStepResponseDtoUnitHours,
+		DigestStepResponseDtoUnitDays,
+		DigestStepResponseDtoUnitWeeks,
+		DigestStepResponseDtoUnitMonths,
+	}
 }
 func (e *DigestStepResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

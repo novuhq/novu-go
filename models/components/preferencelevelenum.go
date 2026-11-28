@@ -18,6 +18,14 @@ const (
 func (e PreferenceLevelEnum) ToPointer() *PreferenceLevelEnum {
 	return &e
 }
+
+// PreferenceLevelEnumValues returns every known PreferenceLevelEnum value in schema order.
+func PreferenceLevelEnumValues() []PreferenceLevelEnum {
+	return []PreferenceLevelEnum{
+		PreferenceLevelEnumGlobal,
+		PreferenceLevelEnumTemplate,
+	}
+}
 func (e *PreferenceLevelEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

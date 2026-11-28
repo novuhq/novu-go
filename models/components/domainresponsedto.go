@@ -17,6 +17,14 @@ const (
 func (e DomainResponseDtoStatus) ToPointer() *DomainResponseDtoStatus {
 	return &e
 }
+
+// DomainResponseDtoStatusValues returns every known DomainResponseDtoStatus value in schema order.
+func DomainResponseDtoStatusValues() []DomainResponseDtoStatus {
+	return []DomainResponseDtoStatus{
+		DomainResponseDtoStatusPending,
+		DomainResponseDtoStatusVerified,
+	}
+}
 func (e *DomainResponseDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

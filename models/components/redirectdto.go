@@ -22,6 +22,17 @@ const (
 func (e Target) ToPointer() *Target {
 	return &e
 }
+
+// TargetValues returns every known Target value in schema order.
+func TargetValues() []Target {
+	return []Target{
+		TargetSelf,
+		TargetBlank,
+		TargetParent,
+		TargetTop,
+		TargetUnfencedTop,
+	}
+}
 func (e *Target) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

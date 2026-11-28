@@ -18,6 +18,14 @@ const (
 func (e ResourceType) ToPointer() *ResourceType {
 	return &e
 }
+
+// ResourceTypeValues returns every known ResourceType value in schema order.
+func ResourceTypeValues() []ResourceType {
+	return []ResourceType{
+		ResourceTypeWorkflow,
+		ResourceTypeLayout,
+	}
+}
 func (e *ResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

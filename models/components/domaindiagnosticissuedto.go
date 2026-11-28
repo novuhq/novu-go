@@ -20,6 +20,17 @@ const (
 func (e DomainDiagnosticIssueDtoCode) ToPointer() *DomainDiagnosticIssueDtoCode {
 	return &e
 }
+
+// DomainDiagnosticIssueDtoCodeValues returns every known DomainDiagnosticIssueDtoCode value in schema order.
+func DomainDiagnosticIssueDtoCodeValues() []DomainDiagnosticIssueDtoCode {
+	return []DomainDiagnosticIssueDtoCode{
+		DomainDiagnosticIssueDtoCodeMxMissing,
+		DomainDiagnosticIssueDtoCodeMxWrongTarget,
+		DomainDiagnosticIssueDtoCodeMxLowPriority,
+		DomainDiagnosticIssueDtoCodeApexCnameCollision,
+		DomainDiagnosticIssueDtoCodeDnsblListed,
+	}
+}
 func (e *DomainDiagnosticIssueDtoCode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -42,17 +53,25 @@ func (e *DomainDiagnosticIssueDtoCode) UnmarshalJSON(data []byte) error {
 	}
 }
 
-type Severity string
+type DomainDiagnosticIssueDtoSeverity string
 
 const (
-	SeverityWarn  Severity = "warn"
-	SeverityError Severity = "error"
+	DomainDiagnosticIssueDtoSeverityWarn  DomainDiagnosticIssueDtoSeverity = "warn"
+	DomainDiagnosticIssueDtoSeverityError DomainDiagnosticIssueDtoSeverity = "error"
 )
 
-func (e Severity) ToPointer() *Severity {
+func (e DomainDiagnosticIssueDtoSeverity) ToPointer() *DomainDiagnosticIssueDtoSeverity {
 	return &e
 }
-func (e *Severity) UnmarshalJSON(data []byte) error {
+
+// DomainDiagnosticIssueDtoSeverityValues returns every known DomainDiagnosticIssueDtoSeverity value in schema order.
+func DomainDiagnosticIssueDtoSeverityValues() []DomainDiagnosticIssueDtoSeverity {
+	return []DomainDiagnosticIssueDtoSeverity{
+		DomainDiagnosticIssueDtoSeverityWarn,
+		DomainDiagnosticIssueDtoSeverityError,
+	}
+}
+func (e *DomainDiagnosticIssueDtoSeverity) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -61,17 +80,17 @@ func (e *Severity) UnmarshalJSON(data []byte) error {
 	case "warn":
 		fallthrough
 	case "error":
-		*e = Severity(v)
+		*e = DomainDiagnosticIssueDtoSeverity(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for Severity: %v", v)
+		return fmt.Errorf("invalid value for DomainDiagnosticIssueDtoSeverity: %v", v)
 	}
 }
 
 type DomainDiagnosticIssueDto struct {
-	Code     DomainDiagnosticIssueDtoCode `json:"code"`
-	Severity Severity                     `json:"severity"`
-	Message  string                       `json:"message"`
+	Code     DomainDiagnosticIssueDtoCode     `json:"code"`
+	Severity DomainDiagnosticIssueDtoSeverity `json:"severity"`
+	Message  string                           `json:"message"`
 	// Plain-language remediation guidance
 	Fix string `json:"fix"`
 }
@@ -83,9 +102,9 @@ func (d *DomainDiagnosticIssueDto) GetCode() DomainDiagnosticIssueDtoCode {
 	return d.Code
 }
 
-func (d *DomainDiagnosticIssueDto) GetSeverity() Severity {
+func (d *DomainDiagnosticIssueDto) GetSeverity() DomainDiagnosticIssueDtoSeverity {
 	if d == nil {
-		return Severity("")
+		return DomainDiagnosticIssueDtoSeverity("")
 	}
 	return d.Severity
 }

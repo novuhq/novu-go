@@ -20,6 +20,15 @@ const (
 func (e Method) ToPointer() *Method {
 	return &e
 }
+
+// MethodValues returns every known Method value in schema order.
+func MethodValues() []Method {
+	return []Method{
+		MethodPost,
+		MethodPut,
+		MethodPatch,
+	}
+}
 func (e *Method) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

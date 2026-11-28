@@ -23,6 +23,20 @@ const (
 func (e BuilderFieldTypeEnum) ToPointer() *BuilderFieldTypeEnum {
 	return &e
 }
+
+// BuilderFieldTypeEnumValues returns every known BuilderFieldTypeEnum value in schema order.
+func BuilderFieldTypeEnumValues() []BuilderFieldTypeEnum {
+	return []BuilderFieldTypeEnum{
+		BuilderFieldTypeEnumBoolean,
+		BuilderFieldTypeEnumText,
+		BuilderFieldTypeEnumDate,
+		BuilderFieldTypeEnumNumber,
+		BuilderFieldTypeEnumStatement,
+		BuilderFieldTypeEnumList,
+		BuilderFieldTypeEnumMultiList,
+		BuilderFieldTypeEnumGroup,
+	}
+}
 func (e *BuilderFieldTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

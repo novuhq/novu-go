@@ -18,6 +18,14 @@ const (
 func (e EditorType) ToPointer() *EditorType {
 	return &e
 }
+
+// EditorTypeValues returns every known EditorType value in schema order.
+func EditorTypeValues() []EditorType {
+	return []EditorType{
+		EditorTypeHTML,
+		EditorTypeBlock,
+	}
+}
 func (e *EditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

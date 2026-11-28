@@ -18,6 +18,13 @@ const (
 func (e HumanSignalDtoType) ToPointer() *HumanSignalDtoType {
 	return &e
 }
+
+// HumanSignalDtoTypeValues returns every known HumanSignalDtoType value in schema order.
+func HumanSignalDtoTypeValues() []HumanSignalDtoType {
+	return []HumanSignalDtoType{
+		HumanSignalDtoTypeHuman,
+	}
+}
 func (e *HumanSignalDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -44,6 +51,16 @@ const (
 
 func (e Kind) ToPointer() *Kind {
 	return &e
+}
+
+// KindValues returns every known Kind value in schema order.
+func KindValues() []Kind {
+	return []Kind{
+		KindAsk,
+		KindApprove,
+		KindChoose,
+		KindTell,
+	}
 }
 func (e *Kind) UnmarshalJSON(data []byte) error {
 	var v string

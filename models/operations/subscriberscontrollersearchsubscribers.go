@@ -19,6 +19,14 @@ const (
 func (e QueryParamOrderDirection) ToPointer() *QueryParamOrderDirection {
 	return &e
 }
+
+// QueryParamOrderDirectionValues returns every known QueryParamOrderDirection value in schema order.
+func QueryParamOrderDirectionValues() []QueryParamOrderDirection {
+	return []QueryParamOrderDirection{
+		QueryParamOrderDirectionAsc,
+		QueryParamOrderDirectionDesc,
+	}
+}
 func (e *QueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

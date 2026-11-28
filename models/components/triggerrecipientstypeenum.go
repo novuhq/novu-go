@@ -17,6 +17,14 @@ const (
 func (e TriggerRecipientsTypeEnum) ToPointer() *TriggerRecipientsTypeEnum {
 	return &e
 }
+
+// TriggerRecipientsTypeEnumValues returns every known TriggerRecipientsTypeEnum value in schema order.
+func TriggerRecipientsTypeEnumValues() []TriggerRecipientsTypeEnum {
+	return []TriggerRecipientsTypeEnum{
+		TriggerRecipientsTypeEnumSubscriber,
+		TriggerRecipientsTypeEnumTopic,
+	}
+}
 func (e *TriggerRecipientsTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

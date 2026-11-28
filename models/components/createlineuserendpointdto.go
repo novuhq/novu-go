@@ -124,6 +124,13 @@ const (
 func (e CreateLineUserEndpointDtoType) ToPointer() *CreateLineUserEndpointDtoType {
 	return &e
 }
+
+// CreateLineUserEndpointDtoTypeValues returns every known CreateLineUserEndpointDtoType value in schema order.
+func CreateLineUserEndpointDtoTypeValues() []CreateLineUserEndpointDtoType {
+	return []CreateLineUserEndpointDtoType{
+		CreateLineUserEndpointDtoTypeLineUser,
+	}
+}
 func (e *CreateLineUserEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

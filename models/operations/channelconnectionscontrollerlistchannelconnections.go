@@ -19,6 +19,14 @@ const (
 func (e ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection) ToPointer() *ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection {
 	return &e
 }
+
+// ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirectionValues returns every known ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection value in schema order.
+func ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirectionValues() []ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection {
+	return []ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection{
+		ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirectionAsc,
+		ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *ChannelConnectionsControllerListChannelConnectionsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -45,6 +53,14 @@ const (
 
 func (e ConnectionMode) ToPointer() *ConnectionMode {
 	return &e
+}
+
+// ConnectionModeValues returns every known ConnectionMode value in schema order.
+func ConnectionModeValues() []ConnectionMode {
+	return []ConnectionMode{
+		ConnectionModeSubscriber,
+		ConnectionModeShared,
+	}
 }
 func (e *ConnectionMode) UnmarshalJSON(data []byte) error {
 	var v string
@@ -76,6 +92,18 @@ const (
 
 func (e Channel) ToPointer() *Channel {
 	return &e
+}
+
+// ChannelValues returns every known Channel value in schema order.
+func ChannelValues() []Channel {
+	return []Channel{
+		ChannelInApp,
+		ChannelEmail,
+		ChannelSms,
+		ChannelChat,
+		ChannelPush,
+		ChannelTool,
+	}
 }
 func (e *Channel) UnmarshalJSON(data []byte) error {
 	var v string

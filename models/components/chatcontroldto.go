@@ -19,6 +19,14 @@ const (
 func (e ChatControlDtoEditorType) ToPointer() *ChatControlDtoEditorType {
 	return &e
 }
+
+// ChatControlDtoEditorTypeValues returns every known ChatControlDtoEditorType value in schema order.
+func ChatControlDtoEditorTypeValues() []ChatControlDtoEditorType {
+	return []ChatControlDtoEditorType{
+		ChatControlDtoEditorTypeBlock,
+		ChatControlDtoEditorTypeText,
+	}
+}
 func (e *ChatControlDtoEditorType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

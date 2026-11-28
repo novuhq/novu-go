@@ -124,6 +124,13 @@ const (
 func (e CreatePagerDutyServiceEndpointDtoType) ToPointer() *CreatePagerDutyServiceEndpointDtoType {
 	return &e
 }
+
+// CreatePagerDutyServiceEndpointDtoTypeValues returns every known CreatePagerDutyServiceEndpointDtoType value in schema order.
+func CreatePagerDutyServiceEndpointDtoTypeValues() []CreatePagerDutyServiceEndpointDtoType {
+	return []CreatePagerDutyServiceEndpointDtoType{
+		CreatePagerDutyServiceEndpointDtoTypePagerdutyService,
+	}
+}
 func (e *CreatePagerDutyServiceEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
