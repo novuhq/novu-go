@@ -13,6 +13,8 @@ type AutoConfigureIntegrationResponseDto struct {
 	Message *string `json:"message,omitempty"`
 	// The updated configurations after auto-configuration
 	Integration *Integration `json:"integration,omitempty"`
+	// The URL the provider sends delivery events to. Set it in the provider yourself when auto-configuration fails.
+	WebhookURL *string `json:"webhookUrl,omitempty"`
 }
 
 func (a *AutoConfigureIntegrationResponseDto) GetSuccess() bool {
@@ -34,4 +36,11 @@ func (a *AutoConfigureIntegrationResponseDto) GetIntegration() *Integration {
 		return nil
 	}
 	return a.Integration
+}
+
+func (a *AutoConfigureIntegrationResponseDto) GetWebhookURL() *string {
+	if a == nil {
+		return nil
+	}
+	return a.WebhookURL
 }

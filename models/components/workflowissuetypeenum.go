@@ -20,6 +20,17 @@ const (
 func (e WorkflowIssueTypeEnum) ToPointer() *WorkflowIssueTypeEnum {
 	return &e
 }
+
+// WorkflowIssueTypeEnumValues returns every known WorkflowIssueTypeEnum value in schema order.
+func WorkflowIssueTypeEnumValues() []WorkflowIssueTypeEnum {
+	return []WorkflowIssueTypeEnum{
+		WorkflowIssueTypeEnumMissingValue,
+		WorkflowIssueTypeEnumMaxLengthAccessed,
+		WorkflowIssueTypeEnumWorkflowIDAlreadyExists,
+		WorkflowIssueTypeEnumDuplicatedValue,
+		WorkflowIssueTypeEnumLimitReached,
+	}
+}
 func (e *WorkflowIssueTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

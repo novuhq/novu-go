@@ -19,6 +19,14 @@ const (
 func (e TranslationControllerDeleteTranslationEndpointPathParamResourceType) ToPointer() *TranslationControllerDeleteTranslationEndpointPathParamResourceType {
 	return &e
 }
+
+// TranslationControllerDeleteTranslationEndpointPathParamResourceTypeValues returns every known TranslationControllerDeleteTranslationEndpointPathParamResourceType value in schema order.
+func TranslationControllerDeleteTranslationEndpointPathParamResourceTypeValues() []TranslationControllerDeleteTranslationEndpointPathParamResourceType {
+	return []TranslationControllerDeleteTranslationEndpointPathParamResourceType{
+		TranslationControllerDeleteTranslationEndpointPathParamResourceTypeWorkflow,
+		TranslationControllerDeleteTranslationEndpointPathParamResourceTypeLayout,
+	}
+}
 func (e *TranslationControllerDeleteTranslationEndpointPathParamResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

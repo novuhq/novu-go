@@ -18,6 +18,14 @@ const (
 func (e StepIssueSeverityEnum) ToPointer() *StepIssueSeverityEnum {
 	return &e
 }
+
+// StepIssueSeverityEnumValues returns every known StepIssueSeverityEnum value in schema order.
+func StepIssueSeverityEnumValues() []StepIssueSeverityEnum {
+	return []StepIssueSeverityEnum{
+		StepIssueSeverityEnumError,
+		StepIssueSeverityEnumWarning,
+	}
+}
 func (e *StepIssueSeverityEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

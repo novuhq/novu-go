@@ -420,6 +420,16 @@ func main() {
 
 * [Track](docs/sdks/activity/README.md#track) - Track provider activity and engagement events
 
+#### [Activity.Requests](docs/sdks/requests/README.md)
+
+* [List](docs/sdks/requests/README.md#list) - List activity requests
+* [Retrieve](docs/sdks/requests/README.md#retrieve) - Retrieve activity request
+
+#### [Activity.WorkflowRuns](docs/sdks/workflowruns/README.md)
+
+* [List](docs/sdks/workflowruns/README.md#list) - List workflow runs
+* [Retrieve](docs/sdks/workflowruns/README.md#retrieve) - Retrieve workflow run
+
 ### [Agents](docs/sdks/agents/README.md)
 
 * [Create](docs/sdks/agents/README.md#create) - Create an agent

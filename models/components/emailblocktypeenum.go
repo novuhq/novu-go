@@ -18,6 +18,14 @@ const (
 func (e EmailBlockTypeEnum) ToPointer() *EmailBlockTypeEnum {
 	return &e
 }
+
+// EmailBlockTypeEnumValues returns every known EmailBlockTypeEnum value in schema order.
+func EmailBlockTypeEnumValues() []EmailBlockTypeEnum {
+	return []EmailBlockTypeEnum{
+		EmailBlockTypeEnumButton,
+		EmailBlockTypeEnumText,
+	}
+}
 func (e *EmailBlockTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

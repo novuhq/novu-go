@@ -24,6 +24,20 @@ const (
 func (e ContentIssueEnum) ToPointer() *ContentIssueEnum {
 	return &e
 }
+
+// ContentIssueEnumValues returns every known ContentIssueEnum value in schema order.
+func ContentIssueEnumValues() []ContentIssueEnum {
+	return []ContentIssueEnum{
+		ContentIssueEnumIllegalVariableInControlValue,
+		ContentIssueEnumInvalidFilterArgInVariable,
+		ContentIssueEnumInvalidURL,
+		ContentIssueEnumMissingValue,
+		ContentIssueEnumTierLimitExceeded,
+		ContentIssueEnumUnsupportedProperty,
+		ContentIssueEnumChatCardLimitExceeded,
+		ContentIssueEnumChatCardInvalidButton,
+	}
+}
 func (e *ContentIssueEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

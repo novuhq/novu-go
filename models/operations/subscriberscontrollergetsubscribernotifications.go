@@ -21,6 +21,16 @@ const (
 func (e Severity) ToPointer() *Severity {
 	return &e
 }
+
+// SeverityValues returns every known Severity value in schema order.
+func SeverityValues() []Severity {
+	return []Severity{
+		SeverityHigh,
+		SeverityMedium,
+		SeverityLow,
+		SeverityNone,
+	}
+}
 func (e *Severity) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

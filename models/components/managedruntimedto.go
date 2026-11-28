@@ -18,6 +18,15 @@ const (
 func (e ProviderID) ToPointer() *ProviderID {
 	return &e
 }
+
+// ProviderIDValues returns every known ProviderID value in schema order.
+func ProviderIDValues() []ProviderID {
+	return []ProviderID{
+		ProviderIDAnthropic,
+		ProviderIDNovuAnthropic,
+		ProviderIDAnthropicAws,
+	}
+}
 func (e *ProviderID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

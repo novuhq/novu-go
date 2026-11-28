@@ -22,6 +22,18 @@ const (
 func (e DigestUnitEnum) ToPointer() *DigestUnitEnum {
 	return &e
 }
+
+// DigestUnitEnumValues returns every known DigestUnitEnum value in schema order.
+func DigestUnitEnumValues() []DigestUnitEnum {
+	return []DigestUnitEnum{
+		DigestUnitEnumSeconds,
+		DigestUnitEnumMinutes,
+		DigestUnitEnumHours,
+		DigestUnitEnumDays,
+		DigestUnitEnumWeeks,
+		DigestUnitEnumMonths,
+	}
+}
 func (e *DigestUnitEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

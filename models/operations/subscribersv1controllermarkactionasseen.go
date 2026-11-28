@@ -18,6 +18,14 @@ const (
 func (e Type) ToPointer() *Type {
 	return &e
 }
+
+// TypeValues returns every known Type value in schema order.
+func TypeValues() []Type {
+	return []Type{
+		TypePrimary,
+		TypeSecondary,
+	}
+}
 func (e *Type) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

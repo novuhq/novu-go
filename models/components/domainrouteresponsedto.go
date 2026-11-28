@@ -17,6 +17,14 @@ const (
 func (e DomainRouteResponseDtoType) ToPointer() *DomainRouteResponseDtoType {
 	return &e
 }
+
+// DomainRouteResponseDtoTypeValues returns every known DomainRouteResponseDtoType value in schema order.
+func DomainRouteResponseDtoTypeValues() []DomainRouteResponseDtoType {
+	return []DomainRouteResponseDtoType{
+		DomainRouteResponseDtoTypeAgent,
+		DomainRouteResponseDtoTypeWebhook,
+	}
+}
 func (e *DomainRouteResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

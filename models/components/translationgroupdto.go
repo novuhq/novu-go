@@ -18,6 +18,14 @@ const (
 func (e TranslationGroupDtoResourceType) ToPointer() *TranslationGroupDtoResourceType {
 	return &e
 }
+
+// TranslationGroupDtoResourceTypeValues returns every known TranslationGroupDtoResourceType value in schema order.
+func TranslationGroupDtoResourceTypeValues() []TranslationGroupDtoResourceType {
+	return []TranslationGroupDtoResourceType{
+		TranslationGroupDtoResourceTypeWorkflow,
+		TranslationGroupDtoResourceTypeLayout,
+	}
+}
 func (e *TranslationGroupDtoResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -29,6 +29,26 @@ const (
 func (e Operator) ToPointer() *Operator {
 	return &e
 }
+
+// OperatorValues returns every known Operator value in schema order.
+func OperatorValues() []Operator {
+	return []Operator{
+		OperatorLarger,
+		OperatorSmaller,
+		OperatorLargerEqual,
+		OperatorSmallerEqual,
+		OperatorEqual,
+		OperatorNotEqual,
+		OperatorAllIn,
+		OperatorAnyIn,
+		OperatorNotIn,
+		OperatorBetween,
+		OperatorNotBetween,
+		OperatorLike,
+		OperatorNotLike,
+		OperatorIn,
+	}
+}
 func (e *Operator) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -78,6 +98,14 @@ const (
 
 func (e On) ToPointer() *On {
 	return &e
+}
+
+// OnValues returns every known On value in schema order.
+func OnValues() []On {
+	return []On{
+		OnSubscriber,
+		OnPayload,
+	}
 }
 func (e *On) UnmarshalJSON(data []byte) error {
 	var v string

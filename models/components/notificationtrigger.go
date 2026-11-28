@@ -16,6 +16,13 @@ const (
 func (e NotificationTriggerType) ToPointer() *NotificationTriggerType {
 	return &e
 }
+
+// NotificationTriggerTypeValues returns every known NotificationTriggerType value in schema order.
+func NotificationTriggerTypeValues() []NotificationTriggerType {
+	return []NotificationTriggerType{
+		NotificationTriggerTypeEvent,
+	}
+}
 func (e *NotificationTriggerType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

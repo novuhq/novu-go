@@ -23,6 +23,18 @@ const (
 func (e MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) ToPointer() *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel {
 	return &e
 }
+
+// MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelValues returns every known MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel value in schema order.
+func MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelValues() []MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel {
+	return []MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel{
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelInApp,
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelEmail,
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelSms,
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelChat,
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelPush,
+		MessagesControllerDeleteMessagesByTransactionIDQueryParamChannelTool,
+	}
+}
 func (e *MessagesControllerDeleteMessagesByTransactionIDQueryParamChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

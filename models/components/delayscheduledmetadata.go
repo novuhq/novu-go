@@ -17,6 +17,13 @@ const (
 func (e DelayScheduledMetadataType) ToPointer() *DelayScheduledMetadataType {
 	return &e
 }
+
+// DelayScheduledMetadataTypeValues returns every known DelayScheduledMetadataType value in schema order.
+func DelayScheduledMetadataTypeValues() []DelayScheduledMetadataType {
+	return []DelayScheduledMetadataType{
+		DelayScheduledMetadataTypeScheduled,
+	}
+}
 func (e *DelayScheduledMetadataType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

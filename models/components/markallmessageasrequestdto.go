@@ -93,6 +93,16 @@ const (
 func (e MarkAs) ToPointer() *MarkAs {
 	return &e
 }
+
+// MarkAsValues returns every known MarkAs value in schema order.
+func MarkAsValues() []MarkAs {
+	return []MarkAs{
+		MarkAsRead,
+		MarkAsSeen,
+		MarkAsUnread,
+		MarkAsUnseen,
+	}
+}
 func (e *MarkAs) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

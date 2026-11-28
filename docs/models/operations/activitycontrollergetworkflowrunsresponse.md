@@ -1,0 +1,10 @@
+# ActivityControllerGetWorkflowRunsResponse
+
+
+## Fields
+
+| Field                                                                                           | Type                                                                                            | Required                                                                                        | Description                                                                                     |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                      | [components.HTTPMetadata](../../models/components/httpmetadata.md)                              | :heavy_check_mark:                                                                              | N/A                                                                                             |
+| `GetWorkflowRunsResponseDto`                                                                    | [*components.GetWorkflowRunsResponseDto](../../models/components/getworkflowrunsresponsedto.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |
+| `Headers`                                                                                       | map[string][]`string`                                                                           | :heavy_check_mark:                                                                              | N/A                                                                                             |

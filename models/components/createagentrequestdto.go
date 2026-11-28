@@ -18,6 +18,14 @@ const (
 func (e Runtime) ToPointer() *Runtime {
 	return &e
 }
+
+// RuntimeValues returns every known Runtime value in schema order.
+func RuntimeValues() []Runtime {
+	return []Runtime{
+		RuntimeSelfHosted,
+		RuntimeManaged,
+	}
+}
 func (e *Runtime) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

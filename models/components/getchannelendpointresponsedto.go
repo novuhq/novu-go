@@ -24,6 +24,18 @@ const (
 func (e GetChannelEndpointResponseDtoChannel) ToPointer() *GetChannelEndpointResponseDtoChannel {
 	return &e
 }
+
+// GetChannelEndpointResponseDtoChannelValues returns every known GetChannelEndpointResponseDtoChannel value in schema order.
+func GetChannelEndpointResponseDtoChannelValues() []GetChannelEndpointResponseDtoChannel {
+	return []GetChannelEndpointResponseDtoChannel{
+		GetChannelEndpointResponseDtoChannelInApp,
+		GetChannelEndpointResponseDtoChannelEmail,
+		GetChannelEndpointResponseDtoChannelSms,
+		GetChannelEndpointResponseDtoChannelChat,
+		GetChannelEndpointResponseDtoChannelPush,
+		GetChannelEndpointResponseDtoChannelTool,
+	}
+}
 func (e *GetChannelEndpointResponseDtoChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -153,6 +165,109 @@ const (
 
 func (e GetChannelEndpointResponseDtoProviderID) ToPointer() *GetChannelEndpointResponseDtoProviderID {
 	return &e
+}
+
+// GetChannelEndpointResponseDtoProviderIDValues returns every known GetChannelEndpointResponseDtoProviderID value in schema order.
+func GetChannelEndpointResponseDtoProviderIDValues() []GetChannelEndpointResponseDtoProviderID {
+	return []GetChannelEndpointResponseDtoProviderID{
+		GetChannelEndpointResponseDtoProviderIDAnypost,
+		GetChannelEndpointResponseDtoProviderIDEmailjs,
+		GetChannelEndpointResponseDtoProviderIDMailgun,
+		GetChannelEndpointResponseDtoProviderIDMailjet,
+		GetChannelEndpointResponseDtoProviderIDMandrill,
+		GetChannelEndpointResponseDtoProviderIDNodemailer,
+		GetChannelEndpointResponseDtoProviderIDPostmark,
+		GetChannelEndpointResponseDtoProviderIDSendgrid,
+		GetChannelEndpointResponseDtoProviderIDSendinblue,
+		GetChannelEndpointResponseDtoProviderIDSes,
+		GetChannelEndpointResponseDtoProviderIDNetcore,
+		GetChannelEndpointResponseDtoProviderIDInfobipEmail,
+		GetChannelEndpointResponseDtoProviderIDResend,
+		GetChannelEndpointResponseDtoProviderIDPlunk,
+		GetChannelEndpointResponseDtoProviderIDMailersend,
+		GetChannelEndpointResponseDtoProviderIDMailtrap,
+		GetChannelEndpointResponseDtoProviderIDClickatell,
+		GetChannelEndpointResponseDtoProviderIDOutlook365,
+		GetChannelEndpointResponseDtoProviderIDNovuEmail,
+		GetChannelEndpointResponseDtoProviderIDSparkpost,
+		GetChannelEndpointResponseDtoProviderIDEmailWebhook,
+		GetChannelEndpointResponseDtoProviderIDBraze,
+		GetChannelEndpointResponseDtoProviderIDNovuEmailAgent,
+		GetChannelEndpointResponseDtoProviderIDAgentEmailInbox,
+		GetChannelEndpointResponseDtoProviderIDNexmo,
+		GetChannelEndpointResponseDtoProviderIDPlivo,
+		GetChannelEndpointResponseDtoProviderIDSms77,
+		GetChannelEndpointResponseDtoProviderIDSmsCentral,
+		GetChannelEndpointResponseDtoProviderIDSns,
+		GetChannelEndpointResponseDtoProviderIDTelnyx,
+		GetChannelEndpointResponseDtoProviderIDTwilio,
+		GetChannelEndpointResponseDtoProviderIDGupshup,
+		GetChannelEndpointResponseDtoProviderIDFiretext,
+		GetChannelEndpointResponseDtoProviderIDInfobipSms,
+		GetChannelEndpointResponseDtoProviderIDBurstSms,
+		GetChannelEndpointResponseDtoProviderIDBulkSms,
+		GetChannelEndpointResponseDtoProviderIDIsendSms,
+		GetChannelEndpointResponseDtoProviderIDFortySixElks,
+		GetChannelEndpointResponseDtoProviderIDKannel,
+		GetChannelEndpointResponseDtoProviderIDMaqsam,
+		GetChannelEndpointResponseDtoProviderIDTermii,
+		GetChannelEndpointResponseDtoProviderIDAfricasTalking,
+		GetChannelEndpointResponseDtoProviderIDNovuSms,
+		GetChannelEndpointResponseDtoProviderIDSendchamp,
+		GetChannelEndpointResponseDtoProviderIDGenericSms,
+		GetChannelEndpointResponseDtoProviderIDClicksend,
+		GetChannelEndpointResponseDtoProviderIDBandwidth,
+		GetChannelEndpointResponseDtoProviderIDMessagebird,
+		GetChannelEndpointResponseDtoProviderIDSimpletexting,
+		GetChannelEndpointResponseDtoProviderIDAzureSms,
+		GetChannelEndpointResponseDtoProviderIDRingCentral,
+		GetChannelEndpointResponseDtoProviderIDBrevoSms,
+		GetChannelEndpointResponseDtoProviderIDEazySms,
+		GetChannelEndpointResponseDtoProviderIDMobishastra,
+		GetChannelEndpointResponseDtoProviderIDAfroMessage,
+		GetChannelEndpointResponseDtoProviderIDUnifonic,
+		GetChannelEndpointResponseDtoProviderIDSmsmode,
+		GetChannelEndpointResponseDtoProviderIDImedia,
+		GetChannelEndpointResponseDtoProviderIDSinch,
+		GetChannelEndpointResponseDtoProviderIDIsendproSms,
+		GetChannelEndpointResponseDtoProviderIDCmTelecom,
+		GetChannelEndpointResponseDtoProviderIDRuachSms,
+		GetChannelEndpointResponseDtoProviderIDFcm,
+		GetChannelEndpointResponseDtoProviderIDApns,
+		GetChannelEndpointResponseDtoProviderIDExpo,
+		GetChannelEndpointResponseDtoProviderIDOneSignal,
+		GetChannelEndpointResponseDtoProviderIDPushpad,
+		GetChannelEndpointResponseDtoProviderIDPushWebhook,
+		GetChannelEndpointResponseDtoProviderIDPusherBeams,
+		GetChannelEndpointResponseDtoProviderIDAppio,
+		GetChannelEndpointResponseDtoProviderIDNovu,
+		GetChannelEndpointResponseDtoProviderIDSlack,
+		GetChannelEndpointResponseDtoProviderIDDiscord,
+		GetChannelEndpointResponseDtoProviderIDGoogleChat,
+		GetChannelEndpointResponseDtoProviderIDMsteams,
+		GetChannelEndpointResponseDtoProviderIDWebexMessaging,
+		GetChannelEndpointResponseDtoProviderIDMattermost,
+		GetChannelEndpointResponseDtoProviderIDRyver,
+		GetChannelEndpointResponseDtoProviderIDZulip,
+		GetChannelEndpointResponseDtoProviderIDGrafanaOnCall,
+		GetChannelEndpointResponseDtoProviderIDGetstream,
+		GetChannelEndpointResponseDtoProviderIDRocketChat,
+		GetChannelEndpointResponseDtoProviderIDWhatsappBusiness,
+		GetChannelEndpointResponseDtoProviderIDLine,
+		GetChannelEndpointResponseDtoProviderIDChatWebhook,
+		GetChannelEndpointResponseDtoProviderIDNovuSlack,
+		GetChannelEndpointResponseDtoProviderIDTelegram,
+		GetChannelEndpointResponseDtoProviderIDSendblue,
+		GetChannelEndpointResponseDtoProviderIDPhotonImessage,
+		GetChannelEndpointResponseDtoProviderIDNovuWebChat,
+		GetChannelEndpointResponseDtoProviderIDAnthropic,
+		GetChannelEndpointResponseDtoProviderIDNovuAnthropic,
+		GetChannelEndpointResponseDtoProviderIDAnthropicAws,
+		GetChannelEndpointResponseDtoProviderIDPagerduty,
+		GetChannelEndpointResponseDtoProviderIDOpsgenie,
+		GetChannelEndpointResponseDtoProviderIDGrafana,
+		GetChannelEndpointResponseDtoProviderIDToolWebhook,
+	}
 }
 func (e *GetChannelEndpointResponseDtoProviderID) UnmarshalJSON(data []byte) error {
 	var v string
@@ -382,6 +497,26 @@ const (
 
 func (e GetChannelEndpointResponseDtoType) ToPointer() *GetChannelEndpointResponseDtoType {
 	return &e
+}
+
+// GetChannelEndpointResponseDtoTypeValues returns every known GetChannelEndpointResponseDtoType value in schema order.
+func GetChannelEndpointResponseDtoTypeValues() []GetChannelEndpointResponseDtoType {
+	return []GetChannelEndpointResponseDtoType{
+		GetChannelEndpointResponseDtoTypeSlackChannel,
+		GetChannelEndpointResponseDtoTypeSlackUser,
+		GetChannelEndpointResponseDtoTypeWebhook,
+		GetChannelEndpointResponseDtoTypePhone,
+		GetChannelEndpointResponseDtoTypeMsTeamsChannel,
+		GetChannelEndpointResponseDtoTypeMsTeamsUser,
+		GetChannelEndpointResponseDtoTypeTelegramChat,
+		GetChannelEndpointResponseDtoTypeWebexRoom,
+		GetChannelEndpointResponseDtoTypeWebexPerson,
+		GetChannelEndpointResponseDtoTypeLineUser,
+		GetChannelEndpointResponseDtoTypePagerdutyService,
+		GetChannelEndpointResponseDtoTypeOpsgenieIntegration,
+		GetChannelEndpointResponseDtoTypeGrafanaOncallIntegration,
+		GetChannelEndpointResponseDtoTypeToolWebhook,
+	}
 }
 func (e *GetChannelEndpointResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string

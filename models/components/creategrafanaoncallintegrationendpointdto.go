@@ -124,6 +124,13 @@ const (
 func (e CreateGrafanaOnCallIntegrationEndpointDtoType) ToPointer() *CreateGrafanaOnCallIntegrationEndpointDtoType {
 	return &e
 }
+
+// CreateGrafanaOnCallIntegrationEndpointDtoTypeValues returns every known CreateGrafanaOnCallIntegrationEndpointDtoType value in schema order.
+func CreateGrafanaOnCallIntegrationEndpointDtoTypeValues() []CreateGrafanaOnCallIntegrationEndpointDtoType {
+	return []CreateGrafanaOnCallIntegrationEndpointDtoType{
+		CreateGrafanaOnCallIntegrationEndpointDtoTypeGrafanaOncallIntegration,
+	}
+}
 func (e *CreateGrafanaOnCallIntegrationEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -19,6 +19,14 @@ const (
 func (e PathParamResourceType) ToPointer() *PathParamResourceType {
 	return &e
 }
+
+// PathParamResourceTypeValues returns every known PathParamResourceType value in schema order.
+func PathParamResourceTypeValues() []PathParamResourceType {
+	return []PathParamResourceType{
+		PathParamResourceTypeWorkflow,
+		PathParamResourceTypeLayout,
+	}
+}
 func (e *PathParamResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

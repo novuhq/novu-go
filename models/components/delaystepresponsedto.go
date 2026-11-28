@@ -19,6 +19,14 @@ const (
 func (e DelayStepResponseDtoType) ToPointer() *DelayStepResponseDtoType {
 	return &e
 }
+
+// DelayStepResponseDtoTypeValues returns every known DelayStepResponseDtoType value in schema order.
+func DelayStepResponseDtoTypeValues() []DelayStepResponseDtoType {
+	return []DelayStepResponseDtoType{
+		DelayStepResponseDtoTypeRegular,
+		DelayStepResponseDtoTypeTimed,
+	}
+}
 func (e *DelayStepResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +57,18 @@ const (
 
 func (e DelayStepResponseDtoUnit) ToPointer() *DelayStepResponseDtoUnit {
 	return &e
+}
+
+// DelayStepResponseDtoUnitValues returns every known DelayStepResponseDtoUnit value in schema order.
+func DelayStepResponseDtoUnitValues() []DelayStepResponseDtoUnit {
+	return []DelayStepResponseDtoUnit{
+		DelayStepResponseDtoUnitSeconds,
+		DelayStepResponseDtoUnitMinutes,
+		DelayStepResponseDtoUnitHours,
+		DelayStepResponseDtoUnitDays,
+		DelayStepResponseDtoUnitWeeks,
+		DelayStepResponseDtoUnitMonths,
+	}
 }
 func (e *DelayStepResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

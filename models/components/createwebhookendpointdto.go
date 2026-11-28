@@ -124,6 +124,13 @@ const (
 func (e CreateWebhookEndpointDtoType) ToPointer() *CreateWebhookEndpointDtoType {
 	return &e
 }
+
+// CreateWebhookEndpointDtoTypeValues returns every known CreateWebhookEndpointDtoType value in schema order.
+func CreateWebhookEndpointDtoTypeValues() []CreateWebhookEndpointDtoType {
+	return []CreateWebhookEndpointDtoType{
+		CreateWebhookEndpointDtoTypeWebhook,
+	}
+}
 func (e *CreateWebhookEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

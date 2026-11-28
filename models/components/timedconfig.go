@@ -8,22 +8,35 @@ import (
 	"github.com/novuhq/novu-go/v3/internal/utils"
 )
 
-type WeekDays string
+type TimedConfigWeekDays string
 
 const (
-	WeekDaysMonday    WeekDays = "monday"
-	WeekDaysTuesday   WeekDays = "tuesday"
-	WeekDaysWednesday WeekDays = "wednesday"
-	WeekDaysThursday  WeekDays = "thursday"
-	WeekDaysFriday    WeekDays = "friday"
-	WeekDaysSaturday  WeekDays = "saturday"
-	WeekDaysSunday    WeekDays = "sunday"
+	TimedConfigWeekDaysMonday    TimedConfigWeekDays = "monday"
+	TimedConfigWeekDaysTuesday   TimedConfigWeekDays = "tuesday"
+	TimedConfigWeekDaysWednesday TimedConfigWeekDays = "wednesday"
+	TimedConfigWeekDaysThursday  TimedConfigWeekDays = "thursday"
+	TimedConfigWeekDaysFriday    TimedConfigWeekDays = "friday"
+	TimedConfigWeekDaysSaturday  TimedConfigWeekDays = "saturday"
+	TimedConfigWeekDaysSunday    TimedConfigWeekDays = "sunday"
 )
 
-func (e WeekDays) ToPointer() *WeekDays {
+func (e TimedConfigWeekDays) ToPointer() *TimedConfigWeekDays {
 	return &e
 }
-func (e *WeekDays) UnmarshalJSON(data []byte) error {
+
+// TimedConfigWeekDaysValues returns every known TimedConfigWeekDays value in schema order.
+func TimedConfigWeekDaysValues() []TimedConfigWeekDays {
+	return []TimedConfigWeekDays{
+		TimedConfigWeekDaysMonday,
+		TimedConfigWeekDaysTuesday,
+		TimedConfigWeekDaysWednesday,
+		TimedConfigWeekDaysThursday,
+		TimedConfigWeekDaysFriday,
+		TimedConfigWeekDaysSaturday,
+		TimedConfigWeekDaysSunday,
+	}
+}
+func (e *TimedConfigWeekDays) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -42,10 +55,10 @@ func (e *WeekDays) UnmarshalJSON(data []byte) error {
 	case "saturday":
 		fallthrough
 	case "sunday":
-		*e = WeekDays(v)
+		*e = TimedConfigWeekDays(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for WeekDays: %v", v)
+		return fmt.Errorf("invalid value for TimedConfigWeekDays: %v", v)
 	}
 }
 
@@ -62,6 +75,18 @@ const (
 
 func (e Ordinal) ToPointer() *Ordinal {
 	return &e
+}
+
+// OrdinalValues returns every known Ordinal value in schema order.
+func OrdinalValues() []Ordinal {
+	return []Ordinal{
+		OrdinalOne,
+		OrdinalTwo,
+		OrdinalThree,
+		OrdinalFour,
+		OrdinalFive,
+		OrdinalLast,
+	}
 }
 func (e *Ordinal) UnmarshalJSON(data []byte) error {
 	var v string
@@ -105,6 +130,22 @@ const (
 func (e OrdinalValue) ToPointer() *OrdinalValue {
 	return &e
 }
+
+// OrdinalValueValues returns every known OrdinalValue value in schema order.
+func OrdinalValueValues() []OrdinalValue {
+	return []OrdinalValue{
+		OrdinalValueDay,
+		OrdinalValueWeekday,
+		OrdinalValueWeekend,
+		OrdinalValueSunday,
+		OrdinalValueMonday,
+		OrdinalValueTuesday,
+		OrdinalValueWednesday,
+		OrdinalValueThursday,
+		OrdinalValueFriday,
+		OrdinalValueSaturday,
+	}
+}
 func (e *OrdinalValue) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -147,6 +188,14 @@ const (
 func (e MonthlyType) ToPointer() *MonthlyType {
 	return &e
 }
+
+// MonthlyTypeValues returns every known MonthlyType value in schema order.
+func MonthlyTypeValues() []MonthlyType {
+	return []MonthlyType{
+		MonthlyTypeEach,
+		MonthlyTypeOn,
+	}
+}
 func (e *MonthlyType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -164,12 +213,12 @@ func (e *MonthlyType) UnmarshalJSON(data []byte) error {
 }
 
 type TimedConfig struct {
-	AtTime       *string       `json:"atTime,omitempty"`
-	WeekDays     []WeekDays    `json:"weekDays,omitempty"`
-	MonthDays    []string      `json:"monthDays,omitempty"`
-	Ordinal      *Ordinal      `json:"ordinal,omitempty"`
-	OrdinalValue *OrdinalValue `json:"ordinalValue,omitempty"`
-	MonthlyType  *MonthlyType  `json:"monthlyType,omitempty"`
+	AtTime       *string               `json:"atTime,omitempty"`
+	WeekDays     []TimedConfigWeekDays `json:"weekDays,omitempty"`
+	MonthDays    []string              `json:"monthDays,omitempty"`
+	Ordinal      *Ordinal              `json:"ordinal,omitempty"`
+	OrdinalValue *OrdinalValue         `json:"ordinalValue,omitempty"`
+	MonthlyType  *MonthlyType          `json:"monthlyType,omitempty"`
 }
 
 func (t TimedConfig) MarshalJSON() ([]byte, error) {
@@ -190,7 +239,7 @@ func (t *TimedConfig) GetAtTime() *string {
 	return t.AtTime
 }
 
-func (t *TimedConfig) GetWeekDays() []WeekDays {
+func (t *TimedConfig) GetWeekDays() []TimedConfigWeekDays {
 	if t == nil {
 		return nil
 	}

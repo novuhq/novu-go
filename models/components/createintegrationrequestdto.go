@@ -22,6 +22,18 @@ const (
 func (e CreateIntegrationRequestDtoChannel) ToPointer() *CreateIntegrationRequestDtoChannel {
 	return &e
 }
+
+// CreateIntegrationRequestDtoChannelValues returns every known CreateIntegrationRequestDtoChannel value in schema order.
+func CreateIntegrationRequestDtoChannelValues() []CreateIntegrationRequestDtoChannel {
+	return []CreateIntegrationRequestDtoChannel{
+		CreateIntegrationRequestDtoChannelInApp,
+		CreateIntegrationRequestDtoChannelEmail,
+		CreateIntegrationRequestDtoChannelSms,
+		CreateIntegrationRequestDtoChannelChat,
+		CreateIntegrationRequestDtoChannelPush,
+		CreateIntegrationRequestDtoChannelTool,
+	}
+}
 func (e *CreateIntegrationRequestDtoChannel) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -56,6 +68,14 @@ const (
 
 func (e CreateIntegrationRequestDtoKind) ToPointer() *CreateIntegrationRequestDtoKind {
 	return &e
+}
+
+// CreateIntegrationRequestDtoKindValues returns every known CreateIntegrationRequestDtoKind value in schema order.
+func CreateIntegrationRequestDtoKindValues() []CreateIntegrationRequestDtoKind {
+	return []CreateIntegrationRequestDtoKind{
+		CreateIntegrationRequestDtoKindDelivery,
+		CreateIntegrationRequestDtoKindAgent,
+	}
 }
 func (e *CreateIntegrationRequestDtoKind) UnmarshalJSON(data []byte) error {
 	var v string

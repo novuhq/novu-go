@@ -19,6 +19,15 @@ const (
 func (e ResourceOriginEnum) ToPointer() *ResourceOriginEnum {
 	return &e
 }
+
+// ResourceOriginEnumValues returns every known ResourceOriginEnum value in schema order.
+func ResourceOriginEnumValues() []ResourceOriginEnum {
+	return []ResourceOriginEnum{
+		ResourceOriginEnumNovuCloud,
+		ResourceOriginEnumNovuCloudV1,
+		ResourceOriginEnumExternal,
+	}
+}
 func (e *ResourceOriginEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

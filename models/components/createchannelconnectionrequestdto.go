@@ -125,6 +125,14 @@ const (
 func (e ConnectionMode) ToPointer() *ConnectionMode {
 	return &e
 }
+
+// ConnectionModeValues returns every known ConnectionMode value in schema order.
+func ConnectionModeValues() []ConnectionMode {
+	return []ConnectionMode{
+		ConnectionModeSubscriber,
+		ConnectionModeShared,
+	}
+}
 func (e *ConnectionMode) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

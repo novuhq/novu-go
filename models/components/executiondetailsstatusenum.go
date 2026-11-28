@@ -22,6 +22,18 @@ const (
 func (e ExecutionDetailsStatusEnum) ToPointer() *ExecutionDetailsStatusEnum {
 	return &e
 }
+
+// ExecutionDetailsStatusEnumValues returns every known ExecutionDetailsStatusEnum value in schema order.
+func ExecutionDetailsStatusEnumValues() []ExecutionDetailsStatusEnum {
+	return []ExecutionDetailsStatusEnum{
+		ExecutionDetailsStatusEnumSuccess,
+		ExecutionDetailsStatusEnumWarning,
+		ExecutionDetailsStatusEnumFailed,
+		ExecutionDetailsStatusEnumPending,
+		ExecutionDetailsStatusEnumQueued,
+		ExecutionDetailsStatusEnumReadConfirmation,
+	}
+}
 func (e *ExecutionDetailsStatusEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

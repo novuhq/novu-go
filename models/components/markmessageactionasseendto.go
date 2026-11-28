@@ -18,6 +18,14 @@ const (
 func (e MarkMessageActionAsSeenDtoStatus) ToPointer() *MarkMessageActionAsSeenDtoStatus {
 	return &e
 }
+
+// MarkMessageActionAsSeenDtoStatusValues returns every known MarkMessageActionAsSeenDtoStatus value in schema order.
+func MarkMessageActionAsSeenDtoStatusValues() []MarkMessageActionAsSeenDtoStatus {
+	return []MarkMessageActionAsSeenDtoStatus{
+		MarkMessageActionAsSeenDtoStatusPending,
+		MarkMessageActionAsSeenDtoStatusDone,
+	}
+}
 func (e *MarkMessageActionAsSeenDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

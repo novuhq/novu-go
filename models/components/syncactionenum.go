@@ -20,6 +20,16 @@ const (
 func (e SyncActionEnum) ToPointer() *SyncActionEnum {
 	return &e
 }
+
+// SyncActionEnumValues returns every known SyncActionEnum value in schema order.
+func SyncActionEnumValues() []SyncActionEnum {
+	return []SyncActionEnum{
+		SyncActionEnumCreated,
+		SyncActionEnumUpdated,
+		SyncActionEnumSkipped,
+		SyncActionEnumDeleted,
+	}
+}
 func (e *SyncActionEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

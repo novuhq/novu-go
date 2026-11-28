@@ -18,6 +18,14 @@ const (
 func (e IntegrationIssueEnum) ToPointer() *IntegrationIssueEnum {
 	return &e
 }
+
+// IntegrationIssueEnumValues returns every known IntegrationIssueEnum value in schema order.
+func IntegrationIssueEnumValues() []IntegrationIssueEnum {
+	return []IntegrationIssueEnum{
+		IntegrationIssueEnumMissingIntegration,
+		IntegrationIssueEnumInboxNotConnected,
+	}
+}
 func (e *IntegrationIssueEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

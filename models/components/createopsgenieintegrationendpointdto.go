@@ -124,6 +124,13 @@ const (
 func (e CreateOpsgenieIntegrationEndpointDtoType) ToPointer() *CreateOpsgenieIntegrationEndpointDtoType {
 	return &e
 }
+
+// CreateOpsgenieIntegrationEndpointDtoTypeValues returns every known CreateOpsgenieIntegrationEndpointDtoType value in schema order.
+func CreateOpsgenieIntegrationEndpointDtoTypeValues() []CreateOpsgenieIntegrationEndpointDtoType {
+	return []CreateOpsgenieIntegrationEndpointDtoType{
+		CreateOpsgenieIntegrationEndpointDtoTypeOpsgenieIntegration,
+	}
+}
 func (e *CreateOpsgenieIntegrationEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

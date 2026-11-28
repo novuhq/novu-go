@@ -59,6 +59,59 @@ func (e UIComponentEnum) ToPointer() *UIComponentEnum {
 	return &e
 }
 
+// UIComponentEnumValues returns every known UIComponentEnum value in schema order.
+func UIComponentEnumValues() []UIComponentEnum {
+	return []UIComponentEnum{
+		UIComponentEnumEmailEditorSelect,
+		UIComponentEnumChatEditorSelect,
+		UIComponentEnumLayoutSelect,
+		UIComponentEnumBlockEditor,
+		UIComponentEnumEmailBody,
+		UIComponentEnumTextFullLine,
+		UIComponentEnumTextInlineLabel,
+		UIComponentEnumInAppBody,
+		UIComponentEnumInAppAvatar,
+		UIComponentEnumInAppPrimarySubject,
+		UIComponentEnumInAppButtonDropdown,
+		UIComponentEnumInAppDisableSanitizationSwitch,
+		UIComponentEnumDisableSanitizationSwitch,
+		UIComponentEnumURLTextBox,
+		UIComponentEnumDigestAmount,
+		UIComponentEnumDigestUnit,
+		UIComponentEnumDigestType,
+		UIComponentEnumDigestKey,
+		UIComponentEnumDigestCron,
+		UIComponentEnumDelayAmount,
+		UIComponentEnumDelayUnit,
+		UIComponentEnumDelayType,
+		UIComponentEnumDelayCron,
+		UIComponentEnumDelayDynamicKey,
+		UIComponentEnumThrottleType,
+		UIComponentEnumThrottleWindow,
+		UIComponentEnumThrottleUnit,
+		UIComponentEnumThrottleDynamicKey,
+		UIComponentEnumThrottleThreshold,
+		UIComponentEnumThrottleKey,
+		UIComponentEnumExtendToSchedule,
+		UIComponentEnumSmsBody,
+		UIComponentEnumChatBody,
+		UIComponentEnumPushBody,
+		UIComponentEnumToolBody,
+		UIComponentEnumPushSubject,
+		UIComponentEnumQueryEditor,
+		UIComponentEnumData,
+		UIComponentEnumLayoutEmail,
+		UIComponentEnumDestinationMethod,
+		UIComponentEnumDestinationURL,
+		UIComponentEnumDestinationHeaders,
+		UIComponentEnumDestinationBody,
+		UIComponentEnumDestinationResponseBodySchema,
+		UIComponentEnumDestinationEnforceSchemaValidation,
+		UIComponentEnumDestinationContinueOnFailure,
+		UIComponentEnumDestinationTimeout,
+	}
+}
+
 // IsExact returns true if the value matches a known enum value, false otherwise.
 func (e *UIComponentEnum) IsExact() bool {
 	if e != nil {

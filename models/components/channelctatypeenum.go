@@ -17,6 +17,13 @@ const (
 func (e ChannelCTATypeEnum) ToPointer() *ChannelCTATypeEnum {
 	return &e
 }
+
+// ChannelCTATypeEnumValues returns every known ChannelCTATypeEnum value in schema order.
+func ChannelCTATypeEnumValues() []ChannelCTATypeEnum {
+	return []ChannelCTATypeEnum{
+		ChannelCTATypeEnumRedirect,
+	}
+}
 func (e *ChannelCTATypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

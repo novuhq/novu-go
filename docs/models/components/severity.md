@@ -1,5 +1,7 @@
 # Severity
 
+Severity
+
 ## Example Usage
 
 ```go
@@ -7,13 +9,15 @@ import (
 	"github.com/novuhq/novu-go/v3/models/components"
 )
 
-value := components.SeverityWarn
+value := components.SeverityHigh
 ```
 
 
 ## Values
 
-| Name            | Value           |
-| --------------- | --------------- |
-| `SeverityWarn`  | warn            |
-| `SeverityError` | error           |
+| Name             | Value            |
+| ---------------- | ---------------- |
+| `SeverityHigh`   | high             |
+| `SeverityMedium` | medium           |
+| `SeverityLow`    | low              |
+| `SeverityNone`   | none             |

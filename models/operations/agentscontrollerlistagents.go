@@ -19,6 +19,14 @@ const (
 func (e AgentsControllerListAgentsQueryParamOrderDirection) ToPointer() *AgentsControllerListAgentsQueryParamOrderDirection {
 	return &e
 }
+
+// AgentsControllerListAgentsQueryParamOrderDirectionValues returns every known AgentsControllerListAgentsQueryParamOrderDirection value in schema order.
+func AgentsControllerListAgentsQueryParamOrderDirectionValues() []AgentsControllerListAgentsQueryParamOrderDirection {
+	return []AgentsControllerListAgentsQueryParamOrderDirection{
+		AgentsControllerListAgentsQueryParamOrderDirectionAsc,
+		AgentsControllerListAgentsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *AgentsControllerListAgentsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

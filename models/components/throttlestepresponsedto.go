@@ -19,6 +19,14 @@ const (
 func (e ThrottleStepResponseDtoType) ToPointer() *ThrottleStepResponseDtoType {
 	return &e
 }
+
+// ThrottleStepResponseDtoTypeValues returns every known ThrottleStepResponseDtoType value in schema order.
+func ThrottleStepResponseDtoTypeValues() []ThrottleStepResponseDtoType {
+	return []ThrottleStepResponseDtoType{
+		ThrottleStepResponseDtoTypeFixed,
+		ThrottleStepResponseDtoTypeDynamic,
+	}
+}
 func (e *ThrottleStepResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -46,6 +54,15 @@ const (
 
 func (e ThrottleStepResponseDtoUnit) ToPointer() *ThrottleStepResponseDtoUnit {
 	return &e
+}
+
+// ThrottleStepResponseDtoUnitValues returns every known ThrottleStepResponseDtoUnit value in schema order.
+func ThrottleStepResponseDtoUnitValues() []ThrottleStepResponseDtoUnit {
+	return []ThrottleStepResponseDtoUnit{
+		ThrottleStepResponseDtoUnitMinutes,
+		ThrottleStepResponseDtoUnitHours,
+		ThrottleStepResponseDtoUnitDays,
+	}
 }
 func (e *ThrottleStepResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

@@ -18,6 +18,14 @@ const (
 func (e AgentResponseDtoRuntime) ToPointer() *AgentResponseDtoRuntime {
 	return &e
 }
+
+// AgentResponseDtoRuntimeValues returns every known AgentResponseDtoRuntime value in schema order.
+func AgentResponseDtoRuntimeValues() []AgentResponseDtoRuntime {
+	return []AgentResponseDtoRuntime{
+		AgentResponseDtoRuntimeSelfHosted,
+		AgentResponseDtoRuntimeManaged,
+	}
+}
 func (e *AgentResponseDtoRuntime) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -44,6 +52,14 @@ const (
 
 func (e Visibility) ToPointer() *Visibility {
 	return &e
+}
+
+// VisibilityValues returns every known Visibility value in schema order.
+func VisibilityValues() []Visibility {
+	return []Visibility{
+		VisibilityPublic,
+		VisibilityPrivate,
+	}
 }
 func (e *Visibility) UnmarshalJSON(data []byte) error {
 	var v string

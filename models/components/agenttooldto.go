@@ -17,6 +17,14 @@ const (
 func (e AgentToolDtoType) ToPointer() *AgentToolDtoType {
 	return &e
 }
+
+// AgentToolDtoTypeValues returns every known AgentToolDtoType value in schema order.
+func AgentToolDtoTypeValues() []AgentToolDtoType {
+	return []AgentToolDtoType{
+		AgentToolDtoTypeBuiltin,
+		AgentToolDtoTypeCustom,
+	}
+}
 func (e *AgentToolDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

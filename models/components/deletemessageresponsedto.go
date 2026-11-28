@@ -17,6 +17,13 @@ const (
 func (e DeleteMessageResponseDtoStatus) ToPointer() *DeleteMessageResponseDtoStatus {
 	return &e
 }
+
+// DeleteMessageResponseDtoStatusValues returns every known DeleteMessageResponseDtoStatus value in schema order.
+func DeleteMessageResponseDtoStatusValues() []DeleteMessageResponseDtoStatus {
+	return []DeleteMessageResponseDtoStatus{
+		DeleteMessageResponseDtoStatusDeleted,
+	}
+}
 func (e *DeleteMessageResponseDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

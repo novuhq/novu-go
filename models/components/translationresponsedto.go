@@ -18,6 +18,14 @@ const (
 func (e TranslationResponseDtoResourceType) ToPointer() *TranslationResponseDtoResourceType {
 	return &e
 }
+
+// TranslationResponseDtoResourceTypeValues returns every known TranslationResponseDtoResourceType value in schema order.
+func TranslationResponseDtoResourceTypeValues() []TranslationResponseDtoResourceType {
+	return []TranslationResponseDtoResourceType{
+		TranslationResponseDtoResourceTypeWorkflow,
+		TranslationResponseDtoResourceTypeLayout,
+	}
+}
 func (e *TranslationResponseDtoResourceType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

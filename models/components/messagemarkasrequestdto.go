@@ -91,6 +91,16 @@ const (
 func (e MessageMarkAsRequestDtoMarkAs) ToPointer() *MessageMarkAsRequestDtoMarkAs {
 	return &e
 }
+
+// MessageMarkAsRequestDtoMarkAsValues returns every known MessageMarkAsRequestDtoMarkAs value in schema order.
+func MessageMarkAsRequestDtoMarkAsValues() []MessageMarkAsRequestDtoMarkAs {
+	return []MessageMarkAsRequestDtoMarkAs{
+		MessageMarkAsRequestDtoMarkAsRead,
+		MessageMarkAsRequestDtoMarkAsSeen,
+		MessageMarkAsRequestDtoMarkAsUnread,
+		MessageMarkAsRequestDtoMarkAsUnseen,
+	}
+}
 func (e *MessageMarkAsRequestDtoMarkAs) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

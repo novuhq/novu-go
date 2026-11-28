@@ -19,6 +19,14 @@ const (
 func (e OpsgenieIntegrationEndpointDtoRegion) ToPointer() *OpsgenieIntegrationEndpointDtoRegion {
 	return &e
 }
+
+// OpsgenieIntegrationEndpointDtoRegionValues returns every known OpsgenieIntegrationEndpointDtoRegion value in schema order.
+func OpsgenieIntegrationEndpointDtoRegionValues() []OpsgenieIntegrationEndpointDtoRegion {
+	return []OpsgenieIntegrationEndpointDtoRegion{
+		OpsgenieIntegrationEndpointDtoRegionUs,
+		OpsgenieIntegrationEndpointDtoRegionEu,
+	}
+}
 func (e *OpsgenieIntegrationEndpointDtoRegion) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

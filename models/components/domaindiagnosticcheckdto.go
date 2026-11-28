@@ -20,6 +20,17 @@ const (
 func (e Code) ToPointer() *Code {
 	return &e
 }
+
+// CodeValues returns every known Code value in schema order.
+func CodeValues() []Code {
+	return []Code{
+		CodeMxMissing,
+		CodeMxWrongTarget,
+		CodeMxLowPriority,
+		CodeApexCnameCollision,
+		CodeDnsblListed,
+	}
+}
 func (e *Code) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -52,6 +63,15 @@ const (
 
 func (e DomainDiagnosticCheckDtoStatus) ToPointer() *DomainDiagnosticCheckDtoStatus {
 	return &e
+}
+
+// DomainDiagnosticCheckDtoStatusValues returns every known DomainDiagnosticCheckDtoStatus value in schema order.
+func DomainDiagnosticCheckDtoStatusValues() []DomainDiagnosticCheckDtoStatus {
+	return []DomainDiagnosticCheckDtoStatus{
+		DomainDiagnosticCheckDtoStatusPass,
+		DomainDiagnosticCheckDtoStatusFail,
+		DomainDiagnosticCheckDtoStatusSkipped,
+	}
 }
 func (e *DomainDiagnosticCheckDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string

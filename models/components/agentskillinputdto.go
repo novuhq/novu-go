@@ -17,6 +17,14 @@ const (
 func (e AgentSkillInputDtoType) ToPointer() *AgentSkillInputDtoType {
 	return &e
 }
+
+// AgentSkillInputDtoTypeValues returns every known AgentSkillInputDtoType value in schema order.
+func AgentSkillInputDtoTypeValues() []AgentSkillInputDtoType {
+	return []AgentSkillInputDtoType{
+		AgentSkillInputDtoTypeAnthropic,
+		AgentSkillInputDtoTypeCustom,
+	}
+}
 func (e *AgentSkillInputDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

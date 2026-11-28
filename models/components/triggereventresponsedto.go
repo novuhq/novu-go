@@ -23,6 +23,19 @@ const (
 func (e TriggerEventResponseDtoStatus) ToPointer() *TriggerEventResponseDtoStatus {
 	return &e
 }
+
+// TriggerEventResponseDtoStatusValues returns every known TriggerEventResponseDtoStatus value in schema order.
+func TriggerEventResponseDtoStatusValues() []TriggerEventResponseDtoStatus {
+	return []TriggerEventResponseDtoStatus{
+		TriggerEventResponseDtoStatusError,
+		TriggerEventResponseDtoStatusTriggerNotActive,
+		TriggerEventResponseDtoStatusNoWorkflowActiveStepsDefined,
+		TriggerEventResponseDtoStatusNoWorkflowStepsDefined,
+		TriggerEventResponseDtoStatusProcessed,
+		TriggerEventResponseDtoStatusNoTenantFound,
+		TriggerEventResponseDtoStatusInvalidRecipients,
+	}
+}
 func (e *TriggerEventResponseDtoStatus) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

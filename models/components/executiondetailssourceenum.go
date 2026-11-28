@@ -20,6 +20,16 @@ const (
 func (e ExecutionDetailsSourceEnum) ToPointer() *ExecutionDetailsSourceEnum {
 	return &e
 }
+
+// ExecutionDetailsSourceEnumValues returns every known ExecutionDetailsSourceEnum value in schema order.
+func ExecutionDetailsSourceEnumValues() []ExecutionDetailsSourceEnum {
+	return []ExecutionDetailsSourceEnum{
+		ExecutionDetailsSourceEnumCredentials,
+		ExecutionDetailsSourceEnumInternal,
+		ExecutionDetailsSourceEnumPayload,
+		ExecutionDetailsSourceEnumWebhook,
+	}
+}
 func (e *ExecutionDetailsSourceEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

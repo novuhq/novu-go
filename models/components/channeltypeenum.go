@@ -21,6 +21,18 @@ const (
 func (e ChannelTypeEnum) ToPointer() *ChannelTypeEnum {
 	return &e
 }
+
+// ChannelTypeEnumValues returns every known ChannelTypeEnum value in schema order.
+func ChannelTypeEnumValues() []ChannelTypeEnum {
+	return []ChannelTypeEnum{
+		ChannelTypeEnumInApp,
+		ChannelTypeEnumEmail,
+		ChannelTypeEnumSms,
+		ChannelTypeEnumChat,
+		ChannelTypeEnumPush,
+		ChannelTypeEnumTool,
+	}
+}
 func (e *ChannelTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

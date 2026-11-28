@@ -19,6 +19,16 @@ const (
 func (e WorkflowResponseDtoSortField) ToPointer() *WorkflowResponseDtoSortField {
 	return &e
 }
+
+// WorkflowResponseDtoSortFieldValues returns every known WorkflowResponseDtoSortField value in schema order.
+func WorkflowResponseDtoSortFieldValues() []WorkflowResponseDtoSortField {
+	return []WorkflowResponseDtoSortField{
+		WorkflowResponseDtoSortFieldCreatedAt,
+		WorkflowResponseDtoSortFieldUpdatedAt,
+		WorkflowResponseDtoSortFieldName,
+		WorkflowResponseDtoSortFieldLastTriggeredAt,
+	}
+}
 func (e *WorkflowResponseDtoSortField) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

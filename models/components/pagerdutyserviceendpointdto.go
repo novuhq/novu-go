@@ -19,6 +19,14 @@ const (
 func (e Region) ToPointer() *Region {
 	return &e
 }
+
+// RegionValues returns every known Region value in schema order.
+func RegionValues() []Region {
+	return []Region{
+		RegionUs,
+		RegionEu,
+	}
+}
 func (e *Region) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

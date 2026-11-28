@@ -124,6 +124,13 @@ const (
 func (e CreateWebexRoomEndpointDtoType) ToPointer() *CreateWebexRoomEndpointDtoType {
 	return &e
 }
+
+// CreateWebexRoomEndpointDtoTypeValues returns every known CreateWebexRoomEndpointDtoType value in schema order.
+func CreateWebexRoomEndpointDtoTypeValues() []CreateWebexRoomEndpointDtoType {
+	return []CreateWebexRoomEndpointDtoType{
+		CreateWebexRoomEndpointDtoTypeWebexRoom,
+	}
+}
 func (e *CreateWebexRoomEndpointDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

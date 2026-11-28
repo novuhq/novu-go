@@ -19,6 +19,14 @@ const (
 func (e DelayControlsMetadataResponseDtoType) ToPointer() *DelayControlsMetadataResponseDtoType {
 	return &e
 }
+
+// DelayControlsMetadataResponseDtoTypeValues returns every known DelayControlsMetadataResponseDtoType value in schema order.
+func DelayControlsMetadataResponseDtoTypeValues() []DelayControlsMetadataResponseDtoType {
+	return []DelayControlsMetadataResponseDtoType{
+		DelayControlsMetadataResponseDtoTypeRegular,
+		DelayControlsMetadataResponseDtoTypeTimed,
+	}
+}
 func (e *DelayControlsMetadataResponseDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +57,18 @@ const (
 
 func (e DelayControlsMetadataResponseDtoUnit) ToPointer() *DelayControlsMetadataResponseDtoUnit {
 	return &e
+}
+
+// DelayControlsMetadataResponseDtoUnitValues returns every known DelayControlsMetadataResponseDtoUnit value in schema order.
+func DelayControlsMetadataResponseDtoUnitValues() []DelayControlsMetadataResponseDtoUnit {
+	return []DelayControlsMetadataResponseDtoUnit{
+		DelayControlsMetadataResponseDtoUnitSeconds,
+		DelayControlsMetadataResponseDtoUnitMinutes,
+		DelayControlsMetadataResponseDtoUnitHours,
+		DelayControlsMetadataResponseDtoUnitDays,
+		DelayControlsMetadataResponseDtoUnitWeeks,
+		DelayControlsMetadataResponseDtoUnitMonths,
+	}
 }
 func (e *DelayControlsMetadataResponseDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

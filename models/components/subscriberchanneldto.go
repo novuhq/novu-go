@@ -44,6 +44,39 @@ const (
 func (e SubscriberChannelDtoProviderID) ToPointer() *SubscriberChannelDtoProviderID {
 	return &e
 }
+
+// SubscriberChannelDtoProviderIDValues returns every known SubscriberChannelDtoProviderID value in schema order.
+func SubscriberChannelDtoProviderIDValues() []SubscriberChannelDtoProviderID {
+	return []SubscriberChannelDtoProviderID{
+		SubscriberChannelDtoProviderIDSlack,
+		SubscriberChannelDtoProviderIDDiscord,
+		SubscriberChannelDtoProviderIDGoogleChat,
+		SubscriberChannelDtoProviderIDMsteams,
+		SubscriberChannelDtoProviderIDWebexMessaging,
+		SubscriberChannelDtoProviderIDMattermost,
+		SubscriberChannelDtoProviderIDRyver,
+		SubscriberChannelDtoProviderIDZulip,
+		SubscriberChannelDtoProviderIDGrafanaOnCall,
+		SubscriberChannelDtoProviderIDGetstream,
+		SubscriberChannelDtoProviderIDRocketChat,
+		SubscriberChannelDtoProviderIDWhatsappBusiness,
+		SubscriberChannelDtoProviderIDLine,
+		SubscriberChannelDtoProviderIDChatWebhook,
+		SubscriberChannelDtoProviderIDNovuSlack,
+		SubscriberChannelDtoProviderIDTelegram,
+		SubscriberChannelDtoProviderIDSendblue,
+		SubscriberChannelDtoProviderIDPhotonImessage,
+		SubscriberChannelDtoProviderIDNovuWebChat,
+		SubscriberChannelDtoProviderIDFcm,
+		SubscriberChannelDtoProviderIDApns,
+		SubscriberChannelDtoProviderIDExpo,
+		SubscriberChannelDtoProviderIDOneSignal,
+		SubscriberChannelDtoProviderIDPushpad,
+		SubscriberChannelDtoProviderIDPushWebhook,
+		SubscriberChannelDtoProviderIDPusherBeams,
+		SubscriberChannelDtoProviderIDAppio,
+	}
+}
 func (e *SubscriberChannelDtoProviderID) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

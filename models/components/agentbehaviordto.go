@@ -20,6 +20,15 @@ const (
 func (e SubscriberAccess) ToPointer() *SubscriberAccess {
 	return &e
 }
+
+// SubscriberAccessValues returns every known SubscriberAccess value in schema order.
+func SubscriberAccessValues() []SubscriberAccess {
+	return []SubscriberAccess{
+		SubscriberAccessOpen,
+		SubscriberAccessRestricted,
+		SubscriberAccessRule,
+	}
+}
 func (e *SubscriberAccess) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -49,6 +58,15 @@ const (
 
 func (e ReplyPolicy) ToPointer() *ReplyPolicy {
 	return &e
+}
+
+// ReplyPolicyValues returns every known ReplyPolicy value in schema order.
+func ReplyPolicyValues() []ReplyPolicy {
+	return []ReplyPolicy{
+		ReplyPolicyMentionOnly,
+		ReplyPolicyAutoReply,
+		ReplyPolicySmart,
+	}
 }
 func (e *ReplyPolicy) UnmarshalJSON(data []byte) error {
 	var v string

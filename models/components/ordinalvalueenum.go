@@ -26,6 +26,22 @@ const (
 func (e OrdinalValueEnum) ToPointer() *OrdinalValueEnum {
 	return &e
 }
+
+// OrdinalValueEnumValues returns every known OrdinalValueEnum value in schema order.
+func OrdinalValueEnumValues() []OrdinalValueEnum {
+	return []OrdinalValueEnum{
+		OrdinalValueEnumDay,
+		OrdinalValueEnumWeekday,
+		OrdinalValueEnumWeekend,
+		OrdinalValueEnumSunday,
+		OrdinalValueEnumMonday,
+		OrdinalValueEnumTuesday,
+		OrdinalValueEnumWednesday,
+		OrdinalValueEnumThursday,
+		OrdinalValueEnumFriday,
+		OrdinalValueEnumSaturday,
+	}
+}
 func (e *OrdinalValueEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

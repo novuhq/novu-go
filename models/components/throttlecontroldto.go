@@ -19,6 +19,14 @@ const (
 func (e ThrottleControlDtoType) ToPointer() *ThrottleControlDtoType {
 	return &e
 }
+
+// ThrottleControlDtoTypeValues returns every known ThrottleControlDtoType value in schema order.
+func ThrottleControlDtoTypeValues() []ThrottleControlDtoType {
+	return []ThrottleControlDtoType{
+		ThrottleControlDtoTypeFixed,
+		ThrottleControlDtoTypeDynamic,
+	}
+}
 func (e *ThrottleControlDtoType) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
@@ -46,6 +54,15 @@ const (
 
 func (e ThrottleControlDtoUnit) ToPointer() *ThrottleControlDtoUnit {
 	return &e
+}
+
+// ThrottleControlDtoUnitValues returns every known ThrottleControlDtoUnit value in schema order.
+func ThrottleControlDtoUnitValues() []ThrottleControlDtoUnit {
+	return []ThrottleControlDtoUnit{
+		ThrottleControlDtoUnitMinutes,
+		ThrottleControlDtoUnitHours,
+		ThrottleControlDtoUnitDays,
+	}
 }
 func (e *ThrottleControlDtoUnit) UnmarshalJSON(data []byte) error {
 	var v string

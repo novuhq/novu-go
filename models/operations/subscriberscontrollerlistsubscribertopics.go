@@ -19,6 +19,14 @@ const (
 func (e SubscribersControllerListSubscriberTopicsQueryParamOrderDirection) ToPointer() *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection {
 	return &e
 }
+
+// SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionValues returns every known SubscribersControllerListSubscriberTopicsQueryParamOrderDirection value in schema order.
+func SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionValues() []SubscribersControllerListSubscriberTopicsQueryParamOrderDirection {
+	return []SubscribersControllerListSubscriberTopicsQueryParamOrderDirection{
+		SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionAsc,
+		SubscribersControllerListSubscriberTopicsQueryParamOrderDirectionDesc,
+	}
+}
 func (e *SubscribersControllerListSubscriberTopicsQueryParamOrderDirection) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {

@@ -18,6 +18,14 @@ const (
 func (e ButtonTypeEnum) ToPointer() *ButtonTypeEnum {
 	return &e
 }
+
+// ButtonTypeEnumValues returns every known ButtonTypeEnum value in schema order.
+func ButtonTypeEnumValues() []ButtonTypeEnum {
+	return []ButtonTypeEnum{
+		ButtonTypeEnumPrimary,
+		ButtonTypeEnumSecondary,
+	}
+}
 func (e *ButtonTypeEnum) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
